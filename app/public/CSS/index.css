@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Rubik:ital@0;1&display=swap');
+
+:root {
+    --orange:  #ef9652;
+    --blue: #2C6493;
+    --blue-2: #5685b1;
+    --gray: #cbcbcb;
+    --light-gray: #fffbff;
+    --font-1: 'Inter', sans-serif;
+    --font-2: 'Rubik', sans-serif;
+    --gray-gradient: linear-gradient(to bottom left, #dbdee3 1.17%, #dee3e9 23.12%, #e5e9ed 40.8%, #eef1f4 68%);
+    --blue-gradient: linear-gradient(to bottom left, #0f3f63 7%, var(--blue) 23%, #3b75a5 37%, #5685b1 68%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-1);
+    color: white;
+    scroll-behavior: smooth;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}

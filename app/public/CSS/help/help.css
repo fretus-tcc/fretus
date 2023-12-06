@@ -1,0 +1,120 @@
+body {
+    background-color: white;
+    background-image: none;
+}
+
+.heading {
+    font-size: clamp(36px, 3.5vw, 48px);
+}
+
+.hero {
+    height: 50vh;
+    background-image: url('../../imgs/help/bg-help.jpg');
+    background-position: center;
+}
+
+.hero > section {
+    height: calc(50vh - 100px);
+}
+
+.hero .search-bar {
+    width: min(610px, 95%);
+    height: 45px;
+    padding: 10px;
+    border: 1px solid var(--blue);
+    border-radius: 30px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar > input {
+    width: 90%;
+    height: 80%;
+    outline: none;
+    border: none;
+    font-family: var(--font-2);
+    font-size: 15px;
+    color: #333;
+}
+
+.search-bar > .search-icon {
+    background-color: var(--orange);
+    border-radius: 100%;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.blue-gradient {
+    padding: 55px 10px;
+}
+
+section.blue-gradient > h1 {
+    margin-bottom: 50px;
+}
+
+.cards-container {
+    width: min(660px, 90%);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cards-container > .card {
+    width: 320px;
+    padding: 18px;
+    border-radius: 15px;
+    background-color: white;
+    color: #333;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    transition: opacity .3s;
+}
+
+.cards-container:hover > .card:not(:hover) {
+    opacity: 0.5;
+}
+
+.card > .links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card a {
+    color: var(--blue);
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.link-section {
+    background-color: white;
+    color: #333;
+    height: 450px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    margin-top: 0;
+}
+
+@media (max-width: 770px) {
+    .cards-container > .card {
+        width: 100%;
+    }
+}

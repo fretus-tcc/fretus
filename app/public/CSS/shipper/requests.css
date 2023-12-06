@@ -1,0 +1,126 @@
+body {
+    background-image: var(--gray-gradient);
+    min-height: 100vh;
+    color: #333;
+}
+
+main {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+main > h1 {
+    margin-bottom: 12px;
+}
+
+.requests-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, auto));
+    gap: 15px;
+}
+
+.requests-container > .card {
+    background-color: #fffbff;
+    height: fit-content;
+    border-radius: 15px;
+    padding: 15px;
+    opacity: 1;
+    transition: all .7s;
+    position: relative;
+}
+
+.card > .top {
+    /* height: 80%; */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 14px;
+}
+
+.top > .row {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding-right: 25px;
+}
+
+.top > .row.track {
+    width: fit-content;
+    margin-left: 9px;
+}
+
+.card > .weight::before {
+    content: 'Carga: ';
+    font-family: var(--font-1);
+    font-weight: 700;
+}
+
+.card > .weight {
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-family: var(--font-2);
+}
+
+.card > .bottom {
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom > .price {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.bottom > .actions {
+    /* opacity: .6; */
+    display: flex;
+    gap: 7px;
+}
+
+.bottom > .actions img {
+    width: 30px;
+    cursor: pointer;
+}
+
+.bottom > .btns {
+    display: flex;
+    column-gap: 7px;
+}
+
+.btns .btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.btn.accept {
+    background-color: var(--orange);
+}
+
+.btn.denied {
+    background-color: #DBDEE3;
+}
+
+.card .indicator {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    font-weight: 700;
+}
+
+@media (max-width: 795px) {
+    .requests-container {
+        grid-template-columns: 100%;
+    }
+}

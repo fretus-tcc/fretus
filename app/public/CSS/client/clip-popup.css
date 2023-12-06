@@ -1,0 +1,96 @@
+.chat-msgs .clip-popup {
+    position: fixed;
+    bottom: 100px;
+    right: 70px;
+    z-index: -900;
+    opacity: 0;
+    transition: all .5s;
+}
+
+.chat-msgs .clip-popup.active {
+    opacity: 1;
+    z-index: 900;
+}
+
+.clip-popup > ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.clip-popup li {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
+    animation: descaling .5s forwards;
+    transition: all .5s;
+}
+
+.clip-popup .rounded-icon {
+    background-image: var(--blue-gradient);
+    box-shadow: 0px 8px 24px 0px #959da5;
+    color: white;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.clip-popup .rounded-icon  > img {
+    width: 60%;
+    filter: brightness(100);
+}
+
+.clip-popup li span {
+    opacity: 0;
+    background-color: #5685b1;
+    padding: 7px;
+    border-radius: 35px;
+    color: white;
+    transition: all .3s;
+    transform: scale(0);
+    transform-origin: right;
+}
+
+.clip-popup .rounded-icon:hover + span {
+    opacity: 1;
+    transform: scale(.9);
+}
+
+.clip-popup.active > ul > * {
+    animation: scaling .3s forwards;
+    transform: scale(0);
+}
+
+.clip-popup.active > ul > li:nth-child(2) {
+    animation-delay: 75ms;
+}
+
+.clip-popup.active > ul > li:nth-child(3) {
+    animation-delay: 150ms;
+}
+
+.clip-popup.active > ul > li:nth-child(4) {
+    animation-delay: 225ms;
+}
+
+@keyframes scaling {
+    0% {
+        transform: scale(0);
+    }
+    75% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes descaling {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}

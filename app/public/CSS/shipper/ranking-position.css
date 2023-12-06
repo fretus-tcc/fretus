@@ -1,0 +1,10 @@
+.ranking-position {
+    width: 85%;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 60px auto 35px;
+    opacity: .6;
+    background-color: white;
+    color: #333;
+    text-align: center;
+}

@@ -1,0 +1,77 @@
+.form .vehicles-container,
+.form .weight-container {
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.vehicles-container .content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.weight-container .content {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    column-gap: 15px;
+}
+
+.weight-container .content>label {
+    flex-grow: 1;
+    width: calc(100% / 4);
+}
+
+
+.content>input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    z-index: -100;
+    left: 50%;
+    bottom: 0;
+}
+
+.vehicles-container .content>label {
+    flex: 0 0 calc(25% - 15px);
+    max-width: calc(25% - 15px);
+    text-align: center;
+}
+
+.content .card {
+    background-color: white;
+    color: #333;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border: solid transparent;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.content>input:checked+label>.card {
+    border: solid var(--orange);
+}
+
+.card h2 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.card img {
+    width: 45px;
+}
+
+@media (max-width: 550px) {
+    .vehicles-container .content>label {
+        flex: 0 0 calc(50% - 15px);
+        max-width: calc(50% - 15px);
+    }
+}

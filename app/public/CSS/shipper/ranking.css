@@ -1,0 +1,21 @@
+.switch {
+   width: min(450px, 90%);
+   margin-top: 45px;
+}
+
+.switch span {
+    width: calc(100% / 3);
+}
+
+.ranking {
+    width: min(600px, 95%);
+    margin: 0 auto;
+}
+
+.ranking > * {
+    display: none;
+}
+
+.ranking > *.show {
+    display: block;
+}

@@ -1,0 +1,49 @@
+.ranking-table {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    margin-bottom: 15px;
+}
+
+.ranking-table > .row {
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+    color: #333;
+}
+
+.row > .position {
+    flex-grow: 1;
+}
+
+.row > .row-info {
+    width: 100%;
+    padding: 5px 16px 5px 5px;
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 30px;
+    display: flex;
+    column-gap: 18px;
+}
+
+.row-info > .photo {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 100%;
+    background-color: #c4c4c4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-info img {
+    width: 75%;
+    opacity: .75;
+}
+
+.row-info > .description {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

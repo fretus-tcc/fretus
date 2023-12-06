@@ -1,0 +1,30 @@
+.row.other-msg > .msg.typing {
+    display: flex;
+    column-gap: 5px
+}
+
+.msg.typing > .ball {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: var(--gray);
+    animation: typing 1s infinite;
+    transition: all .3s;
+}
+
+.msg.typing > .ball:nth-child(2) {
+    animation-delay: 200ms;
+}
+
+.msg.typing > .ball:nth-child(3) {
+    animation-delay: 300ms;
+}
+
+@keyframes typing {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}

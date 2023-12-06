@@ -1,0 +1,57 @@
+.accordion {
+    color: #333;
+    max-width: 1050px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5px;
+}
+
+.accordion > .question {
+    background-color: white;
+    padding: 20px;
+    transition: all .3s;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question > h1 {
+    width: 75%;
+}
+
+.accordion > .question::after {
+    content: ">";
+    font-weight: 700;
+    transition: all .3s;
+}
+
+.accordion > .question:hover {
+    background-color: #DDDDDD;
+}
+
+.accordion > .answer {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+
+.accordion > input {
+    display: none;
+}
+
+.accordion > input:checked + .question {
+    background-color: #DDDDDD;
+}
+
+.accordion > input:checked + .question::after {
+    transform: rotate(90deg);
+}
+
+.accordion > input:checked + .question + .answer {
+    max-height: 250px;
+    padding: 20px;
+    margin: 2.5px 0px;
+}

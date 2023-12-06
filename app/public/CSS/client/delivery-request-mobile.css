@@ -1,0 +1,28 @@
+ /* POP-UP */
+
+@media (max-width: 975px), (max-height: 700px) {
+    .popup .close {
+        display: none;
+    }
+    .popup, .popup.show {
+        display: block;
+        position: relative;
+        height: fit-content;
+        background-color: transparent;
+        z-index: 0;
+    }
+    .popup .popup-content {
+        width: 100%;
+    }
+    .form.mobile {
+        left: -100%;
+        /* opacity: 0; */
+        max-height: 100%;
+        min-height: 100%;
+        overflow: hidden;
+    }
+    .map.mobile {
+        width: 100%;
+        display: block;
+    }
+}

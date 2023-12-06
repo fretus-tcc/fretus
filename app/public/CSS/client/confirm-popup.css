@@ -1,0 +1,122 @@
+/* POP-UP */
+
+body {
+    position: relative;
+}
+
+.popup {
+    display: none;
+}
+
+.popup.show {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100000;
+}
+
+.popup .popup-content {
+    background-color: white;
+    color: #333;
+    width: min(90%, 705px);
+    max-height: 90%;
+    padding: 25px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.popup .close {
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    background-color: var(--orange);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.popup .close img {
+    filter: invert();
+}
+
+.popup .popup-wrapper {
+    min-height: fit-content;
+    max-height: 90%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.popup h1 {
+    font-size: 28px;
+}
+
+.popup .cta {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* todo: tela de carregamento  de carregamento  */
+
+.loader-container {
+    display: none;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999; 
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.loader {
+    border: 4px solid var(--orange);
+    border-top: 4px solid #f3f3f3;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 10px; 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-message {
+    font-size: 18px; 
+    margin: 0; 
+    color: #333; 
+}
+

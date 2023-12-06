@@ -1,0 +1,23 @@
+.cta {
+    text-align: center;
+    font-family: var(--font-2);
+    font-size: 20px;
+    background-color: var(--orange);
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: max-content;
+    height: min-content;
+    padding: 11px 20px;
+    border-radius: 30px;
+    margin: 0 auto;
+    outline: none;
+    border: 2px solid var(--orange);
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+.cta:hover {
+    background-color: transparent;
+    color: var(--orange);
+}

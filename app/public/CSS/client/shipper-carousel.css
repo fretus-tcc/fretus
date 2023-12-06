@@ -1,0 +1,110 @@
+main {
+    padding-bottom: 45px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.product-wrapper {
+    /* width: 90%; */
+    margin: 45px auto 0;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.head > h1 {
+    color: #333;
+    font-family: var(--font-1);
+    font-size: 24px;
+}
+
+.head > .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.controls > * {
+    color: #333;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.carousel {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+.content {
+    transition: all .5s ease-in-out;
+    width: fit-content;
+    display: flex;
+    column-gap: 10px;
+}
+
+.content > .products {
+    flex-shrink: 0;
+    width: 250px;
+    height: 100%;
+    padding: 15px;
+    background-color: var(--light-gray);
+    border-radius: 5px;
+}
+
+/* !         historico            */
+
+.products > .photo {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 210px;   /* obs: em px para facilitar */
+    height: 210px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.products > h1 {
+    font-family: var(--font-1);
+    font-size: 24px;
+    color: #333;
+}
+
+.products > p {
+    font-family: var(--font-2);
+    color: #333;
+}
+
+.products .actions {
+    display: flex;
+    gap: 7px;
+    width: fit-content;
+    margin-top: 50px;
+    margin-left: auto;
+}
+
+.actions img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    opacity: .6;
+    cursor: pointer;
+}
+
+.actions img:hover {
+    opacity: .85;
+}
+
+@media (max-width: 310px) {
+    .content > .products {
+        width: 200px;
+    }
+    .products .actions {
+        margin-top: 25px;
+    }
+}

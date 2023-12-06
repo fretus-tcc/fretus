@@ -1,0 +1,26 @@
+.hero {
+    height: 100vh;
+    background-image: url('../../imgs/home/bg-hero-section.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.hero > section {
+    text-align: center;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 210px 10px 10px;
+}
+
+
+.hero > section p {
+    font-family: var(--font-2);
+}
+
+.hero > section .cta {
+    margin-top: 22px;
+}

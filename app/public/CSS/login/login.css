@@ -1,0 +1,145 @@
+body {
+    background-image: url('../../imgs/login-cadastro/bg-login.svg');
+    color: #333;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:root {
+    --secondary: #6F7E8C;
+    --hover: #F5F5F5;
+    --text: #212121;
+}
+
+.fretus {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+.fretus a {
+    color: #333;
+}
+
+.container {
+    /* padding: 35px; */
+    width: min(400px, 85%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.container h1,
+.container p {
+    margin-bottom: 15px;
+}
+
+.logo-container {
+    width: 40px;
+}
+
+.logo-container .logo {
+    width: 100%;
+}
+
+input {
+    font-family: var(--font-2);
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    margin-bottom: 15px;
+}
+
+input[type="submit"] {
+    background-color: var(--orange);
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+input[type="submit"]:hover {
+    background-color: chocolate;
+}
+
+.container p {
+    font-size: 15px;
+    color: #333;
+}
+
+p a {
+    color: var(--orange);
+    font-weight: bold;
+    text-decoration: none;
+    transition: all .3s ease-out;
+
+}
+
+p a:hover {
+    color: chocolate;
+}
+
+ /* começa aqui */
+ 
+.alternative {
+    text-align: center;
+    padding: 10px;
+
+}
+
+.alternative span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 100%;    
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 400;
+}
+
+.alternative span::before,
+main .alternative span::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 35%;
+    background: #333;
+}
+
+.social-media {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-icon {
+    width: min(45px, 33%);
+}
+
+.social-icon > img {
+    width: 100%;
+}
+
+.input__wrapper {
+    position: relative;
+}
+
+.input__icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    top: 5px;
+}

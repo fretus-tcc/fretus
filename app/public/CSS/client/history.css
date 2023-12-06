@@ -1,0 +1,51 @@
+body {
+    background-image: var(--gray-gradient);
+    min-height: 100vh;
+    color: #333;
+}
+
+header {
+    margin-bottom: 85px;
+}
+
+main {
+    padding: 0 50px 50px;
+    margin: 0 auto;
+}
+
+main > h1 {
+    margin-bottom: 13px;
+    font-size: 36px;
+}
+
+main > .table-container {
+    padding: 25px 30px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+table {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+table tr:not(:nth-child(1)){
+    border-bottom: solid 2px #d7d7d7;
+}
+
+table td, table th {
+    text-align: left;
+    padding: 10px 0;
+}
+
+table th {
+    font-size: 18px;
+    color: rgba(51, 51, 51, 0.64);
+    font-size: clamp(14px, 2.5vw, 18px);
+}
+
+table td {
+    font-family: var(--font-2);
+    font-size: clamp(12px, 2.5vw, 28px);
+}

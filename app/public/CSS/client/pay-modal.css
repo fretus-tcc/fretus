@@ -1,0 +1,47 @@
+.pay-modal:modal {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.pay-modal[open] {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000000;
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+.pay-modal > .modal-content {
+    background-color: #fff;
+    color: #333;
+    width: min(75%, 705px);
+    padding: 25px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.modal-content > h1 {
+    font-size: 20px;
+}
+
+.modal-content > input {
+    width: 100%;
+    height: fit-content;
+    padding: 7px;
+    border: 1px solid #3333332f;
+    outline: none;
+    font-family: var(--font-2);
+    font-size: 18px;
+}

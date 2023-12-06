@@ -1,0 +1,38 @@
+.row > .msg.payment {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.row > .msg.payment h1 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.row > .msg.payment span {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: start;
+}
+
+.btn-container {
+    display: flex;
+    column-gap: 7px;
+}
+
+button {
+    flex-grow: 1;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    padding: 7px;
+    font-family: var(--font-2);
+    /* transition: all .3s; */
+    cursor: pointer;
+}
+
+button.yes {
+    background-color: var(--orange);
+    color: white;
+}

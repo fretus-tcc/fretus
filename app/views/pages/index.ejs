@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus</title>
+    <link rel="shortcut icon" href="./imgs/logotca.png" type="image/x-icon">
+    <%- include('../partial/config/config.ejs') %>
+    <%- include('../partial/config/config-home.ejs') %>
+    <link rel="stylesheet" href="./CSS/home/switch.css">
+    <link rel="stylesheet" href="./CSS/home/gray-gradient.css">
+    <link rel="stylesheet" href="./CSS/home/cards-container.css">
+    <link rel="stylesheet" href="./CSS/home/vehicles-container.css">
+    <link rel="stylesheet" href="./CSS/home/carousel.css">
+    <link rel="stylesheet" href="./CSS/home/accordion.css">
+    <link rel="stylesheet" href="./CSS/home/mobile-carousel.css">
+    <link rel="stylesheet" href="./CSS/home/form-container.css">
+</head>
+<body>
+
+    <div class="hero">
+        <%- include('../partial/header.ejs') %>
+        <section>
+            <h1 class="heading">Entregue com a Fretus</h1>
+            <p class="paragraph">A fretus é uma plataforma de entregas que conecta os clientes com os entregadores</p>
+            <a href="/cadastro" class="cta">Começar</a>
+        </section>
+    </div>
+    <div class="switch">
+        <input type="radio" name="change" id="client" checked data-move="0">
+        <label for="client">Cliente</label>
+        <input type="radio" name="change" id="shipper" data-move="150">
+        <label for="shipper">Entregador</label>
+        <span></span>
+    </div>
+    
+    <main>
+        <div class="client show">
+            <section class="gray-gradient">
+                <%- include('../partial/home/cards-container.ejs', { isClient: true }) %>
+                <a href="/cadastro" class="cta">Começar agora</a>  
+            </section>
+            <section class="blue-gradient">
+                <h1 class="heading">Quais veículos você poderá escolher</h1>
+                <div class="vehicles-container">
+                    <div class="vehicle-row">
+                        <div class="card show">
+                            <div class="img">
+                                <img src="./imgs/home/client/bike.svg" alt="">
+                            </div>
+                            <h1>Moto</h1>
+                        </div>
+                        <div class="card">
+                            <div class="img">
+                                <img src="./imgs/home/client/car.svg" alt="">
+                            </div>
+                            <h1>Carro</h1>
+                        </div>
+                    </div>
+                    <div class="vehicle-description">
+                        <div class="card-description show">
+                            <div class="container-f">
+                                <div class="cell">
+                                  <h1>Descrição</h1>
+                                  <p>Nossos entregadores de moto são ágeis e eficientes, ideais para entregas rápidas em áreas urbanas.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Ideal para</h1>
+                                  <p>Entregar documentos, pequenos pacotes e encomendas com rapidez.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Preço Base:</h1>
+                                  <p id="preco">R$ 5/Km</p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="card-description">
+                            <div class="container-f">
+                                <div class="cell">
+                                  <h1>Descrição</h1>
+                                  <p>Nossos motoristas de carro estão prontos para atender a uma variedade de necessidades de entrega.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Ideal para</h1>
+                                  <p>Transportar encomendas de tamanhos maiores, alimentos, produtos e muito mais.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Preço Base:</h1>
+                                  <p id="preco">R$ 8/Km</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="vehicle-row">
+                        <div class="card">
+                            <div class="img">
+                                <img src="./imgs/home/client/van.svg" alt="">
+                            </div>
+                            <h1>Van</h1>
+                        </div>
+                        <div class="card">
+                            <div class="img">
+                                <img src="./imgs/home/client/truck.svg" alt="">
+                            </div>
+                            <h1>Caminhão</h1>
+                        </div>
+                    </div>
+                    <div class="vehicle-description">
+                        <div class="card-description">
+
+                            <div class="container-f">
+                                <div class="cell">
+                                  <h1>Descrição</h1>
+                                  <p>Com maior capacidade de carga, para entregas maiores ou mais volumosas, nossas vans são ideais.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Ideal para</h1>
+                                  <p>Encomendas de médio porte, móveis, eletrodomésticos e outras cargas maiores.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Preço Base: </h1>
+                                  <p id="preco">R$ 15/Km</p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="card-description">
+                            <div class="container-f">
+                                <div class="cell">
+                                  <h1>Descrição</h1>
+                                  <p>Com capacidade de carga significativa, para cargas pesadas ou volumosas, nossos caminhões são a escolha certa.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Ideal para</h1>
+                                  <p>Entregas de grande porte, mudanças residenciais, cargas comerciais e outras necessidades de transporte pesado.</p>
+                                </div>
+                                <div class="cell">
+                                  <h1>Preço Base:</h1>
+                                  <p id="preco">R$ 18/Km</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="gray-gradient">
+                <%- include('../partial/home/carousel.ejs', { isClient: true }) %>
+            </section>
+            <section class="blue-gradient">
+                <h1 class="heading">Dúvidas Frequentes</h1>
+                <%- include('../partial/home/accordion.ejs', { isClient: true }) %>
+            </section>
+        </div>
+        <div class="shipper">
+            <section class="gray-gradient">
+                <%- include('../partial/home/cards-container.ejs', { isClient: false }) %>
+                <a href="/cadastro" class="cta">Começar agora</a>
+            </section>
+            <section class="blue-gradient">
+                <h1 class="heading">Como funciona</h1>
+                <div class="mobile-wrapper">
+                    <div class="mobile-carousel">
+                        <div class="mobile-content">
+                            <div class="content-item show">
+                                <img src="imgs/home/shipper/carousel-shipper-1.png" alt="">
+                            </div>
+                            <div class="content-item">
+                                <img src="imgs/home/shipper/carousel-shipper-2.png" alt="">
+                            </div>
+                            <div class="content-item">
+                                <img src="imgs/home/shipper/carousel-shipper-3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mobile-controls">
+                        <input type="radio" name="mobile-control" id="m-c1" checked>
+                        <label for="m-c1">
+                            <div class="step">1</div>
+                            <p>Veja suas Entregas Solicitadas</p>
+                        </label>
+                        <input type="radio" name="mobile-control" id="m-c2">
+                        <label for="m-c2">
+                            <div class="step">2</div>
+                            <p>Converse com o Cliente</p>
+                        </label>
+                        <input type="radio" name="mobile-control" id="m-c3">
+                        <label for="m-c3">
+                            <div class="step">3</div>
+                            <p>Consulte seus resultados</p>
+                        </label>
+                        <a href="/cadastro" class="cta">Começar agora</a>
+                    </div>
+                </div>
+            </section>
+            <section class="gray-gradient">
+                <%- include('../partial/home/carousel.ejs', { isClient: false }) %>
+            </section>
+            <section class="blue-gradient">
+                <h1 class="heading">Descubra se você está elegível para trabalhar conosco</h1>
+                <form class="form-container" action="./HTML/cadastro-entregador/cadastro-entregador.html">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="nome">Nome completo</label>
+                            <input type="text" id="nome" autocomplete="off" oninput="nomeValido()" pattern=".{2,}[A-Za-zÀ-ÿ\s]+" required>
+                            <p id="messageNome"></p>
+                        </div>
+                        <div class="form-column">
+                            <label for="cpf">CPF</label>
+                            <input type="text" id="cpf" oninput="cpfValido()" autocomplete="off" pattern=".{11,}" required>
+                            <p id="messageCpf"></p>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="inputEmail">Endereço de E-Mail</label>
+                            <input type="email" id="inputEmail" oninput="emailValido()" autocomplete="off" required>
+                            <p id="messageEmail"></p>
+                        </div>
+                        <div class="form-column">
+                            <label for="password">Senha</label>
+                            <input type="password" id="password" oninput="senhaValidada()" pattern=".{8,}" required>
+                            <p id="messageSenha"></p>
+                        </div>
+                    </div>
+                    <div class="terms">
+                        <input required type="checkbox" name="terms" id="terms">
+                        <label for="terms">Eu concordo com os <a href="">Termos e Condições</a> e com a Política de Taxa da Fretus</label>
+                    </div>
+                    
+                    <button type="submit" id="verificar" class="cta">Verificar</button>
+                </form>
+            </section>
+            <section class="gray-gradient">
+                <h1 class="heading">Dúvidas Frequentes</h1>
+                <%- include('../partial/home/accordion.ejs', { isClient: false }) %>
+            </section>
+        </div>
+    </main>
+
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/menu-burguer.ejs') %>
+
+    <script src="./JS/switch-button.js"></script>
+    <script src="./JS/header-scroll.js"></script>
+    <script src="./JS/burguer.js"></script>
+    <script src="./JS/carousel.js"></script>
+    <script src="./JS/vehicles-container.js"></script>
+    <script src="./JS/mobile-carousel.js"></script>
+    <script src="./JS/validaHome.js"></script>
+    <script src="./JS/login-cadastro/mascara.js"></script>
+
+    <!-- <script src="./JS/form.js"></script> -->
+</body>
+</html>

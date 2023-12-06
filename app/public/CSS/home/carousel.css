@@ -1,0 +1,102 @@
+.carousel {
+    background-color: white;
+    color: #333;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    max-width: 1050px;
+    margin: 30px auto;
+    border-radius: 15px;
+}
+
+.carousel > .content {
+    width: 300%;
+    display: flex;
+}
+
+.content > .card {
+    flex-shrink: 0;
+    width: calc(100% / 3);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.card > .photo {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.photo > img {
+    width: 100%;
+    height: 100%;
+    transition: all .3s;
+}
+
+.photo:hover > img {
+    transform: scale(1.1);
+}
+
+.card > .text {
+    width: 50%;
+    padding: 20px;
+}
+
+.text > p {
+    /* font-size: 22px; */
+    font-family: var(--font-2);
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.controls {
+    width: fit-content;
+    margin: 35px auto 0;
+    display: flex;
+    gap: 12px;
+}
+
+.controls > input {
+    display: none;
+}
+
+.controls > input + label {
+    display: block;
+    background-color: var(--gray);
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.controls > input:checked + label {
+    background-color: var(--orange);
+}
+
+@media (max-width: 600px) {
+    .content > .card {
+        height: 300px;
+    }
+    .card > .text {
+        width: 100%;
+    }
+    .card > .photo {
+        width: 80px;
+        height: 110px;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+    .text > p {
+        font-size: 18px;
+    }
+    .text > h1 {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 360px) {
+    .card > .photo {
+        display: none;
+    }
+}

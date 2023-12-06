@@ -1,0 +1,112 @@
+.links-itens {
+    margin: 10px;
+    max-width: 600px;
+    height: 100%;
+}
+
+.Sobre-fretus {
+    max-width: 600px;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1.3rem;
+    text-align: justify;
+
+}
+
+.links-Privaci {
+    width: 100%;
+    text-align: center;
+}
+
+.container-termos h3 {
+    margin: 15px 0;
+    font-size: 1.5rem;
+}
+
+.container-termos {
+    scroll-behavior: smooth;
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 10px;
+    max-height: 610px;
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 0.25);
+    text-align: left;
+}
+
+.link-bar {
+    background-color: var(--orange);
+    border: 2px solid var(--orange);
+    padding: 8px;
+    border-radius: 5px;
+    margin: 0 25px;
+    transition: all linear 0.2s;
+}
+
+.poli-ef {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 10px;
+
+
+
+}
+
+.poli-ef::after {
+    content: '';
+    width: 90%;
+    position: absolute;
+    height: 5px;
+    bottom: 0;
+    background: #696969;
+
+}
+
+.link-bar:hover {
+    color: var(--orange);
+    background: none;
+}
+
+@media(max-width:1350px) {
+    main {
+        flex-direction: column;
+        /* width: 100%; */
+    }
+
+    main p,
+    main ol {
+        padding: 10px;
+        font-size: 1.5rem;
+        margin: 15px 0; 
+    }
+
+    .links-Privaci {
+        margin-top: 30px;
+
+
+    }
+
+    .Sobre-fretus {
+
+        padding: 0;
+        text-align: justify;
+        width: 97%;
+        max-width: unset;
+
+    }
+
+    .container-termos {
+        max-height: 100%;
+        background: unset;
+        max-width: 100%;
+        text-align: justify;
+        padding: 15px;
+    }
+
+    .links-itens {
+        max-width: unset;
+        width: 100%;
+
+    }
+}

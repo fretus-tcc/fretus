@@ -1,0 +1,65 @@
+body {
+    background-image: var(--gray-gradient);
+    min-height: 100vh;
+}
+
+.hero header {
+    position: relative;
+}
+
+main {
+    width: min(970px, 90%);
+    margin: 75px auto 15px;
+    font-size: 20px;
+    color: #333;
+    line-height: 30.5px;
+}
+
+main > .heading {
+    font-size: clamp(24px, 3.5vw, 48px);
+    margin: 0 0 10px;
+    line-height: normal;
+    text-align: start;
+}
+
+main > ol {
+    padding: 22px;
+}
+
+main ol > li {
+    font-family: var(--font-1);
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+main ol > li > ul {
+    list-style: none;
+} 
+
+main ol ul > li {
+    font-family: var(--font-2);
+    font-weight: 400;
+}
+
+main li a {
+    color: var(--orange);
+}
+
+.contact {
+    /* background-color: rgba(255, 255, 255, 0.686); */
+    color: #333;
+    height: 300px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact > .heading {
+    font-size: clamp(24px, 3.5vw, 48px);
+}
+
+footer {
+    margin-top: 0;
+}

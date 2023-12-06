@@ -1,0 +1,24 @@
+.requests-container + .empty-alert, .content + .empty-alert {
+    display: none;
+}
+
+.requests-container:not(:has(.card)) + .empty-alert, .content:not(:has(.products.show)) + .empty-alert  {
+    display: block;
+    width: fit-content;
+    opacity: .25;
+    margin: 100px auto;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+}
+
+.empty-alert img {
+    max-width: 250px;
+    aspect-ratio: 1/1;
+    margin-bottom: 30px;
+}
+
+.empty-alert p {
+    max-width: 700px;
+}

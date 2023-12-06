@@ -1,0 +1,8 @@
+.popup-wrapper p {
+    font-family: var(--font-2);
+}
+
+.title-type {
+    font-weight: 700;
+    font-family: var(--font-1);
+}

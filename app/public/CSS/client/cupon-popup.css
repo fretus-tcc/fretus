@@ -1,0 +1,25 @@
+.popup.cupon .pay-field {
+    display: grid;
+    grid-template-columns: auto 6ch;
+}
+
+.popup.cupon .pay-field > input.input-field {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.popup.cupon .pay-field > button {
+    outline: none;
+    border: none;
+    background-color: var(--orange);
+    color: white;
+    font-family: var(--font-2);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.popup.cupon .pay-field > button:hover {
+    background-color: #f0893a;
+}

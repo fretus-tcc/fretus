@@ -1,0 +1,36 @@
+.chat-inputs textarea {
+    width: 80%;
+    height: 24px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-family: var(--font-2);
+    font-size: 20px;
+    color: #333;
+    resize: none;
+}
+
+.chat-inputs textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-inputs textarea::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.chat-inputs textarea::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+.chat-inputs textarea::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.chat-inputs > .actions {
+    display: flex;
+    column-gap: 8px;
+}
+
+.actions > .clip {
+    background-color: transparent;
+}

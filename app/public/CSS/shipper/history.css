@@ -1,0 +1,36 @@
+body {
+    background-image: var(--gray-gradient);
+    min-height: 100vh;
+}
+
+main {
+    padding: 50px 0;
+}
+
+main > .history-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+main > .history-header {
+    margin-bottom: 13px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.history-header > .history-nav {
+    display: inherit;
+    align-items: flex-end;
+}
+
+.history-nav > select {
+    opacity: .5;
+    height: 24px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-family: var(--font-2);
+}

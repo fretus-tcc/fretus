@@ -1,0 +1,191 @@
+main {
+    grid-template-columns: 300px auto;
+    height: calc(100vh - 85px);
+}
+
+.sidebar {
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(51, 51, 51, 0.25); 
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(51, 51, 51, 0.3); 
+}
+
+.sidebar > .nav {
+    height: fit-content;
+    margin: 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar .search-bar {
+    display: grid;
+    grid-template-columns: 15px auto;
+    column-gap: 5px;
+    width: 90%;
+    height: 35px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 7px;
+    border: solid 1px rgba(51, 51, 51, 0.18);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.search-bar .icon {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    outline: none;
+    border: none;
+    font-family: var(--font-2);
+    font-size: 16px;
+    color: #333;
+}
+
+.search-bar:has(input:focus) {
+    border-color: #3333336c;   
+}
+
+.sidebar .online {
+    padding: 0 15px;
+}
+
+.online h1 {
+    font-family: var(--font-2);
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.online > .online-users {
+    display: flex;
+    gap: 7px;
+}
+
+.online .online-icon {
+    position: absolute;
+    bottom: -3px;
+    right: -1px;
+    width: 20px;
+    height: 20px;
+    background-color: #A2EA8B;
+    border-radius: 100%;
+}
+
+.sidebar li {
+    border-bottom: none;
+    height: auto;
+    padding: 15px;
+    width: 100%;
+}
+
+.sidebar li > .chat-contact {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-contact > .contact-info {
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+}
+
+.contact-info > .photo, .online .photo {
+    flex-shrink: 0;
+    width: 45px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    background-color: #DBDEE3;
+    color: rgba(51, 51, 51, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.online .photo {
+    width: calc((100% / 4) - 5px);
+    font-size: 32px;
+    position: relative;
+}
+
+.photo img {
+    width: 80%;
+    height: auto;
+    opacity: .5;
+}
+
+.chat-contact h1 {
+    font-family: var(--font-1);
+    font-size: 18px;
+}
+
+.chat-contact p {
+    font-size: 12px;
+}
+
+.contact-time p {
+    text-align: end;
+}
+
+@media (max-width: 1000px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        position: absolute;
+        z-index: 99;
+        translate: -100%;
+        transition: translate .3s ease-in-out;
+        width: 100%;
+        height: calc(100% - 85px);
+    }
+    .sidebar > .nav {
+        margin-top: 75px;
+    }
+    .sidebar .search-bar {
+        width: 95%;
+    }
+    .online .online-icon {
+        display: none;
+    }
+    .sidebar.show {
+        translate: 0;
+    }
+    main > .chat {
+        position: relative;
+    }
+    .chat .sidebar-burguer {
+        display: block;
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        top: 30px;
+        left: 15px;
+        z-index: 100;
+        background-color: white;
+        padding: 5px;
+        border-radius: 100%;
+    }
+    .sidebar-burguer > img {
+        width: 100%;
+    }
+}

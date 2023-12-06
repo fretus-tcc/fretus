@@ -1,0 +1,188 @@
+main {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 50px 0;
+    color: #333;
+    display: grid;
+    grid-template-columns: 35% auto;
+    gap: 50px;
+    /* height: calc(100vh - 85px); */
+}
+
+/* .cupons, .invite-friends {
+    height: calc(100vh - 85px);
+} */
+
+.cupons {
+    height: fit-content;
+}
+
+.cupons, .cupons-container, .cupons-container > * {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.cupons .cupons-container {
+    width: min(90%, 345px);
+}
+
+.cupons-container h2 {
+    font-family: var(--font-2);
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.cupons .cupon {
+    background-color: #EDEFF1;
+    border-radius: 10px;
+}
+
+.cupon .content {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    font-size: 16px;
+}
+
+.cupon .icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFE4D9;
+}
+
+.cupon h1 {
+    font-size: 22px;
+    margin-bottom: 7px;
+}
+
+.description p {
+    color:#333333;
+}
+
+.cupon .expirate {
+    background-color: #FFE4D9;
+    font-size: 13px;
+    padding: 8px 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.disable-cupons .cupon {
+    filter: grayscale(1);
+    opacity: .7;
+}
+
+.invite-friends {
+    background-image: url(../../imgs/client/bg-invite-friends.png), linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+    height: calc(100vh - 85px);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: sticky;
+    top: 20px;
+}
+
+.invite-friends h1 {
+    color: white;
+    font-size: clamp(48px, 3.5vw, 60px);
+}
+
+.invite-friends p {
+    color: white;
+    font-size: 20px;
+    max-width: 500px;
+    margin-top: 7px;
+    margin-bottom: 30px;
+}
+
+.cupon-input {
+    display: grid;
+    grid-template-columns: calc(100% - 90px) 90px;
+    column-gap: 8px;
+}
+
+.invite-friends .cupon-input {
+    width: min(450px, 90%);
+}
+
+.cupon-input input {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: #EDEFF1;
+    padding: 8px 10px;
+    font-family: var(--font-2);
+    font-size: 16px;
+}
+
+.cupon-input .cta {
+    height: 40px;
+    margin: 0;
+    padding: 0 19px;
+    border-radius: 5px;
+    font-family: var(--font-2);
+    font-size: 16px;
+}
+
+.invite-friends .cta:hover {
+    color: white;
+}
+
+.social-media {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.social-media .icon {
+    width: 50px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-media .twitter {
+    background-color: #1D9BF0;
+}
+
+.social-media .facebook {
+    background-color: #1977F3;
+}
+
+.facebook img {
+    transform: translate(0, -3px);
+}
+
+.social-media .whatsapp {
+    background-color: #60D76A;
+}
+
+@media (max-width: 975px) {
+    main {
+        grid-template-columns: 100%;
+    }
+    .invite-friends {
+        order: -1;
+        position: relative;
+        padding: 25px;
+        height: fit-content;
+    }
+    .cupons .cupons-container {
+        width: 100%;
+    }
+}

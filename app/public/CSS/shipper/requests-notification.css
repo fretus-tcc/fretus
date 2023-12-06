@@ -1,0 +1,41 @@
+.notification-container {
+    padding: 15px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.563);
+    background-color: white;
+    color: #333;
+    width: fit-content;
+    position: fixed;
+    bottom: -75px;
+    left: 15px;
+    transition: all .5s;
+    font-weight: 700;
+}
+
+.notification-container.show {
+    bottom: 25px;
+}
+
+.notification-container .notification .loading {
+    transform: scaleX(0);
+    transform-origin: left;
+    margin-top: 7px;
+    height: 10px;
+    background-color: var(--orange);
+    animation: load 5s linear forwards;
+}
+
+.notification-container span {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+.notification-container span:hover {
+    text-decoration: underline;
+}
+
+@keyframes load {
+    90%, 100% {
+        transform: scaleX(1);
+    }
+}

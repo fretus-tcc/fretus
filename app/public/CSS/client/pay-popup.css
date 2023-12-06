@@ -1,0 +1,154 @@
+.popup.show {
+    position: fixed;
+}
+
+.popup.show form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.popup.show .input-field, .popup.show .payment-method {
+    outline: none;
+    width: 100%;
+    padding: 8px;
+    color: #333;
+    border: solid 1px rgba(51, 51, 51, 0.18);
+    border-radius: 5px;
+    font-family: var(--font-2);
+    font-size: 16px;
+}
+
+.popup.show .input-field:focus {
+    border-color: #3333336c;
+}
+
+.popup.show .payment-method {
+    padding: 0;
+}
+
+.payment-method > .field {
+    height: fit-content;
+    padding: 20px;
+}
+
+.payment-method > .pix-field {
+    border-bottom: solid 1px rgba(51, 51, 51, 0.18);
+}
+
+.field > input[type="radio"] {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.field > label {
+    position: relative;
+    top: -6px;
+    left: 5px;
+    display: inline-block;
+    width: 80%;
+    cursor: pointer;
+    color: rgba(51, 51, 51, 0.85);
+}
+
+.pix-field .pay-field {
+    display: grid;
+    grid-template-columns: auto 6ch;
+}
+
+.pix-field .pay-field > input.input-field {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.pix-field .pay-field > button {
+    outline: none;
+    border: none;
+    background-color: var(--orange);
+    color: white;
+    font-family: var(--font-2);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.pix-field .pay-field > button:hover {
+    background-color: #f0893a;
+}
+
+.card-field .pay-field {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.pay-field > .card-input {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto 15%;
+}
+
+.popup.show .card-input > input.input-field {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.card-input input:focus + img {
+    border-color: #3333336c;
+}
+
+.card-input img {
+    width: 15%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    padding-right: 8px;
+    border: solid 1px rgba(51, 51, 51, 0.18);
+    border-left: none;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.field > input ~ .pay-field {
+    max-height: 0px;
+    overflow: hidden;
+    transition: all .3s;
+}
+
+.field > input:checked ~ .pay-field {
+    margin-top: 20px;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.popup.show textarea {
+    resize: none;
+    min-height: 125px;
+}
+
+.popup.show form > .price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.price > span {
+    font-family: var(--font-2);
+    font-weight: 400;
+}
+
+@media (max-width: 650px) {
+    .card-field .pay-field {
+        grid-template-columns: 1fr;
+        
+    }
+    .field > input:checked ~ .pay-field {
+        max-height: 400px;
+    }
+}

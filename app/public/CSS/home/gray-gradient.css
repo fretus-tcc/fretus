@@ -1,0 +1,20 @@
+section.gray-gradient {
+    background-image: var(--gray-gradient);
+}
+
+.gray-gradient > h1 {
+    color: var(--blue);
+}
+
+.gray-gradient > h1 span {
+    color: var(--orange)
+}
+
+.gray-gradient > p {
+
+    text-align: center;
+    font-family: var(--font-2);
+    /* font-size: 28px; */
+    color: #333;
+    margin: 10px auto 50px;
+}

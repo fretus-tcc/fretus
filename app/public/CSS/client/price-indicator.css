@@ -1,0 +1,15 @@
+.indicator {
+    color: #333;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    border-radius: 100%;
+    border: solid 1px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

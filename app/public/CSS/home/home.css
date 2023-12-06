@@ -1,0 +1,36 @@
+body {
+    background-image: linear-gradient(to right, #E8ECEF, #E0E3EA, #DDDEE3);
+}
+
+.heading {
+    font-size: clamp(36px, 3.5vw, 72px);
+    text-align: center;
+
+
+    /* Alterado  */margin: 0 auto 33px;
+
+    max-width: 975px; 
+}
+
+.paragraph {
+    font-size: clamp(18px, 2.5vw, 28px);
+    /* max-width: max(400px, 50vw) !important; */
+}
+
+.client > section, .shipper > section {
+    padding: 55px 20px;
+}
+
+section.blue-gradient {
+    background-image: var(--blue-gradient);
+}
+
+/* dadsd */
+
+main > .client, main > .shipper {
+    display: none;
+}
+
+main > *.show {
+    display: block;
+}

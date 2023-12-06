@@ -1,0 +1,40 @@
+header > nav > .burguer {
+    display: none;
+}
+
+.menu-burguer {
+    overflow-y: scroll;
+    background-image: var(--gray-gradient);
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    translate: 100%;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--gray);
+    color: #333;
+    transition: translate .5s;
+}
+
+.menu-burguer .burguer {
+    position: absolute;
+    top: 35px;
+    right: 50px;
+}
+
+.menu-burguer ul {
+    margin-top: 50px;
+}
+
+.menu-burguer li {
+    list-style-type: none;
+    font-weight: bold;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.menu-burguer a {
+    color: #333;
+    text-decoration: none;
+}

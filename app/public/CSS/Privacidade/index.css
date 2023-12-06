@@ -1,0 +1,48 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--gray-gradient);
+    min-height: 100vh;     
+    
+}
+
+main {
+    padding-top: 100px;
+    margin: 0 auto;
+    width: min(1366px, 90%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+main h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+main p {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    padding: 10px;
+    font-family: var(--font-2);
+}
+
+.links-Privaci a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    color: white; 
+}
+
+
+
+/* todo: temporario  */
+
+/* footer,header{
+    padding: 20px;
+    margin: 20px;
+} */

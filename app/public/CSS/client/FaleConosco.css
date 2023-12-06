@@ -1,0 +1,76 @@
+body {
+    background-image: url("../../imgs/login-cadastro/bg-login.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-contain {
+    max-width: 600px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+input,
+textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-family: var(--font-2);
+}
+
+textarea {
+    height: 180px;
+    display: block;
+
+}
+
+button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: #f28c00;
+    color: white;
+    font-family: var(--font-2);
+    cursor: pointer;
+    height: 40px;
+    transition: all .3s;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.6;
+}
+
+
+@media (max-width: 320px) {
+    .form-contain {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,81 @@
+header {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100px;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all .5s;
+}
+
+header.resized {
+    position: fixed;
+    height: 75px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+header.hide {
+    transform: translateY(-100px);
+}
+
+header > nav > ul {
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    font-size: 20px;
+}
+
+header h1 {
+    width: 40px;
+}
+
+h1 .logo {
+    width: 100%;
+}
+
+.nav-menu li:nth-child(3) {
+    position: relative;
+    width: 75px;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-menu li:nth-child(3)::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 7px;
+    right: 0;
+    transform: rotate(50deg);
+    width: 10px;
+    height: 10px;
+    border: #ef9652 solid 2px;
+    border-bottom: none;
+    border-left: none;
+    transition: all .3s cubic-bezier(.47,1.64,.41,.8);
+}
+
+.nav-menu li:nth-child(3):hover::after {
+    transform: translateX(7px) rotate(50deg);
+}
+
+@media (max-width: 1000px) {
+    header > nav > ul {
+        display: none;
+    }
+    header > nav > .burguer {
+        display: block;
+    }
+    .menu-burguer.active {
+        translate: 0;
+    }
+}
