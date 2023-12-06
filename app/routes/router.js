@@ -20,4 +20,8 @@ router.get('/ajuda', function (req, res) {
   res.render('pages/ajuda')
 })
 
+router.get('/cadastro-entregador', function (req, res) {
+  res.render('pages/cadastro-entregador')
+})
+
 module.exports = router
