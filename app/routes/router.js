@@ -32,4 +32,21 @@ router.get('/Privacidade' , function (req, res) {
   res.render('pages/Privacidade')
 })
 
+//! ínicio Duvidas 
+
+router.get('/duvida-1', function(req, res){
+  res.render('pages/duvida-1')
+})
+
+router.get('/duvida-2', function (resq,res){
+  res.render('pages/duvida-2')
+})
+
+router.get('/duvida-3', function (req, res){
+  res.render('pages/duvida-3')
+})
+
+//! fim duvidas 
+
+
 module.exports = router
