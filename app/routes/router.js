@@ -27,4 +27,9 @@ router.get('/cadastro-entregador', function (req, res) {
 router.get('/FaleConosco', function (req, res) {
   res.render('pages/FaleConosco')
 })
+
+router.get('/Privacidade' , function (req, res) {
+  res.render('pages/Privacidade')
+})
+
 module.exports = router
