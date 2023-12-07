@@ -1,40 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./imgs/logotca.png" type="image/x-icon">
-    <%- include('../partial/config/config.ejs') %>
-        <%- include('../partial/config/config-home.ejs') %>
-            <link rel="stylesheet" href="./CSS/home/switch.css">
-            <link rel="stylesheet" href="./CSS/home/gray-gradient.css">
-            <link rel="stylesheet" href="./CSS/home/cards-container.css">
-            <link rel="stylesheet" href="./CSS/home/vehicles-container.css">
-            <link rel="stylesheet" href="./CSS/home/carousel.css">
-            <link rel="stylesheet" href="./CSS/home/accordion.css">
-            <link rel="stylesheet" href="./CSS/home/mobile-carousel.css">
-            <link rel="stylesheet" href="./CSS/home/form-container.css">
-            <title>Fretus - Fale Conosco</title>
-            <link rel="shortcut icon" href="../../imgs/logotca.png" type="image/x-icon">
+    <title>Fretus - Fale Conosco</title>
+    <link rel="shortcut icon" href="../../imgs/logotca.png" type="image/x-icon">
+    <%- include('../partial/config/config.ejs') %> 
+    <%- include('../partial/config/config-headerFooter.ejs') %> 
+    <link rel="stylesheet" href="./CSS/client/FaleConosco.css">
 </head>
-
 <body>
-    <!--     <div class="menu-burguer">
-        <div class="burguer">
-            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/homepage__mobile_/u14.svg?pageId=474e0aac-b4ee-403d-9bc0-5e2c0892e3b4" alt="">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="../../HTML/login/login.html">Entrar</a></li>
-                <li><a href="../../HTML/cadastro/cadastro.html">Cadastrar</a></li>
-                <li><a href="../../HTML/fale-conosco/FaleConosco.html">Fale Conosco</a></li>
-                <li><a href="../../HTML/central-ajuda/central-de-ajuda.html">Central de ajuda</a></li>
-            </ul>  
-        </nav>
-    </div> -->
-
     <div class="hero">
         <%- include('../partial/header.ejs') %>
     </div>
@@ -55,19 +32,11 @@
             <!--</form>!-->
         </div>
     </main>
-
-
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/menu-burguer.ejs') %>
-
-
     <script src="./JS/burguer.js"></script>
     <script src="./JS/header-scroll.js"></script>
-
-
-
-    <!-- !   -->
-    <script src="../../JS/FaleConsoco/Mascara.js"></script>
+    <script src="./JS/FaleConsoco/Mascara.js"></script>
 </body>
 
 </html>

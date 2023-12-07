@@ -24,4 +24,7 @@ router.get('/cadastro-entregador', function (req, res) {
   res.render('pages/cadastro-entregador')
 })
 
+router.get('/FaleConosco', function (req, res) {
+  res.render('pages/FaleConosco')
+})
 module.exports = router
