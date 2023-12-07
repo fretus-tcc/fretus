@@ -46,6 +46,18 @@ router.get('/duvida-3', function (req, res){
   res.render('pages/duvida-3')
 })
 
+router.get('/duvida-4', function (req, res){
+  res.render('pages/duvida-4')
+})
+
+router.get('/duvida-5', function (req, res){
+  res.render('pages/duvida-5')
+})
+
+router.get('/duvida-6', function (req, res){
+  res.render('pages/duvida-6')
+})
+
 //! fim duvidas 
 
 
