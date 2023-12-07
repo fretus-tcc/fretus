@@ -3,8 +3,8 @@ body {
     min-height: 100vh;
 }
 
-.hero header {
-    position: relative;
+header {
+    position: relative !important;
 }
 
 main {

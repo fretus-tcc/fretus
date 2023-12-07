@@ -5,20 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Dúvidas</title>
-    <link rel="shortcut icon" href="../../imgs/logotca.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
 
     <%- include('../partial/config/config.ejs') %>
-    <%- include('../partial/config/config-headerFooter.ejs') %>
-
-    <link rel="stylesheet" href="./CSS/cta.css">
-    <link rel="stylesheet" href="../CSS/quotes/main.css">
+    <%- include('../partial/config/config-home.ejs') %>
+    <link rel="stylesheet" href="/CSS/quotes/main.css">
 
 </head>
 
 <body>
-    <div class="hero">
-        <%- include('../partial/header.ejs') %>
-    </div>
+    <%- include('../partial/header.ejs') %>
+
     <main>
         <h1 class="heading">Como funciona o pagamento para os entregadores?</h1>
         <ol> 
@@ -49,13 +46,13 @@
 
     <section class="contact">
         <h1 class="heading">Ainda não resolveu seu problema?</h1>
-        <a href="./Privacidade" class="cta">Fale Conosco</a>
+        <a href="/Privacidade" class="cta">Fale Conosco</a>
     </section>
 
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/menu-burguer.ejs') %>
 
-    <script src="./JS/burguer.js"></script>
-    <script src="./JS/header-scroll.js"></script>
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/header-scroll.js"></script>
 </body>
 </html>

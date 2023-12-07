@@ -38,7 +38,7 @@ router.get('/duvida-1', function(req, res){
   res.render('pages/duvida-1')
 })
 
-router.get('/duvida-2', function (resq,res){
+router.get('/duvida-2', function (req,res){
   res.render('pages/duvida-2')
 })
 
