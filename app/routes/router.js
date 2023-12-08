@@ -35,27 +35,27 @@ router.get('/Privacidade' , function (req, res) {
 //! ínicio Duvidas 
 
 router.get('/duvida-1', function(req, res){
-  res.render('pages/duvida-1')
+  res.render('pages/duvidas/duvida-1')
 })
 
 router.get('/duvida-2', function (req,res){
-  res.render('pages/duvida-2')
+  res.render('pages/duvidas/duvida-2')
 })
 
 router.get('/duvida-3', function (req, res){
-  res.render('pages/duvida-3')
+  res.render('pages/duvidas/duvida-3')
 })
 
 router.get('/duvida-4', function (req, res){
-  res.render('pages/duvida-4')
+  res.render('pages/duvidas/duvida-4')
 })
 
 router.get('/duvida-5', function (req, res){
-  res.render('pages/duvida-5')
+  res.render('pages/duvidas/duvida-5')
 })
 
 router.get('/duvida-6', function (req, res){
-  res.render('pages/duvida-6')
+  res.render('pages/duvidas/duvida-6')
 })
 
 //! fim duvidas 
