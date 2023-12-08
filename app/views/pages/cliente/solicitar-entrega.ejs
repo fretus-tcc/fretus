@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Solicitar Entrega</title>
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'/>
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/delivery-request.css">
+    <link rel="stylesheet" href="/CSS/client/delivery-request-suggestions.css">
+    <link rel="stylesheet" href="/CSS/client/delivery-request-carousel.css">
+    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+    <link rel="stylesheet" href="/CSS/client/delivery-request-mobile.css">
+    <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+</head>
+<body>
+    
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
+    <main>
+        <div class="form">
+            <div class="form-wrapper">
+                <form>
+                    <h1>Solicitar Entrega</h1>
+                    <input type="text" required="" class="address start" placeholder="Local de partida">
+                    <div class="suggestions">
+                        <ul class="suggestions-options"></ul>
+                    </div>
+                    <input type="text" required="" class="address end" placeholder="Local de destino">
+                    <div class="suggestions">
+                        <ul class="suggestions-options"></ul>
+                    </div>
+                    <div class="schedules-container">
+                        <input type="checkbox" name="schedule" id="schedule">
+                        <label for="schedule"> Clique aqui para agendar <span>></span></label>
+                        <div class="schedule-content">
+                            <input type="date" class="date-time">
+                            <input type="time" class="date-time">
+                        </div>
+                    </div>
+                    
+                    <div class="weight-container">
+                        <h1>Carga</h1>
+                        <div class="content">
+                            <input required type="radio" name="weight" id="s">
+                            <label for="s">
+                                <div class="card">
+                                    <img src="/imgs/client/small-icon.svg" alt="">
+                                    <h2>Pequena</h2>
+                                </div>
+                            </label>
+                            <input type="radio" name="weight" id="m">
+                            <label for="m">
+                                <div class="card">
+                                    <img src="/imgs/client/medium-icon.svg" alt="">
+                                    <h2>Média</h2>
+                                </div>
+                            </label>
+                            <input type="radio" name="weight" id="l">
+                            <label for="l">
+                                <div class="card">
+                                    <img src="/imgs/client/large-icon.svg" alt="">
+                                    <h2>Grande</h2>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="vehicles-container">
+                        <h1>Veículos</h1>
+                        <div class="content">
+                            <input data-index="0" required type="radio" name="vehicles" id="bike">
+                            <label for="bike">
+                                <div class="card">
+                                    <img src="/imgs/client/Solicitar/icons8-motocicleta-50.png" alt="">
+                                    <h2>Moto</h2>
+                                </div>
+                            </label>
+                            <input data-index="1" type="radio" name="vehicles" id="car">
+                            <label for="car">
+                                <div class="card">
+                                    <img src="/imgs/client/Solicitar/icons8-carro-50.png" alt="">
+                                    <h2>Carro</h2>
+                                </div>
+                            </label>
+                            <input data-index="2" type="radio" name="vehicles" id="van">
+                            <label for="van">
+                                <div class="card">
+                                    <img src="/imgs/client/Solicitar/icons8-van-50.png" alt="">
+                                    <h2>Van</h2>
+                                </div>
+                            </label>
+                            <input data-index="3" type="radio" name="vehicles" id="truck">
+                            <label for="truck">
+                                <div class="card">
+                                    <img src="/imgs/client/Solicitar/icons8-semi-truck-side-view-50.png " alt="">
+                                    <h2>Caminhão</h2>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="submit" value="Continuar" class="cta">
+                </form>
+            </div>
+        </div>
+        <div class="map access" id="map"></div>
+        <div class="return-form">
+            <img src="/imgs/burguer-config-icon.png" alt="">
+        </div>
+        <div class="popup">
+            <div class="popup-content">
+                <div class="close">
+                    <img src="/imgs/client/close-icon.svg" alt="">
+                </div>
+                <div class="popup-wrapper">
+                    <h1>Preço Sugerido: <span class="price"></span><a href="#" class="indicator">?</a></h1>
+                    <p>Você pode escolher negociar esse preço com o entregador. Essa escolha aparecerá para o entregador, que poderá ou não negociar com você. A negociação será feita pelo chat, e não nos responsabilizamos por nada disso.</p>
+                    <div class="confirm">
+                        <input type="checkbox" name="confirm-negotiation" id="confirm-negotiation">
+                        <label for="confirm-negotiation">Entendo essas condições e desejo negociar o preço.</label>
+                    </div>
+                    <a href="#" id="continue-button" class="cta">Continuar</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- todo: tela de carrregamento  -->
+
+        <div class="loader-container" id="loader-container">
+            <div class="loader-content">
+                <div class="loader"></div>
+                <h2 class="loader-message">Por Favor, Aguarde</h2>
+                <p class="loader-message">Em busca de motoristas disponíveis...</p>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <!-- <script src="/JS/client/vehicles-carousel.js"></script> -->
+    <script src="/JS/client/geolocation.js"></script>
+    <script src="/JS/client/popup-confirm.js"></script>
+    <script src="/JS/client/weight-validation.js"></script>
+    <script src="/JS/client/carregamento.js"></script>
+</body>
+</html>

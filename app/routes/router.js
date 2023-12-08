@@ -60,5 +60,8 @@ router.get('/duvida-6', function (req, res){
 
 //! fim duvidas 
 
+router.get('/cliente/solicitar-entrega', function (req, res) {
+  res.render('pages/cliente/solicitar-entrega')
+})
 
 module.exports = router

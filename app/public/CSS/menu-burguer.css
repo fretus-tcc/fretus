@@ -7,7 +7,7 @@ header > nav > .burguer {
     background-image: var(--gray-gradient);
     position: fixed;
     top: 0;
-    z-index: 10000;
+    z-index: 9999;
     translate: 100%;
     padding: 20px;
     width: 100vw;
