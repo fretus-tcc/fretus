@@ -101,15 +101,15 @@ router.get('/entregador/chat', function (req, res) {
   res.render('pages/entregador/chat')
 
 })
-router.get('/entragador/configuracoes-notificacoes', function (req, res) {
+router.get('/entregador/configuracoes-notificacoes', function (req, res) {
   res.render('pages/entragador/configuracoes-notificacoes')
 })
 
-router.get('/entragador/configuracoes-pagamento', function (req, res) {
+router.get('/entregador/configuracoes-pagamento', function (req, res) {
   res.render('pages/entragador/configuracoes-pagamento')
 })
 
-router.get('/entragador/configuracoes', function (req, res) {
+router.get('/entregador/configuracoes', function (req, res) {
   res.render('pages/entregador/configuracoes')
 })
 
