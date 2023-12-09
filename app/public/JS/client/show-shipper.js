@@ -6,7 +6,7 @@ setInterval(() => {
         content.forEach((item, i) => {
             const shipper = document.createElement('div')
             shipper.classList.add('products')
-            shipper.innerHTML = `<img src="../../imgs/historico/${c + 1}.jpg" alt="" class="photo">
+            shipper.innerHTML = `<img src="/imgs/historico/${c + 1}.jpg" alt="" class="photo">
                                  <h1>${names[c]}</h1>
                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>`
             
@@ -14,12 +14,12 @@ setInterval(() => {
             act.classList.add('actions')
 
             const favIcon = document.createElement('img')
-            favIcon.setAttribute('src', '../../imgs/client/fav-icon.svg')
+            favIcon.setAttribute('src', '/imgs/client/fav-icon.svg')
             favIcon.addEventListener('click', showAcceptNotification.bind(null, 'Entregador Favoritado! '))
 
             const paymentCall = document.createElement('img')
             paymentCall.classList.add('pay-call')
-            paymentCall.setAttribute('src', '../../imgs/client/pay-icon.svg')
+            paymentCall.setAttribute('src', '/imgs/client/pay-icon.svg')
             paymentCall.addEventListener('click', () => {
                 payPopup.classList.add('show')
             })

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Escolher Entregador</title>
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
+    <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
+    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+    <link rel="stylesheet" href="/CSS/client/pay-popup.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
+</head>
+<body>
+
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
+    <main>
+        <div class="product-wrapper">
+            <div class="head">
+                <h1>Perto da sua região</h1>
+                <div class="controls">
+                    <span id="prev">
+                        <
+                    </span>
+                    <span id="next">
+                        >
+                    </span>
+                </div>
+            </div>
+            <div class="carousel">
+                <div class="content">
+                    <div class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-wrapper">
+            <div class="head">
+                <h1>Com base nas últimas entregas</h1>
+                <div class="controls">
+                    <span id="prev">
+                        <
+                    </span>
+                    <span id="next">
+                        >
+                    </span>
+                </div>
+            </div>
+            <div class="carousel">
+                <div class="content">
+                    <div class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo"><!-- ! todo motorista 1  -->
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-wrapper">
+            <div class="head">
+                <h1>Mais bem avaliados</h1>
+                <div class="controls">
+                    <span id="prev">
+                        <
+                    </span>
+                    <span id="next">
+                        >
+                    </span>
+                </div>
+            </div>
+            <div class="carousel">
+                <div class="content">
+                    <div class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo"><!-- ! todo motorista 1  -->
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="popup">
+            <div class="popup-content">
+                <div class="close">
+                    <img src="/imgs/client/close-icon.svg" alt="">
+                </div>
+                <form class="popup-wrapper" action="/cliente/chat">
+                    <h1>Pagamento</h1>
+                    <div class="payment-method">
+                        <div class="pix-field field">
+                            <input required type="radio" name="pay-method" id="pix">
+                            <label for="pix">Pix</label>
+                            <div class="pay-field">
+                                <input class="input-field" type="text" readonly value="123e4567-e12b-12d1">
+                                <button type="button">Copiar</button>
+                            </div>
+                        </div>
+                        <div class="card-field field">
+                            <input required type="radio" name="pay-method" id="card">
+                            <label for="card">Cartão</label>
+                            <div class="pay-field">
+                                <div class="card-input">
+                                    <input class="input-field card-info" minlength="16" placeholder="Número do Cartão" type="text" id="card-number">
+                                    <img src="/imgs/client/card-icons/unknown.svg">
+                                </div>
+                                <input class="input-field card-info" minlength="5" placeholder="Validade" type="text" id="card-validity">
+                                <input class="input-field card-info" placeholder="CVV" type="text" id="card-cvv">
+                                <input class="input-field card-info" placeholder="Nome" type="text" id="card-name">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" class="input-field" placeholder="Aplique aqui algum cupom de desconto">
+                    <textarea class="input-field" placeholder="Deixe uma observação ao motorista (opcional)"></textarea>
+                    <p class="price">Valor Total: <span>R$25,00</span></p>
+                    <button type="submit" class="cta">Pagar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <div class="notification-container"></div>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/client/shipper-carousel.js"></script>
+    <script src="/JS/client/show-notification.js"></script>
+    <script src="/JS/client/fav.js"></script>
+    <script src="/JS/client/show-shipper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+    <script src="/JS/client/pay-popup.js"></script>
+</body>
+</html>

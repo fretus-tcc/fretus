@@ -80,4 +80,8 @@ router.get('/cliente/perfil', function (req, res) {
   res.render('pages/cliente/perfil')
 })
 
+router.get('/cliente/escolher-entregador', function (req, res) {
+  res.render('pages/cliente/escolher-entregador')
+})
+
 module.exports = router

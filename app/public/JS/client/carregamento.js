@@ -9,7 +9,7 @@ continueButton.addEventListener('click', () => {
 
     setTimeout(() => {
 
-        window.location.href = './escolher-entregador.html';
+        window.location.href = '/cliente/escolher-entregador';
     }, 4000);
 });
 
