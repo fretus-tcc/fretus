@@ -84,4 +84,16 @@ router.get('/cliente/escolher-entregador', function (req, res) {
   res.render('pages/cliente/escolher-entregador')
 })
 
+router.get('/cliente/configuracoes', function (req, res) {
+  res.render('pages/cliente/configuracoes')
+})
+
+router.get('/cliente/configuracoes-pagamento', function (req, res) {
+  res.render('pages/cliente/configuracoes-pagamento')
+})
+
+router.get('/cliente/configuracoes-notificacoes', function (req, res) {
+  res.render('pages/cliente/configuracoes-notificacoes')
+})
+
 module.exports = router
