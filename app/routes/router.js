@@ -97,38 +97,38 @@ router.get('/cliente/configuracoes-notificacoes', function (req, res) {
 })
 
 //! Início da rota do entregador
-router.get('entregador/chat', function (req, res) {
+router.get('/entregador/chat', function (req, res) {
   res.render('pages/entregador/chat')
 
 })
-router.get('entragador/configuracoes-notificacoes', function (req, res) {
+router.get('/entragador/configuracoes-notificacoes', function (req, res) {
   res.render('pages/entragador/configuracoes-notificacoes')
 })
 
-router.get('entragador/configuracoes-pagamento', function (req, res) {
+router.get('/entragador/configuracoes-pagamento', function (req, res) {
   res.render('pages/entragador/configuracoes-pagamento')
 })
 
-router.get('entragador/configuracoes', function (req, res) {
+router.get('/entragador/configuracoes', function (req, res) {
   res.render('pages/entregador/configuracoes')
 })
 
-router.get('entregador/entregas-solicitadas', function (req, res) {
+router.get('/entregador/entregas-solicitadas', function (req, res) {
   res.render('pages/entregador/entregas-solicitadas')
 })
 
-router.get('entregador/historico', function (req, res) {
+router.get('/entregador/historico', function (req, res) {
   res.render('pages/entregador/historico')
 })
 
-router.get('entregador/perfil', function (req, res) {
+router.get('/entregador/perfil', function (req, res) {
   res.render('pages/entregador/perfil')
 })
 
-router.get('entregador/ranking', function (req, res) {
+router.get('/entregador/ranking', function (req, res) {
   res.render('pages/entregador/ranking')
 })
-router.get('entregador/resultados', function (req, res) {
+router.get('/entregador/resultados', function (req, res) {
   res.render('pages/entregador/resultados')
 })
 

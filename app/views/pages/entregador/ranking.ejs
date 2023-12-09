@@ -16,45 +16,8 @@
     <link rel="stylesheet" href="../../CSS/shipper/ranking-table.css">
 </head>
 <body>
-    <div class="menu-burguer">
-        <nav>
-            <ul>
-                <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
-                <li><a href="./chat.html">Chat</a></li>
-                <li><a href="./ranking.html">Ranking</a></li>
-                <li><a href="./resultados.html">Resultados</a></li>
-                <li><a href="./perfil.html">Perfil</a></li>
-                <li><a href="./configuracoes.html">Configurações</a></li>
-            </ul>
-        </nav>
-    </div>
-    
-    <header>
-        <div class="header-content">
-            <h1><a href="../../index.html"><img class="logo" src="../../imgs/logotca.png"></a></h1>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
-                    <li><a href="./chat.html">Chat</a></li>
-                    <li><a href="./ranking.html">Ranking</a></li>
-                    <li><a href="./resultados.html">Resultados</a></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul>
-                    <a href="./perfil.html">
-                        <li><img src="../../imgs/client/profile-icon.svg" alt=""></li>
-                    </a>
-                    <a href="./configuracoes.html">
-                        <li><img src="../../imgs/client/config-icon.svg" alt=""></li>
-                    </a>
-                </ul>
-            </nav>
-            <div class="burguer">
-                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/homepage__mobile_/u14.svg?pageId=474e0aac-b4ee-403d-9bc0-5e2c0892e3b4" alt="">
-            </div>
-        </div>
-    </header>
+   
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 
     <div class="switch">
         <input type="radio" name="change" id="all-time" checked>
