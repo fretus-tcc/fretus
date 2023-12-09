@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Perfil</title>
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/shipper/config.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="/CSS/shipper/profile.css">
+</head>
+
+<body>
+
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
+    <main>
+        <div class="profile-container">
+            <div class="Seu-Perfil">
+                <h2>Seu Perfil</h2>
+            </div>
+            <div class="action-perfil">
+                <label class="action__upload-btn" for="img-selector">Alterar sua foto de perfil</label>
+                <input type="file" name="" id="img-selector" class="action__hiddenField js__profile-upload-btn">
+            </div>
+            <div class="profile-p">
+                <div class="profile__image js__profile-image"
+                    style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="name">Nome: </label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <input type="text" readonly id="name" value="Cliente">
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span>Alterar</span>
+                </div>
+            </div>
+            <div class="row">
+                <label for="name">Email: </label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <input type="email" readonly id="email" value="cliente123@gmail.com">
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span>Alterar</span>
+                </div>
+            </div>
+            <div class="row">
+                <label for="name">Número: </label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <input type="text" id="number" value="(11) 99999-9999" maxlength="15">
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span id="alterar">Alterar</span>
+                </div>
+            </div>
+            <div class="row">
+                <label for="description">Descrição</label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <textarea readonly id="description"
+                            placeholder="Digite sua descrição">Cliente confiável, com várias necessidades de entrega.</textarea>
+                        <span class="count">0/200</span>
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span>Alterar</span>
+                </div>
+            </div>
+            <div class="containerm-p">
+                <p>
+                    Precisa de ajuda? Entre em contato com a
+                    <a href="/ajuda">Central de Ajuda.</a>
+                </p>
+            </div>
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/change.js"></script>
+    <script src="/JS/shipper/profile.js"></script>
+    <script src="/JS/perfil.js"></script>
+</body>
+
+</html>

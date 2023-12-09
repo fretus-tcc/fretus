@@ -76,4 +76,8 @@ router.get('/cliente/cupons', function (req, res) {
   res.render('pages/cliente/cupons')
 })
 
+router.get('/cliente/perfil', function (req, res) {
+  res.render('pages/cliente/perfil')
+})
+
 module.exports = router
