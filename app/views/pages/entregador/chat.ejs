@@ -4,75 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Chat</title>
-    <link rel="shortcut icon" href="../../imgs/logotca.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../CSS/index.css">
-    <link rel="stylesheet" href="../../CSS/cta.css">
-    <link rel="stylesheet" href="../../CSS/menu-burguer.css">
-    <link rel="stylesheet" href="../../CSS/header-client-shipper.css">
-    <link rel="stylesheet" href="../../CSS/shipper/sidebar-config.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-sidebar.css">
-    <link rel="stylesheet" href="../../CSS/client/chat.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-msgs.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-msgs-typing.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-msgs-payment.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-inputs.css">
-    <link rel="stylesheet" href="../../CSS/client/clip-popup.css">
-    <link rel="stylesheet" href="../../CSS/client/pay-modal.css">
-    <link rel="stylesheet" href="../../CSS/client/confirm-popup.css">
-    <link rel="stylesheet" href="../../CSS/client/pay-popup.css">
-    <link rel="stylesheet" href="../../CSS/shipper/requests-notification.css">
-    <link rel="stylesheet" href="../../CSS/client/popup-info.css">
-    <link rel="stylesheet" href="../../CSS/client/pay-popup.css">
-    <link rel="stylesheet" href="../../CSS/client/report-popup.css">
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <%- include('../../partial/config/config-chat.ejs') %>
 </head>
 <body>
-
-    <div class="menu-burguer">
-        <nav>
-            <ul>
-                <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
-                <li><a href="./chat.html">Chat</a></li>
-                <li><a href="./ranking.html">Ranking</a></li>
-                <li><a href="./resultados.html">Resultados</a></li>
-                <li><a href="./perfil.html">Perfil</a></li>
-                <li><a href="./configuracoes.html">Configurações</a></li>
-            </ul>
-        </nav>
-    </div>
-    
-    <header>
-        <div class="header-content">
-            <h1><a href="../../index.html"><img class="logo" src="../../imgs/logotca.png"></a></h1>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
-                    <li><a href="./chat.html">Chat</a></li>
-                    <li><a href="./ranking.html">Ranking</a></li>
-                    <li><a href="./resultados.html">Resultados</a></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul>
-                    <a href="./perfil.html">
-                        <li><img src="../../imgs/client/profile-icon.svg" alt=""></li>
-                    </a>
-                    <a href="./configuracoes.html">
-                        <li><img src="../../imgs/client/config-icon.svg" alt=""></li>
-                    </a>
-                </ul>
-            </nav>
-            <div class="burguer">
-                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/homepage__mobile_/u14.svg?pageId=474e0aac-b4ee-403d-9bc0-5e2c0892e3b4" alt="">
-            </div>
-        </div>
-    </header>
-
+    <!--  -->
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+    <!-- Não mexer  -->
     <main>
         <div class="sidebar">
             <div class="nav">
                 <div class="search-bar">
                     <div class="icon">
-                        <img src="../../imgs/home/client/card-icon-1.svg" alt="">
+                        <img src="/imgs/home/client/card-icon-1.svg" alt="">
                     </div>
                     <input placeholder="Buscar" type="text">
                 </div>
@@ -265,13 +211,13 @@
         </div>
         <div class="chat">
             <div class="sidebar-burguer">
-                <img src="../../imgs/burguer-config-icon.png" alt="">
+                <img src="/imgs/burguer-config-icon.png" alt="">
             </div>
             <div class="chat-container">
                 <div class="chat-header">
                     <div class="info">
                         <h1>Nome</h1>
-                        <img class="report-call" src="../../imgs/client/report-icon.svg" alt="">
+                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
                     </div>
                     <div class="action">
                         <button class="rounded-icon">
@@ -326,19 +272,19 @@
                         <ul>
                             <li>
                                 <div class="rounded-icon">
-                                    <img src="../../imgs/shipper/icon-image.svg" alt="">
+                                    <img src="/imgs/shipper/icon-image.svg" alt="">
                                 </div>
                                 <span>Fotos e Vídeos</span>
                             </li>
                             <li>
                                 <div class="rounded-icon">
-                                    <img src="../../imgs/shipper/icon-camera.svg" alt="">
+                                    <img src="/imgs/shipper/icon-camera.svg" alt="">
                                 </div>
                                 <span>Câmera</span>
                             </li>
                             <li>
                                 <div class="rounded-icon">
-                                    <img src="../../imgs/shipper/icon-document.svg" alt="">
+                                    <img src="/imgs/shipper/icon-document.svg" alt="">
                                 </div>
                                 <span>Documento</span>
                             </li>
@@ -416,7 +362,7 @@
     <div class="popup report">
         <div class="popup-content">
             <div class="close">
-                <img src="../../imgs/client/close-icon.svg" alt="">
+                <img src="/imgs/client/close-icon.svg" alt="">
             </div>
             <div class="popup-wrapper">
                 <form class="form">
@@ -424,7 +370,7 @@
                     <label class="file-field" for="report-photo">
                         <input class="field" required type="file" name="files" id="report-photo">
                         <div class="icon">
-                            <img src="../../imgs/cadastro-entregador/upload-icon.svg" alt="">
+                            <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
                         </div>
                         <span class="msg">Foto do Ocorrido</span>
                     </label>
@@ -445,16 +391,18 @@
         </div>
     </div>
 
+    <!-- <%- include('../../partial/menu-burguer.ejs', { type: 'entregador' }) %> --> 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> -->
-    <script src="../../JS/burguer.js"></script>
-    <script src="../../JS/shipper/burguer-config.js"></script>
-    <script src="../../JS/shipper/textarea-resize.js"></script>
-    <script src="../../JS/shipper/send-msg.js"></script>
-    <script src="../../JS/shipper/clip-popup.js"></script>
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/burguer-config.js"></script>
+    <script src="/JS/shipper/textarea-resize.js"></script>
+    <script src="/JS/shipper/send-msg.js"></script>
+    <script src="/JS/shipper/clip-popup.js"></script>
     <!-- <script src="../../JS/shipper/payment.js"></script>
     <script src="../../JS/shipper/allow-payment.js"></script>
     <script src="../../JS/client/pay-popup.js"></script> -->
-    <script src="../../JS/shipper/report-popup.js"></script>
+    <script src="/JS/shipper/report-popup.js"></script>
 </body>
 </html>
