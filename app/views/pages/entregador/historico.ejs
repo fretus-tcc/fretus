@@ -5,7 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Histórico</title>
     <link rel="shortcut icon" href="./imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
 
+    <!--todo:   ver se vai ser alterado -->
+
+    <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+    <link rel="stylesheet" href="/CSS/shipper/history.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests.css">
+    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+    <link rel="stylesheet" href="/CSS/client/rate-popup.css">
+    <link rel="stylesheet" href="/CSS/client/popup-info.css">
+
+    <!-- todo  -->
 </head>
 <body>
     
@@ -24,7 +36,7 @@
                         <span>Rua Carlos José de Castilho</span>
                     </div>
                     <div class="row track">
-                        <img src="../../imgs/shipper/track.png" alt="">
+                        <img src="/imgs/shipper/track.png" alt="">
                     </div>
                     <div class="row">
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
@@ -48,7 +60,7 @@
                         <span>Rua Carlos José de Castilho</span>
                     </div>
                     <div class="row track">
-                        <img src="../../imgs/shipper/track.png" alt="">
+                        <img src="/imgs/shipper/track.png" alt="">
                     </div>
                     <div class="row">
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
@@ -72,7 +84,7 @@
                         <span>Rua Carlos José de Castilho</span>
                     </div>
                     <div class="row track">
-                        <img src="../../imgs/shipper/track.png" alt="">
+                        <img src="/imgs/shipper/track.png" alt="">
                     </div>
                     <div class="row">
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
@@ -94,7 +106,7 @@
     <div class="popup info">
         <div class="popup-content">
             <div class="close">
-                <img src="../../imgs/client/close-icon.svg" alt="">
+                <img src="/imgs/client/close-icon.svg" alt="">
             </div>
             <div class="popup-wrapper">
                 <h1>Informações da Entrega</h1>
@@ -106,8 +118,10 @@
             </div>
         </div>
     </div>
-    
-    <script src="../../JS/burguer.js"></script>
-    <script src="../../JS/shipper/popup-info.js"></script>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/popup-info.js"></script>
 </body>
 </html>
