@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Perfil</title>
+    <link rel="shortcut icon" href="../../imgs/logotca.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../CSS/index.css">
+    <link rel="stylesheet" href="../../CSS/header-client-shipper.css">
+    <link rel="stylesheet" href="../../CSS/menu-burguer.css">
+    <link rel="stylesheet" href="../../CSS/shipper/config.css">
+    <link rel="stylesheet" href="../../CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="../../CSS/shipper/profile.css">
+</head>
+<body>
+    <div class="menu-burguer">
+        <nav>
+            <ul>
+                <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
+                <li><a href="./chat.html">Chat</a></li>
+                <li><a href="./ranking.html">Ranking</a></li>
+                <li><a href="./resultados.html">Resultados</a></li>
+                <li><a href="./perfil.html">Perfil</a></li>
+                <li><a href="./configuracoes.html">Configurações</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <header>
+        <div class="header-content">
+            <h1><a href="../../index.html"><img class="logo" src="../../imgs/logotca.png"></a></h1>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
+                    <li><a href="./chat.html">Chat</a></li>
+                    <li><a href="./ranking.html">Ranking</a></li>
+                    <li><a href="./resultados.html">Resultados</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <a href="./perfil.html">
+                        <li><img src="../../imgs/client/profile-icon.svg" alt=""></li>
+                    </a>
+                    <a href="./configuracoes.html">
+                        <li><img src="../../imgs/client/config-icon.svg" alt=""></li>
+                    </a>
+                </ul>
+            </nav>
+            <div class="burguer">
+                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/homepage__mobile_/u14.svg?pageId=474e0aac-b4ee-403d-9bc0-5e2c0892e3b4" alt="">
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="profile-container">
+            <div class="action-perfil">
+                <div class="Seu-Perfil0">
+                    <h2>Seu Perfil</h2>
+                </div>
+                <label class="action__upload-btn" for="img-selector">Alterar sua foto de perfil</label>
+                <input type="file" name="" id="img-selector" class="action__hiddenField js__profile-upload-btn">
+              </div>
+              <div class="profile-p">
+                <div class="profile__image js__profile-image" 
+                style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
+                </div>
+            </div>
+            <div class="row">
+                <label for="name">Nome: </label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <input type="text" readonly id="name" value="Entregador 1">
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span>Alterar</span>
+                </div>
+            </div>
+            <div class="row">
+                <label for="description">Descrição</label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <textarea readonly id="description" placeholder="Digite sua descrição">Entregador experiente e confiável. Serviço de entrega rápido, pontual e de alta qualidade.</textarea>
+                        <span class="count">0/200</span>
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span>Alterar</span>
+                </div>
+            </div>
+            <div class="row">
+                <label for="vehicles">Tipo do Veículo </label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <select id="veiculo">
+                            <option value="moto">Moto</option>
+                            <option value="carro">Carro</option>
+                            <option value="van">Van</option>
+                            <option value="caminhao">Caminhão</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="vehicles">Modelo do Veículo </label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <textarea readonly id="description" placeholder="Digite aqui os modelos de seus veículos">Classe A Sedan</textarea>
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span>Alterar</span>
+                </div>
+            </div>
+            <div class="row">
+                <label for="raio">Raio de Atuação</label>
+                <div class="edit-row">
+                    <div class="input-container">
+                        <input type="text" readonly id="raio" min="1" value="150 km ">
+                        <input type="button" class="btn" value="Cancelar">
+                        <input type="button" class="btn confirm" value="Confirmar">
+                    </div>
+                    <span>Alterar</span>
+                </div>
+            </div>
+            <div class="containerm-p">
+                <p>
+                    Precisa de ajuda? Entre em contato com a
+                    <a href="../central-ajuda/central-de-ajuda.html">Central de Ajuda.</a>
+                  </p>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+
+    <script src="../../JS/burguer.js"></script>
+    <script src="../../JS/shipper/change.js"></script>
+    <script src="../../JS/shipper/profile.js"></script>
+    <script src="../../JS/perfil.js"></script>
+</body>
+</html>

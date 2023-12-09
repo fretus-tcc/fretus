@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Configurações</title>
+    <link rel="shortcut icon" href="../../imgs/logotca.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../CSS/index.css">
+    <link rel="stylesheet" href="../../CSS/header-client-shipper.css">
+    <link rel="stylesheet" href="../../CSS/menu-burguer.css">
+    <link rel="stylesheet" href="../../CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="../../CSS/shipper/sidebar-config.css">
+    <link rel="stylesheet" href="../../CSS/shipper/config.css">
+</head>
+<body>
+    <div class="menu-burguer">
+        <nav>
+            <ul>
+                <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
+                <li><a href="./chat.html">Chat</a></li>
+                <li><a href="./ranking.html">Ranking</a></li>
+                <li><a href="./resultados.html">Resultados</a></li>
+                <li><a href="./perfil.html">Perfil</a></li>
+                <li><a href="./configuracoes.html">Configurações</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <header>
+        <div class="header-content">
+            <h1><a href="../../index.html"><img class="logo" src="../../imgs/logotca.png"></a></h1>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="./entregas-solicitadas.html">Entregas Solicitadas</a></li>
+                    <li><a href="./chat.html">Chat</a></li>
+                    <li><a href="./ranking.html">Ranking</a></li>
+                    <li><a href="./resultados.html">Resultados</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <a href="./perfil.html">
+                        <li><img src="../../imgs/client/profile-icon.svg" alt=""></li>
+                    </a>
+                    <a href="./configuracoes.html">
+                        <li><img src="../../imgs/client/config-icon.svg" alt=""></li>
+                    </a>
+                </ul>
+            </nav>
+            <div class="burguer">
+                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/homepage__mobile_/u14.svg?pageId=474e0aac-b4ee-403d-9bc0-5e2c0892e3b4" alt="">
+            </div>
+        </div>
+    </header>    
+
+    <main>
+        <div class="sidebar">
+            <div class="nav">
+                <ul>
+                    <a href="./configuracoes.html">
+                        <li>Privacidade</li>
+                    </a>
+                    <a href="./configuracoes-pagamento.html">
+                        <li>Pagamento</li>
+                    </a>
+                    <a href="./configuracoes-notificacoes.html">
+                        <li>Notificações</li>
+                    </a>
+                </ul>
+            </div>
+            <div class="container-button">
+                <button class="exit-button"><a href="../../index.html">sair da conta</a></button>
+            </div>
+        </div>
+        <div class="config">
+            <div class="config-container">
+                <div class="sidebar-burguer">
+                    <img src="../../imgs/burguer-config-icon.png" alt="">
+                </div>
+                <h1>Privacidade</h1>
+                <div class="row">
+                    <label for="name">Nome</label>
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <input type="text" readonly id="name" value="Entregador 1">
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </div>
+                        <span>Alterar</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="email">E-mail</label>
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <input type="email" required readonly id="email" value="entregador@email.com">
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </div>
+                        <span>Alterar</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="password">Senha</label>
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <input type="password" readonly id="password" value="Senha123">
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </div>
+                        <span>Alterar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="../../JS/burguer.js"></script>
+    <script src="../../JS/shipper/change.js"></script>
+    <script src="../../JS/shipper/burguer-config.js"></script>
+</body>
+</html>
