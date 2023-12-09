@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Histórico</title>
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+    <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
+    <link rel="stylesheet" href="/CSS/shipper/history.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests.css">
+    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+    <link rel="stylesheet" href="/CSS/client/rate-popup.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
+    <link rel="stylesheet" href="/CSS/client/popup-info.css">
+    <link rel="stylesheet" href="/CSS/client/pay-popup.css">
+    <link rel="stylesheet" href="/CSS/client/report-popup.css">
+</head>
+<body>
+    
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
+    <main>
+        <div class="history-header">
+            <h1>Histórico</h1>
+        </div>
+        
+        <div class="requests-container">
+            <div class="card">
+                <div class="top">
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                            alt="">
+                        <span>Rua Carlos José de Castilho</span>
+                    </div>
+                    <div class="row track">
+                        <img src="/imgs/shipper/track.png" alt="">
+                    </div>
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                            alt="">
+                        <span>Rua Carneiro Leão</span>
+                    </div>
+                </div>
+                <div class="weight">
+                    <span>Pequena (até 15 Kg)</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">R$51,00</span>
+                    <span class="actions">
+                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                        <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                        <img class="rate" src="/imgs/client/star-icon.svg" alt="">
+                    </span>
+                </div>
+                <div class="details">
+                    <span class="indicator">i</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="top">
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
+                        <span>Rua Carlos José de Castilho</span>
+                    </div>
+                    <div class="row track">
+                        <img src="/imgs/shipper/track.png" alt="">
+                    </div>
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
+                        <span>Rua Carneiro Leão</span>
+                    </div>
+                </div>
+                <div class="weight">
+                    <span>Pequena (até 15 Kg)</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">R$51,00</span>
+                    <span class="actions">
+                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                        <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                        <img class="rate" src="/imgs/client/star-icon.svg" alt="">
+                    </span>
+                </div>
+                <div class="details">
+                    <span class="indicator">i</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="top">
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                            alt="">
+                        <span>Rua Carlos José de Castilho</span>
+                    </div>
+                    <div class="row track">
+                        <img src="/imgs/shipper/track.png" alt="">
+                    </div>
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                            alt="">
+                        <span>Rua Carneiro Leão</span>
+                    </div>
+                </div>
+                <div class="weight">
+                    <span>Pequena (até 15 Kg)</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">R$51,00</span>
+                    <span class="actions">
+                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                        <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                        <img class="rate" src="/imgs/client/star-icon.svg" alt="">
+                    </span>
+                </div>
+                <div class="details">
+                    <span class="indicator">i</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="top">
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                            alt="">
+                        <span>Rua Carlos José de Castilho</span>
+                    </div>
+                    <div class="row track">
+                        <img src="/imgs/shipper/track.png" alt="">
+                    </div>
+                    <div class="row">
+                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                            alt="">
+                        <span>Rua Carneiro Leão</span>
+                    </div>
+                </div>
+                <div class="weight">
+                    <span>Pequena (até 15 Kg)</span>
+                </div>
+                <div class="bottom">
+                    <span class="price">R$51,00</span>
+                    <span class="actions">
+                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                        <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                        <img class="rate" src="/imgs/client/star-icon.svg" alt="">
+                    </span>
+                </div>
+                <div class="details">
+                    <span class="indicator">i</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-wrapper">
+            <div class="head">
+                <h1>Entregadores Favoritados</h1>
+                <div class="controls">
+                    <span id="prev">
+                        <
+                    </span>
+                    <span id="next">
+                        >
+                    </span>
+                </div>
+            </div>
+            <div class="carousel">
+                <div class="content">
+                    <div class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo"><!-- ! todo motorista 1  -->
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="unfav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                            <a href="/chat">
+                                <img src="/imgs/home/client/card-icon-2.svg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="products">
+                        <img src="/imgs/historico/2.jpg" alt="" class="photo">  <!-- ? todo motorista 2  -->
+                        <h1>Miguel</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="unfav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                            <a href="/cliente/chat">
+                                <img src="/imgs/home/client/card-icon-2.svg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="products">
+                        <img src="/imgs/historico/3.jpg" alt="" class="photo"> <!-- ! todo motorista 3  -->
+                        <h1>Arthur</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="unfav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                            <a href="/cliente/chat">
+                                <img src="/imgs/home/client/card-icon-2.svg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="products">
+                        <img src="/imgs/historico/4.jpg" alt="" class="photo">  <!-- ? todo motorista 4  -->
+                        <h1>Heitor</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="unfav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                            <a href="/cliente/chat">
+                                <img src="/imgs/home/client/card-icon-2.svg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="products">
+                        <img src="/imgs/historico/5.jpg" alt="" class="photo">  <!-- ? todo motorista 4  -->
+                        <h1>Theo</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="actions">
+                            <img class="unfav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                            <a href="/cliente/chat">
+                                <img src="/imgs/home/client/card-icon-2.svg">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="notification-container"></div>
+    <div class="popup">
+        <div class="popup-content">
+            <div class="close">
+                <img src="/imgs/client/close-icon.svg" alt="">
+            </div>
+            <div class="popup-wrapper">
+                <h1>Avaliar o Motorista</h1>
+                <div class="stars">
+                    <div class="star">
+                        <div class="star-form"></div>
+                    </div>
+                    <div class="star">
+                        <div class="star-form"></div>
+                    </div>
+                    <div class="star">
+                        <div class="star-form"></div>
+                    </div>
+                    <div class="star">
+                        <div class="star-form"></div>
+                    </div>
+                    <div class="star">
+                        <div class="star-form"></div>
+                    </div>
+                </div>
+                <textarea class="rate-field" placeholder="Deixe seu feedback aqui (opcional)"></textarea>
+                <span class="error-container">Nenhuma estrela marcada!</span>
+                <button class="cta">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup info">
+        <div class="popup-content">
+            <div class="close">
+                <img src="/imgs/client/close-icon.svg" alt="">
+            </div>
+            <div class="popup-wrapper">
+                <h1>Informações da Entrega</h1>
+                <p><span class="title-type">Local de partida:</span> Rua José de Castilho</p>
+                <p><span class="title-type">Local de retirada:</span> Rua Carneiro Leão</p>
+                <p><span class="title-type">Peso:</span> 1.5 Kg</p>
+                <p><span class="title-type">Dimensões:</span> 200x200 cm</p>
+                <p><span class="title-type">Preço:</span> R$ 51,00</p>
+            </div>
+        </div>
+    </div>
+    <div class="popup report">
+        <div class="popup-content">
+            <div class="close">
+                <img src="/imgs/client/close-icon.svg" alt="">
+            </div>
+            <div class="popup-wrapper">
+                <form class="form">
+                    <h1>Denúncia</h1>
+                    <label class="file-field" for="report-photo">
+                        <input class="field" required type="file" name="files" id="report-photo">
+                        <div class="icon">
+                            <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
+                        </div>
+                        <span class="msg">Foto do Ocorrido</span>
+                    </label>
+                    <select required class="input-field field">
+                        <option value="">Motivo da Denúncia</option>
+                        <option value="1">Assédio ou Comportamento inadequado</option>
+                        <option value="2">Problemas de Qualidade do Serviço</option>
+                        <option value="3">Violar Regras do Site</option>
+                        <option value="4">Suspeita de Fraude</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                    <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
+                    <input required placeholder="Data do ocorrido" class="input-field field" type="text" onfocus="this.type='date'">
+                    <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
+                    <button class="cta">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/client/shipper-carousel.js"></script>
+    <script src="/JS/client/rate-popup.js"></script>
+    <script src="/JS/client/fav-unfav.js"></script>
+    <script src="/JS/shipper/popup-info.js"></script>
+    <script src="/JS/shipper/report-popup.js"></script>
+</body>
+</html>

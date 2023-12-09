@@ -68,4 +68,8 @@ router.get('/cliente/chat', function (req, res) {
   res.render('pages/cliente/chat')
 })
 
+router.get('/cliente/historico', function (req, res) {
+  res.render('pages/cliente/historico')
+})
+
 module.exports = router
