@@ -64,4 +64,8 @@ router.get('/cliente/solicitar-entrega', function (req, res) {
   res.render('pages/cliente/solicitar-entrega')
 })
 
+router.get('/cliente/chat', function (req, res) {
+  res.render('pages/cliente/chat')
+})
+
 module.exports = router

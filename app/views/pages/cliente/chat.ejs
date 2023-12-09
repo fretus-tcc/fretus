@@ -5,67 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Chat</title>
     <link rel="shortcut icon" href="../../imgs/logotca.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../CSS/index.css">
-    <link rel="stylesheet" href="../../CSS/cta.css">
-    <link rel="stylesheet" href="../../CSS/menu-burguer.css">
-    <link rel="stylesheet" href="../../CSS/header-client-shipper.css">
-    <link rel="stylesheet" href="../../CSS/shipper/sidebar-config.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-sidebar.css">
-    <link rel="stylesheet" href="../../CSS/client/chat.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-msgs.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-msgs-typing.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-msgs-payment.css">
-    <link rel="stylesheet" href="../../CSS/client/chat-inputs.css">
-    <link rel="stylesheet" href="../../CSS/client/clip-popup.css">
-    <link rel="stylesheet" href="../../CSS/client/pay-modal.css">
-    <link rel="stylesheet" href="../../CSS/client/confirm-popup.css">
-    <link rel="stylesheet" href="../../CSS/client/pay-popup.css">
-    <link rel="stylesheet" href="../../CSS/shipper/requests-notification.css">
-    <link rel="stylesheet" href="../../CSS/client/popup-info.css">
-    <link rel="stylesheet" href="../../CSS/client/pay-popup.css">
-    <link rel="stylesheet" href="../../CSS/client/report-popup.css">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <%- include('../../partial/config/config-chat.ejs') %>
 </head>
 <body>
-
-    <div class="menu-burguer">
-        <nav>
-            <ul>
-                <li><a href="./solicitar-entrega.html">Solicitar Entrega</a></li>
-                <li><a href="./chat.html">Chat</a></li>
-                <li><a href="./historico.html">Histórico</a></li>
-                <li><a href="./cupons.html">Cupons</a></li>
-                <li><a href="./perfil.html">Perfil</a></li>
-                <li><a href="./configuracoes.html">Configurações</a></li>
-            </ul>
-        </nav>
-    </div>
     
-    <header>
-        <div class="header-content">
-            <h1><a href="../../index.html"><img class="logo" src="../../imgs/logotca.png"></a></h1>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="./solicitar-entrega.html">Solicitar Entrega</a></li>
-                    <li><a href="./chat.html">Chat</a></li>
-                    <li><a href="./historico.html">Histórico</a></li>
-                    <li><a href="./cupons.html">Cupons</a></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul>
-                    <a href="./perfil.html">
-                        <li><img src="../../imgs/client/profile-icon.svg" alt=""></li>
-                    </a>
-                    <a href="./configuracoes.html">
-                        <li><img src="../../imgs/client/config-icon.svg" alt=""></li>
-                    </a>
-                </ul>
-            </nav>
-            <div class="burguer">
-                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/homepage__mobile_/u14.svg?pageId=474e0aac-b4ee-403d-9bc0-5e2c0892e3b4" alt="">
-            </div>
-        </div>
-    </header>
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <main>
         <div class="sidebar">
@@ -446,6 +392,8 @@
             </div>
         </div>
     </div>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> -->
