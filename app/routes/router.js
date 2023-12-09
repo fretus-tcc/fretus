@@ -72,4 +72,8 @@ router.get('/cliente/historico', function (req, res) {
   res.render('pages/cliente/historico')
 })
 
+router.get('/cliente/cupons', function (req, res) {
+  res.render('pages/cliente/cupons')
+})
+
 module.exports = router

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Cupons</title>
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/cupons.css">
+</head>
+<body>
+    
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
+    <main>
+        <div class="cupons">
+            <h1>Cupons</h1>
+            <div class="cupon-input">
+                <input placeholder="Digite o código do cupom de desconto" type="text">
+                <button class="cta" type="button">Copiar</button>
+            </div>
+            <div class="cupons-container">
+                <div class="active-cupons">
+                    <h2>Ativos</h2>
+                    <div class="cupon">
+                        <div class="content">
+                            <div class="icon">
+                                <img src="/imgs/client/icon-cupon.svg" alt="">
+                            </div>
+                            <div class="description">
+                                <h1>10% de desconto</h1>
+                                <p>A partir de R$10,00</p>
+                            </div>
+                        </div>
+                        <div class="expirate">
+                            <span>Vence em 22/10/2023</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="disable-cupons">
+                    <h2>Inativos</h2>
+                    <div class="cupon">
+                        <div class="content">
+                            <div class="icon">
+                                <img src="/imgs/client/icon-cupon.svg" alt="">
+                            </div>
+                            <div class="description">
+                                <h1>10% de desconto</h1>
+                                <p>A partir de R$10,00</p>
+                            </div>
+                        </div>
+                        <div class="expirate">
+                            <span>Vence em 22/10/2023</span>
+                        </div>
+                    </div>
+                    <div class="cupon">
+                        <div class="content">
+                            <div class="icon">
+                                <img src="/imgs/client/icon-cupon.svg" alt="">
+                            </div>
+                            <div class="description">
+                                <h1>10% de desconto</h1>
+                                <p>A partir de R$10,00</p>
+                            </div>
+                        </div>
+                        <div class="expirate">
+                            <span>Vence em 22/10/2023</span>
+                        </div>
+                    </div>
+                    <div class="cupon">
+                        <div class="content">
+                            <div class="icon">
+                                <img src="/imgs/client/icon-cupon.svg" alt="">
+                            </div>
+                            <div class="description">
+                                <h1>10% de desconto</h1>
+                                <p>A partir de R$10,00</p>
+                            </div>
+                        </div>
+                        <div class="expirate">
+                            <span>Vence em 22/10/2023</span>
+                        </div>
+                    </div>
+                    <div class="cupon">
+                        <div class="content">
+                            <div class="icon">
+                                <img src="/imgs/client/icon-cupon.svg" alt="">
+                            </div>
+                            <div class="description">
+                                <h1>10% de desconto</h1>
+                                <p>A partir de R$10,00</p>
+                            </div>
+                        </div>
+                        <div class="expirate">
+                            <span>Vence em 22/10/2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="invite-friends">
+            <h1>Convide seus amigos</h1>
+            <p>Convidando um amigo, você e ele ganham desconto na próxima entrega.</p>
+            <div class="cupon-input">
+                <input readonly type="text" value="hgq4wj7L0LwOi01KYx20">
+                <button class="cta" type="button">Copiar</button>
+            </div>
+            <div class="social-media">
+                <div class="icon twitter">
+                    <img src="/imgs/client/icon-twitter.svg" alt="">
+                </div>
+                <div class="icon facebook">
+                    <img src="/imgs/client/icon-facebook.svg" alt="">
+                </div>
+                <div class="icon whatsapp">
+                    <img src="/imgs/client/icon -whatsapp.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+</body>
+</html>
