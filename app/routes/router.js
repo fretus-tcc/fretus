@@ -28,33 +28,33 @@ router.get('/FaleConosco', function (req, res) {
   res.render('pages/FaleConosco')
 })
 
-router.get('/Privacidade' , function (req, res) {
+router.get('/Privacidade', function (req, res) {
   res.render('pages/Privacidade')
 })
 
 //! ínicio Duvidas 
 
-router.get('/duvida-1', function(req, res){
+router.get('/duvida-1', function (req, res) {
   res.render('pages/duvidas/duvida-1')
 })
 
-router.get('/duvida-2', function (req,res){
+router.get('/duvida-2', function (req, res) {
   res.render('pages/duvidas/duvida-2')
 })
 
-router.get('/duvida-3', function (req, res){
+router.get('/duvida-3', function (req, res) {
   res.render('pages/duvidas/duvida-3')
 })
 
-router.get('/duvida-4', function (req, res){
+router.get('/duvida-4', function (req, res) {
   res.render('pages/duvidas/duvida-4')
 })
 
-router.get('/duvida-5', function (req, res){
+router.get('/duvida-5', function (req, res) {
   res.render('pages/duvidas/duvida-5')
 })
 
-router.get('/duvida-6', function (req, res){
+router.get('/duvida-6', function (req, res) {
   res.render('pages/duvidas/duvida-6')
 })
 
@@ -97,33 +97,38 @@ router.get('/cliente/configuracoes-notificacoes', function (req, res) {
 })
 
 //! Início da rota do entregador
- router.get('entregador/chat', function(req, res) {
+router.get('entregador/chat', function (req, res) {
   res.render('pages/entregador/chat')
 
- })
-router.get('entragador/configuracoes-notificacoes', function(req, res){
+})
+router.get('entragador/configuracoes-notificacoes', function (req, res) {
   res.render('pages/entragador/configuracoes-notificacoes')
 })
 
 router.get('entragador/configuracoes-pagamento', function (req, res) {
   res.render('pages/entragador/configuracoes-pagamento')
 })
-router.get('entragador/configuracoes', function (req, res){
+
+router.get('entragador/configuracoes', function (req, res) {
   res.render('pages/entregador/configuracoes')
 })
-router.get('entregador/entregas-solicitadas', function (req, res){
+
+router.get('entregador/entregas-solicitadas', function (req, res) {
   res.render('pages/entregador/entregas-solicitadas')
 })
-router.get('entregador/historico', function (req, res){
+
+router.get('entregador/historico', function (req, res) {
   res.render('pages/entregador/historico')
 })
-router.get('entregador/perfil', function (req, res){
+
+router.get('entregador/perfil', function (req, res) {
   res.render('pages/entregador/perfil')
 })
-router.get('entregador/ranking', function (req, res){
+
+router.get('entregador/ranking', function (req, res) {
   res.render('pages/entregador/ranking')
 })
-router.get('entregador/resultados',function (req, res){
+router.get('entregador/resultados', function (req, res) {
   res.render('pages/entregador/resultados')
 })
 
