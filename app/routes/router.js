@@ -99,14 +99,14 @@ router.get('/cliente/configuracoes-notificacoes', function (req, res) {
 //! Início da rota do entregador
 router.get('/entregador/chat', function (req, res) {
   res.render('pages/entregador/chat')
-
 })
+
 router.get('/entregador/configuracoes-notificacoes', function (req, res) {
-  res.render('pages/entragador/configuracoes-notificacoes')
+  res.render('pages/entregador/configuracoes-notificacoes')
 })
 
 router.get('/entregador/configuracoes-pagamento', function (req, res) {
-  res.render('pages/entragador/configuracoes-pagamento')
+  res.render('pages/entregador/configuracoes-pagamento')
 })
 
 router.get('/entregador/configuracoes', function (req, res) {

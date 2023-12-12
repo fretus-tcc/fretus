@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Configurações</title>
-    <link rel="shortcut icon" href="./imgs/logotca.png" type="image/x-icon">
-   
-    
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="/CSS/shipper/sidebar-config.css">
+    <link rel="stylesheet" href="/CSS/shipper/config.css">
 </head>
 <body>
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
@@ -15,25 +18,25 @@
         <div class="sidebar">
             <div class="nav">
                 <ul>
-                    <a href="./configuracoes.html">
+                    <a href="/entregador/configuracoes">
                         <li>Privacidade</li>
                     </a>
-                    <a href="./configuracoes-pagamento.html">
+                    <a href="/entregador/configuracoes-pagamento">
                         <li>Pagamento</li>
                     </a>
-                    <a href="./configuracoes-notificacoes.html">
+                    <a href="/entregador/configuracoes-notificacoes">
                         <li>Notificações</li>
                     </a>
                 </ul>
             </div>
             <div class="container-button">
-                <button class="exit-button"><a href="../../index.html">sair da conta</a></button>
+                <button class="exit-button"><a href="/">sair da conta</a></button>
             </div>
         </div>
         <div class="config">
             <div class="config-container">
                 <div class="sidebar-burguer">
-                    <img src="../../imgs/burguer-config-icon.png" alt="">
+                    <img src="/imgs/burguer-config-icon.png" alt="">
                 </div>
                 <h1>Privacidade</h1>
                 <div class="row">
@@ -73,8 +76,8 @@
         </div>
     </main>
     
-    <script src="../../JS/burguer.js"></script>
-    <script src="../../JS/shipper/change.js"></script>
-    <script src="../../JS/shipper/burguer-config.js"></script>
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/change.js"></script>
+    <script src="/JS/shipper/burguer-config.js"></script>
 </body>
 </html>
