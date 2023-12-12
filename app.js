@@ -17,8 +17,17 @@ app.use(express.urlencoded({ extended: true }))
       saveUninitialized: false,
 })) */
 
-var rotas = require("./app/routes/router")
-app.use("/", rotas)
+const main = require("./app/routes/main")
+app.use("/", main)
+
+const help = require("./app/routes/help")
+app.use("/ajuda", help)
+
+const client = require("./app/routes/client")
+app.use("/cliente", client)
+
+const shipper = require("./app/routes/shipper")
+app.use("/entregador", shipper)
 
 app.listen(port, () => {
   console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`)
