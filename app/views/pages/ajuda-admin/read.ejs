@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - admin</title>
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-home.ejs') %>
+</head>
+<body>
+
+    <%- include('../../partial/header.ejs') %>
+
+    <main style="color:#333; padding: 150px 20px 0;">
+        <h1 style="margin-bottom: 15px;">Dúvidas</h1>
+        <a style="display: inline-block; margin-bottom: 15px; color: rgb(71, 163, 63);" href="/ajuda/admin/create">Nova dúvida</a>
+        <% result.forEach(item => { %>
+            <div>
+                <h2><%= item.titulo_duvida %></h2>
+                <p>Criada em: <%= item.data_duvida.toLocaleDateString() %></p>
+                <a style="color: var(--blue)" href="/ajuda/<%= item.id_duvida %>">Acessar</a>
+                <a style="color: var(--blue)" href="">Atualizar</a>
+                <a style="color: var(--blue)" href="">Deletar</a>
+            </div>
+        <% }) %>
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'home' }) %>
+    
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/header-scroll.js"></script>
+</body>
+</html>

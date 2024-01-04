@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - admin</title>
+    <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-home.ejs') %>
+</head>
+<body>
+
+    <%- include('../../partial/header.ejs') %>
+
+    <main style="color:#333; padding: 150px 20px 0;">
+        <h1 style="margin-bottom: 15px;">Criar dúvida</h1>
+        <form style="display: flex; flex-direction: column; gap: 8px;" action="/ajuda/admin/create" method="post">
+            <input name="title" type="text" placeholder="Título" required>
+            <textarea name="content" cols="30" rows="10" placeholder="Conteudo (Markdown)" required></textarea>
+            <button>Enviar</button>
+        </form>
+        
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'home' }) %>
+    
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/header-scroll.js"></script>
+</body>
+</html>
