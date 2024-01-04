@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="/CSS/help/help.css">
 </head>
 <body>
+    <div style="color: #333">
+        <% result.forEach(item => { %>
+            <% Object.keys(item).forEach(key => { %>
+                <div><%= key %>: <%= item[key] %></div>
+            <% }) %>
+        <% }) %>
+        <%= result[0].data_duvida.toLocaleDateString() %>
+    </div>
+
+
     
     <div class="hero">
         <%- include('../partial/header.ejs') %>

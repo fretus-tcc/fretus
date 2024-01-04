@@ -1,13 +1,19 @@
-var mysql = require("mysql");
-
+var mysql = require("mysql2");
 
 module.exports = function(){
- return mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
-    // password: "@ITB123456",
-    database: "autenticacao",
-    port: 3306
-  });
+  try {
+    let conexao = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "",
+      database: "fretus",
+      port: 3306
+    })
+    console.log('Conexão estabelecida!')
+    return conexao
+  } catch (e) {
+    console.log('Falha ao estabelecer conexão!')
+    console.log(e)
+    return null
+  }
 } 

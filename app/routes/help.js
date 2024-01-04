@@ -5,7 +5,12 @@ var fabricaDeConexao = require("../../config/connection-factory")
 var conexao = fabricaDeConexao()
 
 router.get('/', function (req, res) {
-    res.render('pages/ajuda')
+    conexao.query('SELECT * FROM duvidas', (error, result) => {
+        if (error) {
+            return res.json({ error })
+        }
+        res.render('pages/ajuda', { result })
+    })
 })
 
 router.get('/duvida-1', function (req, res) {
