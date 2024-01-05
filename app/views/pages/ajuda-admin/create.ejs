@@ -7,16 +7,29 @@
     <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-home.ejs') %>
+    <style>
+        .error {
+            border-color: red;
+        }
+    </style>
 </head>
 <body>
+    <%= JSON.stringify(errors) %>
+    <%# JSON.stringify(quotes) %>
 
     <%- include('../../partial/header.ejs') %>
 
     <main style="color:#333; padding: 150px 20px 0;">
         <h1 style="margin-bottom: 15px;">Criar dúvida</h1>
         <form style="display: flex; flex-direction: column; gap: 8px;" action="/ajuda/admin/create" method="post">
-            <input name="title" type="text" placeholder="Título" required>
-            <textarea name="content" cols="30" rows="10" placeholder="Conteudo (Markdown)" required></textarea>
+            <input name="title" type="text" placeholder="Título" value="<%= quotes?.title %>" class="<%= errors?.title ? 'error' : '' %>">
+            <% if (errors?.title) { %>
+                <span><%= errors.title.msg %></span>
+            <% } %>
+            <textarea name="content" class="<%= errors?.content ? 'error' : '' %>" cols="30" rows="10" placeholder="Conteudo (Markdown)"><%= quotes?.content %></textarea>
+            <% if (errors?.content) { %>
+                <span><%= errors.content.msg %></span>
+            <% } %>
             <button>Enviar</button>
         </form>
         

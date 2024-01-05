@@ -4,6 +4,8 @@ var router = express.Router()
 var fabricaDeConexao = require("../../config/connection-factory")
 var conexao = fabricaDeConexao()
 
+const { body, validationResult } = require('express-validator')
+
 router.get('/', function (req, res) {
     res.render('pages/ajuda')
 })
@@ -18,19 +20,32 @@ router.get('/admin', function (req, res) {
 })
 
 router.get('/admin/create', function (req, res) {
-    res.render('pages/ajuda-admin/create')
+    res.render('pages/ajuda-admin/create', { errors: null, quotes: null })
 })
 
-router.post('/admin/create', function (req, res) {
-    const { title, content } = req.body
-    const data = { titulo_duvida: title, conteudo_duvida: content }
-    conexao.query('INSERT INTO duvidas SET ? ', [data], (error, results) => {
-        if (error) {
-            return res.json({ error })
+router.post(
+    '/admin/create',
+
+    body('title').notEmpty().withMessage('vazio'),
+    body('content').notEmpty().withMessage('vazio'),
+
+    function (req, res) {
+        if (!validationResult(req).isEmpty()) {
+            return res.render('pages/ajuda-admin/create', { errors: validationResult(req).mapped(), quotes: req.body })
         }
-        res.redirect(`/ajuda/${results.insertId}`)
-    })
-})
+        const { title, content } = req.body
+        const data = {
+            titulo_duvida: title,
+            conteudo_duvida: content
+        }
+        conexao.query('INSERT INTO duvidas SET ? ', [data], (error, results) => {
+            if (error) {
+                return res.json({ error })
+            }
+            res.redirect(`/ajuda/${results.insertId}`)
+        })
+    }
+)
 
 router.get('/:id', function (req, res) {
     const { id } = req.params
