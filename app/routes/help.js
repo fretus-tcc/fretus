@@ -5,6 +5,7 @@ var fabricaDeConexao = require("../../config/connection-factory")
 var conexao = fabricaDeConexao()
 
 const { body, validationResult } = require('express-validator')
+const slugify = require('slugify')
 
 router.get('/', function (req, res) {
     res.render('pages/ajuda')
@@ -26,8 +27,8 @@ router.get('/admin/create', function (req, res) {
 router.post(
     '/admin/create',
 
-    body('title').notEmpty().withMessage('vazio'),
-    body('content').notEmpty().withMessage('vazio'),
+    body('title').notEmpty().withMessage('Campo não preenchido'),
+    body('content').notEmpty().withMessage('Campo não preenchido'),
 
     function (req, res) {
         if (!validationResult(req).isEmpty()) {
@@ -36,20 +37,21 @@ router.post(
         const { title, content } = req.body
         const data = {
             titulo_duvida: title,
-            conteudo_duvida: content
+            conteudo_duvida: content,
+            slug_duvida: slugify(title, { lower: true, strict: true })
         }
         conexao.query('INSERT INTO duvidas SET ? ', [data], (error, results) => {
             if (error) {
                 return res.json({ error })
             }
-            res.redirect(`/ajuda/${results.insertId}`)
+            res.redirect(`/ajuda/${data.slug_duvida}`)
         })
     }
 )
 
-router.get('/:id', function (req, res) {
-    const { id } = req.params
-    conexao.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id], (error, results) => {
+router.get('/:slug', function (req, res) {
+    const { slug } = req.params
+    conexao.query('SELECT * FROM duvidas WHERE slug_duvida = ?', [slug], (error, results) => {
         if (error) {
             return res.json({ error })
         } else if (!results.length) {
