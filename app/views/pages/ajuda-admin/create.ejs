@@ -14,22 +14,31 @@
     </style>
 </head>
 <body>
-    <%= JSON.stringify(errors) %>
-    <%# JSON.stringify(quotes) %>
+    <%
+        const customError = {}
+        if (errors) {
+            const keys = Object.keys(errors)
+            keys.forEach(key => {
+                if (errors[key]) {
+                    customError[key] = {
+                        class: 'error',
+                        msg: errors[key].msg
+                    }
+                }
+            })
+            // console.log(customError)
+        }
+    %>
 
     <%- include('../../partial/header.ejs') %>
 
     <main style="color:#333; padding: 150px 20px 0;">
         <h1 style="margin-bottom: 15px;">Criar dúvida</h1>
         <form style="display: flex; flex-direction: column; gap: 8px;" action="/ajuda/admin/create" method="post">
-            <input name="title" type="text" placeholder="Título" value="<%= quotes?.title %>" class="<%= errors?.title ? 'error' : '' %>">
-            <% if (errors?.title) { %>
-                <span><%= errors.title.msg %></span>
-            <% } %>
-            <textarea name="content" class="<%= errors?.content ? 'error' : '' %>" cols="30" rows="10" placeholder="Conteudo (Markdown)"><%= quotes?.content %></textarea>
-            <% if (errors?.content) { %>
-                <span><%= errors.content.msg %></span>
-            <% } %>
+            <input name="title" type="text" placeholder="Título" value="<%= quotes?.title %>" class="<%= customError.title?.class %>">
+            <span><%= customError.title?.msg %></span>
+            <textarea name="content" class="<%= customError.content?.class %>" cols="30" rows="10" placeholder="Conteudo (Markdown)"><%= quotes?.content %></textarea>
+            <span><%= customError.content?.msg %></span>
             <button>Enviar</button>
         </form>
         
