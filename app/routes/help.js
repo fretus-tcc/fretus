@@ -27,7 +27,7 @@ router.get('/admin/create', function (req, res) {
 router.post(
     '/admin/create',
 
-    body('title').notEmpty().withMessage('Campo não preenchido'),
+    body('title').notEmpty().withMessage('Campo não preenchido').isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres'),
     body('content').notEmpty().withMessage('Campo não preenchido'),
 
     function (req, res) {
