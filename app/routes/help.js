@@ -7,6 +7,7 @@ var conexao = fabricaDeConexao()
 const { body, validationResult } = require('express-validator')
 const slugify = require('slugify')
 const marked = require('marked')
+const sanitizeHTML = require('sanitize-html')
 
 router.get('/', function (req, res) {
     res.render('pages/ajuda')
@@ -38,7 +39,7 @@ router.post(
         const { title, content } = req.body
         const data = {
             titulo_duvida: title,
-            conteudo_duvida: content,
+            conteudo_duvida: sanitizeHTML(content),
             slug_duvida: slugify(title, { lower: true, strict: true })
         }
         conexao.query('INSERT INTO duvidas SET ? ', [data], (error, results) => {
@@ -58,8 +59,7 @@ router.get('/:slug', function (req, res) {
         } else if (!results.length) {
             return res.redirect('/ajuda')
         }
-        // console.log(results[0].conteudo_duvida);
-        res.render('pages/duvidas/duvida', { results: results[0] })
+        res.render('pages/duvidas/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)) })
     })
 })
 
