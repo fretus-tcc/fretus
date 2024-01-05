@@ -6,6 +6,7 @@ var conexao = fabricaDeConexao()
 
 const { body, validationResult } = require('express-validator')
 const slugify = require('slugify')
+const marked = require('marked')
 
 router.get('/', function (req, res) {
     res.render('pages/ajuda')
@@ -57,7 +58,18 @@ router.get('/:slug', function (req, res) {
         } else if (!results.length) {
             return res.redirect('/ajuda')
         }
+        // console.log(results[0].conteudo_duvida);
         res.render('pages/duvidas/duvida', { results: results[0] })
+    })
+})
+
+router.delete('/admin/delete/:id', function (req, res) {
+    const { id } = req.params
+    conexao.query('DELETE FROM duvidas WHERE id_duvida = ?', [id], (error, results) => {
+        if (error) {
+            return res.json({ error })
+        }
+        res.redirect('/ajuda/admin')
     })
 })
 

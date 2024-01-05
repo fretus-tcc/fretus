@@ -21,7 +21,9 @@
                 <p>Criada em: <%= item.data_duvida.toLocaleDateString() %></p>
                 <a style="color: var(--blue)" href="/ajuda/<%= item.slug_duvida %>">Acessar</a>
                 <a style="color: var(--blue)" href="">Atualizar</a>
-                <a style="color: var(--blue)" href="">Deletar</a>
+                <form style="display: inline;" action="/ajuda/admin/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
+                    <button>Deletar</button>
+                </form>
             </div>
         <% }) %>
     </main>

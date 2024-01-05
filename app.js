@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const methodOverride = require('method-override')
 const port = 3000
 
 app.use(express.static("./app/public"))
@@ -9,6 +10,7 @@ app.set("views", "./app/views")
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 /* app.use(
     session({
