@@ -8,7 +8,7 @@ module.exports = function(){
       password: "",
       database: "fretus",
       port: 3306
-    })
+    }).promise()
     console.log('Conexão estabelecida!')
     return conexao
   } catch (e) {

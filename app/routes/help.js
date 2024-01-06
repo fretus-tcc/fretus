@@ -13,13 +13,13 @@ router.get('/', function (req, res) {
     res.render('pages/ajuda')
 })
 
-router.get('/admin', function (req, res) {
-    conexao.query('SELECT * FROM duvidas ORDER BY data_duvida DESC', (error, result) => {
-        if (error) {
-            return res.json({ error })
-        }
-        res.render('pages/ajuda-admin/read', { result })
-    })
+router.get('/admin', async function (req, res) {
+    try {
+        const [ result ] = await conexao.query('SELECT * FROM duvidas ORDER BY data_duvida DESC')
+        res.render('pages/ajuda-admin/read', { result: result })
+    } catch (error) {
+        return res.json({ error })
+    }
 })
 
 router.get('/admin/create', function (req, res) {
@@ -35,36 +35,37 @@ router.post(
     function (req, res) {
         const data = saveData(req, res, 'create', req.body)
         if (data) {
-            conexao.query('INSERT INTO duvidas SET ? ', [data], (error, results) => {
-                if (error) {
-                    return res.json({ error })
-                }
+            try {
+                conexao.query('INSERT INTO duvidas SET ?', [data])
                 res.redirect(`/ajuda/${data.slug_duvida}`)
-            })
+            } catch (error) {
+                return res.json({ error })
+            }
         }
     }
 )
 
-router.get('/:slug', function (req, res) {
+router.get('/:slug', async function (req, res) {
     const { slug } = req.params
-    conexao.query('SELECT * FROM duvidas WHERE slug_duvida = ?', [slug], (error, results) => {
-        if (error) {
-            return res.json({ error })
-        } else if (!results.length) {
+    try {
+        const [ results ] = await conexao.query('SELECT * FROM duvidas WHERE slug_duvida = ?', [slug])
+        if (!results.length) {
             return res.redirect('/ajuda')
         }
         res.render('pages/duvidas/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)) })
-    })
+    } catch (error) {
+        return res.json({ error })
+    }
 })
 
-router.get('/admin/update/:id', function (req, res) {
+router.get('/admin/update/:id', async function (req, res) {
     const { id } = req.params
-    conexao.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id], (error, results) => {
-        if (error) {
-            return res.json({ error })
-        }
+    try {
+        const [ results ] = await conexao.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id])
         res.render('pages/ajuda-admin/update', { errors: null, quotes: results[0] })
-    })
+    } catch (error) {
+        return res.json({ error })
+    }
 })
 
 router.put(
@@ -77,24 +78,24 @@ router.put(
         const { id } = req.params
         const data = saveData(req, res, 'update', { ...req.body, id_duvida: id })
         if (data) {
-            conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id], (error, results) => {
-                if (error) {
-                    return res.json({ error })
-                }
+            try {
+                conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
                 res.redirect(`/ajuda/${data.slug_duvida}`)
-            })
+            } catch (error) {
+                return res.json({ error })
+            }
         }
     }
 )
 
-router.delete('/admin/delete/:id',  function (req, res) {
+router.delete('/admin/delete/:id', function (req, res) {
     const { id } = req.params
-    conexao.query('DELETE FROM duvidas WHERE id_duvida = ?', [id], (error, results) => {
-        if (error) {
-            return res.json({ error })
-        }
+    try {
+        conexao.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
         res.redirect('/ajuda/admin')
-    })
+    } catch (error) {
+        return res.json({ error })
+    }
 })
 
 const saveData = (req, res, type, quotes) => {
@@ -103,6 +104,19 @@ const saveData = (req, res, type, quotes) => {
         return
     }
     const { title, content } = req.body
+
+    /* const isRepeated = conexao.query('SELECT * FROM duvidas WHERE titulo_duvida = ?', [title], (error, results) => {
+        if (error) {
+            res.json({ error })
+            return
+        } else if (results.length) {
+            console.log(1)
+            return results.length
+        }
+    })
+
+    console.log(isRepeated) */
+
     return {
         titulo_duvida: title,
         conteudo_duvida: sanitizeHTML(content),
