@@ -32,13 +32,14 @@ router.post(
     body('title').notEmpty().withMessage('Campo não preenchido').isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres'),
     body('content').notEmpty().withMessage('Campo não preenchido'),
 
-    function (req, res) {
-        const data = saveData(req, res, 'create', req.body)
+    async function (req, res) {
+        const data = await saveData(req, res, 'create', req.body, null)
         if (data) {
             try {
                 conexao.query('INSERT INTO duvidas SET ?', [data])
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
+                // console.log(error);
                 return res.json({ error })
             }
         }
@@ -74,9 +75,10 @@ router.put(
     body('title').notEmpty().withMessage('Campo não preenchido').isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres'),
     body('content').notEmpty().withMessage('Campo não preenchido'),
 
-    function (req, res) {
+    async function (req, res) {
         const { id } = req.params
-        const data = saveData(req, res, 'update', { ...req.body, id_duvida: id })
+        const data = await saveData(req, res, 'update', { ...req.body, id_duvida: id }, id)
+        // console.log(data)
         if (data) {
             try {
                 conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
@@ -98,30 +100,31 @@ router.delete('/admin/delete/:id', function (req, res) {
     }
 })
 
-const saveData = (req, res, type, quotes) => {
+const saveData = async (req, res, type, quotes) => {
     if (!validationResult(req).isEmpty()) {
         res.render(`pages/ajuda-admin/${type}`, { errors: validationResult(req).mapped(), quotes })
         return
     }
     const { title, content } = req.body
-
-    /* const isRepeated = conexao.query('SELECT * FROM duvidas WHERE titulo_duvida = ?', [title], (error, results) => {
-        if (error) {
-            res.json({ error })
+    
+    try {
+        const [ result ] = await conexao.query(`SELECT * FROM duvidas WHERE titulo_duvida = ? ${quotes.id_duvida ? 'AND id_duvida != ?' : ''}`, [title, quotes.id_duvida])
+        // console.log(result)
+        if (result.length) {
+            res.render(`pages/ajuda-admin/${type}`, { errors: { title: { msg: "Titulo ja utilizado!" } }, quotes })
             return
-        } else if (results.length) {
-            console.log(1)
-            return results.length
         }
-    })
-
-    console.log(isRepeated) */
-
-    return {
-        titulo_duvida: title,
-        conteudo_duvida: sanitizeHTML(content),
-        slug_duvida: slugify(title, { lower: true, strict: true })
+        return {
+            titulo_duvida: title,
+            conteudo_duvida: sanitizeHTML(content),
+            slug_duvida: slugify(title, { lower: true, strict: true })
+        }
+    } catch (error) {
+        // console.log(error)
+        res.json({ error })
+        return
     }
+
 }
 
 module.exports = router
