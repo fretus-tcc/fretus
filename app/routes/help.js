@@ -33,21 +33,15 @@ router.post(
     body('content').notEmpty().withMessage('Campo não preenchido'),
 
     function (req, res) {
-        if (!validationResult(req).isEmpty()) {
-            return res.render('pages/ajuda-admin/create', { errors: validationResult(req).mapped(), quotes: req.body })
+        const data = saveData(req, res, 'create', req.body)
+        if (data) {
+            conexao.query('INSERT INTO duvidas SET ? ', [data], (error, results) => {
+                if (error) {
+                    return res.json({ error })
+                }
+                res.redirect(`/ajuda/${data.slug_duvida}`)
+            })
         }
-        const { title, content } = req.body
-        const data = {
-            titulo_duvida: title,
-            conteudo_duvida: sanitizeHTML(content),
-            slug_duvida: slugify(title, { lower: true, strict: true })
-        }
-        conexao.query('INSERT INTO duvidas SET ? ', [data], (error, results) => {
-            if (error) {
-                return res.json({ error })
-            }
-            res.redirect(`/ajuda/${data.slug_duvida}`)
-        })
     }
 )
 
@@ -81,21 +75,15 @@ router.put(
 
     function (req, res) {
         const { id } = req.params
-        if (!validationResult(req).isEmpty()) {
-            return res.render('pages/ajuda-admin/update', { errors: validationResult(req).mapped(), quotes: { ...req.body, id_duvida: id } })
+        const data = saveData(req, res, 'update', { ...req.body, id_duvida: id })
+        if (data) {
+            conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id], (error, results) => {
+                if (error) {
+                    return res.json({ error })
+                }
+                res.redirect(`/ajuda/${data.slug_duvida}`)
+            })
         }
-        const { title, content } = req.body
-        const data = {
-            titulo_duvida: title,
-            conteudo_duvida: sanitizeHTML(content),
-            slug_duvida: slugify(title, { lower: true, strict: true })
-        }
-        conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id], (error, results) => {
-            if (error) {
-                return res.json({ error })
-            }
-            res.redirect(`/ajuda/${data.slug_duvida}`)
-        })
     }
 )
 
@@ -109,28 +97,17 @@ router.delete('/admin/delete/:id',  function (req, res) {
     })
 })
 
-/* router.get('/duvida-1', function (req, res) {
-    res.render('pages/duvidas/duvida-1')
-})
+const saveData = (req, res, type, quotes) => {
+    if (!validationResult(req).isEmpty()) {
+        res.render(`pages/ajuda-admin/${type}`, { errors: validationResult(req).mapped(), quotes })
+        return
+    }
+    const { title, content } = req.body
+    return {
+        titulo_duvida: title,
+        conteudo_duvida: sanitizeHTML(content),
+        slug_duvida: slugify(title, { lower: true, strict: true })
+    }
+}
 
-router.get('/duvida-2', function (req, res) {
-    res.render('pages/duvidas/duvida-2')
-})
-
-router.get('/duvida-3', function (req, res) {
-    res.render('pages/duvidas/duvida-3')
-})
-
-router.get('/duvida-4', function (req, res) {
-    res.render('pages/duvidas/duvida-4')
-})
-
-router.get('/duvida-5', function (req, res) {
-    res.render('pages/duvidas/duvida-5')
-})
-
-router.get('/duvida-6', function (req, res) {
-    res.render('pages/duvidas/duvida-6')
-})
- */
 module.exports = router
