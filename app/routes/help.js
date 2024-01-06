@@ -29,17 +29,24 @@ router.get('/admin/create', function (req, res) {
 router.post(
     '/admin/create',
 
-    body('title').notEmpty().withMessage('Campo não preenchido').isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres'),
+    body('title')
+        .notEmpty().withMessage('Campo não preenchido')
+        .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
+        .custom(async (value) => {
+            const existingTitle = await repeatedTitle(value, null)
+            if (existingTitle) {
+                throw new Error('Título já utilizado!')
+            }
+        }),
     body('content').notEmpty().withMessage('Campo não preenchido'),
 
-    async function (req, res) {
-        const data = await saveData(req, res, 'create', req.body, null)
+    function (req, res) {
+        const data = saveData(req, res, 'create', req.body)
         if (data) {
             try {
                 conexao.query('INSERT INTO duvidas SET ?', [data])
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
-                // console.log(error);
                 return res.json({ error })
             }
         }
@@ -72,13 +79,20 @@ router.get('/admin/update/:id', async function (req, res) {
 router.put(
     '/admin/update/:id',
     
-    body('title').notEmpty().withMessage('Campo não preenchido').isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres'),
+    body('title')
+        .notEmpty().withMessage('Campo não preenchido')
+        .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
+        .custom(async (value, { req }) => {
+            const existingTitle = await repeatedTitle(value, req.params.id)
+            if (existingTitle) {
+                throw new Error('Título já utilizado!')
+            }
+        }),
     body('content').notEmpty().withMessage('Campo não preenchido'),
 
-    async function (req, res) {
+    function (req, res) {
         const { id } = req.params
-        const data = await saveData(req, res, 'update', { ...req.body, id_duvida: id }, id)
-        // console.log(data)
+        const data = saveData(req, res, 'update', { ...req.body, id_duvida: id })
         if (data) {
             try {
                 conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
@@ -100,31 +114,28 @@ router.delete('/admin/delete/:id', function (req, res) {
     }
 })
 
-const saveData = async (req, res, type, quotes) => {
+const saveData = (req, res, type, quotes) => {
     if (!validationResult(req).isEmpty()) {
         res.render(`pages/ajuda-admin/${type}`, { errors: validationResult(req).mapped(), quotes })
         return
     }
     const { title, content } = req.body
     
+    return {
+        titulo_duvida: title,
+        conteudo_duvida: sanitizeHTML(content),
+        slug_duvida: slugify(title, { lower: true, strict: true })
+    }
+}
+
+const repeatedTitle = async (title, id) => {
     try {
-        const [ result ] = await conexao.query(`SELECT * FROM duvidas WHERE titulo_duvida = ? ${quotes.id_duvida ? 'AND id_duvida != ?' : ''}`, [title, quotes.id_duvida])
-        // console.log(result)
-        if (result.length) {
-            res.render(`pages/ajuda-admin/${type}`, { errors: { title: { msg: "Titulo ja utilizado!" } }, quotes })
-            return
-        }
-        return {
-            titulo_duvida: title,
-            conteudo_duvida: sanitizeHTML(content),
-            slug_duvida: slugify(title, { lower: true, strict: true })
-        }
+        const [ result ] = await conexao.query(`SELECT * FROM duvidas WHERE titulo_duvida = ? ${id ? 'AND id_duvida != ?' : ''}`, [title, id])
+        return result.length
     } catch (error) {
-        // console.log(error)
         res.json({ error })
         return
     }
-
 }
 
 module.exports = router
