@@ -1,0 +1,5 @@
+<input name="title" type="text" placeholder="Título" value="<%= quotes?.title || quotes?.titulo_duvida %>" class="<%= customError.title?.class %>">
+<span><%= customError.title?.msg %></span>
+<textarea name="content" class="<%= customError.content?.class %>" cols="30" rows="10" placeholder="Conteudo (Markdown)"><%= quotes?.content || quotes?.conteudo_duvida %></textarea>
+<span><%= customError.content?.msg %></span>
+<button>Enviar</button>

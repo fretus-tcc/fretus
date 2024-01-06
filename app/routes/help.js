@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
 })
 
 router.get('/admin', function (req, res) {
-    conexao.query('SELECT * FROM duvidas', (error, result) => {
+    conexao.query('SELECT * FROM duvidas ORDER BY data_duvida DESC', (error, result) => {
         if (error) {
             return res.json({ error })
         }
@@ -63,7 +63,43 @@ router.get('/:slug', function (req, res) {
     })
 })
 
-router.delete('/admin/delete/:id', function (req, res) {
+router.get('/admin/update/:id', function (req, res) {
+    const { id } = req.params
+    conexao.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id], (error, results) => {
+        if (error) {
+            return res.json({ error })
+        }
+        res.render('pages/ajuda-admin/update', { errors: null, quotes: results[0] })
+    })
+})
+
+router.put(
+    '/admin/update/:id',
+    
+    body('title').notEmpty().withMessage('Campo não preenchido').isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres'),
+    body('content').notEmpty().withMessage('Campo não preenchido'),
+
+    function (req, res) {
+        const { id } = req.params
+        if (!validationResult(req).isEmpty()) {
+            return res.render('pages/ajuda-admin/update', { errors: validationResult(req).mapped(), quotes: { ...req.body, id_duvida: id } })
+        }
+        const { title, content } = req.body
+        const data = {
+            titulo_duvida: title,
+            conteudo_duvida: sanitizeHTML(content),
+            slug_duvida: slugify(title, { lower: true, strict: true })
+        }
+        conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id], (error, results) => {
+            if (error) {
+                return res.json({ error })
+            }
+            res.redirect(`/ajuda/${data.slug_duvida}`)
+        })
+    }
+)
+
+router.delete('/admin/delete/:id',  function (req, res) {
     const { id } = req.params
     conexao.query('DELETE FROM duvidas WHERE id_duvida = ?', [id], (error, results) => {
         if (error) {
