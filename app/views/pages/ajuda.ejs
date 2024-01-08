@@ -17,8 +17,14 @@
             <h1 class="heading">Busque sua dúvida aqui</h1>
             <div class="search-bar">
                 <input type="text" placeholder="Qual sua dúvida?">
-                <div class="search-icon">
-                    <img src="/imgs/help/search-icon.svg">
+                <div class="suggestions">
+                    <ul class="suggestions-options">
+                        <% result.forEach(item => { %>
+                            <li>
+                                <a href="/ajuda/<%= item.slug_duvida %>"><%= item.titulo_duvida %></a>
+                            </li>
+                        <% }) %>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -63,5 +69,6 @@
     
     <script src="/JS/burguer.js"></script>
     <script src="/JS/header-scroll.js"></script>
+    <script src="/JS/search-quotes.js"></script>
 </body>
 </html>

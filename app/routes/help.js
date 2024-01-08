@@ -9,14 +9,21 @@ const slugify = require('slugify')
 const marked = require('marked')
 const sanitizeHTML = require('sanitize-html')
 
-router.get('/', function (req, res) {
-    res.render('pages/ajuda')
+router.get('/', async function (req, res) {
+    /* res.render('pages/ajuda') */
+    try {
+        const [ result ] = await conexao.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
+        /* console.log(result) */
+        res.render('pages/ajuda', { result })
+    } catch (error) {
+        return res.json({ error })
+    }
 })
 
 router.get('/admin', async function (req, res) {
     try {
         const [ result ] = await conexao.query('SELECT * FROM duvidas ORDER BY data_duvida DESC')
-        res.render('pages/ajuda-admin/read', { result: result })
+        res.render('pages/ajuda-admin/read', { result })
     } catch (error) {
         return res.json({ error })
     }
