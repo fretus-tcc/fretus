@@ -29,7 +29,8 @@ body {
     height: 45px;
     outline: none;
     padding: 10px;
-    border: 1px solid var(--blue);
+    border: none;
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.2);
     border-radius: 24px;
     font-family: var(--font-2);
     font-size: 15px;
@@ -37,16 +38,15 @@ body {
     background-color: white;
 }
 
-.search-bar > input.border {
+.search-bar > input.border:has(+ .suggestions a.show) {
     border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0; 
 }
 
 .search-bar > input + .suggestions {
     display: none;
 }
 
-/* .search-bar > .suggestions, */
 .search-bar > input.border + .suggestions {
     display: block;
     max-height: 240px;
@@ -55,10 +55,26 @@ body {
     z-index: 100;
     width: 100%;
     background-color: white;
-    border: 1px solid var(--blue);
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.2);
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
     overflow: auto;
+}
+
+.suggestions::-webkit-scrollbar {
+    width: 10px;
+}
+
+.suggestions::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+    background: rgba(51, 51, 51, 0.25); 
+}
+
+.suggestions::-webkit-scrollbar-thumb:hover {
+    background: rgba(51, 51, 51, 0.3); 
 }
 
 .search-bar a {
