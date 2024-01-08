@@ -22,26 +22,24 @@ main > .heading {
     text-align: start;
 }
 
-main > ol {
-    padding: 22px;
+main > .date {
+    margin-bottom: 15px;
 }
 
-main ol > li {
-    font-family: var(--font-1);
-    font-weight: 700;
+main ol, main ul {
+    padding: 0 22px;
+}
+
+main h2 {
     margin-bottom: 30px;
 }
 
-main ol > li > ul {
-    list-style: none;
-} 
-
-main ol ul > li {
+main p:not(:has(strong)) {
     font-family: var(--font-2);
-    font-weight: 400;
+    margin-bottom: 30px;
 }
 
-main li a {
+main a {
     color: var(--orange);
 }
 
