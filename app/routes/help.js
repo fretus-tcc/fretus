@@ -67,7 +67,7 @@ router.get('/:slug', async function (req, res) {
         if (!results.length) {
             return res.redirect('/ajuda')
         }
-        res.render('pages/duvidas/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)) })
+        res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)) })
     } catch (error) {
         return res.json({ error })
     }

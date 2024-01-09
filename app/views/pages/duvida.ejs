@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Dúvidas</title>
     <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
-    <%- include('../../partial/config/config.ejs') %> 
-    <%- include('../../partial/config/config-home.ejs') %> 
+    <%- include('../partial/config/config.ejs') %> 
+    <%- include('../partial/config/config-home.ejs') %> 
     <link rel="stylesheet" href="/CSS/quotes/main.css">
 </head>
 
 <body>
 
-    <%- include('../../partial/header.ejs') %>
+    <%- include('../partial/header.ejs') %>
 
     <main>
         <h1 class="heading"><%= results.titulo_duvida %></h1>
@@ -24,8 +24,8 @@
         <a href="/FaleConosco" class="cta">Fale Conosco</a>
     </section>
 
-    <%- include('../../partial/footer.ejs') %>
-    <%- include('../../partial/menu-burguer.ejs', { type: 'home' }) %>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
     
     <script src="/JS/burguer.js"></script>
     <script src="/JS/header-scroll.js"></script>
