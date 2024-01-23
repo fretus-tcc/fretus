@@ -21,8 +21,8 @@
                 <p>Criada em: <%= item.data_duvida.toLocaleDateString() %></p>
                 <a style="color: var(--blue)" href="/ajuda/<%= item.slug_duvida %>">Acessar</a>
                 <a style="color: var(--blue)" href="/ajuda/admin/update/<%= item.id_duvida %>">Atualizar</a>
-                <form style="display: inline;" action="/ajuda/admin/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
-                    <button>Deletar</button>
+                <form class="delete-form" style="display: inline;" action="/ajuda/admin/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
+                    <button class="delete">Deletar</button>
                 </form>
             </div>
         <% }) %>
@@ -32,5 +32,6 @@
     
     <script src="/JS/burguer.js"></script>
     <script src="/JS/header-scroll.js"></script>
+    <script src="/JS/quotes/delete-confirm.js"></script>
 </body>
 </html>
