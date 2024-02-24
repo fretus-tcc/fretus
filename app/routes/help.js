@@ -1,8 +1,8 @@
 var express = require("express")
 var router = express.Router()
 
-var fabricaDeConexao = require("../../config/connection-factory")
-var conexao = fabricaDeConexao()
+/* var fabricaDeConexao = require("../../config/connection-factory")
+var conexao = fabricaDeConexao() */
 
 const { body, validationResult } = require('express-validator')
 const slugify = require('slugify')
