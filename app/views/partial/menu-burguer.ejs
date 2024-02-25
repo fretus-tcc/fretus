@@ -1,41 +1,35 @@
 <% if (type == 'home') { %>
-    <div class="menu-burguer">
-        <div class="burguer">
-            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/homepage__mobile_/u14.svg?pageId=474e0aac-b4ee-403d-9bc0-5e2c0892e3b4" alt="">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/login">Entrar</a></li>
-                <li><a href="/cadastro">Cadastrar</a></li>
-                <li><a href="/FaleConosco">Fale Conosco</a></li>
-                <li><a href="/ajuda">Central de ajuda</a></li>
-            </ul>  
-        </nav>
-    </div>
+    <nav class="menu-burguer">
+        <section class="burguer">
+            <img src="/imgs/burguer-fretus.svg" alt="">
+        </section>
+        <ul>
+            <li><a href="/login">Entrar</a></li>
+            <li><a href="/cadastro">Cadastrar</a></li>
+            <li><a href="/FaleConosco">Fale Conosco</a></li>
+            <li><a href="/ajuda">Central de ajuda</a></li>
+        </ul>
+    </nav>
 <% } else if (type == 'client') { %>
-    <div class="menu-burguer">
-        <nav>
-            <ul>
-                <li><a href="/cliente/solicitar-entrega">Solicitar Entrega</a></li>
-                <li><a href="/cliente/chat">Chat</a></li>
-                <li><a href="/cliente/historico">Histórico</a></li>
-                <li><a href="/cliente/cupons">Cupons</a></li>
-                <li><a href="/cliente/perfil">Perfil</a></li>
-                <li><a href="/cliente/configuracoes">Configurações</a></li>
-            </ul>
-        </nav>
-    </div>
+    <nav class="menu-burguer">
+        <ul>
+            <li><a href="/cliente/solicitar-entrega">Solicitar Entrega</a></li>
+            <li><a href="/cliente/chat">Chat</a></li>
+            <li><a href="/cliente/historico">Histórico</a></li>
+            <li><a href="/cliente/cupons">Cupons</a></li>
+            <li><a href="/cliente/perfil">Perfil</a></li>
+            <li><a href="/cliente/configuracoes">Configurações</a></li>
+        </ul>
+    </nav>
 <% } else if (type == 'shipper') { %>
-    <div class="menu-burguer">
-        <nav>
-            <ul>
-                <li><a href="/entregador/entregas-solicitadas">Entregas Solicitadas</a></li>
-                <li><a href="/entregador/chat">Chat</a></li>
-                <li><a href="/entregador/ranking">Ranking</a></li>
-                <li><a href="/entregador/resultados">Resultados</a></li>
-                <li><a href="/entregador/perfil">Perfil</a></li>
-                <li><a href="/entregador/configuracoes">Configurações</a></li>
-            </ul>
-        </nav>
-    </div>
+    <nav class="menu-burguer">
+        <ul>
+            <li><a href="/entregador/entregas-solicitadas">Entregas Solicitadas</a></li>
+            <li><a href="/entregador/chat">Chat</a></li>
+            <li><a href="/entregador/ranking">Ranking</a></li>
+            <li><a href="/entregador/resultados">Resultados</a></li>
+            <li><a href="/entregador/perfil">Perfil</a></li>
+            <li><a href="/entregador/configuracoes">Configurações</a></li>
+        </ul>
+    </nav>
 <% } %>
