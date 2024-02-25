@@ -31,11 +31,12 @@ header > nav > ul {
     font-size: 20px;
 }
 
-header h1 {
+header .logo-container {
     width: 40px;
+    height: 62px;
 }
 
-h1 .logo {
+.logo {
     width: 100%;
 }
 
