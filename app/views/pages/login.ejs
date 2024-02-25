@@ -13,49 +13,46 @@
 </head>
 
 <body>
-  <div class="fretus">
+  <section class="fretus">
     <h1 class="logo-container"><a href="/"><img class="logo" src="/imgs/logotca.png"></a></h1>
-  </div>
-  <div class="container">
+  </section>
+  <main class="container">
     <h1>Bem-vindo de volta! </h1>
     <form action="/cliente/solicitar-entrega" id="form">
-      <div>
+      <article>
         <input type="email" placeholder="Email" class="inputs" autocomplete="off" oninput="emailValido()"
           id="inputEmail" required>
         <p id="messageEmail"></p>
-      </div>
-      <div class="box-icon">
-        <div class="input__wrapper">
+      </article>
+      <section class="box-icon">
+        <article class="input__wrapper">
           <input id="password" type="password" class="input__field" pattern=".{8,}" placeholder="Senha"
             oninput="senhaValidada()" required>
           <p id="messageSenha"></p>
           <label for="password" class="input__label"></label>
           <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
-        </div>
-      </div>
+        </article>
+      </section>
       <p>
         Ainda não tem uma conta?
         <a href="/cadastro">Acesse aqui.</a>
       </p>
       <input type="submit" value="Entrar" id="entrar">
-      <main>
-        <div class="alternative">
-          <span>ou</span>
-        </div>
-      </main>
-      <div class="social-media">
+      <article class="alternative">
+        <span>ou</span>
+      </article>
+      <article class="social-media">
         <a href="#" class="social-icon">
           <img src="/imgs/login-cadastro/icons8-google-logo.svg" width="45" height="45">
+          <span>Entrar com google</span>
         </a>
-        <a href="#" class="social-icon">
+        <a href="#" class="social-icon facebook">
           <img src="/imgs/login-cadastro/icons8-facebook-novo.svg" width="45" height="45">
+          <span>Entrar com facebook</span>
         </a>
-        <a href="#" class="social-icon">
-          <img src="/imgs/login-cadastro/icons8-linkedin.svg" width="45" height="45">
-        </a>
-      </div>
+      </article>
     </form>
-  </div>
+  </main>
   <script src="/JS/login-cadastro/eye.js"></script>
   <script src="/JS/login-cadastro/validacao.js"></script>
 </body>
