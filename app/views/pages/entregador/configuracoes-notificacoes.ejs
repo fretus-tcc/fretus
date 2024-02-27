@@ -15,53 +15,52 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
     
     <main>
-        <div class="sidebar">
-            <div class="nav">
+        <section class="sidebar">
+            <nav class="nav">
                 <ul>
-                    <a href="/entregador/configuracoes">
+                    <a href="./configuracoes.html">
                         <li>Privacidade</li>
                     </a>
-                    <a href="/entregador/configuracoes-pagamento">
+                    <a href="./configuracoes-pagamento.html">
                         <li>Pagamento</li>
                     </a>
-                    <a href="/entregador/configuracoes-notificacoes">
+                    <a href="./configuracoes-notificacoes.html">
                         <li>Notificações</li>
                     </a>
                 </ul>
-            </div>
-            <div class="container-button">
-                <button class="exit-button"><a href="/">sair da conta</a></button>
-            </div> 
-        </div>
+            </nav>
+            <section class="container-button">
+                <button class="exit-button"><a href="../../index.html">sair da conta</a></button>
+            </section> 
+        </section>
         <div class="config">
             <div class="config-container">
-                <div class="sidebar-burguer">
-                    <img src="/imgs/burguer-config-icon.png" alt="">
-                </div>
+                <article
+                 class="sidebar-burguer">
+                    <img src="../../imgs/burguer-config-icon.png" alt="">
+                </article>
                 <h1>Notificações</h1>
                 <p>Receber notificações promocionais, descontos, institucionais e etc.</p>
-                <div class="row">
+                <article class="row">
                     <span>SMS</span>
                     <input checked type="checkbox" id="sms">
                     <label for="sms" class="toogle">
-                        <div class="ball"></div>
+                        <article class="ball"></article>
                     </label>
-                </div>
-                <div class="row">
+                </article>
+                <article class="row">
                     <span>E-mail</span>
                     <input checked type="checkbox" id="email">
                     <label for="email" class="toogle">
-                        <div class="ball"></div>
+                        <article class="ball"></article>
                     </label>
-                </div>
+                </article>
             </div>
         </div>
     </main>
     
-    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %> 
-
-    <script src="/JS/burguer.js"></script>
-    <script src="/JS/shipper/change.js"></script>
-    <script src="/JS/shipper/burguer-config.js"></script>
+    <script src="../../JS/burguer.js"></script>
+    <script src="../../JS/shipper/change.js"></script>
+    <script src="../../JS/shipper/burguer-config.js"></script>
 </body>
 </html>
