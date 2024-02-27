@@ -14,69 +14,69 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 
     <main>
-        <div class="sidebar">
-            <div class="nav">
+        <section class="sidebar">
+            <nav class="nav">
                 <ul>
-                    <a href="/entregador/configuracoes">
+                    <a href="./configuracoes.html">
                         <li>Privacidade</li>
                     </a>
-                    <a href="/entregador/configuracoes-pagamento">
+                    <a href="./configuracoes-pagamento.html">
                         <li>Pagamento</li>
                     </a>
-                    <a href="/entregador/configuracoes-notificacoes">
+                    <a href="./configuracoes-notificacoes.html">
                         <li>Notificações</li>
                     </a>
                 </ul>
-            </div>
-            <div class="container-button">
-                <button class="exit-button"><a href="/">sair da conta</a></button>
-            </div>
-        </div>
+            </nav>
+            <article class="container-button">
+                <button class="exit-button"><a href="../../index.html">sair da conta</a></button>
+            </article>
+        </section>
         <div class="config">
             <div class="config-container">
-                <div class="sidebar-burguer">
-                    <img src="/imgs/burguer-config-icon.png" alt="">
-                </div>
-                <h1>Privacidade</h1>
-                <div class="row">
+                <article class="sidebar-burguer">
+                    <img src="../../imgs/burguer-config-icon.png" alt="">
+                </article>
+                <h1 class="row">Privacidade</h1>
+                <article class="row">
                     <label for="name">Nome</label>
-                    <div class="edit-row">
-                        <div class="input-container">
+                    <article class="edit-row">
+                        <article class="input-container">
                             <input type="text" readonly id="name" value="Entregador 1">
                             <input type="button" class="btn" value="Cancelar">
                             <input type="button" class="btn confirm" value="Confirmar">
-                        </div>
+                        </article>
                         <span>Alterar</span>
-                    </div>
-                </div>
-                <div class="row">
+                    </article>
+                </article>
+                <article class="row">
                     <label for="email">E-mail</label>
-                    <div class="edit-row">
-                        <div class="input-container">
+                    <article class="edit-row">
+                        <article class="input-container">
                             <input type="email" required readonly id="email" value="entregador@email.com">
                             <input type="button" class="btn" value="Cancelar">
                             <input type="button" class="btn confirm" value="Confirmar">
-                        </div>
+                        </article>
                         <span>Alterar</span>
-                    </div>
-                </div>
-                <div class="row">
+                    </article>
+                </article>
+                <article class="row">
                     <label for="password">Senha</label>
-                    <div class="edit-row">
-                        <div class="input-container">
+                    <article class="edit-row">
+                        <article class="input-container">
                             <input type="password" readonly id="password" value="Senha123">
                             <input type="button" class="btn" value="Cancelar">
                             <input type="button" class="btn confirm" value="Confirmar">
-                        </div>
+                        </article>
                         <span>Alterar</span>
-                    </div>
-                </div>
+                    </article>
+                </article>
             </div>
         </div>
     </main>
     
-    <script src="/JS/burguer.js"></script>
-    <script src="/JS/shipper/change.js"></script>
-    <script src="/JS/shipper/burguer-config.js"></script>
+    <script src="../../JS/burguer.js"></script>
+    <script src="../../JS/shipper/change.js"></script>
+    <script src="../../JS/shipper/burguer-config.js"></script>
 </body>
 </html>
