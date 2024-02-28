@@ -1,6 +1,6 @@
 body {
     background-image: url('../../imgs/login-cadastro/bg-login.svg'); 
-    height: 110vh;
+    height: 129vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -137,28 +137,12 @@ form p a {
 }
 
 .alternative span::before,
-main .alternative span::after {
+.alternative span::after {
     content: '';
     display: block;
     height: 1px;
     width: 35%;
     background: #333;
-}
-
-.social-media {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.social-icon {
-    width: min(45px, 33%);
-}
-
-.social-icon > img {
-    width: 100%;
 }
 
 .input__wrapper {
@@ -171,4 +155,31 @@ main .alternative span::after {
     cursor: pointer;
     top: 30px;
 }
+.social-media {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-flow: column;
+}
+.social-icon {
+    display: flex;
+    align-items: center;
+    /* border: 01px solid #333; */
+    width: 100%;
+    justify-content: center;
+    color: #333;
+    background-color: rgb(255, 255, 255, .7);
+    border-radius: 2px;
+}
+.social-icon img {
+    width: min(40px, 50%);
+    padding-right: 10px;
+}
+.facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+
 @media (max-width:500px) { body{ height:130vh}}
