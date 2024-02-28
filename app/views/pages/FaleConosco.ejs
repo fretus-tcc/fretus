@@ -15,9 +15,9 @@
     
     <main>
         <br><br><br>
-        <div class="container">
+        <section class="container">
             <!-- <form method="post" action="/enviar">-->
-            <div class="form-contain">
+            <form class="form-contain">
                 <h1>Fale com a Fretus por aqui</h1>
                 <input type="text" name="name" placeholder="Nome:" required>
                 <input type="email" name="email" placeholder="Email:" required>
@@ -26,9 +26,9 @@
                 <input type="text" name="assunto" placeholder="Assunto:" required>
                 <textarea style="resize: none" name="message" placeholder="Mensagem:" required></textarea>
                 <button type="submit">Enviar</button>
-            </div>
+            </form>
             <!--</form>!-->
-        </div>
+        </section>
     </main>
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
