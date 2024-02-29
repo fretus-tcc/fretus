@@ -18,8 +18,8 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <main>
-        <div class="sidebar">
-            <div class="nav">
+        <section class="sidebar">
+            <nav class="nav">
                 <ul>
                     <a href="/cliente/configuracoes">
                         <li>Privacidade</li>
@@ -31,48 +31,50 @@
                         <li>Notificações</li>
                     </a>
                 </ul>
-            </div>
-            <div class="container-button">
+            </nav>
+            <aside class="container-button">
                 <button class="exit-button"><a href="/">sair da conta</a></button>
-            </div> 
-        </div>
-        <div class="config">
-            <div class="config-container">
-                <div class="sidebar-burguer">
+            </aside> 
+        </section>
+
+        <section class="config">
+            <section class="config-container">
+                <aside class="sidebar-burguer">
                     <img src="/imgs/burguer-config-icon.png" alt="">
-                </div>
+                </aside>
                 <h1>Pagamento</h1>
                 <p>Insira aqui seus metódos de pagamento.</p>
-                <div class="row">
+                <article class="row">
                     <input type="checkbox" id="cartao">
                     <label for="cartao">Cartão <span>></span></label>
-                    <div class="content">
-                        <div class="edit-row">
-                            <div class="input-container">
+                    <section class="content">
+                        <article class="edit-row">
+                            <aside class="input-container">
                                 <input type="text" readonly value="**** **** **** 5693">
                                 <input type="button" class="btn" value="Cancelar">
                                 <input type="button" class="btn confirm" value="Confirmar">
-                            </div>
+                            </aside>
                             <span>Alterar</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+                        </article>
+                    </section>
+                </article>
+
+                <article class="row">
                     <input type="checkbox" id="pix">
                     <label for="pix">Pix <span>></span></label>
-                    <div class="content">
-                        <div class="edit-row">
-                            <div class="input-container">
+                    <section class="content">
+                        <article class="edit-row">
+                            <aside class="input-container">
                                 <input type="text" readonly value="123e4567-e12b-12d1">
                                 <input type="button" class="btn" value="Cancelar">
                                 <input type="button" class="btn confirm" value="Confirmar">
-                            </div>
+                            </aside>
                             <span>Alterar</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </article>
+                    </section>
+                </article>
+            </section>
+        </section>
     </main>
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
