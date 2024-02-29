@@ -12,18 +12,18 @@
 </head>
 <body>
     
-    <div class="hero">
+    <main class="hero">
         <%- include('../partial/header.ejs') %>
         <section>
-            <div class="popup show">
-                <div class="popup-content">
-                    <div class="popup-wrapper">
+            <aside class="popup show">
+                <section class="popup-content">
+                    <section class="popup-wrapper">
                         <form class="form active">
-                            <div class="title">
+                            <section class="title">
                                 <h2>Etapa 1 de 3</h2>
                                 <h1>Verificando seus dados</h1>
-                            </div>
-                            <div class="form-fields">
+                            </section>
+                            <section class="form-fields">
                                 <input required placeholder="Data de Nascimento" class="input-field" type="text" onfocus="this.type='date'">
                                 <input required id="tel" placeholder="Número de Telefone" class="input-field" type="text">
                                 <select required placeholder="Tipo de Veículo" class="input-field">
@@ -35,21 +35,21 @@
                                 </select>
                                 <input required placeholder="Modelo do Veículo" class="input-field" type="text">
                                 <input required id="placa" placeholder="Placa do Veículo" class="input-field" type="text">
-                            </div>
-                            <div class="terms">
+                            </section>
+                            <section class="terms">
                                 <input required type="checkbox" name="terms" id="terms">
                                 <label for="terms">Eu concordo com os <a href="">Termos e Condições</a> e com a Política de Privacidade da Fretus</label>
-                            </div>
-                            <div class="btns">
+                            </section>
+                            <section class="btns">
                                 <button class="cta yes" type="submit">Próxima Etapa</button>
-                            </div>
+                            </section>
                         </form>
                         <form class="form">
-                            <div class="title">
+                            <section class="title">
                                 <h2>Etapa 2 de 3</h2>
                                 <h1>Enviando seus documentos</h1>
-                            </div>
-                            <div class="form-fields">
+                            </section>
+                            <section class="form-fields">
                                 <label class="file-field" for="cnh">
                                 <input required type="file" name="files" id="cnh">
                                 <div class="icon">
@@ -64,18 +64,18 @@
                                     </div>
                                     <span class="msg">Foto do Veículo</span>
                                 </label>
-                            </div>
-                            <div class="btns">
+                            </section>
+                            <section class="btns">
                                 <button class="cta no" type="submit">Etapa Anterior</button>
                                 <button class="cta yes" type="submit">Próxima Etapa</button>
-                            </div>
+                            </section>
                         </form>
                         <form class="form" action="/entregador/entregas-solicitadas">
-                            <div class="title">
+                            <section class="title">
                                 <h2>Etapa 3 de 3</h2>
                                 <h1>Criando seu Perfil</h1>
-                            </div>
-                            <div class="form-fields">
+                            </section>
+                            <section class="form-fields">
                                 <input type="file" id="profile">
                                 <label class="file-field" for="profile">
                                     <div class="icon">
@@ -85,17 +85,17 @@
                                 </label>
                                 <input required placeholder="Raio de atuação (em km)" class="input-field" type="text">
                                 <textarea required class="input-field" placeholder="Descrição"></textarea>
-                            </div>
-                            <div class="btns">
+                            </section>
+                            <section class="btns">
                                 <button class="cta no" type="submit">Etapa Anterior</button>
                                 <button class="cta yes" type="submit">Enviar</button>
-                            </div>
+                            </section>
                         </form>
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+            </aside>
         </section>
-    </div>
+    </main>
 
     <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
 
