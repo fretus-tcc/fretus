@@ -10,14 +10,14 @@ const marked = require('marked')
 const sanitizeHTML = require('sanitize-html')
 
 router.get('/', async function (req, res) {
-    /* res.render('pages/ajuda') */
-    try {
-        const [ result ] = await conexao.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
-        /* console.log(result) */
-        res.render('pages/ajuda', { result })
-    } catch (error) {
-        return res.json({ error })
-    }
+    res.render('pages/ajuda')
+    // try {
+    //     const [ result ] = await conexao.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
+    //     /* console.log(result) */
+    //     res.render('pages/ajuda', { result })
+    // } catch (error) {
+    //     return res.json({ error })
+    // }
 })
 
 router.get('/admin', async function (req, res) {

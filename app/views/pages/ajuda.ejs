@@ -10,51 +10,51 @@
 </head>
 <body>
     
-    <div class="hero">
+    <main class="hero">
         <%- include('../partial/header.ejs') %>
         <section>
             <h1 class="heading">Busque sua dúvida aqui</h1>
-            <div class="search-bar">
+            <section class="search-bar">
                 <input type="text" placeholder="Qual sua dúvida?">
-                <div class="suggestions">
+                <section class="suggestions">
                     <ul class="suggestions-options">
-                        <% result.forEach(item => { %>
+                        <%# result.forEach(item => { %>
                             <li>
-                                <a href="/ajuda/<%= item.slug_duvida %>"><%= item.titulo_duvida %></a>
+                                <a href="/ajuda/<%# item.slug_duvida %>"><%# item.titulo_duvida %></a>
                             </li>
-                        <% }) %>
+                        <%# }) %>
                     </ul>
                 </div>
-            </div>
+            </section>
         </section>
-    </div>
+    </main>
 
     <section class="blue-gradient">
         <h1 class="heading">Encontre ajuda para o que precisar</h1>
-        <div class="cards-container">
-            <div class="card">
-                <div class="icon">
+        <section class="cards-container">
+            <article class="card">
+                <section class="icon">
                     <img src="/imgs/help/truck-icon.svg">
-                </div>
+                </section>
                 <h2>Sou Entregador</h2>
-                <div class="links-container">
+                <nav class="links-container">
                     <a href="/ajuda/como-faco-para-me-cadastrar-como-entregador">Como faço para me cadastrar como entregador</a>
                     <a href="/ajuda/o-que-fazer-em-caso-de-problemas-durante-a-entrega">O que fazer em caso de problemas durante a entrega?</a>
                     <a href="/ajuda/como-funciona-o-pagamento-para-os-entregadores">Como funciona o pagamento para os entregadores?</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="icon">
+                </nav>
+            </article>
+            <article class="card">
+                <section class="icon">
                     <img src="/imgs/help/client-icon.svg">
-                </div>
+                </section>
                 <h2>Sou Cliente</h2>
-                <div class="links-container">
+                <nav class="links-container">
                     <a href="/ajuda/existe-um-limite-de-peso-ou-tamanho-para-os-itens-que-posso-enviar">Existe um limite de peso ou tamanho para os itens que posso enviar?</a>
                     <a href="/ajuda/posso-agendar-uma-entrega-para-um-horario-especifico">Posso agendar uma entrega para um horário específico?</a>
                     <a href="/ajuda/e-possivel-adicionar-instrucoes-especiais-para-a-entrega">É possível adicionar instruções especiais para a entrega?</a>
-                </div>
-            </div>
-        </div>
+                </nav>
+            </article>
+        </section>
         <a class="cta" href="/ajuda/admin">admin</a>
     </section>
 
