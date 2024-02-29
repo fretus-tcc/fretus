@@ -18,24 +18,24 @@
 </head>
 <body>
 
-    <div class="hero">
+    <section class="hero">
         <%- include('../partial/header.ejs') %>
         <section>
             <h1 class="heading">Entregue com a Fretus</h1>
             <p class="paragraph">A fretus é uma plataforma de entregas que conecta os clientes com os entregadores</p>
             <a href="/cadastro" class="cta">Começar</a>
         </section>
-    </div>
-    <div class="switch">
+    </section>
+    <nav class="switch">
         <input type="radio" name="change" id="client" checked data-move="0">
         <label for="client">Cliente</label>
         <input type="radio" name="change" id="shipper" data-move="150">
         <label for="shipper">Entregador</label>
         <span></span>
-    </div>
+    </nav>
     
     <main>
-        <div class="client show">
+        <article class="client show">
             <section class="gray-gradient">
                 <%- include('../partial/home/cards-container.ejs', { isClient: true }) %>
                 <a href="/cadastro" class="cta">Começar agora</a>  
@@ -149,8 +149,8 @@
                 <h1 class="heading">Dúvidas Frequentes</h1>
                 <%- include('../partial/home/accordion.ejs', { isClient: true }) %>
             </section>
-        </div>
-        <div class="shipper">
+        </article>
+        <article class="shipper">
             <section class="gray-gradient">
                 <%- include('../partial/home/cards-container.ejs', { isClient: false }) %>
                 <a href="/cadastro" class="cta">Começar agora</a>
@@ -197,7 +197,7 @@
             <section class="blue-gradient">
                 <h1 class="heading">Descubra se você está elegível para trabalhar conosco</h1>
                 <form class="form-container" action="/cadastro-entregador">
-                    <div class="form-row">
+                    <section class="form-row">
                         <div class="form-column">
                             <label for="nome">Nome completo</label>
                             <input type="text" id="nome" autocomplete="off" oninput="nomeValido()" pattern=".{2,}[A-Za-zÀ-ÿ\s]+" required>
@@ -208,8 +208,8 @@
                             <input type="text" id="cpf" oninput="cpfValido()" autocomplete="off" pattern=".{11,}" required>
                             <p id="messageCpf"></p>
                         </div>
-                    </div>
-                    <div class="form-row">
+                    </section>
+                    <section class="form-row">
                         <div class="form-column">
                             <label for="inputEmail">Endereço de E-Mail</label>
                             <input type="email" id="inputEmail" oninput="emailValido()" autocomplete="off" required>
@@ -220,11 +220,11 @@
                             <input type="password" id="password" oninput="senhaValidada()" pattern=".{8,}" required>
                             <p id="messageSenha"></p>
                         </div>
-                    </div>
-                    <div class="terms">
+                    </section>
+                    <section class="terms">
                         <input required type="checkbox" name="terms" id="terms">
                         <label for="terms">Eu concordo com os <a href="">Termos e Condições</a> e com a Política de Taxa da Fretus</label>
-                    </div>
+                    </section>
                     
                     <button type="submit" id="verificar" class="cta">Verificar</button>
                 </form>
@@ -233,7 +233,7 @@
                 <h1 class="heading">Dúvidas Frequentes</h1>
                 <%- include('../partial/home/accordion.ejs', { isClient: false }) %>
             </section>
-        </div>
+        </article>
     </main>
 
     <%- include('../partial/footer.ejs') %>

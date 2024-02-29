@@ -19,11 +19,15 @@
     <link rel="stylesheet" href="/CSS/client/report-popup.css">
 </head>
 <body>
-    
+
+    <!--  utilizando tecnologia EJS  -->
+
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
 <!--conteudo principal da pagina-->
+
     <main>    
-           <!-- cabeçalho da  -->
+        
         <header class="history-header">
             <h1>Histórico</h1>
         </header>
@@ -31,9 +35,9 @@
         <section class="requests-container">
             <article class="card">
 
-                 <!-- cabeçalho da seção -->
+               
 
-                <header class="top">
+                <section class="top">
                     <aside class="row">
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                             alt="">
@@ -47,28 +51,28 @@
                             alt="">
                         <span>Rua Carneiro Leão</span>
                 </aside>
-                </header>
+            </section>
                 <aside class="weight">
                     <span>Pequena (até 15 Kg)</span>
                 </aside>
 
                 <!-- rodapé da seção   -->
 
-                <footer class="bottom">
+                <section class="bottom">
                     <span class="price">R$51,00</span>
                     <span class="actions">
                         <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
                         <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
                         <img class="rate" src="/imgs/client/star-icon.svg" alt="">
                     </span>
-                </footer>
+                </section>
                 <aside class="details">
                     <span class="indicator">i</span>
                 </aside>
        
                 
             <article class="card">
-                <header class="top">
+                <section class="top">
                     <aside class="row">
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
                         <span>Rua Carlos José de Castilho</span>
@@ -80,18 +84,18 @@
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
                         <span>Rua Carneiro Leão</span>
                     </aside>
-                </header>
+                </section>
                 <aside class="weight">
                     <span>Pequena (até 15 Kg)</span>
                 </aside>
-                <footer class="bottom">
+                <section class="bottom">
                     <span class="price">R$51,00</span>
                     <span class="actions">
                         <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
                         <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
                         <img class="rate" src="/imgs/client/star-icon.svg" alt="">
                     </span>
-                </footer>
+                </section>
                 <aside class="details">
                     <span class="indicator">i</span>
                 </aside>
@@ -99,7 +103,7 @@
 
 
             <article class="card">
-                <header class="top">
+                <section class="top">
                     <aside class="row">
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                             alt="">
@@ -113,18 +117,18 @@
                             alt="">
                         <span>Rua Carneiro Leão</span>
                     </aside>
-                </header>
+                </section>
                 <aside class="weight">
                     <span>Pequena (até 15 Kg)</span>
                 </aside>
-                <footer class="bottom">
+                <section class="bottom">
                     <span class="price">R$51,00</span>
                     <span class="actions">
                         <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
                         <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
                         <img class="rate" src="/imgs/client/star-icon.svg" alt="">
                     </span>
-                </footer>
+                </section>
                 <aside class="details">
                     <span class="indicator">i</span>
                 </aside>
@@ -132,12 +136,12 @@
 
 
             <article class="card">
-                <header class="top">
+                <section class="top">
                     <aside class="row">
                         <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                             alt="">
                         <span>Rua Carlos José de Castilho</span>
-                    </header>
+                    </section>
                     <aside class="row track">
                         <img src="/imgs/shipper/track.png" alt="">
                     </aside>
@@ -150,14 +154,14 @@
                 <aside class="weight">
                     <span>Pequena (até 15 Kg)</span>
                 </aside>
-                <footer class="bottom">
+                <section class="bottom">
                     <span class="price">R$51,00</span>
                     <span class="actions">
                         <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
                         <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
                         <img class="rate" src="/imgs/client/star-icon.svg" alt="">
                     </span>
-                </footer>
+                </section>
                 <aside class="details">
                     <span class="indicator">i</span>
                 </aside>
@@ -165,7 +169,7 @@
         </section>
         
         <section class="product-wrapper">
-            <header class="head">
+            <section class="head">
                 <h1>Entregadores Favoritados</h1>
                 <aside class="controls">
                     <span id="prev">
@@ -175,7 +179,7 @@
                         >
                     </span>
                 </aside>
-            </header>
+            </section>
 
             <section class="carousel">
                 <section class="content">
@@ -240,7 +244,7 @@
                     </article>
                 </section>
             </section>
-        </div>
+        </section>
     </main>
 
     <section class="notification-container"></section>

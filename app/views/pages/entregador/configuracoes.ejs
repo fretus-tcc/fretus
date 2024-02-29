@@ -17,25 +17,25 @@
         <section class="sidebar">
             <nav class="nav">
                 <ul>
-                    <a href="./configuracoes.html">
+                    <a href="/entregador/configuracoes">
                         <li>Privacidade</li>
                     </a>
-                    <a href="./configuracoes-pagamento.html">
+                    <a href="/entregador/configuracoes-pagamento">
                         <li>Pagamento</li>
                     </a>
-                    <a href="./configuracoes-notificacoes.html">
+                    <a href="/entregador/configuracoes-notificacoes">
                         <li>Notificações</li>
                     </a>
                 </ul>
             </nav>
             <article class="container-button">
-                <button class="exit-button"><a href="../../index.html">sair da conta</a></button>
+                <button class="exit-button"><a href="/">sair da conta</a></button>
             </article>
         </section>
         <div class="config">
             <div class="config-container">
                 <article class="sidebar-burguer">
-                    <img src="../../imgs/burguer-config-icon.png" alt="">
+                    <img src="/imgs/burguer-config-icon.png" alt="">
                 </article>
                 <h1 class="row">Privacidade</h1>
                 <article class="row">
@@ -75,8 +75,9 @@
         </div>
     </main>
     
-    <script src="../../JS/burguer.js"></script>
-    <script src="../../JS/shipper/change.js"></script>
-    <script src="../../JS/shipper/burguer-config.js"></script>
+    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/change.js"></script>
+    <script src="/JS/shipper/burguer-config.js"></script>
 </body>
 </html>

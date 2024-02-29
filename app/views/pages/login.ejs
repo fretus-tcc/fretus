@@ -19,11 +19,11 @@
   <main class="container">
     <h1>Bem-vindo de volta! </h1>
     <form action="/cliente/solicitar-entrega" id="form">
-      <article>
+      <section>
         <input type="email" placeholder="Email" class="inputs" autocomplete="off" oninput="emailValido()"
           id="inputEmail" required>
         <p id="messageEmail"></p>
-      </article>
+      </section>
       <section class="box-icon">
         <article class="input__wrapper">
           <input id="password" type="password" class="input__field" pattern=".{8,}" placeholder="Senha"
@@ -38,10 +38,10 @@
         <a href="/cadastro">Acesse aqui.</a>
       </p>
       <input type="submit" value="Entrar" id="entrar">
-      <article class="alternative">
+      <section class="alternative">
         <span>ou</span>
-      </article>
-      <article class="social-media">
+      </section>
+      <section class="social-media">
         <a href="#" class="social-icon">
           <img src="/imgs/login-cadastro/icons8-google-logo.svg" width="45" height="45">
           <span>Entrar com google</span>
@@ -50,7 +50,7 @@
           <img src="/imgs/login-cadastro/icons8-facebook-novo.svg" width="45" height="45">
           <span>Entrar com facebook</span>
         </a>
-      </article>
+      </section>
     </form>
   </main>
   <script src="/JS/login-cadastro/eye.js"></script>
