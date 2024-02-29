@@ -20,120 +20,123 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <main>
-        <div class="form">
-            <div class="form-wrapper">
+        <section class="form">
+            <section class="form-wrapper">
                 <form>
                     <h1>Solicitar Entrega</h1>
                     <input type="text" required="" class="address start" placeholder="Local de partida">
-                    <div class="suggestions">
+                    <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
-                    </div>
+                    </aside>
                     <input type="text" required="" class="address end" placeholder="Local de destino">
-                    <div class="suggestions">
+                    <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
-                    </div>
-                    <div class="schedules-container">
+                    </aside>
+                    <section class="schedules-container">
                         <input type="checkbox" name="schedule" id="schedule">
                         <label for="schedule"> Clique aqui para agendar <span>></span></label>
-                        <div class="schedule-content">
+                        <aside class="schedule-content">
                             <input type="date" class="date-time">
                             <input type="time" class="date-time">
-                        </div>
-                    </div>
+                        </aside>
+                    </section>
                     
-                    <div class="weight-container">
+                    <section class="weight-container">
                         <h1>Carga</h1>
                         <div class="content">
                             <input required type="radio" name="weight" id="s">
                             <label for="s">
-                                <div class="card">
+                                <article class="card">
                                     <img src="/imgs/client/small-icon.svg" alt="">
                                     <h2>Pequena</h2>
-                                </div>
+                                </article>
                             </label>
                             <input type="radio" name="weight" id="m">
                             <label for="m">
-                                <div class="card">
+                                <article class="card">
                                     <img src="/imgs/client/medium-icon.svg" alt="">
                                     <h2>Média</h2>
-                                </div>
+                                </article>
                             </label>
                             <input type="radio" name="weight" id="l">
                             <label for="l">
-                                <div class="card">
+                                <article class="card">
                                     <img src="/imgs/client/large-icon.svg" alt="">
                                     <h2>Grande</h2>
-                                </div>
+                                </article>
                             </label>
                         </div>
-                    </div>
-                    <div class="vehicles-container">
+                    </section>
+
+                    <section class="vehicles-container">
                         <h1>Veículos</h1>
-                        <div class="content">
+                        <section class="content">
                             <input data-index="0" required type="radio" name="vehicles" id="bike">
                             <label for="bike">
-                                <div class="card">
+                                <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-motocicleta-50.png" alt="">
                                     <h2>Moto</h2>
-                                </div>
+                                </article>
                             </label>
                             <input data-index="1" type="radio" name="vehicles" id="car">
                             <label for="car">
-                                <div class="card">
+                                <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-carro-50.png" alt="">
                                     <h2>Carro</h2>
-                                </div>
+                                </article>
                             </label>
                             <input data-index="2" type="radio" name="vehicles" id="van">
                             <label for="van">
-                                <div class="card">
+                                <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-van-50.png" alt="">
                                     <h2>Van</h2>
-                                </div>
+                                </article>
                             </label>
                             <input data-index="3" type="radio" name="vehicles" id="truck">
                             <label for="truck">
-                                <div class="card">
+                                <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-semi-truck-side-view-50.png " alt="">
                                     <h2>Caminhão</h2>
-                                </div>
+                                </article>
                             </label>
-                        </div>
-                    </div>
+                        </section>
+                    </section>
                     <input type="submit" value="Continuar" class="cta">
                 </form>
-            </div>
-        </div>
-        <div class="map access" id="map"></div>
-        <div class="return-form">
+            </section>
+        </section>
+
+        <section class="map access" id="map"></section>
+        <section class="return-form">
             <img src="/imgs/burguer-config-icon.png" alt="">
-        </div>
-        <div class="popup">
-            <div class="popup-content">
+        </section>
+
+        <section class="popup">
+            <article class="popup-content">
                 <div class="close">
                     <img src="/imgs/client/close-icon.svg" alt="">
                 </div>
-                <div class="popup-wrapper">
+                <article class="popup-wrapper">
                     <h1>Preço Sugerido: <span class="price"></span><a href="#" class="indicator">?</a></h1>
                     <p>Você pode escolher negociar esse preço com o entregador. Essa escolha aparecerá para o entregador, que poderá ou não negociar com você. A negociação será feita pelo chat, e não nos responsabilizamos por nada disso.</p>
-                    <div class="confirm">
+                    <aside class="confirm">
                         <input type="checkbox" name="confirm-negotiation" id="confirm-negotiation">
                         <label for="confirm-negotiation">Entendo essas condições e desejo negociar o preço.</label>
-                    </div>
+                    </aside>
                     <a href="#" id="continue-button" class="cta">Continuar</a>
-                </div>
-            </div>
-        </div>
+                </article>
+            </article>
+        </section>
 
         <!-- todo: tela de carrregamento  -->
 
-        <div class="loader-container" id="loader-container">
-            <div class="loader-content">
-                <div class="loader"></div>
+        <section class="loader-container" id="loader-container">
+            <article class="loader-content">
+                <aside class="loader"></aside>
                 <h2 class="loader-message">Por Favor, Aguarde</h2>
                 <p class="loader-message">Em busca de motoristas disponíveis...</p>
-            </div>
-        </div>
+            </article>
+        </section>
     </main>
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
