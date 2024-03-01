@@ -157,39 +157,39 @@
             </section>
             <section class="blue-gradient">
                 <h1 class="heading">Como funciona</h1>
-                <div class="mobile-wrapper">
-                    <div class="mobile-carousel">
-                        <div class="mobile-content">
-                            <div class="content-item show">
+                <section class="mobile-wrapper">
+                    <section class="mobile-carousel">
+                        <section class="mobile-content">
+                            <figure class="content-item show">
                                 <img src="imgs/home/shipper/carousel-shipper-1.png" alt="">
-                            </div>
-                            <div class="content-item">
+                            </figure>
+                            <figure class="content-item">
                                 <img src="imgs/home/shipper/carousel-shipper-2.png" alt="">
-                            </div>
-                            <div class="content-item">
+                            </figure>
+                            <figure class="content-item">
                                 <img src="imgs/home/shipper/carousel-shipper-3.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mobile-controls">
+                            </figure>
+                        </section>
+                    </section>
+                    <form class="mobile-controls">
                         <input type="radio" name="mobile-control" id="m-c1" checked>
                         <label for="m-c1">
-                            <div class="step">1</div>
+                            <p class="step">1</p>
                             <p>Veja suas Entregas Solicitadas</p>
                         </label>
                         <input type="radio" name="mobile-control" id="m-c2">
                         <label for="m-c2">
-                            <div class="step">2</div>
+                            <p class="step">2</p>
                             <p>Converse com o Cliente</p>
                         </label>
                         <input type="radio" name="mobile-control" id="m-c3">
                         <label for="m-c3">
-                            <div class="step">3</div>
+                            <p class="step">3</p>
                             <p>Consulte seus resultados</p>
                         </label>
                         <a href="/cadastro" class="cta">Começar agora</a>
-                    </div>
-                </div>
+                    </form>
+                </section>
             </section>
             <section class="gray-gradient">
                 <%- include('../partial/home/carousel.ejs', { isClient: false }) %>
@@ -248,6 +248,6 @@
     <script src="/JS/validaHome.js"></script>
     <script src="/JS/login-cadastro/mascara.js"></script>
 
-    <!-- <script src="./JS/form.js"></script> -->
+    <!-- <script src="/JS/form.js"></script> -->
 </body>
 </html>
