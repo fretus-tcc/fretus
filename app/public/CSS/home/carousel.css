@@ -49,6 +49,10 @@
     margin-bottom: 8px;
 }
 
+.text > h1 {
+    font-size: 1.5em;
+}
+
 .controls {
     width: fit-content;
     margin: 35px auto 0;
