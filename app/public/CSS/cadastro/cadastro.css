@@ -1,11 +1,12 @@
 body {
     background-image: url('../../imgs/login-cadastro/bg-login.svg'); 
-    height: 129vh;
+    height: 114vh;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-1);
     color: #333;
+    min-height: 100vh;
 }
 
 .fretus {
@@ -182,4 +183,4 @@ form p a {
     color: #fff;
 }
 
-@media (max-width:500px) { body{ height:130vh}}
+@media (max-width:500px) { body{ height:125vh}}
