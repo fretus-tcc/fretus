@@ -39,6 +39,10 @@
     width: 40px;
 }
 
+.cards-container > .card h1 {
+    font-size: 1.5em;
+}
+
 .gray-gradient > .cta {
     margin: 35px auto;
 }
