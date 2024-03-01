@@ -42,6 +42,10 @@
     width: 100%;
 }
 
+.vehicle-row>.card h1 {
+    font-size: 1.5em;
+}
+
 .vehicle-description {
     flex-basis: 100%;
 }
