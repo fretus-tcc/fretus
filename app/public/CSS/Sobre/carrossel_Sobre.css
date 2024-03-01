@@ -1,0 +1,202 @@
+/* === Google Font Import - Poppins === */
+
+
+.container_carrl {
+  position: relative;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  background: #2C6493;
+  width: 100%;
+  /*   overflow-x: hidden;
+  scroll-behavior: smooth; */
+}
+
+.swiper {
+  max-width: 950px;
+  width: 100%;
+  position: relative;
+  padding: 8px;
+
+}
+
+.swiper h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.8rem;
+}
+
+
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  height: 420px;
+  margin: 50px 0;
+  overflow-y: hidden;
+
+
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  height: 40%;
+  width: 100%;
+  background: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.card .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  z-index: 100;
+
+}
+
+section .card .image {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  padding: 3px;
+  background: #2C6493;
+  margin-top: 30px;
+}
+
+section .card .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+.card .media-icons {
+  position: absolute;
+  top: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card .media-icons i {
+  color: #2C6493;
+  opacity: 0.6;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin: 10px;
+}
+
+
+.card .media-icons i:hover {
+  opacity: 1;
+}
+
+
+.card .name-profession {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  color: black;
+}
+
+
+.name-profession .name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.name-profession .profession {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.button__conteiner {
+  position: absolute;
+  right: 0;
+  left: 0;
+
+}
+
+.swiper-pagination-bullet {
+  height: 7px;
+  width: 26px;
+  border-radius: 25px;
+  background: orange;
+
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+
+  color: #fff;
+  transition: all 0.3s ease;
+  border: 2px solid orange;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  background-color: orange;
+
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.box_swiper {
+  padding-bottom: 15px;
+}
+
+
+@media(max-width:710px) {
+
+  .container_carrl {
+
+    height: 760px;
+
+
+  }
+  
+
+  .swiper h1 {
+    margin: 35px 0;
+    font-size: 2.6rem;
+    text-align: center;
+  }
+
+  .button__conteiner {
+    margin: 5px;
+
+  }
+
+
+}
+
+@media(max-width: 450px) {
+
+  .swiper h1 {
+    margin: 0 5px 30px 5px;
+    font-size: 2rem;
+  }
+
+}
+
+@media(max-width: 356px) {
+
+  .swiper h1 {
+    font-size: 1.9rem;
+  }
+
+}

@@ -1,0 +1,212 @@
+.header {
+    position: relative;
+    background-image: url("../../imgs/Sobre/header.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.inner-header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.inner-header h1 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+
+}
+
+.inner-header p {
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    margin: 0 20px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 68vh;
+}
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 30vh;
+    margin-bottom: -10px;
+    max-height: 150px;
+
+}
+
+.content {
+    position: relative;
+    height: 20vh;
+    text-align: center;
+    background-color: white;
+}
+
+/* Animation */
+
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+main {
+    color: #333;
+    background: #fff;
+}
+
+.h1-Connhe {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+
+}
+
+.h1-Connhe h1 {
+    font-size: 4rem;
+    margin: 18px;
+
+
+}
+
+.h1-Connhe p {
+    font-size: 1.7rem;
+    margin: 0 30px;
+
+
+}
+
+.container-Sobre {
+    color: #333;
+    display: flex;
+    padding: 20px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
+.container-Sobre>.left {
+    text-align: left;
+    flex: 1 1 auto;
+    padding: 20px;
+
+}
+
+.container-Sobre>.left h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    text-decoration: underline;
+    margin: 10px;
+    padding-bottom: 50x;
+    letter-spacing: 4px;
+}
+
+.container-Sobre>.left h3 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+@media(max-width:1073px) {
+    .inner-header p {
+        font-weight: 300;
+        font-size: 1.27rem;
+       
+    }
+}
+
+
+@media(max-width: 950px) {
+    .h1-Connhe h1 {
+        font-size: 3rem;
+    }
+
+    .container-Sobre {
+        display: flex;
+        flex-flow: column;
+        padding: 10px;
+
+
+    }
+
+    .container-Sobre>.left {
+        max-width: 100%;
+        padding: 5px;
+
+
+    }
+    .inner-header p {
+        font-weight: 300;
+        font-size: 1.1rem;
+        margin: 0 2px;
+       
+    }
+
+
+}
+
+@media (max-width: 790px) {
+    .waves {
+        height: 70px;
+        min-height: 70px;
+    }
+
+    .content {
+        height: 30vh;
+    }
+    .inner-header p {
+        font-weight: 300;
+        margin: 20px;
+        text-align: center;
+       
+    }
+    .inner-header h1 {
+        font-size: 2.1rem;
+        text-align: center;
+        margin: 0;
+    
+    }
+
+
+}
