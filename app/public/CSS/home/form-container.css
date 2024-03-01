@@ -9,6 +9,7 @@
 }
 
 .form-container .form-row {
+    border: none;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
@@ -34,6 +35,7 @@
 }
 
 .form-container .terms {
+    border: none;
     display: flex;
     align-items: center;
     column-gap: 7px;
