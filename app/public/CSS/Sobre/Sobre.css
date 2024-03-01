@@ -1,10 +1,11 @@
 .header {
     position: relative;
-    background-image: url("../../imgs/Sobre/header.jpg");
+    background-image: url("/imgs/Sobre/header.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+
 }
 
 .inner-header {

@@ -27,7 +27,8 @@ router.get('/FaleConosco', function (req, res) {
 router.get('/Privacidade', function (req, res) {
   res.render('pages/Privacidade')
 })
-router.get('/Sobre', (res,req) =>{
+router.get('/Sobre', (req,res) =>{
   res.render('pages/Sobre')
 })
+
 module.exports = router
