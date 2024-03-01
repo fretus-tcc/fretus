@@ -1,5 +1,6 @@
 .config-container .row {
-    margin-top: 15px
+    margin-top: 15px;
+    font-size: 2rem;
 }
 
 .row label {
@@ -69,6 +70,7 @@
 
 .edit-row span {
     color: var(--orange);
+    font-size: 1.5rem;
 }
 
 .edit-row span:hover {

@@ -1,5 +1,6 @@
 .config-container > h1 {
     margin-bottom: 13px;
+    font-size: 2rem;
 }
 
 .row > input {
