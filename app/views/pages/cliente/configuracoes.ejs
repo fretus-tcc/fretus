@@ -17,8 +17,8 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <main>
-        <div class="sidebar">
-            <div class="nav">
+        <section class="sidebar">
+            <nav class="nav">
                 <ul>
                     <a href="/cliente/configuracoes">
                         <li>Privacidade</li>
@@ -30,53 +30,56 @@
                         <li>Notificações</li>
                     </a>
                 </ul>
-                </ul>
-            </div>
-            <div class="container-button">
+             
+            </nav>
+            <aside class="container-button">
                 <button class="exit-button"><a href="/">sair da conta</a></button>
-            </div> 
-        </div>
-        <div class="config">
-            <div class="config-container">
-                <div class="sidebar-burguer">
+            </aside> 
+        </section>
+
+        <section class="config">
+            <section class="config-container">
+                <aside class="sidebar-burguer">
                     <img src="/imgs/burguer-config-icon.png" alt="">
-                </div>
+                </aside>
                 <h1>Privacidade</h1>
-                <div class="row">
+                <section class="row">
                     <label for="name">Nome</label>
-                    <div class="edit-row">
-                        <div class="input-container">
+                    <section class="edit-row">
+                        <aside class="input-container">
                             <input type="text" readonly id="name" value="Cliente 1">
                             <input type="button" class="btn" value="Cancelar">
                             <input type="button" class="btn confirm" value="Confirmar">
-                        </div>
+                        </aside>
                         <span>Alterar</span>
-                    </div>
-                </div>
-                <div class="row">
+                    </section>
+                </section>
+
+                <section class="row">
                     <label for="email">E-mail</label>
-                    <div class="edit-row">
-                        <div class="input-container">
+                    <section class="edit-row">
+                        <article class="input-container">
                             <input type="email" required readonly id="email" value="cliente@email.com">
                             <input type="button" class="btn" value="Cancelar">
                             <input type="button" class="btn confirm" value="Confirmar">
-                        </div>
+                        </article>
                         <span>Alterar</span>
-                    </div>
-                </div>
-                <div class="row">
+                    </section>
+                </section>
+
+                <section class="row">
                     <label for="password">Senha</label>
-                    <div class="edit-row">
+                    <article class="edit-row">
                         <div class="input-container">
                             <input type="password" readonly id="password" value="Senha123">
                             <input type="button" class="btn" value="Cancelar">
                             <input type="button" class="btn confirm" value="Confirmar">
                         </div>
                         <span>Alterar</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </article>
+                </section>
+            </section>
+        </section>
     </main>
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
