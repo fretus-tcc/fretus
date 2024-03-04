@@ -1,248 +1,264 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Chat</title>
     <%- include('../../partial/config/config.ejs') %>
-    <%- include('../../partial/config/config-client-shipper.ejs') %>
-    <%- include('../../partial/config/config-chat.ejs') %>
+        <%- include('../../partial/config/config-client-shipper.ejs') %>
+            <%- include('../../partial/config/config-chat.ejs') %>
 </head>
+
 <body>
-    
+
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
-    
-    <main>
-        <section class="sidebar">
-            <article class="nav">
-                <article class="search-bar">
-                    <article class="icon">
-                        <img src="/imgs/home/client/card-icon-1.svg" alt="">
-                    </article>
-                    <input placeholder="Buscar" type="text">
-                </article>
-                <article class="online">
-                    <h1>Online Agora</h1>
-                    <article class="online-users">
-                        <article class="photo">
-                            C
-                            <span class="online-icon"></span>
+
+        <main>
+            <section class="sidebar">
+                <section class="nav">
+                    <section class="search-bar">
+                        <article class="icon">
+                            <img src="/imgs/home/client/card-icon-1.svg" alt="">
                         </article>
-                        <article class="photo">
-                            F
-                            <span class="online-icon"></span>
-                        </article>
-                        <article class="photo">
-                            T
-                            <span class="online-icon"></span>
-                        </article>
-                        <article class="photo">
-                            P
-                            <span class="online-icon"></span>
-                        </article>
-                    </article>
-                </article>
-                <ul>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>09:39 AM</p>
-                                </article>
+                        <input placeholder="Buscar" type="text">
+                    </section>
+                    <section class="online">
+                        <h1>Online Agora</h1>
+                        <section class="online-users">
+                            <article class="photo">
+                                C
+                                <span class="online-icon"></span>
                             </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>07:43 AM</p>
-                                </article>
+                            <article class="photo">
+                                F
+                                <span class="online-icon"></span>
                             </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>Ontem</p>
-                                </article>
+                            <article class="photo">
+                                T
+                                <span class="online-icon"></span>
                             </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>Ontem</p>
-                                </article>
+                            <article class="photo">
+                                P
+                                <span class="online-icon"></span>
                             </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
+                        </section>
+                    </section>
+                    <ul>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>09:39 AM</p>
                                     </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>07:43 AM</p>
                                     </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>Semana Passada</p>
-                                </article>
-                            </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>Ontem</p>
                                     </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>Ontem</p>
                                     </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>Semana Passada</p>
-                                </article>
-                            </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>Semana Passada</p>
                                     </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>Semana Passada</p>
                                     </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>Mês Passado</p>
-                                </article>
-                            </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
                                         <p>Mês Passado</p>
                                     </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>Mês Passado</p>
-                                </article>
-                            </article>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <article class="chat-contact">
-                                <article class="contact-info">
-                                    <article class="photo">
-                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Mês Passado</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>Mês Passado</p>
                                     </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
+                                </section>
+                            </li>
+                        </a>
+                        <a href="#">
+                            <li>
+                                <section class="chat-contact">
+                                    <section class="contact-info">
+                                        <article class="photo">
+                                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                                alt="">
+                                        </article>
+                                        <article class="contact-msg">
+                                            <h1>Nome</h1>
+                                            <p>Ultima mensagem</p>
+                                        </article>
+                                    </section>
+                                    <article class="contact-time">
+                                        <p>Mês Passado</p>
                                     </article>
-                                </article>
-                                <article class="contact-time">
-                                    <p>Mês Passado</p>
-                                </article>
-                            </article>
-                        </li>
-                    </a>
-                </ul>
-            </article>
-        </section>
-        <section class="chat">
-            <article class="sidebar-burguer">
-                <img src="/imgs/burguer-config-icon.png" alt="">
-            </article>
-            <article class="chat-container">
-                <article class="chat-header">
-                    <article class="info">
-                        <h1>Nome</h1>
-                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
-                    </article>
-                    <article class="action">
-                        <button class="rounded-icon">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u202.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                        </button>
-                    </article>
+                                </section>
+                            </li>
+                        </a>
+                    </ul>
+                </section>
+            </section>
+            <section class="chat">
+                <article class="sidebar-burguer">
+                    <img src="/imgs/burguer-config-icon.png" alt="">
                 </article>
+                <section class="chat-container">
+                    <section class="chat-header">
+                        <article class="info">
+                            <h1>Nome</h1>
+                            <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                        </article>
+                        <article class="action">
+                            <button class="rounded-icon">
+                                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u202.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                    alt="">
+                            </button>
+                        </article>
+                    </section>
 
-                <article class="chat-msgs">
-                    <article class="msgs-container">
-                        <article class="msgs-content">
-                            <article class="row other-msg">
-                                <article class="user-icon rounded-icon">
-                                    <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                </article>
-                                <article class="msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin </article>
-                            </article>
-                            <article class="row my-msg">
-                                <article class="user-icon rounded-icon">
-                                    <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                </article>
-                                <article class="msg">
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </article>
-                            </article>
-                            <!-- <article class="row other-msg">
+                    <section class="chat-msgs">
+                        <section class="msgs-container">
+                            <section class="msgs-content">
+                                <section class="row other-msg">
+                                    <article class="user-icon rounded-icon">
+                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                            alt="">
+                                    </article>
+                                    <article class="msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                                        euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
+                                        justo commodo. Proin </article>
+                                </section>
+                                <section class="row my-msg">
+                                    <article class="user-icon rounded-icon">
+                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                            alt="">
+                                    </article>
+                                    <article class="msg">
+                                        <p>Lorem ipsum dolor sit amet</p>
+                                    </article>
+                                </section>
+                                <!-- <article class="row other-msg">
                                 <article class="user-icon rounded-icon">
                                     <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
                                 </article>
@@ -255,64 +271,67 @@
                                     </article>
                                 </article>
                             </article> -->
-                            <article class="row other-msg">
-                                <article class="user-icon rounded-icon">
-                                    <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                                </article>
-                                <article class="msg typing">
-                                    <article class="ball"></article>
-                                    <article class="ball"></article>
-                                    <article class="ball"></article>
-                                </article>
-                            </article>
-                        </article>
-                    </article>
-                    <article class="clip-popup">
-                        <ul>
-                            <li>
-                                <article class="rounded-icon">
-                                    <img src="/imgs/shipper/icon-image.svg" alt="">
-                                </article>
-                                <span>Fotos e Vídeos</span>
-                            </li>
-                            <li>
-                                <article class="rounded-icon">
-                                    <img src="/imgs/shipper/icon-camera.svg" alt="">
-                                </article>
-                                <span>Câmera</span>
-                            </li>
-                            <li>
-                                <article class="rounded-icon">
-                                    <img src="/imgs/shipper/icon-document.svg" alt="">
-                                </article>
-                                <span>Documento</span>
-                            </li>
-                            <!-- <li>
+                                <section class="row other-msg">
+                                    <article class="user-icon rounded-icon">
+                                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                            alt="">
+                                    </article>
+                                    <article class="msg typing">
+                                        <article class="ball"></article>
+                                        <article class="ball"></article>
+                                        <article class="ball"></article>
+                                    </article>
+                                </section>
+                            </section>
+                        </section>
+                        <section class="clip-popup">
+                            <ul>
+                                <li>
+                                    <article class="rounded-icon">
+                                        <img src="/imgs/shipper/icon-image.svg" alt="">
+                                    </article>
+                                    <span>Fotos e Vídeos</span>
+                                </li>
+                                <li>
+                                    <article class="rounded-icon">
+                                        <img src="/imgs/shipper/icon-camera.svg" alt="">
+                                    </article>
+                                    <span>Câmera</span>
+                                </li>
+                                <li>
+                                    <article class="rounded-icon">
+                                        <img src="/imgs/shipper/icon-document.svg" alt="">
+                                    </article>
+                                    <span>Documento</span>
+                                </li>
+                                <!-- <li>
                                 <article class="rounded-icon pay">
                                     <img src="/imgs/shipper/icon-money.svg" alt="">
                                 </article>
                                 <span>Nova Proposta</span>
                             </li> -->
-                        </ul>
-                    </article>
-                </article>
+                            </ul>
+                        </section>
+                    </section>
 
-                <article class="chat-inputs">
-                    <textarea rows="1" placeholder="Digite sua mensagem aqui"></textarea>
-                    <article class="actions">
-                        <button class="clip rounded-icon">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u208.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                        </button>
-                        <button class="send rounded-icon">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u207.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                        </button>
-                    </article>
-                </article>
-            </article>
-        </section>
-    </main>
-    <article class="notification-container"></article>
-    <!-- <section class="popup pay-modal">
+                    <section class="chat-inputs">
+                        <textarea rows="1" placeholder="Digite sua mensagem aqui"></textarea>
+                        <section class="actions">
+                            <button class="clip rounded-icon">
+                                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u208.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                    alt="">
+                            </button>
+                            <button class="send rounded-icon">
+                                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u207.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6"
+                                    alt="">
+                            </button>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </main>
+        <section class="notification-container"></section>
+        <!-- <section class="popup pay-modal">
     <article class="modal-content">
         <input class="money" placeholder="Digite aqui o valor desejado. (Apenas números)" type="text">
         <article class="btn-container">
@@ -321,7 +340,7 @@
         </article>
     </article>
 </section> -->
-    <!-- <section class="popup">
+        <!-- <section class="popup">
     <article class="popup-content">
         <article class="close">
             <img src="/imgs/client/close-icon.svg" alt="">
@@ -358,50 +377,53 @@
         </form>
     </article>
 </section> -->
-    <section class="popup report">
-        <article class="popup-content">
-            <article class="close">
-                <img src="/imgs/client/close-icon.svg" alt="">
-            </article>
-            <article class="popup-wrapper">
-                <form class="form">
-                    <h1>Denúncia</h1>
-                    <label class="file-field" for="report-photo">
-                        <input class="field" required type="file" name="files" id="report-photo">
-                        <article class="icon">
-                            <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
-                        </article>
-                        <span class="msg">Foto do Ocorrido</span>
-                    </label>
-                    <select required class="input-field field">
-                        <option value="">Motivo da Denúncia</option>
-                        <option value="1">Assédio ou Comportamento inadequado</option>
-                        <option value="2">Problemas de Qualidade do Serviço</option>
-                        <option value="3">Violar Regras do Site</option>
-                        <option value="4">Suspeita de Fraude</option>
-                        <option value="Outros">Outros</option>
-                    </select>
-                    <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
-                    <input required placeholder="Data do ocorrido" class="input-field field" type="text" onfocus="this.type='date'">
-                    <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
-                    <button class="cta">Enviar</button>
-                </form>
-            </article>
-        </article>
-    </section>
+        <section class="popup report">
+            <section class="popup-content">
+                <section class="close">
+                    <img src="/imgs/client/close-icon.svg" alt="">
+                </section>
+                <section class="popup-wrapper">
+                    <form class="form">
+                        <h1>Denúncia</h1>
+                        <label class="file-field" for="report-photo">
+                            <input class="field" required type="file" name="files" id="report-photo">
+                            <article class="icon">
+                                <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
+                            </article>
+                            <span class="msg">Foto do Ocorrido</span>
+                        </label>
+                        <select required class="input-field field">
+                            <option value="">Motivo da Denúncia</option>
+                            <option value="1">Assédio ou Comportamento inadequado</option>
+                            <option value="2">Problemas de Qualidade do Serviço</option>
+                            <option value="3">Violar Regras do Site</option>
+                            <option value="4">Suspeita de Fraude</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                        <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
+                        <input required placeholder="Data do ocorrido" class="input-field field" type="text"
+                            onfocus="this.type='date'">
+                        <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
+                        <button class="cta">Enviar</button>
+                    </form>
+                </section>
+            </section>
 
-    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %> 
+            <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> -->
-    <script src="/JS/burguer.js"></script>
-    <script src="/JS/shipper/burguer-config.js"></script>
-    <script src="/JS/shipper/textarea-resize.js"></script>
-    <script src="/JS/shipper/send-msg.js"></script>
-    <script src="/JS/shipper/clip-popup.js"></script>
-    <!-- <script src="/JS/shipper/payment.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"
+                    integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> -->
+                <script src="/JS/burguer.js"></script>
+                <script src="/JS/shipper/burguer-config.js"></script>
+                <script src="/JS/shipper/textarea-resize.js"></script>
+                <script src="/JS/shipper/send-msg.js"></script>
+                <script src="/JS/shipper/clip-popup.js"></script>
+                <!-- <script src="/JS/shipper/payment.js"></script>
     <script src="/JS/shipper/allow-payment.js"></script>
     <script src="/JS/client/pay-popup.js"></script> -->
-    <script src="/JS/shipper/report-popup.js"></script>
+                <script src="/JS/shipper/report-popup.js"></script>
 </body>
+
 </html>
