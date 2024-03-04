@@ -20,7 +20,14 @@
     display: flex;
     column-gap: 7px;
 }
+.info{
+    display: flex;
+}
 
+.info h1{
+    font-size: 2em;
+   margin-right: 7px;
+}
 .info img {
     height: fit-content;
     opacity: .6;
