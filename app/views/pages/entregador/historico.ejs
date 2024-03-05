@@ -1,128 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Histórico</title>
     <%- include('../../partial/config/config.ejs') %>
-    <%- include('../../partial/config/config-client-shipper.ejs') %>
+        <%- include('../../partial/config/config-client-shipper.ejs') %>
 
-    <!--todo:   ver se vai ser alterado -->
+            <!--todo:   ver se vai ser alterado -->
 
-    <link rel="stylesheet" href="/CSS/client/price-indicator.css">
-    <link rel="stylesheet" href="/CSS/shipper/history.css">
-    <link rel="stylesheet" href="/CSS/shipper/requests.css">
-    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
-    <link rel="stylesheet" href="/CSS/client/rate-popup.css">
-    <link rel="stylesheet" href="/CSS/client/popup-info.css">
+            <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+            <link rel="stylesheet" href="/CSS/shipper/history.css">
+            <link rel="stylesheet" href="/CSS/shipper/requests.css">
+            <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+            <link rel="stylesheet" href="/CSS/client/rate-popup.css">
+            <link rel="stylesheet" href="/CSS/client/popup-info.css">
 
-    <!-- todo  -->
+            <!-- todo  -->
 </head>
+
 <body>
-    
+
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 
-    <main>
-        <section class="history-header">
-            <h1>Histórico</h1>
+        <main>
+            <section class="history-header">
+                <h1>Histórico</h1>
+            </section>
+
+            <section class="requests-container">
+                <section class="card">
+                    <section class="top">
+                        <article class="row">
+                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                                alt="">
+                            <span>Rua Carlos José de Castilho</span>
+                        </article>
+                        <article class="row track">
+                            <img src="/imgs/shipper/track.png" alt="">
+                        </article>
+                        <article class="row">
+                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                                alt="">
+                            <span>Rua Carneiro Leão</span>
+                        </article>
+                    </section>
+                    <section class="weight">
+                        <span>Pequena (até 15 Kg)</span>
+                    </section>
+                    <section class="bottom">
+                        <span class="price">R$51,00</span>
+                    </section>
+                    <section class="details">
+                        <span class="indicator">i</span>
+                    </section>
+                </section>
+                <section class="card">
+                    <section class="top">
+                        <article class="row">
+                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                                alt="">
+                            <span>Rua Carlos José de Castilho</span>
+                        </article>
+                        <article class="row track">
+                            <img src="/imgs/shipper/track.png" alt="">
+                        </article>
+                        <article class="row">
+                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                                alt="">
+                            <span>Rua Carneiro Leão</span>
+                        </article>
+                    </section>
+                    <section class="weight">
+                        <span>Pequena (até 15 Kg)</span>
+                    </section>
+                    <section class="bottom">
+                        <span class="price">R$51,00</span>
+                    </section>
+                    <section class="details">
+                        <span class="indicator">i</span>
+                    </section>
+                </section>
+                <section class="card">
+                    <section class="top">
+                        <article class="row">
+                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                                alt="">
+                            <span>Rua Carlos José de Castilho</span>
+                        </article>
+                        <article class="row track">
+                            <img src="/imgs/shipper/track.png" alt="">
+                        </article>
+                        <article class="row">
+                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
+                                alt="">
+                            <span>Rua Carneiro Leão</span>
+                        </article>
+                    </section>
+                    <section class="weight">
+                        <span>Pequena (até 15 Kg)</span>
+                    </section>
+                    <section class="bottom">
+                        <span class="price">R$51,00</span>
+                    </section>
+                    <section class="details">
+                        <span class="indicator">i</span>
+                    </section>
+                </section>
+
+
+            </section>
+        </main>
+        <section class="popup info">
+            <section class="popup-content">
+                <section class="close">
+                    <img src="/imgs/client/close-icon.svg" alt="">
+                </section>
+                <section class="popup-wrapper">
+                    <h1>Informações da Entrega</h1>
+                    <p><span class="title-type">Local de partida:</span> Rua José de Castilho</p>
+                    <p><span class="title-type">Local de retirada:</span> Rua Carneiro Leão</p>
+                    <p><span class="title-type">Peso:</span> 1.5 Kg</p>
+                    <p><span class="title-type">Dimensões:</span> 200x200 cm</p>
+                    <p><span class="title-type">Preço:</span> R$ 51,00</p>
+                </section>
+            </section>
         </section>
 
-        <section class="requests-container">
-            <section class="card">
-                <section class="top">
-                    <article class="row">
-                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
-                        <span>Rua Carlos José de Castilho</span>
-                    </article>
-                    <article class="row track">
-                        <img src="/imgs/shipper/track.png" alt="">
-                    </article>
-                    <article class="row">
-                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
-                        <span>Rua Carneiro Leão</span>
-                    </article>
-                </section>
-                <section class="weight">
-                    <span>Pequena (até 15 Kg)</span>
-                </section>
-                <section class="bottom">
-                    <span class="price">R$51,00</span>
-                </section>
-                <section class="details">
-                    <span class="indicator">i</span>
-                </section>
-            </section>
-            <section class="card">
-                <section class="top">
-                    <article class="row">
-                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
-                        <span>Rua Carlos José de Castilho</span>
-                    </article>
-                    <article class="row track">
-                        <img src="/imgs/shipper/track.png" alt="">
-                    </article>
-                    <article class="row">
-                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
-                        <span>Rua Carneiro Leão</span>
-                    </article>
-                </section>
-                <section class="weight">
-                    <span>Pequena (até 15 Kg)</span>
-                </section>
-                <section class="bottom">
-                    <span class="price">R$51,00</span>
-                </section>
-                <section class="details">
-                    <span class="indicator">i</span>
-                </section>
-            </section>
-            <section class="card">
-                <section class="top">
-                    <article class="row">
-                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
-                        <span>Rua Carlos José de Castilho</span>
-                    </article>
-                    <article class="row track">
-                        <img src="/imgs/shipper/track.png" alt="">
-                    </article>
-                    <article class="row">
-                        <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156" alt="">
-                        <span>Rua Carneiro Leão</span>
-                    </article>
-                </section>
-                <section class="weight">
-                    <span>Pequena (até 15 Kg)</span>
-                </section>
-                <section class="bottom">
-                    <span class="price">R$51,00</span>
-                </section>
-                <section class="details">
-                    <span class="indicator">i</span>
-                </section>
-            </section>
-            
-                  
-        </section>
-    </main>
-    <div class="popup info">
-        <div class="popup-content">
-            <div class="close">
-                <img src="/imgs/client/close-icon.svg" alt="">
-            </div>
-            <div class="popup-wrapper">
-                <h1>Informações da Entrega</h1>
-                <p><span class="title-type">Local de partida:</span> Rua José de Castilho</p>
-                <p><span class="title-type">Local de retirada:</span> Rua Carneiro Leão</p>
-                <p><span class="title-type">Peso:</span> 1.5 Kg</p>
-                <p><span class="title-type">Dimensões:</span> 200x200 cm</p>
-                <p><span class="title-type">Preço:</span> R$ 51,00</p>
-            </div>
-        </div>
-    </div>
+        <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
-    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
-
-    <script src="/JS/burguer.js"></script>
-    <script src="/JS/shipper/popup-info.js"></script>
+            <script src="/JS/burguer.js"></script>
+            <script src="/JS/shipper/popup-info.js"></script>
 </body>
+
 </html>
