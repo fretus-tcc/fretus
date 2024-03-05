@@ -1,488 +1,491 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Ranking</title>
 
     <%- include('../../partial/config/config.ejs') %>
-    <%- include('../../partial/config/config-client-shipper.ejs') %>
+        <%- include('../../partial/config/config-client-shipper.ejs') %>
 
-    <!-- ! ver se vai alterar -->
+            <!-- ! ver se vai alterar -->
 
-    <link rel="stylesheet" href="/CSS/home/switch.css">
-    <link rel="stylesheet" href="/CSS/shipper/ranking.css">
-    <link rel="stylesheet" href="/CSS/shipper/ranking-podium.css">
-    <link rel="stylesheet" href="/CSS/shipper/ranking-position.css">
-    <link rel="stylesheet" href="/CSS/shipper/ranking-table.css">
+            <link rel="stylesheet" href="/CSS/home/switch.css">
+            <link rel="stylesheet" href="/CSS/shipper/ranking.css">
+            <link rel="stylesheet" href="/CSS/shipper/ranking-podium.css">
+            <link rel="stylesheet" href="/CSS/shipper/ranking-position.css">
+            <link rel="stylesheet" href="/CSS/shipper/ranking-table.css">
 
-    <!-- ! -->
+            <!-- ! -->
 
 </head>
+
 <body>
-   
+
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 
-    <div class="switch">
-        <input type="radio" name="change" id="all-time" checked>
-        <label for="all-time">Geral</label>
-        <input type="radio" name="change" id="month">
-        <label for="month">Mês</label>
-        <input type="radio" name="change" id="week">
-        <label for="week">Semana</label>
-        <span></span>
-    </div>
+        <section class="switch">
+            <input type="radio" name="change" id="all-time" checked>
+            <label for="all-time">Geral</label>
+            <input type="radio" name="change" id="month">
+            <label for="month">Mês</label>
+            <input type="radio" name="change" id="week">
+            <label for="week">Semana</label>
+            <span></span>
+        </section>
 
-    <main class="ranking">
-        <div class="all-time show">
-            <div class="ranking-podium">
-                <div class="places first-place">
-                    <div class="position">1.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-2.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">4.9 estrelas</p>
-                    </div>
-                </div>
-                <div class="places second-place">
-                    <div class="position">2.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-1.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">4.85 estrelas</p>
-                    </div>
-                </div>
-                <div class="places third-place">
-                    <div class="position">3.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-3.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">4.7 estrelas</p>
-                    </div>
-                </div>
-            </div>
-            <div class="ranking-position">
-                <p class="position">Você está na posição #36 dos 1243 entregadores da plataforma</p>
-            </div>
-            
-            <div class="ranking-table">
-                <div class="row">
-                    <div class="position">4.</div>
-                    <div class="row-info">
+        <main class="ranking">
+            <section class="all-time show">
+                <section class="ranking-podium">
+                    <section class="places first-place">
+                        <section class="position">1.</section>
                         <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
+                            <img src="/imgs/home/shipper/carousel-photo-2.jpg">
                         </div>
                         <div class="description">
                             <p class="name">Nome</p>
-                            <p class="orders">4.6 estrelas</p>
+                            <p class="orders">4.9 estrelas</p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">5.</div>
-                    <div class="row-info">
+                    </section>
+                    <section class="places second-place">
+                        <section class="position">2.</section>
                         <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
+                            <img src="/imgs/home/shipper/carousel-photo-1.jpg">
                         </div>
                         <div class="description">
                             <p class="name">Nome</p>
-                            <p class="orders">4.55 estrelas</p>
+                            <p class="orders">4.85 estrelas</p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">6.</div>
-                    <div class="row-info">
+                    </section>
+                    <section class="places third-place">
+                        <section class="position">3.</section>
                         <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
+                            <img src="/imgs/home/shipper/carousel-photo-3.jpg">
+                        </div>
+                        <div class="description">
+                            <p class="name">Nome</p>
+                            <p class="orders">4.7 estrelas</p>
+                        </div>
+                    </section>
+                </section>
+                <section class="ranking-position">
+                    <p class="position">Você está na posição #36 dos 1243 entregadores da plataforma</p>
+                </section>
+
+                <section class="ranking-table">
+                    <section class="row">
+                        <section class="position">4.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.6 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">5.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.55 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">6.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.5 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">7.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.45 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">8.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.3 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">9.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.25 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">10.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.2 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">11.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.25 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">12.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">4.1 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="month">
+                <section class="ranking-podium">
+                    <section class="places first-place">
+                        <section class="position">1.</section>
+                        <div class="photo">
+                            <img src="/imgs/home/shipper/carousel-photo-1.jpg">
+                        </div>
+                        <div class="description">
+                            <p class="name">Nome</p>
+                            <p class="orders">4 estrelas</p>
+                        </div>
+                    </section>
+                    <section class="places second-place">
+                        <section class="position">2.</section>
+                        <div class="photo">
+                            <img src="/imgs/home/shipper/carousel-photo-3.jpg">
+                        </div>
+                        <div class="description">
+                            <p class="name">Nome</p>
+                            <p class="orders">3.5 estrelas</p>
+                        </div>
+                    </section>
+                    <section class="places third-place">
+                        <section class="position">3.</section>
+                        <div class="photo">
+                            <img src="/imgs/home/shipper/carousel-photo-2.jpg">
+                        </div>
+                        <div class="description">
+                            <p class="name">Nome</p>
+                            <p class="orders">3.25 estrelas</p>
+                        </div>
+                    </section>
+                </section>
+                <section class="ranking-position">
+                    <p class="position">Você está na posição #20 dos 1243 entregadores da plataforma</p>
+                </section>
+
+                <section class="ranking-table">
+                    <section class="row">
+                        <section class="position">4.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3.2 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">5.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3.15 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">6.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3.1 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">7.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">8.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.9 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">9.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.8 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">10.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.7 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">11.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.6 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">12.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.5 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="week">
+                <section class="ranking-podium">
+                    <section class="places first-place">
+                        <section class="position">1.</section>
+                        <div class="photo">
+                            <img src="/imgs/home/shipper/carousel-photo-3.jpg">
                         </div>
                         <div class="description">
                             <p class="name">Nome</p>
                             <p class="orders">4.5 estrelas</p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">7.</div>
-                    <div class="row-info">
+                    </section>
+                    <section class="places second-place">
+                        <section class="position">2.</section>
                         <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
+                            <img src="/imgs/home/shipper/carousel-photo-2.jpg">
                         </div>
                         <div class="description">
                             <p class="name">Nome</p>
-                            <p class="orders">4.45 estrelas</p>
+                            <p class="orders">3.7 estrelas</p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">8.</div>
-                    <div class="row-info">
+                    </section>
+                    <section class="places third-place">
+                        <section class="position">3.</section>
                         <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
+                            <img src="/imgs/home/shipper/carousel-photo-1.jpg">
                         </div>
                         <div class="description">
                             <p class="name">Nome</p>
-                            <p class="orders">4.3 estrelas</p>
+                            <p class="orders">3.5 entregas</p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">9.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">4.25 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">10.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">4.2 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">11.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">4.25 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">12.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">4.1 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="month">
-            <div class="ranking-podium">
-                <div class="places first-place">
-                    <div class="position">1.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-1.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">4 estrelas</p>
-                    </div>
-                </div>
-                <div class="places second-place">
-                    <div class="position">2.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-3.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">3.5 estrelas</p>
-                    </div>
-                </div>
-                <div class="places third-place">
-                    <div class="position">3.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-2.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">3.25 estrelas</p>
-                    </div>
-                </div>
-            </div>
-            <div class="ranking-position">
-                <p class="position">Você está na posição #20 dos 1243 entregadores da plataforma</p>
-            </div>
-            
-            <div class="ranking-table">
-                <div class="row">
-                    <div class="position">4.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3.2 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">5.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3.15 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">6.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3.1 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">7.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">8.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.9 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">9.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.8 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">10.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.7 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">11.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.6 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">12.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.5 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="week">
-            <div class="ranking-podium">
-                <div class="places first-place">
-                    <div class="position">1.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-3.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">4.5 estrelas</p>
-                    </div>
-                </div>
-                <div class="places second-place">
-                    <div class="position">2.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-2.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">3.7 estrelas</p>
-                    </div>
-                </div>
-                <div class="places third-place">
-                    <div class="position">3.</div>
-                    <div class="photo">
-                        <img src="/imgs/home/shipper/carousel-photo-1.jpg">
-                    </div>
-                    <div class="description">
-                        <p class="name">Nome</p>
-                        <p class="orders">3.5 entregas</p>
-                    </div>
-                </div>
-            </div>
-            <div class="ranking-position">
-                <p class="position">Você está na posição #19 dos 1243 entregadores da plataforma</p>
-            </div>
-            
-            <div class="ranking-table">
-                <div class="row">
-                    <div class="position">4.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3.4 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">5.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3.3 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">6.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3.2 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">7.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3.1 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">8.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">3 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">9.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.9 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">10.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.8 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">11.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.7 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="position">12.</div>
-                    <div class="row-info">
-                        <div class="photo">
-                            <img src="/imgs/home/shipper/card-icon-1.svg">
-                        </div>
-                        <div class="description">
-                            <p class="name">Nome</p>
-                            <p class="orders">2.6 estrelas</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+                    </section>
+                </section>
+                <section class="ranking-position">
+                    <p class="position">Você está na posição #19 dos 1243 entregadores da plataforma</p>
+                </section>
 
-    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
-    
-    <script src="/JS/burguer.js"></script>
-    <script src="/JS/switch-button.js"></script>
+                <section class="ranking-table">
+                    <section class="row">
+                        <section class="position">4.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3.4 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">5.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3.3 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">6.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3.2 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">7.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3.1 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">8.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">3 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">9.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.9 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">10.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.8 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">11.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.7 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="position">12.</section>
+                        <section class="row-info">
+                            <div class="photo">
+                                <img src="/imgs/home/shipper/card-icon-1.svg">
+                            </div>
+                            <div class="description">
+                                <p class="name">Nome</p>
+                                <p class="orders">2.6 estrelas</p>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </main>
+
+        <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+
+            <script src="/JS/burguer.js"></script>
+            <script src="/JS/switch-button.js"></script>
 </body>
+
 </html>
