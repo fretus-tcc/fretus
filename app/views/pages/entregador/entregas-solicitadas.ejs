@@ -299,7 +299,7 @@
                 </section>
                 <section class="weight">
                     <span>Pequena (até 15 Kg)</span>
-                </section>
+                </section>  
                 <section class="bottom">
                     <span class="price">R$12,00</span>
                     <article class="btns">
@@ -316,6 +316,27 @@
                 </section>
             </article>
         </section>
+        <article class="empty-alert">
+            <img src="/imgs/shipper/error-icon.png" alt="">
+            <p>Você ainda não foi solicitado para nenhuma entrega</p>
+        </article>
+    </main>
+    <article class="notification-container"></article>
+    <section class="popup info">
+        <article class="popup-content">
+            <article class="close">
+                <img src="/imgs/client/close-icon.svg" alt="">
+            </article>
+            <section class="popup-wrapper">
+                <h1>Informações da Entrega</h1>
+                <p><span class="title-type">Local de partida:</span> Rua José de Castilho</p>
+                <p><span class="title-type">Local de retirada:</span> Rua Carneiro Leão</p>
+                <p><span class="title-type">Peso:</span> 1.5 Kg</p>
+                <p><span class="title-type">Dimensões:</span> 200x200 cm</p>
+                <p><span class="title-type">Preço:</span> R$ 51,00</p>
+            </section>
+        </article>
+    </section>
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
