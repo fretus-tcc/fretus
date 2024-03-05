@@ -1,106 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Perfil</title>
     <%- include('../../partial/config/config.ejs') %>
-    <%- include('../../partial/config/config-client-shipper.ejs') %>
-    <link rel="stylesheet" href="/CSS/shipper/config.css">
-    <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
-    <link rel="stylesheet" href="/CSS/shipper/profile.css">
+        <%- include('../../partial/config/config-client-shipper.ejs') %>
+            <link rel="stylesheet" href="/CSS/shipper/config.css">
+            <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
+            <link rel="stylesheet" href="/CSS/shipper/profile.css">
 </head>
+
 <body>
 
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 
-    <main>
-        <section class="profile-container">
-            <article class="action-perfil">
-                <article class="Seu-Perfil0">
-                    <h2>Seu Perfil</h2>
-                </article>
-                <label class="action__upload-btn" for="img-selector">Alterar sua foto de perfil</label>
-                <input type="file" name="" id="img-selector" class="action__hiddenField js__profile-upload-btn">
-              </article>
-              <article class="profile-p">
-                <article class="profile__image js__profile-image" 
-                style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
-                </article>
-            </article>
-            <article class="row">
-                <label for="name">Nome: </label>
-                <article class="edit-row">
-                    <article class="input-container">
-                        <input type="text" readonly id="name" value="Entregador 1">
-                        <input type="button" class="btn" value="Cancelar">
-                        <input type="button" class="btn confirm" value="Confirmar">
+        <main>
+            <section class="profile-container">
+                <section class="action-perfil">
+                    <article class="Seu-Perfil0">
+                        <h2>Seu Perfil</h2>
                     </article>
-                    <span>Alterar</span>
-                </article>
-            </article>
-            <article class="row">
-                <label for="description">Descrição</label>
-                <article class="edit-row">
-                    <article class="input-container">
-                        <textarea readonly id="description" placeholder="Digite sua descrição">Entregador experiente e confiável. Serviço de entrega rápido, pontual e de alta qualidade.</textarea>
-                        <span class="count">0/200</span>
-                        <input type="button" class="btn" value="Cancelar">
-                        <input type="button" class="btn confirm" value="Confirmar">
+                    <label class="action__upload-btn" for="img-selector">Alterar sua foto de perfil</label>
+                    <input type="file" name="" id="img-selector" class="action__hiddenField js__profile-upload-btn">
+                </section>
+                <section class="profile-p">
+                    <article class="profile__image js__profile-image"
+                        style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
                     </article>
-                    <span>Alterar</span>
-                </article>
-            </article>
-            <article class="row">
-                <label for="vehicles">Tipo do Veículo </label>
-                <article class="edit-row">
-                    <article class="input-container">
-                        <select id="veiculo">
-                            <option value="moto">Moto</option>
-                            <option value="carro">Carro</option>
-                            <option value="van">Van</option>
-                            <option value="caminhao">Caminhão</option>
-                        </select>
-                    </article>
-                </article>
-            </article>
-            <article class="row">
-                <label for="vehicles">Modelo do Veículo </label>
-                <article class="edit-row">
-                    <article class="input-container">
-                        <textarea readonly id="description" placeholder="Digite aqui os modelos de seus veículos">Classe A Sedan</textarea>
-                        <input type="button" class="btn" value="Cancelar">
-                        <input type="button" class="btn confirm" value="Confirmar">
-                    </article>
-                    <span>Alterar</span>
-                </article>
-            </article>
-            <article class="row">
-                <label for="raio">Raio de Atuação</label>
-                <article class="edit-row">
-                    <article class="input-container">
-                        <input type="text" readonly id="raio" min="1" value="150 km ">
-                        <input type="button" class="btn" value="Cancelar">
-                        <input type="button" class="btn confirm" value="Confirmar">
-                    </article>
-                    <span>Alterar</span>
-                </article>
-            </article>
-            <article class="containerm-p">
-                <p>
-                    Precisa de ajuda? Entre em contato com a
-                    <a href="/ajuda">Central de Ajuda.</a>
-                  </p>
-            </article>
-        </section>
-    </main>
-    <\footer><!-- usado para espaçamento -->
- 
+                </section>
+                <section class="row">
+                    <label for="name">Nome: </label>
+                    <section class="edit-row">
+                        <article class="input-container">
+                            <input type="text" readonly id="name" value="Entregador 1">
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </article>
+                        <span>Alterar</span>
+                    </section>
+                </section>
+                <section class="row">
+                    <label for="description">Descrição</label>
+                    <section class="edit-row">
+                        <article class="input-container">
+                            <textarea readonly id="description"
+                                placeholder="Digite sua descrição">Entregador experiente e confiável. Serviço de entrega rápido, pontual e de alta qualidade.</textarea>
+                            <span class="count">0/200</span>
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </article>
+                        <span>Alterar</span>
+                    </section>
+                </section>
+                <section class="row">
+                    <label for="vehicles">Tipo do Veículo </label>
+                    <section class="edit-row">
+                        <article class="input-container">
+                            <select id="veiculo">
+                                <option value="moto">Moto</option>
+                                <option value="carro">Carro</option>
+                                <option value="van">Van</option>
+                                <option value="caminhao">Caminhão</option>
+                            </select>
+                        </article>
+                    </section>
+                </section>
+                <section class="row">
+                    <label for="vehicles">Modelo do Veículo </label>
+                    <section class="edit-row">
+                        <article class="input-container">
+                            <textarea readonly id="description"
+                                placeholder="Digite aqui os modelos de seus veículos">Classe A Sedan</textarea>
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </article>
+                        <span>Alterar</span>
+                    </section>
+                </section>
+                <section class="row">
+                    <label for="raio">Raio de Atuação</label>
+                    <section class="edit-row">
+                        <article class="input-container">
+                            <input type="text" readonly id="raio" min="1" value="150 km ">
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </article>
+                        <span>Alterar</span>
+                    </section>
+                </section>
+                <section class="containerm-p">
+                    <p>
+                        Precisa de ajuda? Entre em contato com a
+                        <a href="/ajuda">Central de Ajuda.</a>
+                    </p>
+                </section>
+            </section>
+        </main>
+        <\footer><!-- usado para espaçamento -->
 
-    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
-    <script src="/JS/burguer.js"></script>
-    <script src="/JS/shipper/change.js"></script>
-    <script src="/JS/shipper/profile.js"></script>
-    <script src=" /JS/perfil.js"></script>
+
+            <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+                <script src="/JS/burguer.js"></script>
+                <script src="/JS/shipper/change.js"></script>
+                <script src="/JS/shipper/profile.js"></script>
+                <script src=" /JS/perfil.js"></script>
 </body>
+
 </html>
