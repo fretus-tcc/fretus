@@ -19,6 +19,9 @@ main > .history-header {
     justify-content: space-between;
     flex-direction: row;
 }
+main > .history-header h1 {
+    font-size: 2em;
+}
 
 .history-header > .history-nav {
     display: inherit;
