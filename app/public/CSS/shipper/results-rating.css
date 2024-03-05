@@ -1,3 +1,7 @@
+.results-header h1{
+    font-size: 2em;
+
+}
 .results-cards a {
     color: var(--orange);
 }
