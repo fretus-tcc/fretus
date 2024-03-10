@@ -22,8 +22,11 @@ app.use(methodOverride('_method'))
 const main = require("./app/routes/main")
 app.use("/", main)
 
-const help = require("./app/routes/help")
+const help = require("./app/models/help")
 app.use("/ajuda", help)
+
+/* const Form_cadastro = require("./app/models/Form_cadastro")
+app.use("/Form_cadastro", Form_cadastro) */
 
 const client = require("./app/routes/client")
 app.use("/cliente", client)
