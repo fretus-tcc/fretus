@@ -18,11 +18,11 @@
                 <input type="text" placeholder="Qual sua dúvida?">
                 <section class="suggestions">
                     <ul class="suggestions-options">
-                        <%# result.forEach(item => { %>
+                        <% result.forEach(item => { %>
                             <li>
-                                <a href="/ajuda/<%# item.slug_duvida %>"><%# item.titulo_duvida %></a>
+                                <a href="/ajuda/<%= item.slug_duvida %>"><%= item.titulo_duvida %></a>
                             </li>
-                        <%# }) %>
+                        <% }) %>
                     </ul>
                 </div>
             </section>
