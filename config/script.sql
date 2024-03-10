@@ -23,3 +23,35 @@ INSERT INTO `duvidas` (`titulo_duvida`, `conteudo_duvida`, `slug_duvida`) VALUES
 ('Existe um limite de peso ou tamanho para os itens que posso enviar?', 'Sim, em nossa plataforma, há geralmente limites de peso e tamanho para os itens que você pode enviar. Estes limites são estabelecidos pelo veículo escolhido para fazer a entrega. Entender esses limites é importante para garantir que suas entregas ocorram sem problemas. Abaixo, detalhamos como esses limites funcionam:\r\n\r\n## Limites de Peso:\r\n\r\n- **Peso Máximo:**\r\n    \r\n    Geralmente, temos um peso máximo permitido para cada tipo de veículo. Por exemplo, em entregas de moto ou carro, o peso máximo permitido é menor do que em entregas feitas por veículos maiores (van e caminhão).\r\n    \r\n- **Verificação de Peso:**\r\n    \r\n    Os entregadores são instruídos a verificar o peso das encomendas antes da coleta. Isso ajuda a garantir que os itens estejam dentro dos limites estabelecidos. Se um item exceder o peso máximo permitido, o entregador pode recusar a entrega ou solicitar assistência adicional.\r\n    \r\n\r\n## Verificação durante o Processo de Solicitação:\r\n\r\nDurante o processo de solicitação em nossa plataforma, você receberá informações claras sobre os limites de peso, ao escolher o veículo da entrega. Isso ajuda a garantir que você esteja ciente das restrições ao selecionar seus itens para entrega.\r\n\r\nEntender e respeitar os limites de peso e tamanho é importante para garantir uma experiência de entrega tranquila e eficaz.', 'existe-um-limite-de-peso-ou-tamanho-para-os-itens-que-posso-enviar'),
 ('Posso agendar uma entrega para um horário específico?', 'Sim, oferecemos a opção de agendar entregas para horários específicos em nossa plataforma. Entendemos que a conveniência é fundamental para nossos clientes, e agendar uma entrega é uma maneira eficaz de garantir que ela ocorra no momento mais adequado para você.\r\n\r\n1. **Selecione a Opção de Agendamento:**\r\n    \r\n    Durante o processo de solicitação, você terá a opção de escolher o horário e a data desejados para a entrega. Essa opção está disponível após os detalhes da entrega (Local de partida e de destino).\r\n    \r\n2. **Escolha o Horário Conveniente:**\r\n    \r\n    Você poderá selecionar um dia e horário específico para a entrega.\r\n    \r\n\r\n## Benefícios do Agendamento de Entrega:\r\n\r\n-   **Conveniência:** O agendamento de entrega permite que você escolha o momento mais conveniente para receber sua encomenda, evitando a necessidade de esperar em casa durante longos períodos.\r\n-   **Planejamento:** É útil para planejar entregas em datas específicas, como aniversários, eventos ou ocasiões especiais, garantindo que suas encomendas cheguem no momento certo.\r\n-   **Flexibilidade:** Você tem a flexibilidade de escolher entre diferentes horários de entrega com base em sua agenda e preferências pessoais.', 'posso-agendar-uma-entrega-para-um-horario-especifico'),
 ('É possível adicionar instruções especiais para a entrega?', 'Sim, é absolutamente possível adicionar instruções especiais para suas entregas em nossa plataforma. Entendemos que cada entrega pode ter suas particularidades e que você pode ter necessidades específicas para garantir que a entrega seja realizada da maneira desejada.\r\n\r\n## Como Adicionar Instruções Especiais:\r\n\r\n1. **Durante o Processo de Solicitação:**\r\n    \r\n    Após solicitar uma entrega em nossa plataforma, poderá combinar a entrega com o entregador, pelo chat. Também é possível deixar uma observação ao motorista, na página de pagamento.\r\n    \r\n2. **Clareza e Detalhes:**\r\n    \r\n    Ao fornecer instruções especiais, é fundamental ser claro e detalhado. Quanto mais informações você fornecer, melhor o entregador poderá atender às suas expectativas.\r\n    \r\n3. **Garantia de Privacidade e Segurança:**\r\n    \r\n    Suas instruções especiais são tratadas com sigilo e respeito à sua privacidade. Elas são destinadas exclusivamente ao entregador responsável pela sua entrega.\r\n    \r\n\r\nEsteja à vontade para adicionar instruções especiais sempre que necessário durante o processo de solicitação. Estamos aqui para atender às suas necessidades individuais e garantir que suas entregas sejam realizadas conforme suas preferências.', 'e-possivel-adicionar-instrucoes-especiais-para-a-entrega');
+
+/* Tabelas cadastros  Não mexer Alex está organizando isso */
+
+CREATE DATABASE Cadastro_fretus;
+
+USE cadastro_fretus;
+
+CREATE TABLE clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE entregadores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Login (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    UsuarioID INT NOT NULL,
+    TipoUsuario ENUM('Cliente', 'Entregador') NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Senha VARCHAR(100) NOT NULL,
+    FOREIGN KEY (UsuarioID) REFERENCES Cliente(ID) ON DELETE CASCADE,
+    FOREIGN KEY (UsuarioID) REFERENCES Entregador(ID) ON DELETE CASCADE
+);

@@ -31,4 +31,12 @@ router.get('/Sobre', (req,res) =>{
   res.render('pages/Sobre')
 })
 
+/* Não mexer */
+
+router.get('/admin', function (req, res) {
+  res.render('pages/admin')
+})
+
+/* fim */
+
 module.exports = router
