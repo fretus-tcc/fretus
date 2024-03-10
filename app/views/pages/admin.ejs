@@ -37,7 +37,6 @@
     </table>
 
     <script>
-        // Recuperar os dados dos clientes e inserir na tabela
         fetch('/clientes')
             .then(response => response.json())
             .then(data => {
@@ -53,8 +52,6 @@
                     clientesData.appendChild(row);
                 });
             });
-
-        // Recuperar os dados dos entregadores e inserir na tabela
         fetch('/entregadores')
             .then(response => response.json())
             .then(data => {
