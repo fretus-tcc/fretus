@@ -3,6 +3,9 @@ const app = express()
 const methodOverride = require('method-override')
 const port = 3000
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 app.use(express.static("./app/public"))
 
 app.set("view engine", "ejs")
@@ -22,7 +25,7 @@ app.use(methodOverride('_method'))
 const main = require("./app/routes/main")
 app.use("/", main)
 
-const help = require("./app/models/help")
+const help = require("./app/routes/help")
 app.use("/ajuda", help)
 
 const client = require("./app/routes/client")

@@ -1,8 +1,7 @@
 var express = require("express")
 var router = express.Router()
 
-var fabricaDeConexao = require("../../config/connection-factory")
-var conexao = fabricaDeConexao()
+var pool = require("../../config/connection-factory");
 
 router.get('/solicitar-entrega', function (req, res) {
     res.render('pages/cliente/solicitar-entrega')

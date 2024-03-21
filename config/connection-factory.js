@@ -1,19 +1,22 @@
 var mysql = require("mysql2");
 
-module.exports = function(){
-  try {
-    let conexao = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "fretus",
-      port: 3306
-    }).promise()
-    console.log('Conexão estabelecida!')
-    return conexao
-  } catch (e) {
-    console.log('Falha ao estabelecer conexão!')
-    console.log(e)
-    return null
-  }
-} 
+const pool = mysql.createPool({
+  host: process.env.DB_HOST, 
+  user: process.env.DB_USER, 
+  password: process.env.DB_PASSWORDITB,
+  database: process.env.DB_NAME,
+  port: process.env.BD_PORT,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+
+pool.getConnection((err, conn) => {
+  if(err) 
+      console.log(err)
+  else
+      console.log("Conectado ao SGBD!")
+})
+
+module.exports = pool.promise()

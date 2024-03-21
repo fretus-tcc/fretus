@@ -1,8 +1,7 @@
 var express = require("express")
 var router = express.Router()
 
-var fabricaDeConexao = require("../../config/connection-factory")
-var conexao = fabricaDeConexao()
+var pool = require("../../config/connection-factory");
 
 const { body, validationResult } = require('express-validator')
 const slugify = require('slugify')
@@ -12,7 +11,7 @@ const sanitizeHTML = require('sanitize-html')
 router.get('/', async function (req, res) {
     // res.render('pages/ajuda')
     try {
-        const [ result ] = await conexao.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
+        const [result] = await pool.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
         /* console.log(result) */
         res.render('pages/ajuda', { result })
     } catch (error) {
@@ -22,7 +21,7 @@ router.get('/', async function (req, res) {
 
 router.get('/admin', async function (req, res) {
     try {
-        const [ result ] = await conexao.query('SELECT * FROM duvidas ORDER BY data_duvida DESC')
+        const [result] = await pool.query('SELECT * FROM duvidas ORDER BY data_duvida DESC')
         res.render('pages/ajuda-admin/read', { result })
     } catch (error) {
         return res.json({ error })
@@ -51,7 +50,7 @@ router.post(
         const data = saveData(req, res, 'create', req.body)
         if (data) {
             try {
-                conexao.query('INSERT INTO duvidas SET ?', [data])
+                pool.query('INSERT INTO duvidas SET ?', [data])
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })
@@ -63,7 +62,7 @@ router.post(
 router.get('/:slug', async function (req, res) {
     const { slug } = req.params
     try {
-        const [ results ] = await conexao.query('SELECT * FROM duvidas WHERE slug_duvida = ?', [slug])
+        const [results] = await pool.query('SELECT * FROM duvidas WHERE slug_duvida = ?', [slug])
         if (!results.length) {
             return res.redirect('/ajuda')
         }
@@ -76,7 +75,7 @@ router.get('/:slug', async function (req, res) {
 router.get('/admin/update/:id', async function (req, res) {
     const { id } = req.params
     try {
-        const [ results ] = await conexao.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id])
+        const [results] = await pool.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id])
         res.render('pages/ajuda-admin/update', { errors: null, quotes: results[0] })
     } catch (error) {
         return res.json({ error })
@@ -85,7 +84,7 @@ router.get('/admin/update/:id', async function (req, res) {
 
 router.put(
     '/admin/update/:id',
-    
+
     body('title')
         .notEmpty().withMessage('Campo não preenchido')
         .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
@@ -102,7 +101,7 @@ router.put(
         const data = saveData(req, res, 'update', { ...req.body, id_duvida: id })
         if (data) {
             try {
-                conexao.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
+                pool.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })
@@ -114,7 +113,7 @@ router.put(
 router.delete('/admin/delete/:id', function (req, res) {
     const { id } = req.params
     try {
-        conexao.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
+        pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
         res.redirect('/ajuda/admin')
     } catch (error) {
         return res.json({ error })
@@ -127,7 +126,7 @@ const saveData = (req, res, type, quotes) => {
         return
     }
     const { title, content } = req.body
-    
+
     return {
         titulo_duvida: title,
         conteudo_duvida: sanitizeHTML(content),
@@ -137,7 +136,7 @@ const saveData = (req, res, type, quotes) => {
 
 const repeatedTitle = async (title, id) => {
     try {
-        const [ result ] = await conexao.query(`SELECT * FROM duvidas WHERE titulo_duvida = ? ${id ? 'AND id_duvida != ?' : ''}`, [title, id])
+        const [result] = await pool.query(`SELECT * FROM duvidas WHERE titulo_duvida = ? ${id ? 'AND id_duvida != ?' : ''}`, [title, id])
         return result.length
     } catch (error) {
         res.json({ error })

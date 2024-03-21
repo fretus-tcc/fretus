@@ -2,8 +2,8 @@ var express = require("express");
 var router = express.Router();
 const app = express();
 
-var fabricaDeConexao = require("../../config/connection-factory");
-var conexao = fabricaDeConexao();
+
+var pool = require("../../config/connection-factory");
 
 app.use(express.urlencoded({ extended: true }));
 

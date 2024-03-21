@@ -26,10 +26,6 @@ INSERT INTO `duvidas` (`titulo_duvida`, `conteudo_duvida`, `slug_duvida`) VALUES
 
 /* Tabelas cadastros  Não mexer Alex está organizando isso */
 
-CREATE DATABASE Cadastro_fretus;
-
-USE cadastro_fretus;
-
 CREATE TABLE clientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,

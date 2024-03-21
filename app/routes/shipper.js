@@ -1,8 +1,7 @@
 var express = require("express")
 var router = express.Router()
 
-var fabricaDeConexao = require("../../config/connection-factory")
-var conexao = fabricaDeConexao() 
+var pool = require("../../config/connection-factory");
 
 router.get('/chat', function (req, res) {
     res.render('pages/entregador/chat')
