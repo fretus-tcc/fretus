@@ -26,28 +26,42 @@ INSERT INTO `duvidas` (`titulo_duvida`, `conteudo_duvida`, `slug_duvida`) VALUES
 
 /* Tabelas cadastros  Não mexer Alex está organizando isso */
 
-CREATE TABLE clientes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    cpf VARCHAR(14) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL
-);
+-- -----------------------------------------------------
+-- Table `FRETUS`.`USUARIOS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`USUARIOS` (
+  `id_usuario` INT NOT NULL AUTO_INCREMENT,
+  `senha_usuario` VARCHAR(45) NOT NULL,
+  `nome_usuario` VARCHAR(45) NOT NULL,
+  `cpf_usuario` CHAR(11) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `telefone` CHAR(11) NOT NULL,
+  `data_usuario` DATE NOT NULL,
+  `tipo_usuario` VARCHAR(45) NOT NULL,
+  `descricao_usuario` VARCHAR(45) NULL,
+  `desr_tipo_usuario` VARCHAR(45) NOT NULL,
+  `cod_tipo_usuario` INT NOT NULL,
+  `foto_de_perfil_usuario` BINARY NULL,
+  `notificacao_sms_estado` VARCHAR(45) NOT NULL,
+  `notificacao_email_estado` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE INDEX `idUSUARIOS_UNIQUE` (`id_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `cpf_usuario_UNIQUE` (`cpf_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  UNIQUE INDEX `telefone_UNIQUE` (`telefone` ASC) VISIBLE)
+ENGINE = InnoDB;
 
-CREATE TABLE entregadores (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(14) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    senha VARCHAR(100) NOT NULL
-);
 
 CREATE TABLE IF NOT EXISTS Login (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     UsuarioID INT NOT NULL,
-    TipoUsuario ENUM('Cliente', 'Entregador') NOT NULL,
+    TipoUsuario ENUM('tipo_usuario') NOT NULL,
     Email VARCHAR(100) NOT NULL,
     Senha VARCHAR(100) NOT NULL,
     FOREIGN KEY (UsuarioID) REFERENCES Cliente(ID) ON DELETE CASCADE,
     FOREIGN KEY (UsuarioID) REFERENCES Entregador(ID) ON DELETE CASCADE
 );
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`USUARIOS` , `login` 
+-- -----------------------------------------------------
