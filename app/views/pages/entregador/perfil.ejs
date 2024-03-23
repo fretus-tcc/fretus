@@ -10,6 +10,8 @@
             <link rel="stylesheet" href="/CSS/shipper/config.css">
             <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
             <link rel="stylesheet" href="/CSS/shipper/profile.css">
+            <link rel="stylesheet" href="/CSS/shipper/botaoToggle.css">
+            <link rel="stylesheet" href="/CSS/shipper/periodo.css">
 </head>
 
 <body>
@@ -30,6 +32,13 @@
                         style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
                     </article>
                 </section>
+
+            <aside class="botaoDisponivel">
+                <p id="disponibilidade">Não disponível</p>
+                <input id="toggle" onclick="disponivel()" class="toggle" type="checkbox">
+                <label for="toggle"></label>
+            </aside>
+
                 <section class="row">
                     <label for="name">Nome: </label>
                     <section class="edit-row">
@@ -54,6 +63,17 @@
                         <span>Alterar</span>
                     </section>
                 </section>
+
+                <section class="row">
+                    <label for="periodo">período de disponibilidade:</label>
+                    <aside class="edit-periodo">
+                      <input type="time">
+                       <span>até</span>
+                       <input type="time" name="periodo">
+                       
+                    </aside>
+               </section>
+    
                 <section class="row">
                     <label for="vehicles">Tipo do Veículo </label>
                     <section class="edit-row">
@@ -106,6 +126,7 @@
                 <script src="/JS/shipper/change.js"></script>
                 <script src="/JS/shipper/profile.js"></script>
                 <script src=" /JS/perfil.js"></script>
+                <script src="/JS/shipper/toggle.js"></script>
 </body>
 
 </html>

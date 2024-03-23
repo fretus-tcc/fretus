@@ -1,0 +1,46 @@
+.botaoDisponivel{
+    display:flex;
+    justify-content: center;
+    gap:25px;
+  }
+  
+  .toggle{
+      display:none;
+  }
+      
+  .toggle+label{
+      width:60px;
+      height:30px;
+      background:lightslategrey;
+      display:block;
+      position:relative;
+      cursor:pointer;
+      transition:200ms;
+      border-radius:20px;
+      padding:2px;
+      }
+      
+  .toggle+label:before{
+      
+      content:'';
+      position:absolute;
+      width:30px;
+      height:30px;
+      background:white;
+      display:block;
+      border-radius:50%;
+      right:unset;
+      left:0px;
+      top:0px;
+      transition:200ms;
+      border:1px solid rgba(187, 180, 180, 0.61);
+  }
+      
+  .toggle:checked + label{
+      background-color:#ef9652;  
+  }
+  .toggle:checked + label:before{
+      content:'';
+      margin-left:49%;
+      box-shadow:0 4px 4px rgb(0 0 0/10%);
+  }

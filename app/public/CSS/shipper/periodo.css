@@ -1,0 +1,32 @@
+input[type="time"]{
+    padding:5px;
+    border-radius:10px;
+    border:1px solid rgba(184, 175, 175, 0.596);
+    height:40px;
+    width:120px;
+    font-size:20px;
+}
+
+.edit-periodo {
+    margin-left:10px;
+    margin-top:10px;
+    margin-bottom:15px;
+
+}
+
+.edit-periodo span{
+   font-size:20px;
+}
+
+@media(max-width:407px){
+    .edit-periodo{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .edit-periodo span{
+      margin-top:10px;
+      margin-bottom:10px;
+      margin-left:20%;
+     }
+}
