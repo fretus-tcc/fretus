@@ -1,5 +1,6 @@
 var express = require("express")
 var router = express.Router()
+const tarefasController = require('../controller/quotesController')
 
 var pool = require("../../config/connection-factory");
 
@@ -8,24 +9,12 @@ const slugify = require('slugify')
 const marked = require('marked')
 const sanitizeHTML = require('sanitize-html')
 
-router.get('/', async function (req, res) {
-    // res.render('pages/ajuda')
-    try {
-        const [result] = await pool.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
-        /* console.log(result) */
-        res.render('pages/ajuda', { result })
-    } catch (error) {
-        return res.json({ error })
-    }
+router.get('/', (req, res) => {
+    tarefasController.listQuotesTitle(req, res)
 })
 
-router.get('/admin', async function (req, res) {
-    try {
-        const [result] = await pool.query('SELECT * FROM duvidas ORDER BY data_duvida DESC')
-        res.render('pages/ajuda-admin/read', { result })
-    } catch (error) {
-        return res.json({ error })
-    }
+router.get('/admin', (req, res) => {
+    tarefasController.listQuotes(req, res)
 })
 
 router.get('/admin/create', function (req, res) {
