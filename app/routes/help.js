@@ -1,6 +1,6 @@
 var express = require("express")
 var router = express.Router()
-const tarefasController = require('../controller/quotesController')
+const quotesController = require('../controller/quotesController')
 
 var pool = require("../../config/connection-factory");
 
@@ -10,11 +10,11 @@ const marked = require('marked')
 const sanitizeHTML = require('sanitize-html')
 
 router.get('/', (req, res) => {
-    tarefasController.listQuotesTitle(req, res)
+    quotesController.listQuotesTitle(req, res)
 })
 
 router.get('/admin', (req, res) => {
-    tarefasController.listQuotes(req, res)
+    quotesController.listQuotes(req, res)
 })
 
 router.get('/admin/create', function (req, res) {

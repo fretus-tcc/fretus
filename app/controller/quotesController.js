@@ -1,14 +1,14 @@
-const tarefasModel = require('../models/quotesModel')
+const quotesModel = require('../models/quotesModel')
 
 const { body, validationResult } = require('express-validator')
 const slugify = require('slugify')
 const marked = require('marked')
 const sanitizeHTML = require('sanitize-html')
 
-const tarefasController = {
+const quotesController = {
     listQuotesTitle: async (req, res) => {
         try {
-            const result = await tarefasModel.findTitle()
+            const result = await quotesModel.findTitle()
             res.render('pages/ajuda', { result })
         } catch (error) {
             res.json({ error })
@@ -17,7 +17,7 @@ const tarefasController = {
 
     listQuotes: async (req, res) => {
         try {
-            const result = await tarefasModel.findAll()
+            const result = await quotesModel.findAll()
             res.render('pages/ajuda-admin/read', { result })
         } catch (error) {
             res.json({ error })
@@ -25,4 +25,4 @@ const tarefasController = {
     },
 }
 
-module.exports = tarefasController
+module.exports = quotesController

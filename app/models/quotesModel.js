@@ -1,6 +1,6 @@
 const pool = require('../../config/connection-factory')
 
-const tarefasModel = {
+const quotesModel = {
     findTitle: async () => {
         try {
             const [result] = await pool.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
@@ -17,7 +17,7 @@ const tarefasModel = {
         } catch (error) {
             return error
         }
-    }
+    },
 }
 
-module.exports = tarefasModel
+module.exports = quotesModel
