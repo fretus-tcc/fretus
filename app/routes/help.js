@@ -49,16 +49,7 @@ router.post(
 )
 
 router.get('/:slug', async function (req, res) {
-    const { slug } = req.params
-    try {
-        const [results] = await pool.query('SELECT * FROM duvidas WHERE slug_duvida = ?', [slug])
-        if (!results.length) {
-            return res.redirect('/ajuda')
-        }
-        res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)) })
-    } catch (error) {
-        return res.json({ error })
-    }
+    quotesController.showQuote(req, res)
 })
 
 router.get('/admin/update/:id', async function (req, res) {

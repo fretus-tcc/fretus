@@ -34,6 +34,19 @@ const quotesController = {
         }
     },
 
+    showQuote: async (req, res) => {
+        const { slug } = req.params
+        try {
+            const results = await quotesModel.findBySlug(slug)
+            if (!results.length) {
+                return res.redirect('/ajuda')
+            }
+            res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)) })
+        } catch (error) {
+            return res.json({ error })
+        }
+    },
+
     deleteQuote: async (req, res) => {
         const { id } = req.params
         try {
