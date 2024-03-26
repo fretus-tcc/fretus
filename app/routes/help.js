@@ -62,13 +62,7 @@ router.get('/:slug', async function (req, res) {
 })
 
 router.get('/admin/update/:id', async function (req, res) {
-    const { id } = req.params
-    try {
-        const [results] = await pool.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id])
-        res.render('pages/ajuda-admin/update', { errors: null, quotes: results[0] })
-    } catch (error) {
-        return res.json({ error })
-    }
+    quotesController.getQuoteContent(req, res)
 })
 
 router.put(

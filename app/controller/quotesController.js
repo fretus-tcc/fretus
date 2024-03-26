@@ -24,6 +24,16 @@ const quotesController = {
         }
     },
 
+    getQuoteContent: async (req, res) => {
+        const { id } = req.params
+        try {
+            const result = await quotesModel.findById(id)
+            res.render('pages/ajuda-admin/update', { errors: null, quotes: result[0] })
+        } catch (error) {
+            res.json({ error })
+        }
+    },
+
     deleteQuote: async (req, res) => {
         const { id } = req.params
         try {

@@ -19,6 +19,15 @@ const quotesModel = {
         }
     },
     
+    findById: async (id) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
     delete: async (id) => {
         try {
             await pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
