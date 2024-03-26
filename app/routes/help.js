@@ -35,11 +35,11 @@ router.post(
         }),
     body('content').notEmpty().withMessage('Campo não preenchido'),
 
-    function (req, res) {
+    async function (req, res) {
         const data = saveData(req, res, 'create', req.body)
         if (data) {
             try {
-                pool.query('INSERT INTO duvidas SET ?', [data])
+                await pool.query('INSERT INTO duvidas SET ?', [data])
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })
@@ -100,13 +100,7 @@ router.put(
 )
 
 router.delete('/admin/delete/:id', function (req, res) {
-    const { id } = req.params
-    try {
-        pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
-        res.redirect('/ajuda/admin')
-    } catch (error) {
-        return res.json({ error })
-    }
+    quotesController.deleteQuote(req, res)
 })
 
 const saveData = (req, res, type, quotes) => {

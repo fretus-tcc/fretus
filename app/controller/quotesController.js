@@ -23,6 +23,16 @@ const quotesController = {
             res.json({ error })
         }
     },
+
+    deleteQuote: async (req, res) => {
+        const { id } = req.params
+        try {
+            await quotesModel.delete(id)
+            res.redirect('/ajuda/admin')
+        } catch (error) {
+            res.json({ error })
+        }
+    },
 }
 
 module.exports = quotesController

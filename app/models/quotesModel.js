@@ -18,6 +18,14 @@ const quotesModel = {
             return error
         }
     },
+    
+    delete: async (id) => {
+        try {
+            await pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
+        } catch (error) {
+            return error
+        }
+    },
 }
 
 module.exports = quotesModel
