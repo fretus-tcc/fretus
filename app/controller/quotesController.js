@@ -60,6 +60,32 @@ const quotesController = {
         }
     },
 
+    formatData: (req, res, type, quotes) => {
+        if (!validationResult(req).isEmpty()) {
+            res.render(`pages/ajuda-admin/${type}`, { errors: validationResult(req).mapped(), quotes })
+            return
+        }
+        const { title, content } = req.body
+    
+        return {
+            titulo_duvida: title,
+            conteudo_duvida: sanitizeHTML(content),
+            slug_duvida: slugify(title, { lower: true, strict: true })
+        }
+    },
+
+    createQuote: async (req, res) => {
+        const data = quotesController.formatData(req, res, 'create', req.body) /*  */
+        if (data) {
+            try {
+                await quotesModel.create(data)
+                res.redirect(`/ajuda/${data.slug_duvida}`)
+            } catch (error) {
+                return res.json({ error })
+            }
+        }
+    },
+
     deleteQuote: async (req, res) => {
         const { id } = req.params
         try {

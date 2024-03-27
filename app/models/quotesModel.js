@@ -37,6 +37,14 @@ const quotesModel = {
         }
     },
 
+    create: async (data) => {
+        try {
+            await pool.query('INSERT INTO duvidas SET ?', [data])
+        } catch (error) {
+            return error
+        }
+    },
+
     delete: async (id) => {
         try {
             await pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
