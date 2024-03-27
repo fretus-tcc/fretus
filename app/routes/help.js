@@ -21,32 +21,17 @@ router.get('/admin/create', function (req, res) {
     res.render('pages/ajuda-admin/create', { errors: null, quotes: null })
 })
 
-router.post(
-    '/admin/create',
-
-    body('title')
-        .notEmpty().withMessage('Campo não preenchido')
-        .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
-        .custom(async (value) => {
-            const existingTitle = await repeatedTitle(value, null)
-            if (existingTitle) {
-                throw new Error('Título já utilizado!')
-            }
-        }),
-    body('content').notEmpty().withMessage('Campo não preenchido'),
-
-    async function (req, res) {
-        const data = saveData(req, res, 'create', req.body)
-        if (data) {
-            try {
-                await pool.query('INSERT INTO duvidas SET ?', [data])
-                res.redirect(`/ajuda/${data.slug_duvida}`)
-            } catch (error) {
-                return res.json({ error })
-            }
+router.post('/admin/create', quotesController.validation, async function (req, res) {
+    const data = saveData(req, res, 'create', req.body)
+    if (data) {
+        try {
+            await pool.query('INSERT INTO duvidas SET ?', [data])
+            res.redirect(`/ajuda/${data.slug_duvida}`)
+        } catch (error) {
+            return res.json({ error })
         }
     }
-)
+})
 
 router.get('/:slug', async function (req, res) {
     quotesController.showQuote(req, res)
@@ -56,33 +41,18 @@ router.get('/admin/update/:id', async function (req, res) {
     quotesController.getQuoteContent(req, res)
 })
 
-router.put(
-    '/admin/update/:id',
-
-    body('title')
-        .notEmpty().withMessage('Campo não preenchido')
-        .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
-        .custom(async (value, { req }) => {
-            const existingTitle = await repeatedTitle(value, req.params.id)
-            if (existingTitle) {
-                throw new Error('Título já utilizado!')
-            }
-        }),
-    body('content').notEmpty().withMessage('Campo não preenchido'),
-
-    function (req, res) {
-        const { id } = req.params
-        const data = saveData(req, res, 'update', { ...req.body, id_duvida: id })
-        if (data) {
-            try {
-                pool.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
-                res.redirect(`/ajuda/${data.slug_duvida}`)
-            } catch (error) {
-                return res.json({ error })
-            }
+router.put('/admin/update/:id', quotesController.validation, async function (req, res) {
+    const { id } = req.params
+    const data = saveData(req, res, 'update', { ...req.body, id_duvida: id })
+    if (data) {
+        try {
+            await pool.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
+            res.redirect(`/ajuda/${data.slug_duvida}`)
+        } catch (error) {
+            return res.json({ error })
         }
     }
-)
+})
 
 router.delete('/admin/delete/:id', function (req, res) {
     quotesController.deleteQuote(req, res)
@@ -99,16 +69,6 @@ const saveData = (req, res, type, quotes) => {
         titulo_duvida: title,
         conteudo_duvida: sanitizeHTML(content),
         slug_duvida: slugify(title, { lower: true, strict: true })
-    }
-}
-
-const repeatedTitle = async (title, id) => {
-    try {
-        const [result] = await pool.query(`SELECT * FROM duvidas WHERE titulo_duvida = ? ${id ? 'AND id_duvida != ?' : ''}`, [title, id])
-        return result.length
-    } catch (error) {
-        res.json({ error })
-        return
     }
 }
 

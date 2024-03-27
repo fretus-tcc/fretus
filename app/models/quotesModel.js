@@ -44,6 +44,15 @@ const quotesModel = {
             return error
         }
     },
+
+    repeatedTitle: async (title, id) => {
+        try {
+            const [result] = await pool.query(`SELECT * FROM duvidas WHERE titulo_duvida = ? ${id ? 'AND id_duvida != ?' : ''}`, [title, id])
+            return result.length
+        } catch (error) {
+            return error
+        }
+    },
 }
 
 module.exports = quotesModel

@@ -6,6 +6,19 @@ const marked = require('marked')
 const sanitizeHTML = require('sanitize-html')
 
 const quotesController = {
+    validation: [
+        body('title')
+            .notEmpty().withMessage('Campo não preenchido')
+            .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
+            .custom(async (value, { req }) => {
+                const existingTitle = await quotesModel.repeatedTitle(value, req.params.id)
+                if (existingTitle) {
+                    throw new Error('Título já utilizado!')
+                }
+            }),
+        body('content').notEmpty().withMessage('Campo não preenchido')
+    ],
+    
     listQuotesTitle: async (req, res) => {
         try {
             const result = await quotesModel.findTitle()
