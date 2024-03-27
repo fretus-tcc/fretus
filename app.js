@@ -34,15 +34,8 @@ app.use("/cliente", client)
 const shipper = require("./app/routes/shipper")
 app.use("/entregador", shipper)
 
-/* Não mexer  Alex está organizando isso */
-
 const admin = require("./app/routes/admin")
 app.use("/admin", admin)
-
-const cadastro_geral = require("./app/models/cadastro_geral")
-app.use("/cadastro", cadastro_geral)
-
-/* fim */
 
 app.listen(port, () => {
   console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`)

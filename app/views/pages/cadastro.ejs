@@ -24,25 +24,39 @@
         </section>
         <section class="signup-container">
             <section class="signup-content">
+
+            
                 <form id="cliente" action="#">
+
+
+
                     <input type="text" id="nome" autocomplete="off" placeholder="Nome completo"
                         pattern=".{2,}[A-Za-zÀ-ÿ\s]+" oninput="nomeValido()" required>
-                    <p id="messageNome"></p>
+                    <!-- <p id="messageNome"></p> -->
                     <input type="text" autocomplete="off" maxlength="14" placeholder="CPF/CNPJ" id="cpf"
                         pattern=".{14,}" oninput="cpfValido()" required>
-                    <p id="messageCpf"></p>
+                   <!--  <p id="messageCpf"></p> -->
                     <input type="email" placeholder="Email" autocomplete="off" id="inputEmail" oninput="emailValido()"
                         required>
-                    <p id="messageEmail"></p>
+                    <!-- <p id="messageEmail"></p> -->
                     <section class="input__wrapper">
                         <input required id="password" type="password" class="input__field" pattern=".{8,}"
                             oninput="senhaValidada()" placeholder="Senha">
-                        <p id="messageSenha"></p>
+                        <!-- <p id="messageSenha"></p> -->
                         <label for="password" class="input__label"></label>
                         <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
                     </section>
+
+
+
                     <p>Já tem uma conta? <a href="/login">Acesse aqui.</a></p>
+
+
+
                     <button type="submit" id="criar1">Criar como cliente</button>
+
+
+
                     <section class="alternative">
                         <span>ou</span>
                     </section>
@@ -58,21 +72,25 @@
                         </a>
                     </section>
                 </form>
+
+
+
+
                 <form id="entregador" action="#">
                     <input type="text" id="nome2" autocomplete="off" placeholder="Nome completo"
                         pattern=".{2,}[A-Za-zÀ-ÿ\s]+" oninput="nomeValido2()" required>
-                    <p id="messageNome2"></p>
+                    <!-- <p id="messageNome2"></p> -->
                     <input type="text" autocomplete="off" maxlength="14" placeholder="CPF/CNPJ" id="cpf2"
                         pattern=".{14,}" oninput="cpfValido2()" required>
-                    <p id="messageCpf2"></p>
+                    <!-- <p id="messageCpf2"></p> -->
                     <input type="Email" placeholder="Email" autocomplete="off" id="inputEmail2" oninput="emailValido2()"
                         required>
-                    <p id="messageEmail2"></p>
+                   <!--  <p id="messageEmail2"></p> -->
                     <section class="input__wrapper">
                         <input required id="password2" type="password" class="input__field" oninput="senhaValidada2()"
                             pattern=".{8,}" placeholder="Senha">
                         <label for="password2" class="input__label"></label>
-                        <p id="messageSenha2"></p>
+                        <!-- <p id="messageSenha2"></p> -->
                         <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
                     </section>
                     <input required type="checkbox" name="terms" id="terms">
@@ -104,7 +122,7 @@
     <script src="/JS/login-cadastro/validacao.js"></script>
     <script src="/JS/login-cadastro/eye.js"></script>
     <script src="/JS/login-cadastro/mascara.js"></script>
-    <script src="/JS/login-cadastro/button.js"></script> <!--  JS para usa validação  -->
+    <!-- <script src="/JS/login-cadastro/button.js"></script>  --><!--  JS para usa validação  -->
 
 </body>
 

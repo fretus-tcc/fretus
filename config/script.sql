@@ -27,6 +27,26 @@ INSERT INTO `duvidas` (`titulo_duvida`, `conteudo_duvida`, `slug_duvida`) VALUES
 /* Tabelas cadastros  Não mexer Alex está organizando isso */
 
 -- -----------------------------------------------------
+-- Table 
+-- -----------------------------------------------------
+
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema FRETUS
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema FRETUS
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `FRETUS` DEFAULT CHARACTER SET utf8 ;
+USE `FRETUS` ;
+
+-- -----------------------------------------------------
 -- Table `FRETUS`.`USUARIOS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FRETUS`.`USUARIOS` (
@@ -37,13 +57,12 @@ CREATE TABLE IF NOT EXISTS `FRETUS`.`USUARIOS` (
   `email` VARCHAR(100) NOT NULL,
   `telefone` CHAR(11) NOT NULL,
   `data_usuario` DATE NOT NULL,
-  `tipo_usuario` VARCHAR(45) NOT NULL,
-  `descricao_usuario` VARCHAR(45) NULL,
-  `desr_tipo_usuario` VARCHAR(45) NOT NULL,
+  `descricao_usuario` TEXT(100) NULL,
+  `foto_de_perfil` VARCHAR(255) NULL,
   `cod_tipo_usuario` INT NOT NULL,
-  `foto_de_perfil_usuario` BINARY NULL,
-  `notificacao_sms_estado` VARCHAR(45) NOT NULL,
-  `notificacao_email_estado` VARCHAR(45) NOT NULL,
+  `notificacao_sms_estado` INT NOT NULL,
+  `notificacao_email_estado` INT NOT NULL,
+  `desr_tipo_usuario` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE INDEX `idUSUARIOS_UNIQUE` (`id_usuario` ASC) VISIBLE,
   UNIQUE INDEX `cpf_usuario_UNIQUE` (`cpf_usuario` ASC) VISIBLE,
@@ -52,16 +71,494 @@ CREATE TABLE IF NOT EXISTS `FRETUS`.`USUARIOS` (
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS Login (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    UsuarioID INT NOT NULL,
-    TipoUsuario ENUM('tipo_usuario') NOT NULL,
-    Email VARCHAR(100) NOT NULL,
-    Senha VARCHAR(100) NOT NULL,
-    FOREIGN KEY (UsuarioID) REFERENCES Cliente(ID) ON DELETE CASCADE,
-    FOREIGN KEY (UsuarioID) REFERENCES Entregador(ID) ON DELETE CASCADE
-);
+-- -----------------------------------------------------
+-- Table `FRETUS`.`CEP`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`CEP` (
+  `id_cep` INT NOT NULL AUTO_INCREMENT,
+  `complemento` VARCHAR(45) NOT NULL,
+  `num` INT NOT NULL,
+  `cep` CHAR(8) NOT NULL,
+  `iid_usuario` INT NOT NULL,
+  PRIMARY KEY (`id_cep`),
+  UNIQUE INDEX `IDENDERECO_UNIQUE` (`id_cep` ASC) VISIBLE,
+  INDEX `fk_CEP_USUARIOS1_idx` (`iid_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_CEP_USUARIOS1`
+    FOREIGN KEY (`iid_usuario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
--- Table `FRETUS`.`USUARIOS` , `login` 
+-- Table `FRETUS`.`DETALHAMENTO_ENTREGADOR`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`DETALHAMENTO_ENTREGADOR` (
+  `raio_de_atuacao` FLOAT NOT NULL,
+  `id_usuario` INT NOT NULL,
+  `id_entregador` INT NOT NULL AUTO_INCREMENT,
+  `qtn_visualizacoes_perfil` INT NOT NULL,
+  `qtn_cupons_ativos` INT NOT NULL,
+  `qtn_entregas_aceitas` INT NOT NULL,
+  `qtn_entregas_canceladas` INT NOT NULL,
+  `qtn_entregas_recusadas` INT NOT NULL,
+  `disponivel_inicio` TIME NULL,
+  `disponivel_final` TIME NULL,
+  `qtn_entregas_solicitadas` INT NOT NULL,
+  INDEX `fk_ESPECIFICA_ENTREGADOR_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
+  PRIMARY KEY (`id_entregador`),
+  UNIQUE INDEX `id_entregador_UNIQUE` (`id_entregador` ASC) VISIBLE,
+  CONSTRAINT `fk_ESPECIFICA_ENTREGADOR_USUARIOS1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`PEDIDOS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`PEDIDOS` (
+  `id_pedido` INT NOT NULL AUTO_INCREMENT,
+  `data_pedido` DATETIME NOT NULL,
+  `preco_sugerido_pedido` DECIMAL(10,2) NOT NULL,
+  `id_usuario_cliente` INT NOT NULL,
+  `data_agendada` DATETIME NULL,
+  `id_entregador` INT NOT NULL,
+  PRIMARY KEY (`id_pedido`),
+  UNIQUE INDEX `IDPEDIDO_UNIQUE` (`id_pedido` ASC) VISIBLE,
+  INDEX `fk_PEDIDOS_USUARIOS1_idx` (`id_usuario_cliente` ASC) VISIBLE,
+  INDEX `fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1_idx` (`id_entregador` ASC) VISIBLE,
+  CONSTRAINT `fk_PEDIDOS_USUARIOS1`
+    FOREIGN KEY (`id_usuario_cliente`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1`
+    FOREIGN KEY (`id_entregador`)
+    REFERENCES `FRETUS`.`DETALHAMENTO_ENTREGADOR` (`id_entregador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`CUPONS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`CUPONS` (
+  `id_cupon` INT NOT NULL AUTO_INCREMENT,
+  `prazo_cupon` DATETIME NOT NULL,
+  `desconto_cupom` INT NOT NULL,
+  `limite_uso` INT NOT NULL,
+  `estado_cupon` VARCHAR(45) NOT NULL,
+  `codigo_cupon` VARCHAR(45) NOT NULL,
+  `id_usuario_criador` INT NOT NULL,
+  `id_usuario_utilizador` INT NOT NULL,
+  PRIMARY KEY (`id_cupon`),
+  UNIQUE INDEX `IDCUPON_UNIQUE` (`id_cupon` ASC) VISIBLE,
+  INDEX `fk_CUPONS_USUARIOS1_idx` (`id_usuario_criador` ASC) VISIBLE,
+  INDEX `fk_CUPONS_USUARIOS2_idx` (`id_usuario_utilizador` ASC) VISIBLE,
+  CONSTRAINT `fk_CUPONS_USUARIOS1`
+    FOREIGN KEY (`id_usuario_criador`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CUPONS_USUARIOS2`
+    FOREIGN KEY (`id_usuario_utilizador`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`DESTINO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`DESTINO` (
+  `id_coleta_entrega` INT NOT NULL AUTO_INCREMENT,
+  `endereco` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_coleta_entrega`),
+  UNIQUE INDEX `IDENTREGAS_UNIQUE` (`id_coleta_entrega` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`RAKING`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`RAKING` (
+  `id_posicao` INT NOT NULL,
+  `qnt_entregas` INT NOT NULL,
+  `media_avaliacao` FLOAT NOT NULL,
+  `id_usuario` INT NOT NULL,
+  `media_final` FLOAT NOT NULL,
+  `meida_semanal` FLOAT NOT NULL,
+  `media_mensal` FLOAT NOT NULL,
+  PRIMARY KEY (`id_posicao`),
+  INDEX `fk_RAKING_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_RAKING_USUARIOS1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`USUARIOS_has_CUPONS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`USUARIOS_has_CUPONS` (
+  `USUARIOS_id_usuario` INT NOT NULL,
+  `CUPONS_id_cupon` INT NOT NULL,
+  PRIMARY KEY (`USUARIOS_id_usuario`, `CUPONS_id_cupon`),
+  INDEX `fk_USUARIOS_has_CUPONS_CUPONS1_idx` (`CUPONS_id_cupon` ASC) VISIBLE,
+  INDEX `fk_USUARIOS_has_CUPONS_USUARIOS1_idx` (`USUARIOS_id_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_USUARIOS_has_CUPONS_USUARIOS1`
+    FOREIGN KEY (`USUARIOS_id_usuario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_USUARIOS_has_CUPONS_CUPONS1`
+    FOREIGN KEY (`CUPONS_id_cupon`)
+    REFERENCES `FRETUS`.`CUPONS` (`id_cupon`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`VEICULOS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`VEICULOS` (
+  `id_veiculo` INT NOT NULL AUTO_INCREMENT,
+  `tipo_veiculo` VARCHAR(45) NOT NULL,
+  `placa` CHAR(9) NOT NULL,
+  `modelo_veiculo` VARCHAR(45) NOT NULL,
+  `id_entregador` INT NOT NULL,
+  `tipo_bauleto` VARCHAR(45) NULL,
+  `foto_veiculo` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_veiculo`),
+  UNIQUE INDEX `placa_UNIQUE` (`placa` ASC) VISIBLE,
+  INDEX `fk_VEICULOS_DETALHAMENTO_ENTREGADOR1_idx` (`id_entregador` ASC) VISIBLE,
+  CONSTRAINT `fk_VEICULOS_DETALHAMENTO_ENTREGADOR1`
+    FOREIGN KEY (`id_entregador`)
+    REFERENCES `FRETUS`.`DETALHAMENTO_ENTREGADOR` (`id_entregador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`FAVORITADOS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`FAVORITADOS` (
+  `id_favoritado` INT NOT NULL AUTO_INCREMENT,
+  `id_usuario` INT NOT NULL,
+  `id_usuario_favoritou` INT NOT NULL,
+  `id_usuario_favoritado` INT NOT NULL,
+  PRIMARY KEY (`id_favoritado`),
+  INDEX `fk_FAVORITADOS_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
+  INDEX `fk_FAVORITADOS_USUARIOS2_idx` (`id_usuario_favoritou` ASC) VISIBLE,
+  INDEX `fk_FAVORITADOS_USUARIOS3_idx` (`id_usuario_favoritado` ASC) VISIBLE,
+  CONSTRAINT `fk_FAVORITADOS_USUARIOS1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FAVORITADOS_USUARIOS2`
+    FOREIGN KEY (`id_usuario_favoritou`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_FAVORITADOS_USUARIOS3`
+    FOREIGN KEY (`id_usuario_favoritado`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`PAGAMENTOS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`PAGAMENTOS` (
+  `id_pagamento` INT NOT NULL,
+  `data_transicao` DATETIME NOT NULL,
+  `valor_pago` DECIMAL(10,2) NOT NULL,
+  `preco_sugerido` DECIMAL(10,2) NOT NULL,
+  `metodo_pagamento` VARCHAR(45) NOT NULL,
+  `estado_pagamento` VARCHAR(45) NOT NULL,
+  `id_usuario_pagador` INT NOT NULL,
+  `id_usuario_recebidor` INT NOT NULL,
+  PRIMARY KEY (`id_pagamento`),
+  INDEX `fk_PAGAMENTOS_USUARIOS1_idx` (`id_usuario_pagador` ASC) VISIBLE,
+  INDEX `fk_PAGAMENTOS_USUARIOS2_idx` (`id_usuario_recebidor` ASC) VISIBLE,
+  CONSTRAINT `fk_PAGAMENTOS_USUARIOS1`
+    FOREIGN KEY (`id_usuario_pagador`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PAGAMENTOS_USUARIOS2`
+    FOREIGN KEY (`id_usuario_recebidor`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`historico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`historico` (
+  `id_entrega` INT NOT NULL AUTO_INCREMENT,
+  `data_realizada` DATETIME NOT NULL,
+  `tempo_realizada_horas` INT NOT NULL,
+  `id_pedido` INT NOT NULL,
+  `id_entrega_registrada` INT NOT NULL,
+  `cep_entrega` CHAR(8) NOT NULL,
+  `complemento_entrega` VARCHAR(45) NOT NULL,
+  `num_entrega` INT NOT NULL,
+  `tempo_realizada_minutos` INT NOT NULL,
+  `observacao_cliente` TEXT(200) NULL,
+  `terminio_entrega` DATETIME NOT NULL,
+  `id_pagamento` INT NOT NULL,
+  PRIMARY KEY (`id_entrega`),
+  INDEX `fk_ENTREGA_REALIZADA_PEDIDOS1_idx` (`id_pedido` ASC) VISIBLE,
+  INDEX `fk_historico_PAGAMENTOS1_idx` (`id_pagamento` ASC) VISIBLE,
+  CONSTRAINT `fk_ENTREGA_REALIZADA_PEDIDOS1`
+    FOREIGN KEY (`id_pedido`)
+    REFERENCES `FRETUS`.`PEDIDOS` (`id_pedido`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_historico_PAGAMENTOS1`
+    FOREIGN KEY (`id_pagamento`)
+    REFERENCES `FRETUS`.`PAGAMENTOS` (`id_pagamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`PRODUTOS_ENTREGA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`PRODUTOS_ENTREGA` (
+  `id_produto` INT NOT NULL AUTO_INCREMENT,
+  `peso` FLOAT NULL,
+  `id_pedido` INT NOT NULL,
+  `tamanho_produto` VARCHAR(45) NOT NULL,
+  `tipo_veiculo_solicitado` VARCHAR(45) NOT NULL,
+  `cod_tamanho` INT NOT NULL,
+  `altura_produto` FLOAT NULL,
+  `comprimento_produto` FLOAT NULL,
+  PRIMARY KEY (`id_produto`),
+  INDEX `fk_PRODUTOS_ENTREGA_PEDIDOS1_idx` (`id_pedido` ASC) VISIBLE,
+  CONSTRAINT `fk_PRODUTOS_ENTREGA_PEDIDOS1`
+    FOREIGN KEY (`id_pedido`)
+    REFERENCES `FRETUS`.`PEDIDOS` (`id_pedido`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`AC_ENTREGA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`AC_ENTREGA` (
+  `id_ac` INT NOT NULL,
+  `nome_ac` VARCHAR(45) NOT NULL,
+  `cpf_ac` CHAR(11) NOT NULL,
+  `endereco_ac` VARCHAR(45) NOT NULL,
+  `id_entrega` INT NOT NULL,
+  PRIMARY KEY (`id_ac`),
+  UNIQUE INDEX `cpf_ac_UNIQUE` (`cpf_ac` ASC) VISIBLE,
+  INDEX `fk_AC_ENTREGA_ENTREGA_REALIZADA1_idx` (`id_entrega` ASC) VISIBLE,
+  CONSTRAINT `fk_AC_ENTREGA_ENTREGA_REALIZADA1`
+    FOREIGN KEY (`id_entrega`)
+    REFERENCES `FRETUS`.`historico` (`id_entrega`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`COLETA`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`COLETA` (
+  `id_coleta` INT NOT NULL,
+  `endereco_coleta` VARCHAR(45) NOT NULL,
+  `cep_colerta` CHAR(8) NOT NULL,
+  `id_pedido` INT NOT NULL,
+  PRIMARY KEY (`id_coleta`),
+  UNIQUE INDEX `cep_colerta_UNIQUE` (`cep_colerta` ASC) VISIBLE,
+  INDEX `fk_COLETA_PEDIDOS1_idx` (`id_pedido` ASC) VISIBLE,
+  CONSTRAINT `fk_COLETA_PEDIDOS1`
+    FOREIGN KEY (`id_pedido`)
+    REFERENCES `FRETUS`.`PEDIDOS` (`id_pedido`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`CHAT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`CHAT` (
+  `id_mensagem` INT NOT NULL,
+  `conteudo_mensagem` TEXT(1500) NOT NULL,
+  `id_conversa` INT NOT NULL AUTO_INCREMENT,
+  `tipo_mensagem` VARCHAR(45) NOT NULL,
+  `data` DATETIME NOT NULL,
+  `id_usuario` INT NOT NULL,
+  `id_usuario_destinatario` INT NOT NULL,
+  `id_usuario_rementente` INT NOT NULL,
+  PRIMARY KEY (`id_conversa`),
+  UNIQUE INDEX `id_conversa_UNIQUE` (`id_conversa` ASC) VISIBLE,
+  INDEX `fk_CHAT_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
+  INDEX `fk_CHAT_USUARIOS2_idx` (`id_usuario_destinatario` ASC) VISIBLE,
+  INDEX `fk_CHAT_USUARIOS3_idx` (`id_usuario_rementente` ASC) VISIBLE,
+  CONSTRAINT `fk_CHAT_USUARIOS1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CHAT_USUARIOS2`
+    FOREIGN KEY (`id_usuario_destinatario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CHAT_USUARIOS3`
+    FOREIGN KEY (`id_usuario_rementente`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`avaliacoes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`avaliacoes` (
+  `id_avaliacoes` INT NOT NULL AUTO_INCREMENT,
+  `qnt_estrelas` INT NOT NULL,
+  `feedback` VARCHAR(200) NULL,
+  `id_usuario_entregador` INT NOT NULL,
+  `id_usuario_avaliador` INT NOT NULL,
+  `RAKING_id_posicao` INT NOT NULL,
+  PRIMARY KEY (`id_avaliacoes`),
+  INDEX `fk_avaliacoes_USUARIOS1_idx` (`id_usuario_entregador` ASC) VISIBLE,
+  INDEX `fk_avaliacoes_USUARIOS2_idx` (`id_usuario_avaliador` ASC) VISIBLE,
+  INDEX `fk_avaliacoes_RAKING1_idx` (`RAKING_id_posicao` ASC) VISIBLE,
+  CONSTRAINT `fk_avaliacoes_USUARIOS1`
+    FOREIGN KEY (`id_usuario_entregador`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_avaliacoes_USUARIOS2`
+    FOREIGN KEY (`id_usuario_avaliador`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_avaliacoes_RAKING1`
+    FOREIGN KEY (`RAKING_id_posicao`)
+    REFERENCES `FRETUS`.`RAKING` (`id_posicao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`COLETA_has_DESTINO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`COLETA_has_DESTINO` (
+  `COLETA_id_coleta` INT NOT NULL,
+  `DESTINO_id_coleta_entrega` INT NOT NULL,
+  PRIMARY KEY (`COLETA_id_coleta`, `DESTINO_id_coleta_entrega`),
+  INDEX `fk_COLETA_has_DESTINO_DESTINO1_idx` (`DESTINO_id_coleta_entrega` ASC) VISIBLE,
+  INDEX `fk_COLETA_has_DESTINO_COLETA1_idx` (`COLETA_id_coleta` ASC) VISIBLE,
+  CONSTRAINT `fk_COLETA_has_DESTINO_COLETA1`
+    FOREIGN KEY (`COLETA_id_coleta`)
+    REFERENCES `FRETUS`.`COLETA` (`id_coleta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_COLETA_has_DESTINO_DESTINO1`
+    FOREIGN KEY (`DESTINO_id_coleta_entrega`)
+    REFERENCES `FRETUS`.`DESTINO` (`id_coleta_entrega`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`DENUNCIAS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`DENUNCIAS` (
+  `id_denuncia` INT NOT NULL AUTO_INCREMENT,
+  `motivo_denuncia` VARCHAR(45) NOT NULL,
+  `descricao_denuncia` TEXT(300) NOT NULL,
+  `foto_do_ocorrido` VARCHAR(255) NULL,
+  `data_denuncia` DATETIME NOT NULL,
+  `id_usuario_denunciador` INT NOT NULL,
+  `id_usuario_denunciado` INT NOT NULL,
+  PRIMARY KEY (`id_denuncia`),
+  INDEX `fk_DENUNCIAS_USUARIOS1_idx` (`id_usuario_denunciador` ASC) VISIBLE,
+  INDEX `fk_DENUNCIAS_USUARIOS2_idx` (`id_usuario_denunciado` ASC) VISIBLE,
+  CONSTRAINT `fk_DENUNCIAS_USUARIOS1`
+    FOREIGN KEY (`id_usuario_denunciador`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DENUNCIAS_USUARIOS2`
+    FOREIGN KEY (`id_usuario_denunciado`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`FALE_CONOSCO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`FALE_CONOSCO` (
+  `id_solicitacao` INT NOT NULL AUTO_INCREMENT,
+  `mensagem` TEXT(300) NOT NULL,
+  `assunto` VARCHAR(45) NOT NULL,
+  `id_usuario` INT NOT NULL,
+  PRIMARY KEY (`id_solicitacao`),
+  INDEX `fk_FALE_CONOSCO_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_FALE_CONOSCO_USUARIOS1`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FRETUS`.`documentos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `FRETUS`.`documentos` (
+  `id_documento` INT NOT NULL AUTO_INCREMENT,
+  `cnh` VARCHAR(255) NULL,
+  `crvl` VARCHAR(255) NULL,
+  `ipva` VARCHAR(255) NULL,
+  `id_entregador` INT NOT NULL,
+  PRIMARY KEY (`id_documento`),
+  INDEX `fk_documentos_DETALHAMENTO_ENTREGADOR1_idx` (`id_entregador` ASC) VISIBLE,
+  CONSTRAINT `fk_documentos_DETALHAMENTO_ENTREGADOR1`
+    FOREIGN KEY (`id_entregador`)
+    REFERENCES `FRETUS`.`DETALHAMENTO_ENTREGADOR` (`id_entregador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+-- -----------------------------------------------------
+-- 
 -- -----------------------------------------------------
