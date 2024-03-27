@@ -45,6 +45,14 @@ const quotesModel = {
         }
     },
 
+    update: async (data, id) => {
+        try {
+            await pool.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
+        } catch (error) {
+            return error
+        }
+    },
+
     delete: async (id) => {
         try {
             await pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])

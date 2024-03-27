@@ -86,6 +86,19 @@ const quotesController = {
         }
     },
 
+    updateQuote: async (req, res) => {
+        const { id } = req.params
+        const data = quotesController.formatData(req, res, 'update', { ...req.body, id_duvida: id })
+        if (data) {
+            try {
+                await quotesModel.update(data, id)
+                res.redirect(`/ajuda/${data.slug_duvida}`)
+            } catch (error) {
+                return res.json({ error })
+            }
+        }
+    },
+
     deleteQuote: async (req, res) => {
         const { id } = req.params
         try {
