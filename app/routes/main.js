@@ -1,5 +1,6 @@
 var express = require("express")
 var router = express.Router()
+var TarefasControl = require("../controller/cadastroController")
 
 var pool = require("../../config/connection-factory");
 
@@ -13,9 +14,16 @@ router.get('/login', function (req, res) {
   res.render('pages/login')
 })
 
+/* ============================CADASTRO======================================== */
 router.get('/cadastro', function (req, res) {
-  res.render('pages/cadastro')
-})
+  res.render('pages/cadastro', {pagina:"cadastro", logado:null})
+});
+router.post("/cadastro", async function (req, res) {
+  TarefasControl.Criarussuario(req,res)
+});
+
+
+/* ==================================================================== */
 
 router.get('/cadastro-entregador', function (req, res) {
   res.render('pages/cadastro-entregador')

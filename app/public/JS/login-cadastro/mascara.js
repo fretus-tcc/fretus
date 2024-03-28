@@ -1,5 +1,5 @@
-const cpfInput = document.getElementById('cpf');
-const cpfInput2 = document.getElementById('cpf2');    
+const cpfInput = document.querySelector('.cpf');
+const cpfInput2 = document.querySelector('.cpf2');    
 cpfInput.addEventListener('input', function () {
     let value = cpfInput.value.replace(/\D/g, '');
     if (value.length > 9) {

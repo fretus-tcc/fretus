@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const methodOverride = require('method-override')
-const port = 3000
+const port = 3001
 
 const dotenv = require('dotenv');
 dotenv.config();

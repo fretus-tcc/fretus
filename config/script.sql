@@ -43,33 +43,56 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema FRETUS
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `FRETUS` DEFAULT CHARACTER SET utf8 ;
-USE `FRETUS` ;
-
+CREATE DATABASE IF NOT EXISTS `FRETUS` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `FRETUS`;
 -- -----------------------------------------------------
 -- Table `FRETUS`.`USUARIOS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `FRETUS`.`USUARIOS` (
-  `id_usuario` INT NOT NULL AUTO_INCREMENT,
-  `senha_usuario` VARCHAR(45) NOT NULL,
-  `nome_usuario` VARCHAR(45) NOT NULL,
-  `cpf_usuario` CHAR(11) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `telefone` CHAR(11) NOT NULL,
-  `data_usuario` DATE NOT NULL,
-  `descricao_usuario` TEXT(100) NULL,
-  `foto_de_perfil` VARCHAR(255) NULL,
-  `cod_tipo_usuario` INT NOT NULL,
-  `notificacao_sms_estado` INT NOT NULL,
-  `notificacao_email_estado` INT NOT NULL,
-  `desr_tipo_usuario` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE INDEX `idUSUARIOS_UNIQUE` (`id_usuario` ASC) VISIBLE,
-  UNIQUE INDEX `cpf_usuario_UNIQUE` (`cpf_usuario` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `telefone_UNIQUE` (`telefone` ASC) VISIBLE)
-ENGINE = InnoDB;
 
+-- Table structure for table `tipo_usuario`
+
+DROP TABLE IF EXISTS `tipo_usuario`;
+CREATE TABLE `tipo_usuario` (
+  `id_tipo_usuario` int NOT NULL AUTO_INCREMENT,
+  `tipo_usuario` varchar(25) DEFAULT NULL,
+  `descricao_usuario` varchar(155) DEFAULT NULL,
+  `status_tipo_usuario` int DEFAULT '1',
+  PRIMARY KEY (`id_tipo_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `tipo_usuario` WRITE;
+/*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
+INSERT INTO `tipo_usuario` VALUES (1,'Comum','Usuário cadastrado no sistema',1),(2,'Encarregado','Usuário com acesso a consultas na área administrativa',1),(3,'ADM','Usuário com acesso a consultas e edições na área administrativa',1);
+/*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE `usuario` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `nome_usuario` varchar(45) DEFAULT NULL,
+  `user_usuario` varchar(45) DEFAULT NULL,
+  `senha_usuario` char(60) DEFAULT NULL,
+  `email_usuario` varchar(45) DEFAULT NULL,
+  `fone_usuario` varchar(11) DEFAULT NULL,
+  `tipo_usuario` int NOT NULL DEFAULT '1',
+  `status_usuario` int DEFAULT '1',
+  `cpf_usuario` CHAR(11) DEFAULT NULL,
+  `telefone` CHAR(11) DEFAULT NULL,
+  `data_usuario` DATE DEFAULT NULL,
+  `descricao_usuario` TEXT NULL,
+  `foto_de_perfil` VARCHAR(255) NULL,
+  `cod_tipo_usuario` INT DEFAULT NULL,
+  `notificacao_sms_estado` INT DEFAULT NULL,
+  `notificacao_email_estado` INT DEFAULT NULL,
+  `desr_tipo_usuario` VARCHAR(45) DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`),
+  KEY `fk_usuario_tipo_usuario_idx` (`tipo_usuario`),
+    UNIQUE INDEX `idUSUARIOS_UNIQUE` (`id_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `cpf_usuario_UNIQUE` (`cpf_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `email_usuario_UNIQUE` (`email_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `telefone_UNIQUE` (`telefone` ASC) VISIBLE, 
+  CONSTRAINT `fk_usuario_tipo_usuario` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
 -- Table `FRETUS`.`CEP`
