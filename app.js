@@ -34,8 +34,6 @@ app.use("/cliente", client)
 const shipper = require("./app/routes/shipper")
 app.use("/entregador", shipper)
 
-const admin = require("./app/routes/admin")
-app.use("/admin", admin)
 
 app.listen(port, () => {
   console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`)
