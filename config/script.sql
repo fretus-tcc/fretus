@@ -70,29 +70,29 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int NOT NULL AUTO_INCREMENT,
   `nome_usuario` varchar(45) DEFAULT NULL,
-  `user_usuario` varchar(45) DEFAULT NULL,
+  `user_usuario` varchar(45) NULL,
   `senha_usuario` char(60) DEFAULT NULL,
   `email_usuario` varchar(45) DEFAULT NULL,
-  `fone_usuario` varchar(11) DEFAULT NULL,
+  `fone_usuario` varchar(11) NULL,
   `tipo_usuario` int NOT NULL DEFAULT '1',
   `status_usuario` int DEFAULT '1',
   `cpf_usuario` CHAR(11) DEFAULT NULL,
-  `telefone` CHAR(11) DEFAULT NULL,
-  `data_usuario` DATE DEFAULT NULL,
+  `telefone` CHAR(11) NULL,
+  `data_usuario` DATE NULL,
   `descricao_usuario` TEXT NULL,
   `foto_de_perfil` VARCHAR(255) NULL,
-  `cod_tipo_usuario` INT DEFAULT NULL,
-  `notificacao_sms_estado` INT DEFAULT NULL,
-  `notificacao_email_estado` INT DEFAULT NULL,
-  `desr_tipo_usuario` VARCHAR(45) DEFAULT NULL,
+  `cod_tipo_usuario` INT NULL,
+  `notificacao_sms_estado` INT NULL,
+  `notificacao_email_estado` INT NULL,
+  `desr_tipo_usuario` VARCHAR(45) NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `fk_usuario_tipo_usuario_idx` (`tipo_usuario`),
-    UNIQUE INDEX `idUSUARIOS_UNIQUE` (`id_usuario` ASC) VISIBLE,
-  UNIQUE INDEX `cpf_usuario_UNIQUE` (`cpf_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `idUSUARIOS_UNIQUE` (`id_usuario` ASC) VISIBLE,
   UNIQUE INDEX `email_usuario_UNIQUE` (`email_usuario` ASC) VISIBLE,
   UNIQUE INDEX `telefone_UNIQUE` (`telefone` ASC) VISIBLE, 
   CONSTRAINT `fk_usuario_tipo_usuario` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 -- -----------------------------------------------------
 -- Table `FRETUS`.`CEP`
