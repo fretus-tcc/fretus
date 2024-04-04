@@ -1,6 +1,6 @@
 var express = require("express")
 var router = express.Router()
-var TarefasControl = require("../controller/cadastroController")
+const TarefasControl = require("../controller/cadastroController");
 const { body, validationResult } = require("express-validator")
 
 var pool = require("../../config/connection-factory");
@@ -20,12 +20,14 @@ router.get('/login', function (req, res) {
 router.get('/cadastro', function (req, res) {
   res.render('pages/cadastro', {pagina:"cadastro", logado:null})
 });
-router.post("/cadastroCleiente",TarefasControl.regrasValidacao, async function (req, res) {
-  TarefasControl.Criarussuario(req,res)
+router.post("/cadastroCliente", async function (req, res) {
+  TarefasControl.CriarUsuario(req, res, 'cliente');
 });
-router.post("/cadastroEntregador",TarefasControl.regrasValidacao ,async function (req, res) {
-  TarefasControl.Criarussuario(req,res)
+
+router.post("/cadastroEntregador", async function (req, res) {
+  TarefasControl.CriarUsuario(req, res, 'entregador'); 
 });
+
 
 
 /* ==================================================================== */

@@ -2,17 +2,20 @@
 var pool = require("../../config/connection-factory");
 
 const tarefasModel = {
-    create: async (data) => {
+    create: async (data, tipoUsuario) => {
         try {
-            const [linhas] = await pool.query('INSERT INTO usuario ( `nome_usuario` ,`cpf_usuario`,`email_usuario`, `senha_usuario` ) VALUES ( ? , ? , ?, ? ) ',
-             [ data.nome,data.cpf, data.email, data.senha ])  
-            return linhas;
+            const [linhas] = await pool.query(
+                'INSERT INTO usuario ( `nome_usuario` ,`cpf_usuario`,`email_usuario`, `senha_usuario`, `tipo_usuario` ) VALUES ( ? , ? , ?, ?, ? ) ',
+                [data.nome, data.cpf, data.email, data.senha, tipoUsuario]
+            );
 
+            return linhas;
+            
         } catch (error) {
-            return error;
+            throw error; 
         }
     },
-  
 };
+
 
 module.exports = tarefasModel;
