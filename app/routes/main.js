@@ -18,13 +18,13 @@ router.get('/login', function (req, res) {
 /* ============================CADASTRO======================================== */
 
 router.get('/cadastro', function (req, res) {
-  res.render('pages/cadastro', {pagina:"cadastro", logado:null})
+  res.render('pages/cadastro', {pagina:"cadastroCliente , cadastroEntregador ", logado:null , retorno: null, listaErros: null, dados: null})
 });
-router.post("/cadastroCliente", async function (req, res) {
+router.post("/cadastroCliente",TarefasControl.regrasValidacao, async function (req, res) {
   TarefasControl.CriarUsuario(req, res, 'cliente');
 });
 
-router.post("/cadastroEntregador", async function (req, res) {
+router.post("/cadastroEntregador",TarefasControl.regrasValidacao, async function (req, res) {
   TarefasControl.CriarUsuario(req, res, 'entregador'); 
 });
 

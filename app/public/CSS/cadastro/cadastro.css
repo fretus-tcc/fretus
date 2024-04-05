@@ -8,6 +8,18 @@ body {
     color: #333;
     min-height: 100vh;
 }
+.erroForm {
+    background-color: red;
+    display: block;
+    color: white;
+    font-weight: bolder;
+    height: 1.5em;
+    width:420px;
+    margin-bottom: 5px;
+    padding: 5px 0 0 15px;  
+    width: 100%;
+    height: fit-content;
+}
 
 .fretus {
     position: absolute;

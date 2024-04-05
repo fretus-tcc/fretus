@@ -10,7 +10,39 @@
     <link rel="stylesheet" href="/CSS/index.css">
     <link rel="stylesheet" href="/CSS/cadastro/cadastro.css">
 </head>
+
+<style>
+
+
+
+</style>
 <body>
+
+   
+    <%
+    var msgErro = {nome:"", email:"", senha:""}
+    var cssErro = {nome:"", email:"", senha:""}
+    let valorCampos = {nome:"", email:"", senha:""}
+    if(dados && dados!=null){
+        valorCampos = dados
+    }
+
+    if(listaErros){
+        listaErros.errors.forEach((itemErro)=>{
+            if(itemErro.path == "nome"){
+                msgErro.nome = itemErro.msg
+                cssErro.nome = "erroForm"
+            } else if(itemErro.path == "email"){
+                msgErro.email = itemErro.msg
+                cssErro.email = "erroForm"
+            } else if(itemErro.path == "senha"){
+                msgErro.senha = itemErro.msg
+                cssErro.senha = "erroForm"
+            } 
+        });
+    } 
+
+    %>
 
 
         <section class="fretus">
@@ -26,16 +58,17 @@
             <section class="signup-container">
                 <section class="signup-content">
                     <form id="cliente" action="/cadastroCliente" method="post" class="login-form">
-                        <input type="text" name="nome" id="nome" placeholder="Seu nome">
+                        
+                        <input type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
                         <!-- <p id="messageNome"></p> -->
                         <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
                             placeholder="CPF/CNPJ">
                         <!--  <p id="messageCpf"></p> -->
-                        <input type="text" name="email" id="email" placeholder="Seu e-mail">
+                        <input type="text" name="email" id="email" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
                         <!-- <p id="messageEmail"></p> -->
                         <section class="input__wrapper">
                             <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
-                                placeholder="Senha">
+                                placeholder="Senha" value="<%=valorCampos.senha%>">
                             <!-- <p id="messageSenha"></p> -->
                             <!--  <label for="password" class="input__label"></label> -->
                             <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
