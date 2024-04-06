@@ -11,11 +11,7 @@
     <link rel="stylesheet" href="/CSS/cadastro/cadastro.css">
 </head>
 
-<style>
 
-
-
-</style>
 <body>
 
    
@@ -60,15 +56,18 @@
                     <form id="cliente" action="/cadastroCliente" method="post" class="login-form">
                         
                         <input type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
+                        <span class="<%= cssErro.nome %>"><%= msgErro.nome %></span>
                         <!-- <p id="messageNome"></p> -->
-                        <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
-                            placeholder="CPF/CNPJ">
+                      <!--   <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
+                            placeholder="CPF/CNPJ"> -->
                         <!--  <p id="messageCpf"></p> -->
                         <input type="text" name="email" id="email" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
+                        <span class="<%= cssErro.email %>"><%= msgErro.email %></span>
                         <!-- <p id="messageEmail"></p> -->
                         <section class="input__wrapper">
                             <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
                                 placeholder="Senha" value="<%=valorCampos.senha%>">
+                                <span class="<%= cssErro.senha %>"><%= msgErro.senha %></span>
                             <!-- <p id="messageSenha"></p> -->
                             <!--  <label for="password" class="input__label"></label> -->
                             <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
@@ -91,15 +90,18 @@
                     </form>
                     <form id="entregador" action="/cadastroEntregador" method="post">
                         <input type="text" name="nome" id="nome" placeholder="Seu nome">
+                        <span class="<%= cssErro.nome %>"><%= msgErro.nome %></span>
                         <!-- <p id="messageNome"></p> -->
-                        <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
-                            placeholder="CPF/CNPJ">
+                        <!-- <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
+                            placeholder="CPF/CNPJ"> -->
                         <!--  <p id="messageCpf"></p> -->
                         <input type="text" name="email" id="email" placeholder="Seu e-mail">
+                        <span class="<%= cssErro.email %>"><%= msgErro.email %></span>
                         <!-- <p id="messageEmail"></p> -->
                         <section class="input__wrapper">
                             <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
                                 placeholder="Senha">
+                                <span class="<%= cssErro.senha %>"><%= msgErro.senha %></span>
                             <!-- <p id="messageSenha"></p> -->
                             <!--  <label for="password" class="input__label"></label> -->
                             <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">

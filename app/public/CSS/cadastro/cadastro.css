@@ -8,18 +8,6 @@ body {
     color: #333;
     min-height: 100vh;
 }
-.erroForm {
-    background-color: red;
-    display: block;
-    color: white;
-    font-weight: bolder;
-    height: 1.5em;
-    width:420px;
-    margin-bottom: 5px;
-    padding: 5px 0 0 15px;  
-    width: 100%;
-    height: fit-content;
-}
 
 .fretus {
     position: absolute;
@@ -194,5 +182,18 @@ form p a {
     background-color: #3b5998;
     color: #fff;
 }
+
+/* ====================validator============================ */
+
+.erroForm {
+    color: red;
+    display: block;
+    font-weight: bolder;
+    width: 100%;
+    padding: 10px 0 0 15px;
+    font-size: 0.9rem;
+}
+
+/* ================================================ */
 
 @media (max-width:500px) { body{ height:125vh}}

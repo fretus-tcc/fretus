@@ -28,6 +28,7 @@ const TarefasControl = {
         } catch (error) {
             return error;
         }
+        
     },
     regrasValidacao: [
         body("nome")
