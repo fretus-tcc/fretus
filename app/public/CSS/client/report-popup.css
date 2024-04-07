@@ -1,18 +1,11 @@
-.form input[type="file"] {
+/* deve ser global */
+/* input[type="file"] {
     opacity: 0;
     position: absolute;
     z-index: -1000000;
 }
 
-.form .report-reason {
-    display: none;
-}
-
-.form .report-reason.show {
-    display: block;
-}
-
-.form .file-field {
+.file-field {
     background-color: #FEEFE8;
     color: #FF8750;
     border: dashed 2px;
@@ -26,7 +19,7 @@
     transition: all .3s;
 }
 
-.form .file-field:hover, .form .file-field:focus {
+.file-field:hover, .file-field:focus {
     color: #bb440c;
 }
 
@@ -49,4 +42,12 @@
     padding: 8px;
     font-family: var(--font-2);
     font-size: 16px;
+} */
+
+.report-reason {
+    display: none;
+}
+
+.report-reason.show {
+    display: block;
 }

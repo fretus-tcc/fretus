@@ -7,7 +7,7 @@ const labelFile = document.querySelectorAll('.file-field .msg')
 const reportSubmit = document.querySelector('.report .cta')
 // const notificationContainer = document.querySelector('.notification-container')
 const reportSelect = document.querySelector('.report select')
-const reportReason = document.querySelector('.form .report-reason')
+const reportReason = document.querySelector('.report-reason')
 let clicked
 
 reportCall.forEach((item, i) => {

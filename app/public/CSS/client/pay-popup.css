@@ -1,14 +1,16 @@
-.popup.show {
+/* duplicado */
+/* .popup.show {
     position: fixed;
-}
+} 
 
 .popup.show form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-}
+} */
 
-.popup.show .input-field, .popup.show .payment-method {
+/* deve ser global */
+/* .popup.show .input-field, .popup.show .payment-method {
     outline: none;
     width: 100%;
     padding: 8px;
@@ -21,7 +23,7 @@
 
 .popup.show .input-field:focus {
     border-color: #3333336c;
-}
+} */
 
 .popup.show .payment-method {
     padding: 0;
@@ -126,10 +128,10 @@
     overflow: hidden;
 }
 
-.popup.show textarea {
+/* .popup.show textarea {
     resize: none;
     min-height: 125px;
-}
+} */
 
 .popup.show form > .price {
     display: flex;

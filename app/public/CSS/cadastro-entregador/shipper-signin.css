@@ -69,7 +69,8 @@
     gap: 20px;
 }
 
-.form input[type="file"] {
+/* deve ser global */
+/* .form input[type="file"] {
     opacity: 0;
     position: absolute;
     z-index: -1000000;
@@ -101,10 +102,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .form label {
-    color: rgba(51, 51, 51, 0.645);
     font-family: var(--font-2);
 }
 

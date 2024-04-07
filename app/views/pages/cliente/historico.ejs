@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Histórico</title>
     <%- include('../../partial/config/config.ejs') %>
-        <%- include('../../partial/config/config-client-shipper.ejs') %>
-            <link rel="stylesheet" href="/CSS/client/price-indicator.css">
-            <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
-            <link rel="stylesheet" href="/CSS/shipper/history.css">
-            <link rel="stylesheet" href="/CSS/shipper/requests.css">
-            <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
-            <link rel="stylesheet" href="/CSS/client/rate-popup.css">
-            <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
-            <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
-            <link rel="stylesheet" href="/CSS/client/popup-info.css">
-            <link rel="stylesheet" href="/CSS/client/pay-popup.css">
-            <link rel="stylesheet" href="/CSS/client/report-popup.css">
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+    <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
+    <link rel="stylesheet" href="/CSS/shipper/history.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests.css">
+    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+    <link rel="stylesheet" href="/CSS/client/rate-popup.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
+    <link rel="stylesheet" href="/CSS/client/popup-info.css">
+    <link rel="stylesheet" href="/CSS/client/pay-popup.css">
+    <link rel="stylesheet" href="/CSS/client/report-popup.css">
 
-            <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
-            <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'/>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'/>
 </head>
 
 <style>
@@ -355,48 +355,41 @@
                 <aside class="close">
                     <img src="../../imgs/client/close-icon.svg" alt="">
                 </aside>
-                <section class="popup-wrapper">
-                    <form class="form">
-                        <h1>Denúncia</h1>
-                        <label class="file-field" for="report-photo">
-                            <input class="field" required type="file" name="files" id="report-photo">
-                            <aside class="icon">
-                                <img src="../../imgs/cadastro-entregador/upload-icon.svg" alt="">
-                            </aside>
-                            <span class="msg">Foto do Ocorrido</span>
-                        </label>
-                        <select required class="input-field field">
-                            <option value="">Motivo da Denúncia</option>
-                            <option value="1">Assédio ou Comportamento inadequado</option>
-                            <option value="2">Problemas de Qualidade do Serviço</option>
-                            <option value="3">Violar Regras do Site</option>
-                            <option value="4">Suspeita de Fraude</option>
-                            <option value="Outros">Outros</option>
-                        </select>
-                        <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
-                        <input required placeholder="Data do ocorrido" class="input-field field" type="text"
-                            onfocus="this.type='date'">
-                        <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
-                        <button class="cta">Enviar</button>
-                    </form>
-                </section>
+                <form class="popup-wrapper">
+                    <h1>Denúncia</h1>
+                    <label class="file-field" for="report-photo">
+                        <input class="field" required type="file" name="files" id="report-photo">
+                        <aside class="icon">
+                            <img src="../../imgs/cadastro-entregador/upload-icon.svg" alt="">
+                        </aside>
+                        <span class="msg">Foto do Ocorrido</span>
+                    </label>
+                    <select required class="input-field field">
+                        <option value="">Motivo da Denúncia</option>
+                        <option value="1">Assédio ou Comportamento inadequado</option>
+                        <option value="2">Problemas de Qualidade do Serviço</option>
+                        <option value="3">Violar Regras do Site</option>
+                        <option value="4">Suspeita de Fraude</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                    <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
+                    <input required placeholder="Data do ocorrido" class="input-field field" type="text"
+                        onfocus="this.type='date'">
+                    <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
+                    <button class="cta">Enviar</button>
+                </form>
             </article>
         </section>
 
         <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
-            <script src="/JS/burguer.js"></script>
-            <script src="/JS/client/shipper-carousel.js"></script>
-            <script src="/JS/client/rate-popup.js"></script>
-            <script src="/JS/client/fav-unfav.js"></script>
-            <script src="/JS/shipper/popup-info.js"></script>
-            <script src="/JS/shipper/popup-location.js"></script>
-            <script src="/JS/shipper/report-popup.js"></script>
-
-
-            
-
-
+        <script src="/JS/burguer.js"></script>
+        <script src="/JS/client/shipper-carousel.js"></script>
+        <script src="/JS/client/rate-popup.js"></script>
+        <script src="/JS/client/fav-unfav.js"></script>
+        <script src="/JS/shipper/popup-info.js"></script>
+        <script src="/JS/shipper/popup-location.js"></script>
+        <script src="/JS/shipper/report-popup.js"></script>
 </body>
 
 </html>
