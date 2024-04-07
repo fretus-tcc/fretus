@@ -75,7 +75,7 @@ body {
 
 /* PAY POPUP */
 
-.popup.show .input-field {
+.popup.show .input-field, .popup.show .payment-method {
     outline: none;
     width: 100%;
     padding: 8px;
