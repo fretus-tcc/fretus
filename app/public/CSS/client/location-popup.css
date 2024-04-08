@@ -1,0 +1,20 @@
+.location .popup-content {
+    padding: 0;
+}
+
+.location .close {
+    z-index: 1000;
+}
+
+.location .map-container {
+    width: 100%;
+}
+
+.location #map {
+    height: 350px;
+    border-radius: 7px;
+}
+
+.location-info {
+    padding: 0 25px 25px;
+}
