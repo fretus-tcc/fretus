@@ -262,42 +262,9 @@
                 </article>
                 </article>
             </section>
-
-
         </main>
 
         <article class="notification-container"></article>
-
-        <section class="popup report">
-            <article class="popup-content">
-                <section class="close">
-                    <img src="/imgs/client/close-icon.svg" alt="">
-                </section>
-                <form class="popup-wrapper">
-                    <h1>Denúncia</h1>
-                    <label class="file-field" for="report-photo">
-                        <input class="field" required type="file" name="files" id="report-photo">
-                        <aside class="icon">
-                            <img src="../../imgs/cadastro-entregador/upload-icon.svg" alt="">
-                        </aside>
-                        <span class="msg">Foto do Ocorrido</span>
-                    </label>
-                    <select required class="input-field field">
-                        <option value="">Motivo da Denúncia</option>
-                        <option value="1">Assédio ou Comportamento inadequado</option>
-                        <option value="2">Problemas de Qualidade do Serviço</option>
-                        <option value="3">Violar Regras do Site</option>
-                        <option value="4">Suspeita de Fraude</option>
-                        <option value="Outros">Outros</option>
-                    </select>
-                    <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
-                    <input required placeholder="Data do ocorrido" class="input-field field" type="text"
-                        onfocus="this.type='date'">
-                    <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
-                    <button class="cta">Enviar</button>
-                </form>
-            </article>
-        </section>
 
         <section class="popup cupon">
             <article class="popup-content">
@@ -316,14 +283,15 @@
             </article>
         </section>
 
+        <%- include('../../partial/popup/report.ejs') %>
         <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
-            <script src="/JS/burguer.js"></script>
-            <script src="/JS/shipper/results-carousel.js"></script>
-            <script src="/JS/shipper/report-popup.js"></script>
-            <script src="/JS/client/show-notification.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="/JS/shipper/cupons.js"></script>
+        <script src="/JS/burguer.js"></script>
+        <script src="/JS/shipper/results-carousel.js"></script>
+        <script src="/JS/shipper/report-popup.js"></script>
+        <script src="/JS/client/show-notification.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/JS/shipper/cupons.js"></script>
 </body>
 
 </html>

@@ -377,51 +377,21 @@
         </form>
     </article>
 </section> -->
-        <section class="popup report">
-            <section class="popup-content">
-                <section class="close">
-                    <img src="/imgs/client/close-icon.svg" alt="">
-                </section>
-                <form class="popup-wrapper">
-                    <h1>Denúncia</h1>
-                    <label class="file-field" for="report-photo">
-                        <input class="field" required type="file" name="files" id="report-photo">
-                        <article class="icon">
-                            <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
-                        </article>
-                        <span class="msg">Foto do Ocorrido</span>
-                    </label>
-                    <select required class="input-field field">
-                        <option value="">Motivo da Denúncia</option>
-                        <option value="1">Assédio ou Comportamento inadequado</option>
-                        <option value="2">Problemas de Qualidade do Serviço</option>
-                        <option value="3">Violar Regras do Site</option>
-                        <option value="4">Suspeita de Fraude</option>
-                        <option value="Outros">Outros</option>
-                    </select>
-                    <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
-                    <input required placeholder="Data do ocorrido" class="input-field field" type="text"
-                        onfocus="this.type='date'">
-                    <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
-                    <button class="cta">Enviar</button>
-                </form>
-            </section>
 
-            <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+        <%- include('../../partial/popup/report.ejs') %>
+        <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"
-                    integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ=="
-                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> -->
-                <script src="/JS/burguer.js"></script>
-                <script src="/JS/shipper/burguer-config.js"></script>
-                <script src="/JS/shipper/textarea-resize.js"></script>
-                <script src="/JS/shipper/send-msg.js"></script>
-                <script src="/JS/shipper/clip-popup.js"></script>
-                <!-- <script src="/JS/shipper/payment.js"></script>
-    <script src="/JS/shipper/allow-payment.js"></script>
-    <script src="/JS/client/pay-popup.js"></script> -->
-                <script src="/JS/shipper/report-popup.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> -->
+        <script src="/JS/burguer.js"></script>
+        <script src="/JS/shipper/burguer-config.js"></script>
+        <script src="/JS/shipper/textarea-resize.js"></script>
+        <script src="/JS/shipper/send-msg.js"></script>
+        <script src="/JS/shipper/clip-popup.js"></script>
+        <!-- <script src="/JS/shipper/payment.js"></script>
+        <script src="/JS/shipper/allow-payment.js"></script>
+        <script src="/JS/client/pay-popup.js"></script> -->
+        <script src="/JS/shipper/report-popup.js"></script>
 </body>
 
 </html>
