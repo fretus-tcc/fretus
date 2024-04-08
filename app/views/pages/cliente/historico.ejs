@@ -312,22 +312,6 @@
             </section>
         </section>
 
-        <section class="popup info">
-            <article class="popup-content">
-                <aside class="close">
-                    <img src="../../imgs/client/close-icon.svg" alt="">
-                </aside>
-                <summary class="popup-wrapper">
-                    <h1>Informações da Entrega</h1>
-                    <p><span class="title-type">Local de partida:</span> Rua José de Castilho</p>
-                    <p><span class="title-type">Local de retirada:</span> Rua Carneiro Leão</p>
-                    <p><span class="title-type">Peso:</span> 1.5 Kg</p>
-                    <p><span class="title-type">Dimensões:</span> 200x200 cm</p>
-                    <p><span class="title-type">Preço:</span> R$ 51,00</p>
-                </summary>
-            </article>
-        </section>
-
         <section class="popup locationBox">
             <article class="popup-content">
 
@@ -346,6 +330,7 @@
         </section>
 
         <%- include('../../partial/popup/report.ejs') %>
+        <%- include('../../partial/popup/info.ejs') %>
         <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
         <script src="/JS/burguer.js"></script>
