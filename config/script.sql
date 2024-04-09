@@ -50,7 +50,7 @@ CREATE TABLE `usuario` (
   `fone_usuario` varchar(11) NULL,
   `tipo_usuario` int NOT NULL DEFAULT '1',
   `status_usuario` int DEFAULT '1',
-  `cpf_usuario` CHAR(11) DEFAULT NULL,
+  `cpf_usuario` VARCHAR(11) DEFAULT NULL,
   `telefone` CHAR(11) NULL,
   `data_usuario` DATE NULL,
   `descricao_usuario` TEXT NULL,
