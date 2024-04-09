@@ -25,3 +25,8 @@ locationCall.forEach(item => {
 closelocation.addEventListener('click', () => {
   locationPopup.classList.remove('show')
 })
+
+function toggleItens() {
+  var itens = document.querySelector('.itens');
+  itens.style.display = itens.style.display === 'block' ? 'none' : 'block';
+}
