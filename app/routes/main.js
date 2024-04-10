@@ -5,8 +5,6 @@ const { body, validationResult } = require("express-validator")
 
 var pool = require("../../config/connection-factory");
 
-
-
 router.get("/", function (req, res) {
   res.render("pages/index")
 })
@@ -18,18 +16,12 @@ router.get('/login', function (req, res) {
 /* ============================CADASTRO======================================== */
 
 router.get('/cadastro', function (req, res) {
-  res.render('pages/cadastro', {pagina:"cadastroCliente , cadastroEntregador ", logado:null , retorno: null, listaErros: null, dados: null})
+  res.render('pages/cadastro', {/* pagina:"cadastroCliente , cadastroEntregador ", */ logado:null , retorno: null, listaErros: null, dados: null})
 });
 
-router.post("/cadastroCliente",TarefasControl.regrasValidacao, async function (req, res) {
-  TarefasControl.CriarUsuario(req, res, 'cliente');
+router.post("/cadastro", TarefasControl.regrasValidacao, async function (req, res) {
+  await TarefasControl.CriarUsuario(req, res);
 });
-
-router.post("/cadastroEntregador",TarefasControl.regrasValidacao, async function (req, res) {
-  TarefasControl.CriarUsuario(req, res, 'entregador'); 
-});
-
-
 
 /* ==================================================================== */
 

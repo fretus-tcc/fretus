@@ -3,26 +3,27 @@ const tarefasModel = require("../models/cadastroModel");
 const { body, validationResult } = require("express-validator");
 
 const TarefasControl = {
-    CriarUsuario: async (req, res, tipoUsuario) => {
+    CriarUsuario: async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           console.log(errors);
           return res.render('pages/cadastro', {
             dados: req.body,
             listaErros: errors,
-            pagina: "cadastroCliente , cadastroEntregador ", 
             logado: null
 
           });
         }
+        
         try {
-            let resultados;
-            if (tipoUsuario === 'cliente') {
-                resultados = await tarefasModel.create(req.body, 1); 
-                res.render('pages/cliente/solicitar-entrega')
-            } else if (tipoUsuario === 'entregador') {
-                resultados = await tarefasModel.create(req.body, 2); 
-                res.render('pages/cadastro-entregador')
+            if (req.body.type == '1') {
+                await tarefasModel.create(req.body, 1);
+                console.log('foi')
+                res.redirect('/cliente/solicitar-entrega')
+            } else if (req.body.type == '2') {
+                await tarefasModel.create(req.body, 2);
+                console.log('foi')
+                res.redirect('/cadastro-entregador')
             }
             
         } catch (error) {
