@@ -97,4 +97,33 @@
 
 }
 
+.itens ul {
+    list-style: none;
+}
+.menu-container{
+    background-color: red;
+
+}
+.menu-item{
+    background-color: #EF9652;
+    display: flex;
+    flex-direction: column;
+
+}
+.y-line{
+    width: 20px;
+    height: 20px;
+    background-color: blue;
+    border-radius: 2px;
+    margin: 12px;
+}
+.x-line{
+    width: 45px ;
+    height: 0.3rem ;
+    background-color: pink;
+    transform: rotate(90deg);
+    margin: 10px 0;
+    border-radius: 10px;
+}
 /* =================descrição============== */
+
