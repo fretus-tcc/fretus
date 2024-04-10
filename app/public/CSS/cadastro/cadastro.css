@@ -32,7 +32,7 @@ body {
     position: relative;
 }
 
-.signup-container {
+/* .signup-container {
     width: 100%;
     overflow: hidden;
     scroll-behavior: smooth;
@@ -40,13 +40,13 @@ body {
 }
 
 .signup-container > .signup-content {
-    width: fit-content;
+    width: 100%;
     display: flex;
     flex-wrap: nowrap;
     gap: 15px;
-}
+} */
 
-.signup-content > form {
+.container > form {
     width: 100%;
     flex-shrink: 0;
     transition: .5s;
@@ -61,7 +61,12 @@ body {
     display: flex;
 }
 
-.buttonsForm button {
+.buttonsForm input[type="radio"] {
+    display: none;
+}
+
+.buttonsForm label {
+    text-align: center;
     font-family: var(--font-1);
     font-weight: bold;
     font-size: 16px;
@@ -69,22 +74,28 @@ body {
     background: transparent;
     border: none;
     position: relative;
+    z-index: 50000;
     width: 50%;
     padding: 10px 0;
-    color: white;
+    color: #333;
 }
 
-.buttonsForm button#btnEntregador {
-    color: #333;
+.buttonsForm input:checked + label {
+    color: white;
 }
 
 .btnColor {
     position: absolute;
+    left: 0;
     width: 50%;
     height: 100%;
     background-color: var(--orange);
     border-radius: 30px;
-    transition: .3s;
+    transition: .3s all;
+}
+
+.buttonsForm input#tipoEntregador:checked ~ .btnColor {
+    left: 50%;
 }
 
 input:not([type="checkbox"]) {

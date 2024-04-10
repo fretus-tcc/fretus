@@ -46,88 +46,48 @@
         </section>
         <section class="container">
             <h2>Você deseja se cadastrar como?</h2>
-            <section class="buttonsForm">
-                <article class="btnColor"></article>
-                <button id="btnCliente">Cliente</button>
-                <button id="btnEntregador">Entregador</button>
-            </section>
-            <section class="signup-container">
-                <section class="signup-content">
-                    <form id="cliente" action="/cadastroCliente" method="post" class="login-form">
-                        
-                        <input type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
-                        <span class="<%= cssErro.nome %>"><%= msgErro.nome %></span>
-                        <!-- <p id="messageNome"></p> -->
-                      <!--   <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
-                            placeholder="CPF/CNPJ"> -->
-                        <!--  <p id="messageCpf"></p> -->
-                        <input type="text" name="email" id="email" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
-                        <span class="<%= cssErro.email %>"><%= msgErro.email %></span>
-                        <!-- <p id="messageEmail"></p> -->
-                        <section class="input__wrapper">
-                            <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
-                                placeholder="Senha" value="<%=valorCampos.senha%>">
-                                <span class="<%= cssErro.senha %>"><%= msgErro.senha %></span>
-                            <!-- <p id="messageSenha"></p> -->
-                            <!--  <label for="password" class="input__label"></label> -->
-                            <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
-                        </section>
-                        <p>Já tem uma conta? <a href="/login">Acesse aqui.</a></p>
-                        <button type="submit" id="criar1">Criar como cliente</button>
-                        <section class="alternative">
-                            <span>ou</span>
-                        </section>
-                        <section class="social-media">
-                            <a href="#" class="social-icon">
-                                <img src="/imgs/login-cadastro/icons8-google-logo.svg" width="45" height="45">
-                                <span>Entrar com google</span>
-                            </a>
-                            <a href="#" class="social-icon facebook">
-                                <img src="/imgs/login-cadastro/icons8-facebook-novo.svg" width="45" height="45">
-                                <span>Entrar com facebook</span>
-                            </a>
-                        </section>
-                    </form>
-                    <form id="entregador" action="/cadastroEntregador" method="post">
-                        <input type="text" name="nome" id="nome" placeholder="Seu nome">
-                        <span class="<%= cssErro.nome %>"><%= msgErro.nome %></span>
-                        <!-- <p id="messageNome"></p> -->
-                        <!-- <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
-                            placeholder="CPF/CNPJ"> -->
-                        <!--  <p id="messageCpf"></p> -->
-                        <input type="text" name="email" id="email" placeholder="Seu e-mail">
-                        <span class="<%= cssErro.email %>"><%= msgErro.email %></span>
-                        <!-- <p id="messageEmail"></p> -->
-                        <section class="input__wrapper">
-                            <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
-                                placeholder="Senha">
-                                <span class="<%= cssErro.senha %>"><%= msgErro.senha %></span>
-                            <!-- <p id="messageSenha"></p> -->
-                            <!--  <label for="password" class="input__label"></label> -->
-                            <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
-                        </section>
-                        <input required type="checkbox" name="terms" id="terms">
-                        <label for="terms" style="font-size:12px;">Eu concordo com os <a href="/Privacidade"
-                                style="color: #ef9652;">Termos e Condições</a> e com a Política de Taxa da
-                            Fretus</label>
-                        <p>Já tem uma conta? <a href="/login">Acesse aqui.</a></p>
-                        <button type="submit" id="criar2">Criar como entregador</button>
-                        <section class="alternative">
-                            <span>ou</span>
-                        </section>
-                        <section class="social-media">
-                            <a href="#" class="social-icon">
-                                <img src="/imgs/login-cadastro/icons8-google-logo.svg" width="45" height="45">
-                                <span>Entrar com google</span>
-                            </a>
-                            <a href="#" class="social-icon facebook">
-                                <img src="/imgs/login-cadastro/icons8-facebook-novo.svg" width="45" height="45">
-                                <span>Entrar com facebook</span>
-                            </a>
-                        </section>
-                    </form>
+            <form id="cliente" action="/cadastroCliente" method="get" class="login-form">
+                <section class="buttonsForm">
+                    <input type="radio" name="type" id="tipoCliente" value="1" checked>
+                    <label for="tipoCliente">Cliente</label>
+                    <input type="radio" name="type" id="tipoEntregador" value="2">
+                    <label for="tipoEntregador">Entregador</label>
+                    <article class="btnColor"></article>
                 </section>
-            </section>
+                
+                <input type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
+                <span class="<%= cssErro.nome %>"><%= msgErro.nome %></span>
+                <!-- <p id="messageNome"></p> -->
+                <!--   <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
+                    placeholder="CPF/CNPJ"> -->
+                <!--  <p id="messageCpf"></p> -->
+                <input type="text" name="email" id="email" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
+                <span class="<%= cssErro.email %>"><%= msgErro.email %></span>
+                <!-- <p id="messageEmail"></p> -->
+                <section class="input__wrapper">
+                    <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
+                        placeholder="Senha" value="<%=valorCampos.senha%>">
+                        <span class="<%= cssErro.senha %>"><%= msgErro.senha %></span>
+                    <!-- <p id="messageSenha"></p> -->
+                    <!--  <label for="password" class="input__label"></label> -->
+                    <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
+                </section>
+                <p>Já tem uma conta? <a href="/login">Acesse aqui.</a></p>
+                <button type="submit" id="criar1">Cadastrar</button>
+                <section class="alternative">
+                    <span>ou</span>
+                </section>
+                <section class="social-media">
+                    <a href="#" class="social-icon">
+                        <img src="/imgs/login-cadastro/icons8-google-logo.svg" width="45" height="45">
+                        <span>Entrar com google</span>
+                    </a>
+                    <a href="#" class="social-icon facebook">
+                        <img src="/imgs/login-cadastro/icons8-facebook-novo.svg" width="45" height="45">
+                        <span>Entrar com facebook</span>
+                    </a>
+                </section>
+            </form>
         </section>
 
 

@@ -20,6 +20,7 @@ router.get('/login', function (req, res) {
 router.get('/cadastro', function (req, res) {
   res.render('pages/cadastro', {pagina:"cadastroCliente , cadastroEntregador ", logado:null , retorno: null, listaErros: null, dados: null})
 });
+
 router.post("/cadastroCliente",TarefasControl.regrasValidacao, async function (req, res) {
   TarefasControl.CriarUsuario(req, res, 'cliente');
 });

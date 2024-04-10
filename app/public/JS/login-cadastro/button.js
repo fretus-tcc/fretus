@@ -1,4 +1,4 @@
-var container = document.querySelector('.signup-container');
+/* var container = document.querySelector('.signup-container');
 var btnColor = document.querySelector('.btnColor');
 
 document.querySelector('#btnCliente').addEventListener('click', () => {
@@ -13,4 +13,4 @@ document.querySelector('#btnEntregador').addEventListener('click', () => {
   btnColor.style.left = "50%";
   document.querySelector('#btnEntregador').style.color = 'white'
   document.querySelector('#btnCliente').style.color = '#333'
-});
+}); */
