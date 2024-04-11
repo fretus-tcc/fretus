@@ -90,6 +90,9 @@
     padding: 10px 10px 0 10px ;
     cursor: pointer;
 }
+.descricao .icon_s{
+    margin-left: 5px;
+}
 
 .itens {
     display: none;
