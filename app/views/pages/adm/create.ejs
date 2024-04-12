@@ -32,9 +32,9 @@
 
     <%- include('../../partial/adm/sidebar.ejs') %>
 
-    <main style="color:#333; padding: 150px 20px 0;">
-        <h1 style="margin-bottom: 15px;">Criar dúvida</h1>
-        <form style="display: flex; flex-direction: column; gap: 8px;" action="/admin/ajuda/create" method="post">
+    <main style="color:#333; padding: 150px 20px 0;" class="container_duvidas">
+        <h1 style="margin-bottom: 15px;" >Criar dúvida</h1>
+        <form style="display: flex; flex-direction: column; gap: 8px;" action="/admin/ajuda/create" method="post" class="form">
             <%- include('../../partial/quotes/fields.ejs', { customError }) %>
         </form>
         

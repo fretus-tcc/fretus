@@ -1,0 +1,29 @@
+.container_duvidas {
+    width: 100%;
+    margin: 0 30px;
+}
+
+.container_duvidas h1 {
+    font-size: 2rem;
+}
+
+.container_duvidas input {
+    padding: 10px;
+    outline: none;
+    border: none;
+}
+.container_duvidas textarea{
+    padding: 10px;
+    outline: none;
+    border: none;
+    height: 20rem;
+    resize: none;
+
+}
+.container_duvidas button{
+    padding: 10px ;
+    color: #fff;
+    background-color: #EF9652;
+    border: none;
+    border-radius: 5px;
+}
