@@ -5,12 +5,12 @@ const accessToken = 'pk.eyJ1IjoiZ2FicmllbGNhcnZhbGgwIiwiYSI6ImNscG14ZDB6OTAwc3Ey
 
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v12',
-    center: [-46.625290, -23.533773],
-    zoom: 12,
-    minZoom: 5,
-    language: 'pt'
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v12',
+  center: [-46.625290, -23.533773],
+  zoom: 12,
+  minZoom: 5,
+  language: 'pt'
 })
 
 map.addControl(new mapboxgl.NavigationControl());
@@ -28,5 +28,15 @@ closelocation.addEventListener('click', () => {
 
 function toggleItens() {
   var itens = document.querySelector('.itens');
+  var icon = document.getElementById("arrow-icon");
+
   itens.style.display = itens.style.display === 'block' ? 'none' : 'block';
+
+  if (icon.classList.contains("down-arrow")) {
+    icon.classList.remove("down-arrow");
+    icon.classList.add("up-arrow");
+} else {
+    icon.classList.remove("up-arrow");
+    icon.classList.add("down-arrow");
+}
 }
