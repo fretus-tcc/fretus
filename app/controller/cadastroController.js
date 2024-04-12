@@ -4,7 +4,6 @@ const { body, validationResult } = require("express-validator");
 
 const TarefasControl = {
     CriarUsuario: async (req, res) => {
-        console.log(req.body)
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           console.log(errors);
@@ -12,17 +11,14 @@ const TarefasControl = {
             dados: req.body,
             listaErros: errors,
             logado: null
-
           });
         }
         
         try {
+            await tarefasModel.create(req.body);
             if (req.body.type == '1') {
-                await tarefasModel.create(req.body, 1);
                 res.redirect('/cliente/solicitar-entrega')
-            } else if (req.body.type == '2') {
-                console.log('foi')
-                await tarefasModel.create(req.body, 2);
+            } else {
                 res.redirect('/cadastro-entregador')
             }
             

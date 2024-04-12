@@ -17,7 +17,7 @@ router.get('/login', function (req, res) {
 /* ============================CADASTRO======================================== */
 
 router.get('/cadastro', function (req, res) {
-  res.render('pages/cadastro', {/* pagina:"cadastroCliente , cadastroEntregador ", */ logado:null , retorno: null, listaErros: null, dados: null})
+  res.render('pages/cadastro', { logado:null , retorno: null, listaErros: null, dados: null})
 });
 
 router.post("/cadastro", TarefasControl.regrasValidacao, async function (req, res) {
