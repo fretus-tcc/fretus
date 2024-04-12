@@ -50,7 +50,7 @@
                     <input type="radio" name="type" id="tipoCliente" value="1" checked>
                     <label for="tipoCliente">Cliente</label>
                     <input type="radio" name="type" id="tipoEntregador" value="2" 
-                        <% if (dados?.type != '1') { %>
+                        <% if (dados?.type && dados?.type != '1') { %>
                             checked
                         <% } %>
                     >
