@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - admin</title>
     <%- include('../../partial/config/config.ejs') %>
-    <%- include('../../partial/config/config-home.ejs') %>
+    <%- include('../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/grid.css">
 </head>
 <body>
 
-    <%- include('../../partial/header.ejs') %>
+    <%- include('../../partial/adm/sidebar.ejs') %>
 
     <main style="color:#333; padding: 150px 20px 0;">
         <h1 style="margin-bottom: 15px;">Dúvidas</h1>
@@ -26,11 +27,10 @@
             </div>
         <% }) %>
     </main>
-
-    <%- include('../../partial/menu-burguer.ejs', { type: 'home' }) %>
     
     <script src="/JS/burguer.js"></script>
     <script src="/JS/header-scroll.js"></script>
     <script src="/JS/quotes/delete-confirm.js"></script>
+    <script src="/JS/adm/resize.js"></script>
 </body>
 </html>

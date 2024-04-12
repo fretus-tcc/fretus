@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
 })
 
 router.get('/create', function (req, res) {
-    res.render('pages/ajuda-admin/create', { errors: null, quotes: null })
+    res.render('pages/adm/create', { errors: null, quotes: null })
 })
 
 router.post('/create', quotesController.validation, function (req, res) {

@@ -57,6 +57,11 @@ a {
     row-gap: .3em;
 }
 
+.main-content > a {
+    display: block;
+    width: 100%;
+}
+
 .home {
     display: flex;
 	flex-basis: 100%;

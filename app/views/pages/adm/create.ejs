@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - admin</title>
-    <!-- <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon"> -->
     <%- include('../../partial/config/config.ejs') %>
-    <%- include('../../partial/config/config-home.ejs') %>
+    <%- include('../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/form.css">
     <style>
         .error {
             border-color: red;
@@ -30,11 +30,11 @@
         }
     %>
 
-    <%- include('../../partial/header.ejs') %>
+    <%- include('../../partial/adm/sidebar.ejs') %>
 
     <main style="color:#333; padding: 150px 20px 0;">
-        <h1 style="margin-bottom: 15px;">Atualizar dúvida</h1>
-        <form style="display: flex; flex-direction: column; gap: 8px;" action="/admin/ajuda/update/<%= quotes?.id_duvida %>?_method=PUT" method="post">
+        <h1 style="margin-bottom: 15px;">Criar dúvida</h1>
+        <form style="display: flex; flex-direction: column; gap: 8px;" action="/admin/ajuda/create" method="post">
             <%- include('../../partial/quotes/fields.ejs', { customError }) %>
         </form>
         
@@ -44,5 +44,7 @@
     
     <script src="/JS/burguer.js"></script>
     <script src="/JS/header-scroll.js"></script>
+    <script src="/JS/adm/resize.js"></script>
+
 </body>
 </html>

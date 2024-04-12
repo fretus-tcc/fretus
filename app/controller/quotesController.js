@@ -31,7 +31,7 @@ const quotesController = {
     listQuotes: async (req, res) => {
         try {
             const result = await quotesModel.findAll()
-            res.render('pages/ajuda-admin/read', { result })
+            res.render('pages/adm/read', { result })
         } catch (error) {
             res.json({ error })
         }
@@ -41,7 +41,7 @@ const quotesController = {
         const { id } = req.params
         try {
             const result = await quotesModel.findById(id)
-            res.render('pages/ajuda-admin/update', { errors: null, quotes: result[0] })
+            res.render('pages/adm/update', { errors: null, quotes: result[0] })
         } catch (error) {
             res.json({ error })
         }
@@ -62,7 +62,7 @@ const quotesController = {
 
     formatData: (req, res, type, quotes) => {
         if (!validationResult(req).isEmpty()) {
-            res.render(`pages/ajuda-admin/${type}`, { errors: validationResult(req).mapped(), quotes })
+            res.render(`pages/adm/${type}`, { errors: validationResult(req).mapped(), quotes })
             return
         }
         const { title, content } = req.body
