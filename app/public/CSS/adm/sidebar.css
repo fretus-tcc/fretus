@@ -119,6 +119,12 @@ a {
 	transform: scaleX(-1);
 }
 
+.content-container {
+    width: 100%;
+    padding: 50px;
+    color: #333;
+}
+
 @media (max-width: 650px), (max-height: 550px) {
     .sidebar {
         visibility: hidden;

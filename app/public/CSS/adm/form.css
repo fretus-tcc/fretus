@@ -1,29 +1,35 @@
-.container_duvidas {
+.content-container form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.content-container input, .content-container textarea {
+    outline: none;
     width: 100%;
-    margin: 0 30px;
+    padding: 8px;
+    color: #333;
+    border: solid 1px rgba(51, 51, 51, 0.18);
+    border-radius: 5px;
+    font-family: var(--font-2);
+    font-size: 16px;
+    
 }
-
-.container_duvidas h1 {
-    font-size: 2rem;
+.content-container input:focus, .content-container textarea:focus {
+    border-color: #3333336c;
 }
-
-.container_duvidas input {
-    padding: 10px;
-    outline: none;
-    border: none;
-}
-.container_duvidas textarea{
-    padding: 10px;
-    outline: none;
-    border: none;
+.content-container textarea{
     height: 20rem;
     resize: none;
 
 }
-.container_duvidas button{
-    padding: 10px ;
-    color: #fff;
-    background-color: #EF9652;
-    border: none;
+.content-container button{
+    width: 100%;
+    height: 45px;
     border-radius: 5px;
+    padding: 5px;
+    font-size: 18px;
+}
+.error {
+    border-color: red !important;
 }
