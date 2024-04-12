@@ -2,20 +2,14 @@
     --sidebar-color: #2C6493;
     --bg-color: #DBDEE3;
     --hover-color: #5682a7;
-    --font-2: 600 .8em 'Inter', sans-serif;
+    /* --font-2: 600 .8em 'Inter', sans-serif; */
     --transition-1: .5s;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    box-sizing: border-box;
 }
 
 body {
     background-color: var(--bg-color);
-    font: var(--font-2);
+    font-family: var(--font-1);
+    
     display: flex;
 }
 
@@ -32,6 +26,8 @@ body {
     align-items: flex-start;
     overflow-x: hidden;
     transition: var(--transition-1);
+    font-size: .8em;
+    font-weight: 700;
 }
 
 a {
@@ -98,7 +94,6 @@ a {
 .row:hover, #show:hover {
     background-color: var(--hover-color);
     color: white;
-    font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
 }
 
 .sidebar.resized {

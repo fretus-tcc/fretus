@@ -12,25 +12,41 @@
 
     <%- include('../../partial/adm/sidebar.ejs') %>
 
-    <main style="color:#333; padding: 150px 20px 0;">
-        <h1 style="margin-bottom: 15px;">Dúvidas</h1>
-        <a style="display: inline-block; margin-bottom: 15px; color: rgb(71, 163, 63);" href="/admin/ajuda/create">Nova dúvida</a>
-        <% result.forEach(item => { %>
-            <div>
-                <h2><%= item.titulo_duvida %></h2>
-                <p>Criada em: <%= item.data_duvida.toLocaleDateString() %></p>
-                <a style="color: var(--blue)" href="/ajuda/<%= item.slug_duvida %>">Acessar</a>
-                <a style="color: var(--blue)" href="/admin/ajuda/update/<%= item.id_duvida %>">Atualizar</a>
-                <form class="delete-form" style="display: inline;" action="/admin/ajuda/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
-                    <button class="delete">Deletar</button>
-                </form>
-            </div>
-        <% }) %>
+    <main class="content-container">
+        
+        <div class="header">
+            <h1>Dúvidas</h1>
+            <a href="/admin/ajuda/create">
+                <img src="/imgs/adm/add.svg" alt="">
+            </a>
+        </div>
+
+        <div class="grid">
+            <% result.forEach(item => { %>
+                <div class="grid-card">
+                    <h2><%= item.titulo_duvida %></h2>
+                    <p>Criada em: <%= item.data_duvida.toLocaleDateString() %></p>
+                    <p><%= item.conteudo_duvida %></p>
+                    <div class="actions">
+                        <a href="/ajuda/<%= item.slug_duvida %>">
+                            <img src="/imgs/adm/view.svg" alt="">
+                        </a>
+                        <a href="/admin/ajuda/update/<%= item.id_duvida %>">
+                            <img src="/imgs/adm/update.svg" alt="">
+                        </a>
+                        <form class="delete-form" action="/admin/ajuda/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
+                            <button class="delete">
+                                <img src="/imgs/adm/delete.svg" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     </main>
     
     <script src="/JS/burguer.js"></script>
-    <script src="/JS/header-scroll.js"></script>
-    <script src="/JS/quotes/delete-confirm.js"></script>
     <script src="/JS/adm/resize.js"></script>
+    <script src="/JS/quotes/delete-confirm.js"></script>
 </body>
 </html>

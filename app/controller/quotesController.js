@@ -31,6 +31,9 @@ const quotesController = {
     listQuotes: async (req, res) => {
         try {
             const result = await quotesModel.findAll()
+            result.forEach(item => {
+                item.conteudo_duvida = marked.parse(item.conteudo_duvida).replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '').slice(0, 300).concat('...')
+            })
             res.render('pages/adm/read', { result })
         } catch (error) {
             res.json({ error })

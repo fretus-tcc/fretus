@@ -1,0 +1,54 @@
+.content-container {
+    width: 100%;
+    padding: 50px;
+    color: #333;
+}
+
+.content-container a {
+    color: #333;
+}
+
+.content-container .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.content-container h1 {
+    font-size: 32px;  
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, auto));
+    gap: 15px;
+}
+
+.grid-card {
+    background-color: white;
+    padding: 18px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.grid-card h2 {
+    font-size: 20px;
+}
+
+.grid-card p {
+    font-family: var(--font-2);
+}
+
+.grid-card .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.grid-card button {
+    all: unset;
+    cursor: pointer;
+}
