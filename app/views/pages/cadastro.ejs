@@ -16,30 +16,35 @@
 
    
     <%
-    var msgErro = {nome:"", email:"", senha:""}
-    var cssErro = {nome:"", email:"", senha:""}
-    let valorCampos = {nome:"", email:"", senha:""}
-    if(dados && dados!=null){
-        valorCampos = dados
-    }
+        var msgErro = {nome:"", email:"", senha:""}
+        var cssErro = {nome:"", email:"", senha:""}
+        let valorCampos = {nome:"", email:"", senha:""}
+        if(dados && dados!=null){
+            valorCampos = dados
+        }
 
-    if(listaErros){
-        listaErros.errors.forEach((itemErro)=>{
-            if(itemErro.path == "nome"){
-                msgErro.nome = itemErro.msg
-                cssErro.nome = "erroForm"
-            } else if(itemErro.path == "email"){
-                msgErro.email = itemErro.msg
-                cssErro.email = "erroForm"
-            } else if(itemErro.path == "senha"){
-                msgErro.senha = itemErro.msg
-                cssErro.senha = "erroForm"
-            } 
-        });
-    } 
+        if(listaErros){
+            listaErros.errors.forEach((itemErro)=>{
+                if(itemErro.path == "nome"){
+                    msgErro.nome = itemErro.msg
+                    cssErro.nome = "erroForm"
+                } else if(itemErro.path == "email"){
+                    msgErro.email = itemErro.msg
+                    cssErro.email = "erroForm"
+                } else if(itemErro.path == "senha"){
+                    msgErro.senha = itemErro.msg
+                    cssErro.senha = "erroForm"
+                } 
+            });
+        }
 
+        let cliente
+        if (dados.type == '1') {
+            cliente = true
+        } else {
+            cliente = false   
+        }
     %>
-
 
         <section class="fretus">
             <h1><a href="/"><img class="logo" src="/imgs/logotca.png"></a></h1>
@@ -50,7 +55,11 @@
                 <section class="buttonsForm">
                     <input type="radio" name="type" id="tipoCliente" value="1" checked>
                     <label for="tipoCliente">Cliente</label>
-                    <input type="radio" name="type" id="tipoEntregador" value="2">
+                    <input type="radio" name="type" id="tipoEntregador" value="2" 
+                        <% if (!cliente) { %>
+                            checked
+                        <% } %>
+                    >
                     <label for="tipoEntregador">Entregador</label>
                     <article class="btnColor"></article>
                 </section>
@@ -89,7 +98,6 @@
                 </section>
             </form>
         </section>
-
 
         <script src="/JS/login-cadastro/validacao.js"></script>
         <script src="/JS/login-cadastro/eye.js"></script>
