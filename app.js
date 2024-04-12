@@ -25,8 +25,6 @@ app.use(methodOverride('_method'))
 const main = require("./app/routes/main")
 app.use("/", main)
 
-const help = require("./app/routes/help")
-app.use("/ajuda", help)
 
 const client = require("./app/routes/client")
 app.use("/cliente", client)
@@ -37,6 +35,8 @@ app.use("/entregador", shipper)
 const adm = require("./app/routes/admin")
 app.use("/admin", adm)
 
+const help = require("./app/routes/help")
+app.use("/admin/ajuda", help)
 
 app.listen(port, () => {
   console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`)

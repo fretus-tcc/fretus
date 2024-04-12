@@ -103,7 +103,7 @@ const quotesController = {
         const { id } = req.params
         try {
             await quotesModel.delete(id)
-            res.redirect('/ajuda/admin')
+            res.redirect('/admin/ajuda')
         } catch (error) {
             res.json({ error })
         }

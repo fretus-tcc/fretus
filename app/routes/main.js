@@ -1,6 +1,7 @@
 var express = require("express")
 var router = express.Router()
 const TarefasControl = require("../controller/cadastroController");
+const quotesController = require('../controller/quotesController')
 const { body, validationResult } = require("express-validator")
 
 var pool = require("../../config/connection-factory");
@@ -24,6 +25,14 @@ router.post("/cadastro", TarefasControl.regrasValidacao, async function (req, re
 });
 
 /* ==================================================================== */
+
+router.get('/ajuda', function (req, res) {
+  quotesController.listQuotesTitle(req, res)
+})
+
+router.get('/ajuda/:slug', function (req, res) {
+  quotesController.showQuote(req, res)
+})
 
 router.get('/cadastro-entregador', function (req, res) {
   res.render('pages/cadastro-entregador')

@@ -13,14 +13,14 @@
 
     <main style="color:#333; padding: 150px 20px 0;">
         <h1 style="margin-bottom: 15px;">Dúvidas</h1>
-        <a style="display: inline-block; margin-bottom: 15px; color: rgb(71, 163, 63);" href="/ajuda/admin/create">Nova dúvida</a>
+        <a style="display: inline-block; margin-bottom: 15px; color: rgb(71, 163, 63);" href="/admin/ajuda/create">Nova dúvida</a>
         <% result.forEach(item => { %>
             <div>
                 <h2><%= item.titulo_duvida %></h2>
                 <p>Criada em: <%= item.data_duvida.toLocaleDateString() %></p>
                 <a style="color: var(--blue)" href="/ajuda/<%= item.slug_duvida %>">Acessar</a>
-                <a style="color: var(--blue)" href="/ajuda/admin/update/<%= item.id_duvida %>">Atualizar</a>
-                <form class="delete-form" style="display: inline;" action="/ajuda/admin/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
+                <a style="color: var(--blue)" href="/admin/ajuda/update/<%= item.id_duvida %>">Atualizar</a>
+                <form class="delete-form" style="display: inline;" action="/admin/ajuda/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
                     <button class="delete">Deletar</button>
                 </form>
             </div>
