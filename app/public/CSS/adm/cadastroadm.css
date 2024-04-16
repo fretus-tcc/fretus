@@ -1,0 +1,22 @@
+main {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 20px;
+}
+
+.container_box {
+    color: #333;
+    height: fit-content;
+    width: fit-content;
+    padding: 70px;
+    border-radius: 29px;
+    border-radius: 29px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    text-align: center;
+}
+
+.container_box h1 {
+    color: #333;
+    margin-top: 10px;
+}

@@ -14,7 +14,7 @@ body {
 }
 
 .sidebar {
-    width: 150px;
+    width: 180px;
     height: 100vh;
     padding: 15px 5px;
     background-color: var(--sidebar-color);
@@ -123,6 +123,11 @@ a {
     width: 100%;
     padding: 50px;
     color: #333;
+}
+
+.icon_box svg{
+    width: 35px;
+    padding-right: 5px;
 }
 
 @media (max-width: 650px), (max-height: 550px) {

@@ -9,4 +9,8 @@ router.get('/', function (req, res) {
     res.render('pages/adm/admin')
 })
 
+router.get('/cadastroAdm', function (req, res) {
+    res.render('pages/adm/cadastroAdm')
+})
+
 module.exports = router
