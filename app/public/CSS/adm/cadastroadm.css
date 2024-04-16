@@ -1,19 +1,46 @@
 main {
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: column;
     width: 100%;
-    margin: 20px;
+    margin: 20px 0;
+
+}
+.h1_conteiner h1 {
+    color: #333;
+    font-size: 2rem;
+    margin: 10px 0;
+    font-family: var(--font1);
+} 
+
+.container_cads {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 25px 10px 0 10px;
+    gap: 30px;
 }
 
 .container_box {
     color: #333;
     height: fit-content;
     width: fit-content;
-    padding: 70px;
-    border-radius: 29px;
-    border-radius: 29px;
-    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 15px;
+    background-color: #fff;
     text-align: center;
+    transition: all 200ms ease-in-out;
+    min-width: 450px;
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.container_box:hover {
+    background-color: rgb(0, 0, 0, .1);
+    cursor: pointer;
 }
 
 .container_box h1 {
