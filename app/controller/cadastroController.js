@@ -6,14 +6,14 @@ const TarefasControl = {
     CriarUsuario: async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-          console.log(errors);
-          return res.render('pages/cadastro', {
-            dados: req.body,
-            listaErros: errors,
-            logado: null
-          });
+            console.log(errors);
+            return res.render('pages/cadastro', {
+                dados: req.body,
+                listaErros: errors,
+                logado: null
+            });
         }
-        
+
         try {
             await tarefasModel.create(req.body);
             if (req.body.type == '1') {
@@ -21,17 +21,19 @@ const TarefasControl = {
             } else {
                 res.redirect('/cadastro-entregador')
             }
-            
+
         } catch (error) {
             return error;
         }
-        
+
     },
     regrasValidacao: [
         body("nome")
             .isLength({ min: 3, max: 45 })
             .withMessage("Nome invalido "),
-
+        body("cpf")
+        .isLength({ min: 14, max: 14 })
+            .withMessage("cpf invalido "),
         body("email")
             .isEmail()
             .withMessage("Email invalido "),

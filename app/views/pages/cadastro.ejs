@@ -12,34 +12,38 @@
 </head>
 
 
-<body>
+<%
+var msgErro = {nome:"", cpf: "",email:"", senha:""}
+var cssErro = {nome:"",cpf: "", email:"", senha:""}
+let valorCampos = {nome:"",cpf: "", email:"", senha:""}
+if(dados && dados!=null){
+    valorCampos = dados
+}
 
-   
-    <%
-        var msgErro = {nome:"", email:"", senha:""}
-        var cssErro = {nome:"", email:"", senha:""}
-        let valorCampos = {nome:"", email:"", senha:""}
-        if(dados && dados!=null){
-            valorCampos = dados
+
+if (listaErros && listaErros.errors) {
+    listaErros.errors.forEach((itemErro) => {
+        if (itemErro.path == "nome") {
+            msgErro.nome = itemErro.msg;
+            cssErro.nome = "erroForm";
+        } else if (itemErro.path == "cpf") {
+            msgErro.cpf = itemErro.msg;
+            cssErro.cpf = "erroForm";
+        } else if (itemErro.path == "email") {
+            msgErro.email = itemErro.msg;
+            cssErro.email = "erroForm";
+        } else if (itemErro.path == "senha") {
+            msgErro.senha = itemErro.msg;
+            cssErro.senha = "erroForm";
         }
+    });
+}
 
-        if(listaErros){
-            listaErros.errors.forEach((itemErro)=>{
-                if(itemErro.path == "nome"){
-                    msgErro.nome = itemErro.msg
-                    cssErro.nome = "erroForm"
-                } else if(itemErro.path == "email"){
-                    msgErro.email = itemErro.msg
-                    cssErro.email = "erroForm"
-                } else if(itemErro.path == "senha"){
-                    msgErro.senha = itemErro.msg
-                    cssErro.senha = "erroForm"
-                } 
-            });
-        }
 
-    %>
 
+%>
+
+    <body>
         <section class="fretus">
             <h1><a href="/"><img class="logo" src="/imgs/logotca.png"></a></h1>
         </section>
@@ -49,28 +53,37 @@
                 <section class="buttonsForm">
                     <input type="radio" name="type" id="tipoCliente" value="1" checked>
                     <label for="tipoCliente">Cliente</label>
-                    <input type="radio" name="type" id="tipoEntregador" value="2" 
-                        <% if (dados?.type && dados?.type != '1') { %>
-                            checked
-                        <% } %>
-                    >
-                    <label for="tipoEntregador">Entregador</label>
-                    <article class="btnColor"></article>
+                    <input type="radio" name="type" id="tipoEntregador" value="2" <% if (dados?.type && dados?.type
+                        !='1' ) { %>
+                    checked
+                    <% } %>
+                        >
+                        <label for="tipoEntregador">Entregador</label>
+                        <article class="btnColor"></article>
                 </section>
-                
+
                 <input type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
-                <span class="<%= cssErro.nome %>"><%= msgErro.nome %></span>
+                <span class="<%= cssErro.nome %>">
+                    <%= msgErro.nome %>
+                </span>
                 <!-- <p id="messageNome"></p> -->
-                <!--   <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="11" class="cpf"
-                    placeholder="CPF/CNPJ"> -->
+                <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="14" class="cpf" placeholder="CPF"
+                    value="<%=valorCampos.cpf%>">
+                <span class="<%= cssErro.cpf %>">
+                    <%= msgErro.cpf %>
+                </span>
                 <!--  <p id="messageCpf"></p> -->
                 <input type="text" name="email" id="email" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
-                <span class="<%= cssErro.email %>"><%= msgErro.email %></span>
+                <span class="<%= cssErro.email %>">
+                    <%= msgErro.email %>
+                </span>
                 <!-- <p id="messageEmail"></p> -->
                 <section class="input__wrapper">
                     <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
                         placeholder="Senha" value="<%=valorCampos.senha%>">
-                        <span class="<%= cssErro.senha %>"><%= msgErro.senha %></span>
+                    <span class="<%= cssErro.senha %>">
+                        <%= msgErro.senha %>
+                    </span>
                     <!-- <p id="messageSenha"></p> -->
                     <!--  <label for="password" class="input__label"></label> -->
                     <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
@@ -95,9 +108,9 @@
 
         <script src="/JS/login-cadastro/validacao.js"></script>
         <script src="/JS/login-cadastro/eye.js"></script>
-        <!-- <script src="/JS/login-cadastro/mascara.js"></script> -->
+        <script src="/JS/login-cadastro/mascara.js"></script>
         <!-- <script src="/JS/login-cadastro/button.js"></script> -->
 
-</body>
+    </body>
 
 </html>
