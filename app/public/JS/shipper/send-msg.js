@@ -23,7 +23,7 @@ function sendMsg() {
         newRow.appendChild(userIcon)
 
         const iconImg = document.createElement('img')
-        iconImg.setAttribute('src', 'https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6')
+        iconImg.setAttribute('src', '/imgs/client/user-icon.svg')
         userIcon.appendChild(iconImg)
         
         const msgContainer = document.createElement('div')

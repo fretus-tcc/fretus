@@ -25,7 +25,7 @@ yes.addEventListener('click', () => {
         let msgPayment = document.createElement('div')
         msgPayment.classList.add('row', 'my-msg')
         msgPayment.innerHTML += `<div class="user-icon rounded-icon">
-                                    <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u195.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
+                                    <img src="/imgs/client/user-icon.svg" alt="">
                                 </div>
                                 <div class="msg payment">
                                     <h1>Você enviou uma proposta!</h1>
