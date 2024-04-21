@@ -32,9 +32,17 @@
                     <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
                     </aside>
-                    <section class="schedules-container">
+                    <h2>Agendamento</h2>
+                    
+                    <section class="toogle-container">
+                        <span>Entrega Imediata</span>
                         <input type="checkbox" name="schedule" id="schedule">
-                        <label for="schedule"> Clique aqui para agendar <span>></span></label>
+                        <label for="schedule" class="toogle">
+                            <article class="ball"></article>
+                        </label>
+                        <span>Agendar Entrega</span>
+                    </section>
+                    <section class="schedules-container">
                         <aside class="schedule-content">
                             <input type="date" class="date-time">
                             <input type="time" class="date-time">
@@ -42,7 +50,7 @@
                     </section>
                     
                     <section class="weight-container">
-                        <h1>Carga</h1>
+                        <h2>Carga</h2>
                         <div class="content">
                             <input required type="radio" name="weight" id="s">
                             <label for="s">
@@ -69,7 +77,7 @@
                     </section>
 
                     <section class="vehicles-container">
-                        <h1>Veículos</h1>
+                        <h2>Veículos</h2>
                         <section class="content">
                             <input data-index="0" required type="radio" name="vehicles" id="bike">
                             <label for="bike">

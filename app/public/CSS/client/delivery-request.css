@@ -52,53 +52,83 @@ main {
     height: fit-content;
 }
 
-.form h1 {
+.form h1, .form h2 {
     color: #333;
     margin-bottom: 15px;
+    font-size: 2em;
+}
+
+.form h2 {
+    font-size: 1.65em;
 }
 
 .form .schedules-container {
     min-height: 158px;
     max-height: 158px;
+    margin-top: 15px;
     margin-bottom: 25px;
 }
 
-.schedules-container > label {
+.toogle-container {
+    display: flex;
+    gap: 7px;
     color: #333;
-    display: block;
-    width: 100%;
-    margin: 15px 0;
-    font-size: 18px;
-    font-family: var(--font-2);
-    position: relative;
-    cursor: pointer;
 }
 
-.schedules-container > label span {
-    color: var(--orange);
-    font-size: 20px;
-    display: inline-block;
-    margin: 0 15px;
-    position: absolute;
-    top: -2px;
-    transition: transform .3s;
+.toogle-container span:last-child {
+    opacity: 0.7;
 }
 
-.schedules-container > input[type="checkbox"] {
+#schedule {
     display: none;
 }
 
+.toogle {
+    display: block;
+    width: 48px;
+    height: 24px;
+    background-color: white;
+    border: solid 1px #DDDDDC;
+    border-radius: 15px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.toogle > .ball {
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    border: solid 1px #DDDDDC;
+    border-radius: 100%;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.35);
+    transition: all .3s;
+}
+
+#schedule:checked + .toogle {
+    background-color: var(--orange);
+}
+
+#schedule:checked + .toogle > .ball {
+    border: solid 1px #ef9652;
+    transform: translateX(100%);
+}
+
 .schedules-container > .schedule-content {
+    margin-top: 15px;
     height: 0px;
     overflow: hidden;
 }
 
-.schedules-container > input[type="checkbox"]:checked + label span {
-    transform: rotate(90deg);
+.toogle-container:has(:checked) + .schedules-container .schedule-content {
+    height: 100%;
 }
 
-.schedules-container > input[type="checkbox"]:checked ~ .schedule-content {
-    height: 100%;
+.toogle-container:has(:checked) span:first-child {
+    opacity: 0.7;
+}
+
+.toogle-container:has(:checked) span:last-child  {
+    opacity: 1;
 }
 
 form > .cta {
