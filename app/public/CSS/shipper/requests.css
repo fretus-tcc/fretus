@@ -50,16 +50,18 @@ main > h1 {
     margin-left: 9px;
 }
 
-.card > .weight::before {
-    content: 'Carga: ';
+.card > .description {
+    font-size: 14px;
+    font-family: var(--font-2);
+}
+
+.description .description-title {
     font-family: var(--font-1);
     font-weight: 700;
 }
 
-.card > .weight {
+.description p {
     margin-bottom: 7px;
-    font-size: 14px;
-    font-family: var(--font-2);
 }
 
 .card > .bottom {

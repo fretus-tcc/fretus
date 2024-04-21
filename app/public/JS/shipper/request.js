@@ -1,7 +1,14 @@
 const container = document.querySelector('.requests-container')
 const cards = document.querySelectorAll('.card')
 const btns = document.querySelectorAll('.card .btn')
-// const notificationContainer = document.querySelector('.notification-container')
+const imediata = document.querySelectorAll('.card .imediata')
+let timeoutId
+
+imediata.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        timeoutId = setTimeout(() => window.location.href = '/entregador/panel', 6000)
+    })
+})
 
 btns.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
@@ -15,7 +22,7 @@ function showNotification(r, i, m) {
     if (notificationContainer.innerHTML != '') {
         document.querySelector('.notification').remove()
     }
-    
+
     notificationContainer.classList.add('show')
     
     const notification = document.createElement('div')
@@ -32,6 +39,7 @@ function showNotification(r, i, m) {
     notification.appendChild(loading)
 
     undo.addEventListener('click', () => {
+        clearTimeout(timeoutId)
         const position = container.children[i]
         container.insertBefore(r, position)
         notificationContainer.classList.remove('show')
