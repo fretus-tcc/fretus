@@ -47,7 +47,7 @@ main {
     margin: 0 auto;
 }
 
-.form-wrapper form {
+.form-wrapper .form-container {
     padding: 45px 0;
     height: fit-content;
 }

@@ -34,8 +34,13 @@ router.get('/perfil', function (req, res) {
 router.get('/ranking', function (req, res) {
     res.render('pages/entregador/ranking')
 })
+
 router.get('/resultados', function (req, res) {
     res.render('pages/entregador/resultados')
+})
+
+router.get('/panel', function (req, res) {
+    res.render('pages/entregador/panel')
 })
 
 module.exports = router
