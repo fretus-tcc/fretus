@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Envie suas Entrega</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'/>
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/delivery-request.css">
+    <link rel="stylesheet" href="/CSS/client/delivery-request-suggestions.css">
+    <link rel="stylesheet" href="/CSS/client/delivery-request-carousel.css">
+    <link rel="stylesheet" href="/CSS/client/delivery-request-mobile.css">
+    <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+    <link rel="stylesheet" href="/CSS/shipper/panel.css">
+</head>
+<body>
+    
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
+
+    <main>
+        <section class="form">
+            <section class="form-wrapper">
+                <section class="form-container">
+                    <h1>Envie suas entregas</h1>
+                    <section>
+                        <div class="ships">
+                            <div class="info">
+                                <div class="photo">C</div>
+                                <div>
+                                    <h2 class="name">Nome</h2>
+                                    <p class="address">De: Rua Coleta; Para: Rua Destino</p>
+                                </div>
+                            </div>
+                            <a href="/cliente/chat" class="img_chat">
+                                <img src="/imgs/client/chat.svg" alt="" class="">
+                            </a>
+                        </div>
+                        <div class="ships">
+                            <div class="info">
+                                <div class="photo">C</div>
+                                <div>
+                                    <h2 class="name">Nome</h2>
+                                    <p class="address">De: Rua Coleta; Para: Rua Destino</p>
+                                </div>
+                            </div>
+                            <a href="/cliente/chat" class="img_chat">
+                                <img src="/imgs/client/chat.svg" alt="" class="">
+                            </a>
+                        </div>
+                        <div class="ships">
+                            <div class="info">
+                                <div class="photo">C</div>
+                                <div>
+                                    <h2 class="name">Nome</h2>
+                                    <p class="address">De: Rua Coleta; Para: Rua Destino</p>
+                                </div>
+                            </div>
+                            <a href="/cliente/chat" class="img_chat">
+                                <img src="/imgs/client/chat.svg" alt="" class="">
+                            </a>
+                        </div>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+        <section class="map">
+            <div id="map"></div>
+            <div class="status">
+                <div class="header">
+                    <h1>Buscando Produto</h1>
+                    <div class="time">30 min</div>
+                </div>
+                <section class="container_bar_count">
+                    <section class="bar_count count1"></section>
+                    <section class="bar_count"></section>
+                    <section class="bar_count"></section>
+                    <section class="bar_count"></section>
+                </section>
+                <p class="text-time">Previsão de chegada às 2:50PM</p>
+                <div class="btn-container">
+                    <button class="cta">Próxima Etapa</button>
+                    <button class="cta notify">Notificar Impeditivo</button>
+                </div>
+            </div>
+        </section>
+        <section class="return-form">
+            <img src="/imgs/burguer-config-icon.png" alt="">
+        </section>
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/client/geolocation.js"></script>
+</body>
+</html>
