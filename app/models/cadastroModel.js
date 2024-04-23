@@ -13,6 +13,24 @@ const tarefasModel = {
             throw error; 
         }
     },
+    findByEmail: async (data) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM usuario WHERE email_usuario  = ? ',  [ data ])
+            
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
+    findByCpf: async (data) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM usuario WHERE cpf_usuario  = ? ',  [ data ])
+            
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    }
 };
 
 

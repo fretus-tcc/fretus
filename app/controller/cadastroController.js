@@ -32,11 +32,28 @@ const TarefasControl = {
             .isLength({ min: 3, max: 45 })
             .withMessage("Nome invalido "),
         body("cpf")
-        .isLength({ min: 14, max: 14 })
-            .withMessage("cpf invalido "),
+            .isLength({ min: 14, max: 14 })
+            .withMessage("cpf invalido ")
+            .custom(async (value) => {
+                const cpf = await tarefasModel.findByCpf(value)
+                if (cpf.length > 0) {
+                    throw new Error('Cpf já utilizado.');
+                }
+                return true;
+
+            }),
+
         body("email")
             .isEmail()
-            .withMessage("Email invalido "),
+            .withMessage("Email invalido ")
+            .custom(async (value) => {
+                const email = await tarefasModel.findByEmail(value)
+                if (email.length > 0) {
+                    throw new Error('Email já utilizado.');
+                }
+                return true;
+
+            }),
 
         body("senha")
             .isLength({ min: 8, max: 30 })
