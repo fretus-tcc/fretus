@@ -31,12 +31,15 @@ if (listaErros && listaErros.errors) {
         } else if (itemErro.path == "cpf") {
             msgErro.cpf = itemErro.msg;
             cssErro.cpf = "erroForm";
+            cssErroBorda.cpf = "erroInput";
         } else if (itemErro.path == "email") {
             msgErro.email = itemErro.msg;
             cssErro.email = "erroForm";
+            cssErroBorda.email = "erroInput";
         } else if (itemErro.path == "senha") {
             msgErro.senha = itemErro.msg;
             cssErro.senha = "erroForm";
+            cssErroBorda.senha = "erroInput";
         }
     });
 }
@@ -69,19 +72,19 @@ if (listaErros && listaErros.errors) {
                     <%= msgErro.nome %>
                 </span>
                 <!-- <p id="messageNome"></p> -->
-                <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="14" class="cpf" placeholder="CPF"
+                <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="14" class="cpf <%= cssErroBorda.cpf %>" placeholder="CPF"
                     value="<%=valorCampos.cpf%>">
                 <span class="<%= cssErro.cpf %>">
                     <%= msgErro.cpf %>
                 </span>
                 <!--  <p id="messageCpf"></p> -->
-                <input type="text" name="email" id="email" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
+                <input type="text" name="email" id="email" class="<%= cssErroBorda.email %>" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
                 <span class="<%= cssErro.email %>">
                     <%= msgErro.email %>
                 </span>
                 <!-- <p id="messageEmail"></p> -->
                 <section class="input__wrapper">
-                    <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field"
+                    <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field <%= cssErroBorda.senha %>"
                         placeholder="Senha" value="<%=valorCampos.senha%>">
                     <span class="<%= cssErro.senha %>">
                         <%= msgErro.senha %>
