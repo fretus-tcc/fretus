@@ -205,6 +205,11 @@ form p a {
     font-size: 0.9rem;
 }
 
+.erroInput {
+    border: solid 1px red !important;
+
+}
+
 /* ================================================ */
 
 @media (max-width:500px) { body{ height:125vh}}

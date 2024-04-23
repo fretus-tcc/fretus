@@ -15,6 +15,7 @@
 <%
 var msgErro = {nome:"", cpf: "",email:"", senha:""}
 var cssErro = {nome:"",cpf: "", email:"", senha:""}
+var cssErroBorda = {nome:"",cpf: "", email:"", senha:""}
 let valorCampos = {nome:"",cpf: "", email:"", senha:""}
 if(dados && dados!=null){
     valorCampos = dados
@@ -26,6 +27,7 @@ if (listaErros && listaErros.errors) {
         if (itemErro.path == "nome") {
             msgErro.nome = itemErro.msg;
             cssErro.nome = "erroForm";
+            cssErroBorda.nome = "erroInput";
         } else if (itemErro.path == "cpf") {
             msgErro.cpf = itemErro.msg;
             cssErro.cpf = "erroForm";
@@ -62,7 +64,7 @@ if (listaErros && listaErros.errors) {
                         <article class="btnColor"></article>
                 </section>
 
-                <input type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
+                <input class="<%= cssErroBorda.nome %>" type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
                 <span class="<%= cssErro.nome %>">
                     <%= msgErro.nome %>
                 </span>
