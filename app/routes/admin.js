@@ -16,5 +16,8 @@ router.get('/cadastroAdm', function (req, res) {
 router.get('/clientes', function (req, res) {
     res.render('pages/adm/clentesAdm')
 })
+router.get('/CreateCadastroAdm', function (req, res) {
+    res.render('pages/adm/CreateCadastroAdm')
+})
 
 module.exports = router
