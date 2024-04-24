@@ -16,11 +16,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 /* app.use(
-    session({
-      secret: "HELLo nODE",
-      resave: false,
-      saveUninitialized: false,
-})) */
+  session({
+    secret: "HELLo node",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+  })) */
 
 const main = require("./app/routes/main")
 app.use("/", main)

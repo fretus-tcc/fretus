@@ -12,7 +12,14 @@ router.get("/", function (req, res) {
 
 router.get('/login', function (req, res) {
   res.render('pages/login')
+  
 })
+/* router.psot('/login',gravarUsuAutenticado(usuarioDAL, bcrypt), function (req, res) {
+  res.render('pages/login'), 
+  
+  
+}) */
+
 
 /* ============================CADASTRO======================================== */
 
