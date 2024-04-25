@@ -22,5 +22,7 @@ router.get('/cadastroAdm/entregador', function (req, res) {
 router.get('/CadastroAdmGeral/CreateCadastroAdm', function (req, res) {
     res.render('pages/adm/CadastroAdmGeral/CreateCadastroAdm')
 })
-
+/* router.delete('/delete/:id', function (req, res) {
+    quotesController.deleteQuote(req, res)
+}) */
 module.exports = router

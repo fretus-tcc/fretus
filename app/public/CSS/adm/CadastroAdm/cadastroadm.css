@@ -91,10 +91,10 @@ main {
     display: flex;
     flex-direction: column;
 }
-.boXaCao a {
-    text-decoration: none;
-    display: inline-block;
+.flex{
+    display: flex;
 }
+
 .boXaCao button{
     padding: 10px 20px;
     margin: 5px;

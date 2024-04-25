@@ -9,7 +9,16 @@ const admCadastroController = {
         } catch (error) {
             res.json({ error })
         }
-    }
+    }, 
+   /*  deleteQuote: async (req, res) => {
+        const { id } = req.params
+        try {
+            await quotesModel.findByTypeDelete(id)
+            res.redirect('pages/adm/CadastroAdmGeral/clientesAdm')
+        } catch (error) {
+            res.json({ error })
+        }
+    }, */
 
 
 
