@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 })
 
 router.get('/cadastroAdm', function (req, res) {
-    res.render('pages/adm/cadastroAdm')
+    res.render('pages/adm/CadastroAdmGeral/cadastroAdm')
 })
 
 router.get('/cadastroAdm/clientes', function (req, res) {
@@ -19,8 +19,8 @@ router.get('/cadastroAdm/entregador', function (req, res) {
     admCadastroController.listUsers(req, res, '2')
 })
 
-router.get('/cadastroAdm/CreateCadastroAdm', function (req, res) {
-    res.render('pages/adm/CreateCadastroAdm')
+router.get('/CadastroAdmGeral/CreateCadastroAdm', function (req, res) {
+    res.render('pages/adm/CadastroAdmGeral/CreateCadastroAdm')
 })
 
 module.exports = router
