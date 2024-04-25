@@ -4,7 +4,7 @@ const admCadastroModel = {
 
     findByType: async (type) => {
         try {
-            const [result] = await pool.query('SELECT `id_usuario`, `nome_usuario` FROM usuario WHERE `tipo_usuario` = ?', [type])
+            const [result] = await pool.query('SELECT `nome_usuario`, `email_usuario`, `cpf_usuario` FROM usuario WHERE `tipo_usuario` = ?', [type])
             return result
         } catch (error) {
             return error

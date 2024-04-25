@@ -1,24 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Admin</title>
     <%- include('../../../partial/config/config.ejs') %>
-    <%- include('../../../partial/config/config-adm.ejs') %>
-    
+        <%- include('../../../partial/config/config-adm.ejs') %>
+
+            <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+
 </head>
+
 <body>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
-    <div>
-        <% result.forEach(item => { %>
-            <p><%= item.nome_usuario %></p>
-            <p><%= item.id_usuario %></p>
-        <% }) %>
-    </div>
+        <!-- `nome_usuario` ,`cpf_usuario`,`email_usuario`, `senha_usuario` -->
 
-    <script src="/JS/adm/resize.js"></script>
+        <section class="ContainerAdm_cadastroClient">
+            <a href="#">
+                <h3><- volta para página anterior </h3>
+            </a>
+            <h1>Cadastro - Cliente </h1>
+            <% result.forEach(item=> { %>
+                <section class="ContainerAdm_Use">
+                    <article class="boxDados">
+                        <h3>Nome Usuário: </h3>
+                        <p>
+                            <%= item.nome_usuario %>
+                        </p>
+                    </article>
+                    <article class="boxDados">
+                        <h3>Email Usuário: </h3>
+                        <p>
+                            <%= item.email_usuario %>
+                        </p>
+                    </article>
+                    <article class="boxDados">
+                        <h3>CPF Usuário: </h3>
+                        <p>
+                            <%= item.cpf_usuario %>
+                        </p>
+                    </article>
+                    <article class="boxDados">
+                        <h3>Status Usuário: </h3>
+                        <p>
+                            Status
+                        </p>
+                    </article>
+                    <section class="boXaCao">
+                        <h3>Ações: </h3>
+                        <section>
+                            <a href="#">
+                                <button class="button1">Editar</button>
+                            </a>
+                            <a href="#">
+                                <button class="button2">Detalhes</button>
+                            </a>
+                            <a href="#">
+                                <button class="button3">Excluir</button>
+                            </a>
+                        </section>
+                    </section>
+                </section>
+                <% }) %>
+                    </div>
+
+
+                    <script src="/JS/adm/resize.js"></script>
 </body>
+
 </html>
