@@ -1,6 +1,6 @@
 const admCadastroModel = require('../models/admCadastroModel')
 
-const quotesController = {    
+const admCadastroController = {    
     /* listQuotesTitle: async (req, res) => {
         try {
             const result = await quotesModel.findTitle()
@@ -10,16 +10,16 @@ const quotesController = {
         }
     }, */
 
-    /* listUsers: async (req, res) => {
+    listUsers: async (req, res, type) => {
         try {
-            const result = await admCadastroModel.findTitle()
-            res.render('pages/ajuda', { result })
+            const result = await admCadastroModel.findByType(type)
+            res.render('pages/adm/clientesAdm', { result })
         } catch (error) {
             res.json({ error })
         }
-    } */
+    }
 
 
 }
 
-module.exports = quotesController
+module.exports = admCadastroController

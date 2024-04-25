@@ -1,6 +1,6 @@
 const pool = require('../../config/connection-factory')
 
-const quotesModel = {
+const admCadastroModel = {
     /* findTitle: async () => {
         try {
             const [result] = await pool.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
@@ -37,14 +37,14 @@ const quotesModel = {
         }
     }, */
 
-    /* findByType: async (type) => {
+    findByType: async (type) => {
         try {
             const [result] = await pool.query('SELECT `id_usuario`, `nome_usuario` FROM usuario WHERE `tipo_usuario` = ?', [type])
             return result
         } catch (error) {
             return error
         }
-    } */
+    }
 }
 
-module.exports = quotesModel
+module.exports = admCadastroModel

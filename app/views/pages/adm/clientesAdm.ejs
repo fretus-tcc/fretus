@@ -11,7 +11,13 @@
 <body>
 
     <%- include('../../partial/adm/sidebar.ejs') %>
-    
+
+    <div>
+        <% result.forEach(item => { %>
+            <p><%= item.nome_usuario %></p>
+            <p><%= item.id_usuario %></p>
+        <% }) %>
+    </div>
 
     <script src="/JS/adm/resize.js"></script>
 </body>
