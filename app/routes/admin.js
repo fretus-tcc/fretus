@@ -29,4 +29,8 @@ router.delete('/cadastroAdm/delete/:id/:type', function (req, res) {
     admCadastroController.deleteUse(req, res)
 })
 
+// Detalhes Usuário 
+router.get('/cadastroAdm', function (req, res) {
+    res.render('pages/adm/CadastroAdmGeral/c')
+})
 module.exports = router
