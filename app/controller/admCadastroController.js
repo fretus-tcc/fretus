@@ -5,7 +5,7 @@ const admCadastroController = {
     listUsers: async (req, res, type) => {
         try {
             const result = await admCadastroModel.findByType(type)
-            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { result })
+            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { result, type })
         } catch (error) {
             res.json({ error })
         }

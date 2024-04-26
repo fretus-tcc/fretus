@@ -22,7 +22,11 @@
             <a href="/admin/cadastroAdm">
                 <h3><- volta para página anterior </h3>
             </a>
-            <h1>Cadastro - Cliente </h1>
+            <% if (type=="1") { %>
+                <h1>Cadastro - Cliente</h1>
+            <% } else { %>
+                <h1>Cadastro - Entregador</h1>
+            <% } %>
             <% result.forEach(item=> { %>
                 <section class="ContainerAdm_Use">
                     <article class="boxDados">
