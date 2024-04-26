@@ -23,6 +23,14 @@
     margin-bottom: 30px;
 }
 
+.msgs-container .row.chat-info .msg {
+    /* background-color: white; */
+    opacity: .7;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .msgs-container .row.my-msg {
     justify-content: flex-end;
 }
