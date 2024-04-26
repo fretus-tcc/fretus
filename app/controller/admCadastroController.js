@@ -11,15 +11,20 @@ const admCadastroController = {
         }
     }, 
     //Excluir usuário da tabela 
-    /* deleteUse: async (req, res) => {
-        const { id } = req.params
+        deleteUse: async (req, res) => {
+        const { id, type  } = req.params
+        console.log(type)
         try {
             await admCadastroModel.findByTypeDelete(id)
-            res.redirect('pages/adm/CadastroAdmGeral/clientesAdm')
+            if (type == '1') {
+                res.redirect('/admin/cadastroAdm/clientes')
+            } else {
+                res.redirect('/admin/cadastroAdm/entregador')
+            }
         } catch (error) {
             res.json({ error })
         }
-    }, */
+    },
 
 
 
