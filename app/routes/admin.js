@@ -1,6 +1,8 @@
 var express = require("express")
 var router = express.Router()
 
+/* const deleteUseController = require() */
+
 var pool = require("../../config/connection-factory");
 const admCadastroController = require('../controller/admCadastroController')
 
@@ -22,7 +24,9 @@ router.get('/cadastroAdm/entregador', function (req, res) {
 router.get('/CadastroAdmGeral/CreateCadastroAdm', function (req, res) {
     res.render('pages/adm/CadastroAdmGeral/CreateCadastroAdm')
 })
+//Excluir Usuário 
 /* router.delete('/delete/:id', function (req, res) {
-    quotesController.deleteQuote(req, res)
+    quotesController.deleteUse(req, res)
 }) */
+
 module.exports = router

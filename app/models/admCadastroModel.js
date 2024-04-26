@@ -11,14 +11,13 @@ const admCadastroModel = {
         }
     } , 
     //excluindo usuário da tabela 
-   /*  findByTypeDelete: async (id) => {
+    /*  findByTypeDelete: async (id) => {
         try {
             await pool.query('DELETE FROM usuario WHERE id_usuario = ?', [id])
         } catch (error) {
             return error
         }
-    }, */
-
+    },  */
 }
 
 module.exports = admCadastroModel
