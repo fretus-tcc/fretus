@@ -38,5 +38,9 @@ router.get('/cadastroAdm', function (req, res) {
 router.get('/detealhesAdm', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/detealhesAdm')
 })
+//Novo usuário 
+router.get('/CadastroNovoUser', (req, res) => {
+    res.render('pages/adm/CadastroAdmGeral/CadastroNovoUser')
+})
 
 module.exports = router

@@ -95,7 +95,7 @@ main {
     display: flex;
 }
 
-.boXaCao button{
+ button{
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
@@ -104,6 +104,16 @@ main {
     font-weight: 600;
     border: none;
 
+}
+
+.buttonNovo{
+    background-color: rgb(89, 199, 25);
+    color: #fff;
+    margin-bottom: 15px ;
+}
+.buttonNovo:hover{
+    transition: all 200ms ease-in-out;
+    background-color: rgb(69, 146, 24); 
 }
 .button1{
     background-color: orange;

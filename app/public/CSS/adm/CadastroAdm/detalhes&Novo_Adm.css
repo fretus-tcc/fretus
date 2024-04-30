@@ -1,6 +1,6 @@
 main {
     width: 100vw;
-    padding: 40px 50px;
+    padding: 50px;
     color: #333;
     max-height: 100vh;
     overflow: auto;
@@ -42,3 +42,5 @@ main {
 .LinkUser {
     margin-bottom: 15px;
 }
+
+/* Novo */
