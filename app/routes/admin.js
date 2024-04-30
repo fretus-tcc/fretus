@@ -33,4 +33,10 @@ router.delete('/cadastroAdm/delete/:id/:type', function (req, res) {
 router.get('/cadastroAdm', function (req, res) {
     res.render('pages/adm/CadastroAdmGeral/c')
 })
+//Detalhes Usuário 
+
+router.get('/detealhesAdm', (req, res) => {
+    res.render('pages/adm/CadastroAdmGeral/detealhesAdm')
+})
+
 module.exports = router

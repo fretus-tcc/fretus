@@ -1,0 +1,44 @@
+main {
+    width: 100vw;
+    padding: 40px 50px;
+    color: #333;
+    max-height: 100vh;
+    overflow: auto;
+}
+
+.LinkUser a {
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.LinkUser a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+
+}
+
+.DadosUserIMG {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 20px;
+    background:linear-gradient(to right, yellow , green );
+    min-height: 100px;
+
+}
+
+.containerDetealhes {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+
+}
+
+.DadosUser p {
+    margin: 20px 8px;
+}
+
+.LinkUser {
+    margin-bottom: 15px;
+}
