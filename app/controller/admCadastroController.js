@@ -13,7 +13,6 @@ const admCadastroController = {
     //Excluir usuário da tabela 
         deleteUse: async (req, res) => {
         const { id, type  } = req.params
-        console.log(type)
         try {
             await admCadastroModel.findByTypeDelete(id)
             if (type == '1') {

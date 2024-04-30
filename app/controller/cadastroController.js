@@ -36,7 +36,7 @@ const TarefasControl = {
             .isLength({ min: 14, max: 14 })
             .withMessage("cpf invalido ")
             .custom(async (value) => {
-                console.log(value)
+                
                 if(validaCPF.validarCpf(value)){
                     const cpf = await tarefasModel.findByCpf(value)
                     if (cpf.length > 0) {
