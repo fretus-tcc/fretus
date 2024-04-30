@@ -34,10 +34,16 @@ router.get('/cadastroAdm', function (req, res) {
     res.render('pages/adm/CadastroAdmGeral/c')
 })
 //Detalhes Usuário 
-
 router.get('/detealhesAdm', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/detealhesAdm')
 })
+
+/* router.get('/detealhesAdm/clientes', function (req, res) {
+    admCadastroController.listUsersDetalhes(req, res, '1')
+})
+router.get('/detealhesAdm/entregador', function (req, res) {
+    admCadastroController.listUsersDetalhes(req, res, '2')
+}) */
 //Novo usuário 
 router.get('/CadastroNovoUser', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/CadastroNovoUser')
