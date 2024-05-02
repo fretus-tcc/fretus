@@ -1,12 +1,12 @@
 body {
-    background-image: url('../../imgs/login-cadastro/bg-login.svg'); 
-    height: 114vh;
+    background-image: url('../../imgs/login-cadastro/bg-login.svg');
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-1);
     color: #333;
-    min-height: 100vh;
+    
 }
 
 .fretus {
@@ -30,6 +30,7 @@ body {
     flex-direction: column;
     align-items: center;
     position: relative;
+    margin-top: 40px ;
 }
 
 /* .signup-container {
@@ -46,7 +47,7 @@ body {
     gap: 15px;
 } */
 
-.container > form {
+.container>form {
     width: 100%;
     flex-shrink: 0;
     transition: .5s;
@@ -80,7 +81,7 @@ body {
     color: #333;
 }
 
-.buttonsForm input:checked + label {
+.buttonsForm input:checked+label {
     color: white;
 }
 
@@ -94,7 +95,7 @@ body {
     transition: .3s all;
 }
 
-.buttonsForm input#tipoEntregador:checked ~ .btnColor {
+.buttonsForm input#tipoEntregador:checked~.btnColor {
     left: 50%;
 }
 
@@ -142,7 +143,7 @@ form p a {
     justify-content: center;
     align-items: center;
     gap: 32px;
-    width: 100%;    
+    width: 100%;
     font-size: 1.1rem;
     color: #333;
     font-weight: 400;
@@ -167,6 +168,7 @@ form p a {
     cursor: pointer;
     top: 30px;
 }
+
 .social-media {
     padding: 10px;
     display: flex;
@@ -175,6 +177,7 @@ form p a {
     gap: 20px;
     flex-flow: column;
 }
+
 .social-icon {
     display: flex;
     align-items: center;
@@ -185,10 +188,12 @@ form p a {
     background-color: rgb(255, 255, 255, .7);
     border-radius: 2px;
 }
+
 .social-icon img {
     width: min(40px, 50%);
     padding-right: 10px;
 }
+
 .facebook {
     background-color: #3b5998;
     color: #fff;
@@ -210,6 +215,68 @@ form p a {
 
 }
 
+/* Modal de Carregamento */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    padding: 15px;
+    background-color: #fefefe;
+    max-width: 400px;
+    border-radius: 10px;
+    margin: 18% auto;
+
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid orange;
+    width: 50px;
+    height: 50px;
+    margin: 15px 0 ; 
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 /* ================================================ */
 
-@media (max-width:500px) { body{ height:125vh}}
+@media (max-width:500px) {
+    body {
+        height: 125vh
+    }
+}

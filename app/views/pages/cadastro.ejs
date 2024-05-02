@@ -103,13 +103,20 @@ if (listaErros && listaErros.errors) {
                         <img src="/imgs/login-cadastro/icons8-google-logo.svg" width="45" height="45">
                         <span>Entrar com google</span>
                     </a>
-                    <a href="#" class="social-icon facebook">
+                   <!--  <a href="#" class="social-icon facebook">
                         <img src="/imgs/login-cadastro/icons8-facebook-novo.svg" width="45" height="45">
                         <span>Entrar com facebook</span>
-                    </a>
+                    </a> -->
                 </section>
             </form>
         </section>
+        <section id="loadingModal" class="modal">
+            <section class="modal-content">
+              <div class="loader"></div>
+              <p>Aguarde, estamos processando sua solicitação...</p>
+            </section>
+        </section>
+          
 
         <script src="/JS/login-cadastro/validacao.js"></script>
         <script src="/JS/login-cadastro/eye.js"></script>
@@ -117,5 +124,17 @@ if (listaErros && listaErros.errors) {
         <!-- <script src="/JS/login-cadastro/button.js"></script> -->
 
     </body>
+    <script>
+        document.getElementById('cliente').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            document.getElementById('loadingModal').style.display = 'block';
+            
+            setTimeout(function() {
+              document.getElementById('cliente').submit(); 
+            }, 2000);
+          });
+          
+    </script>
 
 </html>
