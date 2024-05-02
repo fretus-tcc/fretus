@@ -63,10 +63,12 @@ const TarefasControl = {
 
             }),
 
-        body("senha")
+            body("senha")
             .isLength({ min: 8, max: 30 })
-            .withMessage("senha invalido, deve conter pelo menos 8 digitos "),
-
+            .withMessage("Senha inválida, deve conter pelo menos 8 caracteres")
+            .bail()
+            .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/)
+            .withMessage("Senha inválida, deve conter pelo menos 1 número e 1 caractere especial"),
     ],
 };
 

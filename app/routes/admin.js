@@ -34,14 +34,13 @@ router.delete('/cadastroAdm/delete/:id/:type', function (req, res) {
 router.get('/cadastroAdm', function (req, res) {
     res.render('pages/adm/CadastroAdmGeral/c')
 })
+
 //Detalhes Usuário 
-router.get('/cadastroAdm/clientes/detealhesAdm/clientes', (req, res) => {
+router.get('/detealhesAdm', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/detealhesAdm')
 })
 
-router.get('/detealhesAdm', function (req, res) {
-    admCadastroController.listUsersDetalhes(req, res, '1')
-})
+
 
 //Novo usuário 
 router.get('/CadastroNovoUser', (req, res) => {

@@ -24,15 +24,7 @@ const admCadastroController = {
             res.json({ error })
         }
     },
-     //Pegar dados da tabela e jogando na tabela Detalhes
-     listUsersDetalhes: async (req, res, type) => {
-        try {
-            const detalhe = await admCadastroModel.findByDetalhe(type)
-            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { detalhe, type })
-        } catch (error) {
-            res.json({ error })
-        }
-    }, 
+    
 
 
 

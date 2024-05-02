@@ -18,15 +18,8 @@ const admCadastroModel = {
             return error
         }
     },  
-    //Pegando da tabela e jogando nos detalhes 
-    findByDetalhe: async (type) => {
-        try {
-            const [detalhe] = await pool.query('SELECT `id_usuario`, `nome_usuario`, `email_usuario`, `cpf_usuario`,`tipo_usuario` FROM usuario WHERE `tipo_usuario` = ?', [type])
-            return detalhe
-        } catch (error) {
-            return error
-        }
-    } , 
+    
+   
 }
 
 module.exports = admCadastroModel
