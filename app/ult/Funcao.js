@@ -1,7 +1,5 @@
 function validacpf(cpf) {
 
-    
-
     cpf = cpf.replace(/\D+/g, '');
     if (cpf.length !== 11) return false;
 
