@@ -1,3 +1,4 @@
+//Sugestão de risco da parte do cliente ->   tipo se ele não gostaria de passar em tal rua
 var express = require("express")
 var router = express.Router()
 
@@ -38,12 +39,10 @@ router.get('/detealhesAdm', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/detealhesAdm')
 })
 
-/* router.get('/detealhesAdm/clientes', function (req, res) {
+router.get('/detealhesAdm', function (req, res) {
     admCadastroController.listUsersDetalhes(req, res, '1')
 })
-router.get('/detealhesAdm/entregador', function (req, res) {
-    admCadastroController.listUsersDetalhes(req, res, '2')
-}) */
+
 //Novo usuário 
 router.get('/CadastroNovoUser', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/CadastroNovoUser')

@@ -30,19 +30,19 @@
                 <article class="DadosUserIMG">
                     <img src="/imgs/adm/incon_people.svg">
                 </article>
+                <%detalhe.forEach(item=> { %>
 
-           <!--  
-                <%# detalhes.forEach(item=> { %>
-    
-                    <section class="DadosUser">
+                    <section class="ContainerAdm_Use">
+                        <article class="boxDados">
+                            <h3>Nome Usuário: </h3>
+                            <p>
+                                <%= item.nome_usuario %>
+                            </p>
+                        </article>
+                        <% }) %>
 
-                        <P><b>Nome do usuário: </b><%= item.nome_usuario %></P>
 
                     </section>
-                    <% }) %> -->
-
-
-            </section>
 
         </main>
 
