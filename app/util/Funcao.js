@@ -1,4 +1,4 @@
-function validacpf(cpf) {
+function validaCPF(cpf) {
 
     cpf = cpf.replace(/\D+/g, '');
     if (cpf.length !== 11) return false;
@@ -21,4 +21,4 @@ function validacpf(cpf) {
     return true;
 }
 
-exports.validarCpf = validacpf;
+exports.validaCPF = validaCPF;

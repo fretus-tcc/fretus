@@ -1,6 +1,6 @@
 // Criação de usúario no Back-end 
 const tarefasModel = require("../models/cadastroModel");
-const validaCPF = require("../ult/Funcao");
+const { validaCPF } = require("../util/Funcao");
 const { body, validationResult } = require("express-validator");
 
 const TarefasControl = {
@@ -34,22 +34,20 @@ const TarefasControl = {
             .withMessage("Nome invalido "),
         body("cpf")
             .isLength({ min: 14, max: 14 })
-            .withMessage("cpf invalido ")
+            .withMessage("Cpf inválido ")
             .custom(async (value) => {
-                
-                if(validaCPF.validarCpf(value)){
+
+                if(validaCPF(value)){
                     const cpf = await tarefasModel.findByCpf(value)
                     if (cpf.length > 0) {
-                        throw new Error('Cpf já utilizado.');
+                        throw new Error('Cpf já utilizado');
                     }
                     return true;
                 } else{
-                    return false 
+                    throw new Error('Cpf inválido');
                 }
-               
 
-
-            }).withMessage("cpf invalido "), 
+            }),
 
         body("email")
             .isEmail()
