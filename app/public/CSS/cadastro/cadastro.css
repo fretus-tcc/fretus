@@ -219,7 +219,7 @@ form p a {
 .modal {
     display: none;
     position: fixed;
-    z-index: 9999;
+    z-index: 99999999999999999;
     left: 0;
     top: 0;
     width: 100%;
