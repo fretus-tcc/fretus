@@ -542,19 +542,25 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `FRETUS`.`FALE_CONOSCO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `FRETUS`.`FALE_CONOSCO` (
+CREATE TABLE IF NOT EXISTS `FaleConosco` (
   `id_solicitacao` INT NOT NULL AUTO_INCREMENT,
-  `mensagem` TEXT(300) NOT NULL,
-  `assunto` VARCHAR(45) NOT NULL,
   `id_usuario` INT NOT NULL,
-  PRIMARY KEY (`id_solicitacao`),
-  INDEX `fk_FALE_CONOSCO_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
-  CONSTRAINT `fk_FALE_CONOSCO_USUARIOS1`
+  `nome_usuario` varchar(45) DEFAULT NULL,
+  `user_usuario` varchar(45) NULL,
+  `email_usuario` varchar(45) NULL,
+  `fone_usuario` varchar(11) NULL,
+  `cpf_usuario` CHAR(14)  NULL,
+  `assunto` VARCHAR(45) NOT NULL,
+  `mensagem` TEXT(300) NOT NULL,
+    PRIMARY KEY (`id_solicitacao`),
+    INDEX `fk_FALE_CONOSCO_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
+    CONSTRAINT `fk_FALE_CONOSCO_USUARIOS1`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION)  
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
