@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Fale Conosco</title>
-    <%- include('../partial/config/config.ejs') %> 
-    <%- include('../partial/config/config-home.ejs') %> 
-    <link rel="stylesheet" href="/CSS/client/FaleConosco.css">
+    <%- include('../partial/config/config.ejs') %>
+        <%- include('../partial/config/config-home.ejs') %>
+            <link rel="stylesheet" href="/CSS/client/FaleConosco.css">
 </head>
-<body>
-    
-    <%- include('../partial/header.ejs') %>
-    
-    <main>
-        <br><br><br>
-        <section class="container">
-            <!-- <form method="post" action="/enviar">-->
-            <form class="form-contain">
-                <h1>Fale com a Fretus por aqui</h1>
-                <input type="text" name="name" placeholder="Nome:" required>
-                <input type="email" name="email" placeholder="Email:" required>
-                <input type="text" name="sou" placeholder="Sou:" required>
-                <input type="cpf" name="cpf" placeholder="CPF:" autocomplete="off" maxlength="14" id="cpf" required>
-                <input type="text" name="assunto" placeholder="Assunto:" required>
-                <textarea style="resize: none" name="message" placeholder="Mensagem:" required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
-            <!--</form>!-->
-        </section>
-    </main>
-    <%- include('../partial/footer.ejs') %>
-    <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
 
-    <script src="/JS/burguer.js"></script>
-    <script src="/JS/header-scroll.js"></script>
-    <script src="/JS/FaleConsoco/Mascara.js"></script>
+<body>
+
+    <%- include('../partial/header.ejs') %>
+
+        <main>
+            <br><br><br>
+            <section class="container">
+                <!-- <form method="post" action="/enviar">-->
+                <form class="form-contain" action="FaleConosco" method="post">
+                    <h1>Fale com a Fretus por aqui</h1>
+                    <input type="text" name="nome" id="nome" placeholder="Nome:" maxlength="45" required>
+                    <input type="email"  maxlength="45" name="email" placeholder="Email:" required>
+                    <input type="text" name="identificador" placeholder="Sou:" required>
+
+                    <input type="cpf" name="cpf" placeholder="CPF:" autocomplete="off" maxlength="14" id="cpf" required>
+                 <input type="text" name="assunto" placeholder="Assunto:" maxlength="30" required>
+                  
+                    <textarea style="resize: none" name="mensagem" placeholder="Mensagem:" required></textarea>  
+                    <button type="submit">Enviar</button>
+                </form>
+                <!--</form>!-->
+            </section>
+        </main>
+        <%- include('../partial/footer.ejs') %>
+            <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
+
+                <script src="/JS/burguer.js"></script>
+                <script src="/JS/header-scroll.js"></script>
+                <script src="/JS/FaleConsoco/Mascara.js"></script>
 </body>
 
 </html>

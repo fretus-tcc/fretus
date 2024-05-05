@@ -542,24 +542,23 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `FRETUS`.`FALE_CONOSCO`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `FaleConosco` (
-  `id_solicitacao` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT NOT NULL,
+
+
+DROP TABLE IF EXISTS `FaleConosco`;
+CREATE TABLE `FaleConosco` (
+  `id_assunto` int NOT NULL AUTO_INCREMENT,
   `nome_usuario` varchar(45) DEFAULT NULL,
-  `user_usuario` varchar(45) NULL,
-  `email_usuario` varchar(45) NULL,
-  `fone_usuario` varchar(11) NULL,
-  `cpf_usuario` CHAR(14)  NULL,
-  `assunto` VARCHAR(45) NOT NULL,
-  `mensagem` TEXT(300) NOT NULL,
-    PRIMARY KEY (`id_solicitacao`),
-    INDEX `fk_FALE_CONOSCO_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
-    CONSTRAINT `fk_FALE_CONOSCO_USUARIOS1`
-    FOREIGN KEY (`id_usuario`)
-    REFERENCES `FRETUS`.`USUARIOS` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)  
-ENGINE = InnoDB;
+  `email_usuario` varchar(45) DEFAULT NULL,
+  `Identificador_usuario` varchar(45) DEFAULT NULL,
+  `cpf_usuario` CHAR(14) DEFAULT NULL,
+	`assunto` varchar(45) DEFAULT NULL,
+	`mensagem` TEXT(300) NOT NULL,
+  `tipo_usuario` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_assunto`),
+  KEY `fk_usuario_tipo_usuario_idx` (`tipo_usuario`),
+  UNIQUE INDEX `idASSUNTO_UNIQUE` (`id_assunto` ASC) VISIBLE,
+   CONSTRAINT fk_usuario_tipo_usuario_faleconosco FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario (id_tipo_usuario)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 

@@ -1,6 +1,7 @@
 var express = require("express")
 var router = express.Router()
 const TarefasControl = require("../controller/cadastroController");
+const FaleConoscoControl = require("../controller/FaleConoscoController");
 const quotesController = require('../controller/quotesController')
 const { body, validationResult } = require("express-validator")
 
@@ -45,9 +46,17 @@ router.get('/cadastro-entregador', function (req, res) {
   res.render('pages/cadastro-entregador')
 })
 
+
+/* ===========================FaleConsoco======================================== */
 router.get('/FaleConosco', function (req, res) {
-  res.render('pages/FaleConosco')
+  res.render('pages/FaleConosco',{pagina:"FaleConosco", logado:null , retorno: null, listaErros: null, dados: null})
 })
+router.post("/FaleConosco", async function (req, res) {
+  FaleConoscoControl.MensagemFaleConosco(req, res);
+});
+
+/* ===========================FaleConsoco======================================== */
+
 
 router.get('/Privacidade', function (req, res) {
   res.render('pages/Privacidade')
