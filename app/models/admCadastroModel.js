@@ -10,6 +10,14 @@ const admCadastroModel = {
             return error
         }
     } , 
+    findByUserId: async (userId) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM usuario WHERE `id_usuario` = ?', [userId]);
+            return result;
+        } catch (error) {
+            return error;
+        }
+    }, 
     //excluindo usuário da tabela 
      findByTypeDelete: async (id) => {
         try {

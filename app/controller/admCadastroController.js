@@ -10,6 +10,14 @@ const admCadastroController = {
             res.json({ error })
         }
     }, 
+    listUsersId: async (req, res, userId ) => {
+        try {
+            const result = await admCadastroModel.findByUserId(userId)
+            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result, userId })
+        } catch (error) {
+            res.json({ error })
+        }
+    }, 
     //Excluir usuário da tabela 
         deleteUse: async (req, res) => {
         const { id, type  } = req.params

@@ -64,16 +64,12 @@
                             <a href="#">
                                 <button class="button1">Editar</button>
                             </a>
-                            <a href="/admin/detealhesAdm">
-                                <button class="button2">Detalhes</button>
-                            </a>
-                            <!--  
-                            <form class="delete-form" action="/admin/cadastroAdm/delete/<%= item.id_duvida %>?_method=DELETE" method="post">
-                                <button class="delete">
-                                    <img src="/imgs/adm/delete.svg" alt="">
-                                </button>
-                            </form>
-                             -->
+                         
+                                <a href="/admin/detalhesAdm">
+                                    <button class="button2">Detalhes</button>
+                                </a>
+                     
+                            
                              <form class="delete-form" action="/admin/cadastroAdm/delete/<%= item.id_usuario %>/<%= item.tipo_usuario %>?_method=DELETE" method="post">
                                 <button class="button3">Excluir</button>
                             </form>
