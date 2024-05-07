@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="/CSS/client/delivery-request-carousel.css">
     <link rel="stylesheet" href="/CSS/client/delivery-request-mobile.css">
     <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+    <link rel="stylesheet" href="/CSS/client/pay-popup.css">
+    <link rel="stylesheet" href="/CSS/client/report-popup.css">
     <link rel="stylesheet" href="/CSS/shipper/panel.css">
 </head>
 <body>
@@ -82,7 +85,7 @@
                 <p class="text-time">Previsão de chegada às 2:50PM</p>
                 <div class="btn-container">
                     <button class="cta">Próxima Etapa</button>
-                    <button class="cta notify">Notificar Impeditivo</button>
+                    <button class="cta notify-call">Notificar Impeditivo</button>
                 </div>
             </div>
             <div class="status">
@@ -99,7 +102,7 @@
                 <p class="text-time">Previsão de chegada às 2:50PM</p>
                 <div class="btn-container">
                     <button class="cta">Próxima Etapa</button>
-                    <button class="cta notify">Notificar Impeditivo</button>
+                    <button class="cta notify-call">Notificar Impeditivo</button>
                 </div>
             </div>
             <div class="status">
@@ -116,7 +119,7 @@
                 <p class="text-time">Previsão de chegada às 2:50PM</p>
                 <div class="btn-container">
                     <button class="cta">Próxima Etapa</button>
-                    <button class="cta notify">Notificar Impeditivo</button>
+                    <button class="cta notify-call">Notificar Impeditivo</button>
                 </div>
             </div>
         </section>
@@ -125,10 +128,31 @@
         </section>
     </main>
 
+    <section class="popup notify">
+        <section class="popup-content">
+            <section class="close">
+                <img src="/imgs/client/close-icon.svg" alt="">
+            </section>
+            <form class="popup-wrapper">
+                <h1>Notificar Impeditivo</h1>
+                <select required class="input-field field">
+                    <option value="">Motivo do Impeditivo</option>
+                    <option value="1">Problemas com Veículo</option>
+                    <option value="2">Acidente de Trânsito</option>
+                    <option value="4">Furto</option>
+                    <option value="Outros">Outros</option>
+                </select>
+                <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
+                <button class="cta">Enviar</button>
+            </form>
+        </section>
+    </section>
+
     <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
     <script src="/JS/burguer.js"></script>
     <!-- <script src="/JS/client/geolocation.js"></script> -->
+    <script type="module" src="/JS/shipper/notify.js"></script>
     <script type="module" src="/JS/shipper/panel.js"></script>
 </body>
 </html>
