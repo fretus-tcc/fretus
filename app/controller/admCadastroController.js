@@ -10,10 +10,11 @@ const admCadastroController = {
             res.json({ error })
         }
     }, 
-    listUsersId: async (req, res, userId ) => {
+    listUsersId: async (req, res) => {
+        const { id } = req.params
         try {
-            const result = await admCadastroModel.findByUserId(userId)
-            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result, userId })
+            const result = await admCadastroModel.findByUserId(id)
+            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result, id })
         } catch (error) {
             res.json({ error })
         }

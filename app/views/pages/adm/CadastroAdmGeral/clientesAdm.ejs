@@ -28,9 +28,9 @@
             <% } else { %>
                 <h1>Cadastro - Entregador</h1>
             <% } %>
-            <a href="/admin/CadastroNovoUser">
+            <!-- <a href="/admin/CadastroNovoUser">
                 <button class="buttonNovo">Criar novo usuário +</button>
-            </a>
+            </a> -->
             <% result.forEach(item=> { %>
 
                 <section class="ContainerAdm_Use">
@@ -65,7 +65,7 @@
                                 <button class="button1">Editar</button>
                             </a>
                          
-                                <a href="/admin/detalhesAdm">
+                                <a href="/admin/detalhesAdm/<%= item.id_usuario %>">
                                     <button class="button2">Detalhes</button>
                                 </a>
                      
