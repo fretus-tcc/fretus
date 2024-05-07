@@ -29,11 +29,12 @@ router.delete('/cadastroAdm/delete/:id/:type', function (req, res) {
     admCadastroController.deleteUse(req, res)
 })
 
+// Detalhes Usuário
 router.get('/cadastroAdm/detalhesAdm/:id', function (req, res) {
     admCadastroController.listUsersId(req, res);
 });
 
-//Novo usuário 
+// Novo usuário 
 router.get('/CadastroNovoUser', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/CadastroNovoUser')
 })

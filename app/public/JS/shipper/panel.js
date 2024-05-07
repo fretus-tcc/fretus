@@ -40,12 +40,16 @@ const end = new mapboxgl.Marker({
 const ships = document.querySelectorAll('.ships')
 const form = document.querySelector('.form')
 const mapContainer = document.querySelector('.map')
+const statusContainer = document.querySelectorAll('.status')
 const backForm = document.querySelector('.return-form')
 
-ships.forEach(item => {
+ships.forEach((item, index) => {
     item.addEventListener('click', () => {
         document.querySelector('.ships.active')?.classList.remove('active')
         item.classList.add('active')
+
+        document.querySelector('.status.active')?.classList.remove('active')
+        statusContainer[index].classList.add('active')
 
         form.classList.add('mobile')
         mapContainer.classList.add('mobile')
