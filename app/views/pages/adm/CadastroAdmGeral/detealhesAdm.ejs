@@ -17,14 +17,19 @@
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
         <main>
-            <section class="LinkUser">
-                <a href="/admin/cadastroAdm/clientes">
+            <% result.forEach(item=> { %>
+                <section class="LinkUser">
 
-                    <h3><- volta para página anterior </h3>
-
-                </a>
-            </section>
-
+                    <% if (item.tipo_usuario =="1") { %>
+                        <a href="/admin/cadastroAdm/clientes">
+                            <h3><- volta para página anterior </h3>
+                        </a>
+                    <% } else { %>
+                        <a href="/admin/cadastroAdm/entregador">
+                            <h3><- volta para página anterior </h3>
+                        </a>
+                    <% } %>
+                <% }) %>
             <h2>Usuário - nome: </h2>
             <section class="containerDetealhes">
                 <% result.forEach(item=> { %>

@@ -35,7 +35,10 @@ const admCadastroController = {
         const { id } = req.params
         try {
             const data = {
-                nome_usuario: req.body.name
+                nome_usuario: req.body.name,
+                email_usuario: req.body.email,
+                cpf_usuario: req.body.cpf,
+                senha_usuario: req.body.senha,
             }
             await admCadastroModel.updateUser(data, id)
             res.redirect(`/admin/cadastroAdm/editar/${id}`)

@@ -6,9 +6,9 @@ main {
     overflow: auto;
 }
 
-.boxDados{
+.boxDados {
     font-size: 1.2rem;
-    
+
 }
 
 .LinkUser a {
@@ -27,7 +27,7 @@ main {
     justify-content: center;
     margin: 20px 0;
     padding: 20px;
-    background:linear-gradient(to right, yellow , green );
+    background: linear-gradient(to right, yellow, green);
     min-height: 100px;
 
 }
@@ -47,18 +47,37 @@ main {
 .LinkUser {
     margin-bottom: 15px;
 }
-.Header_container{
+
+.Header_container {
     display: flex;
     justify-content: space-between;
     padding: 20px;
 }
-.Header_container .name_user{
+
+.Header_container .name_user {
     font-size: 2rem;
     font-weight: bolder;
 }
-.DocumentoUserEnt  h1 {
+
+.DocumentoUserEnt h1 {
     margin: 10px 5px;
     font-size: 2rem;
+}
+.flex-dadosedite{
+    margin: 10px 0;
+}
+.inputEdite input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #333;
+}
+.inputEdite input:focus{
+    outline: 2px solid rgb(228, 172, 18);
+}
+.Box_textEditar h1{
+    font-size: 2rem;
+    margin: 20px 0;
 }
 
 /* Novo */

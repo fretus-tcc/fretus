@@ -17,37 +17,46 @@
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
         <main>
-            <section class="LinkUser">
-                <a href="/admin/cadastroAdm/clientes">
 
-                    <h3><- volta para página anterior </h3>
-
-                </a>
             </section>
+            <% result.forEach(item=> { %>
+                <section class="LinkUser">
 
-            <h2>Usuário - nome: </h2>
-            <section class="containerDetealhes">
-                <% result.forEach(item=> { %>
-                    <section class="ContainerAdm_Use">
-                        <header class="Header_container">
-                            <article class="boxDados">
-                                <span class="name_user">Nome Usuário: 
-                                        <%= item.nome_usuario %>
-                                 </span>
-                            </article>
-                            <article class="boxDados">
-                                <span>Status: Status </span>
-                            </article>
+                    <% if (item.tipo_usuario =="1") { %>
+                        <a href="/admin/cadastroAdm/clientes">
+                            <h3><- volta para página anterior </h3>
+                        </a>
+                    <% } else { %>
+                        <a href="/admin/cadastroAdm/entregador">
+                            <h3><- volta para página anterior </h3>
+                        </a>
+                    <% } %>
+            <section class="Box_textEditar">
+                <h1>Página de Editar usuário</h1>
+                <h2>Usuário: <%=item.nome_usuario%> - ID: <%=item.id_usuario%></h2>
+            </section>
+                <% }) %>
+                    <section class="containerDetealhes">
+                        <% result.forEach(item=> { %>
+                            <section class="ContainerAdm_Use">
+                                <header class="Header_container">
+                                    <article class="boxDados">
+                                        <span class="name_user">Nome Usuário:
+                                            <%= item.nome_usuario %>
+                                        </span>
+                                    </article>
+                                    <article class="boxDados">
+                                        <span>Status: Status </span>
+                                    </article>
 
-                        </header>
-                        <article class="DadosUserIMG">
-                            <img src="/imgs/adm/incon_people.svg">
-                        </article>
-                        <!-- <article class="boxDados DADOS">
-                            <span><b>NOME Usuário:</b>  <%= item.nome_usuario %></span><BR><BR>
-                            <span><b>CPF Usuário:</b>  <%= item.cpf_usuario %></span><BR><BR>
-                            <span><b>EMAIL Usuário:</b>  <%= item.email_usuario %></span><BR><BR>
-                            <span><b>SENHA Usuário:</b>  <%= item.senha_usuario %></span><BR><BR>
+                                </header>
+                                <article class="DadosUserIMG">
+                                    <img src="/imgs/adm/incon_people.svg">
+                                </article>
+                                <article class="boxDados DADOS">
+
+
+                                    <!-- <span><b>SENHA Usuário:</b>  <%= item.senha_usuario %></span><BR><BR>
                             <span><b>TELEFONE Usuário:</b>  VAZIO  </span><BR><BR>
                                 
                                 <% if ( item.tipo_usuario =="2") { %>
@@ -62,18 +71,76 @@
 
                                 <% }  %>
                         </article> -->
-                        <form action="/admin/cadastroAdm/editar/<%= item.id_usuario %>?_method=PUT" method="post">
-                            <input name="name" type="text" value="<%= item.nome_usuario %>">
+                                    <form action="/admin/cadastroAdm/editar/<%= item.id_usuario %>?_method=PUT"
+                                        method="post" class="formEdite">
+                                        <article class="flex-dadosedite">
+                                            <span><b>NOME Usuário:</b>
+                                                <%= item.nome_usuario %>
+                                            </span>
+                                            <section class="inputEdite">
+                                                <P><b>Dados a ser alterado: </b></P>
+                                                <input name="name" type="text" value="<%= item.nome_usuario %>"><BR><BR>
+                                            </section>
+                                        </article>
 
-                            <button class="cta">Enviar</button>
-                        </form>
+                                        <article class="flex-dadosedite">
+                                            <span><b>EMAIL Usuário:</b>
+                                                <%= item.email_usuario %>
+                                            </span>
+                                            <section class="inputEdite">
+                                                <P><b>Dados a ser alterado: </b></P>
+                                                <input name="email" type="email" value="<%= item.email_usuario %>">
+                                                <BR><BR>
+                                            </section>
 
-                    </section>
-                    <% }) %>
+                                        </article>
+
+                                        <article class="flex-dadosedite">
+                                            <span><b>CPF Usuário:</b>
+                                                <%= item.cpf_usuario %>
+                                            </span>
+                                            <section class="inputEdite">
+                                                <P><b>Dados a ser alterado: </b></P>
+                                                <input name="cpf" type="text" value="<%= item.cpf_usuario %>" id="cpf"
+                                                    autocomplete="off" maxlength="14" class="cpf">
+                                                <BR><BR>
+                                            </section>
+
+                                        </article>
+                                        <article class="flex-dadosedite">
+                                            <span><b>SENHA Usuário:</b>
+                                                <%= item.senha_usuario %>
+                                            </span>
+                                            <section class="inputEdite">
+                                                <P><b>Dados a ser alterado: </b></P>
+                                                <input name="senha" type="senha" value="<%= item.senha_usuario %>">
+                                                <BR><BR>
+                                            </section>
+
+                                        </article>
+
+
+
+
+                                        <% if ( item.tipo_usuario=="2" ) { %>
+                                            <section class="DocumentoUserEnt">
+
+                                                <h1> DOCUMENTOS: </h1>
+                                            </section>
+                                            <% } %>
+
+
+                                                <button class="cta">Enviar</button>
+                                    </form>
+
+                            </section>
+                            <% }) %>
 
         </main>
 
         <script src="/JS/adm/resize.js"></script>
+        <script src="/JS/login-cadastro/eye.js"></script>
+        <script src="/JS/login-cadastro/mascara.js"></script>
 </body>
 
 </html>
