@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Admin</title>
+    <%- include('../../../partial/config/config.ejs') %>
+        <%- include('../../../partial/config/config-adm.ejs') %>
+
+            <link rel="stylesheet" href="/CSS/adm/CadastroAdm/detalhes&Novo_Adm.css">
+
+</head>
+
+<body>
+
+    <%- include('../../../partial/adm/sidebar.ejs') %>
+
+        <main>
+            <section class="LinkUser">
+                <a href="/admin/cadastroAdm/clientes">
+
+                    <h3><- volta para página anterior </h3>
+
+                </a>
+            </section>
+
+            <h2>Usuário - nome: </h2>
+            <section class="containerDetealhes">
+                <% result.forEach(item=> { %>
+                    <section class="ContainerAdm_Use">
+                        <header class="Header_container">
+                            <article class="boxDados">
+                                <span class="name_user">Nome Usuário: 
+                                        <%= item.nome_usuario %>
+                                 </span>
+                            </article>
+                            <article class="boxDados">
+                                <span>Status: Status </span>
+                            </article>
+
+                        </header>
+                        <article class="DadosUserIMG">
+                            <img src="/imgs/adm/incon_people.svg">
+                        </article>
+                        <!-- <article class="boxDados DADOS">
+                            <span><b>NOME Usuário:</b>  <%= item.nome_usuario %></span><BR><BR>
+                            <span><b>CPF Usuário:</b>  <%= item.cpf_usuario %></span><BR><BR>
+                            <span><b>EMAIL Usuário:</b>  <%= item.email_usuario %></span><BR><BR>
+                            <span><b>SENHA Usuário:</b>  <%= item.senha_usuario %></span><BR><BR>
+                            <span><b>TELEFONE Usuário:</b>  VAZIO  </span><BR><BR>
+                                
+                                <% if ( item.tipo_usuario =="2") { %>
+
+                                    <section class="DocumentoUserEnt">
+                                        
+                                        <h1 > DOCUMENTOS: </h1>
+
+                                    </section>
+
+                                    
+
+                                <% }  %>
+                        </article> -->
+                        <form action="/admin/cadastroAdm/editar/<%= item.id_usuario %>?_method=PUT" method="post">
+                            <input name="name" type="text" value="<%= item.nome_usuario %>">
+
+                            <button class="cta">Enviar</button>
+                        </form>
+
+                    </section>
+                    <% }) %>
+
+        </main>
+
+        <script src="/JS/adm/resize.js"></script>
+</body>
+
+</html>

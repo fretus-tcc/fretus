@@ -12,16 +12,13 @@ router.get('/', function (req, res) {
 router.get('/cadastroAdm', function (req, res) {
     res.render('pages/adm/CadastroAdmGeral/cadastroAdm')
 })
+// 2 - Página de administração de cadastro
 
 router.get('/cadastroAdm/clientes', function (req, res) {
     admCadastroController.listUsers(req, res, '1')
 })
 router.get('/cadastroAdm/entregador', function (req, res) {
     admCadastroController.listUsers(req, res, '2')
-})
-
-router.get('/CadastroAdmGeral/CreateCadastroAdm', function (req, res) {
-    res.render('pages/adm/CadastroAdmGeral/CreateCadastroAdm')
 })
 
 //Excluir Usuário 
@@ -34,9 +31,19 @@ router.get('/cadastroAdm/detalhesAdm/:id', function (req, res) {
     admCadastroController.listUsersId(req, res);
 });
 
+
 // Novo usuário 
 router.get('/CadastroNovoUser', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/CadastroNovoUser')
 })
+
+// Editar user 
+router.get('/cadastroAdm/editar/:id', function (req, res) {
+    admCadastroController.listUsersId(req, res);
+});
+
+router.put('/cadastroAdm/editar/:id', function (req, res) {
+    admCadastroController.updateUser(req, res);
+});
 
 module.exports = router

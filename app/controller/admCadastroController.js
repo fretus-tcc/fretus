@@ -9,7 +9,8 @@ const admCadastroController = {
         } catch (error) {
             res.json({ error })
         }
-    }, 
+    },
+    // Detalhes
     listUsersId: async (req, res) => {
         const { id } = req.params
         try {
@@ -18,7 +19,29 @@ const admCadastroController = {
         } catch (error) {
             res.json({ error })
         }
-    }, 
+    },
+    // Editar - Mostrar Campos
+    listUsersId: async (req, res) => {
+        const { id } = req.params
+        try {
+            const result = await admCadastroModel.findByUserId(id)
+            res.render('pages/adm/CadastroAdmGeral/editar', { result, id })
+        } catch (error) {
+            res.json({ error })
+        }
+    },
+    // Editar - Atualizar User
+    updateUser: async (req, res) => {
+        const { id } = req.params
+        try {
+            const result = await admCadastroModel.findByUserId(id)
+            console.log(req.body);
+            await admCadastroModel.updateUser(req.body, id)
+            res.render('pages/adm/CadastroAdmGeral/editar', { result, id })
+        } catch (error) {
+            res.json({ error })
+        }
+    },
     //Excluir usuário da tabela 
         deleteUse: async (req, res) => {
         const { id, type  } = req.params

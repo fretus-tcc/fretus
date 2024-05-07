@@ -18,6 +18,15 @@ const admCadastroModel = {
             return error;
         }
     },
+    //atualizando usuário da tabela 
+    updateUser: async (data, id) => {
+        console.log('model: '+data.name);
+        try {
+            await pool.query('UPDATE duvidas SET `nome_usuario` = ? WHERE id_duvida = ?', [data.name, id])
+        } catch (error) {
+            return error
+        }
+    },
     //excluindo usuário da tabela 
     findByTypeDelete: async (id) => {
         try {
