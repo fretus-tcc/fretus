@@ -6,6 +6,11 @@ main {
     overflow: auto;
 }
 
+.boxDados{
+    font-size: 1.2rem;
+    
+}
+
 .LinkUser a {
     color: #333;
     font-size: 1.3rem;
@@ -45,9 +50,11 @@ main {
 .Header_container{
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    padding: 20px;
 }
 .Header_container .name_user{
-
+    font-size: 2rem;
+    font-weight: bolder;
 }
+
 /* Novo */
