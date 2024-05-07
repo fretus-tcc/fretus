@@ -9,25 +9,25 @@ const admCadastroModel = {
         } catch (error) {
             return error
         }
-    } , 
+    },
     findByUserId: async (userId) => {
         try {
-            const [result] = await pool.query('SELECT * FROM usuario WHERE `id_usuario` = ?', [userId]);
+            const [result] = await pool.query('SELECT * FROM usuario WHERE `id_usuario` = ? ', [userId]);
             return result;
         } catch (error) {
             return error;
         }
-    }, 
+    },
     //excluindo usuário da tabela 
-     findByTypeDelete: async (id) => {
+    findByTypeDelete: async (id) => {
         try {
             await pool.query('DELETE FROM usuario WHERE id_usuario = ?', [id])
         } catch (error) {
             return error
         }
-    },  
-    
-   
+    },
+
+
 }
 
 module.exports = admCadastroModel
