@@ -27,12 +27,22 @@
 
             <h2>Usuário - nome: </h2>
             <section class="containerDetealhes">
-                <article class="DadosUserIMG">
-                    <img src="/imgs/adm/incon_people.svg">
-                </article>
-
                 <% result.forEach(item=> { %>
                     <section class="ContainerAdm_Use">
+                        <header class="Header_container">
+                            <article class="boxDados">
+                                <span class="name_user">Nome Usuário: 
+                                        <%= item.nome_usuario %>
+                                 </span>
+                            </article>
+                            <article class="boxDados">
+                                <span>Status: Status </span>
+                            </article>
+
+                        </header>
+                        <article class="DadosUserIMG">
+                            <img src="/imgs/adm/incon_people.svg">
+                        </article>
                         <article class="boxDados">
                             <h3>Nome Usuário: </h3>
                             <p>
@@ -41,7 +51,7 @@
                         </article>
 
                     </section>
-                <% }) %>
+                    <% }) %>
 
         </main>
 

@@ -63,13 +63,10 @@
                         <section class="flex">
                             <a href="#">
                                 <button class="button1">Editar</button>
-                            </a>
-                         
+                            </a>    
                                 <a href="/admin/detalhesAdm/<%= item.id_usuario %>">
                                     <button class="button2">Detalhes</button>
                                 </a>
-                     
-                            
                              <form class="delete-form" action="/admin/cadastroAdm/delete/<%= item.id_usuario %>/<%= item.tipo_usuario %>?_method=DELETE" method="post">
                                 <button class="delete button3">Excluir</button>
                             </form>

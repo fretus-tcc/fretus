@@ -42,5 +42,12 @@ main {
 .LinkUser {
     margin-bottom: 15px;
 }
+.Header_container{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+.Header_container .name_user{
 
+}
 /* Novo */
