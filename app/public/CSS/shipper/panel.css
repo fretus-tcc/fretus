@@ -70,14 +70,14 @@ h2.name {
     bottom: 35px;
     left: 10px;
     right: 10px;
-    z-index: 99999999;
+    z-index: 10000;
     background-color: white;
     color: #333;
     padding: 20px 25px;
     border-radius: 15px;
     opacity: 0;
     transition: all .6s;
-    transform: translateY(30px);
+    transform: translateY(110%);
 }
 
 .status.active {
@@ -142,7 +142,7 @@ h2.name {
     font-size: 14px;
 }
 
-.notify {
+.notify-call {
     background-color: #F0F0F0;
     color: #333 !important;
     border: 2px solid #F0F0F0;
