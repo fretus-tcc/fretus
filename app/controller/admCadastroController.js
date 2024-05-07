@@ -34,10 +34,11 @@ const admCadastroController = {
     updateUser: async (req, res) => {
         const { id } = req.params
         try {
-            const result = await admCadastroModel.findByUserId(id)
-            console.log(req.body);
-            await admCadastroModel.updateUser(req.body, id)
-            res.render('pages/adm/CadastroAdmGeral/editar', { result, id })
+            const data = {
+                nome_usuario: req.body.name
+            }
+            await admCadastroModel.updateUser(data, id)
+            res.redirect(`/admin/cadastroAdm/editar/${id}`)
         } catch (error) {
             res.json({ error })
         }

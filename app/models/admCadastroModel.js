@@ -20,9 +20,8 @@ const admCadastroModel = {
     },
     //atualizando usuário da tabela 
     updateUser: async (data, id) => {
-        console.log('model: '+data.name);
         try {
-            await pool.query('UPDATE duvidas SET `nome_usuario` = ? WHERE id_duvida = ?', [data.name, id])
+            await pool.query('UPDATE usuario SET ? WHERE id_usuario = ?', [data, id])
         } catch (error) {
             return error
         }

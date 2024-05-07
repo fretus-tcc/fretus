@@ -37,11 +37,12 @@ router.get('/CadastroNovoUser', (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/CadastroNovoUser')
 })
 
-// Editar user 
+// Editar user - Campos
 router.get('/cadastroAdm/editar/:id', function (req, res) {
     admCadastroController.listUsersId(req, res);
 });
 
+// Editar user - Banco de dados
 router.put('/cadastroAdm/editar/:id', function (req, res) {
     admCadastroController.updateUser(req, res);
 });
