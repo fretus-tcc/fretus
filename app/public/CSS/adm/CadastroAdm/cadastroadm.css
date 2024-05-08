@@ -1,3 +1,23 @@
+.notificador ul {
+    background-color: transparent;
+    position: relative;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.notificador li a {
+    border: 1px solid #426cb4;
+    padding: 6px;
+}
+
+.notificador .atual {
+    background-color: #426cb4;
+    color: white;
+}
+
 main {
     padding: 50px;
     width: 60vw;
