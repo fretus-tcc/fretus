@@ -30,13 +30,24 @@ const quotesController = {
 
     listQuotes: async (req, res) => {
         try {
-            const result = await quotesModel.findAll()
+            // paginação
+            let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+            let result = null
+            let regPagina = 4
+            let inicio = parseInt(pagina - 1) * regPagina
+            let totReg = await quotesModel.totalReg();
+            let totPaginas = Math.ceil(totReg[0].total / regPagina);
+            result = await quotesModel.findPaginate(inicio, regPagina);
+            let paginador = totReg[0].total <= regPagina 
+                ? null 
+                : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
             result.forEach(item => {
                 item.conteudo_duvida = marked.parse(item.conteudo_duvida).replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '').slice(0, 300).concat('...')
             })
-            res.render('pages/adm/read', { result })
+            res.render('pages/adm/read', { result, paginador })
         } catch (error) {
             res.json({ error })
+            console.log(error);
         }
     },
 

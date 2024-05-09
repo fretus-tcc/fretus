@@ -46,3 +46,26 @@
     all: unset;
     cursor: pointer;
 }
+
+.notificador ul {
+    background-color: transparent;
+    position: relative;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+}
+
+.notificador li a {
+    border: 1px solid #426cb4;
+    padding: 6px;
+}
+
+.notificador .atual {
+    background-color: #426cb4;
+    color: white;
+}

@@ -10,9 +10,19 @@ const quotesModel = {
         }
     },
 
-    findAll: async () => {
+    findPaginate: async (pagina, total) => {
         try {
-            const [result] = await pool.query('SELECT * FROM duvidas ORDER BY data_duvida DESC')
+            const [result] = await pool.query('SELECT * FROM duvidas ORDER BY data_duvida DESC limit ?, ?', [pagina, total])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
+    totalReg: async () => {
+        try {
+            // const [result] = await pool.query('SELECT count* FROM duvidas limit ?, ? ORDER BY data_duvida DESC')
+            const [result] = await pool.query('SELECT count(*) total FROM duvidas')
             return result
         } catch (error) {
             return error
