@@ -76,27 +76,6 @@
                 <% }) %>
                     </div>
                     
-                    <% if(paginador){ %>
-
-                        <div class="notificador">
-                            <ul>
-                                <% for(var i=1; i <=paginador.total_paginas; i++){ 
-                                    if(paginador.pagina_atual==i){ 
-                                %>
-                                    <li><a class="atual" href="?pagina=<%= i %>">
-                                            <%= i %>
-                                        </a>
-                                    </li>
-                                    <% } else { %>
-                                        <li><a href="?pagina=<%= i %>">
-                                                <%= i %>
-                                            </a>
-                                        </li>
-                                    <% } 
-                                } %>
-                            </ul>
-                        </div>
-                        <% } %>
 
 
                     <script src="/JS/adm/resize.js"></script>

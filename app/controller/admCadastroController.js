@@ -5,19 +5,8 @@ const admCadastroController = {
     listUsers: async (req, res, type) => {
         try {
             const result = await admCadastroModel.findByType(type)
-        
-            let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
-            let results = null
-            let regPagina = 2
-            let inicio = parseInt(pagina - 1) * regPagina
-            let totReg = await admCadastroModel.totalReg();
-            let totPaginas = Math.ceil(totReg[0].total / regPagina);
-            results = await admCadastroModel.findPage(inicio, regPagina);
-            let paginador = totReg[0].total <= regPagina
-              ? null
-              : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
 
-            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { result, type,  listaTipoQuartos: results, pagina: "clientesAdm", logado: null, paginador: paginador })
+            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { result, type })
             
         } catch (error) {
             res.json({ error })
