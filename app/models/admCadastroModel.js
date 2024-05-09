@@ -35,6 +35,26 @@ const admCadastroModel = {
         }
     },
 
+    // Paginação 
+
+    findPage: async (pagina, total) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM tipo_usuario WHERE status_usuario = 1 limit ?, ?', [pagina, total])
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
+
+    totalReg: async () => {
+        try {
+            const [linhas] = await pool.query('SELECT count(*) total FROM tipo_usuario  WHERE status_usuario = 1')
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
+
 
 }
 

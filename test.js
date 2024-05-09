@@ -20,4 +20,4 @@ function validaCPF(cpf) {
     return true;
 }
 
-console.log(validaCPF('177.345.324-93'))
+console.log(validaCPF('475.399.900-90'))
