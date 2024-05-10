@@ -31,12 +31,20 @@ const quotesController = {
     listQuotes: async (req, res) => {
         try {
             // paginação
-            let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+            let pagina = req.query.pagina == undefined ? 1 : Number(req.query.pagina);
             let result = null
             let regPagina = 4
             let inicio = parseInt(pagina - 1) * regPagina
             let totReg = await quotesModel.totalReg();
             let totPaginas = Math.ceil(totReg[0].total / regPagina);
+            
+            // validacao parametro pagina
+            if (pagina <= 0 || isNaN(pagina)) {
+                return res.redirect('/admin/ajuda')
+            } else if (pagina > totPaginas) {
+                return res.redirect(`/admin/ajuda?pagina=${totPaginas}`)
+            }
+
             result = await quotesModel.findPaginate(inicio, regPagina);
             let paginador = totReg[0].total <= regPagina 
                 ? null 
