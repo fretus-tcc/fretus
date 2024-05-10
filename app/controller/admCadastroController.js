@@ -3,13 +3,30 @@ const admCadastroModel = require('../models/admCadastroModel')
 const admCadastroController = {    
     //Pegar dados da tabela 
     listUsers: async (req, res, type) => {
-        try {
-            const result = await admCadastroModel.findByType(type)
+        try {/* 
+            const result = await admCadastroModel.findByType(type) */
 
-            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { result, type })
+            // paginação
+
+            let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+            let results = null
+            let regPagina = 2
+            let inicio = parseInt(pagina - 1) * regPagina
+            let totReg = await admCadastroModel.totalReg(type);
+            let totPaginas = Math.ceil(totReg[0].total / regPagina);
+            results = await admCadastroModel.findPage(inicio, regPagina,type);
+            let paginador = totReg[0].total <= regPagina
+              ? null
+              : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+
+            console.log(results)
+            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { type , results, paginador})
+
             
         } catch (error) {
-            res.json({ error })
+            console.log(error)
+            res.json({ error: "Falha ao acessar dados" })
+        
         }
     },
     // Detalhes
