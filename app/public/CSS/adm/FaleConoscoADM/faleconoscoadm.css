@@ -1,0 +1,29 @@
+main{
+    width: 100vw;
+    padding: 50px;
+    color: #333;
+    max-height: 100vh;
+    overflow: auto;
+}
+.ContainerFaleConosco{
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+.ContainerFaleConosco header{
+    padding: 10px ;
+    margin: 15px 0;
+
+}
+
+.ContainerFaleConosco header .nameUserF{
+    margin: 10px 0px 15px 0 ; 
+}
+
+.ContainerFaleConosco textarea{
+    margin: 10px 0;
+    width: 100%;
+    min-height: 200px;
+}

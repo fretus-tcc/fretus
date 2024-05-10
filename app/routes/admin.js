@@ -4,6 +4,7 @@ var router = express.Router()
 
 var pool = require("../../config/connection-factory");
 const admCadastroController = require('../controller/admCadastroController')
+const FaleConoscoController = require('../controller/FaleConoscoController')
 
 router.get('/', function (req, res) {
     res.render('pages/adm/admin')
@@ -46,5 +47,14 @@ router.get('/cadastroAdm/editar/:id', function (req, res) {
 router.put('/cadastroAdm/editar/:id', function (req, res) {
     admCadastroController.updateUser(req, res);
 });
+//Fale Conosco 
+router.get('/AdmFaleConosco', function (req, res) {
+    res.render('pages/adm/FaleConosco/AdmFaleConosco')
+})
+router.get('/AdmFaleConosco', function (req, res) {
+    res.render('pages/adm/FaleConosco/AdmFaleConosco')
+})
+
+
 
 module.exports = router
