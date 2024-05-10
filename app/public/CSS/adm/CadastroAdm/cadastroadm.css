@@ -1,21 +1,24 @@
 .notificador ul {
-    background-color: transparent;
-    position: relative;
-    height: auto;
-    padding: 0;
-    margin: 0;
     display: flex;
     gap: 8px;
     list-style: none;
+    justify-content: center;
 }
 
-.notificador li a {
-    border: 1px solid #426cb4;
-    padding: 6px;
+.notificador a {
+    border: 1px solid var(--blue);
+    padding: 10px;
+    transition: all .3s;
+}
+
+.notificador a:not(.atual):hover {
+    background-color: var(--blue-2);
+    border: 1px solid var(--blue-2);
+    color: white;
 }
 
 .notificador .atual {
-    background-color: #426cb4;
+    background-color: var(--blue);
     color: white;
 }
 
