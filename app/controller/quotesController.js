@@ -76,7 +76,7 @@ const quotesController = {
             if (!results.length) {
                 return res.redirect('/ajuda')
             }
-            res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)) })
+            res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)), msg: req.flash('msg') })
         } catch (error) {
             return res.json({ error })
         }
@@ -101,6 +101,7 @@ const quotesController = {
         if (data) {
             try {
                 await quotesModel.create(data)
+                req.flash('msg', 'Dúvida criada com sucesso')
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })

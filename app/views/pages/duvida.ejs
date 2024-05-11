@@ -7,11 +7,20 @@
     <%- include('../partial/config/config.ejs') %> 
     <%- include('../partial/config/config-home.ejs') %> 
     <link rel="stylesheet" href="/CSS/quotes/main.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
 </head>
 
 <body>
 
     <%- include('../partial/header.ejs') %>
+
+    <!-- Notificações -->
+    <% if (msg.length > 0) { %>
+        <script>notify('<%= msg %>', 'Dúvida criada com sucesso', 'success')</script>
+    <% } %>
 
     <main>
         <h1 class="heading"><%= results.titulo_duvida %></h1>

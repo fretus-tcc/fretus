@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 const methodOverride = require('method-override')
+const session = require('express-session')
+const flash = require('connect-flash')
 const port = 3001
 
 const dotenv = require('dotenv');
@@ -14,6 +16,12 @@ app.set("views", "./app/views")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(session({
+  secret: "secret",
+  saveUninitialized: true,
+  resave: true
+}))
+app.use(flash())
 
 /* app.use(
   session({
