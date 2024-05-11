@@ -46,7 +46,7 @@ main a {
 .contact {
     /* background-color: rgba(255, 255, 255, 0.686); */
     color: #333;
-    height: 300px;
+    height: max(50vh, 300px);
     padding: 0 10px;
     display: flex;
     flex-direction: column;
