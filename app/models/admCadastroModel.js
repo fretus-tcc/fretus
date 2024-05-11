@@ -18,6 +18,14 @@ const admCadastroModel = {
             return error;
         }
     },
+    findByUserIdD: async (userIdd) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM usuario WHERE `id_usuario` = ? ', [userIdd]);
+            return result;
+        } catch (error) {
+            return error;
+        }
+    },
     //atualizando usuário da tabela 
     updateUser: async (data, id) => {
         try {
