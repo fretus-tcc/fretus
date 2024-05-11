@@ -7,12 +7,23 @@
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-adm.ejs') %>
     <link rel="stylesheet" href="/CSS/adm/grid.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
 </head>
 <body>
 
     <%- include('../../partial/adm/sidebar.ejs') %>
 
-    <main class="content-container">
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.text %>', '<%= msg.text %> com sucesso', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
+
+    <main class="content-container">    
         
         <div class="header">
             <h1>Dúvidas</h1>

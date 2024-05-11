@@ -33,7 +33,7 @@ const quotesController = {
             // paginação
             let pagina = req.query.pagina == undefined ? 1 : Number(req.query.pagina);
             let result = null
-            let regPagina = 4
+            let regPagina = 2
             let inicio = parseInt(pagina - 1) * regPagina
             let totReg = await quotesModel.totalReg();
             let totPaginas = Math.ceil(totReg[0].total / regPagina);
@@ -49,10 +49,16 @@ const quotesController = {
             let paginador = totReg[0].total <= regPagina 
                 ? null 
                 : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+
+            // formatando mensagens notificacao
+            const msgs = quotesController.notifyMessages(req, res)
+
+            // formatando conteudo dúvida
             result.forEach(item => {
                 item.conteudo_duvida = marked.parse(item.conteudo_duvida).replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '').slice(0, 300).concat('...')
             })
-            res.render('pages/adm/read', { result, paginador })
+
+            res.render('pages/adm/read', { result, paginador, msgs })
         } catch (error) {
             res.json({ error })
             console.log(error);
@@ -69,6 +75,21 @@ const quotesController = {
         }
     },
 
+    notifyMessages: (req, res) => {
+        const flash = req.flash()
+        const statusMsgs = Object.keys(flash)
+        const msgs = []
+        if (statusMsgs.length > 0) { 
+            statusMsgs.forEach(status => { 
+                const texts = [...flash[status]] 
+                texts.forEach(text => { 
+                    msgs.push({status, text})
+                })
+            })
+        }
+        return msgs
+    },
+
     showQuote: async (req, res) => {
         const { slug } = req.params
         try {
@@ -76,7 +97,11 @@ const quotesController = {
             if (!results.length) {
                 return res.redirect('/ajuda')
             }
-            res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)), msg: req.flash('msg') })
+
+            // formatando mensagens notificacao
+            const msgs = quotesController.notifyMessages(req, res)
+
+            res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)), msgs })
         } catch (error) {
             return res.json({ error })
         }
@@ -101,7 +126,7 @@ const quotesController = {
         if (data) {
             try {
                 await quotesModel.create(data)
-                req.flash('msg', 'Dúvida criada com sucesso')
+                req.flash('success', 'Dúvida criada')
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })
@@ -115,6 +140,7 @@ const quotesController = {
         if (data) {
             try {
                 await quotesModel.update(data, id)
+                req.flash('info', 'Dúvida atualizada')
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })
@@ -126,6 +152,7 @@ const quotesController = {
         const { id } = req.params
         try {
             await quotesModel.delete(id)
+            req.flash('error', 'Dúvida deletada')
             res.redirect('/admin/ajuda')
         } catch (error) {
             res.json({ error })

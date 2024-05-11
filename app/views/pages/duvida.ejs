@@ -18,8 +18,10 @@
     <%- include('../partial/header.ejs') %>
 
     <!-- Notificações -->
-    <% if (msg.length > 0) { %>
-        <script>notify('<%= msg %>', 'Dúvida criada com sucesso', 'success')</script>
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.text %>', '<%= msg.text %> com sucesso', '<%= msg.status %>')</script>
+        <% }) %>
     <% } %>
 
     <main>
