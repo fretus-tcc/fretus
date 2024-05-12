@@ -6,102 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Admin</title>
     <%- include('../../../partial/config/config.ejs') %>
-        <%- include('../../../partial/config/config-adm.ejs') %>
+    <%- include('../../../partial/config/config-adm.ejs') %>
 
-            <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
-
+    <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
-        <!-- `nome_usuario` ,`cpf_usuario`,`email_usuario`, `senha_usuario` -->
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.text %>', '<%= msg.text %> com sucesso', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
 
-        <section class="ContainerAdm_cadastroClient">
-            <a href="/admin/cadastroAdm">
-                <h3><- volta para página anterior </h3>
-            </a>
-            
-            <% if (type=="1") { %>
-                <h1>Cadastro - Cliente</h1>
-            <% } else { %>
-                <h1>Cadastro - Entregador</h1>
-            <% } %>
-            <!-- <a href="/admin/CadastroNovoUser">
-                <button class="buttonNovo">Criar novo usuário +</button>
-            </a> -->
-            <% results.forEach(item=> { %>
+    <!-- `nome_usuario` ,`cpf_usuario`,`email_usuario`, `senha_usuario` -->
 
-                <section class="ContainerAdm_Use">
-                    <article class="boxDados">
-                        <h3>Nome Usuário: </h3>
-                        <p>
-                            <%= item.nome_usuario %>
-                        </p>
-                    </article>
-                    <article class="boxDados">
-                        <h3>Email Usuário: </h3>
-                        <p>
-                            <%= item.email_usuario %>
-                        </p>
-                    </article>
-                    <article class="boxDados">
-                        <h3>CPF Usuário: </h3>
-                        <p>
-                            <%= item.cpf_usuario %>
-                        </p>
-                    </article>
-                    <article class="boxDados">
-                        <h3>Status Usuário: </h3>
-                        <p>
-                            Status
-                        </p>
-                    </article>
-                    <section class="boXaCao">
-                        <h3>Ações: </h3>
-                        <section class="flex">
-                            <a href="/admin/cadastroAdm/editar/<%= item.id_usuario %>">
-                                <button class="button1">Editar</button>
-                            </a>    
-                                <a href="/admin/cadastroAdm/detalhesAdm/<%= item.id_usuario %>">
-                                    <button class="button2">Detalhes</button>
-                                </a>
-                             <form class="delete-form" action="/admin/cadastroAdm/delete/<%= item.id_usuario %>/<%= item.tipo_usuario %>?_method=DELETE" method="post">
-                                <button class="delete button3">Excluir</button>
-                            </form>
-                        </section>
-                    </section>
+    <section class="ContainerAdm_cadastroClient">
+    <a href="/admin/cadastroAdm">
+        <h3><- volta para página anterior </h3>
+    </a>
+
+    <% if (type=="1") { %>
+        <h1>Cadastro - Cliente</h1>
+    <% } else { %>
+        <h1>Cadastro - Entregador</h1>
+    <% } %>
+    <!-- <a href="/admin/CadastroNovoUser">
+        <button class="buttonNovo">Criar novo usuário +</button>
+    </a> -->
+    <% results.forEach(item=> { %>
+
+        <section class="ContainerAdm_Use">
+            <article class="boxDados">
+                <h3>Nome Usuário: </h3>
+                <p>
+                    <%= item.nome_usuario %>
+                </p>
+            </article>
+            <article class="boxDados">
+                <h3>Email Usuário: </h3>
+                <p>
+                    <%= item.email_usuario %>
+                </p>
+            </article>
+            <article class="boxDados">
+                <h3>CPF Usuário: </h3>
+                <p>
+                    <%= item.cpf_usuario %>
+                </p>
+            </article>
+            <article class="boxDados">
+                <h3>Status Usuário: </h3>
+                <p>
+                    Status
+                </p>
+            </article>
+            <section class="boXaCao">
+                <h3>Ações: </h3>
+                <section class="flex">
+                    <a href="/admin/cadastroAdm/editar/<%= item.id_usuario %>">
+                        <button class="button1">Editar</button>
+                    </a>    
+                        <a href="/admin/cadastroAdm/detalhesAdm/<%= item.id_usuario %>">
+                            <button class="button2">Detalhes</button>
+                        </a>
+                        <form class="delete-form" action="/admin/cadastroAdm/delete/<%= item.id_usuario %>/<%= item.tipo_usuario %>?_method=DELETE" method="post">
+                        <button class="delete button3">Excluir</button>
+                    </form>
                 </section>
-                <% }) %>
-                    </div>
+            </section>
+        </section>
 
-                    <% if(paginador){ %>
+    <% }) %>
 
-                        <div class="notificador">
-                            <ul>
-                                <% for(var i=1; i <=paginador.total_paginas; i++){ 
-                                    if(paginador.pagina_atual==i){ 
-                                %>
-                                    <li><a class="atual" href="?pagina=<%= i %>">
-                                            <%= i %>
-                                        </a>
-                                    </li>
-                                    <% } else { %>
-                                        <li><a href="?pagina=<%= i %>">
-                                                <%= i %>
-                                            </a>
-                                        </li>
-                                    <% } 
-                                } %>
-                            </ul>
-                        </div>
-                        <% } %>
-                    
+    <% if(paginador){ %>
 
+        <div class="notificador">
+            <ul>
+                <% for(var i=1; i <=paginador.total_paginas; i++){ 
+                    if(paginador.pagina_atual==i){ 
+                %>
+                    <li><a class="atual" href="?pagina=<%= i %>">
+                            <%= i %>
+                        </a>
+                    </li>
+                    <% } else { %>
+                        <li><a href="?pagina=<%= i %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                    <% } 
+                } %>
+            </ul>
+        </div>
 
-                    <script src="/JS/adm/resize.js"></script>
-                    <script src="/JS/quotes/delete-confirm.js"></script>
+    <% } %>
+    
+    <script src="/JS/adm/sidebar.js"></script>
+    <script src="/JS/quotes/delete-confirm.js"></script>
 </body>
 
 </html>

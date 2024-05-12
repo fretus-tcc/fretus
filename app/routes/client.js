@@ -2,9 +2,13 @@ var express = require("express")
 var router = express.Router()
 
 var pool = require("../../config/connection-factory");
+const { notifyMessages } = require('../util/Funcao')
 
 router.get('/solicitar-entrega', function (req, res) {
-    res.render('pages/cliente/solicitar-entrega')
+    // formatando mensagens notificacao
+    const msgs = notifyMessages(req, res)
+    
+    res.render('pages/cliente/solicitar-entrega', { msgs })
 })
 
 router.get('/chat', function (req, res) {

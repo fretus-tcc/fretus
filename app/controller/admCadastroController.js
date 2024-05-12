@@ -1,4 +1,5 @@
 const admCadastroModel = require('../models/admCadastroModel')
+const { notifyMessages } = require('../util/Funcao')
 
 const admCadastroController = {    
     //Pegar dados da tabela 
@@ -19,8 +20,11 @@ const admCadastroController = {
               ? null
               : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
 
-            console.log(results)
-            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { type , results, paginador})
+            // formatando mensagens notificacao
+            const msgs = notifyMessages(req, res)
+            
+            // console.log(results)
+            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { type , results, paginador, msgs })
 
             
         } catch (error) {
@@ -44,7 +48,8 @@ const admCadastroController = {
         const { id } = req.params
         try {
             const result = await admCadastroModel.findByUserId(id)
-            res.render('pages/adm/CadastroAdmGeral/editar', { result, id })
+            const msgs = notifyMessages(req, res)
+            res.render('pages/adm/CadastroAdmGeral/editar', { result, id, msgs })
         } catch (error) {
             res.json({ error })
         }
@@ -60,6 +65,7 @@ const admCadastroController = {
                 senha_usuario: req.body.senha,
             }
             await admCadastroModel.updateUser(data, id)
+            req.flash('info', 'Usuário atualizado')
             res.redirect(`/admin/cadastroAdm/editar/${id}`)
         } catch (error) {
             res.json({ error })
@@ -70,6 +76,7 @@ const admCadastroController = {
         const { id, type  } = req.params
         try {
             await admCadastroModel.findByTypeDelete(id)
+            req.flash('error', 'Usuário deletado')
             if (type == '1') {
                 res.redirect('/admin/cadastroAdm/clientes')
             } else {

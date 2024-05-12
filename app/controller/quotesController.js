@@ -1,4 +1,5 @@
 const quotesModel = require('../models/quotesModel')
+const { notifyMessages } = require('../util/Funcao')
 
 const { body, validationResult } = require('express-validator')
 const slugify = require('slugify')
@@ -51,7 +52,7 @@ const quotesController = {
                 : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
 
             // formatando mensagens notificacao
-            const msgs = quotesController.notifyMessages(req, res)
+            const msgs = notifyMessages(req, res)
 
             // formatando conteudo dúvida
             result.forEach(item => {
@@ -75,21 +76,6 @@ const quotesController = {
         }
     },
 
-    notifyMessages: (req, res) => {
-        const flash = req.flash()
-        const statusMsgs = Object.keys(flash)
-        const msgs = []
-        if (statusMsgs.length > 0) { 
-            statusMsgs.forEach(status => { 
-                const texts = [...flash[status]] 
-                texts.forEach(text => { 
-                    msgs.push({status, text})
-                })
-            })
-        }
-        return msgs
-    },
-
     showQuote: async (req, res) => {
         const { slug } = req.params
         try {
@@ -99,7 +85,7 @@ const quotesController = {
             }
 
             // formatando mensagens notificacao
-            const msgs = quotesController.notifyMessages(req, res)
+            const msgs = notifyMessages(req, res)
 
             res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)), msgs })
         } catch (error) {

@@ -17,6 +17,7 @@ const TarefasControl = {
 
         try {
             await tarefasModel.create(req.body);
+            req.flash('success', `Bem-vindo, ${req.body.nome}`)
             if (req.body.type == '1') {
                 res.redirect('/cliente/solicitar-entrega')
             } else {

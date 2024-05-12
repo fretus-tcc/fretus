@@ -6,15 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Admin</title>
     <%- include('../../../partial/config/config.ejs') %>
-        <%- include('../../../partial/config/config-adm.ejs') %>
+    <%- include('../../../partial/config/config-adm.ejs') %>
 
-            <link rel="stylesheet" href="/CSS/adm/CadastroAdm/detalhes&Novo_Adm.css">
-
+    <link rel="stylesheet" href="/CSS/adm/CadastroAdm/detalhes&Novo_Adm.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
+
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.text %>', '<%= msg.text %> com sucesso', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
+
 
         <main>
 
@@ -138,7 +150,7 @@
 
         </main>
 
-        <script src="/JS/adm/resize.js"></script>
+        <script src="/JS/adm/sidebar.js"></script>
         <script src="/JS/login-cadastro/eye.js"></script>
         <script src="/JS/login-cadastro/mascara.js"></script>
         <script src="/JS/adm/editar.js"></script>
