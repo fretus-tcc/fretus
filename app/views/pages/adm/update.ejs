@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - admin</title>
-    <!-- <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon"> -->
     <link rel="stylesheet" href="/CSS/adm/form.css">
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-adm.ejs') %>
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
     <%
@@ -20,6 +24,11 @@
                         class: 'error',
                         msg: errors[key].msg
                     }
+                    const campoAtual = key
+                    const msg = errors[campoAtual].msg
+                    %>
+                        <script>notify('Verifique o campo <%= campoAtual %>', '<%= msg %>', 'error')</script>
+                    <%
                 }
             })
             // console.log(customError)

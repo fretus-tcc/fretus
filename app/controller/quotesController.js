@@ -8,7 +8,7 @@ const sanitizeHTML = require('sanitize-html')
 
 const quotesController = {
     validation: [
-        body('title')
+        body('titulo')
             .notEmpty().withMessage('Campo não preenchido')
             .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
             .custom(async (value, { req }) => {
@@ -17,7 +17,7 @@ const quotesController = {
                     throw new Error('Título já utilizado!')
                 }
             }),
-        body('content').notEmpty().withMessage('Campo não preenchido')
+        body('conteudo').notEmpty().withMessage('Campo não preenchido')
     ],
     
     listQuotesTitle: async (req, res) => {
@@ -98,12 +98,12 @@ const quotesController = {
             res.render(`pages/adm/${type}`, { errors: validationResult(req).mapped(), quotes })
             return
         }
-        const { title, content } = req.body
+        const { titulo, conteudo } = req.body
     
         return {
-            titulo_duvida: title,
-            conteudo_duvida: sanitizeHTML(content),
-            slug_duvida: slugify(title, { lower: true, strict: true })
+            titulo_duvida: titulo,
+            conteudo_duvida: sanitizeHTML(conteudo),
+            slug_duvida: slugify(titulo, { lower: true, strict: true })
         }
     },
 

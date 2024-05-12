@@ -7,6 +7,11 @@
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-adm.ejs') %>
     <link rel="stylesheet" href="/CSS/adm/form.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
     <%
@@ -19,6 +24,11 @@
                         class: 'error',
                         msg: errors[key].msg
                     }
+                    const campoAtual = key
+                    const msg = errors[campoAtual].msg
+                    %>
+                        <script>notify('Verifique o campo <%= campoAtual %>', '<%= msg %>', 'error')</script>
+                    <%
                 }
             })
             // console.log(customError)
