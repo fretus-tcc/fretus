@@ -36,6 +36,7 @@ const TarefasControl = {
         body("cpf")
             .isLength({ min: 14, max: 14 })
             .withMessage("Cpf inválido ")
+            .bail()
             .custom(async (value) => {
 
                 if(validaCPF(value)){
