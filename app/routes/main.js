@@ -46,6 +46,11 @@ router.get('/cadastro-entregador', function (req, res) {
   res.render('pages/cadastro-entregador')
 })
 
+router.post('/cadastro-entregador', function (req, res) {
+  console.log(req.body)
+  res.redirect('/entregador/entregas-solicitadas')
+})
+
 
 /* ===========================FaleConsoco======================================== */
 router.get('/FaleConosco', function (req, res) {

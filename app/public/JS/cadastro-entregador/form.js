@@ -51,7 +51,11 @@ const removeClass = () => {
 
 const isChecked = (i) => {
     let valid = true
-    Array.from(form[i].elements).forEach(field => {
+    const allFields = document.querySelector('form').elements
+    // console.log(allFields);
+    const currentFields = [...allFields].filter((field) => field.offsetParent == form[i])
+    console.log(currentFields);
+    currentFields.forEach(field => {
         if (field.validity.valid == false) {
             valid = false
         }
