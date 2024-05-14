@@ -1,7 +1,9 @@
 const admCadastroModel = require('../models/admCadastroModel')
 const { notifyMessages } = require('../util/Funcao')
 
-const admCadastroController = {    
+const { body, validationResult } = require("express-validator");
+
+const admCadastroController = {
     //Pegar dados da tabela 
     listUsers: async (req, res, type) => {
         try {/* 
@@ -15,22 +17,22 @@ const admCadastroController = {
             let inicio = parseInt(pagina - 1) * regPagina
             let totReg = await admCadastroModel.totalReg(type);
             let totPaginas = Math.ceil(totReg[0].total / regPagina);
-            results = await admCadastroModel.findPage(inicio, regPagina,type);
+            results = await admCadastroModel.findPage(inicio, regPagina, type);
             let paginador = totReg[0].total <= regPagina
-              ? null
-              : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+                ? null
+                : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
 
             // formatando mensagens notificacao
             const msgs = notifyMessages(req, res)
-            
-            // console.log(results)
-            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { type , results, paginador, msgs })
 
-            
+            // console.log(results)
+            res.render('pages/adm/CadastroAdmGeral/clientesAdm', { type, results, paginador, msgs })
+
+
         } catch (error) {
             console.log(error)
             res.json({ error: "Falha ao acessar dados" })
-        
+
         }
     },
     // Detalhes
@@ -72,8 +74,8 @@ const admCadastroController = {
         }
     },
     //Excluir usuário da tabela 
-        deleteUse: async (req, res) => {
-        const { id, type  } = req.params
+    deleteUse: async (req, res) => {
+        const { id, type } = req.params
         try {
             await admCadastroModel.findByTypeDelete(id)
             req.flash('error', 'Usuário deletado')
@@ -86,7 +88,13 @@ const admCadastroController = {
             res.json({ error })
         }
     },
-    
+    regrasValidacao: [
+        body("nome")
+            .isLength({ min: 3, max: 45 })
+            .withMessage("Nome invalido "),
+        
+    ],
+
 
 
 
