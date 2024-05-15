@@ -65,6 +65,7 @@ const admCadastroController = {
                 email_usuario: req.body.email,
                 cpf_usuario: req.body.cpf,
                 senha_usuario: req.body.senha,
+                telefone_usuario: req.body.tel,
             }
             await admCadastroModel.updateUser(data, id)
             req.flash('info', 'Usuário atualizado')

@@ -96,6 +96,26 @@
                                         </article>
 
                                         <article class="flex-dadosedite">
+                                            <span><b>DATA DE NASCIMENTO Usuário:</b>
+                                                <%= item.data_usuario %>
+                                            </span>
+                                            <section class="inputEdite">
+                                                <P><b>Dados a ser alterado: </b></P>
+                                                <input name="nasc" type="date" value="<%= item.data_usuario %>"><BR><BR>
+                                            </section>
+                                        </article>
+
+                                        <article class="flex-dadosedite">
+                                            <span><b>TELEFONE Usuário:</b>
+                                                <%= item.telefone_usuario %>
+                                            </span>
+                                            <section class="inputEdite">
+                                                <P><b>Dados a ser alterado: </b></P>
+                                                <input name="tel" type="text" id="tel" value="<%= item.telefone_usuario %>"><BR><BR>
+                                            </section>
+                                        </article>
+
+                                        <article class="flex-dadosedite">
                                             <span><b>EMAIL Usuário:</b>
                                                 <%= item.email_usuario %>
                                             </span>
@@ -152,6 +172,8 @@
 
         <script src="/JS/adm/sidebar.js"></script>
         <script src="/JS/login-cadastro/eye.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
         <script src="/JS/login-cadastro/mascara.js"></script>
         <script src="/JS/adm/editar.js"></script>
 </body>
