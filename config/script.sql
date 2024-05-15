@@ -42,31 +42,80 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
-  `id_usuario` int NOT NULL AUTO_INCREMENT,
-  `nome_usuario` varchar(45) DEFAULT NULL,
-  `user_usuario` varchar(45) NULL,
-  `senha_usuario` char(60) DEFAULT NULL,
-  `email_usuario` varchar(45) DEFAULT NULL,
-  `fone_usuario` varchar(11) NULL,
-  `tipo_usuario` int NOT NULL DEFAULT '1',
-  `status_usuario` int DEFAULT '1',
-  `cpf_usuario` CHAR(14) DEFAULT NULL,
-  `telefone` CHAR(11) NULL,
-  `data_usuario` DATE NULL,
-  `descricao_usuario` TEXT NULL,
-  `foto_de_perfil` VARCHAR(255) NULL,
-  `cod_tipo_usuario` INT NULL,
-  `notificacao_sms_estado` INT NULL,
-  `notificacao_email_estado` INT NULL,
-  `desr_tipo_usuario` VARCHAR(45) NULL,
+  id_usuario int NOT NULL AUTO_INCREMENT,
+  /* nome_usuario varchar(45) DEFAULT NULL, */
+  nome_usuario varchar(45) NOT NULL,
+  /* user_usuario varchar(45) NULL, */
+  /* senha_usuario char(60) DEFAULT NULL, */
+  senha_usuario char(60) NOT NULL,
+  /* email_usuario varchar(45) DEFAULT NULL, */
+  email_usuario varchar(45) NOT NULL,
+  /* fone_usuario varchar(11) NULL, */
+  tipo_usuario int NOT NULL DEFAULT '1',
+  status_usuario int DEFAULT '1',
+  /* cpf_usuario CHAR(14) DEFAULT NULL, */
+  cpf_usuario CHAR(14) NOT NULL,
+  /* telefone CHAR(11) NULL, */
+  telefone_usuario CHAR(15) NOT NULL,
+  /* data_usuario DATE NULL, */
+  data_usuario DATE NOT NULL,
+  descricao_usuario TEXT NULL,
+  foto_de_perfil VARCHAR(255) NULL,
+  /* cod_tipo_usuario INT NULL, */
+  notificacao_sms_estado INT NULL,
+  notificacao_email_estado INT NULL,
+  /* desr_tipo_usuario VARCHAR(45) NULL, */
   PRIMARY KEY (`id_usuario`),
   KEY `fk_usuario_tipo_usuario_idx` (`tipo_usuario`),
   UNIQUE INDEX `idUSUARIOS_UNIQUE` (`id_usuario` ASC) VISIBLE,
   UNIQUE INDEX `email_usuario_UNIQUE` (`email_usuario` ASC) VISIBLE,
-  UNIQUE INDEX `telefone_UNIQUE` (`telefone` ASC) VISIBLE, 
+  UNIQUE INDEX `telefone_UNIQUE` (`telefone_usuario` ASC) VISIBLE, 
   CONSTRAINT `fk_usuario_tipo_usuario` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador;
+CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
+  raio_de_atuacao FLOAT NOT NULL,
+  id_usuario INT NOT NULL,
+  id_entregador INT NOT NULL AUTO_INCREMENT,
+  cnh_entregador VARCHAR(255) NOT NULL,
+  crvl_entregador VARCHAR(255) NULL,
+  ipva_entregador VARCHAR(255) NULL,
+  qtn_visualizacoes_perfil INT NULL DEFAULT '0',
+  qtn_cupons_ativos INT NULL DEFAULT '0',
+  qtn_entregas_aceitas INT NULL DEFAULT '0',
+  qtn_entregas_canceladas INT NULL DEFAULT '0',
+  qtn_entregas_recusadas INT NULL DEFAULT '0',
+  disponivel_inicio TIME NULL,
+  disponivel_final TIME NULL,
+  qtn_entregas_solicitadas INT NULL DEFAULT '0',
+  INDEX fk_ESPECIFICA_ENTREGADOR_USUARIOS1_idx (id_usuario ASC) VISIBLE,
+  PRIMARY KEY (id_entregador),
+  UNIQUE INDEX id_entregador_UNIQUE (id_entregador ASC) VISIBLE,
+  CONSTRAINT fk_ESPECIFICA_ENTREGADOR_USUARIOS1
+    FOREIGN KEY (id_usuario)
+    REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.veiculos (
+  id_veiculo INT NOT NULL AUTO_INCREMENT,
+  tipo_veiculo VARCHAR(45) NOT NULL,
+  placa CHAR(9) NOT NULL,
+  modelo_veiculo VARCHAR(45) NOT NULL,
+  id_entregador INT NOT NULL,
+  tipo_bauleto VARCHAR(45) NULL,
+  foto_veiculo VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id_veiculo),
+  UNIQUE INDEX placa_UNIQUE (placa ASC) VISIBLE,
+  INDEX fk_VEICULOS_DETALHAMENTO_ENTREGADOR1_idx (id_entregador ASC) VISIBLE,
+  CONSTRAINT fk_VEICULOS_DETALHAMENTO_ENTREGADOR1
+    FOREIGN KEY (id_entregador)
+    REFERENCES bzt6iht1cder66rlnctv.detalhamento_entregador (id_entregador)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CEP` (
   `id_cep` INT NOT NULL AUTO_INCREMENT,
@@ -79,29 +128,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CEP` (
   INDEX `fk_CEP_USUARIOS1_idx` (`iid_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_CEP_USUARIOS1`
     FOREIGN KEY (`iid_usuario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`DETALHAMENTO_ENTREGADOR` (
-  `raio_de_atuacao` FLOAT NOT NULL,
-  `id_usuario` INT NOT NULL,
-  `id_entregador` INT NOT NULL AUTO_INCREMENT,
-  `qtn_visualizacoes_perfil` INT NOT NULL,
-  `qtn_cupons_ativos` INT NOT NULL,
-  `qtn_entregas_aceitas` INT NOT NULL,
-  `qtn_entregas_canceladas` INT NOT NULL,
-  `qtn_entregas_recusadas` INT NOT NULL,
-  `disponivel_inicio` TIME NULL,
-  `disponivel_final` TIME NULL,
-  `qtn_entregas_solicitadas` INT NOT NULL,
-  INDEX `fk_ESPECIFICA_ENTREGADOR_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
-  PRIMARY KEY (`id_entregador`),
-  UNIQUE INDEX `id_entregador_UNIQUE` (`id_entregador` ASC) VISIBLE,
-  CONSTRAINT `fk_ESPECIFICA_ENTREGADOR_USUARIOS1`
-    FOREIGN KEY (`id_usuario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -119,12 +146,12 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`PEDIDOS` (
   INDEX `fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1_idx` (`id_entregador` ASC) VISIBLE,
   CONSTRAINT `fk_PEDIDOS_USUARIOS1`
     FOREIGN KEY (`id_usuario_cliente`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1`
     FOREIGN KEY (`id_entregador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`DETALHAMENTO_ENTREGADOR` (`id_entregador`)
+    REFERENCES `bzt6iht1cder66rlnctv`.detalhamento_entregador (`id_entregador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -144,12 +171,12 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CUPONS` (
   INDEX `fk_CUPONS_USUARIOS2_idx` (`id_usuario_utilizador` ASC) VISIBLE,
   CONSTRAINT `fk_CUPONS_USUARIOS1`
     FOREIGN KEY (`id_usuario_criador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CUPONS_USUARIOS2`
     FOREIGN KEY (`id_usuario_utilizador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -173,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`RAKING` (
   INDEX `fk_RAKING_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_RAKING_USUARIOS1`
     FOREIGN KEY (`id_usuario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -186,31 +213,12 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`USUARIOS_has_CUPONS` (
   INDEX `fk_USUARIOS_has_CUPONS_USUARIOS1_idx` (`USUARIOS_id_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_USUARIOS_has_CUPONS_USUARIOS1`
     FOREIGN KEY (`USUARIOS_id_usuario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_USUARIOS_has_CUPONS_CUPONS1`
     FOREIGN KEY (`CUPONS_id_cupon`)
     REFERENCES `bzt6iht1cder66rlnctv`.`CUPONS` (`id_cupon`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`VEICULOS` (
-  `id_veiculo` INT NOT NULL AUTO_INCREMENT,
-  `tipo_veiculo` VARCHAR(45) NOT NULL,
-  `placa` CHAR(9) NOT NULL,
-  `modelo_veiculo` VARCHAR(45) NOT NULL,
-  `id_entregador` INT NOT NULL,
-  `tipo_bauleto` VARCHAR(45) NULL,
-  `foto_veiculo` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id_veiculo`),
-  UNIQUE INDEX `placa_UNIQUE` (`placa` ASC) VISIBLE,
-  INDEX `fk_VEICULOS_DETALHAMENTO_ENTREGADOR1_idx` (`id_entregador` ASC) VISIBLE,
-  CONSTRAINT `fk_VEICULOS_DETALHAMENTO_ENTREGADOR1`
-    FOREIGN KEY (`id_entregador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`DETALHAMENTO_ENTREGADOR` (`id_entregador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -226,17 +234,17 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`FAVORITADOS` (
   INDEX `fk_FAVORITADOS_USUARIOS3_idx` (`id_usuario_favoritado` ASC) VISIBLE,
   CONSTRAINT `fk_FAVORITADOS_USUARIOS1`
     FOREIGN KEY (`id_usuario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FAVORITADOS_USUARIOS2`
     FOREIGN KEY (`id_usuario_favoritou`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FAVORITADOS_USUARIOS3`
     FOREIGN KEY (`id_usuario_favoritado`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -255,12 +263,12 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`PAGAMENTOS` (
   INDEX `fk_PAGAMENTOS_USUARIOS2_idx` (`id_usuario_recebidor` ASC) VISIBLE,
   CONSTRAINT `fk_PAGAMENTOS_USUARIOS1`
     FOREIGN KEY (`id_usuario_pagador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PAGAMENTOS_USUARIOS2`
     FOREIGN KEY (`id_usuario_recebidor`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -358,17 +366,17 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CHAT` (
   INDEX `fk_CHAT_USUARIOS3_idx` (`id_usuario_rementente` ASC) VISIBLE,
   CONSTRAINT `fk_CHAT_USUARIOS1`
     FOREIGN KEY (`id_usuario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CHAT_USUARIOS2`
     FOREIGN KEY (`id_usuario_destinatario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CHAT_USUARIOS3`
     FOREIGN KEY (`id_usuario_rementente`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -386,12 +394,12 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`avaliacoes` (
   INDEX `fk_avaliacoes_RAKING1_idx` (`RAKING_id_posicao` ASC) VISIBLE,
   CONSTRAINT `fk_avaliacoes_USUARIOS1`
     FOREIGN KEY (`id_usuario_entregador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_avaliacoes_USUARIOS2`
     FOREIGN KEY (`id_usuario_avaliador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_avaliacoes_RAKING1`
@@ -432,12 +440,12 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`DENUNCIAS` (
   INDEX `fk_DENUNCIAS_USUARIOS2_idx` (`id_usuario_denunciado` ASC) VISIBLE,
   CONSTRAINT `fk_DENUNCIAS_USUARIOS1`
     FOREIGN KEY (`id_usuario_denunciador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DENUNCIAS_USUARIOS2`
     FOREIGN KEY (`id_usuario_denunciado`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -451,22 +459,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`FALE_CONOSCO` (
   INDEX `fk_FALE_CONOSCO_USUARIOS1_idx` (`id_usuario` ASC) VISIBLE,
   CONSTRAINT `fk_FALE_CONOSCO_USUARIOS1`
     FOREIGN KEY (`id_usuario`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`USUARIOS` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`documentos` (
-  `id_documento` INT NOT NULL AUTO_INCREMENT,
-  `cnh` VARCHAR(255) NULL,
-  `crvl` VARCHAR(255) NULL,
-  `ipva` VARCHAR(255) NULL,
-  `id_entregador` INT NOT NULL,
-  PRIMARY KEY (`id_documento`),
-  INDEX `fk_documentos_DETALHAMENTO_ENTREGADOR1_idx` (`id_entregador` ASC) VISIBLE,
-  CONSTRAINT `fk_documentos_DETALHAMENTO_ENTREGADOR1`
-    FOREIGN KEY (`id_entregador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`DETALHAMENTO_ENTREGADOR` (`id_entregador`)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
