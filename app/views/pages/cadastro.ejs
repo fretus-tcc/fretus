@@ -20,10 +20,10 @@
     <body>
         <%
 
-            var msgErro = {nome:"", cpf: "",email:"", senha:""}
-            var cssErro = {nome:"",cpf: "", email:"", senha:""}
-            var cssErroBorda = {nome:"",cpf: "", email:"", senha:""}
-            let valorCampos = {nome:"",cpf: "", email:"", senha:""}
+            var msgErro = {nome:"", cpf: "",email:"", senha:"", nasc:"", tel:""}
+            var cssErro = {nome:"",cpf: "", email:"", senha:"", nasc:"", tel:""}
+            var cssErroBorda = {nome:"",cpf: "", email:"", senha:"", nasc:"", tel:""}
+            let valorCampos = {nome:"",cpf: "", email:"", senha:"", nasc:"", tel:""}
             if(dados && dados!=null){
                 valorCampos = dados
             }
@@ -58,6 +58,20 @@
                         %>
                             <script>notify('Verifique o campo senha', '<%= msgErro.senha %>', 'error')</script>
                         <%
+                    } else if (itemErro.path == "nasc") {
+                        msgErro.nasc = itemErro.msg;
+                        cssErro.nasc = "erroForm";
+                        cssErroBorda.nasc = "erroInput";
+                        %>
+                            <script>notify('Verifique o campo data de nascimento', '<%= msgErro.nasc %>', 'error')</script>
+                        <%
+                    } else if (itemErro.path == "tel") {
+                        msgErro.tel = itemErro.msg;
+                        cssErro.tel = "erroForm";
+                        cssErroBorda.tel = "erroInput";
+                        %>
+                            <script>notify('Verifique o campo telefone', '<%= msgErro.tel %>', 'error')</script>
+                        <%
                     }
                 });
             }
@@ -86,6 +100,17 @@
                     <%= msgErro.nome %>
                 </span>
                 <!-- <p id="messageNome"></p> -->
+
+                <input class="<%= cssErroBorda.nasc %>" type="text" name="nasc" id="nasc" placeholder="Sua data de nascimento " value="<%=valorCampos.nasc %>" onfocus="this.type='date'">
+                <span class="<%= cssErro.nasc %>">
+                    <%= msgErro.nasc %>
+                </span>
+
+                <input class="<%= cssErroBorda.tel %>" type="text" name="tel" id="tel" placeholder="Seu telefone " value="<%=valorCampos.tel%>">
+                <span class="<%= cssErro.tel %>">
+                    <%= msgErro.tel %>
+                </span>
+
                 <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="14" class="cpf <%= cssErroBorda.cpf %>" placeholder="CPF"
                     value="<%=valorCampos.cpf%>">
                 <span class="<%= cssErro.cpf %>">
@@ -134,6 +159,8 @@
 
         <script src="/JS/login-cadastro/validacao.js"></script>
         <script src="/JS/login-cadastro/eye.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
         <script src="/JS/login-cadastro/mascara.js"></script>
         <!-- <script src="/JS/login-cadastro/button.js"></script> -->
 

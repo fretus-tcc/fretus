@@ -7,7 +7,15 @@ const TarefasControl = {
     CriarUsuario: async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            console.log(errors);
+
+            // formatando data nascimento
+            const { nasc } = req.body
+            if (nasc) {
+                const date = new Date(nasc)
+                req.body.nasc = date.toISOString().split('T')[0]
+            }
+
+            // console.log(errors);
             return res.render('pages/cadastro', {
                 dados: req.body,
                 listaErros: errors,
@@ -25,6 +33,7 @@ const TarefasControl = {
             }
 
         } catch (error) {
+            console.log(error)
             return error;
         }
 
@@ -33,6 +42,28 @@ const TarefasControl = {
         body("nome")
             .isLength({ min: 3, max: 45 })
             .withMessage("Nome invalido "),
+        
+        body("nasc")
+            .isLength({ min: 10 })
+            .withMessage('Data inválida ')
+            .toDate()
+            .withMessage('Data inválida '),
+        
+        body("tel")
+            .isLength({ min: 15 })
+            .withMessage('Telefone incompleto ')
+            .bail()
+            .isMobilePhone()
+            .withMessage('Telefone inválido ')
+            .bail()
+            .custom(async (value) => {
+                const tel = await tarefasModel.findByTel(value)
+                if (tel.length > 0) {
+                    throw new Error('Telefone já utilizado.');
+                }
+                return true;
+            }),
+
         body("cpf")
             .isLength({ min: 14, max: 14 })
             .withMessage("Cpf inválido ")
@@ -45,7 +76,7 @@ const TarefasControl = {
                         throw new Error('Cpf já utilizado');
                     }
                     return true;
-                } else{
+                } else {
                     throw new Error('Cpf inválido');
                 }
 
@@ -63,7 +94,7 @@ const TarefasControl = {
 
             }),
 
-            body("senha")
+        body("senha")
             .isLength({ min: 8, max: 30 })
             .withMessage("Senha inválida, deve conter pelo menos 8 caracteres")
             .bail()

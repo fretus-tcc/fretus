@@ -14,3 +14,4 @@ cpfInput.addEventListener('input', function () {
     cpfInput.value = value;
 });
 
+$('#tel').mask('(00) 00000-0000')
