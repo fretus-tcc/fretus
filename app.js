@@ -16,10 +16,12 @@ app.set("views", "./app/views")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
 app.use(session({
   secret: "secret",
   saveUninitialized: true,
-  resave: true
+  resave: false,
+  cookie: { secure: false }
 }))
 app.use(flash())
 
