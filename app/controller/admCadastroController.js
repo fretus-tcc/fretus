@@ -96,6 +96,21 @@ const admCadastroController = {
         
     ],
 
+     /*   const errors = validationResult(req); */
+     /*    const result = await admCadastroModel.findByUserId(id); */
+    /* 
+        if (!errors.isEmpty()) {
+            const dados = req.body || {};
+            const msgs = notifyMessages(req, res);
+            return res.render('pages/adm/CadastroAdmGeral/editar', {
+                result,
+                id,
+                msgs,
+                listaErros: errors,
+                dados: dados
+            });
+        } */
+    
 
 
 
