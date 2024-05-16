@@ -5,16 +5,15 @@ const { body, validationResult } = require("express-validator");
 
 const TarefasControl = {
     CriarUsuario: async (req, res) => {
+        // formatando data nascimento
+        const { nasc } = req.body
+        if (nasc) {
+            const date = new Date(nasc)
+            req.body.nasc = date.toISOString().split('T')[0]
+        }
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-
-            // formatando data nascimento
-            const { nasc } = req.body
-            if (nasc) {
-                const date = new Date(nasc)
-                req.body.nasc = date.toISOString().split('T')[0]
-            }
-
             // console.log(errors);
             return res.render('pages/cadastro', {
                 dados: req.body,
@@ -24,6 +23,7 @@ const TarefasControl = {
         }
 
         try {
+            
             await tarefasModel.create(req.body);
             req.flash('success', `Bem-vindo, ${req.body.nome}`)
             if (req.body.type == '1') {
