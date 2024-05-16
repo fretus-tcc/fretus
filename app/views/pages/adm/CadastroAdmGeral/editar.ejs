@@ -18,17 +18,42 @@
 
 <body>
 
+
+
+    <%
+
+    var msgErro = {nome:""}
+    var cssErro = {nome:""}
+    var cssErroBorda = {nome:""}
+    let valorCampos = {nome:""}
+    if(dados && dados!=null){
+        valorCampos = dados
+        
+    }
+
+    if (listaErros && listaErros.errors) {
+        listaErros.errors.forEach((itemErro) => {
+            if (itemErro.path == "nome") {
+                msgErro.nome = itemErro.msg;
+                cssErro.nome = "erroForm";
+                cssErroBorda.nome = "erroInput";
+               
+            } 
+        });
+    }
+
+%>
+
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
     <!-- Notificações -->
-    <% if (msgs.length > 0) { %>
-        <% msgs.forEach(msg => { %>
-            <script>notify('<%= msg.text %>', '<%= msg.text %> com sucesso', '<%= msg.status %>')</script>
-        <% }) %>
-    <% } %>
+  
 
 
         <main>
+
+            
+        <p><%= dados%></p>
 
             </section>
             <% result.forEach(item=> { %>
@@ -91,11 +116,15 @@
                                             </span>
                                             <section class="inputEdite">
                                                 <P><b>Dados a ser alterado: </b></P>
-                                                <input name="name" type="text" value="<%= item.nome_usuario %>"><BR><BR>
+                                                <input class="<%= cssErroBorda.nome %>" type="text" name="nome" id="nome" placeholder="Seu nome " value="<%=valorCampos.nome%>">
+                                                <span class="<%= cssErro.nome %>">
+                                                    <%= msgErro.nome %>
+                                                </span>
+                                                <br><br>
                                             </section>
                                         </article>
 
-                                        <article class="flex-dadosedite">
+                                       <!--  <article class="flex-dadosedite">
                                             <span><b>DATA DE NASCIMENTO Usuário:</b>
                                                 <%= item.data_usuario %>
                                             </span>
@@ -125,7 +154,7 @@
                                                 <BR><BR>
                                             </section>
 
-                                        </article>
+                                        </article> -->
 
                                         <!-- <article class="flex-dadosedite">
                                             <span><b>CPF Usuário:</b>

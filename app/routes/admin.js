@@ -41,12 +41,12 @@ router.get('/CadastroNovoUser', (req, res) => {
 })
 
 // Editar user - Campos
-router.get('/cadastroAdm/editar/:id',admCadastroController.regrasValidacao,  function (req, res) {
+router.get('/cadastroAdm/editar/:id', function (req, res) {
     admCadastroController.listUsersId(req, res);
 });
 
 // Editar user - Banco de dados
-router.put('/cadastroAdm/editar/:id',  function (req, res) {
+router.put('/cadastroAdm/editar/:id', admCadastroController.regrasValidacao ,  function (req, res) {
     admCadastroController.updateUser(req, res);
 });
 //Fale Conosco 

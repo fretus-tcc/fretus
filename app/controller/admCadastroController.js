@@ -39,7 +39,7 @@ const admCadastroController = {
     listUsersIdD: async (req, res) => {
         const { id } = req.params
         try {
-            const result = await admCadastroModel.findByUserIdD(id) 
+            const result = await admCadastroModel.findByUserIdD(id)
             res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result, id })
         } catch (error) {
             res.json({ error })
@@ -51,7 +51,7 @@ const admCadastroController = {
         try {
             const result = await admCadastroModel.findByUserId(id)
             const msgs = notifyMessages(req, res)
-            res.render('pages/adm/CadastroAdmGeral/editar', { result, id, msgs })
+            res.render('pages/adm/CadastroAdmGeral/editar', { result, id, msgs, dados: null, listaErros: null })
         } catch (error) {
             res.json({ error })
         }
@@ -59,6 +59,22 @@ const admCadastroController = {
     // Editar - Atualizar User
     updateUser: async (req, res) => {
         const { id } = req.params
+        const errors = validationResult(req);
+        const result = await admCadastroModel.findByUserId(id);
+
+        if (!errors.isEmpty()) {
+            const dados = req.body;
+            const msgs = notifyMessages(req, res);
+
+            return res.render('pages/adm/CadastroAdmGeral/editar', {
+                result,
+                id,
+                msgs,
+                listaErros: errors,
+                dados: dados
+            })
+        }
+
         try {
             const data = {
                 nome_usuario: req.body.name,
@@ -70,10 +86,19 @@ const admCadastroController = {
             await admCadastroModel.updateUser(data, id)
             req.flash('info', 'Usuário atualizado')
             res.redirect(`/admin/cadastroAdm/editar/${id}`)
+
+
         } catch (error) {
             res.json({ error })
         }
+
     },
+    regrasValidacao: [
+        body("nome")
+            .isLength({ min: 3, max: 45 })
+            .withMessage("Nome invalido "),
+
+    ],
     //Excluir usuário da tabela 
     deleteUse: async (req, res) => {
         const { id, type } = req.params
@@ -89,28 +114,8 @@ const admCadastroController = {
             res.json({ error })
         }
     },
-    regrasValidacao: [
-        body("nome")
-            .isLength({ min: 3, max: 45 })
-            .withMessage("Nome invalido "),
-        
-    ],
 
-     /*   const errors = validationResult(req); */
-     /*    const result = await admCadastroModel.findByUserId(id); */
-    /* 
-        if (!errors.isEmpty()) {
-            const dados = req.body || {};
-            const msgs = notifyMessages(req, res);
-            return res.render('pages/adm/CadastroAdmGeral/editar', {
-                result,
-                id,
-                msgs,
-                listaErros: errors,
-                dados: dados
-            });
-        } */
-    
+
 
 
 
