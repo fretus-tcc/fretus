@@ -15,8 +15,6 @@
     <script src="/JS/notify.js"></script>
     <link rel="stylesheet" href="/CSS/notify.css">
 </head>
-
-
     <body>
         <%
 
@@ -75,7 +73,6 @@
                     }
                 });
             }
-
         %>
         <section class="fretus">
             <h1><a href="/"><img class="logo" src="/imgs/logotca.png"></a></h1>
@@ -101,7 +98,7 @@
                 </span>
                 <!-- <p id="messageNome"></p> -->
 
-                <input class="<%= cssErroBorda.nasc %>" type="text" name="nasc" id="nasc" placeholder="Sua data de nascimento " value="<%=valorCampos.nasc %>" onfocus="this.type='date'">
+                <input class="<%= cssErroBorda.nasc %>" type="<%= dados?.nasc ? 'date' : 'text' %>" name="nasc" id="nasc" placeholder="Sua data de nascimento " value="<%=valorCampos.nasc %>" onfocus="this.type='date'">
                 <span class="<%= cssErro.nasc %>">
                     <%= msgErro.nasc %>
                 </span>
