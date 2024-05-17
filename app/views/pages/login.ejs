@@ -13,22 +13,55 @@
 </head>
 
 <body>
+  <%
+
+  var msgErro = {email:"", senha:""}
+  var cssErro = {email:"", senha:""}
+  var cssErroBorda = {email:"", senha:""}
+  let valorCampos = {email:"", senha:""}
+  if(dados && dados!=null){
+      valorCampos = dados
+  }
+
+  if (listaErros && listaErros.errors) {
+      listaErros.errors.forEach((itemErro) => {
+          if (itemErro.path == "email") {
+              msgErro.email = itemErro.msg;
+              cssErro.email = "erroForm";
+              cssErroBorda.email = "erroInput";
+              %>
+                  <script>notify('Verifique o campo email', '<%= msgErro.email %>', 'error')</script>
+              <%
+          } else if (itemErro.path == "senha") {
+              msgErro.senha = itemErro.msg;
+              cssErro.senha = "erroForm";
+              cssErroBorda.senha = "erroInput";
+              %>
+                  <script>notify('Verifique o campo senha', '<%= msgErro.senha %>', 'error')</script>
+              <%
+          }
+      });
+  }
+%>
   <section class="fretus">
     <h1 class="logo-container"><a href="/"><img class="logo" src="/imgs/logotca.png"></a></h1>
   </section>
   <main class="container">
     <h1>Bem-vindo de volta! </h1>
-    <form action="/cliente/solicitar-entrega" id="form">
+    <form action="Login" id="form" method="post">
       <section>
-        <input type="email" placeholder="Email" class="inputs" autocomplete="off" oninput="emailValido()"
-          id="inputEmail" required>
-        <p id="messageEmail"></p>
+        <input type="text" name="email" id="email" class="<%= cssErroBorda.email %>" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
+        <span class="<%= cssErro.email %>">
+            <%= msgErro.email %>
+        </span>
       </section>
       <section class="box-icon">
         <article class="input__wrapper">
-          <input id="password" type="password" class="input__field" pattern=".{8,}" placeholder="Senha"
-            oninput="senhaValidada()" required>
-          <p id="messageSenha"></p>
+          <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field <%= cssErroBorda.senha %>"
+          placeholder="Senha" value="<%=valorCampos.senha%>">
+            <span class="<%= cssErro.senha %>">
+                <%= msgErro.senha %>
+            </span>
           <label for="password" class="input__label"></label>
           <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
         </article>
@@ -54,7 +87,7 @@
     </form>
   </main>
   <script src="/JS/login-cadastro/eye.js"></script>
-  <script src="/JS/login-cadastro/validacao.js"></script>
+  <!-- <script src="/JS/login-cadastro/validacao.js"></script> -->
 </body>
 
 </html>

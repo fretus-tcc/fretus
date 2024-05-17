@@ -25,14 +25,6 @@ app.use(session({
 }))
 app.use(flash())
 
-/* app.use(
-  session({
-    secret: "HELLo node",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false }
-  })) */
-
 const main = require("./app/routes/main")
 app.use("/", main)
 

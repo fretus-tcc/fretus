@@ -11,16 +11,13 @@ router.get("/", function (req, res) {
   res.render("pages/index")
 })
 
-router.get('/login', function (req, res) {
-  res.render('pages/login')
+router.get('/login',  function (req, res) {
+  res.render('pages/login', {listaErros: null, dados: null})
   
 })
-/* router.psot('/login',gravarUsuAutenticado(usuarioDAL, bcrypt), function (req, res) {
-  res.render('pages/login'), 
-  
-  
-}) */
-
+router.post('/login', TarefasControl.regrasValidacaoFormLogin, function (req, res) {
+  TarefasControl.logar(req, res);
+})
 
 /* ============================CADASTRO======================================== */
 
