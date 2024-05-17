@@ -5,10 +5,70 @@ const tarefasModel = require("../models/cadastroModel");
 const { body, validationResult } = require("express-validator");
 
 const admCadastroController = {
+    regrasValidacao: [
+        /* body("nasc")
+            .isLength({ min: 10 })
+            .withMessage('Data inválida ')
+            .toDate()
+            .withMessage('Data inválida '), */
+
+        body("nome")
+            .isLength({ min: 3, max: 45 })
+            .withMessage("Nome invalido "),
+
+        body("tel")
+            .isLength({ min: 15 })
+            .withMessage('Telefone incompleto ')
+            .bail()
+            .isMobilePhone()
+            .withMessage('Telefone inválido ')
+            .bail()
+            .custom(async (value, { req }) => {
+                const { id } = req.params
+                const tel = await tarefasModel.findByTel(value, id)
+                // console.log(tel)
+                if (tel.length > 0) {
+                    throw new Error('Telefone já utilizado.');
+                }
+                return true;
+            }),
+
+        body("cpf")
+            .isLength({ min: 14, max: 14 })
+            .withMessage("Cpf inválido ")
+            .bail()
+            .custom(async (value, { req } ) => {
+                if(validaCPF(value)){
+                    const { id } = req.params
+                    const cpf = await tarefasModel.findByCpf(value, id)
+                    if (cpf.length > 0) {
+                        throw new Error('Cpf já utilizado');
+                    }
+                    return true;
+                } else {
+                    throw new Error('Cpf inválido');
+                }
+
+            }),
+
+        body("email")
+            .isEmail()
+            .withMessage("Email invalido ")
+            .custom(async (value, { req }) => {
+                const { id } = req.params
+                const email = await tarefasModel.findByEmail(value, id)
+                if (email.length > 0) {
+                    throw new Error('Email já utilizado.');
+                }
+                return true;
+
+            }),
+
+    ],
     //Pegar dados da tabela 
     listUsers: async (req, res, type) => {
-        try {/* 
-            const result = await admCadastroModel.findByType(type) */
+        try { 
+            /* const result = await admCadastroModel.findByType(type) */
 
             // paginação
 
@@ -28,7 +88,6 @@ const admCadastroController = {
 
             // console.log(results)
             res.render('pages/adm/CadastroAdmGeral/clientesAdm', { type, results, paginador, msgs })
-
 
         } catch (error) {
             console.log(error)
@@ -52,7 +111,7 @@ const admCadastroController = {
         try {
             const result = await admCadastroModel.findByUserId(id)
             const msgs = notifyMessages(req, res)
-            res.render('pages/adm/CadastroAdmGeral/editar', { result, id, msgs, dados: null, listaErros: null })
+            res.render('pages/adm/CadastroAdmGeral/editar', { result: result[0], id, msgs, dados: null, listaErros: null })
         } catch (error) {
             res.json({ error })
         }
@@ -65,95 +124,33 @@ const admCadastroController = {
 
         if (!errors.isEmpty()) {
             const dados = req.body;
-            const msgs = notifyMessages(req, res);
 
             return res.render('pages/adm/CadastroAdmGeral/editar', {
-                result,
+                result: result[0],
                 id,
-                msgs,
+                msgs: [],
                 listaErros: errors,
                 dados: dados
             })
         }
 
         try {
+
             const data = {
-                nome_usuario: req.body.name,
+                nome_usuario: req.body.nome,
                 email_usuario: req.body.email,
                 cpf_usuario: req.body.cpf,
-                senha_usuario: req.body.senha,
                 telefone_usuario: req.body.tel,
             }
             await admCadastroModel.updateUser(data, id)
             req.flash('info', 'Usuário atualizado')
             res.redirect(`/admin/cadastroAdm/editar/${id}`)
 
-
         } catch (error) {
             res.json({ error })
         }
 
     },
-    regrasValidacao: [
-        body("nasc")
-            .isLength({ min: 10 })
-            .withMessage('Data inválida ')
-            .toDate()
-            .withMessage('Data inválida '),
-        
-        body("tel")
-            .isLength({ min: 15 })
-            .withMessage('Telefone incompleto ')
-            .bail()
-            .isMobilePhone()
-            .withMessage('Telefone inválido ')
-            .bail()
-            .custom(async (value) => {
-                const tel = await tarefasModel.findByTel(value)
-                if (tel.length > 0) {
-                    throw new Error('Telefone já utilizado.');
-                }
-                return true;
-            }),
-
-        body("cpf")
-            .isLength({ min: 14, max: 14 })
-            .withMessage("Cpf inválido ")
-            .bail()
-            .custom(async (value) => {
-
-                if(validaCPF(value)){
-                    const cpf = await tarefasModel.findByCpf(value)
-                    if (cpf.length > 0) {
-                        throw new Error('Cpf já utilizado');
-                    }
-                    return true;
-                } else {
-                    throw new Error('Cpf inválido');
-                }
-
-            }),
-
-        body("email")
-            .isEmail()
-            .withMessage("Email invalido ")
-            .custom(async (value) => {
-                const email = await tarefasModel.findByEmail(value)
-                if (email.length > 0) {
-                    throw new Error('Email já utilizado.');
-                }
-                return true;
-
-            }),
-
-        body("senha")
-            .isLength({ min: 8, max: 30 })
-            .withMessage("Senha inválida, deve conter pelo menos 8 caracteres")
-            .bail()
-            .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/)
-            .withMessage("Senha inválida, deve conter pelo menos 1 letra, 1 número e 1 caractere especial"),
-
-    ],
     //Excluir usuário da tabela 
     deleteUse: async (req, res) => {
         const { id, type } = req.params
@@ -169,11 +166,6 @@ const admCadastroController = {
             res.json({ error })
         }
     },
-
-
-
-
-
 }
 
 module.exports = admCadastroController
