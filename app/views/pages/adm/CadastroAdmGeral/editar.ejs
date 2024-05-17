@@ -18,206 +18,191 @@
 
 <body>
 
-
-
     <%
 
-    var msgErro = {nome:"", cpf: "",email:"",  nasc:"", tel:""}
-    var cssErro = {nome:"",cpf: "", email:"",  nasc:"", tel:""}
-    var cssErroBorda = {nome:"",cpf: "", email:"",  nasc:"", tel:""}
-    let valorCampos = {nome:"",cpf: "", email:"", nasc:"", tel:""}
-    if(dados && dados!=null){
-        valorCampos = dados
-    }
+        var msgErro = {nome:"", cpf: "",email:"",  nasc:"", tel:""}
+        var cssErro = {nome:"",cpf: "", email:"",  nasc:"", tel:""}
+        var cssErroBorda = {nome:"",cpf: "", email:"",  nasc:"", tel:""}
+        let valorCampos = {nome:"",cpf: "", email:"", nasc:"", tel:""}
+        if(dados && dados!=null){
+            valorCampos = dados
+        }
 
-    if (listaErros && listaErros.errors) {
-        listaErros.errors.forEach((itemErro) => {
-            if (itemErro.path == "nome") {
-                msgErro.nome = itemErro.msg;
-                cssErro.nome = "erroForm";
-                cssErroBorda.nome = "erroInput";
-                %>
-                    <script>notify('Verifique o campo nome', '<%= msgErro.nome %>', 'error')</script>
-                <%
-            } else if (itemErro.path == "cpf") {
-                msgErro.cpf = itemErro.msg;
-                cssErro.cpf = "erroForm";
-                cssErroBorda.cpf = "erroInput";
-                %>
-                    <script>notify('Verifique o campo cpf', '<%= msgErro.cpf %>', 'error')</script>
-                <%
-            } else if (itemErro.path == "email") {
-                msgErro.email = itemErro.msg;
-                cssErro.email = "erroForm";
-                cssErroBorda.email = "erroInput";
-                %>
-                    <script>notify('Verifique o campo email', '<%= msgErro.email %>', 'error')</script>
-                <%
-            } 
-               else if (itemErro.path == "nasc") {
-                msgErro.nasc = itemErro.msg;
-                cssErro.nasc = "erroForm";
-                cssErroBorda.nasc = "erroInput";
-                %>
-                    <script>notify('Verifique o campo data de nascimento', '<%= msgErro.nasc %>', 'error')</script>
-                <%
-            } else if (itemErro.path == "tel") {
-                msgErro.tel = itemErro.msg;
-                cssErro.tel = "erroForm";
-                cssErroBorda.tel = "erroInput";
-                %>
-                    <script>notify('Verifique o campo telefone', '<%= msgErro.tel %>', 'error')</script>
-                <%
-            }
-        });
-    }
-%>
+        if (listaErros && listaErros.errors) {
+            listaErros.errors.forEach((itemErro) => {
+                if (itemErro.path == "nome") {
+                    msgErro.nome = itemErro.msg;
+                    cssErro.nome = "erroForm";
+                    cssErroBorda.nome = "erroInput";
+                    %>
+                        <script>notify('Verifique o campo nome', '<%= msgErro.nome %>', 'error')</script>
+                    <%
+                } else if (itemErro.path == "cpf") {
+                    msgErro.cpf = itemErro.msg;
+                    cssErro.cpf = "erroForm";
+                    cssErroBorda.cpf = "erroInput";
+                    %>
+                        <script>notify('Verifique o campo cpf', '<%= msgErro.cpf %>', 'error')</script>
+                    <%
+                } else if (itemErro.path == "email") {
+                    msgErro.email = itemErro.msg;
+                    cssErro.email = "erroForm";
+                    cssErroBorda.email = "erroInput";
+                    %>
+                        <script>notify('Verifique o campo email', '<%= msgErro.email %>', 'error')</script>
+                    <%
+                } 
+                else if (itemErro.path == "nasc") {
+                    msgErro.nasc = itemErro.msg;
+                    cssErro.nasc = "erroForm";
+                    cssErroBorda.nasc = "erroInput";
+                    %>
+                        <script>notify('Verifique o campo data de nascimento', '<%= msgErro.nasc %>', 'error')</script>
+                    <%
+                } else if (itemErro.path == "tel") {
+                    msgErro.tel = itemErro.msg;
+                    cssErro.tel = "erroForm";
+                    cssErroBorda.tel = "erroInput";
+                    %>
+                        <script>notify('Verifique o campo telefone', '<%= msgErro.tel %>', 'error')</script>
+                    <%
+                }
+            });
+        }
+
+    %>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
     <!-- Notificações -->
-  
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.text %>', '<%= msg.text %> com sucesso', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
 
+    <main>
 
-        <main>
+        <section class="LinkUser">
 
-            </section>
-            <% result.forEach(item=> { %>
-                <section class="LinkUser">
+            <% if (result.tipo_usuario == "1") { %>
+                <a href="/admin/cadastroAdm/clientes">
+                    <h3><- volta para página anterior </h3>
+                </a>
+            <% } else { %>
+                <a href="/admin/cadastroAdm/entregador">
+                    <h3><- volta para página anterior </h3>
+                </a>
+            <% } %>
 
-                    <% if (item.tipo_usuario =="1") { %>
-                        <a href="/admin/cadastroAdm/clientes">
-                            <h3><- volta para página anterior </h3>
-                        </a>
-                    <% } else { %>
-                        <a href="/admin/cadastroAdm/entregador">
-                            <h3><- volta para página anterior </h3>
-                        </a>
-                    <% } %>
-            <section class="Box_textEditar">
-                <h1>Página de Editar usuário</h1>
-                <h2>Usuário: <%=item.nome_usuario%> - ID: <%=item.id_usuario%></h2>
-            </section>
-                <% }) %>
-                    <section class="containerDetealhes">
-                        <% result.forEach(item=> { %>
-                            <section class="ContainerAdm_Use">
-                                <header class="Header_container">
-                                    <article class="boxDados">
-                                        <span class="name_user">Nome Usuário:
-                                            <%= item.nome_usuario %>
-                                        </span>
-                                    </article>
-                                    <article class="boxDados">
-                                        <span>Status: Status </span>
-                                    </article>
+        </section>
 
-                                </header>
-                                <article class="DadosUserIMG">
-                                    <img src="/imgs/adm/incon_people.svg">
-                                </article>
-                                <article class="boxDados DADOS">
-                                    <form action="/admin/cadastroAdm/editar/<%= item.id_usuario %>?_method=PUT"
-                                        method="post" class="formEdite">
-                                        <article class="flex-dadosedite">
-                                            <span><b>NOME Usuário:</b>
-                                                <%= item.nome_usuario %>
-                                            </span>
-                                            <section class="inputEdite">
-                                                <P><b>Dados a ser alterado: </b></P>
-                                                <input class="<%= cssErroBorda.nome %>" type="text" name="nome" id="nome" value="<%= item.nome_usuario%>">
-                                                <span class="<%= cssErro.nome %>">
-                                                    <%= msgErro.nome %>
-                                                </span>
-                                                <br><br>
-                                            </section>
-                                        </article>
+        <section class="Box_textEditar">
+            <h1>Página de Editar usuário</h1>
+            <h2>Usuário: <%= result.nome_usuario%> - ID: <%=result.id_usuario%></h2>
+        </section>
+        
+        <section class="containerDetealhes">
+            <section class="ContainerAdm_Use">
+                <header class="Header_container">
+                    <article class="boxDados">
+                        <span class="name_user">Nome Usuário: <%= result.nome_usuario %></span>
+                    </article>
+                    <article class="boxDados">
+                        <span>Status: Status </span>
+                    </article>
+                </header>
 
-                                        <!-- <article class="flex-dadosedite">
-                                            <span><b>DATA DE NASCIMENTO Usuário:</b>
-                                                <%= new Date(item.data_usuario).toLocaleDateString('pt-br', { year:"numeric", month:"short", day:"numeric"}) %>
-                                            </span>
-                                            <section class="inputEdite">
-                                                <P><b>Dados a ser alterado: </b></P>
+                <article class="DadosUserIMG">
+                    <img src="/imgs/adm/incon_people.svg">
+                </article>
 
-                                                <input class="<%= cssErroBorda.nasc %>" type="<%= dados?.nasc ? 'date' : 'text' %>" name="nasc" id="nasc" value="<%= new Date(item.data_usuario).toISOString().split('T')[0] %>" onfocus="this.type='date'">
-                                                <span class="<%= cssErro.nasc %>">
-                                                    <%= msgErro.nasc %>
-                                                </span>
-                                                <BR><BR>
-                                            </section>
-                                        </article> -->
-
-
-                                       <article class="flex-dadosedite">
-                                            <span><b>TELEFONE Usuário:</b>
-                                                <%= item.telefone_usuario %>
-                                            </span>
-                                            <section class="inputEdite">
-                                                <P><b>Dados a ser alterado: </b></P>
-
-                                                <input class="<%= cssErroBorda.tel %>" type="text" name="tel" id="tel" value="<%= item.telefone_usuario %>">
-                                                <span class="<%= cssErro.tel %>">
-                                                    <%= msgErro.tel %>
-                                                </span>                      
-                                                <BR><BR>
-                                            </section>
-                                        </article>
-
-
-                                     <article class="flex-dadosedite">
-                                            <span><b>EMAIL Usuário:</b>
-                                                <%= item.email_usuario %>
-                                            </span>
-                                            <section class="inputEdite">
-                                                <P><b>Dados a ser alterado: </b></P>
-                                                <input type="text" name="email" id="email" class="<%= cssErroBorda.email %>" value="<%= item.email_usuario %>">
-                                                <span class="<%= cssErro.email %>">
-                                                    <%= msgErro.email %>
-                                                </span>
-                                                <BR><BR>
-                                            </section>
-
-                                        </article>
-
-                                       <article class="flex-dadosedite">
-                                            <span><b>CPF Usuário:</b>
-                                                <%= item.cpf_usuario %>
-                                            </span>
-                                            <section class="inputEdite">
-                                                <P><b>Dados a ser alterado: </b></P>
-                                                <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="14" class="cpf <%= cssErroBorda.cpf %>" 
-                                                value="<%= item.cpf_usuario %>">
-                                            <span class="<%= cssErro.cpf %>">
-                                                <%= msgErro.cpf %>
-                                            </span>
-                                                <BR><BR>
-                                            </section>
-
-                                        </article>
-                                    
-                                        <% if ( item.tipo_usuario=="2" ) { %>
-                                            <section class="DocumentoUserEnt">
-
-                                                <h1> DOCUMENTOS: </h1>
-                                            </section>
-                                            <% } %>
-
-
-                                                <button class="cta editar">Alterar</button>
-                                    </form>
-
+                <article class="boxDados DADOS">
+                    <form action="/admin/cadastroAdm/editar/<%= result.id_usuario %>?_method=PUT" method="post" class="formEdite">
+                        <article class="flex-dadosedite">
+                            <section class="inputEdite">
+                                <span><b>NOME Usuário:</b> <%= result.nome_usuario %></span>
+                                <p><b>Dados a ser alterado: </b></p>
+                                <input class="<%= cssErroBorda.nome %>" type="text" name="nome" id="nome" value="<%= valorCampos?.nome || result.nome_usuario %>">
+                                <span class="<%= cssErro.nome %>">
+                                    <%= msgErro.nome %>
+                                </span>
+                                <br><br>
                             </section>
-                            <% }) %>
+                        </article>
 
-        </main>
+                        <!-- <article class="flex-dadosedite">
+                            <span><b>DATA DE NASCIMENTO Usuário:</b>
+                                <%# new Date(result.data_usuario).toLocaleDateString('pt-br', { year:"numeric", month:"short", day:"numeric"}) %>
+                            </span>
+                            <section class="inputEdite">
+                                <P><b>Dados a ser alterado: </b></P>
 
-        <script src="/JS/adm/sidebar.js"></script>
-        <script src="/JS/login-cadastro/eye.js"></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-        <script src="/JS/login-cadastro/mascara.js"></script>
-        <script src="/JS/adm/editar.js"></script>
+                                <input class="<%# cssErroBorda.nasc %>" type="<%# dados?.nasc ? 'date' : 'text' %>" name="nasc" id="nasc" value="<%# new Date(result.data_usuario).toISOString().split('T')[0] %>" onfocus="this.type='date'">
+                                <span class="<%# cssErro.nasc %>">
+                                    <%= msgErro.nasc %>
+                                </span>
+                                <BR><BR>
+                            </section>
+                        </article> -->
+
+                        <article class="flex-dadosedite">
+                            <span><b>TELEFONE Usuário:</b> <%= result.telefone_usuario %></span>
+                            <section class="inputEdite">
+                                <p><b>Dados a ser alterado: </b></p>
+
+                                <input class="<%= cssErroBorda.tel %>" type="text" name="tel" id="tel" value="<%= valorCampos?.tel || result.telefone_usuario %>">
+                                <span class="<%= cssErro.tel %>">
+                                    <%= msgErro.tel %>
+                                </span>                 
+                                <br><br>
+                            </section>
+                        </article>
+
+                        <article class="flex-dadosedite">
+                            <span><b>EMAIL Usuário:</b> <%= result.email_usuario %></span>
+                            <section class="inputEdite">
+                                <p><b>Dados a ser alterado: </b></p>
+                                <input type="text" name="email" id="email" class="<%= cssErroBorda.email %>" value="<%= valorCampos?.email || result.email_usuario %>">
+                                <span class="<%= cssErro.email %>">
+                                    <%= msgErro.email %>
+                                </span>
+                                <br><br>
+                            </section>
+                        </article>
+
+                        <article class="flex-dadosedite">
+                            <span><b>CPF Usuário:</b> <%= result.cpf_usuario %></span>
+                            <section class="inputEdite">
+                                <p><b>Dados a ser alterado: </b></p>
+                                <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="14" class="cpf <%= cssErroBorda.cpf %>" 
+                                value="<%= valorCampos?.cpf || result.cpf_usuario %>">
+                                <span class="<%= cssErro.cpf %>">
+                                    <%= msgErro.cpf %>
+                                </span>
+                                <br><br>
+                            </section>
+                        </article>
+                    
+                        <% if ( result.tipo_usuario=="2" ) { %>
+                            <section class="DocumentoUserEnt">
+                                <h1> DOCUMENTOS: </h1>
+                            </section>
+                        <% } %>
+
+                        <button class="cta editar">Alterar</button>
+                    </form>
+                </article>
+            </section>
+        </section>
+    </main>
+
+    <script src="/JS/adm/sidebar.js"></script>
+    <script src="/JS/login-cadastro/eye.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="/JS/login-cadastro/mascara.js"></script>
+    <script src="/JS/adm/editar.js"></script>
 </body>
 
 </html>
