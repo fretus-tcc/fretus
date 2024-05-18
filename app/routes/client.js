@@ -3,8 +3,9 @@ var router = express.Router()
 
 var pool = require("../../config/connection-factory");
 const { notifyMessages } = require('../util/Funcao')
+const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
 
-router.get('/solicitar-entrega', function (req, res) {
+router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     // formatando mensagens notificacao
     const msgs = notifyMessages(req, res)
     

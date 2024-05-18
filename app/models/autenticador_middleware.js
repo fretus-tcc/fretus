@@ -72,11 +72,10 @@ gravarUsuAutenticadoCadastro = (req, res, next) => {
 
 verificarUsuAutorizado = (tipoPermitido, destinoFalha) => {
     return (req, res, next) => {
-        if (req.session.autenticado.autenticado != null &&
-            tipoPermitido.find(function (element) { return element == req.session.autenticado.tipo }) != undefined) {
+        if (req.session?.autenticado != null && tipoPermitido.find((item) => { return item == req.session.autenticado.tipo }) != undefined) {
             next();
         } else {
-            res.render(destinoFalha, req.session.autenticado);
+            res.render(destinoFalha, { autenticado: req.session.autenticado });
         }
     };
 }
