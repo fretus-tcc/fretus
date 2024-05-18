@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,28 +11,14 @@
     <link rel="stylesheet" href="/CSS/shipper/sidebar-config.css">
     <link rel="stylesheet" href="/CSS/shipper/config.css">
 </head>
+
 <body>
-    <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
+    
+    <%- include('../../partial/header-client-shipper.ejs', { isClient }) %>
 
     <main>
-        <section class="sidebar">
-            <nav class="nav">
-                <ul>
-                    <a href="/entregador/configuracoes">
-                        <li>Privacidade</li>
-                    </a>
-                    <a href="/entregador/configuracoes-pagamento">
-                        <li>Pagamento</li>
-                    </a>
-                    <a href="/entregador/configuracoes-notificacoes">
-                        <li>Notificações</li>
-                    </a>
-                </ul>
-            </nav>
-            <section class="container-button">
-                <button class="exit-button"><a href="/">sair da conta</a></button>
-            </section>
-        </section>
+        <%- include('../../partial/cliente-entregador/sidebar-configuracoes.ejs', { isClient }) %>
+        
         <section class="config">
             <section class="config-container">
                 <section class="sidebar-burguer">
@@ -74,10 +61,12 @@
             </section>
         </section>
     </main>
-    
-    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
     <script src="/JS/burguer.js"></script>
     <script src="/JS/shipper/change.js"></script>
     <script src="/JS/shipper/burguer-config.js"></script>
 </body>
+
 </html>

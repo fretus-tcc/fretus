@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Configurações</title>
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="/CSS/shipper/sidebar-config.css">
+    <link rel="stylesheet" href="/CSS/shipper/notification-config.css">
+</head>
+
+<body>
+
+    <%- include('../../partial/header-client-shipper.ejs', { isClient }) %>
+
+    <main>
+        <%- include('../../partial/cliente-entregador/sidebar-configuracoes.ejs', { isClient }) %>
+        
+        <section class="config">
+            <section class="config-container">
+                <section class="sidebar-burguer">
+                    <img src="/imgs/burguer-config-icon.png" alt="">
+                </section>
+                <h1>Notificações</h1>
+                <p>Receber notificações promocionais, descontos, institucionais e etc.</p>
+                <section class="row">
+                    <span>SMS</span>
+                    <input checked type="checkbox" id="sms">
+                    <label for="sms" class="toogle">
+                        <article class="ball"></article>
+                    </label>
+                </section>
+                <section class="row">
+                    <span>E-mail</span>
+                    <input checked type="checkbox" id="email">
+                    <label for="email" class="toogle">
+                        <article class="ball"></article>
+                    </label>
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/change.js"></script>
+    <script src="/JS/shipper/burguer-config.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<% 
+    let caminho = ''
+    if (isClient) {
+        caminho = 'cliente'
+    } else {
+        caminho = 'entregador'
+    }
+%>
+
+<section class="sidebar">
+    <nav class="nav">
+        <ul>
+            <a href="/<%= caminho %>/configuracoes">
+                <li>Privacidade</li>
+            </a>
+            <a href="/<%= caminho %>/configuracoes-pagamento">
+                <li>Pagamento</li>
+            </a>
+            <a href="/<%= caminho %>/configuracoes-notificacoes">
+                <li>Notificações</li>
+            </a>
+        </ul>
+    </nav>
+    <form action="/sair" method="post" class="container-button">
+        <button class="exit-button">sair da conta</button>
+    </form>
+</section>

@@ -32,15 +32,15 @@ router.get('/escolher-entregador', function (req, res) {
 })
 
 router.get('/configuracoes', function (req, res) {
-    res.render('pages/cliente/configuracoes')
+    res.render('pages/cliente-entregador/configuracoes', { isClient: true })
 })
 
 router.get('/configuracoes-pagamento', function (req, res) {
-    res.render('pages/cliente/configuracoes-pagamento')
+    res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: true })
 })
 
 router.get('/configuracoes-notificacoes', function (req, res) {
-    res.render('pages/cliente/configuracoes-notificacoes')
+    res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: true })
 })
 
 module.exports = router

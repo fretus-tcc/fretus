@@ -68,19 +68,23 @@ main>.config {
 
 button {
     width: 100%;
-
 }
-.exit-button a{
+
+/* .exit-button a{
     width: 100%;
     display: block;
     height: 100%;
     padding: 10px 20px;
-}
+} */
 
 .exit-button {
     background-color: var(--orange);
+    color: white;
     border: 2px solid var(--orange);
     border-radius: 10px;
+    padding: 10px 20px;
+    font-family: var(--font-1);
+    font-size: 18px;
     text-transform: uppercase;
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
@@ -88,17 +92,18 @@ button {
 
 .exit-button:hover {
     background: white;
-}
-
-.exit-button:hover a {
     color: var(--orange);
 }
 
-.container-button a {
+/* .exit-button:hover a {
+    color: var(--orange);
+} */
+
+/* .container-button a {
     text-decoration: none;
     color: white;
     font-family: var(--font-1);
-}
+} */
 
 @media (max-width: 800px) {
     main {

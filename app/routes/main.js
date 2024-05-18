@@ -3,7 +3,7 @@ var router = express.Router()
 const TarefasControl = require("../controller/cadastroController");
 const FaleConoscoControl = require("../controller/FaleConoscoController");
 const quotesController = require('../controller/quotesController')
-const { gravarUsuAutenticado } = require('../models/autenticador_middleware')
+const { gravarUsuAutenticado, limparSessao } = require('../models/autenticador_middleware')
 // const { notifyMessages } = require('../util/Funcao')
 // const { body, validationResult } = require("express-validator")
 
@@ -19,6 +19,10 @@ router.get('/login', function (req, res) {
 
 router.post('/login', TarefasControl.regrasValidacaoFormLogin, gravarUsuAutenticado, function (req, res) {
   TarefasControl.logar(req, res);
+})
+
+router.post('/sair', limparSessao, function (req, res) {
+  res.redirect('/')
 })
 
 /* ============================CADASTRO======================================== */

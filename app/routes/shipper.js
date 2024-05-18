@@ -9,15 +9,15 @@ router.get('/chat', function (req, res) {
 })
 
 router.get('/configuracoes-notificacoes', function (req, res) {
-    res.render('pages/entregador/configuracoes-notificacoes')
+    res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: false })
 })
 
 router.get('/configuracoes-pagamento', function (req, res) {
-    res.render('pages/entregador/configuracoes-pagamento')
+    res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: false })
 })
 
 router.get('/configuracoes', function (req, res) {
-    res.render('pages/entregador/configuracoes')
+    res.render('pages/cliente-entregador/configuracoes', { isClient: false })
 })
 
 router.get('/entregas-solicitadas', function (req, res) {
