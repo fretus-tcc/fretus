@@ -25,13 +25,13 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <!-- Notificações -->
-    <% if (msgs.length > 0 && autenticado == null) { %>
+    <% if (msgs.length > 0 && autenticado.id == null) { %>
         <% msgs.forEach(msg => { %>
             <script>notify('<%= msg.text %>', 'Bem-vindo a Fretus', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
     
-    <% if (autenticado) { %>
+    <% if (autenticado && autenticado.id != null) { %>
         <% msgs.forEach(msg => { %>
             <script>notify('Olá, <%= autenticado.autenticado %>', 'Bem-vindo de volta', '<%= msg.status %>')</script>
         <% }) %>

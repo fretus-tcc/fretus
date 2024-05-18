@@ -57,6 +57,19 @@ gravarUsuAutenticado = async (req, res, next) => {
     next();
 }
 
+gravarUsuAutenticadoCadastro = (req, res, next) => {
+    const erros = validationResult(req)
+    if (erros.isEmpty()) {
+        var autenticado = {
+            autenticado: req.body.nome,
+            // id: results[0].id_usuario,
+            tipo: req.body.type
+        }
+    }
+    req.session.autenticado = autenticado
+    next()
+}
+
 verificarUsuAutorizado = (tipoPermitido, destinoFalha) => {
     return (req, res, next) => {
         if (req.session.autenticado.autenticado != null &&
@@ -72,5 +85,6 @@ module.exports = {
     verificarUsuAutenticado,
     limparSessao,
     gravarUsuAutenticado,
-    verificarUsuAutorizado
+    verificarUsuAutorizado,
+    gravarUsuAutenticadoCadastro
 }
