@@ -1,11 +1,24 @@
 <% if (type == 'home') { %>
+    <%
+        let caminho = null
+        if (autenticado?.tipo == 1) {
+            caminho = '/cliente/solicitar-entrega'
+        } else {
+            caminho = '/entregador/entregas-solicitadas'
+        }
+    %>
+
     <nav class="menu-burguer">
         <section class="burguer">
             <img src="/imgs/burguer-fretus.svg" alt="">
         </section>
         <ul>
-            <li><a href="/login">Entrar</a></li>
-            <li><a href="/cadastro">Cadastrar</a></li>
+            <% if (autenticado) { %>
+                <li><a href="<%= caminho %>">Acessar Conta</a></li>
+            <% } else { %>
+                <li><a href="/login">Entrar</a></li>
+                <li><a href="/cadastro">Cadastrar</a></li>
+            <% } %>
             <li><a href="/FaleConosco">Fale Conosco</a></li>
             <li><a href="/ajuda">Central de ajuda</a></li>
         </ul>

@@ -9,7 +9,13 @@
   <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/CSS/index.css">
-  <link rel="stylesheet" href="/CSS/login/login.css">
+  <!-- <link rel="stylesheet" href="/CSS/login/login.css"> -->
+  <link rel="stylesheet" href="/CSS/cadastro/cadastro.css">
+  <!-- SIMPLE NOTIFY - Notificações -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+  <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+  <script src="/JS/notify.js"></script>
+  <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
@@ -48,7 +54,7 @@
   </section>
   <main class="container">
     <h1>Bem-vindo de volta! </h1>
-    <form action="Login" id="form" method="post">
+    <form action="/login" id="form" method="post">
       <section>
         <input type="text" name="email" id="email" class="<%= cssErroBorda.email %>" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
         <span class="<%= cssErro.email %>">
@@ -58,7 +64,7 @@
       <section class="box-icon">
         <article class="input__wrapper">
           <input type="password" name="senha" id="senha" placeholder="Sua senha" class="input__field <%= cssErroBorda.senha %>"
-          placeholder="Senha" value="<%=valorCampos.senha%>">
+          placeholder="Senha" value="<%= valorCampos.senha%>">
             <span class="<%= cssErro.senha %>">
                 <%= msgErro.senha %>
             </span>
@@ -70,7 +76,7 @@
         Ainda não tem uma conta?
         <a href="/cadastro">Acesse aqui.</a>
       </p>
-      <input type="submit" value="Entrar" id="entrar">
+      <button type="submit" id="criar1">Entrar</button>
       <section class="alternative">
         <span>ou</span>
       </section>
@@ -86,6 +92,7 @@
       </section>
     </form>
   </main>
+
   <script src="/JS/login-cadastro/eye.js"></script>
   <!-- <script src="/JS/login-cadastro/validacao.js"></script> -->
 </body>

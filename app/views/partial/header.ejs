@@ -1,25 +1,40 @@
+<%
+    let caminho = null
+    if (autenticado?.tipo == 1) {
+        caminho = '/cliente/solicitar-entrega'
+    } else {
+        caminho = '/entregador/entregas-solicitadas'
+    }
+%>
 
-    <header>
-        <a class="logo-container" href="/">
-            <img class="logo" src="/imgs/logotca.png">
-        </a>
-        <nav class="nav-menu">
-            <ul>
+<header>
+    <a class="logo-container" href="/">
+        <img class="logo" src="/imgs/logotca.png">
+    </a>
+    <nav class="nav-menu">
+        <ul>
+            <li>
+                <a href="/ajuda">Central de ajuda</a>
+            </li>
+            <li>
+                <a href="/admin">Fale Conosco</a>
+            </li>
+            
+            <% if (autenticado) { %>
                 <li>
-                    <a href="/ajuda">Central de ajuda</a>
+                    <a class="cta" href="<%= caminho %>">Acessar conta</a>
                 </li>
-                <li>
-                    <a href="/admin">Fale Conosco</a>
-                </li>
-                <li>
+            <% } else {%>
+                <li class="arrow-link">
                     <a href="/login">Entrar</a>
                 </li>
                 <li>
                     <a class="cta" href="/cadastro">Cadastre-se</a>
                 </li>
-            </ul>
-            <section class="burguer">
-                <img src="/imgs/burguer-fretus.svg" alt="">
-            </section>
-        </nav>
-    </header>
+            <% } %>
+        </ul>
+        <section class="burguer">
+            <img src="/imgs/burguer-fretus.svg" alt="">
+        </section>
+    </nav>
+</header>

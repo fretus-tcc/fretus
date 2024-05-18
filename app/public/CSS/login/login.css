@@ -58,7 +58,7 @@ input {
 input[type="email"],
 input[type="password"],
 input[type="text"] {
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
 }
 
 input[type="submit"] {
@@ -87,6 +87,20 @@ p a {
 
 p a:hover {
     color: chocolate;
+}
+
+.erroForm {
+    color: red;
+    display: block;
+    font-weight: bolder;
+    width: 100%;
+    padding: 10px 0 10px 15px;
+    font-size: 0.9rem;
+}
+
+.erroInput {
+    border: solid 1px red !important;
+
 }
 
 /* começa aqui */

@@ -3,26 +3,28 @@ var router = express.Router()
 const TarefasControl = require("../controller/cadastroController");
 const FaleConoscoControl = require("../controller/FaleConoscoController");
 const quotesController = require('../controller/quotesController')
-const { body, validationResult } = require("express-validator")
+const { gravarUsuAutenticado } = require('../models/autenticador_middleware')
+// const { notifyMessages } = require('../util/Funcao')
+// const { body, validationResult } = require("express-validator")
 
 var pool = require("../../config/connection-factory");
 
 router.get("/", function (req, res) {
-  res.render("pages/index")
+  res.render("pages/index", { autenticado: req.session.autenticado })
 })
 
-router.get('/login',  function (req, res) {
-  res.render('pages/login', {listaErros: null, dados: null})
-  
+router.get('/login', function (req, res) {
+  res.render('pages/login', { listaErros: null, dados: null })
 })
-router.post('/login', TarefasControl.regrasValidacaoFormLogin, function (req, res) {
+
+router.post('/login', TarefasControl.regrasValidacaoFormLogin, gravarUsuAutenticado, function (req, res) {
   TarefasControl.logar(req, res);
 })
 
 /* ============================CADASTRO======================================== */
 
 router.get('/cadastro', function (req, res) {
-  res.render('pages/cadastro', { logado:null , retorno: null, listaErros: null, dados: null})
+  res.render('pages/cadastro', { listaErros: null, dados: null })
 });
 
 router.post("/cadastro", TarefasControl.regrasValidacao, async function (req, res) {
@@ -40,7 +42,7 @@ router.get('/ajuda/:slug', function (req, res) {
 })
 
 router.get('/cadastro-entregador', function (req, res) {
-  res.render('pages/cadastro-entregador')
+  res.render('pages/cadastro-entregador', { autenticado: req.session.autenticado })
 })
 
 router.post('/cadastro-entregador', function (req, res) {
@@ -51,7 +53,7 @@ router.post('/cadastro-entregador', function (req, res) {
 
 /* ===========================FaleConsoco======================================== */
 router.get('/FaleConosco', function (req, res) {
-  res.render('pages/FaleConosco',{pagina:"FaleConosco", logado:null , retorno: null, listaErros: null, dados: null})
+  res.render('pages/FaleConosco', { autenticado: req.session.autenticado, listaErros: null, dados: null })
 })
 router.post("/FaleConosco", async function (req, res) {
   FaleConoscoControl.MensagemFaleConosco(req, res);
@@ -59,12 +61,12 @@ router.post("/FaleConosco", async function (req, res) {
 
 /* ===========================FaleConsoco======================================== */
 
-
 router.get('/Privacidade', function (req, res) {
-  res.render('pages/Privacidade')
+  res.render('pages/Privacidade', { autenticado: req.session.autenticado })
 })
+
 router.get('/Sobre', (req,res) =>{
-  res.render('pages/Sobre')
+  res.render('pages/Sobre', { autenticado: req.session.autenticado })
 })
 
 module.exports = router

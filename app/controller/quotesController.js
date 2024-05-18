@@ -23,7 +23,7 @@ const quotesController = {
     listQuotesTitle: async (req, res) => {
         try {
             const result = await quotesModel.findTitle()
-            res.render('pages/ajuda', { result })
+            res.render('pages/ajuda', { result, autenticado: req.session.autenticado })
         } catch (error) {
             res.json({ error })
         }
@@ -87,7 +87,7 @@ const quotesController = {
             // formatando mensagens notificacao
             const msgs = notifyMessages(req, res)
 
-            res.render('pages/duvida', { results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)), msgs })
+            res.render('pages/duvida', { autenticado: req.session.autenticado, results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)), msgs })
         } catch (error) {
             return res.json({ error })
         }

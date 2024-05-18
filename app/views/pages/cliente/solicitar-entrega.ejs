@@ -25,9 +25,15 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <!-- Notificações -->
-    <% if (msgs.length > 0) { %>
+    <% if (msgs.length > 0 && autenticado == null) { %>
         <% msgs.forEach(msg => { %>
             <script>notify('<%= msg.text %>', 'Bem-vindo a Fretus', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
+    
+    <% if (autenticado) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('Olá, <%= autenticado.autenticado %>', 'Bem-vindo de volta', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
 

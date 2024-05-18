@@ -1,5 +1,6 @@
 var express = require("express")
 var router = express.Router()
+const { notifyMessages } = require('../util/Funcao')
 
 var pool = require("../../config/connection-factory");
 
@@ -20,7 +21,8 @@ router.get('/configuracoes', function (req, res) {
 })
 
 router.get('/entregas-solicitadas', function (req, res) {
-    res.render('pages/entregador/entregas-solicitadas')
+    const msgs = notifyMessages(req, res)
+    res.render('pages/entregador/entregas-solicitadas', { autenticado: req.session.autenticado, msgs })
 })
 
 router.get('/historico', function (req, res) {

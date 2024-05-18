@@ -8,7 +8,7 @@ router.get('/solicitar-entrega', function (req, res) {
     // formatando mensagens notificacao
     const msgs = notifyMessages(req, res)
     
-    res.render('pages/cliente/solicitar-entrega', { msgs })
+    res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs })
 })
 
 router.get('/chat', function (req, res) {

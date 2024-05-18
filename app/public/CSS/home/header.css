@@ -40,7 +40,7 @@ header .logo-container {
     width: 100%;
 }
 
-.nav-menu li:nth-child(3) {
+.nav-menu li.arrow-link {
     position: relative;
     width: 75px;
 }
@@ -50,7 +50,7 @@ header .logo-container {
     text-decoration: none;
 }
 
-.nav-menu li:nth-child(3)::after {
+.nav-menu li.arrow-link::after {
     content: "";
     display: block;
     position: absolute;
@@ -65,7 +65,7 @@ header .logo-container {
     transition: all .3s cubic-bezier(.47,1.64,.41,.8);
 }
 
-.nav-menu li:nth-child(3):hover::after {
+.nav-menu li.arrow-link:hover::after {
     transform: translateX(7px) rotate(50deg);
 }
 

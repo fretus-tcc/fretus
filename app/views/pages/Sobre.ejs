@@ -13,242 +13,265 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <%- include('../partial/config/config.ejs') %>
-        <%- include('../partial/config/config-home.ejs') %>
-            <link rel="stylesheet" href="/CSS/home/switch.css">
-            <link rel="stylesheet" href="/CSS/home/gray-gradient.css">
-            <link rel="stylesheet" href="/CSS/home/cards-container.css">
-            <link rel="stylesheet" href="/CSS/home/vehicles-container.css">
-            <link rel="stylesheet" href="/CSS/home/carousel.css">
-            <link rel="stylesheet" href="/CSS/home/accordion.css">
-            <link rel="stylesheet" href="/CSS/home/mobile-carousel.css">
-            <link rel="stylesheet" href="/CSS/home/form-container.css">
-            <link rel="stylesheet" href="/CSS/Sobre/Sobre.css">
-            <link rel="stylesheet" href="/CSS/Sobre/carrossel_Sobre.css">
+    <%- include('../partial/config/config-home.ejs') %>
+    <link rel="stylesheet" href="/CSS/home/switch.css">
+    <link rel="stylesheet" href="/CSS/home/gray-gradient.css">
+    <link rel="stylesheet" href="/CSS/home/cards-container.css">
+    <link rel="stylesheet" href="/CSS/home/vehicles-container.css">
+    <link rel="stylesheet" href="/CSS/home/carousel.css">
+    <link rel="stylesheet" href="/CSS/home/accordion.css">
+    <link rel="stylesheet" href="/CSS/home/mobile-carousel.css">
+    <link rel="stylesheet" href="/CSS/home/form-container.css">
+    <link rel="stylesheet" href="/CSS/Sobre/Sobre.css">
+    <link rel="stylesheet" href="/CSS/Sobre/carrossel_Sobre.css">
 
-            <title>Sobre</title>
+    <title>Sobre</title>
 
 </head>
 
 <body>
-    <%- include('../partial/header-client-sobre') -%>
-        <main>
-            <section class="container-Sobre">
-                <section class="left">
-                    <h1>FRETUS </h1>
-                    <h3>A Fretus é uma plataforma inovadora que nasceu com o propósito de tornar as entregas mais
-                        acessíveis
-                        e confiáveis para todos os usuários. Em um cenário dinâmico e acelerado, reconhecemos a
-                        importância
-                        de uma solução que conecte entregadores e clientes de maneira eficiente e segura. Nossa
-                        plataforma
-                        foi meticulosamente desenvolvida para proporcionar uma experiência confiável, assegurando que
-                        cada
-                        entrega seja realizada com a máxima eficácia e integridade.
-                    </h3>
-                    <h3>
-                        Acreditamos firmemente na acessibilidade para todos e, por isso, o Fretus é projetado para
-                        atender
-                        às necessidades de sectionersos públicos. Seja você um pequeno empresário local, um consumidor
-                        insectionidual ou um entregador autônomo, nossa plataforma é acessível e adaptável a diferentes
-                        contextos. Buscamos diminuir barreiras e facilitar a vida das pessoas, promovendo uma conexão
-                        transparente entre quem envia e quem recebe, fortalecendo laços comunitários e contribuindo para
-                        o
-                        desenvolvimento de uma rede de entregas confiável e solidária.
-                    </h3>
-                </section>
+    <!-- <%# include('../partial/header-client-sobre') -%> -->
+    <%- include('../partial/header.ejs') %>
+    
+    <main>
+        <section class="header">
+            <section class="inner-header flex">
+                <h1>Conheça a Fretus</h1>
+                <p>A fretus é uma plataforma de entregas que conecta os clientes com os entregadores</p>
             </section>
-            <section class="container_carrl">
-                <section class="swiper mySwiper container">
-                    <section class="box_swiper">
-                        <h1> Conheça os fundadores </h1>
-                        <article class="button__conteiner">
-                            <article class="swiper-button-prev"></article>
-                            <article class="swiper-button-next"></article>
-                        </article>
-                    </section>
-                    <section class="swiper-pagination"></section>
-                    <section class="swiper-wrapper ">
-                        <section class="swiper-slide card">
-                            <section class="card-content">
-                                <article class="image">
-                                    <img src="#" alt="">
-                                </article>
-                                <section class="media-icons">
-                                    <a href="https://github.com/AlexFariasV"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </section>
-                                <section class="name-profession">
-                                    <span class="name">Alex Farias </span>
-                                    <span class="profession">Gerente</span>
-                                    <span class="profession">Web Developer</span>
-                                    <span class="profession">Backend Developer</span>
-                                    <p class="descria__name">
+            <section>
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                    </g>
+                </svg>
+            </section>
+        </section>
+        <section class="container-Sobre">
+            <section class="left">
+                <h1>FRETUS </h1>
+                <h3>A Fretus é uma plataforma inovadora que nasceu com o propósito de tornar as entregas mais
+                    acessíveis
+                    e confiáveis para todos os usuários. Em um cenário dinâmico e acelerado, reconhecemos a
+                    importância
+                    de uma solução que conecte entregadores e clientes de maneira eficiente e segura. Nossa
+                    plataforma
+                    foi meticulosamente desenvolvida para proporcionar uma experiência confiável, assegurando que
+                    cada
+                    entrega seja realizada com a máxima eficácia e integridade.
+                </h3>
+                <h3>
+                    Acreditamos firmemente na acessibilidade para todos e, por isso, o Fretus é projetado para
+                    atender
+                    às necessidades de sectionersos públicos. Seja você um pequeno empresário local, um consumidor
+                    insectionidual ou um entregador autônomo, nossa plataforma é acessível e adaptável a diferentes
+                    contextos. Buscamos diminuir barreiras e facilitar a vida das pessoas, promovendo uma conexão
+                    transparente entre quem envia e quem recebe, fortalecendo laços comunitários e contribuindo para
+                    o
+                    desenvolvimento de uma rede de entregas confiável e solidária.
+                </h3>
+            </section>
+        </section>
+        <section class="container_carrl">
+            <section class="swiper mySwiper container">
+                <section class="box_swiper">
+                    <h1> Conheça os fundadores </h1>
+                    <article class="button__conteiner">
+                        <article class="swiper-button-prev"></article>
+                        <article class="swiper-button-next"></article>
+                    </article>
+                </section>
+                <section class="swiper-pagination"></section>
+                <section class="swiper-wrapper ">
+                    <section class="swiper-slide card">
+                        <section class="card-content">
+                            <article class="image">
+                                <img src="#" alt="">
+                            </article>
+                            <section class="media-icons">
+                                <a href="https://github.com/AlexFariasV"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </section>
+                            <section class="name-profession">
+                                <span class="name">Alex Farias </span>
+                                <span class="profession">Gerente</span>
+                                <span class="profession">Web Developer</span>
+                                <span class="profession">Backend Developer</span>
+                                <p class="descria__name">
 
-                                    </p>
-                                </section>
-                            </section>
-                        </section>
-                        <section class="swiper-slide card">
-                            <section class="card-content">
-                                <article class="image">
-                                    <img src="images/2.jpg" alt="">
-                                </article>
-                                <section class="media-icons">
-                                    <a href="#"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </section>
-                                <section class="name-profession">
-                                    <span class="name">Davi Lucas </span>
-                                    <span class="profession">Systems Analyst</span>
-                                    <span class="profession">Software Engineer</span>
-                                </section>
-                            </section>
-                        </section>
-                        <section class="swiper-slide card">
-                            <section class="card-content">
-                                <article class="image">
-                                    <img src="images/3.jpg" alt="">
-                                </article>
-
-                                <section class="media-icons">
-                                    <a href="#"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </section>
-                                <section class="name-profession">
-                                    <span class="name">Gabriel Borges </span>
-                                    <span class="profession">UX/UI Desinger</span>
-                                    <span class="profession">Backend Developer</span>
-                                </section>
-                            </section>
-                        </section>
-                        <section class="swiper-slide card">
-                            <section class="card-content">
-                                <article class="image">
-                                    <img src="images/4.jpg" alt="">
-                                </article>
-
-                                <section class="media-icons">
-                                    <a href="#"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </section>
-                                <section class="name-profession">
-                                    <span class="name">Gabriel Carvalho </span>
-                                    <span class="profession">Backend Developer</span>
-                                    <span class="profession">Web Developer</span>
-                                    <span class="profession">UX/UI Desinger</span>
-                                </section>
-                            </section>
-                        </section>
-                        <section class="swiper-slide card">
-                            <section class="card-content">
-                                <article class="image">
-                                    <img src="images/5.jpg" alt="">
-                                </article>
-                                <section class="media-icons">
-                                    <a href="#"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </section>
-                                <section class="name-profession">
-                                    <span class="name">João Victor </span>
-                                    <span class="profession">Web Developer</span>
-                                    <span class="profession">Backend Developer</span>
-                                </section>
-                            </section>
-                        </section>
-                        <section class="swiper-slide card">
-                            <section class="card-content">
-                                <article class="image">
-                                    <img src="images/6.jpg" alt="">
-                                </article>
-                                <section class="media-icons">
-                                    <a href="#"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </section>
-                                <section class="name-profession">
-                                    <span class="name">Luana </span>
-                                    <span class="profession">UX/UI Desinger</span>
-                                    <span class="profession">Web Developer</span>
-                                </section>
-                            </section>
-                        </section>
-                        <section class="swiper-slide card">
-                            <section class="card-content">
-                                <article class="image">
-                                    <img src="images/7.jpg" alt="">
-                                </article>
-                                <section class="media-icons">
-                                    <a href="#"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </section>
-                                <section class="name-profession">
-                                    <span class="name"> Luís Felipe </span>
-                                    <span class="profession">Web Developer</span>
-                                    <span class="profession">Backend Developer</span>
-                                </section>
+                                </p>
                             </section>
                         </section>
                     </section>
+                    <section class="swiper-slide card">
+                        <section class="card-content">
+                            <article class="image">
+                                <img src="images/2.jpg" alt="">
+                            </article>
+                            <section class="media-icons">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </section>
+                            <section class="name-profession">
+                                <span class="name">Davi Lucas </span>
+                                <span class="profession">Systems Analyst</span>
+                                <span class="profession">Software Engineer</span>
+                            </section>
+                        </section>
+                    </section>
+                    <section class="swiper-slide card">
+                        <section class="card-content">
+                            <article class="image">
+                                <img src="images/3.jpg" alt="">
+                            </article>
+
+                            <section class="media-icons">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </section>
+                            <section class="name-profession">
+                                <span class="name">Gabriel Borges </span>
+                                <span class="profession">UX/UI Desinger</span>
+                                <span class="profession">Backend Developer</span>
+                            </section>
+                        </section>
+                    </section>
+                    <section class="swiper-slide card">
+                        <section class="card-content">
+                            <article class="image">
+                                <img src="images/4.jpg" alt="">
+                            </article>
+
+                            <section class="media-icons">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </section>
+                            <section class="name-profession">
+                                <span class="name">Gabriel Carvalho </span>
+                                <span class="profession">Backend Developer</span>
+                                <span class="profession">Web Developer</span>
+                                <span class="profession">UX/UI Desinger</span>
+                            </section>
+                        </section>
+                    </section>
+                    <section class="swiper-slide card">
+                        <section class="card-content">
+                            <article class="image">
+                                <img src="images/5.jpg" alt="">
+                            </article>
+                            <section class="media-icons">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </section>
+                            <section class="name-profession">
+                                <span class="name">João Victor </span>
+                                <span class="profession">Web Developer</span>
+                                <span class="profession">Backend Developer</span>
+                            </section>
+                        </section>
+                    </section>
+                    <section class="swiper-slide card">
+                        <section class="card-content">
+                            <article class="image">
+                                <img src="images/6.jpg" alt="">
+                            </article>
+                            <section class="media-icons">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </section>
+                            <section class="name-profession">
+                                <span class="name">Luana </span>
+                                <span class="profession">UX/UI Desinger</span>
+                                <span class="profession">Web Developer</span>
+                            </section>
+                        </section>
+                    </section>
+                    <section class="swiper-slide card">
+                        <section class="card-content">
+                            <article class="image">
+                                <img src="images/7.jpg" alt="">
+                            </article>
+                            <section class="media-icons">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </section>
+                            <section class="name-profession">
+                                <span class="name"> Luís Felipe </span>
+                                <span class="profession">Web Developer</span>
+                                <span class="profession">Backend Developer</span>
+                            </section>
+                        </section>
+                    </section>
                 </section>
             </section>
-        </main>
+        </section>
+    </main>
 
-        <%- include('../partial/footer.ejs') %>
-            <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
 
-                <script src="../../JS/header-scroll.js"></script>
-                <script src="../../JS/burguer.js"></script>
-                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-                <script>
+    <script src="/JS/header-scroll.js"></script>
+    <script src="/JS/burguer.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    <script>
 
-                    function initSwiper() {
-                        var screenWidth = window.innerWidth;
-                        var swiperConfig = {
-                            spaceBetween: 30,
-                            loop: false,
-                            loopFillGroupWithBlank: true,
-                            pagination: {
-                                el: ".swiper-pagination",
-                                clickable: true,
-                            },
-                            navigation: {
-                                nextEl: ".swiper-button-next",
-                                prevEl: ".swiper-button-prev",
-                            },
-                            autoplay: {
-                                delay: 5000, //tempo
-                            },
-                        };
+        function initSwiper() {
+            var screenWidth = window.innerWidth;
+            var swiperConfig = {
+                spaceBetween: 30,
+                loop: false,
+                loopFillGroupWithBlank: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                autoplay: {
+                    delay: 5000, //tempo
+                },
+            };
 
-                        if (screenWidth > 700) {
-                            swiperConfig.slidesPerView = 3;
-                            swiperConfig.slidesPerGroup = 3;
-                        } else if (screenWidth > 400) {
-                            swiperConfig.slidesPerView = 2;
-                            swiperConfig.slidesPerGroup = 2;
-                        } else {
-                            swiperConfig.slidesPerView = 1;
-                            swiperConfig.slidesPerGroup = 1;
-                        }
+            if (screenWidth > 700) {
+                swiperConfig.slidesPerView = 3;
+                swiperConfig.slidesPerGroup = 3;
+            } else if (screenWidth > 400) {
+                swiperConfig.slidesPerView = 2;
+                swiperConfig.slidesPerGroup = 2;
+            } else {
+                swiperConfig.slidesPerView = 1;
+                swiperConfig.slidesPerGroup = 1;
+            }
 
-                        if (window.mySwiper) {
-                            window.mySwiper.destroy();
-                        }
+            if (window.mySwiper) {
+                window.mySwiper.destroy();
+            }
 
-                        window.mySwiper = new Swiper(".mySwiper", swiperConfig);
-                    }
-                    initSwiper();
-                    window.addEventListener('resize', function () {
-                        initSwiper();
-                    });
-                </script>
+            window.mySwiper = new Swiper(".mySwiper", swiperConfig);
+        }
+        initSwiper();
+        window.addEventListener('resize', function () {
+            initSwiper();
+        });
+    </script>
 
 </body>
 

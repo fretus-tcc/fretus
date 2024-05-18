@@ -2,22 +2,26 @@
 const tarefasModel = require("../models/cadastroModel");
 const { validaCPF } = require("../util/Funcao");
 const { body, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-
-
 
 const TarefasControl = {
-
-    
+  
     logar: (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
+            return res.render("pages/login", { listaErros: erros, dados: req.body })
+        }
+
+        // console.log(req.session.autenticado)
+
+        if (req.session.autenticado == null) {
             return res.render("pages/login", { listaErros: erros, dados: null })
         }
-        if (req.session.autenticado != null) {
-            res.redirect("/");
+
+        req.flash('success', 'Usuário logado')
+        if (req.session.autenticado.tipo == 1) {
+            res.redirect("/cliente/solicitar-entrega");
         } else {
-            res.render("pages/login", { listaErros: erros, dados: null })
+            res.redirect("/entregador/entregas-solicitadas");
         }
     },
 
@@ -131,6 +135,7 @@ const TarefasControl = {
             .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/)
             .withMessage("Senha inválida, deve conter pelo menos 1 letra, 1 número e 1 caractere especial"),
     ],
+
 };
 
 
