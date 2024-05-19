@@ -12,35 +12,35 @@ router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), 
     res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs })
 })
 
-router.get('/chat', function (req, res) {
+router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/chat')
 })
 
-router.get('/historico', function (req, res) {
+router.get('/historico', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/historico')
 })
 
-router.get('/cupons', function (req, res) {
+router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/cupons')
 })
 
-router.get('/perfil', function (req, res) {
+router.get('/perfil', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/perfil')
 })
 
-router.get('/escolher-entregador', function (req, res) {
+router.get('/escolher-entregador', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/escolher-entregador')
 })
 
-router.get('/configuracoes', function (req, res) {
+router.get('/configuracoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente-entregador/configuracoes', { isClient: true })
 })
 
-router.get('/configuracoes-pagamento', function (req, res) {
+router.get('/configuracoes-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: true })
 })
 
-router.get('/configuracoes-notificacoes', function (req, res) {
+router.get('/configuracoes-notificacoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: true })
 })
 
