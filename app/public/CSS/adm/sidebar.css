@@ -130,6 +130,20 @@ a {
     padding-right: 5px;
 }
 
+.footer form {
+    width: 100%;
+    display: flex;
+}
+
+.footer button {
+    background-color: transparent;
+    color: white;
+    outline: none;
+    border: none;
+    font-family: var(--font-1);
+    font-weight: 700;
+}
+
 @media (max-width: 650px), (max-height: 550px) {
     .sidebar {
         visibility: hidden;

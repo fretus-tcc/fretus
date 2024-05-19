@@ -3,8 +3,10 @@
         let caminho = null
         if (autenticado?.tipo == 1) {
             caminho = '/cliente/solicitar-entrega'
-        } else {
+        } else if (autenticado?.tipo == 2) {
             caminho = '/entregador/entregas-solicitadas'
+        } else if (autenticado?.tipo == 3) {
+            caminho = '/admin'
         }
     %>
 

@@ -20,8 +20,10 @@ const TarefasControl = {
         req.flash('success', 'Usuário logado')
         if (req.session.autenticado.tipo == 1) {
             res.redirect("/cliente/solicitar-entrega");
-        } else {
+        } else if (req.session.autenticado.tipo == 2) {
             res.redirect("/entregador/entregas-solicitadas");
+        } else if (req.session.autenticado.tipo == 3) {
+            res.redirect("/admin");
         }
     },
 

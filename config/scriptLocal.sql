@@ -100,6 +100,9 @@ CREATE TABLE usuario (
   CONSTRAINT fk_usuario_tipo_usuario FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario (id_tipo_usuario)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
+VALUES ('Admin', '347.090.530-49', '(65) 97369-0035', '2022-01-01', 'admin@admin.com', '$2a$10$OzE7w2Ra1alz9aP5w.bhEOjNRV7Jq1/4TslgKS4KLEIcEmMA6bh..', '3');
+
 -- -----------------------------------------------------
 -- Table FRETUS.DETALHAMENTO_ENTREGADOR
 -- -----------------------------------------------------

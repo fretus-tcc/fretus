@@ -5,11 +5,13 @@ var router = express.Router()
 var pool = require("../../config/connection-factory");
 const admCadastroController = require('../controller/admCadastroController')
 const FaleConoscoController = require('../controller/FaleConoscoController')
+const { notifyMessages } = require('../util/Funcao')
 
 const { body, validationResult } = require("express-validator")
 
 router.get('/', function (req, res) {
-    res.render('pages/adm/admin')
+    const msgs = notifyMessages(req, res)
+    res.render('pages/adm/admin', { msgs })
 })
 
 router.get('/cadastroAdm', function (req, res) {
