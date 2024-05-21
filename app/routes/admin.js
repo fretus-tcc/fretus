@@ -9,53 +9,53 @@ const { notifyMessages } = require('../util/Funcao')
 
 const { body, validationResult } = require("express-validator")
 
-router.get('/', function (req, res) {
+router.get('/', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     const msgs = notifyMessages(req, res)
     res.render('pages/adm/admin', { msgs })
 })
 
-router.get('/cadastroAdm', function (req, res) {
+router.get('/cadastroAdm', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/CadastroAdmGeral/cadastroAdm')
 })
 // 2 - Página de administração de cadastro
 
-router.get('/cadastroAdm/clientes', function (req, res) {
+router.get('/cadastroAdm/clientes', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     admCadastroController.listUsers(req, res, '1')
 })
-router.get('/cadastroAdm/entregador', function (req, res) {
+router.get('/cadastroAdm/entregador', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     admCadastroController.listUsers(req, res, '2')
 })
 
 //Excluir Usuário 
-router.delete('/cadastroAdm/delete/:id/:type', function (req, res) {
+router.delete('/cadastroAdm/delete/:id/:type', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     admCadastroController.deleteUse(req, res)
 })
 
 // Detalhes Usuário
-router.get('/cadastroAdm/detalhesAdm/:id', function (req, res) {
+router.get('/cadastroAdm/detalhesAdm/:id', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     admCadastroController.listUsersIdD(req, res);
 });
 
 
 // Novo usuário 
-router.get('/CadastroNovoUser', (req, res) => {
+router.get('/CadastroNovoUser', verificarUsuAutorizado([3], 'pages/restrito'), (req, res) => {
     res.render('pages/adm/CadastroAdmGeral/CadastroNovoUser')
 })
 
 // Editar user - Campos
-router.get('/cadastroAdm/editar/:id', function (req, res) {
+router.get('/cadastroAdm/editar/:id', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     admCadastroController.listUsersId(req, res);
 });
 
 // Editar user - Banco de dados
-router.put('/cadastroAdm/editar/:id', admCadastroController.regrasValidacao ,  function (req, res) {
+router.put('/cadastroAdm/editar/:id', verificarUsuAutorizado([3], 'pages/restrito'), admCadastroController.regrasValidacao, function (req, res) {
     admCadastroController.updateUser(req, res);
 });
 //Fale Conosco 
-router.get('/AdmFaleConosco', function (req, res) {
+router.get('/AdmFaleConosco', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/FaleConosco/AdmFaleConosco')
 })
-router.get('/AdmFaleConosco', function (req, res) {
+router.get('/AdmFaleConosco', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/FaleConosco/AdmFaleConosco')
 })
 
