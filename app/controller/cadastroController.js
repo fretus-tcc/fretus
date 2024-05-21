@@ -2,6 +2,8 @@
 const tarefasModel = require("../models/cadastroModel");
 const { validaCPF } = require("../util/Funcao");
 const { body, validationResult } = require("express-validator");
+const bycrypt = require('bcryptjs')
+const salt = bycrypt.genSaltSync(10)
 
 const TarefasControl = {
   
@@ -47,7 +49,7 @@ const TarefasControl = {
 
         try {
             
-            await tarefasModel.create(req.body);
+            await tarefasModel.create({...req.body, senha: bycrypt.hashSync(req.body.senha)});
             req.flash('success', `Bem-vindo, ${req.body.nome}`)
             if (req.body.type == '1') {
                 res.redirect('/cliente/solicitar-entrega')
