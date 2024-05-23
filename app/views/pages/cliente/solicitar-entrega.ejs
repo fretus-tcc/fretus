@@ -27,7 +27,7 @@
     <!-- Notificações -->
     <% if (msgs.length > 0 && autenticado.id == null) { %>
         <% msgs.forEach(msg => { %>
-            <script>notify('<%= msg.text %>', 'Bem-vindo a Fretus', '<%= msg.status %>')</script>
+            <script>notify('<%= msg.text %>', 'Cadastro realizado com sucesso ', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
     
