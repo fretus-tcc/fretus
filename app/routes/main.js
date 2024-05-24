@@ -45,7 +45,7 @@ router.get('/ajuda/:slug', function (req, res) {
   quotesController.showQuote(req, res)
 })
 
-router.get('/cadastro-entregador', function (req, res) {
+router.get('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito'), function (req, res) {
   res.render('pages/cadastro-entregador', { autenticado: req.session.autenticado })
 })
 

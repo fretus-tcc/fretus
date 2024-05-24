@@ -24,8 +24,7 @@
                                 <h1>Verificando seus dados</h1>
                             </section>
                             <section class="form-fields">
-                                <!-- <input name="nasc" required placeholder="Data de Nascimento" class="input-field" type="text" onfocus="this.type='date'">
-                                <input name="tel" required id="tel" placeholder="Número de Telefone" class="input-field" type="text"> -->
+                                <input type="hidden" name="id_usuario" value="<%= autenticado.id %>">
                                 <select name="tipo_veiculo" required placeholder="Tipo de Veículo" class="input-field">
                                     <option value="">Tipo de Veículo</option>
                                     <option value="moto">Moto</option>

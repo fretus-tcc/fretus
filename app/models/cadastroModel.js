@@ -6,10 +6,11 @@ const salt = bycrypt.genSaltSync(10) */
 const tarefasModel = {
     create: async (data) => {
         try {
-            await pool.query(
+            const result = await pool.query(
                 'INSERT INTO usuario (`nome_usuario`, `data_usuario`, `telefone_usuario`, `cpf_usuario`, `email_usuario`, `senha_usuario`, `tipo_usuario`) VALUES (?, ?, ?, ?, ?, ?, ?) ',
                 [data.nome, data.nasc, data.tel, data.cpf, data.email, /* bycrypt.hashSync( */data.senha/*, salt ) */, data.type]
             );
+            return result
             
         } catch (error) {
             throw error; 

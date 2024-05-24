@@ -49,8 +49,14 @@ const TarefasControl = {
 
         try {
             
-            await tarefasModel.create({...req.body, senha: bycrypt.hashSync(req.body.senha)});
+            const result = await tarefasModel.create({...req.body, senha: bycrypt.hashSync(req.body.senha)});
+            console.log(result[0].insertId);
+
             req.flash('success', `Bem-vindo, ${req.body.nome}`)
+            
+            // definindo tipo usuario autenticacao
+            req.session.autenticado.id = result[0].insertId
+
             if (req.body.type == '1') {
                 res.redirect('/cliente/solicitar-entrega')
             } else {
