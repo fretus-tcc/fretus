@@ -133,16 +133,29 @@ const TarefasControl = {
           
     ],
     
+    cadastrarEntregador: async (req, res) => {
+        const autenticado = req.session.autenticado
+        const result = await cadastroModel.findBySubscribe(autenticado.id)
+        const isSubscribed = result.length > 0
+        if (isSubscribed) {
+            // console.log(result)
+            const status = result[0].status_aprovacao
+            return res.render('pages/cadastro-entregador', { autenticado, status })
+        }
+
+        res.render('pages/cadastro-entregador', { autenticado, status: null })
+    },
+    
     verificarAutenticacao: async (req, res) => {
         const autenticado = req.session.autenticado
 
         if (autenticado.tipo == 1) {
             res.redirect("/cliente/solicitar-entrega");
         } else if (autenticado.tipo == 2) {
-            const result = await cadastroModel.findBySubscribe(autenticado.id)
-            const isSubscribed = result.length > 0
+            const result = await cadastroModel.findByApproved(autenticado.id)
+            const isApproved = result.length > 0
 
-            if (isSubscribed) {
+            if (isApproved) {
                 res.redirect("/entregador/entregas-solicitadas");
             } else {
                 res.redirect("/cadastro-entregador");

@@ -102,6 +102,18 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
+VALUES ('francisco', '731.571.950-42', '(96) 96924-6462', '2022-01-01', 'francisco@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
+
+INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador)
+VALUES ('2', '30', './cnh.pdf');
+
+INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
+VALUES ('geraldo', '518.255.750-70', '(81) 97446-3199', '2022-01-01', 'geraldo@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
+
+INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador, status_aprovacao)
+VALUES ('3', '30', './cnh.pdf', '2');
+
 CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.veiculos (
   id_veiculo INT NOT NULL AUTO_INCREMENT,
   tipo_veiculo VARCHAR(45) NOT NULL,

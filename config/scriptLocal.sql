@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.detalhamento_entregador (
   raio_de_atuacao FLOAT NOT NULL,
   id_usuario INT NOT NULL,
   id_entregador INT NOT NULL AUTO_INCREMENT,
+  status_aprovacao INT NOT NULL DEFAULT '0',
   cnh_entregador VARCHAR(255) NOT NULL,
   crvl_entregador VARCHAR(255) NULL,
   ipva_entregador VARCHAR(255) NULL,
@@ -131,6 +132,18 @@ CREATE TABLE IF NOT EXISTS FRETUS.detalhamento_entregador (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
+VALUES ('francisco', '731.571.950-42', '(96) 96924-6462', '2022-01-01', 'francisco@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
+
+INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador)
+VALUES ('2', '30', './cnh.pdf');
+
+INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
+VALUES ('geraldo', '518.255.750-70', '(81) 97446-3199', '2022-01-01', 'geraldo@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
+
+INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador, status_aprovacao)
+VALUES ('3', '30', './cnh.pdf', '2');
 
 -- -----------------------------------------------------
 -- Table FRETUS.VEICULOS

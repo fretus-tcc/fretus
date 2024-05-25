@@ -17,80 +17,90 @@
         <section>
             <aside class="popup show">
                 <section class="popup-content">
-                    <form action="/cadastro-entregador" method="post" class="popup-wrapper">
-                        <div class="form active">
-                            <section class="title">
-                                <h2>Etapa 1 de 3</h2>
-                                <h1>Verificando seus dados</h1>
-                            </section>
-                            <section class="form-fields">
-                                <input type="hidden" name="id_usuario" value="<%= autenticado.id %>">
-                                <select name="tipo_veiculo" required placeholder="Tipo de Veículo" class="input-field">
-                                    <option value="">Tipo de Veículo</option>
-                                    <option value="moto">Moto</option>
-                                    <option value="carro">Carro</option>
-                                    <option value="van">Van</option>
-                                    <option value="caminhao">Caminhão</option>
-                                </select>
-                                <input name="modelo_veiculo" required placeholder="Modelo do Veículo" class="input-field" type="text">
-                                <input name="placa_veiculo" required id="placa" placeholder="Placa do Veículo" class="input-field" type="text">
-                            </section>
-                            <section class="terms">
-                                <input required type="checkbox" name="terms" id="terms">
-                                <label for="terms">Eu concordo com os <a href="">Termos e Condições</a> e com a Política de Privacidade da Fretus</label>
-                            </section>
-                            <section class="btns">
-                                <button class="cta yes" type="submit">Próxima Etapa</button>
-                            </section>
-                        </div>
-                        <div class="form">
-                            <section class="title">
-                                <h2>Etapa 2 de 3</h2>
-                                <h1>Enviando seus documentos</h1>
-                            </section>
-                            <section class="form-fields">
-                                <label class="file-field" for="cnh">
-                                    <input required type="file" name="cnh" id="cnh">
-                                    <div class="icon">
-                                        <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
-                                    </div>
-                                    <span class="msg">PDF ou Foto da CNH</span>
-                                </label>
-                                <label class="file-field" for="vehicle-photo">
-                                    <input required type="file" name="foto_veiculo" id="vehicle-photo">
-                                    <div class="icon">
-                                        <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
-                                    </div>
-                                    <span class="msg">Foto do Veículo</span>
-                                </label>
-                            </section>
-                            <section class="btns">
-                                <button class="cta no" type="submit">Etapa Anterior</button>
-                                <button class="cta yes" type="submit">Próxima Etapa</button>
-                            </section>
-                        </div>
-                        <div class="form">
-                            <section class="title">
-                                <h2>Etapa 3 de 3</h2>
-                                <h1>Criando seu Perfil</h1>
-                            </section>
-                            <section class="form-fields">
-                                <input type="file" name="foto_perfil" id="profile">
-                                <label class="file-field" for="profile">
-                                    <div class="icon">
-                                        <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
-                                    </div>
-                                    <span class="msg">Foto de Perfil (opcional)</span>
-                                </label>
-                                <input name="raio_atuacao" required placeholder="Raio de atuação (em km)" class="input-field" type="text">
-                                <textarea name="descricao" required class="input-field" placeholder="Descrição"></textarea>
-                            </section>
-                            <section class="btns">
-                                <button class="cta no" type="submit">Etapa Anterior</button>
-                                <button class="cta yes" type="submit">Enviar</button>
-                            </section>
-                        </div>
-                    </form>
+
+                    <% if (status == 0) { %>
+                        <p>pendente</p>
+                    <% } else if (status == 1) { %>
+                        <p>negado</p>
+                    <% } else if (status == 2) { %>     
+                        <p>aceito</p>
+                    <% } else { %>
+                        <form action="/cadastro-entregador" method="post" class="popup-wrapper">
+                            <div class="form active">
+                                <section class="title">
+                                    <h2>Etapa 1 de 3</h2>
+                                    <h1>Verificando seus dados</h1>
+                                </section>
+                                <section class="form-fields">
+                                    <input type="hidden" name="id_usuario" value="<%= autenticado.id %>">
+                                    <select name="tipo_veiculo" required placeholder="Tipo de Veículo" class="input-field">
+                                        <option value="">Tipo de Veículo</option>
+                                        <option value="moto">Moto</option>
+                                        <option value="carro">Carro</option>
+                                        <option value="van">Van</option>
+                                        <option value="caminhao">Caminhão</option>
+                                    </select>
+                                    <input name="modelo_veiculo" required placeholder="Modelo do Veículo" class="input-field" type="text">
+                                    <input name="placa_veiculo" required id="placa" placeholder="Placa do Veículo" class="input-field" type="text">
+                                </section>
+                                <section class="terms">
+                                    <input required type="checkbox" name="terms" id="terms">
+                                    <label for="terms">Eu concordo com os <a href="">Termos e Condições</a> e com a Política de Privacidade da Fretus</label>
+                                </section>
+                                <section class="btns">
+                                    <button class="cta yes" type="submit">Próxima Etapa</button>
+                                </section>
+                            </div>
+                            <div class="form">
+                                <section class="title">
+                                    <h2>Etapa 2 de 3</h2>
+                                    <h1>Enviando seus documentos</h1>
+                                </section>
+                                <section class="form-fields">
+                                    <label class="file-field" for="cnh">
+                                        <input required type="file" name="cnh" id="cnh">
+                                        <div class="icon">
+                                            <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
+                                        </div>
+                                        <span class="msg">PDF ou Foto da CNH</span>
+                                    </label>
+                                    <label class="file-field" for="vehicle-photo">
+                                        <input required type="file" name="foto_veiculo" id="vehicle-photo">
+                                        <div class="icon">
+                                            <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
+                                        </div>
+                                        <span class="msg">Foto do Veículo</span>
+                                    </label>
+                                </section>
+                                <section class="btns">
+                                    <button class="cta no" type="submit">Etapa Anterior</button>
+                                    <button class="cta yes" type="submit">Próxima Etapa</button>
+                                </section>
+                            </div>
+                            <div class="form">
+                                <section class="title">
+                                    <h2>Etapa 3 de 3</h2>
+                                    <h1>Criando seu Perfil</h1>
+                                </section>
+                                <section class="form-fields">
+                                    <input type="file" name="foto_perfil" id="profile">
+                                    <label class="file-field" for="profile">
+                                        <div class="icon">
+                                            <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
+                                        </div>
+                                        <span class="msg">Foto de Perfil (opcional)</span>
+                                    </label>
+                                    <input name="raio_atuacao" required placeholder="Raio de atuação (em km)" class="input-field" type="text">
+                                    <textarea name="descricao" required class="input-field" placeholder="Descrição"></textarea>
+                                </section>
+                                <section class="btns">
+                                    <button class="cta no" type="submit">Etapa Anterior</button>
+                                    <button class="cta yes" type="submit">Enviar</button>
+                                </section>
+                            </div>
+                        </form>
+                    <% } %>
+                     
                 </section>
             </aside>
         </section>

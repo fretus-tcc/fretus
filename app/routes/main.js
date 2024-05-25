@@ -50,7 +50,7 @@ router.get('/ajuda/:slug', function (req, res) {
 })
 
 router.get('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito'), function (req, res) {
-  res.render('pages/cadastro-entregador', { autenticado: req.session.autenticado })
+  cadastroController.cadastrarEntregador(req, res)
 })
 
 router.post('/cadastro-entregador', function (req, res) {
