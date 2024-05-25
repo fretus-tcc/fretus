@@ -25,13 +25,13 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <!-- Notificações -->
-    <% if (msgs.length > 0 && autenticado.id == null) { %>
+    <% if (msgs.length > 0 && autenticado.tipo_autenticacao == 'cadastro') { %>
         <% msgs.forEach(msg => { %>
             <script>notify('<%= msg.text %>', 'Cadastro realizado com sucesso ', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
     
-    <% if (autenticado && autenticado.id != null) { %>
+    <% if (autenticado && autenticado.tipo_autenticacao == 'login') { %>
         <% msgs.forEach(msg => { %>
             <script>notify('Olá, <%= autenticado.autenticado %>', 'Bem-vindo de volta', '<%= msg.status %>')</script>
         <% }) %>

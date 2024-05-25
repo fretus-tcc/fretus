@@ -50,7 +50,7 @@ const TarefasControl = {
         try {
             
             const result = await tarefasModel.create({...req.body, senha: bycrypt.hashSync(req.body.senha)});
-            console.log(result[0].insertId);
+            // console.log(result[0].insertId);
 
             req.flash('success', `Bem-vindo, ${req.body.nome}`)
             

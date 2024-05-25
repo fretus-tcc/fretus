@@ -37,7 +37,7 @@ gravarUsuAutenticado = async (req, res, next) => {
         if (total == 1) {
             if (bcrypt.compareSync(req.body.senha, results[0].senha_usuario)) {
                 var autenticado = {
-                    tipo_autenticacao: 'cadastro',
+                    tipo_autenticacao: 'login',
                     autenticado: results[0].nome_usuario,
                     id: results[0].id_usuario,
                     tipo: results[0].tipo_usuario
