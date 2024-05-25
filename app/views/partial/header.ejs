@@ -1,14 +1,3 @@
-<%
-    let caminho = null
-    if (autenticado?.tipo == 1) {
-        caminho = '/cliente/solicitar-entrega'
-    } else if (autenticado?.tipo == 2) {
-        caminho = '/entregador/entregas-solicitadas'
-    } else if (autenticado?.tipo == 3) {
-        caminho = '/admin'
-    }
-%>
-
 <header>
     <a class="logo-container" href="/">
         <img class="logo" src="/imgs/logotca.png">
@@ -24,7 +13,7 @@
             
             <% if (autenticado) { %>
                 <li>
-                    <a class="cta" href="<%= caminho %>">Acessar conta</a>
+                    <a class="cta" href="/verificar-autenticacao">Acessar conta</a>
                 </li>
             <% } else {%>
                 <li class="arrow-link">

@@ -1,34 +1,12 @@
 // Criação de usúario no Back-end 
-const tarefasModel = require("../models/cadastroModel");
+const cadastroModel = require("../models/cadastroModel");
 const { validaCPF } = require("../util/Funcao");
 const { body, validationResult } = require("express-validator");
 const bycrypt = require('bcryptjs')
 const salt = bycrypt.genSaltSync(10)
 
 const TarefasControl = {
-  
-    logar: (req, res) => {
-        const erros = validationResult(req);
-        if (!erros.isEmpty()) {
-            return res.render("pages/login", { listaErros: erros, dados: req.body })
-        }
-
-        // console.log(req.session.autenticado)
-
-        if (req.session.autenticado == null) {
-            return res.render("pages/login", { listaErros: erros, dados: null })
-        }
-
-        req.flash('success', 'Usuário logado')
-        if (req.session.autenticado.tipo == 1) {
-            res.redirect("/cliente/solicitar-entrega");
-        } else if (req.session.autenticado.tipo == 2) {
-            res.redirect("/entregador/entregas-solicitadas");
-        } else if (req.session.autenticado.tipo == 3) {
-            res.redirect("/admin");
-        }
-    },
-
+    
     CriarUsuario: async (req, res) => {
         // formatando data nascimento
         const { nasc } = req.body
@@ -48,40 +26,19 @@ const TarefasControl = {
         }
 
         try {
-            
-            const result = await tarefasModel.create({...req.body, senha: bycrypt.hashSync(req.body.senha)});
-            // console.log(result[0].insertId);
-
-            req.flash('success', `Bem-vindo, ${req.body.nome}`)
-            
-            // definindo tipo usuario autenticacao
+            const result = await cadastroModel.create({...req.body, senha: bycrypt.hashSync(req.body.senha)});
+            // definindo id_usuario autenticacao cadastro
             req.session.autenticado.id = result[0].insertId
 
-            if (req.body.type == '1') {
-                res.redirect('/cliente/solicitar-entrega')
-            } else {
-                res.redirect('/cadastro-entregador')
-            }
+            req.flash('success', `Bem-vindo, ${req.body.nome}`)
 
+            res.redirect('/verificar-autenticacao')
         } catch (error) {
             console.log(error)
             return error;
         }
-
     },
-    regrasValidacaoFormLogin: [
-        body("email")
-        .isEmail()
-        .withMessage("Email invalido "),
 
-        body("senha")
-        .isLength({ min: 8, max: 30 })
-        .withMessage("Senha inválida, deve conter pelo menos 8 caracteres")
-        .bail()
-        .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/)
-        .withMessage("Senha inválida, deve conter pelo menos 1 letra, 1 número e 1 caractere especial"),
-          
-    ],
     regrasValidacao: [
         body("nome")
             .isLength({ min: 3, max: 45 })
@@ -101,7 +58,7 @@ const TarefasControl = {
             .withMessage('Telefone inválido ')
             .bail()
             .custom(async (value) => {
-                const tel = await tarefasModel.findByTel(value)
+                const tel = await cadastroModel.findByTel(value)
                 if (tel.length > 0) {
                     throw new Error('Telefone já utilizado.');
                 }
@@ -115,7 +72,7 @@ const TarefasControl = {
             .custom(async (value) => {
 
                 if(validaCPF(value)){
-                    const cpf = await tarefasModel.findByCpf(value)
+                    const cpf = await cadastroModel.findByCpf(value)
                     if (cpf.length > 0) {
                         throw new Error('Cpf já utilizado');
                     }
@@ -130,7 +87,7 @@ const TarefasControl = {
             .isEmail()
             .withMessage("Email invalido ")
             .custom(async (value) => {
-                const email = await tarefasModel.findByEmail(value)
+                const email = await cadastroModel.findByEmail(value)
                 if (email.length > 0) {
                     throw new Error('Email já utilizado.');
                 }
@@ -146,6 +103,55 @@ const TarefasControl = {
             .withMessage("Senha inválida, deve conter pelo menos 1 letra, 1 número e 1 caractere especial"),
     ],
 
+    logar: (req, res) => {
+        const erros = validationResult(req);
+        if (!erros.isEmpty()) {
+            return res.render("pages/login", { listaErros: erros, dados: req.body })
+        }
+
+        if (req.session.autenticado == null) {
+            return res.render("pages/login", { listaErros: erros, dados: null })
+        }
+
+        req.flash('success', 'Usuário logado')
+
+        res.redirect('/verificar-autenticacao')
+    },
+
+    
+    regrasValidacaoFormLogin: [
+        body("email")
+            .isEmail()
+            .withMessage("Email invalido "),
+
+        body("senha")
+            .isLength({ min: 8, max: 30 })
+            .withMessage("Senha inválida, deve conter pelo menos 8 caracteres")
+            .bail()
+            .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/)
+            .withMessage("Senha inválida, deve conter pelo menos 1 letra, 1 número e 1 caractere especial"),
+          
+    ],
+    
+    verificarAutenticacao: async (req, res) => {
+        const autenticado = req.session.autenticado
+
+        if (autenticado.tipo == 1) {
+            res.redirect("/cliente/solicitar-entrega");
+        } else if (autenticado.tipo == 2) {
+            const result = await cadastroModel.findBySubscribe(autenticado.id)
+            const isSubscribed = result.length > 0
+
+            if (isSubscribed) {
+                res.redirect("/entregador/entregas-solicitadas");
+            } else {
+                res.redirect("/cadastro-entregador");
+            }
+
+        } else if (autenticado.tipo == 3) {
+            res.redirect("/admin");
+        }
+    }
 };
 
 

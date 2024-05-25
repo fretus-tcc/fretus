@@ -1,6 +1,6 @@
 var express = require("express")
 var router = express.Router()
-const TarefasControl = require("../controller/cadastroController");
+const cadastroController = require("../controller/cadastroController");
 const FaleConoscoControl = require("../controller/FaleConoscoController");
 const quotesController = require('../controller/quotesController')
 const { gravarUsuAutenticado, gravarUsuAutenticadoCadastro, limparSessao } = require('../models/autenticador_middleware')
@@ -13,29 +13,33 @@ router.get("/", function (req, res) {
   res.render("pages/index", { autenticado: req.session.autenticado })
 })
 
-router.get('/login', function (req, res) {
-  res.render('pages/login', { listaErros: null, dados: null })
-})
-
-router.post('/login', TarefasControl.regrasValidacaoFormLogin, gravarUsuAutenticado, function (req, res) {
-  TarefasControl.logar(req, res);
-})
-
-router.post('/sair', limparSessao, function (req, res) {
-  res.redirect('/')
-})
-
 /* ============================CADASTRO======================================== */
 
 router.get('/cadastro', function (req, res) {
   res.render('pages/cadastro', { listaErros: null, dados: null })
 });
 
-router.post("/cadastro", TarefasControl.regrasValidacao, gravarUsuAutenticadoCadastro, async function (req, res) {
-  await TarefasControl.CriarUsuario(req, res);
+router.post("/cadastro", cadastroController.regrasValidacao, gravarUsuAutenticadoCadastro, async function (req, res) {
+  await cadastroController.CriarUsuario(req, res);
 });
 
 /* ==================================================================== */
+
+router.get('/login', function (req, res) {
+  res.render('pages/login', { listaErros: null, dados: null })
+})
+
+router.post('/login', cadastroController.regrasValidacaoFormLogin, gravarUsuAutenticado, function (req, res) {
+  cadastroController.logar(req, res);
+})
+
+router.post('/sair', limparSessao, function (req, res) {
+  res.redirect('/')
+})
+
+router.get('/verificar-autenticacao', verificarUsuAutorizado([1, 2, 3], 'pages/restrito'), function (req, res) {
+  cadastroController.verificarAutenticacao(req, res)
+})
 
 router.get('/ajuda', function (req, res) {
   quotesController.listQuotesTitle(req, res)

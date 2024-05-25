@@ -42,6 +42,19 @@ const tarefasModel = {
         } catch (error) {
             return error;
         }
+    },
+    findBySubscribe: async (id) => {
+        try {
+            const [linhas] = await pool.query(
+                'SELECT u.id_usuario, u.nome_usuario FROM usuario AS u ' +
+                'INNER JOIN detalhamento_entregador AS e ' +
+                'ON u.id_usuario = e.id_usuario ' +
+                'WHERE u.id_usuario = ?;' ,  [ id ])
+            
+            return linhas;
+        } catch (error) {
+            return error
+        }
     }
 };
 
