@@ -82,6 +82,19 @@ verificarUsuAutorizado = (tipoPermitido, destinoFalha) => {
     };
 }
 
+verificarCadastroCompleto = async (req, res, next) => {
+    const autenticado = req.session.autenticado
+    const result = await usuario.findByApproved(autenticado.id)
+    const isApproved = result.length > 0
+    
+    if (isApproved) {
+        return next()
+    }
+
+    res.render('pages/restrito', { autenticado });
+    // next()
+}
+
 module.exports = {
     verificarUsuAutenticado,
     limparSessao,

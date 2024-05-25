@@ -6,6 +6,11 @@
         <ul>
             <% if (autenticado) { %>
                 <li><a href="/verificar-autenticacao">Acessar Conta</a></li>
+                <li>
+                    <form action="/sair" method="post">
+                        <button class="logout-button">Sair</button>
+                    </form>
+                </li>
             <% } else { %>
                 <li><a href="/login">Entrar</a></li>
                 <li><a href="/cadastro">Cadastrar</a></li>

@@ -12,6 +12,11 @@
             </li>
             
             <% if (autenticado) { %>
+                <li class="arrow-link logout">
+                    <form action="/sair" method="post">
+                        <button class="logout-button">Sair</button>
+                    </form>
+                </li>
                 <li>
                     <a class="cta" href="/verificar-autenticacao">Acessar conta</a>
                 </li>

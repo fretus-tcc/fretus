@@ -45,6 +45,15 @@ header .logo-container {
     width: 75px;
 }
 
+.nav-menu li.arrow-link.logout {
+    width: 55px;
+}
+
+.logout-button {
+    all: unset;
+    cursor: pointer;
+}
+
 .nav-menu a {
     color: white;
     text-decoration: none;
