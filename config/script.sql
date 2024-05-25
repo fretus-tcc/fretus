@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
   raio_de_atuacao FLOAT NOT NULL,
   id_usuario INT NOT NULL,
   id_entregador INT NOT NULL AUTO_INCREMENT,
+  status_aprovacao INT NOT NULL DEFAULT '0',
   cnh_entregador VARCHAR(255) NOT NULL,
   crvl_entregador VARCHAR(255) NULL,
   ipva_entregador VARCHAR(255) NULL,
