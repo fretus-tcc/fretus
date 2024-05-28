@@ -48,8 +48,19 @@ const TarefasControl = {
             .isLength({ min: 10 })
             .withMessage('Data inválida ')
             .toDate()
-            .withMessage('Data inválida '),
-        
+            .withMessage('Data inválida ')
+           /*  .custom(async (value) => {
+
+                if((value)){
+                   
+                    
+                    return true;
+                } else {
+                    throw new Error('Cpf inválido');
+                }
+
+            }), */
+        , 
         body("tel")
             .isLength({ min: 15 })
             .withMessage('Telefone incompleto ')

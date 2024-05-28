@@ -15,36 +15,3 @@ main{
     border-radius: 10px;
 
 }
-.ContainerFaleConosco header{
-    padding: 10px 0;
-    margin-bottom: 15px ;
-
-}
-
-.ContainerFaleConosco header .nameUserF{
-    margin: 10px 0px 15px 0 ; 
-}
-
-.ContainerFaleConosco textarea{
-    margin: 10px 0;
-    width: 100%;
-    min-height: 200px;
-}
-.buttonBox{
-    display: flex;
-    margin: 30px ;
-    justify-content: end;
-}
-.buttonBox button{
-    background-color: orange;
-    border: 2px solid orange;
-    color: #fff;
-    font-size: 20px;
-    padding: 15px 5%;
-    cursor: pointer;
-    transition:  all 200ms ease-in-out;
-    border-radius: 3px;
-}
-.buttonBox button:hover{
-    background-color: rgb(197, 136, 24);  
-}

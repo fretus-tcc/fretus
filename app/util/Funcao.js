@@ -36,5 +36,22 @@ function notifyMessages(req, res) {
     return msgs
 }
 
+/* function ZeroEsqueda (num){
+    return num >=10 ? num : `0${num}`;
+}
+
+function age(data){
+    const ano = ZeroEsqueda(data.getFullYear());
+    
+    idade = ano - data(req.body.nasc) 
+
+    if(idade > 18){
+        return true
+    }else{
+        return error
+    }
+
+} */
+
 exports.validaCPF = validaCPF;
 exports.notifyMessages = notifyMessages;

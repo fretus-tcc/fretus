@@ -21,3 +21,30 @@ function validaCPF(cpf) {
 }
 
 console.log(validaCPF('475.399.900-90'))
+
+
+function ZeroEsqueda (num){
+    return num >=10 ? num : `0${num}`;
+}
+
+function FormatandoData(data){
+
+    //Dia
+    const dia = ZeroEsqueda(data.getDate());
+    const mes = ZeroEsqueda(data.getMonth() + 1);
+    const ano = ZeroEsqueda(data.getFullYear());
+
+    //Horas 
+    const horas = ZeroEsqueda(data.getHours());
+    const min = ZeroEsqueda(data.getMinutes());
+    const segundos = ZeroEsqueda(data.getSeconds());
+
+
+    return `${dia}/${mes}/${ano}  ${horas}:${min}:${segundos} `
+
+}
+
+const data = new Date(); 
+const dataBrasil = FormatandoData(data); 
+
+console.log(dataBrasil)

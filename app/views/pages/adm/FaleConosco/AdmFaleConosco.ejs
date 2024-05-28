@@ -10,6 +10,8 @@
     <%- include('../../../partial/config/config.ejs') %>
         <%- include('../../../partial/config/config-adm.ejs') %>
 
+        <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+
 
 </head>
 
@@ -23,26 +25,29 @@
                     Mensagens - Fale Conosco
                 </h1>
             </div>
-            <a href="#">
-                <section class="ContainerFaleConosco">
-                    <header>
-                        <p class="nameUserF"><b style="font-size: 1.8rem;">Nome: </b>user</p>
-                        <p><b style="font-size: 1.8rem;">Assunto: </b><br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur ex mollitia labore repellendus soluta eligendi iusto in cumque eveniet, nihil expedita provident! Aut excepturi eligendi voluptas dolor quo consequuntur error.</p>
-                    </header>
-                    <section class="Box">
-                        <p><b style="font-size: 1.8rem;">Mensager: </b><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic modi adipisci libero
-                            voluptatibus
-                            temporibus unde accusantium impedit provident architecto, porro amet esse molestias ipsa
-                            possimus iusto
-                            dignissimos quidem illo perspiciatis!</p><br>
-                        
-                        <section class="buttonBox">
-                            <button>Responder</button>
-                        </section>
-                    </section>
+            <section class="container_cads">
+                <a href="#">
+                    <section class="container_box ">
 
-                </section>
-            </a>
+                        <span style="color: #333;font-size: 90px;" class="material-symbols-outlined">
+                            mail
+                            </span>
+
+                        <h1>Usuário cadastro - cliente </h1>
+
+                    </section>
+                </a>
+                <a href="#">
+                    <section class="container_box">
+                        <span style="color: #333;font-size: 90px;" class="material-symbols-outlined">
+                            mail
+                            </span>
+                        <h1>Usuário cadastro - Entregador </h1>
+                    </section>
+                </a>
+                
+            </section>
+            
         </main>
 
         <script src="/JS/adm/sidebar.js"></script>
