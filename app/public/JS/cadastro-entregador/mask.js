@@ -1,4 +1,4 @@
-$('#tel').mask('(00) 00000-0000')
+/* $('#tel').mask('(00) 00000-0000') */
 $('#placa').mask('ZZZ-0A00', {
     translation: {
         'A': {
@@ -10,13 +10,13 @@ $('#placa').mask('ZZZ-0A00', {
     }
 })
 
-const tel = document.querySelector('#tel')
+/* const tel = document.querySelector('#tel')
 tel.addEventListener('input', () => {
     tel.setCustomValidity('')
     if (tel.value.length < 15) {
         tel.setCustomValidity('Campo Incompleto!')
     }
-})
+}) */
 
 const placa = document.querySelector('#placa')
 placa.addEventListener('input', () => {
