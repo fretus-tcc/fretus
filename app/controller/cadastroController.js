@@ -6,7 +6,7 @@ const bycrypt = require('bcryptjs')
 const salt = bycrypt.genSaltSync(10)
 
 const TarefasControl = {
-    
+
     CriarUsuario: async (req, res) => {
         // formatando data nascimento
         const { nasc } = req.body
@@ -26,7 +26,7 @@ const TarefasControl = {
         }
 
         try {
-            const result = await cadastroModel.create({...req.body, senha: bycrypt.hashSync(req.body.senha)});
+            const result = await cadastroModel.create({ ...req.body, senha: bycrypt.hashSync(req.body.senha) });
             // definindo id_usuario autenticacao cadastro
             req.session.autenticado.id = result[0].insertId
 
@@ -43,24 +43,31 @@ const TarefasControl = {
         body("nome")
             .isLength({ min: 3, max: 45 })
             .withMessage("Nome invalido "),
-        
+
         body("nasc")
             .isLength({ min: 10 })
             .withMessage('Data inválida ')
             .toDate()
             .withMessage('Data inválida ')
-           /*  .custom(async (value) => {
-
-                if((value)){
-                   
-                    
-                    return true;
-                } else {
-                    throw new Error('Cpf inválido');
+            .custom(value => {
+                const birthDate = new Date(value);
+                if (isNaN(birthDate.getTime())) {
+                    throw new Error('Data de nascimento inválida');
+                }
+                
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                if (age < 18) {
+                    throw new Error('Você deve ter pelo menos 18 anos');
                 }
 
-            }), */
-        , 
+                return true;
+            })
+        ,
         body("tel")
             .isLength({ min: 15 })
             .withMessage('Telefone incompleto ')
@@ -82,7 +89,7 @@ const TarefasControl = {
             .bail()
             .custom(async (value) => {
 
-                if(validaCPF(value)){
+                if (validaCPF(value)) {
                     const cpf = await cadastroModel.findByCpf(value)
                     if (cpf.length > 0) {
                         throw new Error('Cpf já utilizado');
@@ -129,7 +136,7 @@ const TarefasControl = {
         res.redirect('/verificar-autenticacao')
     },
 
-    
+
     regrasValidacaoFormLogin: [
         body("email")
             .isEmail()
@@ -141,9 +148,9 @@ const TarefasControl = {
             .bail()
             .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/)
             .withMessage("Senha inválida, deve conter pelo menos 1 letra, 1 número e 1 caractere especial"),
-          
+
     ],
-    
+
     cadastrarEntregador: async (req, res) => {
         const autenticado = req.session.autenticado
         const result = await cadastroModel.findBySubscribe(autenticado.id)
@@ -156,7 +163,7 @@ const TarefasControl = {
 
         res.render('pages/cadastro-entregador', { autenticado, status: null })
     },
-    
+
     verificarAutenticacao: async (req, res) => {
         const autenticado = req.session.autenticado
 
