@@ -51,7 +51,7 @@ const removeClass = () => {
 
 const isChecked = (i) => {
     let valid = true
-    const allFields = document.querySelector('form').elements
+    const allFields = document.querySelector('.popup-wrapper').elements
     // console.log(allFields);
     const currentFields = [...allFields].filter((field) => field.offsetParent == form[i])
     console.log(currentFields);
