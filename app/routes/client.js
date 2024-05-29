@@ -24,9 +24,13 @@ router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (r
     res.render('pages/cliente/cupons')
 })
 
+
+
 router.get('/perfil', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/perfil')
 })
+
+
 
 router.get('/escolher-entregador', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/escolher-entregador')
