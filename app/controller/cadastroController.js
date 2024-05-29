@@ -161,11 +161,17 @@ const TarefasControl = {
             return res.render('pages/cadastro-entregador', { autenticado, status })
         }
 
-        res.render('pages/cadastro-entregador', { autenticado, status: null })
+        res.render('pages/cadastro-entregador', { erros: null, autenticado, status: null })
     },
 
     createShipper: async (req, res) => {
-        console.log(req.body)
+        const autenticado = req.session.autenticado
+        const erros = validationResult(req)
+        if (!erros.isEmpty()) {
+            return res.render('pages/cadastro-entregador', { erros, autenticado, status: null })
+        }
+
+        // console.log(req.body)
         const { id_usuario, descricao, raio_de_atuacao, tipo_veiculo, modelo_veiculo, placa } = req.body
         
         /* Atulizando tabela usuario */
@@ -179,6 +185,13 @@ const TarefasControl = {
 
         res.redirect('/verificar-autenticacao')
     },
+
+    regrasValidacaoCadastroEntregador: [
+        body("modelo_veiculo")
+            .isLength({ min: 3, max: 45 })
+            .withMessage("Nome invalido "),
+
+    ],
 
     redirectByType: async (req, res) => {
         const autenticado = req.session.autenticado
