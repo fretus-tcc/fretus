@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="/CSS/cadastro-entregador/shipper-signin.css">
 </head>
 <body>
-    
+    <%
+        
+    %>
+
     <main class="hero">
         <%- include('../partial/header.ejs') %>
         <section>
@@ -28,6 +31,7 @@
                         <form action="/cadastro-entregador" method="post" class="popup-wrapper">
                             <div class="form active">
                                 <section class="title">
+                                    <p><%= JSON.stringify(erros) %></p>
                                     <h2>Etapa 1 de 3</h2>
                                     <h1>Verificando seus dados</h1>
                                 </section>
