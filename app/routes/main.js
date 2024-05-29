@@ -38,7 +38,7 @@ router.post('/sair', limparSessao, function (req, res) {
 })
 
 router.get('/verificar-autenticacao', verificarUsuAutorizado([1, 2, 3], 'pages/restrito'), function (req, res) {
-  cadastroController.verificarAutenticacao(req, res)
+  cadastroController.redirectByType(req, res)
 })
 
 router.get('/ajuda', function (req, res) {
@@ -50,12 +50,11 @@ router.get('/ajuda/:slug', function (req, res) {
 })
 
 router.get('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito'), function (req, res) {
-  cadastroController.cadastrarEntregador(req, res)
+  cadastroController.showByStatus(req, res)
 })
 
 router.post('/cadastro-entregador', function (req, res) {
-  console.log(req.body)
-  res.redirect('/entregador/entregas-solicitadas')
+  cadastroController.createShipper(req, res)
 })
 
 

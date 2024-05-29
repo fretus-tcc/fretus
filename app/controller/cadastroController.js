@@ -151,7 +151,7 @@ const TarefasControl = {
 
     ],
 
-    cadastrarEntregador: async (req, res) => {
+    showByStatus: async (req, res) => {
         const autenticado = req.session.autenticado
         const result = await cadastroModel.findBySubscribe(autenticado.id)
         const isSubscribed = result.length > 0
@@ -164,7 +164,23 @@ const TarefasControl = {
         res.render('pages/cadastro-entregador', { autenticado, status: null })
     },
 
-    verificarAutenticacao: async (req, res) => {
+    createShipper: async (req, res) => {
+        console.log(req.body)
+        const { id_usuario, descricao, raio_de_atuacao, tipo_veiculo, modelo_veiculo, placa } = req.body
+        
+        /* Atulizando tabela usuario */
+        await cadastroModel.updateUser({ descricao_usuario: descricao }, id_usuario)
+        
+        /* Inserindo dados tabela detalhamento_entregador */
+        const shipper = await cadastroModel.insertShipper({ id_usuario, raio_de_atuacao, cnh_entregador: 'teste' })
+
+        /* Inserindo dados tabela veiculos */
+        await cadastroModel.insertVehicle({ id_entregador: shipper.insertId, tipo_veiculo, modelo_veiculo, placa, foto_veiculo: 'teste' })
+
+        res.redirect('/verificar-autenticacao')
+    },
+
+    redirectByType: async (req, res) => {
         const autenticado = req.session.autenticado
 
         if (autenticado.tipo == 1) {

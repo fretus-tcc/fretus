@@ -68,7 +68,35 @@ const tarefasModel = {
         } catch (error) {
             return error
         }
-    }
+    },
+    updateUser: async (data, id) => {
+        try {
+            const [linhas] = await pool.query(`UPDATE usuario SET ? WHERE id_usuario = ?` ,  [ data, id ])
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
+    insertShipper: async (data) => {
+        try {
+            const [linhas] = await pool.query(`INSERT INTO detalhamento_entregador SET ?`, [data] )
+            // console.log(linhas)
+            return linhas;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+    insertVehicle: async (data) => {
+        try {
+            const [linhas] = await pool.query(`INSERT INTO veiculos SET ?`, [data] )
+            // console.log(linhas)
+            return linhas;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
 };
 
 
