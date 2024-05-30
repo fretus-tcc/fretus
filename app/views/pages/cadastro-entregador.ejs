@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="/CSS/cadastro-entregador/shipper-signin.css">
 </head>
 <body>
-    <%
-        
-    %>
 
     <main class="hero">
         <%- include('../partial/header.ejs') %>
@@ -31,7 +28,6 @@
                         <form action="/cadastro-entregador" method="post" class="popup-wrapper">
                             <div class="form active">
                                 <section class="title">
-                                    <p><%= JSON.stringify(erros) %></p>
                                     <h2>Etapa 1 de 3</h2>
                                     <h1>Verificando seus dados</h1>
                                 </section>
@@ -39,13 +35,19 @@
                                     <input type="hidden" name="id_usuario" value="<%= autenticado.id %>">
                                     <select name="tipo_veiculo" required placeholder="Tipo de Veículo" class="input-field">
                                         <option value="">Tipo de Veículo</option>
-                                        <option value="moto">Moto</option>
-                                        <option value="carro">Carro</option>
-                                        <option value="van">Van</option>
-                                        <option value="caminhao">Caminhão</option>
+                                        <option value="moto" <%= dados?.tipo_veiculo == 'moto' ? 'selected' : '' %> >Moto</option>
+                                        <option value="carro" <%= dados?.tipo_veiculo == 'carro' ? 'selected' : '' %> >Carro</option>
+                                        <option value="van" <%= dados?.tipo_veiculo == 'van' ? 'selected' : '' %> >Van</option>
+                                        <option value="caminhao" <%= dados?.tipo_veiculo == 'caminhao' ? 'selected' : '' %> >Caminhão</option>
                                     </select>
-                                    <input name="modelo_veiculo" required placeholder="Modelo do Veículo" class="input-field" type="text">
-                                    <input name="placa" required id="placa" placeholder="Placa do Veículo" class="input-field" type="text">
+                                    <span class="error <%= erros?.tipo_veiculo?.msg != undefined ? 'show' : '' %>"><%= erros?.tipo_veiculo?.msg %></span>
+
+                                    <input name="modelo_veiculo" required placeholder="Modelo do Veículo" class="input-field" type="text" value="<%= dados?.modelo_veiculo %>">
+                                    <span class="error <%= erros?.modelo_veiculo?.msg != undefined ? 'show' : '' %>"><%= erros?.modelo_veiculo?.msg %></span>
+
+                                    <input name="placa" required id="placa" placeholder="Placa do Veículo" class="input-field" type="text" value="<%= dados?.placa %>">
+                                    <span class="error <%= erros?.placa?.msg != undefined ? 'show' : '' %>"><%= erros?.placa?.msg %></span>
+
                                 </section>
                                 <section class="terms">
                                     <input required type="checkbox" name="terms" id="terms">
@@ -94,8 +96,11 @@
                                         </div>
                                         <span class="msg">Foto de Perfil (opcional)</span>
                                     </label>
-                                    <input name="raio_de_atuacao" required placeholder="Raio de atuação (em km)" class="input-field" type="text">
-                                    <textarea name="descricao" required class="input-field" placeholder="Descrição"></textarea>
+                                    <input name="raio_de_atuacao" required placeholder="Raio de atuação (em km)" class="input-field" type="text" value="<%= dados?.raio_de_atuacao %>">
+                                    <span class="error <%= erros?.raio_de_atuacao?.msg != undefined ? 'show' : '' %>"><%= erros?.raio_de_atuacao?.msg %></span>
+
+                                    <textarea name="descricao" required class="input-field" placeholder="Descrição" value=""><%= dados?.descricao %></textarea>
+                                    <span class="error <%= erros?.descricao?.msg != undefined ? 'show' : '' %>"><%= erros?.descricao?.msg %></span>
                                 </section>
                                 <section class="btns">
                                     <button class="cta no" type="submit">Etapa Anterior</button>

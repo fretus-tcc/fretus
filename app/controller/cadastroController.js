@@ -158,17 +158,18 @@ const TarefasControl = {
         if (isSubscribed) {
             // console.log(result)
             const status = result[0].status_aprovacao
-            return res.render('pages/cadastro-entregador', { autenticado, status })
+            return res.render('pages/cadastro-entregador', { erros: null, dados: null, autenticado, status })
         }
 
-        res.render('pages/cadastro-entregador', { erros: null, autenticado, status: null })
+        res.render('pages/cadastro-entregador', { erros: null, dados: null, autenticado, status: null })
     },
 
     createShipper: async (req, res) => {
         const autenticado = req.session.autenticado
         const erros = validationResult(req)
         if (!erros.isEmpty()) {
-            return res.render('pages/cadastro-entregador', { erros, autenticado, status: null })
+            console.log(erros)
+            return res.render('pages/cadastro-entregador', { erros: erros.mapped(), dados: req.body, autenticado, status: null })
         }
 
         // console.log(req.body)
@@ -187,10 +188,32 @@ const TarefasControl = {
     },
 
     regrasValidacaoCadastroEntregador: [
-        body("modelo_veiculo")
-            .isLength({ min: 3, max: 45 })
-            .withMessage("Nome invalido "),
+        body("tipo_veiculo")
+            .notEmpty()
+            .withMessage("Tipo de Veículo inválido"),
 
+        body("modelo_veiculo")
+            .isLength({ min: 2, max: 45 })
+            .withMessage("Modelo de Veículo inválido"),
+
+        body("placa")
+            .isLength({ min: 8, max: 8 })
+            .withMessage("Placa inválida")
+            .custom(async (value) => {
+                const placa = await cadastroModel.findByPlaca(value)
+                if (placa.length > 0) {
+                    throw new Error('Placa já utilizada');
+                }
+                return true;
+            }),
+        
+        body("raio_de_atuacao")
+            .isFloat({ min: 1 })
+            .withMessage("Deve conter apenas números, que sejam maiores que 0"),
+
+        body("descricao")
+            .isLength({ min: 10, max: 120 })
+            .withMessage("Deve conter de 10 até 120 caracteres")
     ],
 
     redirectByType: async (req, res) => {

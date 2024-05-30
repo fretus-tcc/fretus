@@ -39,6 +39,7 @@ const admCadastroModel = {
         try {
             await pool.query('DELETE FROM usuario WHERE id_usuario = ?', [id])
         } catch (error) {
+            console.log(error)
             return error
         }
     },

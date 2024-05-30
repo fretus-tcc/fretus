@@ -53,7 +53,7 @@ router.get('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito')
   cadastroController.showByStatus(req, res)
 })
 
-router.post('/cadastro-entregador', cadastroController.regrasValidacaoCadastroEntregador, function (req, res) {
+router.post('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito'), cadastroController.regrasValidacaoCadastroEntregador, function (req, res) {
   cadastroController.createShipper(req, res)
 })
 

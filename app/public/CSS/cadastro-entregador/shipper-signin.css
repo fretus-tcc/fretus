@@ -91,3 +91,13 @@
 .form .btns .cta {
     margin-top: 0;
 }
+
+.error {
+    display: none;
+    color: red;
+    margin-top: -10px;
+}
+
+.error.show {
+    display: block;
+}
