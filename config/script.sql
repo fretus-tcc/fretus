@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
   CONSTRAINT fk_ESPECIFICA_ENTREGADOR_USUARIOS1
     FOREIGN KEY (id_usuario)
     REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.veiculos (
   CONSTRAINT fk_VEICULOS_DETALHAMENTO_ENTREGADOR1
     FOREIGN KEY (id_entregador)
     REFERENCES bzt6iht1cder66rlnctv.detalhamento_entregador (id_entregador)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
