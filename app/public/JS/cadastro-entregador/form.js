@@ -16,6 +16,16 @@ yes.forEach((item, i) => {
             container.classList.add('scrolling')
             container.addEventListener('scrollend', scrolling)
             container.scrollLeft = (form[index].clientWidth + 7) * index
+            if (index == 2) {
+                const stepFields = [...form[index].children[1].children]
+                const fieldErrors = stepFields.filter((item) => item.classList.contains('show'))
+                if (fieldErrors.length >= 2) {
+                    form[index].classList.add('translate')
+                }
+                console.log(fieldErrors);
+                // container.scrollLeft = 1080
+            }
+            console.log((form[index].clientWidth + 7) * index)
         }
     })
 })
@@ -46,6 +56,7 @@ window.addEventListener('resize', () => {
 const removeClass = () => {
     form.forEach(item => {
         item.classList.remove('active')
+        item.classList.remove('translate')
     })
 }
 
@@ -54,7 +65,7 @@ const isChecked = (i) => {
     const allFields = document.querySelector('.popup-wrapper').elements
     // console.log(allFields);
     const currentFields = [...allFields].filter((field) => field.offsetParent == form[i])
-    console.log(currentFields);
+    // console.log(currentFields);
     currentFields.forEach(field => {
         if (field.validity.valid == false) {
             valid = false
@@ -72,7 +83,6 @@ const goTo = (firstError) => {
     removeClass()
     form[index].classList.add('active')
 
-    /* form[index].classList.add('active') */
     /* container.classList.add('scrolling')
     container.addEventListener('scrollend', scrolling) */
 
@@ -82,7 +92,7 @@ const goTo = (firstError) => {
     container.style = 'scroll-behavior: smooth;'
     container.addEventListener('scrollend', () => {
         form[index].style = 'transition: max-height .7s;'
-        container.style = 'scroll-behavior: smooth;'
+        /* container.style = 'scroll-behavior: smooth;' */
     })
 }
 
