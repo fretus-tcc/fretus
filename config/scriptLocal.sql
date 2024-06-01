@@ -86,7 +86,8 @@ CREATE TABLE usuario (
   /* data_usuario DATE NULL, */
   data_usuario DATE NOT NULL,
   descricao_usuario TEXT NULL,
-  foto_de_perfil VARCHAR(255) NULL,
+  /* foto_de_perfil VARCHAR(255) NULL, */
+  foto_de_perfil MEDIUMBLOB NULL,
   /* cod_tipo_usuario INT NULL, */
   notificacao_sms_estado INT NULL,
   notificacao_email_estado INT NULL,
@@ -112,7 +113,8 @@ CREATE TABLE IF NOT EXISTS FRETUS.detalhamento_entregador (
   id_usuario INT NOT NULL,
   id_entregador INT NOT NULL AUTO_INCREMENT,
   status_aprovacao INT NOT NULL DEFAULT '0',
-  cnh_entregador VARCHAR(255) NOT NULL,
+  /* cnh_entregador VARCHAR(255) NOT NULL, */
+  cnh_entregador MEDIUMBLOB NOT NULL,
   crvl_entregador VARCHAR(255) NULL,
   ipva_entregador VARCHAR(255) NULL,
   qtn_visualizacoes_perfil INT NULL DEFAULT '0',
@@ -155,7 +157,8 @@ CREATE TABLE IF NOT EXISTS FRETUS.veiculos (
   modelo_veiculo VARCHAR(45) NOT NULL,
   id_entregador INT NOT NULL,
   tipo_bauleto VARCHAR(45) NULL,
-  foto_veiculo VARCHAR(255) NOT NULL,
+  /* foto_veiculo VARCHAR(255) NOT NULL, */
+  foto_veiculo MEDIUMBLOB NOT NULL,
   PRIMARY KEY (id_veiculo),
   UNIQUE INDEX placa_UNIQUE (placa ASC) VISIBLE,
   INDEX fk_VEICULOS_DETALHAMENTO_ENTREGADOR1_idx (id_entregador ASC) VISIBLE,

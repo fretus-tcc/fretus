@@ -1,5 +1,6 @@
 var express = require("express")
 var router = express.Router()
+const multer = require('multer')
 const cadastroController = require("../controller/cadastroController");
 const FaleConoscoControl = require("../controller/FaleConoscoController");
 const quotesController = require('../controller/quotesController')
@@ -8,6 +9,13 @@ const { gravarUsuAutenticado, gravarUsuAutenticadoCadastro, limparSessao } = req
 // const { body, validationResult } = require("express-validator")
 
 var pool = require("../../config/connection-factory");
+
+const upload = multer({ storage: multer.memoryStorage() })
+const fields = [
+  { name: 'cnh', maxCount: 1 },
+  { name: 'foto_veiculo', maxCount: 1 },
+  { name: 'foto_perfil', maxCount: 1 }
+]
 
 router.get("/", function (req, res) {
   res.render("pages/index", { autenticado: req.session.autenticado })
@@ -53,7 +61,7 @@ router.get('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito')
   cadastroController.showByStatus(req, res)
 })
 
-router.post('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito'), cadastroController.regrasValidacaoCadastroEntregador, function (req, res) {
+router.post('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito'), upload.fields(fields), cadastroController.regrasValidacaoCadastroEntregador, function (req, res) {
   cadastroController.createShipper(req, res)
 })
 

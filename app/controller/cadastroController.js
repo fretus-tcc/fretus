@@ -165,23 +165,25 @@ const TarefasControl = {
     },
 
     createShipper: async (req, res) => {
+        const { cnh, foto_veiculo, foto_perfil } = req.files
+        // console.log(cnh[0].buffer/* .toString('base64') */, foto_veiculo, foto_perfil)
+
         const autenticado = req.session.autenticado
         const erros = validationResult(req)
         if (!erros.isEmpty()) {
             return res.render('pages/cadastro-entregador', { erros: erros.mapped(), dados: req.body, autenticado, status: null })
         }
 
-        // console.log(req.body)
         const { id_usuario, descricao, raio_de_atuacao, tipo_veiculo, modelo_veiculo, placa } = req.body
         
         /* Atulizando tabela usuario */
-        await cadastroModel.updateUser({ descricao_usuario: descricao }, id_usuario)
+        await cadastroModel.updateUser({ descricao_usuario: descricao, foto_de_perfil: foto_perfil[0].buffer }, id_usuario)
         
         /* Inserindo dados tabela detalhamento_entregador */
-        const shipper = await cadastroModel.insertShipper({ id_usuario, raio_de_atuacao, cnh_entregador: 'teste' })
+        const shipper = await cadastroModel.insertShipper({ id_usuario, raio_de_atuacao, cnh_entregador: cnh[0].buffer })
 
         /* Inserindo dados tabela veiculos */
-        await cadastroModel.insertVehicle({ id_entregador: shipper.insertId, tipo_veiculo, modelo_veiculo, placa, foto_veiculo: 'teste' })
+        await cadastroModel.insertVehicle({ id_entregador: shipper.insertId, tipo_veiculo, modelo_veiculo, placa, foto_veiculo: foto_veiculo[0].buffer })
 
         res.redirect('/verificar-autenticacao')
     },
