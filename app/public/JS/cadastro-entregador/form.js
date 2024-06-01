@@ -63,6 +63,29 @@ const isChecked = (i) => {
     return valid
 }
 
+const goTo = (firstError) => {
+    const errorContainer = document.querySelector(`[name="${firstError}"]`).offsetParent
+    const containerIndex = [...form].findIndex((item) => item == errorContainer)
+
+    index = containerIndex
+    console.log('index goTo()', index)
+    removeClass()
+    form[index].classList.add('active')
+
+    /* form[index].classList.add('active') */
+    /* container.classList.add('scrolling')
+    container.addEventListener('scrollend', scrolling) */
+
+    container.style = 'scroll-behavior: auto;'
+    form[index].style = containerIndex != 0 ? 'transition: none;' : ''
+    container.scrollLeft = (form[index].clientWidth + 7) * index
+    container.style = 'scroll-behavior: smooth;'
+    container.addEventListener('scrollend', () => {
+        form[index].style = 'transition: max-height .7s;'
+        container.style = 'scroll-behavior: smooth;'
+    })
+}
+
 inputFile.forEach((input, i) => {
     input.addEventListener('change', () => {
         if (input.files[0]) {

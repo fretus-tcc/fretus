@@ -9,15 +9,34 @@
     <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
     <link rel="stylesheet" href="/CSS/client/pay-popup.css">
     <link rel="stylesheet" href="/CSS/cadastro-entregador/shipper-signin.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
+
+    <%
+        if (erros) {
+            const keys = Object.keys(erros)
+            keys.forEach(key => {
+                if (erros[key]) {
+                    const campoAtual = key
+                    const msg = erros[campoAtual].msg
+                    %>
+                        <script>notify('Verifique o campo <%= campoAtual %>', '<%= msg %>', 'error')</script>
+                    <%
+                }
+            })
+        }
+    %>
 
     <main class="hero">
         <%- include('../partial/header.ejs') %>
         <section>
             <aside class="popup show">
                 <section class="popup-content">
-
                     <% if (status == 0) { %>
                         <p>pendente</p>
                     <% } else if (status == 1) { %>
@@ -50,7 +69,7 @@
 
                                 </section>
                                 <section class="terms">
-                                    <input required type="checkbox" name="terms" id="terms">
+                                    <input required type="checkbox" name="terms" id="terms" <%= dados?.terms == 'on' ? 'checked' : '' %> >
                                     <label for="terms">Eu concordo com os <a href="">Termos e Condições</a> e com a Política de Privacidade da Fretus</label>
                                 </section>
                                 <section class="btns">
@@ -119,6 +138,12 @@
 
     <script src="/JS/burguer.js"></script>
     <script src="/JS/cadastro-entregador/form.js"></script>
+    <% if (erros) { %>
+        <script>
+            let firstError = '<%= Object.keys(erros)[0] %>'
+            goTo(firstError)
+        </script>
+    <% } %>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="/JS/cadastro-entregador/mask.js"></script>

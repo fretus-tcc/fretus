@@ -168,7 +168,6 @@ const TarefasControl = {
         const autenticado = req.session.autenticado
         const erros = validationResult(req)
         if (!erros.isEmpty()) {
-            console.log(erros)
             return res.render('pages/cadastro-entregador', { erros: erros.mapped(), dados: req.body, autenticado, status: null })
         }
 
