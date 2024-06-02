@@ -108,12 +108,12 @@
                                     <h1>Criando seu Perfil</h1>
                                 </section>
                                 <section class="form-fields">
-                                    <input type="file" name="foto_perfil" id="profile">
+                                    <input required type="file" name="foto_perfil" id="profile">
                                     <label class="file-field" for="profile">
                                         <div class="icon">
                                             <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
                                         </div>
-                                        <span class="msg">Foto de Perfil (opcional)</span>
+                                        <span class="msg">Foto de Perfil</span>
                                     </label>
                                     <input name="raio_de_atuacao" required placeholder="Raio de atuação (em km)" class="input-field" type="text" value="<%= dados?.raio_de_atuacao %>">
                                     <span class="error <%= erros?.raio_de_atuacao?.msg != undefined ? 'show' : '' %>"><%= erros?.raio_de_atuacao?.msg %></span>

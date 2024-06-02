@@ -10,12 +10,12 @@ const { gravarUsuAutenticado, gravarUsuAutenticadoCadastro, limparSessao } = req
 
 var pool = require("../../config/connection-factory");
 
-const upload = multer({ storage: multer.memoryStorage() })
 const fields = [
   { name: 'cnh', maxCount: 1 },
   { name: 'foto_veiculo', maxCount: 1 },
   { name: 'foto_perfil', maxCount: 1 }
 ]
+const upload = multer({ storage: multer.memoryStorage() }).fields(fields)
 
 router.get("/", function (req, res) {
   res.render("pages/index", { autenticado: req.session.autenticado })
@@ -61,9 +61,15 @@ router.get('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito')
   cadastroController.showByStatus(req, res)
 })
 
-router.post('/cadastro-entregador', verificarUsuAutorizado([2], 'pages/restrito'), upload.fields(fields), cadastroController.regrasValidacaoCadastroEntregador, function (req, res) {
-  cadastroController.createShipper(req, res)
-})
+router.post(
+  '/cadastro-entregador',
+  verificarUsuAutorizado([2], 'pages/restrito'),
+  upload,
+  cadastroController.regrasValidacaoCadastroEntregador,
+  function (req, res) {
+    cadastroController.createShipper(req, res)
+  }
+)
 
 
 /* ===========================FaleConsoco======================================== */
