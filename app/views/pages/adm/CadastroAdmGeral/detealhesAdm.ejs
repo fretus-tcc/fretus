@@ -17,61 +17,79 @@
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
         <main>
-            <% result.forEach(item=> { %>
-                <section class="LinkUser">
+            <section class="LinkUser">
+                <% if (result.tipo_usuario =="1") { %>
+                    <a href="/admin/cadastroAdm/clientes">
+                        <h3><- volta para página anterior </h3>
+                    </a>
+                <% } else { %>
+                    <a href="/admin/cadastroAdm/entregador">
+                        <h3><- volta para página anterior </h3>
+                    </a>
+                <% } %>
+                <h2 style="margin: 30px 0;">Usuário - nome: <%= result.nome_usuario %></h2>
+            </section>
 
-                    <% if (item.tipo_usuario =="1") { %>
-                        <a href="/admin/cadastroAdm/clientes">
-                            <h3><- volta para página anterior </h3>
-                        </a>
-                    <% } else { %>
-                        <a href="/admin/cadastroAdm/entregador">
-                            <h3><- volta para página anterior </h3>
-                        </a>
-                    <% } %>
-                    <h2 style="margin: 30px 0;">Usuário - nome: <%= item.nome_usuario %></h2>
-                <% }) %>
             <section class="containerDetealhes">
-                <% result.forEach(item=> { %>
-                    <section class="ContainerAdm_Use">
-                        <header class="Header_container">
-                            <article class="boxDados">
-                                <span class="name_user">Nome Usuário: 
-                                        <%= item.nome_usuario %>
-                                 </span>
-                            </article>
-                            <article class="boxDados">
-                                <span>Status: Status </span>
-                            </article>
+                <section class="ContainerAdm_Use">
+                    <header class="Header_container">
+                        <article class="boxDados">
+                            <span class="name_user">Nome Usuário: <%= result.nome_usuario %></span>
+                        </article>
+                        <article class="boxDados">
+                            <span>Status: Status </span>
+                        </article>
+                    </header>
 
-                        </header>
-                        <article class="DadosUserIMG">
+                    <article class="DadosUserIMG">
+                        <% if (result.foto_de_perfil != null) { %>
+                            <img src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
+                        <% } else { %>
                             <img src="/imgs/adm/incon_people.svg">
-                        </article>
-                        <article class="boxDados DADOS">
-                            <span><b>NOME Usuário:</b>  <%= item.nome_usuario %></span><BR><BR>
-                            <span><b>CPF Usuário:</b>  <%= item.cpf_usuario %></span><BR><BR>
-                            <span><b>EMAIL Usuário:</b>  <%= item.email_usuario %></span><BR><BR>
-                            <!-- <span><b>SENHA Usuário:</b>  <%= item.senha_usuario %></span><BR><BR> -->
-                            <span><b>TELEFONE Usuário:</b>  <%= item.telefone_usuario %>  </span><BR><BR>
-                            <span><b>DATA DE NASCIMENTO Usuário:</b>  <%= new Date(item.data_usuario).toLocaleDateString('pt-br', { year:"numeric", month:"short", day:"numeric"})  %>  </span><BR><BR>
-                                
-                                <% if ( item.tipo_usuario =="2") { %>
+                        <% } %>      
+                    </article>
 
-                                    <section class="DocumentoUserEnt">
-                                        
-                                        <h1 > DOCUMENTOS: </h1>
+                    <article class="boxDados DADOS">
+                        <p><b>Nome:</b> <%= result.nome_usuario %></p>
+                        <br>
+                        <p><b>Cpf:</b> <%= result.cpf_usuario %></p>
+                        <br>
+                        <p><b>E-mail:</b> <%= result.email_usuario %></p>
+                        <br>
+                        <p><b>Telefone:</b> <%= result.telefone_usuario %></p>
+                        <br>
+                        <p><b>Data de Nascimento:</b>
+                            <%= new Date(result.data_usuario).toLocaleDateString('pt-br', { year:"numeric", month:"short", day:"numeric"}) %>
+                        </p>
+                        <br>
+                            
+                        <% if (result.tipo_usuario =="2") { %>
+                            <p><b>Raio de Atuação:</b> <%= result.raio_de_atuacao %></p>
+                            <br>
+                            <p><b>Status Aprovação:</b> <%= result.status_aprovacao %></p>
+                            <br>
 
-                                    </section>
+                            <section class="DocumentoUserEnt">
+                                <h1>Veículos:</h1>
+                                <article class="DadosUserIMG">
+                                    <img src="data:image/png;base64,<%= result.foto_veiculo.toString('base64') %>">
+                                </article>
+                                <p><b>Tipo de Veículo:</b> <%= result.tipo_veiculo %></p>
+                                <br>
+                                <p><b>Modelo de Veículo:</b> <%= result.modelo_veiculo %></p>
+                                <br>
+                                <p><b>Placa do Veículo:</b> <%= result.placa %></p>
+                                <br>
 
-                                    
-
-                                <% }  %>
-                        </article>
-
-                    </section>
-                    <% }) %>
-
+                                <h1>Documentos:</h1>
+                                <article class="DadosUserIMG">
+                                    <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>">
+                                </article>
+                            </section>
+                        <% } %>
+                    </article>
+                </section>
+            </section>
         </main>
 
         <script src="/JS/adm/sidebar.js"></script>

@@ -29,7 +29,12 @@ main {
     padding: 20px;
     background: linear-gradient(to right, yellow, green);
     min-height: 100px;
+    max-height: 300px;
+}
 
+.DadosUserIMG img {
+    width: 100%;
+    object-fit: contain;
 }
 
 .containerDetealhes {
@@ -60,7 +65,7 @@ main {
 }
 
 .DocumentoUserEnt h1 {
-    margin: 10px 5px;
+    margin: 10px 0;
     font-size: 2rem;
 }
 .flex-dadosedite{

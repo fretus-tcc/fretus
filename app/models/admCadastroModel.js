@@ -26,6 +26,19 @@ const admCadastroModel = {
             return error;
         }
     },
+    findShipper: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT e.id_usuario, e.raio_de_atuacao, e.status_aprovacao, e.cnh_entregador, v.tipo_veiculo, v.placa, v.modelo_veiculo, v.foto_veiculo ' +
+                'FROM detalhamento_entregador AS e ' +
+                'INNER JOIN veiculos AS v ' +
+                'ON e.id_entregador = v.id_entregador ' +
+                'WHERE e.id_usuario = ?', [id]);
+            return result;
+        } catch (error) {
+            return error;
+        }
+    },
     //atualizando usuário da tabela 
     updateUser: async (data, id) => {
         try {

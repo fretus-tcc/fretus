@@ -100,8 +100,15 @@ const admCadastroController = {
         const { id } = req.params
         try {
             const result = await admCadastroModel.findByUserIdD(id)
-            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result, id })
+            
+            if (result[0].tipo_usuario == 2) {
+                const shipper = await admCadastroModel.findShipper(id)
+                const merge = {...result[0], ...shipper[0]}
+                return res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: merge, id })
+            }
+            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: result[0], id })
         } catch (error) {
+            console.log(error)
             res.json({ error })
         }
     },
