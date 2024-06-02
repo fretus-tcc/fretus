@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.detalhamento_entregador (
     REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
 VALUES ('francisco', '731.571.950-42', '(96) 96924-6462', '2022-01-01', 'francisco@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.veiculos (
     REFERENCES FRETUS.DETALHAMENTO_ENTREGADOR (id_entregador)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
 -- Table FRETUS.CEP

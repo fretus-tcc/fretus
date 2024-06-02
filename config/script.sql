@@ -60,7 +60,8 @@ CREATE TABLE `usuario` (
   /* data_usuario DATE NULL, */
   data_usuario DATE NOT NULL,
   descricao_usuario TEXT NULL,
-  foto_de_perfil VARCHAR(255) NULL,
+  /* foto_de_perfil VARCHAR(255) NULL, */
+  foto_de_perfil MEDIUMBLOB NULL,
   /* cod_tipo_usuario INT NULL, */
   notificacao_sms_estado INT NULL,
   notificacao_email_estado INT NULL,
@@ -82,7 +83,8 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
   id_usuario INT NOT NULL,
   id_entregador INT NOT NULL AUTO_INCREMENT,
   status_aprovacao INT NOT NULL DEFAULT '0',
-  cnh_entregador VARCHAR(255) NOT NULL,
+  /* cnh_entregador VARCHAR(255) NOT NULL, */
+  cnh_entregador MEDIUMBLOB NOT NULL,
   crvl_entregador VARCHAR(255) NULL,
   ipva_entregador VARCHAR(255) NULL,
   qtn_visualizacoes_perfil INT NULL DEFAULT '0',
@@ -101,7 +103,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
     REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
 VALUES ('francisco', '731.571.950-42', '(96) 96924-6462', '2022-01-01', 'francisco@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
@@ -122,7 +124,8 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.veiculos (
   modelo_veiculo VARCHAR(45) NOT NULL,
   id_entregador INT NOT NULL,
   tipo_bauleto VARCHAR(45) NULL,
-  foto_veiculo VARCHAR(255) NOT NULL,
+  /* foto_veiculo VARCHAR(255) NOT NULL, */
+  foto_veiculo MEDIUMBLOB NOT NULL,
   PRIMARY KEY (id_veiculo),
   UNIQUE INDEX placa_UNIQUE (placa ASC) VISIBLE,
   INDEX fk_VEICULOS_DETALHAMENTO_ENTREGADOR1_idx (id_entregador ASC) VISIBLE,
@@ -131,7 +134,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.veiculos (
     REFERENCES bzt6iht1cder66rlnctv.detalhamento_entregador (id_entregador)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CEP` (
   `id_cep` INT NOT NULL AUTO_INCREMENT,
