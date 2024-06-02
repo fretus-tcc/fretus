@@ -47,6 +47,15 @@ const admCadastroModel = {
             return error
         }
     },
+    findEmailById: async (id) => {
+        try {
+            const [linhas] = await pool.query('SELECT email_usuario FROM usuario WHERE id_usuario = ?', [id])
+            return linhas
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
     //atualizando usuário da tabela 
     updateUser: async (data, id) => {
         try {

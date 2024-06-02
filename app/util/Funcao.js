@@ -36,6 +36,40 @@ function notifyMessages(req, res) {
     return msgs
 }
 
+function sendEmail(to, subject, text) {
+    return new Promise((resolve, reject) => {
+        const nodemailer = require('nodemailer')
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASSWORD
+            }
+        })
+
+        const options = {
+            from: {
+                name: 'Fretus',
+                address: process.env.EMAIL_USER
+            },
+            to,
+            subject,
+            text
+        }
+
+        transporter.sendMail(options, function (error, info) {
+            if (error) {
+                console.log(error);
+                return reject({ message: 'Ocorreu um erro' })
+            }
+            return resolve({ message: 'Email enviado com sucesso' })
+        })
+    })
+}
+
 /* function ZeroEsqueda (num){
     return num >=10 ? num : `0${num}`;
 }
@@ -55,3 +89,4 @@ function age(data){
 
 exports.validaCPF = validaCPF;
 exports.notifyMessages = notifyMessages;
+exports.sendEmail = sendEmail;

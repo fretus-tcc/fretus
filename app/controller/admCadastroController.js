@@ -1,5 +1,5 @@
 const admCadastroModel = require('../models/admCadastroModel')
-const { notifyMessages, validaCPF } = require('../util/Funcao')
+const { notifyMessages, validaCPF, sendEmail } = require('../util/Funcao')
 const cadastroModel = require("../models/cadastroModel");
 
 const { body, validationResult } = require("express-validator");
@@ -129,8 +129,15 @@ const admCadastroController = {
     updateStatus: async (req, res) => {
         const { id } = req.params
         try {
-            // console.log(req.body)
             await admCadastroModel.updateShipper(req.body, id)
+            const shipper = await admCadastroModel.findEmailById(id)
+            const email = shipper[0].email_usuario
+            console.log(email);
+            if (req.body.status_aprovacao == 1) {
+                await sendEmail(email, 'Atualizações sobre o seu cadastro', 'Negado')
+            } else {
+                await sendEmail(email, 'Seu cadastro foi aprovado  ', 'Aprovado')
+            }
             res.redirect(`/admin/cadastroAdm/detalhesAdm/${id}`)
         } catch (error) {
             res.json({ error })
