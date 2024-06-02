@@ -89,6 +89,19 @@
                                     <article class="DadosUserIMG">
                                         <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>">
                                     </article>
+
+                                    <% if (result.status_aprovacao == 0) { %>
+                                        <div class="btns">
+                                            <form action="/admin/cadastroAdm/status/<%= id %>?_method=PUT" method="post">
+                                                <input type="hidden" name="status_aprovacao" value="1">
+                                                <button class="cta" type="submit">Negar</button>
+                                            </form>
+                                            <form action="/admin/cadastroAdm/status/<%= id %>?_method=PUT" method="post">
+                                                <input type="hidden" name="status_aprovacao" value="2">
+                                                <button class="cta" type="submit">Aprovar</button>
+                                            </form>
+                                        </div>
+                                    <% } %>
                                 </section>
                             <% } %>
                         <% } %>

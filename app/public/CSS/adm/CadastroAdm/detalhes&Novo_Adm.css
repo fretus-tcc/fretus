@@ -84,6 +84,19 @@ main {
     font-size: 2rem;
     margin: 20px 0;
 }
+.btns {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+.btns form {
+    flex-grow: 1;
+}
+.btns button {
+    width: 100%;
+    border-radius: 7px;
+    font-size: 16px;
+}
 
 /* Novo */
 

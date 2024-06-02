@@ -39,11 +39,20 @@ const admCadastroModel = {
             return error;
         }
     },
+    updateShipper: async (data, id) => {
+        try {
+            await pool.query('UPDATE detalhamento_entregador SET ? WHERE id_usuario = ?', [data, id])
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
     //atualizando usuário da tabela 
     updateUser: async (data, id) => {
         try {
             await pool.query('UPDATE usuario SET ? WHERE id_usuario = ?', [data, id])
         } catch (error) {
+            console.log(error)
             return error
         }
     },

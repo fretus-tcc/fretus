@@ -36,6 +36,10 @@ router.get('/cadastroAdm/detalhesAdm/:id', verificarUsuAutorizado([3], 'pages/re
     admCadastroController.listUsersIdD(req, res);
 });
 
+router.put('/cadastroAdm/status/:id', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    admCadastroController.updateStatus(req, res)
+});
+
 
 // Novo usuário 
 router.get('/CadastroNovoUser', verificarUsuAutorizado([3], 'pages/restrito'), (req, res) => {

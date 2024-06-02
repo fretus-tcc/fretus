@@ -106,7 +106,7 @@ const admCadastroController = {
                 const merge = {...result[0], ...shipper[0]}
                 const subscribe = await cadastroModel.findBySubscribe(id)
                 const isSubscribed = subscribe.length > 0
-                console.log(isSubscribed);
+                // console.log(isSubscribed);
                 return res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: merge, isSubscribed, id })
             }
             res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: result[0], isSubscribed: null, id })
@@ -122,6 +122,16 @@ const admCadastroController = {
             const result = await admCadastroModel.findByUserId(id)
             const msgs = notifyMessages(req, res)
             res.render('pages/adm/CadastroAdmGeral/editar', { result: result[0], id, msgs, dados: null, listaErros: null })
+        } catch (error) {
+            res.json({ error })
+        }
+    },
+    updateStatus: async (req, res) => {
+        const { id } = req.params
+        try {
+            // console.log(req.body)
+            await admCadastroModel.updateShipper(req.body, id)
+            res.redirect(`/admin/cadastroAdm/detalhesAdm/${id}`)
         } catch (error) {
             res.json({ error })
         }
