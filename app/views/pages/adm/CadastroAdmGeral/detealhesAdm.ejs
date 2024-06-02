@@ -34,7 +34,7 @@
                 <section class="ContainerAdm_Use">
                     <header class="Header_container">
                         <article class="boxDados">
-                            <span class="name_user">Nome Usuário: <%= result.nome_usuario %></span>
+                            <span class="name_user">Nome: <%= result.nome_usuario %></span>
                         </article>
                         <article class="boxDados">
                             <span>Status: Status </span>
@@ -63,30 +63,36 @@
                         </p>
                         <br>
                             
-                        <% if (result.tipo_usuario =="2") { %>
-                            <p><b>Raio de Atuação:</b> <%= result.raio_de_atuacao %></p>
-                            <br>
-                            <p><b>Status Aprovação:</b> <%= result.status_aprovacao %></p>
-                            <br>
+                        <% if (result.tipo_usuario == "2") { %>
 
-                            <section class="DocumentoUserEnt">
-                                <h1>Veículos:</h1>
-                                <article class="DadosUserIMG">
-                                    <img src="data:image/png;base64,<%= result.foto_veiculo.toString('base64') %>">
-                                </article>
-                                <p><b>Tipo de Veículo:</b> <%= result.tipo_veiculo %></p>
+                            <% if (!isSubscribed) { %>
+                                <h1>Entregador ainda não finalizou cadastro</h1>
+                            <% } else { %>
+                                <p><b>Raio de Atuação:</b> <%= result.raio_de_atuacao %></p>
                                 <br>
-                                <p><b>Modelo de Veículo:</b> <%= result.modelo_veiculo %></p>
+                                <p><b>Status Aprovação:</b> <%= result.status_aprovacao %></p>
                                 <br>
-                                <p><b>Placa do Veículo:</b> <%= result.placa %></p>
-                                <br>
-
-                                <h1>Documentos:</h1>
-                                <article class="DadosUserIMG">
-                                    <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>">
-                                </article>
-                            </section>
+    
+                                <section class="DocumentoUserEnt">
+                                    <h1>Veículos:</h1>
+                                    <article class="DadosUserIMG">
+                                        <img src="data:image/png;base64,<%= result.foto_veiculo.toString('base64') %>">
+                                    </article>
+                                    <p><b>Tipo de Veículo:</b> <%= result.tipo_veiculo %></p>
+                                    <br>
+                                    <p><b>Modelo de Veículo:</b> <%= result.modelo_veiculo %></p>
+                                    <br>
+                                    <p><b>Placa do Veículo:</b> <%= result.placa %></p>
+                                    <br>
+    
+                                    <h1>Documentos:</h1>
+                                    <article class="DadosUserIMG">
+                                        <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>">
+                                    </article>
+                                </section>
+                            <% } %>
                         <% } %>
+
                     </article>
                 </section>
             </section>

@@ -1,6 +1,6 @@
 const admCadastroModel = require('../models/admCadastroModel')
 const { notifyMessages, validaCPF } = require('../util/Funcao')
-const tarefasModel = require("../models/cadastroModel");
+const cadastroModel = require("../models/cadastroModel");
 
 const { body, validationResult } = require("express-validator");
 
@@ -25,7 +25,7 @@ const admCadastroController = {
             .bail()
             .custom(async (value, { req }) => {
                 const { id } = req.params
-                const tel = await tarefasModel.findByTel(value, id)
+                const tel = await cadastroModel.findByTel(value, id)
                 // console.log(tel)
                 if (tel.length > 0) {
                     throw new Error('Telefone já utilizado.');
@@ -40,7 +40,7 @@ const admCadastroController = {
             .custom(async (value, { req } ) => {
                 if(validaCPF(value)){
                     const { id } = req.params
-                    const cpf = await tarefasModel.findByCpf(value, id)
+                    const cpf = await cadastroModel.findByCpf(value, id)
                     if (cpf.length > 0) {
                         throw new Error('Cpf já utilizado');
                     }
@@ -56,7 +56,7 @@ const admCadastroController = {
             .withMessage("Email invalido ")
             .custom(async (value, { req }) => {
                 const { id } = req.params
-                const email = await tarefasModel.findByEmail(value, id)
+                const email = await cadastroModel.findByEmail(value, id)
                 if (email.length > 0) {
                     throw new Error('Email já utilizado.');
                 }
@@ -104,9 +104,12 @@ const admCadastroController = {
             if (result[0].tipo_usuario == 2) {
                 const shipper = await admCadastroModel.findShipper(id)
                 const merge = {...result[0], ...shipper[0]}
-                return res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: merge, id })
+                const subscribe = await cadastroModel.findBySubscribe(id)
+                const isSubscribed = subscribe.length > 0
+                console.log(isSubscribed);
+                return res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: merge, isSubscribed, id })
             }
-            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: result[0], id })
+            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: result[0], isSubscribed: null, id })
         } catch (error) {
             console.log(error)
             res.json({ error })
