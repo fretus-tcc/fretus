@@ -11,22 +11,25 @@ const ConfigPerfilController = {
         const { id } = req.params
         try {
             const result = await ConfigPerfilModel.findByUserId(id)
-            const msgs = notifyMessages(req, res)
-            res.render('pages/adm/CadastroAdmGeral/editar', { result: result[0], id, msgs, dados: null, listaErros: null })
+            /* const msgs = notifyMessages(req, res) */
+            res.render('pages/cliente/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado })
         } catch (error) {
             res.json({ error })
+            console.log(error)
         }
     },
     // Editar - Atualizar User
     updateUser: async (req, res) => {
-        const { id } = req.params
+        
+            console.log(req.body)
+/*         const { id } = req.params
         const errors = validationResult(req);
         const result = await ConfigPerfilModel.findByUserId(id);
 
         if (!errors.isEmpty()) {
             const dados = req.body;
 
-            return res.render('pages/adm/CadastroAdmGeral/editar', {
+            return res.render('pages/cliente/perfil', {
                 result: result[0],
                 id,
                 msgs: [],
@@ -34,8 +37,8 @@ const ConfigPerfilController = {
                 dados: dados
             })
         }
-
-        try {
+ */
+       /*  try {
 
             const data = {
                 nome_usuario: req.body.nome,
@@ -48,7 +51,7 @@ const ConfigPerfilController = {
 
         } catch (error) {
             res.json({ error })
-        }
+        } */
 
     },
     

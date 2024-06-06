@@ -33,12 +33,12 @@ function isEnterPressed(e) {
 }
 
 function resetInput() {
-    if (input.value == '') { 
+    /* if (input.value == '') { 
         showModal('ERRO: Campo não preenchido')
         input.value = inputValue
     } else if (input.value != inputValue) {
         showModal('Alteração realizada com sucesso!')
-    }
+    } */
     changed.style = 'display: block;'
     input.setAttribute('readonly', 'true')
     if (input.id == 'password') {
@@ -48,7 +48,7 @@ function resetInput() {
     removeEvents()
 }
 
-function showModal(msg) {
+/* function showModal(msg) {
     if (main.childElementCount > 2) {
         main.children[2].remove()
     }
@@ -57,7 +57,7 @@ function showModal(msg) {
                        <div class="loading"></div>`
     modal.classList.add('modal', 'active')
     main.appendChild(modal)
-}
+} */
 
 function removeEvents() {
     input.removeEventListener('blur', resetInput)
