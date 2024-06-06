@@ -5,6 +5,8 @@ var pool = require("../../config/connection-factory");
 const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
 
+const ConfigPerfilController = require('../controller/ConfigPerfilController')
+
 router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     // formatando mensagens notificacao
     const msgs = notifyMessages(req, res)
@@ -25,10 +27,14 @@ router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (r
 })
 
 
-
+/* 
 router.get('/perfil', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/perfil')
-})
+}) */
+
+router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    ConfigPerfilController.listUsersId(req, res);
+});
 
 
 
