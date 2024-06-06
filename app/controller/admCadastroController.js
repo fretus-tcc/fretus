@@ -98,6 +98,7 @@ const admCadastroController = {
     // Detalhes
     listUsersIdD: async (req, res) => {
         const { id } = req.params
+        const msgs = notifyMessages(req, res)
         try {
             const result = await admCadastroModel.findByUserIdD(id)
             
@@ -107,9 +108,9 @@ const admCadastroController = {
                 const subscribe = await cadastroModel.findBySubscribe(id)
                 const isSubscribed = subscribe.length > 0
                 // console.log(isSubscribed);
-                return res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: merge, isSubscribed, id })
+                return res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: merge, isSubscribed, msgs, id })
             }
-            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: result[0], isSubscribed: null, id })
+            res.render('pages/adm/CadastroAdmGeral/detealhesAdm', { result: result[0], isSubscribed: null, msgs, id })
         } catch (error) {
             console.log(error)
             res.json({ error })
@@ -135,8 +136,10 @@ const admCadastroController = {
             console.log(email);
             if (req.body.status_aprovacao == 1) {
                 await sendEmail(email, 'Atualizações sobre o seu cadastro', 'Negado')
+                req.flash('success', 'Entregador Negado')
             } else {
                 await sendEmail(email, 'Seu cadastro foi aprovado  ', 'Aprovado')
+                req.flash('success', 'Entregador Aprovado')
             }
             res.redirect(`/admin/cadastroAdm/detalhesAdm/${id}`)
         } catch (error) {
