@@ -20,15 +20,14 @@ const ConfigPerfilController = {
     },
     // Editar - Atualizar User
     updateUser: async (req, res) => {
+        const { id } = req.params
+        console.log(req.body)
         
-            console.log(req.body)
-/*         const { id } = req.params
-        const errors = validationResult(req);
-        const result = await ConfigPerfilModel.findByUserId(id);
-
+        /* const errors = validationResult(req);
+        
         if (!errors.isEmpty()) {
             const dados = req.body;
-
+            
             return res.render('pages/cliente/perfil', {
                 result: result[0],
                 id,
@@ -36,9 +35,17 @@ const ConfigPerfilController = {
                 listaErros: errors,
                 dados: dados
             })
+        } */
+        
+        const data = {
+            nome_usuario: req.body.nome,
+            /* email_usuario: req.body.email, */
         }
- */
-       /*  try {
+
+        const result = await ConfigPerfilModel.updateUser(data, id)
+        res.redirect(`/cliente/perfil/${id}`)
+
+        /* try {
 
             const data = {
                 nome_usuario: req.body.nome,

@@ -19,7 +19,7 @@
         <main>
             <div class="profile-container">
 
-                <form action="/cliente/perfil/<%= result.id_usuario %>?_method=PUT" method="post" >
+                <form class="form-perfil" action="/cliente/perfil/<%= result.id_usuario %>?_method=PUT" method="post" >
 
                     <div class="Seu-Perfil">
                         <h2>Seu Perfil</h2>
@@ -49,9 +49,9 @@
                         <label for="name">Email: </label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input type="email" readonly id="email" value=" <%= result.email_usuario%>">
+                                <input type="text" readonly id="name" name="email" value="<%= result.email_usuario %>">
                                 <input type="button" class="btn" value="Cancelar">
-                                <input type="button" class="btn confirm" value="Confirmar">
+                                <button class="btn confirm">Confirmar</button>
                             </div>
                             <span>Alterar</span>
                         </div>
@@ -60,22 +60,20 @@
                         <label for="name">Número: </label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input type="text" id="number" value=" <%= result.telefone_usuario %>" maxlength="15">
+                                <input type="text" readonly id="name" name="telefone" value="<%= result.telefone_usuario %>">
                                 <input type="button" class="btn" value="Cancelar">
-                                <input type="button" class="btn confirm" value="Confirmar">
+                                <button class="btn confirm">Confirmar</button>
                             </div>
-                            <span id="alterar">Alterar</span>
+                            <span>Alterar</span>
                         </div>
                     </div>
                     <div class="row">
-                        <label for="description">Descrição</label>
+                        <label for="name">Descricao: </label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <textarea readonly id="description"
-                                    placeholder="Digite sua descrição"> <%= result.descricao_usuario%></textarea>
-                                <span class="count">0/200</span>
+                                <input type="text" readonly id="name" name="descricao" value="<%= result.descricao_usuario %>">
                                 <input type="button" class="btn" value="Cancelar">
-                                <input type="button" class="btn confirm" value="Confirmar">
+                                <button class="btn confirm">Confirmar</button>
                             </div>
                             <span>Alterar</span>
                         </div>

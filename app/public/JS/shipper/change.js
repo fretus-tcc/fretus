@@ -1,5 +1,7 @@
 const change = document.querySelectorAll('.edit-row span')
 const main = document.querySelector('main')
+const confirm = document.querySelectorAll('.confirm')
+const form = document.querySelector('.form-perfil')
 let changed
 let cancel
 let input
@@ -22,8 +24,10 @@ change.forEach(item => {
         input.focus()
         input.addEventListener('blur', resetInput)
         input.addEventListener('keydown', isEnterPressed)
-        cancel.addEventListener('mousedown', () => {
+        cancel.addEventListener('mousedown', (e) => {
+            e.preventDefault()
             input.value = inputValue
+            resetInput(false)
         })
     })
 })
@@ -32,7 +36,7 @@ function isEnterPressed(e) {
     if (e.key == 'Enter') resetInput()
 }
 
-function resetInput() {
+function resetInput(submit=true) {
     /* if (input.value == '') { 
         showModal('ERRO: Campo não preenchido')
         input.value = inputValue
@@ -46,6 +50,12 @@ function resetInput() {
     }
     inputContainer.classList.remove('edit')
     removeEvents()
+    if (submit) form.submit()
+}
+
+function removeEvents() {
+    input.removeEventListener('blur', resetInput)
+    input.removeEventListener('keydown', isEnterPressed)
 }
 
 /* function showModal(msg) {
@@ -58,8 +68,3 @@ function resetInput() {
     modal.classList.add('modal', 'active')
     main.appendChild(modal)
 } */
-
-function removeEvents() {
-    input.removeEventListener('blur', resetInput)
-    input.removeEventListener('keydown', isEnterPressed)
-}
