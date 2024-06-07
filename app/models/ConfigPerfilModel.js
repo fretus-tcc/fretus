@@ -16,6 +16,7 @@ const PerfilModel = {
         try {
             await pool.query('UPDATE usuario SET ? WHERE id_usuario = ?', [data, id])
         } catch (error) {
+            console.log(error)
             return error
         }
     },

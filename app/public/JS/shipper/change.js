@@ -1,9 +1,9 @@
 const change = document.querySelectorAll('.edit-row span')
 const main = document.querySelector('main')
-const confirm = document.querySelectorAll('.confirm')
 const form = document.querySelector('.form-perfil')
 let changed
 let cancel
+let confirm
 let input
 let inputContainer
 let inputValue
@@ -14,6 +14,8 @@ change.forEach(item => {
         changed.style = 'display: none;'
         inputContainer = item.previousElementSibling
         cancel = inputContainer.children[1]
+        confirm = inputContainer.children[2]
+        console.log(inputContainer.children);
         input = inputContainer.firstElementChild
         inputValue = input.value
         input.removeAttribute('readonly')
@@ -22,13 +24,18 @@ change.forEach(item => {
         }
         inputContainer.classList.add('edit')
         input.focus()
-        input.addEventListener('blur', resetInput)
+        input.addEventListener('blur', (e) => {
+            e.preventDefault()
+            input.value = inputValue
+            resetInput(false)
+        })
         input.addEventListener('keydown', isEnterPressed)
         cancel.addEventListener('mousedown', (e) => {
             e.preventDefault()
             input.value = inputValue
             resetInput(false)
         })
+        confirm.addEventListener('click', resetInput)
     })
 })
 
@@ -37,12 +44,6 @@ function isEnterPressed(e) {
 }
 
 function resetInput(submit=true) {
-    /* if (input.value == '') { 
-        showModal('ERRO: Campo não preenchido')
-        input.value = inputValue
-    } else if (input.value != inputValue) {
-        showModal('Alteração realizada com sucesso!')
-    } */
     changed.style = 'display: block;'
     input.setAttribute('readonly', 'true')
     if (input.id == 'password') {

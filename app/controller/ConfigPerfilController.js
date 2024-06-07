@@ -39,7 +39,10 @@ const ConfigPerfilController = {
         
         const data = {
             nome_usuario: req.body.nome,
-            /* email_usuario: req.body.email, */
+            email_usuario: req.body.email,
+            email_usuario: req.body.email,
+            telefone_usuario: req.body.telefone,
+            descricao_usuario: req.body.descricao,
         }
 
         const result = await ConfigPerfilModel.updateUser(data, id)
