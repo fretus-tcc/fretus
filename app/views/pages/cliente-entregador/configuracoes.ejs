@@ -24,7 +24,8 @@
                 <section class="sidebar-burguer">
                     <img src="/imgs/burguer-config-icon.png" alt="">
                 </section>
-                <h1 class="row">Privacidade</h1>
+                <h1 class="row">Privacidade</h1><br>
+                <h2 style="text-decoration: underline;">Dados pessoais</h2>
                 <section class="row">
                     <label for="name">Nome</label>
                     <section class="edit-row">
@@ -47,6 +48,18 @@
                         <span>Alterar</span>
                     </section>
                 </section>
+                <section class="row">
+                    <label for="email">Telefone</label>
+                    <section class="edit-row">
+                        <article class="input-container">
+                            <input type="email" required readonly id="email" value="(11)99999-9999">
+                            <input type="button" class="btn" value="Cancelar">
+                            <input type="button" class="btn confirm" value="Confirmar">
+                        </article>
+                        <span>Alterar</span>
+                    </section>
+                </section><br><br>
+                <h2 style="text-decoration: underline;">Documentos</h2>
                 <!-- <section class="row">
                     <label for="password">Senha</label>
                     <section class="edit-row">
@@ -62,7 +75,7 @@
         </section>
     </main>
 
-    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
     <script src="/JS/burguer.js"></script>
     <script src="/JS/shipper/change.js"></script>
