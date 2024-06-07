@@ -38,11 +38,39 @@
             <aside class="popup show">
                 <section class="popup-content">
                     <% if (status == 0) { %>
-                        <p>pendente</p>
+                        <section class="RequestPages">
+                            <h1><b>Analisando seu Cadastro</b></h1>
+                            <p>
+                                Obrigado por se cadastrar como entregador em nossa plataforma! Estamos revisando suas informações e entraremos em contato em breve. 
+                                Esse processo pode levar alguns dias. Agradecemos pela sua paciência. Se tiver alguma dúvida, entre em contato com nossa equipe de suporte.
+                            </p>
+                            <a href="/">
+                                <button class="cta">Voltar</button>
+                            </a>
+                        </section>
                     <% } else if (status == 1) { %>
-                        <p>negado</p>
+                        <section class="RequestPages">
+                            <h1><b>Atualização sobre seu cadastro</b></h1>
+                            <p>
+                                Após uma análise cuidadosa, lamentamos informar que seu cadastro não foi aprovado. Agradecemos seu interesse em se tornar um entregador em nossa plataforma. 
+                                Caso tenha dúvidas ou precise de mais informações, entre em contato conosco. Agradecemos pela compreensão e esperamos que você possa tentar novamente no futuro.
+                            </p>
+                            <a href="/">
+                                <button class="cta">Voltar</button>
+                            </a>
+                        </section>
                     <% } else if (status == 2) { %>     
-                        <p>aceito</p>
+                        <section class="RequestPages">
+                            <h1><b>Seu cadastro foi aprovado</b></h1>
+                            <p>
+                                Agora você é oficialmente um entregador em nossa plataforma. Estamos felizes em tê-lo com a gente.
+                                 Você agora pode começar a aceitar entregas e ganhar com a gente. Acesse seu painel de entregador e comece a explorar as oportunidades disponíveis. Seja bem-vindo.
+                            </p>
+                            <a href="/verificar-autenticacao">
+                                <button class="cta">Entrar</button>
+                            </a>
+                        </section>
+
                     <% } else { %>
                         <form action="/cadastro-entregador" enctype="multipart/form-data" method="post" class="popup-wrapper">
                             <div class="form active">
