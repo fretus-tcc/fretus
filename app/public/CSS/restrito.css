@@ -1,0 +1,20 @@
+ 
+.Container__Restricted{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+} 
+.Restricted{
+    background-color: #fff;
+    color: #333;
+    padding: 15px;
+    max-width: 500px;
+    border-radius: 10px;
+
+}
+.Restricted h1 {
+    font-size: 2.2rem;
+    margin: 10px 0;
+}

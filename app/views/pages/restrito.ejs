@@ -5,27 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus</title>
-    <%# include('../partial/config/config.ejs') %>
-    <%# include('../partial/config/config-home.ejs') %>
-    <!-- <link rel="stylesheet" href="/CSS/home/switch.css">
+    <%- include('../partial/config/config.ejs') %>
+    <%- include('../partial/config/config-home.ejs') %>
+    <link rel="stylesheet" href="/CSS/home/switch.css">
     <link rel="stylesheet" href="/CSS/home/gray-gradient.css">
     <link rel="stylesheet" href="/CSS/home/cards-container.css">
     <link rel="stylesheet" href="/CSS/home/vehicles-container.css">
     <link rel="stylesheet" href="/CSS/home/carousel.css">
     <link rel="stylesheet" href="/CSS/home/accordion.css">
     <link rel="stylesheet" href="/CSS/home/mobile-carousel.css">
-    <link rel="stylesheet" href="/CSS/home/form-container.css"> -->
+    <link rel="stylesheet" href="/CSS/home/form-container.css">
+
+    <link rel="stylesheet" href="/css/restrito.css">
 </head>
 <body>
     
     <main>
-        <h1>Acesso Restrito</h1>
+        <section class="hero">
+            <%- include('../partial/header.ejs') %>
+           
+            <section class="Container__Restricted">
+                <section class="Restricted">
+                    <h1><b>Acesso restrito</b></h1>
+                    <p>
+                       Por motivos de segurança, volte e efetue o login novamente. Obrigado pela compreensão!  
+                    </p>
+                    <a href="/login">
+                        <button class="cta">Voltar</button>
+                    </a>
+                </section>
+            </section>
+        </section>
+    
     </main>
 
     <%# include('../partial/footer.ejs') %>
-    <%# include('../partial/menu-burguer.ejs', { type: 'home' }) %>
+    <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
 
-
-    <!-- <script src="/JS/burguer.js"></script> -->
+    <script src="/JS/burguer.js"></script> 
 </body>
 </html>
