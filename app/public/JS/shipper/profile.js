@@ -16,8 +16,8 @@ function resize(e) {
         item.style = `height: ${height}px;`
         count.innerText = `${value.length}/200`
         count.style = 'color: #333;'
-        if (value.length >= 200) {
-            textarea[0].value = textarea.value.substring(0, 200)
+        if (value.length >= 199) {
+            textarea[0].value = textarea[0].value.substring(0, 200)
             count.style = 'color: red;'
             return
         }

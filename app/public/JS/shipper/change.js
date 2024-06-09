@@ -1,7 +1,7 @@
 const form = document.querySelector('.form-perfil')
 const change = document.querySelectorAll('.changeCall')
 const inputContainer = document.querySelectorAll('.input-container')
-const input = document.querySelectorAll('.input-container > input.input-field')
+const input = document.querySelectorAll('.input-container > .input-field')
 const confirmCall = document.querySelectorAll('.input-container > .confirm')
 
 change.forEach((item, i) => {
@@ -30,6 +30,7 @@ const isEnterPressed = (e) => {
 
 const cancel = (lastValue, idx) => {
     input[idx].value = lastValue
+    input[idx].setAttribute('readonly', 'true')
     inputContainer[idx].classList.remove('edit')
     change[idx].style.display = 'block'
 }

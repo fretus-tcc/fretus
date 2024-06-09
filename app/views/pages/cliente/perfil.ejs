@@ -38,7 +38,7 @@
                     <label for="name">Nome: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" readonly id="name" name="nome" value="<%= result.nome_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome" value="<%= result.nome_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
@@ -49,7 +49,7 @@
                     <label for="name">Email: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" readonly id="email" name="email" value="<%= result.email_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= result.email_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
@@ -60,7 +60,7 @@
                     <label for="name">Número: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" readonly id="telefone" name="telefone" value="<%= result.telefone_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui sua telefone" readonly id="number" name="telefone" maxlength="15" value="<%= result.telefone_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
@@ -71,7 +71,8 @@
                     <label for="name">Descricao: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input type="text" readonly id="descricao" name="descricao" value="<%= result.descricao_usuario %>">
+                            <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao"><%= result.descricao_usuario %></textarea>
+                            <span class="count">0/200</span>
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
