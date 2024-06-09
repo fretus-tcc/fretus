@@ -3,6 +3,10 @@
     font-size: 2rem;
 }
 
+.row {
+    margin-bottom: 12px;
+}
+
 .row label {
     font-weight: 700;
     font-size: 28px;
@@ -70,7 +74,8 @@
 
 .edit-row span {
     color: var(--orange);
-    font-size: 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .edit-row span:hover {

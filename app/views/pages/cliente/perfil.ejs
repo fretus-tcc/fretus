@@ -19,7 +19,7 @@
     <main>
         <div class="profile-container">
 
-            <form class="form-perfil" action="/cliente/perfil/<%= result.id_usuario %>?_method=PUT" method="post" >
+            <form class="form-perfil" action="/cliente/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
 
                 <div class="Seu-Perfil">
                     <h2>Seu Perfil</h2>
@@ -38,33 +38,33 @@
                     <label for="name">Nome: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input type="text" readonly id="name" name="nome" value="<%= result.nome_usuario %>">
+                            <input class="input-field" type="text" readonly id="name" name="nome" value="<%= result.nome_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
-                        <span>Alterar</span>
+                        <span class="changeCall">Alterar</span>
                     </div>
                 </div>
                 <div class="row">
                     <label for="name">Email: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input type="text" readonly id="email" name="email" value="<%= result.email_usuario %>">
+                            <input class="input-field" type="text" readonly id="email" name="email" value="<%= result.email_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
-                        <span>Alterar</span>
+                        <span class="changeCall">Alterar</span>
                     </div>
                 </div>
                 <div class="row">
                     <label for="name">Número: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input type="text" readonly id="telefone" name="telefone" value="<%= result.telefone_usuario %>">
+                            <input class="input-field" type="text" readonly id="telefone" name="telefone" value="<%= result.telefone_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
-                        <span>Alterar</span>
+                        <span class="changeCall">Alterar</span>
                     </div>
                 </div>
                 <div class="row">
@@ -75,7 +75,7 @@
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
-                        <span>Alterar</span>
+                        <span class="changeCall">Alterar</span>
                     </div>
                 </div>
             </form>
@@ -90,8 +90,11 @@
         <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
         <script src="/JS/burguer.js"></script>
+        <!-- alterar valores input -->
         <script src="/JS/shipper/change.js"></script>
+        <!-- resize textarea -->
         <script src="/JS/shipper/profile.js"></script>
+        <!-- foto perfil -->
         <script src="/JS/perfil.js"></script>
 </body>
 
