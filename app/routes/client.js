@@ -33,9 +33,9 @@ router.get('/perfil', verificarUsuAutorizado([1], 'pages/restrito'), function (r
 }) */
 
 router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    ConfigPerfilController.listUsersId(req, res);
+    ConfigPerfilController.showClientData(req, res);
 });
-router.put('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+router.put('/perfil/:id', verificarUsuAutorizado([1, 2], 'pages/restrito'), function (req, res) {
     ConfigPerfilController.updateUser(req, res);
 });
 

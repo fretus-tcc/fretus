@@ -17,9 +17,11 @@
 <body>
 
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
+    <%# JSON.stringify(result) %>
+    <main>
+        <section class="profile-container">
 
-        <main>
-            <section class="profile-container">
+            <form class="form-perfil" action="/cliente/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
                 <section class="action-perfil">
                     <article class="Seu-Perfil0">
                         <h2>Seu Perfil</h2>
@@ -32,48 +34,66 @@
                         style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
                     </article>
                 </section>
-
-            <aside class="botaoDisponivel">
-                <p id="disponibilidade">Não disponível</p>
-                <input id="toggle" onclick="disponivel()" class="toggle" type="checkbox">
-                <label for="toggle"></label>
-            </aside>
-
+                <aside class="botaoDisponivel">
+                    <p id="disponibilidade">Não disponível</p>
+                    <input id="toggle" onclick="disponivel()" class="toggle" type="checkbox">
+                    <label for="toggle"></label>
+                </aside>
                 <section class="row">
                     <label for="name">Nome: </label>
-                    <section class="edit-row">
-                        <article class="input-container">
-                            <input type="text" readonly id="name" value="Entregador 1">
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome" value="<%= result.nome_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
-                            <input type="button" class="btn confirm" value="Confirmar">
-                        </article>
-                        <span>Alterar</span>
-                    </section>
+                            <button class="btn confirm">Confirmar</button>
+                        </div>
+                        <span class="changeCall">Alterar</span>
+                    </div>
                 </section>
+                <div class="row">
+                    <label for="name">Email: </label>
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= result.email_usuario %>">
+                            <input type="button" class="btn" value="Cancelar">
+                            <button class="btn confirm">Confirmar</button>
+                        </div>
+                        <span class="changeCall">Alterar</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="name">Número: </label>
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <input class="input-field" type="text" placeholder="Digite aqui sua telefone" readonly id="number" name="telefone" maxlength="15" value="<%= result.telefone_usuario %>">
+                            <input type="button" class="btn" value="Cancelar">
+                            <button class="btn confirm">Confirmar</button>
+                        </div>
+                        <span class="changeCall">Alterar</span>
+                    </div>
+                </div>
                 <section class="row">
                     <label for="description">Descrição</label>
-                    <section class="edit-row">
-                        <article class="input-container">
-                            <textarea readonly id="description"
-                                placeholder="Digite sua descrição">Entregador experiente e confiável. Serviço de entrega rápido, pontual e de alta qualidade.</textarea>
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao"><%= result.descricao_usuario %></textarea>
                             <span class="count">0/200</span>
                             <input type="button" class="btn" value="Cancelar">
-                            <input type="button" class="btn confirm" value="Confirmar">
-                        </article>
-                        <span>Alterar</span>
-                    </section>
+                            <button class="btn confirm">Confirmar</button>
+                        </div>
+                        <span class="changeCall">Alterar</span>
+                    </div>
                 </section>
 
-                <section class="row">
+                <!-- <section class="row">
                     <label for="periodo">período de disponibilidade:</label>
                     <aside class="edit-periodo">
-                      <input type="time">
-                       <span>até</span>
-                       <input type="time" name="periodo">
-                       
+                        <input type="time">
+                        <span>até</span>
+                        <input type="time" name="periodo">
+                
                     </aside>
-               </section>
-    
+                                </section>
                 <section class="row">
                     <label for="vehicles">Tipo do Veículo </label>
                     <section class="edit-row">
@@ -88,16 +108,15 @@
                     </section>
                 </section>
                 <section class="row">
-                    <label for="vehicles">Modelo do Veículo </label>
-                    <section class="edit-row">
-                        <article class="input-container">
-                            <textarea readonly id="description"
-                                placeholder="Digite aqui os modelos de seus veículos">Classe A Sedan</textarea>
+                    <label for="name">Modelo de Veículo:</label>
+                    <div class="edit-row">
+                        <div class="input-container">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="modelo_veiculo" value="<%= result.modelo_veiculo %>">
                             <input type="button" class="btn" value="Cancelar">
-                            <input type="button" class="btn confirm" value="Confirmar">
-                        </article>
-                        <span>Alterar</span>
-                    </section>
+                            <button class="btn confirm">Confirmar</button>
+                        </div>
+                        <span class="changeCall">Alterar</span>
+                    </div>
                 </section>
                 <section class="row">
                     <label for="raio">Raio de Atuação</label>
@@ -109,24 +128,23 @@
                         </article>
                         <span>Alterar</span>
                     </section>
-                </section>
-                <section class="containerm-p">
-                    <p>
-                        Precisa de ajuda? Entre em contato com a
-                        <a href="/ajuda">Central de Ajuda.</a>
-                    </p>
-                </section>
+                </section> -->
+            </form>
+            <section class="containerm-p">
+                <p>
+                    Precisa de ajuda? Entre em contato com a
+                    <a href="/ajuda">Central de Ajuda.</a>
+                </p>
             </section>
-        </main>
-        <\footer><!-- usado para espaçamento -->
+        </section>
+    </main>
 
-
-            <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
-                <script src="/JS/burguer.js"></script>
-                <script src="/JS/shipper/change.js"></script>
-                <script src="/JS/shipper/profile.js"></script>
-                <script src=" /JS/perfil.js"></script>
-                <script src="/JS/shipper/toggle.js"></script>
+    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/change.js"></script>
+    <script src="/JS/shipper/profile.js"></script>
+    <script src=" /JS/perfil.js"></script>
+    <script src="/JS/shipper/toggle.js"></script>
 </body>
 
 </html>

@@ -5,9 +5,7 @@ const { body, validationResult } = require("express-validator");
 const ConfigPerfilController = {
 
     // Editar - Mostrar Campos
-
-
-    listUsersId: async (req, res) => {
+    showClientData: async (req, res) => {
         const { id } = req.params
         try {
             const result = await ConfigPerfilModel.findByUserId(id)
@@ -18,10 +16,22 @@ const ConfigPerfilController = {
             console.log(error)
         }
     },
+    showShipperData: async (req, res) => {
+        const { id } = req.params
+        try {
+            const result = await ConfigPerfilModel.findShipper(id)
+            // console.log(result);
+            /* const msgs = notifyMessages(req, res) */
+            res.render('pages/entregador/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado })
+        } catch (error) {
+            res.json({ error })
+            console.log(error)
+        }
+    },
     // Editar - Atualizar User
     updateUser: async (req, res) => {
         const { id } = req.params
-        console.log(req.body)
+        // console.log(req.body)
         
         /* const errors = validationResult(req);
         
@@ -46,7 +56,7 @@ const ConfigPerfilController = {
         }
 
         const result = await ConfigPerfilModel.updateUser(data, id)
-        res.redirect(`/cliente/perfil/${id}`)
+        res.redirect(`/entregador/perfil/${id}`)
 
         /* try {
 

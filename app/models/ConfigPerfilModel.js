@@ -11,6 +11,22 @@ const PerfilModel = {
         }
     },
 
+    findShipper: async (id) => {
+        try {
+            const [linhas] = await pool.query(
+                'SELECT u.id_usuario, u.nome_usuario, u.email_usuario, u.telefone_usuario, u.descricao_usuario, e.raio_de_atuacao, e.disponivel_inicio, e.disponivel_final, v.tipo_veiculo, v.modelo_veiculo , v.placa ' +
+                'FROM usuario AS u ' +
+                'INNER JOIN detalhamento_entregador AS e ' +
+                'ON u.id_usuario = e.id_usuario ' +
+                'INNER JOIN veiculos AS v ' +
+                'ON e.id_entregador = v.id_entregador ' +
+                'WHERE u.id_usuario = ?', [id])
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
+
     //atualizando usuário da tabela 
     updateUser: async (data, id) => {
         try {
