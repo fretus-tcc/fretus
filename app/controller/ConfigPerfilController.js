@@ -56,7 +56,7 @@ const ConfigPerfilController = {
         }
 
         const result = await ConfigPerfilModel.updateUser(data, id)
-        res.redirect(`/entregador/perfil/${id}`)
+        res.redirect('back')
 
         /* try {
 
