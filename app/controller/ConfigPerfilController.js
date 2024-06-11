@@ -10,7 +10,7 @@ const ConfigPerfilController = {
         try {
             const result = await ConfigPerfilModel.findByUserId(id)
             /* const msgs = notifyMessages(req, res) */
-            res.render('pages/cliente/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado })
+            res.render('pages/cliente-entregador/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado, isClient: true })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -22,7 +22,7 @@ const ConfigPerfilController = {
             const result = await ConfigPerfilModel.findShipper(id)
             // console.log(result);
             /* const msgs = notifyMessages(req, res) */
-            res.render('pages/entregador/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado })
+            res.render('pages/cliente-entregador/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado, isClient: false })
         } catch (error) {
             res.json({ error })
             console.log(error)

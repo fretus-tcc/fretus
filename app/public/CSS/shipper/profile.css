@@ -60,3 +60,86 @@ main {
 footer{
     padding: 25px; 
 }
+
+/* botao toggle */
+.botaoDisponivel {
+    display:flex;
+    justify-content: center;
+    gap:25px;
+}
+
+.toggle {
+    display:none;
+}
+    
+.toggle + label {
+    width:60px;
+    height:30px;
+    background:lightslategrey;
+    display:block;
+    position:relative;
+    cursor:pointer;
+    transition:200ms;
+    border-radius:20px;
+    padding:2px;
+}
+    
+.toggle + label:before {
+    
+    content:'';
+    position:absolute;
+    width:30px;
+    height:30px;
+    background:white;
+    display:block;
+    border-radius:50%;
+    right:unset;
+    left:0px;
+    top:0px;
+    transition:200ms;
+    border:1px solid rgba(187, 180, 180, 0.61);
+}
+    
+.toggle:checked + label {
+    background-color:#ef9652;  
+}
+
+.toggle:checked + label:before {
+    content:'';
+    margin-left:49%;
+    box-shadow:0 4px 4px rgb(0 0 0/10%);
+}
+
+/* periodo */
+input[type="time"] {
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(184, 175, 175, 0.596);
+    height: 40px;
+    width: 120px;
+    font-size: 20px;
+}
+
+.edit-periodo {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+}
+
+.edit-periodo span {
+    font-size: 20px;
+}
+
+@media(max-width:407px) {
+    .edit-periodo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .edit-periodo span {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 20%;
+    }
+}
