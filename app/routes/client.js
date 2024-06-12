@@ -33,8 +33,8 @@ router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), functio
     ConfigPerfilController.showClientData(req, res);
 });
 
-router.put('/perfil/:id/:type', verificarUsuAutorizado([1, 2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
-    ConfigPerfilController.updateUser(req, res);
+router.put('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
+    ConfigPerfilController.updateClient(req, res);
 });
 
 router.get('/escolher-entregador', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {

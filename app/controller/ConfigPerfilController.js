@@ -29,17 +29,58 @@ const ConfigPerfilController = {
         }
     },
     // Editar - Atualizar User
-    updateUser: async (req, res) => {
-        const { id, type } = req.params
-        // console.log(type)
-        // console.log(req.body)
-        let fields = await ConfigPerfilModel.findByUserId(id)
-        if (type == 2) {
-            fields = await ConfigPerfilModel.findShipper(id)
-        }
-
+    updateClient: async (req, res) => {
+        const { id } = req.params
+        
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            let fields = await ConfigPerfilModel.findByUserId(id)
+
+            return res.render('pages/cliente-entregador/perfil', {
+                result: fields[0],
+                dados: req.body,
+                erros: errors.mapped(),
+                autenticado: req.session.autenticado,
+                isClient: true
+            })
+        }
+        
+        const data = {
+            nome_usuario: req.body.nome,
+            email_usuario: req.body.email,
+            email_usuario: req.body.email,
+            telefone_usuario: req.body.telefone,
+            descricao_usuario: req.body.descricao,
+        }
+
+        await ConfigPerfilModel.updateUser(data, id)
+        
+        res.redirect(`/cliente/perfil/${id}`)
+
+        /* try {
+
+            const data = {
+                nome_usuario: req.body.nome,
+                email_usuario: req.body.email,
+                
+            }
+            await ConfigPerfilModel.updateUser(data, id)
+            req.flash('info', 'Usuário atualizado')
+            res.redirect(`/admin/cadastroAdm/editar/${id}`)
+
+        } catch (error) {
+            res.json({ error })
+        } */
+
+    },
+
+    updateShipper: async (req, res) => {
+        const { id } = req.params
+        
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            let fields = await ConfigPerfilModel.findShipper(id)
+
             return res.render('pages/cliente-entregador/perfil', {
                 result: fields[0],
                 dados: req.body,
@@ -57,12 +98,8 @@ const ConfigPerfilController = {
             descricao_usuario: req.body.descricao,
         }
 
-        const result = await ConfigPerfilModel.updateUser(data, id)
-        if (type == 1) {
-            res.redirect(`/cliente/perfil/${id}`)
-        } else {
-            res.redirect(`/entregador/perfil/${id}`)
-        }
+        await ConfigPerfilModel.updateUser(data, id)
+        res.redirect(`/entregador/perfil/${id}`)
 
         /* try {
 

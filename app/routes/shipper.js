@@ -35,6 +35,10 @@ router.get('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), verific
     // res.render('pages/entregador/perfil', { autenticado: req.session.autenticado })
 })
 
+router.put('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
+    ConfigPerfilController.updateShipper(req, res);
+});
+
 router.get('/ranking', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/entregador/ranking', { autenticado: req.session.autenticado })
 })

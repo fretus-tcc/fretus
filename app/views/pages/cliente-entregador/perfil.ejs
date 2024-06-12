@@ -19,7 +19,7 @@
     <main>
         <div class="profile-container">
 
-            <form class="form-perfil" action="/cliente/perfil/<%= result.id_usuario %>/<%= isClient ? '1' : '2' %>?_method=PUT" method="post">
+            <form class="form-perfil" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
 
                 <div class="Seu-Perfil">
                     <h2>Seu Perfil</h2>

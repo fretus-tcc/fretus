@@ -1,4 +1,5 @@
 const FaleConoscoModel = require("../models/FaleConoscoModel");
+const { body, validationResult } = require("express-validator");
 
 const FaleConoscoControl = {
     MensagemFaleConosco: async (req, res) => {
