@@ -596,21 +596,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS FaleConosco (
   id_solicitacao INT NOT NULL AUTO_INCREMENT,
-  id_usuario INT NOT NULL,
-  nome_usuario varchar(45) DEFAULT NULL,
-  user_usuario varchar(45) NULL,
-  email_usuario varchar(45) NULL,
-  fone_usuario varchar(11) NULL,
-  cpf_usuario CHAR(14)  NULL,
+  tipo_usuario varchar(10) NOT NULL,
+  nome_usuario varchar(45) NOT NULL,
+  email_usuario varchar(45) NOT NULL,
+  cpf_usuario CHAR(14) NOT NULL,
   assunto VARCHAR(45) NOT NULL,
   mensagem TEXT(300) NOT NULL,
-    PRIMARY KEY (id_solicitacao),
-    INDEX fk_FALE_CONOSCO_USUARIOS1_idx (id_usuario ASC) VISIBLE,
-    CONSTRAINT fk_FALE_CONOSCO_USUARIOS1
-    FOREIGN KEY (id_usuario)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)  
+    PRIMARY KEY (id_solicitacao)
+)  
 ENGINE = InnoDB;
 
 
