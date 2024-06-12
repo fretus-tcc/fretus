@@ -10,7 +10,7 @@ const ConfigPerfilController = {
         try {
             const result = await ConfigPerfilModel.findByUserId(id)
             /* const msgs = notifyMessages(req, res) */
-            res.render('pages/cliente-entregador/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado, isClient: true })
+            res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, isClient: true })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -22,7 +22,7 @@ const ConfigPerfilController = {
             const result = await ConfigPerfilModel.findShipper(id)
             // console.log(result);
             /* const msgs = notifyMessages(req, res) */
-            res.render('pages/cliente-entregador/perfil', { result: result[0], id, dados: null, listaErros: null, autenticado: req.session.autenticado, isClient: false })
+            res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, isClient: false })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -30,22 +30,24 @@ const ConfigPerfilController = {
     },
     // Editar - Atualizar User
     updateUser: async (req, res) => {
-        const { id } = req.params
+        const { id, type } = req.params
+        // console.log(type)
         // console.log(req.body)
-        
-        /* const errors = validationResult(req);
-        
+        let fields = await ConfigPerfilModel.findByUserId(id)
+        if (type == 2) {
+            fields = await ConfigPerfilModel.findShipper(id)
+        }
+
+        const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const dados = req.body;
-            
-            return res.render('pages/cliente/perfil', {
-                result: result[0],
-                id,
-                msgs: [],
-                listaErros: errors,
-                dados: dados
+            return res.render('pages/cliente-entregador/perfil', {
+                result: fields[0],
+                dados: req.body,
+                erros: errors.mapped(),
+                autenticado: req.session.autenticado,
+                isClient: false
             })
-        } */
+        }
         
         const data = {
             nome_usuario: req.body.nome,
@@ -56,7 +58,11 @@ const ConfigPerfilController = {
         }
 
         const result = await ConfigPerfilModel.updateUser(data, id)
-        res.redirect('back')
+        if (type == 1) {
+            res.redirect(`/cliente/perfil/${id}`)
+        } else {
+            res.redirect(`/entregador/perfil/${id}`)
+        }
 
         /* try {
 
@@ -75,7 +81,11 @@ const ConfigPerfilController = {
 
     },
     
-
+    regrasValidacaoPerfil: [
+        body("descricao")
+            .isLength({ min: 10, max: 120 })
+            .withMessage("Deve conter de 10 até 120 caracteres")
+    ],
 }
 
 module.exports = ConfigPerfilController;

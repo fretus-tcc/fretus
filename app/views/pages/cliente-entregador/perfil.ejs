@@ -15,11 +15,11 @@
 <body>
 
     <%- include('../../partial/header-client-shipper.ejs', { isClient, autenticado: autenticado }) %>
-
+    <span><%# JSON.stringify(erros) %></span>
     <main>
         <div class="profile-container">
 
-            <form class="form-perfil" action="/cliente/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
+            <form class="form-perfil" action="/cliente/perfil/<%= result.id_usuario %>/<%= isClient ? '1' : '2' %>?_method=PUT" method="post">
 
                 <div class="Seu-Perfil">
                     <h2>Seu Perfil</h2>
@@ -79,13 +79,14 @@
                     <label for="name">Descricao: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao"><%= result.descricao_usuario %></textarea>
+                            <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao"><%= dados?.descricao ?? result.descricao_usuario %></textarea>
                             <span class="count">0/200</span>
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
+                    <span class=""><%= erros?.descricao.msg %></span>
                 </div>
                 <% if (!isClient) { %>
                     <section class="row">
