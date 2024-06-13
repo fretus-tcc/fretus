@@ -55,7 +55,7 @@
                     <span class="error"><%= erros?.nome?.msg %></span>
                 </div>
                 <div class="row">
-                    <label for="name">Email: </label>
+                    <label for="email">Email: </label>
                     <div class="edit-row">
                         <div class="input-container">
                             <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= dados?.email ??result.email_usuario %>">
@@ -67,7 +67,7 @@
                     <span class="error"><%= erros?.email?.msg %></span>
                 </div>
                 <div class="row">
-                    <label for="name">Número: </label>
+                    <label for="number">Número: </label>
                     <div class="edit-row">
                         <div class="input-container">
                             <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone" maxlength="15" value="<%= dados?.telefone ?? result.telefone_usuario %>">
@@ -79,7 +79,7 @@
                     <span class="error"><%= erros?.telefone?.msg %></span>
                 </div>
                 <div class="row">
-                    <label for="name">Descricao: </label>
+                    <label for="descricao">Descricao: </label>
                     <div class="edit-row">
                         <div class="input-container">
                             <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao"><%= dados?.descricao ?? result.descricao_usuario %></textarea>
