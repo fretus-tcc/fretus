@@ -74,9 +74,9 @@ router.post(
 
 /* ===========================FaleConsoco======================================== */
 router.get('/FaleConosco', function (req, res) {
-  res.render('pages/FaleConosco', { autenticado: req.session.autenticado, listaErros: null, dados: null })
+  res.render('pages/FaleConosco', { autenticado: req.session.autenticado || false , listaErros: null, dados: null })
 })
-router.post("/FaleConosco", async function (req, res) {
+router.post("/FaleConosco", FaleConoscoControl.regrasValidacao, async function (req, res) {
   FaleConoscoControl.MensagemFaleConosco(req, res);
 });
 

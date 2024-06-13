@@ -7,38 +7,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Fale Conosco</title>
     <%- include('../partial/config/config.ejs') %>
-        <%- include('../partial/config/config-home.ejs') %>
-            <link rel="stylesheet" href="/CSS/client/FaleConosco.css">
+    <%- include('../partial/config/config-home.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/FaleConosco.css">
 </head>
 
 <body>
 
-    <%- include('../partial/header.ejs') %>
+    <%- include('../partial/header.ejs', { autenticado: autenticado }) %>
 
-        <main>
-            <br><br><br>
-            <section class="container">
-                <!-- <form method="post" action="/enviar">-->
-                <form class="form-contain" action="FaleConosco" method="post">
-                    <h1>Fale com a Fretus por aqui</h1>
-                    <input type="text" name="nome" id="nome" placeholder="Nome:" maxlength="45" required>
-                    <input type="email"  maxlength="45" name="email" placeholder="Email:" required>
-                    <input type="text" name="tipo" placeholder="Sou:(Cliente/entregador)" required>
-                    <input type="cpf" name="cpf" placeholder="CPF:" autocomplete="off" maxlength="14" id="cpf" required>
-                 <input type="text" name="assunto" placeholder="Assunto:" maxlength="30" required>
-                  
-                    <textarea style="resize: none" name="mensagem" placeholder="Mensagem:" required></textarea>  
-                    <button type="submit">Enviar</button>
-                </form>
-                <!--</form>!-->
-            </section>
-        </main>
-        <%- include('../partial/footer.ejs') %>
-            <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
+    <%
 
-                <script src="/JS/burguer.js"></script>
-                <script src="/JS/header-scroll.js"></script>
-                <script src="/JS/FaleConsoco/Mascara.js"></script>
+    var msgErro = {nome:""}
+    var cssErro = {nome:""}
+    var cssErroBorda = {nome:""}
+    let valorCampos = {nome:""}
+    if(dados && dados!=null){
+        valorCampos = dados
+    }
+
+    if (listaErros && listaErros.errors) {
+        listaErros.errors.forEach((itemErro) => {
+            if (itemErro.path == "nome") {
+                msgErro.nome = itemErro.msg;
+                cssErro.nome = "erroForm";
+                cssErroBorda.nome = "erroInput";
+            }
+        });
+    }
+    %>
+
+    <main>
+        <br><br><br>
+        <section class="container">
+            <form class="form-contain" action="FaleConosco" method="post">
+                <h1>Fale com a Fretus por aqui</h1>
+                <input class="<%= cssErroBorda.nome %>" type="text" name="nome" id="nome" placeholder="Seu nome " value="<%= valorCampos.nome %>">
+                <span class="<%= cssErro.nome %>">
+                    <%= msgErro.nome %>
+                </span>
+                <!-- 
+                <input type="email" maxlength="45" name="email" placeholder="Email:" required>
+                <input type="text" name="tipo" placeholder="Sou:(Cliente/entregador)" required>
+                <input type="cpf" name="cpf" placeholder="CPF:" autocomplete="off" maxlength="14" id="cpf" required>
+                <input type="text" name="assunto" placeholder="Assunto:" maxlength="30" required>
+                <textarea style="resize: none" name="mensagem" placeholder="Mensagem:" required></textarea> 
+                -->
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/menu-burguer.ejs', { type: 'home' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/header-scroll.js"></script>
+    <script src="/JS/FaleConsoco/Mascara.js"></script>
 </body>
 
 </html>

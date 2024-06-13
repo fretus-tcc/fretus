@@ -34,7 +34,6 @@ const TarefasControl = {
 
             res.redirect('/verificar-autenticacao')
         } catch (error) {
-            console.log(error)
             return error;
         }
     },

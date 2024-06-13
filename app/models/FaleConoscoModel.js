@@ -15,14 +15,14 @@ const FaleconoscoModel = {
     
         }
     },
-    findByUserId: async (userId) => {
+    /* findByUserId: async (userId) => {
         try {
             const [result] = await pool.query('SELECT * FROM FaleConosco WHERE `id_assunto` = ? ', [userId]);
             return result;
         } catch (error) {
             return error;
         }
-    },
+    }, */
 };
 
 
