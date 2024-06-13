@@ -46,34 +46,37 @@
                     <label for="name">Nome: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome" value="<%= result.nome_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome" value="<%= dados?.nome ?? result.nome_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
+                    <span class="error"><%= erros?.nome?.msg %></span>
                 </div>
                 <div class="row">
                     <label for="name">Email: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= result.email_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= dados?.email ??result.email_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
+                    <span class="error"><%= erros?.email?.msg %></span>
                 </div>
                 <div class="row">
                     <label for="name">Número: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone" maxlength="15" value="<%= result.telefone_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone" maxlength="15" value="<%= dados?.telefone ?? result.telefone_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
+                    <span class="error"><%= erros?.telefone?.msg %></span>
                 </div>
                 <div class="row">
                     <label for="name">Descricao: </label>
@@ -86,7 +89,7 @@
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
-                    <span class=""><%= erros?.descricao.msg %></span>
+                    <span class="error"><%= erros?.descricao?.msg %></span>
                 </div>
                 <% if (!isClient) { %>
                     <section class="row">

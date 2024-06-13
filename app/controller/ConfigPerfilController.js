@@ -1,5 +1,6 @@
 const ConfigPerfilModel = require('../models/ConfigPerfilModel')
 const { body, validationResult } = require("express-validator");
+const cadastroModel = require('../models/cadastroModel')
 
 
 const ConfigPerfilController = {
@@ -119,6 +120,40 @@ const ConfigPerfilController = {
     },
     
     regrasValidacaoPerfil: [
+        body("nome")
+            .isLength({ min: 3, max: 45 })
+            .withMessage("Nome invalido "),
+
+        body("email")
+            .isEmail()
+            .withMessage("Email invalido ")
+            .custom(async (value, { req }) => {
+                const { id } = req.params
+                const email = await cadastroModel.findByEmail(value, id)
+                if (email.length > 0) {
+                    throw new Error('Email já utilizado.');
+                }
+                return true;
+
+            }),
+        
+        body("telefone")
+            .isLength({ min: 15 })
+            .withMessage('Telefone incompleto ')
+            .bail()
+            .isMobilePhone()
+            .withMessage('Telefone inválido ')
+            .bail()
+            .custom(async (value, { req }) => {
+                const { id } = req.params
+                const tel = await cadastroModel.findByTel(value, id)
+                // console.log(tel)
+                if (tel.length > 0) {
+                    throw new Error('Telefone já utilizado.');
+                }
+                return true;
+            }),
+
         body("descricao")
             .isLength({ min: 10, max: 120 })
             .withMessage("Deve conter de 10 até 120 caracteres")
