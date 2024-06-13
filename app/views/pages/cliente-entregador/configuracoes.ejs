@@ -16,52 +16,82 @@
     
     <%- include('../../partial/header-client-shipper.ejs', { isClient }) %>
 
+    <%# JSON.stringify(result) %>
+ 
     <main>
         <%- include('../../partial/cliente-entregador/sidebar-configuracoes.ejs', { isClient }) %>
-        
         <section class="config">
             <section class="config-container">
                 <section class="sidebar-burguer">
                     <img src="/imgs/burguer-config-icon.png" alt="">
                 </section>
 
-                <form class="form-perfil">
+                <form class="form-perfil" action="" method="post">
                     <h1 class="row">Privacidade</h1><br>
                     <h2 style="text-decoration: underline;">Dados pessoais</h2>
-                    <section class="row">
-                        <label for="name">Nome</label>
+                    <div class="row">
+                        <label for="name">Nome </label>
+                        <div class="edit-row">
+                            <div class="input-container">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome" value="<%= dados?.nome ?? result.nome_usuario %>">
+                                <input type="button" class="btn" value="Cancelar">
+                                <button class="btn confirm">Confirmar</button>
+                            </div>
+                            <span class="changeCall">Alterar</span>
+                        </div>
+                        <span class="error"><%= erros?.nome?.msg %></span>
+                    </div>
+                    <div class="row">
+                        <label for="email">Email </label>
+                        <div class="edit-row">
+                            <div class="input-container">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= dados?.email ??result.email_usuario %>">
+                                <input type="button" class="btn" value="Cancelar">
+                                <button class="btn confirm">Confirmar</button>
+                            </div>
+                            <span class="changeCall">Alterar</span>
+                        </div>
+                        <span class="error"><%= erros?.email?.msg %></span>
+                    </div>
+                    <div class="row">
+                        <label for="number">Número </label>
+                        <div class="edit-row">
+                            <div class="input-container">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone" maxlength="15" value="<%= dados?.telefone ?? result.telefone_usuario %>">
+                                <input type="button" class="btn" value="Cancelar">
+                                <button class="btn confirm">Confirmar</button>
+                            </div>
+                            <span class="changeCall">Alterar</span>
+                        </div>
+                        <span class="error"><%= erros?.telefone?.msg %></span>
+                    </div>
+                    <div class="row">
+                        <label for="cpf">CPF </label>
+                        <div class="edit-row">
+                            <div class="input-container">
+                                <input class="input-field cpf" type="text" placeholder="Digite aqui seu telefone" readonly id="cpf" name="cpf" maxlength="15" value="<%= dados?.telefone ?? result.cpf_usuario %>">
+                                <input type="button" class="btn" value="Cancelar">
+                                <button class="btn confirm">Confirmar</button>
+                            </div>
+                            <span class="changeCall">Alterar</span>
+                        </div>
+                        <span class="error"><%= erros?.telefone?.msg %></span>
+                    </div>
+                    <!-- <section class="row">
+                        <label for="email">Data de Nascimento</label>
                         <section class="edit-row">
                             <article class="input-container">
-                                <input class="input-field" type="text" readonly id="name" value="Entregador 1">
+                                <input class="input-field" type="text" required readonly id="number" value="(11)99999-9999">
                                 <input type="button" class="btn" value="Cancelar">
                                 <input type="button" class="btn confirm" value="Confirmar">
                             </article>
                             <span class="changeCall">Alterar</span>
                         </section>
-                    </section>
-                    <section class="row">
-                        <label for="email">E-mail</label>
-                        <section class="edit-row">
-                            <article class="input-container">
-                                <input class="input-field" type="text" required readonly id="email" value="entregador@email.com">
-                                <input type="button" class="btn" value="Cancelar">
-                                <input type="button" class="btn confirm" value="Confirmar">
-                            </article>
-                            <span class="changeCall">Alterar</span>
-                        </section>
-                    </section>
-                    <section class="row">
-                        <label for="email">Telefone</label>
-                        <section class="edit-row">
-                            <article class="input-container">
-                                <input class="input-field" type="text" required readonly id="email" value="(11)99999-9999">
-                                <input type="button" class="btn" value="Cancelar">
-                                <input type="button" class="btn confirm" value="Confirmar">
-                            </article>
-                            <span class="changeCall">Alterar</span>
-                        </section>
-                    </section><br><br>
-                    <h2 style="text-decoration: underline;">Documentos</h2>
+                    </section> -->
+                    <br><br>
+                    <% if (!isClient) { %>
+                        <h2 style="text-decoration: underline;">Documentos</h2>
+                    <% } %>
                 </form>
                 <!-- <section class="row">
                     <label for="password">Senha</label>
@@ -83,6 +113,10 @@
     <script src="/JS/burguer.js"></script>
     <script src="/JS/shipper/change.js"></script>
     <script src="/JS/shipper/burguer-config.js"></script>
+    <!-- <script src="/JS/perfil.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="/JS/login-cadastro/mascara.js"></script>
 </body>
 
 </html>

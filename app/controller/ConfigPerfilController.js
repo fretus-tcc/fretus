@@ -6,7 +6,7 @@ const cadastroModel = require('../models/cadastroModel')
 const ConfigPerfilController = {
 
     // Editar - Mostrar Campos
-    showClientData: async (req, res) => {
+    showClientProfile: async (req, res) => {
         const { id } = req.params
         try {
             const result = await ConfigPerfilModel.findByUserId(id)
@@ -17,7 +17,7 @@ const ConfigPerfilController = {
             console.log(error)
         }
     },
-    showShipperData: async (req, res) => {
+    showShipperProfile: async (req, res) => {
         const { id } = req.params
         try {
             const result = await ConfigPerfilModel.findShipper(id)
@@ -49,7 +49,7 @@ const ConfigPerfilController = {
         const data = {
             nome_usuario: req.body.nome,
             email_usuario: req.body.email,
-            email_usuario: req.body.email,
+            /* email_usuario: req.body.email, */
             telefone_usuario: req.body.telefone,
             descricao_usuario: req.body.descricao,
         }
@@ -94,7 +94,7 @@ const ConfigPerfilController = {
         const data = {
             nome_usuario: req.body.nome,
             email_usuario: req.body.email,
-            email_usuario: req.body.email,
+            /* email_usuario: req.body.email, */
             telefone_usuario: req.body.telefone,
             descricao_usuario: req.body.descricao,
         }
@@ -158,6 +158,30 @@ const ConfigPerfilController = {
             .isLength({ min: 10, max: 120 })
             .withMessage("Deve conter de 10 até 120 caracteres")
     ],
+
+    showClientConfig: async (req, res) => {
+        const { id } = req.session.autenticado
+        try {
+            // console.log(id)
+            const result = await ConfigPerfilModel.findByUserId(id)
+            res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, isClient: true, autenticado: req.session.autenticado })
+        } catch (error) {
+            res.json({ error })
+            console.log(error)
+        }
+    },
+
+    showShipperConfig: async (req, res) => {
+        const { id } = req.session.autenticado
+        try {
+            // console.log(id)
+            const result = await ConfigPerfilModel.findShipper(id)
+            res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, isClient: false, autenticado: req.session.autenticado })
+        } catch (error) {
+            res.json({ error })
+            console.log(error)
+        }
+    },
 }
 
 module.exports = ConfigPerfilController;

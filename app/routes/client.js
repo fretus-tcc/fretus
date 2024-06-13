@@ -30,7 +30,7 @@ router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (r
 }) */
 
 router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    ConfigPerfilController.showClientData(req, res);
+    ConfigPerfilController.showClientProfile(req, res);
 });
 
 router.put('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
@@ -42,15 +42,16 @@ router.get('/escolher-entregador', verificarUsuAutorizado([1], 'pages/restrito')
 })
 
 router.get('/configuracoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    res.render('pages/cliente-entregador/configuracoes', { isClient: true, autenticado: req.session.autenticado })
+    /* res.render('pages/cliente-entregador/configuracoes', { isClient: true, autenticado: req.session.autenticado }) */
+    ConfigPerfilController.showClientConfig(req, res);
 })
 
 router.get('/configuracoes-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: true, autenticado: req.session.autenticado })
 })
 
-router.get('/configuracoes-notificacoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+/* router.get('/configuracoes-notificacoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: true, autenticado: req.session.autenticado })
-})
+}) */
 
 module.exports = router

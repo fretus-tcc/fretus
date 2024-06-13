@@ -66,6 +66,7 @@
     right: 15px;
     background-color: var(--orange);
     color: white;
+    width: auto;
 }
 
 .edit-row .btn.confirm:hover {

@@ -9,16 +9,17 @@ router.get('/chat', verificarUsuAutorizado([2], 'pages/restrito'), verificarCada
     res.render('pages/entregador/chat', { autenticado: req.session.autenticado })
 })
 
-router.get('/configuracoes-notificacoes', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
+/* router.get('/configuracoes-notificacoes', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: false, autenticado: req.session.autenticado })
-})
+}) */
 
 router.get('/configuracoes-pagamento', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: false, autenticado: req.session.autenticado })
 })
 
 router.get('/configuracoes', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    res.render('pages/cliente-entregador/configuracoes', { isClient: false, autenticado: req.session.autenticado })
+    /* res.render('pages/cliente-entregador/configuracoes', { isClient: false, autenticado: req.session.autenticado }) */
+    ConfigPerfilController.showShipperConfig(req, res)
 })
 
 router.get('/entregas-solicitadas', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
@@ -31,7 +32,7 @@ router.get('/historico', verificarUsuAutorizado([2], 'pages/restrito'), verifica
 })
 
 router.get('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    ConfigPerfilController.showShipperData(req, res)
+    ConfigPerfilController.showShipperProfile(req, res)
     // res.render('pages/entregador/perfil', { autenticado: req.session.autenticado })
 })
 
