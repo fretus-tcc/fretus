@@ -66,10 +66,10 @@ const FaleConoscoControl = {
         body("mensagem")
             .custom((value) => {
                 const wordCount = value.split(/\s+/).length;
-                if (wordCount >= 15) {
+                if (wordCount >= 10) {
                     return true;
                 } else {
-                    throw new Error('Mensagem inválida, mínimo 15 palavras');
+                    throw new Error('Mensagem inválida, mínimo 10 palavras');
                 }
             }),
 
