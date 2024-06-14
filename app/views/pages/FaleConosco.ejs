@@ -17,10 +17,10 @@
 
     <%
 
-    var msgErro = {nome:""}
-    var cssErro = {nome:""}
-    var cssErroBorda = {nome:""}
-    let valorCampos = {nome:""}
+    var msgErro = {nome:"",cpf:"", email:"", tipo:"",assunto:"", mensagem:""}
+    var cssErro = {nome:"",cpf:"",mail:"", tipo:"",assunto:"",mensagem:""}
+    var cssErroBorda = {nome:"",cpf:"",email:"", tipo:"",assunto:"",mensagem:""}
+    let valorCampos = {nome:"",cpf:"", email:"", tipo:"",assunto:"",mensagem:""}
     if(dados && dados!=null){
         valorCampos = dados
     }
@@ -31,6 +31,36 @@
                 msgErro.nome = itemErro.msg;
                 cssErro.nome = "erroForm";
                 cssErroBorda.nome = "erroInput";
+            }
+            else if (itemErro.path == "cpf") {
+                msgErro.cpf = itemErro.msg;
+                cssErro.cpf = "erroForm";
+                cssErroBorda.cpf = "erroInput";
+              
+            }
+            else if (itemErro.path == "email") {
+                msgErro.email = itemErro.msg;
+                cssErro.email = "erroForm";
+                cssErroBorda.email = "erroInput";
+               
+            }
+            else if (itemErro.path == "tipo") {
+                msgErro.tipo = itemErro.msg;
+                cssErro.tipo = "erroForm";
+                cssErroBorda.tipo = "erroInput";
+               
+            }
+            else if (itemErro.path == "assunto") {
+                msgErro.assunto = itemErro.msg;
+                cssErro.assunto = "erroForm";
+                cssErroBorda.assunto = "erroInput";
+               
+            }
+            else if (itemErro.path == "mensagem") {
+                msgErro.mensagem = itemErro.msg;
+                cssErro.mensagem = "erroForm";
+                cssErroBorda.mensagem = "erroInput";
+               
             }
         });
     }
@@ -45,13 +75,36 @@
                 <span class="<%= cssErro.nome %>">
                     <%= msgErro.nome %>
                 </span>
-                <!-- 
-                <input type="email" maxlength="45" name="email" placeholder="Email:" required>
-                <input type="text" name="tipo" placeholder="Sou:(Cliente/entregador)" required>
-                <input type="cpf" name="cpf" placeholder="CPF:" autocomplete="off" maxlength="14" id="cpf" required>
-                <input type="text" name="assunto" placeholder="Assunto:" maxlength="30" required>
-                <textarea style="resize: none" name="mensagem" placeholder="Mensagem:" required></textarea> 
-                -->
+                <input type="text" name="cpf" id="cpf" autocomplete="off" maxlength="14" class="cpf <%= cssErroBorda.cpf %>" placeholder="CPF"
+                value="<%=valorCampos.cpf%>">
+                <span class="<%= cssErro.cpf %>">
+                    <%= msgErro.cpf %>
+                </span>
+
+                <input type="text" name="email" id="email" class="<%= cssErroBorda.email %>" placeholder="Seu e-mail" value="<%=valorCampos.email%>">
+
+                <span class="<%= cssErro.email %>">
+                    <%= msgErro.email %>
+                </span>
+
+                <input type="text" name="tipo" placeholder="Sou:(Cliente/entregador)" class="<%= cssErroBorda.tipo %>" value="<%=valorCampos.tipo%>" maxlength="10">
+                <span class="<%= cssErro.tipo %>">
+                    <%= msgErro.tipo %>
+                </span>
+
+                <input type="text" name="assunto" placeholder="Assunto:" maxlength="30" class="<%= cssErroBorda.assunto %>" value="<%=valorCampos.assunto%>">
+                <span class="<%= cssErro.assunto %>">
+                    <%= msgErro.assunto %>
+                </span>
+
+
+
+                <textarea style="resize: none" name="mensagem" placeholder="Mensagem:" class="<%= cssErroBorda.mensagem %>" value="<%=valorCampos.mensagem%>"></textarea>
+
+                <span class="<%= cssErro.mensagem %>">
+                    <%= msgErro.mensagem %>
+                </span>
+
                 <button type="submit">Enviar</button>
             </form>
         </section>
