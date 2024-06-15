@@ -1,8 +1,9 @@
-const form = document.querySelector('.form-perfil')
+const form = document.querySelectorAll('.form-perfil')
 const change = document.querySelectorAll('.changeCall')
 const inputContainer = document.querySelectorAll('.input-container')
 const input = document.querySelectorAll('.input-container > .input-field')
 const confirmCall = document.querySelectorAll('.input-container > .confirm')
+const select = document.querySelector('.select-field')
 
 change.forEach((item, i) => {
     item.addEventListener('click', () => {
@@ -12,20 +13,28 @@ change.forEach((item, i) => {
         input[i].removeAttribute('readonly')
         input[i].focus()
         input[i].setSelectionRange(1000,1000) // seta a posiçao do cursor ao fim
-        confirmCall[i].addEventListener('mousedown', update) // é usado o mousedown, pois ele não gera conflito com o blur
+        const formIndex = [...form].findIndex((item) => item == input[i].form)
+        confirmCall[i].addEventListener('mousedown', update.bind(null, formIndex)) // é usado o mousedown, pois ele não gera conflito com o blur
         input[i].addEventListener('keydown', isEnterPressed)
         input[i].addEventListener('blur', cancel.bind(null, lastValue, i))
     })
 
 })
 
-const update = (e) => {
+select?.addEventListener('change', () => {
+    form[1].submit()
+})
+
+const update = (i) => {
     console.log('update');
-    form.submit()
+    form[i].submit()
 }
 
 const isEnterPressed = (e) => {
-    if (e.key == 'Enter') update()
+    if (e.key == 'Enter') {
+        const formIndex = [...form].findIndex((item) => item == e.target.form)
+        update(formIndex)
+    }
 }
 
 const cancel = (lastValue, idx) => {

@@ -46,97 +46,101 @@
                     <label for="name">Nome: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome" value="<%= dados?.nome ?? result.nome_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome_usuario" value="<%= dados?.nome_usuario ?? result.nome_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
-                    <span class="error"><%= erros?.nome?.msg %></span>
+                    <span class="error"><%= erros?.nome_usuario?.msg %></span>
                 </div>
                 <div class="row">
                     <label for="email">Email: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= dados?.email ??result.email_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email_usuario" value="<%= dados?.email_usuario ??result.email_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
-                    <span class="error"><%= erros?.email?.msg %></span>
+                    <span class="error"><%= erros?.email_usuario?.msg %></span>
                 </div>
                 <div class="row">
                     <label for="number">Número: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone" maxlength="15" value="<%= dados?.telefone ?? result.telefone_usuario %>">
+                            <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone_usuario" maxlength="15" value="<%= dados?.telefone_usuario ?? result.telefone_usuario %>">
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
-                    <span class="error"><%= erros?.telefone?.msg %></span>
+                    <span class="error"><%= erros?.telefone_usuario?.msg %></span>
                 </div>
                 <div class="row">
-                    <label for="descricao">Descricao: </label>
+                    <label for="descricao">Descrição: </label>
                     <div class="edit-row">
                         <div class="input-container">
-                            <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao"><%= dados?.descricao ?? result.descricao_usuario %></textarea>
+                            <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao_usuario"><%= dados?.descricao_usuario ?? result.descricao_usuario %></textarea>
                             <span class="count">0/200</span>
                             <input type="button" class="btn" value="Cancelar">
                             <button class="btn confirm">Confirmar</button>
                         </div>
                         <span class="changeCall">Alterar</span>
                     </div>
-                    <span class="error"><%= erros?.descricao?.msg %></span>
+                    <span class="error"><%= erros?.descricao_usuario?.msg %></span>
                 </div>
-                <% if (!isClient) { %>
-                    <section class="row">
-                        <label for="periodo">período de disponibilidade:</label>
-                        <aside class="edit-periodo">
-                            <input type="time">
-                            <span>até</span>
-                            <input type="time" name="periodo">
-                        </aside>
-                    </section>
+            </form>
+
+            <% if (!isClient) { %>
+                <!-- <section class="row">
+                    <label for="periodo">período de disponibilidade:</label>
+                    <aside class="edit-periodo">
+                        <input type="time">
+                        <span>até</span>
+                        <input type="time" name="periodo">
+                    </aside>
+                </section> -->
+                <form class="form-perfil" action="/entregador/veiculo/<%= result.id_usuario %>?_method=PUT" method="post">
+                    <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
                     <section class="row">
                         <label for="vehicles">Tipo do Veículo </label>
                         <section class="edit-row">
-                            <article class="input-container">
-                                <select id="veiculo">
-                                    <option value="moto">Moto</option>
-                                    <option value="carro">Carro</option>
-                                    <option value="van">Van</option>
-                                    <option value="caminhao">Caminhão</option>
+                            <!-- <article class="input-container"> -->
+                                <select name="tipo_veiculo" class="select-field" id="veiculo">
+                                    <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
+                                    <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
+                                    <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
+                                    <option value="caminhao" <%= result.tipo_veiculo == 'caminhao' ? 'selected': '' %>>Caminhão</option>
                                 </select>
-                            </article>
+                            <!-- </article> -->
                         </section>
                     </section>
                     <section class="row">
                         <label for="raio">Modelo do Veículo:</label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="raio_de_atuacao" value="<%= result.modelo_veiculo %>">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="modelo_veiculo" value="<%= result.modelo_veiculo %>">
                                 <input type="button" class="btn" value="Cancelar">
                                 <button class="btn confirm">Confirmar</button>
                             </div>
                             <span class="changeCall">Alterar</span>
                         </div>
                     </section>
-                    <section class="row">
+                    <!-- <section class="row">
                         <label for="raio">Raio de Atuação</label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Digite aqui seu raio de atuacao" readonly id="raio_de_atuacao" name="raio_de_atuacao" value="<%= result.raio_de_atuacao %>">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu raio de atuacao" readonly id="raio_de_atuacao" name="modelo_veiculo" value="<%= result.raio_de_atuacao %>">
                                 <input type="button" class="btn" value="Cancelar">
                                 <button class="btn confirm">Confirmar</button>
                             </div>
                             <span class="changeCall">Alterar</span>
                         </div>
-                    </section>
-                <% } %>
-            </form>
+                    </section> -->
+                </form>
+            <% } %>
             <div class="containerm-p">
                 <p>
                     Precisa de ajuda? Entre em contato com a

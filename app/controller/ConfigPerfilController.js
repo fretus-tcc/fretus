@@ -33,6 +33,7 @@ const ConfigPerfilController = {
     updateClient: async (req, res) => {
         const { id } = req.params
         
+        console.log(req.body)
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             let fields = await ConfigPerfilModel.findByUserId(id)
@@ -46,15 +47,16 @@ const ConfigPerfilController = {
             })
         }
         
-        const data = {
-            nome_usuario: req.body.nome,
-            email_usuario: req.body.email,
-            /* email_usuario: req.body.email, */
-            telefone_usuario: req.body.telefone,
-            descricao_usuario: req.body.descricao,
-        }
+        // const data = {
+        //     nome_usuario: req.body.nome,
+        //     email_usuario: req.body.email,
+        //     /* email_usuario: req.body.email, */
+        //     telefone_usuario: req.body.telefone,
+        //     descricao_usuario: req.body.descricao,
+        // }
 
-        await ConfigPerfilModel.updateUser(data, id)
+
+        await ConfigPerfilModel.updateUser(req.body, id)
         
         res.redirect(`/cliente/perfil/${id}`)
 
@@ -90,16 +92,45 @@ const ConfigPerfilController = {
                 isClient: false
             })
         }
-        
-        const data = {
-            nome_usuario: req.body.nome,
-            email_usuario: req.body.email,
-            /* email_usuario: req.body.email, */
-            telefone_usuario: req.body.telefone,
-            descricao_usuario: req.body.descricao,
-        }
 
-        await ConfigPerfilModel.updateUser(data, id)
+        await ConfigPerfilModel.updateUser(req.body, id)
+        res.redirect(`/entregador/perfil/${id}`)
+
+        /* try {
+
+            const data = {
+                nome_usuario: req.body.nome,
+                email_usuario: req.body.email,
+                
+            }
+            await ConfigPerfilModel.updateUser(data, id)
+            req.flash('info', 'Usuário atualizado')
+            res.redirect(`/admin/cadastroAdm/editar/${id}`)
+
+        } catch (error) {
+            res.json({ error })
+        } */
+
+    },
+
+    updateVehicle: async (req, res) => {
+        console.log(req.body)
+        const { id } = req.params
+        
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            let fields = await ConfigPerfilModel.findShipper(id)
+
+            return res.render('pages/cliente-entregador/perfil', {
+                result: fields[0],
+                dados: req.body,
+                erros: errors.mapped(),
+                autenticado: req.session.autenticado,
+                isClient: false
+            })
+        }
+        
+        await ConfigPerfilModel.updateVehicle(req.body, req.body.id_entregador)
         res.redirect(`/entregador/perfil/${id}`)
 
         /* try {
@@ -120,11 +151,13 @@ const ConfigPerfilController = {
     },
     
     regrasValidacaoPerfil: [
-        body("nome")
+        body("nome_usuario")
+            .optional()
             .isLength({ min: 3, max: 45 })
             .withMessage("Nome invalido "),
 
-        body("email")
+        body("email_usuario")
+            .optional()
             .isEmail()
             .withMessage("Email invalido ")
             .custom(async (value, { req }) => {
@@ -137,7 +170,8 @@ const ConfigPerfilController = {
 
             }),
         
-        body("telefone")
+        body("telefone_usuario")
+            .optional()
             .isLength({ min: 15 })
             .withMessage('Telefone incompleto ')
             .bail()
@@ -154,7 +188,8 @@ const ConfigPerfilController = {
                 return true;
             }),
 
-        body("descricao")
+        body("descricao_usuario")
+            .optional()
             .isLength({ min: 10, max: 120 })
             .withMessage("Deve conter de 10 até 120 caracteres")
     ],
@@ -164,7 +199,7 @@ const ConfigPerfilController = {
         try {
             // console.log(id)
             const result = await ConfigPerfilModel.findByUserId(id)
-            res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, isClient: true, autenticado: req.session.autenticado })
+            res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, erros: null, isClient: true, autenticado: req.session.autenticado })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -176,7 +211,7 @@ const ConfigPerfilController = {
         try {
             // console.log(id)
             const result = await ConfigPerfilModel.findShipper(id)
-            res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, isClient: false, autenticado: req.session.autenticado })
+            res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, erros: null, isClient: false, autenticado: req.session.autenticado })
         } catch (error) {
             res.json({ error })
             console.log(error)

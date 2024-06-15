@@ -26,56 +26,56 @@
                     <img src="/imgs/burguer-config-icon.png" alt="">
                 </section>
 
-                <form class="form-perfil" action="" method="post">
+                <form class="form-perfil" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
                     <h1 class="row">Privacidade</h1><br>
                     <h2 style="text-decoration: underline;">Dados pessoais</h2>
                     <div class="row">
                         <label for="name">Nome </label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome" value="<%= dados?.nome ?? result.nome_usuario %>">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu nome" readonly id="name" name="nome_usuario" value="<%= dados?.nome_usuario ?? result.nome_usuario %>">
                                 <input type="button" class="btn" value="Cancelar">
                                 <button class="btn confirm">Confirmar</button>
                             </div>
                             <span class="changeCall">Alterar</span>
                         </div>
-                        <span class="error"><%= erros?.nome?.msg %></span>
+                        <span class="error"><%= erros?.nome_usuario?.msg %></span>
                     </div>
                     <div class="row">
                         <label for="email">Email </label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email" value="<%= dados?.email ??result.email_usuario %>">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email_usuario" value="<%= dados?.email_usuario ??result.email_usuario %>">
                                 <input type="button" class="btn" value="Cancelar">
                                 <button class="btn confirm">Confirmar</button>
                             </div>
                             <span class="changeCall">Alterar</span>
                         </div>
-                        <span class="error"><%= erros?.email?.msg %></span>
+                        <span class="error"><%= erros?.email_usuario?.msg %></span>
                     </div>
                     <div class="row">
                         <label for="number">Número </label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone" maxlength="15" value="<%= dados?.telefone ?? result.telefone_usuario %>">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone_usuario" maxlength="15" value="<%= dados?.telefone_usuario ?? result.telefone_usuario %>">
                                 <input type="button" class="btn" value="Cancelar">
                                 <button class="btn confirm">Confirmar</button>
                             </div>
                             <span class="changeCall">Alterar</span>
                         </div>
-                        <span class="error"><%= erros?.telefone?.msg %></span>
+                        <span class="error"><%= erros?.telefone_usuario?.msg %></span>
                     </div>
                     <div class="row">
                         <label for="cpf">CPF </label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input class="input-field cpf" type="text" placeholder="Digite aqui seu telefone" readonly id="cpf" name="cpf" maxlength="15" value="<%= dados?.telefone ?? result.cpf_usuario %>">
+                                <input class="input-field cpf" type="text" placeholder="Digite aqui seu telefone" readonly id="cpf" name="cpf_usuario" maxlength="15" value="<%= dados?.cpf_usuario ?? result.cpf_usuario %>">
                                 <input type="button" class="btn" value="Cancelar">
                                 <button class="btn confirm">Confirmar</button>
                             </div>
                             <span class="changeCall">Alterar</span>
                         </div>
-                        <span class="error"><%= erros?.telefone?.msg %></span>
+                        <span class="error"><%= erros?.cpf_usuario?.msg %></span>
                     </div>
                     <!-- <section class="row">
                         <label for="email">Data de Nascimento</label>
@@ -91,6 +91,8 @@
                     <br><br>
                     <% if (!isClient) { %>
                         <h2 style="text-decoration: underline;">Documentos</h2>
+                        <br>
+                        <img style="width: 100%;" src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
                     <% } %>
                 </form>
                 <!-- <section class="row">

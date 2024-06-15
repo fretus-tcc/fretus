@@ -40,6 +40,10 @@ router.put('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigP
     ConfigPerfilController.updateShipper(req, res);
 });
 
+router.put('/veiculo/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
+    ConfigPerfilController.updateVehicle(req, res);
+});
+
 router.get('/ranking', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/entregador/ranking', { autenticado: req.session.autenticado })
 })
