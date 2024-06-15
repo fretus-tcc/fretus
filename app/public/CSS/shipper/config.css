@@ -199,3 +199,10 @@ select{
 footer{
     padding: 20px;
 }
+
+.error {
+    display: block;
+    font-size: 16px;
+    margin-top: 10px;
+    color: red;
+}

@@ -22,6 +22,10 @@ router.get('/configuracoes', verificarUsuAutorizado([2], 'pages/restrito'), veri
     ConfigPerfilController.showShipperConfig(req, res)
 })
 
+router.put('/configuracoes/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
+    ConfigPerfilController.updateShipper(req, res, 'pages/cliente-entregador/configuracoes', `/entregador/configuracoes`, false);
+});
+
 router.get('/entregas-solicitadas', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     const msgs = notifyMessages(req, res)
     res.render('pages/entregador/entregas-solicitadas', { autenticado: req.session.autenticado, msgs })
@@ -37,7 +41,7 @@ router.get('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), verific
 })
 
 router.put('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
-    ConfigPerfilController.updateShipper(req, res);
+    ConfigPerfilController.updateShipper(req, res, 'pages/cliente-entregador/perfil', `/entregador/perfil/${req.params.id}`);
 });
 
 router.put('/veiculo/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {

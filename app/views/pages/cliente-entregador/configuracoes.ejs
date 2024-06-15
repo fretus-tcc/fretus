@@ -26,7 +26,7 @@
                     <img src="/imgs/burguer-config-icon.png" alt="">
                 </section>
 
-                <form class="form-perfil" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
+                <form class="form-perfil" action="/<%= isClient ? 'cliente' : 'entregador' %>/configuracoes/<%= result.id_usuario %>?_method=PUT" method="post">
                     <h1 class="row">Privacidade</h1><br>
                     <h2 style="text-decoration: underline;">Dados pessoais</h2>
                     <div class="row">
@@ -93,7 +93,7 @@
                         <h2 style="text-decoration: underline;">Documentos</h2>
                         <br>
                         <img style="width: 100%;" src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
-                    <% } %>
+                    <% } %> 
                 </form>
                 <!-- <section class="row">
                     <label for="password">Senha</label>
