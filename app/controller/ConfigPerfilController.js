@@ -1,7 +1,7 @@
 const ConfigPerfilModel = require('../models/ConfigPerfilModel')
 const { body, validationResult } = require("express-validator");
 const cadastroModel = require('../models/cadastroModel')
-
+const { validaCPF } = require('../util/Funcao')
 
 const ConfigPerfilController = {
 
@@ -182,7 +182,25 @@ const ConfigPerfilController = {
         body("descricao_usuario")
             .optional()
             .isLength({ min: 10, max: 120 })
-            .withMessage("Deve conter de 10 até 120 caracteres")
+            .withMessage("Deve conter de 10 até 120 caracteres"),
+
+        body("cpf_usuario")
+            .optional()
+            .isLength({ min: 14, max: 14 })
+            .withMessage("Cpf inválido ")
+            .bail()
+            .custom(async (value, { req }) => {
+                if (validaCPF(value)) {
+                    const { id } = req.params
+                    const cpf = await cadastroModel.findByCpf(value, id)
+                    if (cpf.length > 0) {
+                        throw new Error('Cpf já utilizado');
+                    }
+                    return true;
+                } else {
+                    throw new Error('Cpf inválido');
+                }
+            })
     ],
 
     showClientConfig: async (req, res) => {
