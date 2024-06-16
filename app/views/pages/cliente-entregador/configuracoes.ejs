@@ -110,7 +110,7 @@
         </section>
     </main>
 
-    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+    <%- include('../../partial/menu-burguer.ejs', { type: isClient ? 'client' : 'shipper' }) %>
 
     <script src="/JS/burguer.js"></script>
     <script src="/JS/shipper/change.js"></script>
