@@ -22,7 +22,7 @@ change.forEach((item, i) => {
 })
 
 select?.addEventListener('change', () => {
-    form[1].submit()
+    select.form.submit()
 })
 
 const update = (i) => {

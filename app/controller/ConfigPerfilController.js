@@ -22,74 +22,21 @@ const ConfigPerfilController = {
             console.log(error)
         }
     },
-    // showClientProfile: async (req, res) => {
-    //     const { id } = req.params
-        
-    //     try {
-    //         /* const result = await ConfigPerfilModel.findByUserId(id) */
-    //         const result = await ConfigPerfilModel.findUserByType(id, 1)
-    //         // console.log(result)
-            
-    //         /* const msgs = notifyMessages(req, res) */
-    //         res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, isClient: true })
-    //     } catch (error) {
-    //         res.json({ error })
-    //         console.log(error)
-    //     }
-    // },
-    // showShipperProfile: async (req, res) => {
-    //     const { id } = req.params
-    //     try {
-    //         /* const result = await ConfigPerfilModel.findShipper(id) */
-    //         const result = await ConfigPerfilModel.findUserByType(id, 2)
 
-    //         // console.log(result);
-    //         /* const msgs = notifyMessages(req, res) */
-    //         res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, isClient: false })
-    //     } catch (error) {
-    //         res.json({ error })
-    //         console.log(error)
-    //     }
-    // },
-
-    showConfig: async (req, res, isClient) => {
+    showConfig: async (req, res, view, isClient) => {
         const { id } = req.session.autenticado
         try {
             // console.log(id)
             /* const result = await ConfigPerfilModel.findByUserId(id) */
             const type = isClient ? 1 : 2
             const result = await ConfigPerfilModel.findUserByType(id, type)
-            res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, erros: null, isClient, autenticado: req.session.autenticado })
+            res.render(/* 'pages/cliente-entregador/configuracoes' */ view, { result: result[0], dados: null, erros: null, isClient, autenticado: req.session.autenticado })
         } catch (error) {
             res.json({ error })
             console.log(error)
         }
     },
 
-    // showClientConfig: async (req, res) => {
-    //     const { id } = req.session.autenticado
-    //     try {
-    //         // console.log(id)
-    //         /* const result = await ConfigPerfilModel.findByUserId(id) */
-    //         const result = await ConfigPerfilModel.findUserByType(id, 1)
-    //         res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, erros: null, isClient: true, autenticado: req.session.autenticado })
-    //     } catch (error) {
-    //         res.json({ error })
-    //         console.log(error)
-    //     }
-    // },
-    // showShipperConfig: async (req, res) => {
-    //     const { id } = req.session.autenticado
-    //     try {
-    //         // console.log(id)
-    //         /* const result = await ConfigPerfilModel.findShipper(id) */
-    //         const result = await ConfigPerfilModel.findUserByType(id, 2)
-    //         res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, erros: null, isClient: false, autenticado: req.session.autenticado })
-    //     } catch (error) {
-    //         res.json({ error })
-    //         console.log(error)
-    //     }
-    // },
     // Editar - Atualizar User
     updateUser: async (req, res, view, redirect, isClient) => {
         const { id } = req.params
@@ -131,7 +78,7 @@ const ConfigPerfilController = {
 
     },
 
-    updateVehicle: async (req, res) => {
+    updateVehicle: async (req, res, view, redirect) => {
         // console.log(req.body)
         const { id } = req.params
         
@@ -139,7 +86,7 @@ const ConfigPerfilController = {
         if (!errors.isEmpty()) {
             const fields = await ConfigPerfilModel.findUserByType(id, 2)
 
-            return res.render('pages/cliente-entregador/perfil', {
+            return res.render(/* 'pages/cliente-entregador/perfil' */ view, {
                 result: fields[0],
                 dados: req.body,
                 erros: errors.mapped(),
@@ -149,7 +96,7 @@ const ConfigPerfilController = {
         }
         
         await ConfigPerfilModel.updateVehicle(req.body, req.body.id_entregador)
-        res.redirect(`/entregador/perfil/${id}`)
+        res.redirect(/* `/entregador/perfil/${id}` */ redirect)
 
         /* try {
 
@@ -238,6 +185,19 @@ const ConfigPerfilController = {
             .optional()
             .isLength({ min: 2, max: 45 })
             .withMessage("Modelo de Veículo inválido"),
+        
+        body("placa")
+            .optional()
+            .isLength({ min: 8, max: 8 })
+            .withMessage("Placa inválida")
+            .custom(async (value, { req }) => {
+                const { id_entregador } = req.body
+                const placa = await cadastroModel.findByPlaca(value, id_entregador)
+                if (placa.length > 0) {
+                    throw new Error('Placa já utilizada');
+                }
+                return true;
+            }),
     ],
 
 }

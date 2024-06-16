@@ -16,6 +16,11 @@
             <a href="/<%= caminho %>/configuracoes-pagamento">
                 <li>Pagamento</li>
             </a>
+            <% if (!isClient) { %>
+                <a href="/<%= caminho %>/configuracoes-veiculos">
+                    <li>Veículos</li>
+                </a>
+            <% } %>
            <!--  <a href="/<%= caminho %>/configuracoes-notificacoes">
                 <li>Notificações</li>
             </a> -->

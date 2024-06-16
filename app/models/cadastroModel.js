@@ -43,9 +43,9 @@ const tarefasModel = {
             return error;
         }
     },
-    findByPlaca: async (data) => {
+    findByPlaca: async (data, id) => {
         try {
-            const [linhas] = await pool.query(`SELECT * FROM veiculos WHERE placa = ?` , [data])
+            const [linhas] = await pool.query(`SELECT * FROM veiculos WHERE placa = ? ${id ? 'AND id_entregador != ?' : ''}` ,  [ data, id ])
             return linhas;
         } catch (error) {
             return error;

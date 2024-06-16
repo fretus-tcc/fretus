@@ -13,6 +13,15 @@ router.get('/chat', verificarUsuAutorizado([2], 'pages/restrito'), verificarCada
     res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: false, autenticado: req.session.autenticado })
 }) */
 
+router.get('/configuracoes-veiculos', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
+    /* res.render('pages/entregador/configuracoes-veiculos', { autenticado: req.session.autenticado }) */
+    ConfigPerfilController.showConfig(req, res, 'pages/entregador/configuracoes-veiculos', false);
+})
+
+router.put('/configuracoes-veiculos/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
+    ConfigPerfilController.updateVehicle(req, res, 'pages/entregador/configuracoes-veiculos', `/entregador/configuracoes-veiculos`);
+});
+
 router.get('/configuracoes-pagamento', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: false, autenticado: req.session.autenticado })
 })
@@ -20,7 +29,7 @@ router.get('/configuracoes-pagamento', verificarUsuAutorizado([2], 'pages/restri
 router.get('/configuracoes', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     /* res.render('pages/cliente-entregador/configuracoes', { isClient: false, autenticado: req.session.autenticado }) */
     /* ConfigPerfilController.showShipperConfig(req, res) */
-    ConfigPerfilController.showConfig(req, res, false);
+    ConfigPerfilController.showConfig(req, res, 'pages/cliente-entregador/configuracoes', false);
 })
 
 router.put('/configuracoes/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
@@ -47,7 +56,7 @@ router.put('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigP
 });
 
 router.put('/veiculo/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
-    ConfigPerfilController.updateVehicle(req, res);
+    ConfigPerfilController.updateVehicle(req, res, 'pages/cliente-entregador/perfil', `/entregador/perfil/${req.params.id}`);
 });
 
 router.get('/ranking', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {

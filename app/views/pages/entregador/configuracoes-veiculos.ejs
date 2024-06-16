@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Configurações</title>
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
+    <link rel="stylesheet" href="/CSS/shipper/sidebar-config.css">
+    <link rel="stylesheet" href="/CSS/shipper/notification-config.css">
+    <link rel="stylesheet" href="/CSS/shipper/config.css">
+</head>
+
+<body>
+
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
+
+    <main>
+        <%- include('../../partial/cliente-entregador/sidebar-configuracoes.ejs', { isClient: false }) %>
+        
+        <section class="config">
+            <section class="config-container">
+                <section class="sidebar-burguer">
+                    <img src="/imgs/burguer-config-icon.png" alt="">
+                </section>
+                <h1>Veículos</h1>
+
+                <form class="form-perfil" action="/entregador/configuracoes-veiculos/<%= result.id_usuario %>?_method=PUT" method="post">
+                    <section class="row">
+                        <label for="photo">Foto do Veículo </label>
+                        <img style="width: 100%;" src="data:image/png;base64,<%= result.foto_veiculo.toString('base64') %>" alt="">
+                    </section>
+                    <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
+                    <section class="row">
+                        <label for="vehicles">Tipo do Veículo </label>
+                        <section class="edit-row">
+                            <!-- <article class="input-container"> -->
+                                <select name="tipo_veiculo" class="select-field" id="veiculo">
+                                    <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
+                                    <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
+                                    <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
+                                    <option value="caminhao" <%= result.tipo_veiculo == 'caminhao' ? 'selected': '' %>>Caminhão</option>
+                                </select>
+                            <!-- </article> -->
+                        </section>
+                        <span class="error"><%= erros?.tipo_veiculo?.msg %></span>
+                    </section>
+                    <section class="row">
+                        <label for="raio">Modelo do Veículo:</label>
+                        <div class="edit-row">
+                            <div class="input-container">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="modelo_veiculo" value="<%= dados?.modelo_veiculo ?? result.modelo_veiculo %>">
+                                <input type="button" class="btn" value="Cancelar">
+                                <button class="btn confirm">Confirmar</button>
+                            </div>
+                            <span class="changeCall">Alterar</span>
+                        </div>
+                        <span class="error"><%= erros?.modelo_veiculo?.msg %></span>
+                    </section>
+                    <section class="row">
+                        <label for="raio">Placa do Veículo:</label>
+                        <div class="edit-row">
+                            <div class="input-container">
+                                <input class="input-field" type="text" placeholder="Digite aqui a placa do seu veículo" readonly id="placa" name="placa" value="<%= dados?.placa ?? result.placa %>">
+                                <input type="button" class="btn" value="Cancelar">
+                                <button class="btn confirm">Confirmar</button>
+                            </div>
+                            <span class="changeCall">Alterar</span>
+                        </div>
+                        <span class="error"><%= erros?.placa?.msg %></span>
+                    </section>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/shipper/change.js"></script>
+    <script src="/JS/shipper/burguer-config.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="/JS/shipper/mask-config.js"></script>
+</body>
+
+</html>
