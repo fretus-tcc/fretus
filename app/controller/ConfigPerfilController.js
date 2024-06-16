@@ -200,7 +200,17 @@ const ConfigPerfilController = {
                 } else {
                     throw new Error('Cpf inválido');
                 }
-            })
+            }),
+
+        body("tipo_veiculo")
+            .optional()
+            .notEmpty()
+            .withMessage("Tipo de Veículo inválido"),
+
+        body("modelo_veiculo")
+            .optional()
+            .isLength({ min: 2, max: 45 })
+            .withMessage("Modelo de Veículo inválido"),
     ],
 
     showClientConfig: async (req, res) => {

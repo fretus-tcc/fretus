@@ -116,17 +116,19 @@
                                 </select>
                             <!-- </article> -->
                         </section>
+                        <span class="error"><%= erros?.tipo_veiculo?.msg %></span>
                     </section>
                     <section class="row">
                         <label for="raio">Modelo do Veículo:</label>
                         <div class="edit-row">
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="modelo_veiculo" value="<%= result.modelo_veiculo %>">
+                                <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="modelo_veiculo" value="<%= dados?.modelo_veiculo ?? result.modelo_veiculo %>">
                                 <input type="button" class="btn" value="Cancelar">
                                 <button class="btn confirm">Confirmar</button>
                             </div>
                             <span class="changeCall">Alterar</span>
                         </div>
+                        <span class="error"><%= erros?.modelo_veiculo?.msg %></span>
                     </section>
                     <!-- <section class="row">
                         <label for="raio">Raio de Atuação</label>
