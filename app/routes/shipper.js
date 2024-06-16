@@ -19,7 +19,8 @@ router.get('/configuracoes-pagamento', verificarUsuAutorizado([2], 'pages/restri
 
 router.get('/configuracoes', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     /* res.render('pages/cliente-entregador/configuracoes', { isClient: false, autenticado: req.session.autenticado }) */
-    ConfigPerfilController.showShipperConfig(req, res)
+    /* ConfigPerfilController.showShipperConfig(req, res) */
+    ConfigPerfilController.showConfig(req, res, false);
 })
 
 router.put('/configuracoes/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
@@ -36,7 +37,8 @@ router.get('/historico', verificarUsuAutorizado([2], 'pages/restrito'), verifica
 })
 
 router.get('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    ConfigPerfilController.showShipperProfile(req, res)
+    /* ConfigPerfilController.showShipperProfile(req, res) */
+    ConfigPerfilController.showProfile(req, res, false)
     // res.render('pages/entregador/perfil', { autenticado: req.session.autenticado })
 })
 

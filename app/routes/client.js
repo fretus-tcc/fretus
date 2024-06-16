@@ -30,7 +30,8 @@ router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (r
 }) */
 
 router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    ConfigPerfilController.showClientProfile(req, res);
+    /* ConfigPerfilController.showClientProfile(req, res); */
+    ConfigPerfilController.showProfile(req, res, true);
 });
 
 router.put('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
@@ -43,7 +44,8 @@ router.get('/escolher-entregador', verificarUsuAutorizado([1], 'pages/restrito')
 
 router.get('/configuracoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     /* res.render('pages/cliente-entregador/configuracoes', { isClient: true, autenticado: req.session.autenticado }) */
-    ConfigPerfilController.showClientConfig(req, res);
+    /* ConfigPerfilController.showClientConfig(req, res); */
+    ConfigPerfilController.showConfig(req, res, true);
 })
 
 router.put('/configuracoes/:id', verificarUsuAutorizado([1], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
