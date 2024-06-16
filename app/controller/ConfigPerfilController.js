@@ -8,8 +8,12 @@ const ConfigPerfilController = {
     // Editar - Mostrar Campos
     showClientProfile: async (req, res) => {
         const { id } = req.params
+        
         try {
-            const result = await ConfigPerfilModel.findByUserId(id)
+            /* const result = await ConfigPerfilModel.findByUserId(id) */
+            const result = await ConfigPerfilModel.findUserByType(id, 1)
+            // console.log(result)
+            
             /* const msgs = notifyMessages(req, res) */
             res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, isClient: true })
         } catch (error) {
@@ -20,7 +24,9 @@ const ConfigPerfilController = {
     showShipperProfile: async (req, res) => {
         const { id } = req.params
         try {
-            const result = await ConfigPerfilModel.findShipper(id)
+            /* const result = await ConfigPerfilModel.findShipper(id) */
+            const result = await ConfigPerfilModel.findUserByType(id, 2)
+
             // console.log(result);
             /* const msgs = notifyMessages(req, res) */
             res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, isClient: false })
@@ -30,14 +36,16 @@ const ConfigPerfilController = {
         }
     },
     // Editar - Atualizar User
-    updateClient: async (req, res, view, redirect, isClient) => {
+    updateUser: async (req, res, view, redirect, isClient) => {
         const { id } = req.params
-        
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            let fields = await ConfigPerfilModel.findByUserId(id)
+            /* let fields = await ConfigPerfilModel.findByUserId(id) */
+            const type = isClient ? 1 : 2
+            const fields = await ConfigPerfilModel.findUserByType(id, type)
 
-            return res.render(/* 'pages/cliente-entregador/perfil' */view, {
+            return res.render(view, {
                 result: fields[0],
                 dados: req.body,
                 erros: errors.mapped(),
@@ -68,49 +76,13 @@ const ConfigPerfilController = {
 
     },
 
-    updateShipper: async (req, res, view, redirect, isClient) => {
-        const { id } = req.params
-        
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            let fields = await ConfigPerfilModel.findShipper(id)
-
-            return res.render(/* 'pages/cliente-entregador/perfil' */ view, {
-                result: fields[0],
-                dados: req.body,
-                erros: errors.mapped(),
-                autenticado: req.session.autenticado,
-                isClient
-            })
-        }
-
-        await ConfigPerfilModel.updateUser(req.body, id)
-        res.redirect(/* `/entregador/perfil/${id}` */ redirect)
-
-        /* try {
-
-            const data = {
-                nome_usuario: req.body.nome,
-                email_usuario: req.body.email,
-                
-            }
-            await ConfigPerfilModel.updateUser(data, id)
-            req.flash('info', 'Usuário atualizado')
-            res.redirect(`/admin/cadastroAdm/editar/${id}`)
-
-        } catch (error) {
-            res.json({ error })
-        } */
-
-    },
-
     updateVehicle: async (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         const { id } = req.params
         
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            let fields = await ConfigPerfilModel.findShipper(id)
+            const fields = await ConfigPerfilModel.findUserByType(id, 2)
 
             return res.render('pages/cliente-entregador/perfil', {
                 result: fields[0],
@@ -217,7 +189,8 @@ const ConfigPerfilController = {
         const { id } = req.session.autenticado
         try {
             // console.log(id)
-            const result = await ConfigPerfilModel.findByUserId(id)
+            /* const result = await ConfigPerfilModel.findByUserId(id) */
+            const result = await ConfigPerfilModel.findUserByType(id, 1)
             res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, erros: null, isClient: true, autenticado: req.session.autenticado })
         } catch (error) {
             res.json({ error })
@@ -229,7 +202,8 @@ const ConfigPerfilController = {
         const { id } = req.session.autenticado
         try {
             // console.log(id)
-            const result = await ConfigPerfilModel.findShipper(id)
+            /* const result = await ConfigPerfilModel.findShipper(id) */
+            const result = await ConfigPerfilModel.findUserByType(id, 2)
             res.render('pages/cliente-entregador/configuracoes', { result: result[0], dados: null, erros: null, isClient: false, autenticado: req.session.autenticado })
         } catch (error) {
             res.json({ error })
