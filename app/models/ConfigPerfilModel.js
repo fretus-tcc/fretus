@@ -1,4 +1,4 @@
-const pool = require('../../config/connection-factory')
+const pool = require('../../config/connection-factory');
 
 const PerfilModel = {
 
@@ -25,6 +25,15 @@ const PerfilModel = {
     updateUser: async (data, id) => {
         try {
             await pool.query('UPDATE usuario SET ? WHERE id_usuario = ?', [data, id])
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
+    updateShipper: async (data, id) => {
+        try {
+            await pool.query('UPDATE detalhamento_entregador SET ? WHERE id_usuario = ?', [data, id])
         } catch (error) {
             console.log(error)
             return error

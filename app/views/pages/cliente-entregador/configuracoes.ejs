@@ -92,9 +92,22 @@
                         </section>
                         <span class="error"><%= erros?.data_usuario?.msg %></span>
                     </section>
-                    <br><br>
                 </form>
                 <% if (!isClient) { %>
+                    <form class="form-perfil" action="/entregador/configuracoes-entregador/<%= result.id_usuario %>?_method=PUT" method="post">
+                        <div class="row">
+                            <label for="cpf">Raio de Atuação </label>
+                            <div class="edit-row">
+                                <div class="input-container">
+                                    <input class="input-field cpf" type="text" placeholder="Digite aqui seu telefone" readonly id="raio_de_atuacao" name="raio_de_atuacao" value="<%= dados?.raio_de_atuacao ?? result.raio_de_atuacao %>">
+                                    <input type="button" class="btn" value="Cancelar">
+                                    <button class="btn confirm">Confirmar</button>
+                                </div>
+                                <span class="changeCall">Alterar</span>
+                            </div>
+                            <span class="error"><%= erros?.raio_de_atuacao?.msg %></span>
+                        </div>
+                    </form>
                     <h2 style="text-decoration: underline;">Documentos</h2>
                     <br>
                     <img style="width: 100%;" src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">

@@ -85,6 +85,43 @@ const ConfigPerfilController = {
 
     },
 
+    updateShipper: async (req, res, view, redirect) => {
+        // console.log(req.body)
+        const { id } = req.params
+        
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const fields = await ConfigPerfilModel.findUserByType(id, 2)
+
+            return res.render(/* 'pages/cliente-entregador/perfil' */ view, {
+                result: fields[0],
+                dados: req.body,
+                erros: errors.mapped(),
+                autenticado: req.session.autenticado,
+                isClient: false
+            })
+        }
+        
+        await ConfigPerfilModel.updateShipper(req.body, id)
+        res.redirect(/* `/entregador/perfil/${id}` */ redirect)
+
+        /* try {
+
+            const data = {
+                nome_usuario: req.body.nome,
+                email_usuario: req.body.email,
+                
+            }
+            await ConfigPerfilModel.updateUser(data, id)
+            req.flash('info', 'Usuário atualizado')
+            res.redirect(`/admin/cadastroAdm/editar/${id}`)
+
+        } catch (error) {
+            res.json({ error })
+        } */
+
+    },
+
     updateVehicle: async (req, res, view, redirect) => {
         // console.log(req.body)
         const { id } = req.params
@@ -229,7 +266,12 @@ const ConfigPerfilController = {
                 }
 
                 return true;
-            })
+            }),
+
+        body("raio_de_atuacao")
+            .optional()
+            .isFloat({ min: 1 })
+            .withMessage("Deve conter apenas números, que sejam maiores que 0"),
     ],
 
 }
