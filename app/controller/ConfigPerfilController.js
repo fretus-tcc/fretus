@@ -41,6 +41,13 @@ const ConfigPerfilController = {
     updateUser: async (req, res, view, redirect, isClient) => {
         const { id } = req.params
 
+        // formatando data nascimento
+        const { data_usuario } = req.body
+        if (data_usuario) {
+            const date = new Date(data_usuario)
+            req.body.data_usuario = date.toISOString().split('T')[0]
+        }
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             /* let fields = await ConfigPerfilModel.findByUserId(id) */
@@ -198,6 +205,31 @@ const ConfigPerfilController = {
                 }
                 return true;
             }),
+
+        body("data_usuario")
+            .optional()
+            .isLength({ min: 10 })
+            .withMessage('Data inválida ')
+            /* .toDate()
+            .withMessage('Data inválida ') */
+            .custom(value => {
+                const birthDate = new Date(value);
+                if (isNaN(birthDate.getTime())) {
+                    throw new Error('Data de nascimento inválida');
+                }
+                
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                if (age < 18) {
+                    throw new Error('Você deve ter pelo menos 18 anos');
+                }
+
+                return true;
+            })
     ],
 
 }

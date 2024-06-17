@@ -31,7 +31,6 @@ const PerfilModel = {
         }
     },
 
-    //atualizando usuário da tabela 
     updateVehicle: async (data, id) => {
         try {
             await pool.query('UPDATE veiculos SET ? WHERE id_entregador = ?', [data, id])

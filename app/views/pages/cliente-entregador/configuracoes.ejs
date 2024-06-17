@@ -77,35 +77,28 @@
                         </div>
                         <span class="error"><%= erros?.cpf_usuario?.msg %></span>
                     </div>
-                    <!-- <section class="row">
-                        <label for="email">Data de Nascimento</label>
+                    <section class="row">
+                        <label for="nasc">Data de Nascimento</label>
                         <section class="edit-row">
-                            <article class="input-container">
-                                <input class="input-field" type="text" required readonly id="number" value="(11)99999-9999">
+                            <div class="input-container">
+                                <% const dataValue = dados?.data_usuario ?? result.data_usuario %>
+                                <!-- <input class="input-field" type="date" placeholder="Digite aqui sua data de nascimento" required readonly name="data_usuario" id="nasc" value="<%#= new Date(dataValue).toISOString().split('T')[0] %>"> -->
+                                <p><%#= JSON.stringify(dados) %></p>
+                                <input class="input-field" type="date" placeholder="Digite aqui sua data de nascimento" required readonly name="data_usuario" id="nasc" value="<%= dados?.data_usuario ?? new Date(dataValue).toISOString().split('T')[0] %>">
                                 <input type="button" class="btn" value="Cancelar">
-                                <input type="button" class="btn confirm" value="Confirmar">
-                            </article>
+                                <button class="btn confirm">Confirmar</button>
+                            </div>
                             <span class="changeCall">Alterar</span>
                         </section>
-                    </section> -->
-                    <br><br>
-                    <% if (!isClient) { %>
-                        <h2 style="text-decoration: underline;">Documentos</h2>
-                        <br>
-                        <img style="width: 100%;" src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
-                    <% } %> 
-                </form>
-                <!-- <section class="row">
-                    <label for="password">Senha</label>
-                    <section class="edit-row">
-                        <article class="input-container">
-                            <input type="password" readonly id="password" value="Senha123">
-                            <input type="button" class="btn" value="Cancelar">
-                            <input type="button" class="btn confirm" value="Confirmar">
-                        </article>
-                        <span class="changeCall">Alterar</span>
+                        <span class="error"><%= erros?.data_usuario?.msg %></span>
                     </section>
-                </section> -->
+                    <br><br>
+                </form>
+                <% if (!isClient) { %>
+                    <h2 style="text-decoration: underline;">Documentos</h2>
+                    <br>
+                    <img style="width: 100%;" src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
+                <% } %> 
             </section>
         </section>
     </main>

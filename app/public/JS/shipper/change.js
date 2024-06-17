@@ -4,6 +4,7 @@ const inputContainer = document.querySelectorAll('.input-container')
 const input = document.querySelectorAll('.input-container > .input-field')
 const confirmCall = document.querySelectorAll('.input-container > .confirm')
 const select = document.querySelector('.select-field')
+const nasc = document.querySelector('#nasc')
 
 change.forEach((item, i) => {
     item.addEventListener('click', () => {
@@ -12,7 +13,9 @@ change.forEach((item, i) => {
         inputContainer[i].classList.add('edit')
         input[i].removeAttribute('readonly')
         input[i].focus()
-        input[i].setSelectionRange(1000,1000) // seta a posiçao do cursor ao fim
+        if (input[i].id != 'nasc') {
+            input[i].setSelectionRange(1000,1000) // seta a posiçao do cursor ao fim, apenas se não for um input de data
+        }
         const formIndex = [...form].findIndex((item) => item == input[i].form)
         confirmCall[i].addEventListener('mousedown', update.bind(null, formIndex)) // é usado o mousedown, pois ele não gera conflito com o blur
         input[i].addEventListener('keydown', isEnterPressed)
