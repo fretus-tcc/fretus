@@ -13,10 +13,11 @@ const ConfigPerfilController = {
             /* const result = await ConfigPerfilModel.findByUserId(id) */
             const type = isClient ? 1 : 2
             const result = await ConfigPerfilModel.findUserByType(id, type)
-            // console.log(result)
+
+            const hasPermission = id == req.session.autenticado.id
             
             /* const msgs = notifyMessages(req, res) */
-            res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, isClient })
+            res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, hasPermission, isClient })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -48,6 +49,12 @@ const ConfigPerfilController = {
             req.body.data_usuario = date.toISOString().split('T')[0]
         }
 
+        // verificando autorizao alterar perfil
+        const hasPermission = id == req.session.autenticado.id
+        if (!hasPermission) {
+            return res.render('pages/restrito', { autenticado: req.session.autenticado })
+        }
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             /* let fields = await ConfigPerfilModel.findByUserId(id) */
@@ -59,6 +66,7 @@ const ConfigPerfilController = {
                 dados: req.body,
                 erros: errors.mapped(),
                 autenticado: req.session.autenticado,
+                hasPermission,
                 isClient
             })
         }
@@ -89,6 +97,12 @@ const ConfigPerfilController = {
         // console.log(req.body)
         const { id } = req.params
         
+        // verificando autorizao alterar perfil
+        const hasPermission = id == req.session.autenticado.id
+        if (!hasPermission) {
+            return res.render('pages/restrito', { autenticado: req.session.autenticado })
+        }
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             const fields = await ConfigPerfilModel.findUserByType(id, 2)
@@ -98,6 +112,7 @@ const ConfigPerfilController = {
                 dados: req.body,
                 erros: errors.mapped(),
                 autenticado: req.session.autenticado,
+                hasPermission,
                 isClient: false
             })
         }
@@ -126,6 +141,12 @@ const ConfigPerfilController = {
         // console.log(req.body)
         const { id } = req.params
         
+        // verificando autorizao alterar perfil
+        const hasPermission = id == req.session.autenticado.id
+        if (!hasPermission) {
+            return res.render('pages/restrito', { autenticado: req.session.autenticado })
+        }
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             const fields = await ConfigPerfilModel.findUserByType(id, 2)
@@ -135,6 +156,7 @@ const ConfigPerfilController = {
                 dados: req.body,
                 erros: errors.mapped(),
                 autenticado: req.session.autenticado,
+                hasPermission,
                 isClient: false
             })
         }

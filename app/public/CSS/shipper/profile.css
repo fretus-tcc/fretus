@@ -17,6 +17,34 @@ main {
     
 }
 
+.disable-form .action-perfil,
+.disable-form .changeCall {
+    display: none;
+}
+
+.disable-form .profile__image {
+    top: 20px;
+}
+
+.disable-form .botaoDisponivel {
+    margin-top: 30px;
+}
+
+select[disabled] {
+    border: none;
+    padding: 0;
+    opacity: 1;
+    cursor: text;
+    color: #333;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+/* For IE10 */
+select[disabled]::-ms-expand {
+    display: none;
+}
+
 .profile-container > * {
     width: 100%;
     margin-bottom: 11px;

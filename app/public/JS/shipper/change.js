@@ -6,43 +6,50 @@ const confirmCall = document.querySelectorAll('.input-container > .confirm')
 const select = document.querySelector('.select-field')
 const nasc = document.querySelector('#nasc')
 
-change.forEach((item, i) => {
-    item.addEventListener('click', () => {
-        const lastValue = input[i].value
-        change[i].style.display = 'none'
-        inputContainer[i].classList.add('edit')
-        input[i].removeAttribute('readonly')
-        input[i].focus()
-        if (input[i].id != 'nasc') {
-            input[i].setSelectionRange(1000,1000) // seta a posiçao do cursor ao fim, apenas se não for um input de data
-        }
-        const formIndex = [...form].findIndex((item) => item == input[i].form)
-        confirmCall[i].addEventListener('mousedown', update.bind(null, formIndex)) // é usado o mousedown, pois ele não gera conflito com o blur
-        input[i].addEventListener('keydown', isEnterPressed)
-        input[i].addEventListener('blur', cancel.bind(null, lastValue, i))
+if (!noPermission) {
+    change.forEach((item, i) => {
+        item.addEventListener('click', () => {
+            const lastValue = input[i].value
+            change[i].style.display = 'none'
+            inputContainer[i].classList.add('edit')
+            input[i].removeAttribute('readonly')
+            input[i].focus()
+            if (input[i].id != 'nasc') {
+                input[i].setSelectionRange(1000,1000) // seta a posiçao do cursor ao fim, apenas se não for um input de data
+            }
+            const formIndex = [...form].findIndex((item) => item == input[i].form)
+            confirmCall[i].addEventListener('mousedown', update.bind(null, formIndex)) // é usado o mousedown, pois ele não gera conflito com o blur
+            input[i].addEventListener('keydown', isEnterPressed)
+            input[i].addEventListener('blur', cancel.bind(null, lastValue, i))
+        })
+    
     })
-
-})
-
-select?.addEventListener('change', () => {
-    select.form.submit()
-})
-
-const update = (i) => {
-    console.log('update');
-    form[i].submit()
-}
-
-const isEnterPressed = (e) => {
-    if (e.key == 'Enter') {
-        const formIndex = [...form].findIndex((item) => item == e.target.form)
-        update(formIndex)
+    
+    select?.addEventListener('change', () => {
+        if (noPermission) return
+        select.form.submit()
+    })
+    
+    const update = (i) => {
+        console.log('update');
+        if (noPermission) return
+        form[i].submit()
     }
-}
-
-const cancel = (lastValue, idx) => {
-    input[idx].value = lastValue
-    input[idx].setAttribute('readonly', 'true')
-    inputContainer[idx].classList.remove('edit')
-    change[idx].style.display = 'block'
+    
+    const isEnterPressed = (e) => {
+        if (e.key == 'Enter') {
+            e.preventDefault()
+            const formIndex = [...form].findIndex((item) => item == e.target.form)
+            update(formIndex)
+        }
+    }
+    
+    const cancel = (lastValue, idx) => {
+        input[idx].value = lastValue
+        input[idx].setAttribute('readonly', 'true')
+        inputContainer[idx].classList.remove('edit')
+        change[idx].style.display = 'block'
+    }
+} else {
+    form.forEach(item => item.removeAttribute('action')) // removendo action, nos perfis que não possuirem autorizacao
 }

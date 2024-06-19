@@ -19,7 +19,7 @@
     <main>
         <div class="profile-container">
 
-            <form class="form-perfil" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
+            <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
 
                 <div class="Seu-Perfil">
                     <h2>Seu Perfil</h2>
@@ -102,13 +102,13 @@
                         <input type="time" name="periodo">
                     </aside>
                 </section> -->
-                <form class="form-perfil" action="/entregador/veiculo/<%= result.id_usuario %>?_method=PUT" method="post">
+                <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.id_usuario %>?_method=PUT" method="post">
                     <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
                     <section class="row">
                         <label for="vehicles">Tipo do Veículo </label>
                         <section class="edit-row">
                             <!-- <article class="input-container"> -->
-                                <select name="tipo_veiculo" class="select-field" id="veiculo">
+                                <select name="tipo_veiculo" class="select-field" id="veiculo" <%= !hasPermission ? 'disabled' : '' %>>
                                     <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
                                     <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
                                     <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
@@ -154,6 +154,9 @@
 
     <%- include('../../partial/menu-burguer.ejs', { type: isClient ? 'client' : 'shipper' }) %>
 
+    <script>
+        const noPermission = <%= !hasPermission %>
+    </script>
     <script src="/JS/burguer.js"></script>
     <!-- alterar valores input -->
     <script src="/JS/shipper/change.js"></script>
