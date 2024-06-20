@@ -18,7 +18,11 @@ const FaleConoscoControl = {
             }
             try {
                 await FaleConoscoModel.createFaleconosco(req.body);
+                
                 res.redirect('/')
+
+                /* req.flash('success', `mensagem enviada com sucesso`) */
+
             } catch (error) {
                 return error;
             }
