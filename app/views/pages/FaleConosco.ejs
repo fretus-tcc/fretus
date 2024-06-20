@@ -9,6 +9,12 @@
     <%- include('../partial/config/config.ejs') %>
     <%- include('../partial/config/config-home.ejs') %>
     <link rel="stylesheet" href="/CSS/client/FaleConosco.css">
+
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
@@ -31,35 +37,50 @@
                 msgErro.nome = itemErro.msg;
                 cssErro.nome = "erroForm";
                 cssErroBorda.nome = "erroInput";
+                %>
+                    <script>notify('Verifique o campo nome', '<%= msgErro.nome %>', 'error')</script>
+                <%
             }
             else if (itemErro.path == "cpf") {
                 msgErro.cpf = itemErro.msg;
                 cssErro.cpf = "erroForm";
                 cssErroBorda.cpf = "erroInput";
-              
+                %>
+                <script>notify('Verifique o campo cpf', '<%= msgErro.cpf %>', 'error')</script>
+                <%
             }
             else if (itemErro.path == "email") {
                 msgErro.email = itemErro.msg;
                 cssErro.email = "erroForm";
                 cssErroBorda.email = "erroInput";
+                %>
+                <script>notify('Verifique o campo email', '<%= msgErro.email %>', 'error')</script>
+                <%
                
             }
             else if (itemErro.path == "tipo") {
                 msgErro.tipo = itemErro.msg;
                 cssErro.tipo = "erroForm";
                 cssErroBorda.tipo = "erroInput";
-               
+                %>
+                <script>notify('Verifique o campo tipo', '<%= msgErro.tipo %>', 'error')</script>
+                <%
             }
             else if (itemErro.path == "assunto") {
                 msgErro.assunto = itemErro.msg;
                 cssErro.assunto = "erroForm";
                 cssErroBorda.assunto = "erroInput";
-               
+                %>
+                <script>notify('Verifique o campo assunto', '<%= msgErro.assunto %>', 'error')</script>
+                <%
             }
             else if (itemErro.path == "mensagem") {
                 msgErro.mensagem = itemErro.msg;
                 cssErro.mensagem = "erroForm";
                 cssErroBorda.mensagem = "erroInput";
+                %>
+                <script>notify('Verifique o campo mensagem', '<%= msgErro.mensagem %>', 'error')</script>
+                <%
                
             }
         });
