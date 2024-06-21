@@ -11,9 +11,21 @@
     <link rel="stylesheet" href="/CSS/shipper/sidebar-config.css">
     <link rel="stylesheet" href="/CSS/shipper/notification-config.css">
     <link rel="stylesheet" href="/CSS/shipper/config.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
+
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('Alteração feita', '<%= msg.text %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
 
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 

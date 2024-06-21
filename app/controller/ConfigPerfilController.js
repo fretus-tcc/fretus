@@ -1,7 +1,7 @@
 const ConfigPerfilModel = require('../models/ConfigPerfilModel')
 const { body, validationResult } = require("express-validator");
 const cadastroModel = require('../models/cadastroModel')
-const { validaCPF } = require('../util/Funcao')
+const { validaCPF, notifyMessages } = require('../util/Funcao')
 
 const ConfigPerfilController = {
 
@@ -15,9 +15,10 @@ const ConfigPerfilController = {
             const result = await ConfigPerfilModel.findUserByType(id, type)
 
             const hasPermission = id == req.session.autenticado.id
+
+            const msgs = notifyMessages(req, res)
             
-            /* const msgs = notifyMessages(req, res) */
-            res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, hasPermission, isClient })
+            res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, hasPermission, isClient, msgs })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -27,11 +28,12 @@ const ConfigPerfilController = {
     showConfig: async (req, res, view, isClient) => {
         const { id } = req.session.autenticado
         try {
-            // console.log(id)
-            /* const result = await ConfigPerfilModel.findByUserId(id) */
             const type = isClient ? 1 : 2
             const result = await ConfigPerfilModel.findUserByType(id, type)
-            res.render(/* 'pages/cliente-entregador/configuracoes' */ view, { result: result[0], dados: null, erros: null, isClient, autenticado: req.session.autenticado })
+
+            const msgs = notifyMessages(req, res)
+
+            res.render(view, { result: result[0], dados: null, erros: null, isClient, autenticado: req.session.autenticado, msgs })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -57,7 +59,6 @@ const ConfigPerfilController = {
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            /* let fields = await ConfigPerfilModel.findByUserId(id) */
             const type = isClient ? 1 : 2
             const fields = await ConfigPerfilModel.findUserByType(id, type)
 
@@ -67,13 +68,14 @@ const ConfigPerfilController = {
                 erros: errors.mapped(),
                 autenticado: req.session.autenticado,
                 hasPermission,
-                isClient
+                isClient,
+                msgs: []
             })
         }
 
         await ConfigPerfilModel.updateUser(req.body, id)
         
-        // res.redirect(`/cliente/perfil/${id}`)
+        req.flash('success', `Usuário alterado com sucesso`)
         res.redirect(redirect)
 
         /* try {
@@ -94,7 +96,6 @@ const ConfigPerfilController = {
     },
 
     updateShipper: async (req, res, view, redirect) => {
-        // console.log(req.body)
         const { id } = req.params
         
         // verificando autorizao alterar perfil
@@ -107,18 +108,20 @@ const ConfigPerfilController = {
         if (!errors.isEmpty()) {
             const fields = await ConfigPerfilModel.findUserByType(id, 2)
 
-            return res.render(/* 'pages/cliente-entregador/perfil' */ view, {
+            return res.render(view, {
                 result: fields[0],
                 dados: req.body,
                 erros: errors.mapped(),
                 autenticado: req.session.autenticado,
                 hasPermission,
-                isClient: false
+                isClient: false,
+                msgs: []
             })
         }
         
         await ConfigPerfilModel.updateShipper(req.body, id)
-        res.redirect(/* `/entregador/perfil/${id}` */ redirect)
+        req.flash('success', `Usuário alterado com sucesso`)
+        res.redirect(redirect)
 
         /* try {
 
@@ -138,7 +141,6 @@ const ConfigPerfilController = {
     },
 
     updateVehicle: async (req, res, view, redirect) => {
-        // console.log(req.body)
         const { id } = req.params
         
         // verificando autorizao alterar perfil
@@ -151,18 +153,20 @@ const ConfigPerfilController = {
         if (!errors.isEmpty()) {
             const fields = await ConfigPerfilModel.findUserByType(id, 2)
 
-            return res.render(/* 'pages/cliente-entregador/perfil' */ view, {
+            return res.render(view, {
                 result: fields[0],
                 dados: req.body,
                 erros: errors.mapped(),
                 autenticado: req.session.autenticado,
                 hasPermission,
-                isClient: false
+                isClient: false,
+                msgs: []
             })
         }
         
         await ConfigPerfilModel.updateVehicle(req.body, req.body.id_entregador)
-        res.redirect(/* `/entregador/perfil/${id}` */ redirect)
+        req.flash('success', `Usuário alterado com sucesso`)
+        res.redirect(redirect)
 
         /* try {
 
