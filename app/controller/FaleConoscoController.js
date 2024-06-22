@@ -13,15 +13,20 @@ const FaleConoscoControl = {
                     dados: req.body,
                     listaErros: errors,
                     pagina: "FaleConosco",
-                    autenticado: req.session.autenticado
+                    autenticado: req.session.autenticado,
+                    dadosNotificacao: null
                 });
             }
             try {
                 await FaleConoscoModel.createFaleconosco(req.body);
-                
-                res.redirect('/')
 
-                /* req.flash('success', `mensagem enviada com sucesso`) */
+                res.render(
+                    "pages/index",
+                    {
+                        autenticado: req.session.autenticado, pagina: "home", dadosNotificacao: {
+                            titulo: "Enviado", mensagem: "Mensagem enviada com sucesso", tipo: "success"
+                        }
+                    });
 
             } catch (error) {
                 return error;

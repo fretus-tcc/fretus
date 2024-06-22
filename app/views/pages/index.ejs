@@ -15,9 +15,21 @@
     <link rel="stylesheet" href="/CSS/home/accordion.css">
     <link rel="stylesheet" href="/CSS/home/mobile-carousel.css">
     <link rel="stylesheet" href="/CSS/home/form-container.css">
+     <!-- SIMPLE NOTIFY - Notificações -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+     <script src="/JS/notify.js"></script>
+     <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
-
+    <% if (dadosNotificacao) { %>
+        <script>
+                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                if("<%= dadosNotificacao.tipo %>" == "success"){
+                    setTimeout(function(){window.location="/"}, 3000)
+                }                        
+        </script>
+    <% } %>
     <section class="hero">
         <%- include('../partial/header.ejs') %>
         <section>

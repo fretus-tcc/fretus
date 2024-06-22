@@ -18,7 +18,7 @@ const fields = [
 const upload = multer({ storage: multer.memoryStorage() }).fields(fields)
 
 router.get("/", function (req, res) {
-  res.render("pages/index", { autenticado: req.session.autenticado })
+  res.render("pages/index", { autenticado: req.session.autenticado, pagina:"home", dadosNotificacao: null })
 })
 
 /* ============================CADASTRO======================================== */
@@ -71,10 +71,9 @@ router.post(
   }
 )
 
-
 /* ===========================FaleConsoco======================================== */
 router.get('/FaleConosco', function (req, res) {
-  res.render('pages/FaleConosco', { autenticado: req.session.autenticado || false , listaErros: null, dados: null })
+  res.render('pages/FaleConosco', { autenticado: req.session.autenticado || false , listaErros: null, dados: null, dadosNotificacao: null })
 })
 router.post("/FaleConosco", FaleConoscoControl.regrasValidacao, async function (req, res) {
   FaleConoscoControl.MensagemFaleConosco(req, res);
