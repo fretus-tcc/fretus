@@ -79,9 +79,10 @@ VALUES ('Admin', '347.090.530-49', '(65) 97369-0035', '2022-01-01', 'admin@admin
 
 DROP TABLE IF EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador;
 CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
-  raio_de_atuacao FLOAT NOT NULL,
   id_usuario INT NOT NULL,
   id_entregador INT NOT NULL AUTO_INCREMENT,
+  raio_de_atuacao FLOAT NOT NULL,
+  status_disponivel INT NOT NULL DEFAULT '2',
   status_aprovacao INT NOT NULL DEFAULT '0',
   /* cnh_entregador VARCHAR(255) NOT NULL, */
   cnh_entregador MEDIUMBLOB NOT NULL,
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
+/* INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
 VALUES ('francisco', '731.571.950-42', '(96) 96924-6462', '2022-01-01', 'francisco@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
 
 INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador)
@@ -115,7 +116,7 @@ INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, 
 VALUES ('geraldo', '518.255.750-70', '(81) 97446-3199', '2022-01-01', 'geraldo@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
 
 INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador, status_aprovacao)
-VALUES ('3', '30', './cnh.pdf', '2');
+VALUES ('3', '30', './cnh.pdf', '2'); */
 
 CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.veiculos (
   id_veiculo INT NOT NULL AUTO_INCREMENT,
@@ -469,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`DENUNCIAS` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`FALE_CONOSCO` (
+/* CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`FALE_CONOSCO` (
   `id_solicitacao` INT NOT NULL AUTO_INCREMENT,
   `mensagem` TEXT(300) NOT NULL,
   `assunto` VARCHAR(45) NOT NULL,
@@ -481,6 +482,16 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`FALE_CONOSCO` (
     REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB; */
+
+CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`FaleConosco` (
+  id_solicitacao INT NOT NULL AUTO_INCREMENT,
+  tipo_usuario varchar(10) NOT NULL,
+  nome_usuario varchar(45) NOT NULL,
+  email_usuario varchar(45) NOT NULL,
+  cpf_usuario CHAR(14) NOT NULL,
+  assunto VARCHAR(45) NOT NULL,
+  mensagem TEXT(300) NOT NULL,
+    PRIMARY KEY (id_solicitacao)
+)  
 ENGINE = InnoDB;
-
-
