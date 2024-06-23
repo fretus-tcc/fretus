@@ -27,6 +27,21 @@
         <% }) %>
     <% } %>
 
+    <%
+        <!-- const customError = {} -->
+        if (erros) {
+            const keys = Object.keys(erros)
+            keys.forEach(key => {
+                const campoAtual = key
+                const msg = erros[campoAtual].msg 
+                %>
+                    <script>notify('<%= msg %>', 'Verifique este campo', 'error')</script>
+                <%
+            })
+            // console.log(customError)
+        }
+    %>
+
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 
     <main>

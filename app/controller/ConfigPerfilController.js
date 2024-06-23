@@ -189,17 +189,17 @@ const ConfigPerfilController = {
         body("nome_usuario")
             .optional()
             .isLength({ min: 3, max: 45 })
-            .withMessage("Nome invalido "),
+            .withMessage("Nome inválido, deve conter de 3 até 45 caracteres"),
 
         body("email_usuario")
             .optional()
             .isEmail()
-            .withMessage("Email invalido ")
+            .withMessage("Email inválido")
             .custom(async (value, { req }) => {
                 const { id } = req.params
                 const email = await cadastroModel.findByEmail(value, id)
                 if (email.length > 0) {
-                    throw new Error('Email já utilizado.');
+                    throw new Error('Email já utilizado');
                 }
                 return true;
 
@@ -208,17 +208,17 @@ const ConfigPerfilController = {
         body("telefone_usuario")
             .optional()
             .isLength({ min: 15 })
-            .withMessage('Telefone incompleto ')
+            .withMessage('Telefone incompleto')
             .bail()
             .isMobilePhone()
-            .withMessage('Telefone inválido ')
+            .withMessage('Telefone inválido')
             .bail()
             .custom(async (value, { req }) => {
                 const { id } = req.params
                 const tel = await cadastroModel.findByTel(value, id)
                 // console.log(tel)
                 if (tel.length > 0) {
-                    throw new Error('Telefone já utilizado.');
+                    throw new Error('Telefone já utilizado');
                 }
                 return true;
             }),
@@ -226,12 +226,12 @@ const ConfigPerfilController = {
         body("descricao_usuario")
             .optional()
             .isLength({ min: 10, max: 120 })
-            .withMessage("Deve conter de 10 até 120 caracteres"),
+            .withMessage("Descrição deve conter de 10 até 120 caracteres"),
 
         body("cpf_usuario")
             .optional()
             .isLength({ min: 14, max: 14 })
-            .withMessage("Cpf inválido ")
+            .withMessage("Cpf inválido")
             .bail()
             .custom(async (value, { req }) => {
                 if (validaCPF(value)) {
@@ -254,7 +254,7 @@ const ConfigPerfilController = {
         body("modelo_veiculo")
             .optional()
             .isLength({ min: 2, max: 45 })
-            .withMessage("Modelo de Veículo inválido"),
+            .withMessage("Modelo de Veículo inválido, deve conter de 2 até 45 caracteres"),
         
         body("placa")
             .optional()
@@ -272,9 +272,7 @@ const ConfigPerfilController = {
         body("data_usuario")
             .optional()
             .isLength({ min: 10 })
-            .withMessage('Data inválida ')
-            /* .toDate()
-            .withMessage('Data inválida ') */
+            .withMessage('Data inválida')
             .custom(value => {
                 const birthDate = new Date(value);
                 if (isNaN(birthDate.getTime())) {
@@ -297,7 +295,7 @@ const ConfigPerfilController = {
         body("raio_de_atuacao")
             .optional()
             .isFloat({ min: 1 })
-            .withMessage("Deve conter apenas números, que sejam maiores que 0"),
+            .withMessage("Raio de Atuação deve conter apenas números, que sejam maiores que 0"),
     ],
 
 }
