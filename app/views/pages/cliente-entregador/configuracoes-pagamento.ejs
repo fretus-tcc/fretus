@@ -25,7 +25,7 @@
                 <section class="sidebar-burguer">
                     <img src="/imgs/burguer-config-icon.png" alt="">
                 </section>
-                <form class="form-perfil" action="">
+                <form class="form-perfil" action="" method="post">
                     <h1 class="row">Pagamento</h1>
                     <p>Insira aqui seus metódos de pagamento.</p>
                     <section class="row">
@@ -36,7 +36,7 @@
                                 <article class="input-container">
                                     <input class="input-field" type="text" readonly value="**** **** **** 5693">
                                     <input type="button" class="btn" value="Cancelar">
-                                    <input type="button" class="btn confirm" value="Confirmar">
+                                    <button class="btn confirm">Confirmar</button>
                                 </article>
                                 <span class="changeCall">Alterar</span>
                             </section>
@@ -50,7 +50,7 @@
                                 <article class="input-container">
                                     <input class="input-field" type="text" readonly value="123e4567-e12b-12d1">
                                     <input type="button" class="btn" value="Cancelar">
-                                    <input type="button" class="btn confirm" value="Confirmar">
+                                    <button class="btn confirm">Confirmar</button>
                                 </article>
                                 <span class="changeCall">Alterar</span>
                             </section>
@@ -63,6 +63,9 @@
 
     <%- include('../../partial/menu-burguer.ejs', { type: isClient ? 'client' : 'shipper' }) %>
 
+    <script>
+        const noPermission = false
+    </script>
     <script src="/JS/burguer.js"></script>
     <script src="/JS/shipper/change.js"></script>
     <script src="/JS/shipper/burguer-config.js"></script>
