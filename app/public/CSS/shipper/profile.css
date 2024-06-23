@@ -14,7 +14,6 @@ main {
     margin: 0 auto;
     background-color: white;
     border-radius: 20px;
-    
 }
 
 .disable-form .action-perfil,
@@ -85,57 +84,70 @@ select[disabled]::-ms-expand {
 .edit-row > .input-container.edit textarea + span {
     display: block;
 }
+
 footer{
     padding: 25px; 
 }
 
 /* botao toggle */
-.botaoDisponivel {
-    display:flex;
-    justify-content: center;
-    gap:25px;
+.row-toogle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 28px;
 }
 
-.toggle {
-    display:none;
-}
-    
-.toggle + label {
-    width:60px;
-    height:30px;
-    background:lightslategrey;
-    display:block;
-    position:relative;
-    cursor:pointer;
-    transition:200ms;
-    border-radius:20px;
-    padding:2px;
-}
-    
-.toggle + label:before {
-    
-    content:'';
-    position:absolute;
-    width:30px;
-    height:30px;
-    background:white;
-    display:block;
-    border-radius:50%;
-    right:unset;
-    left:0px;
-    top:0px;
-    transition:200ms;
-    border:1px solid rgba(187, 180, 180, 0.61);
-}
-    
-.toggle:checked + label {
-    background-color:#ef9652;  
+.row-toogle .info {
+    display: flex;
+    align-items: center;
+    gap: 7px;
 }
 
-.toggle:checked + label:before {
-    content:'';
-    margin-left:49%;
-    box-shadow:0 4px 4px rgb(0 0 0/10%);
+.row-toogle .status-online {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: #24C46A;
+}
+
+.row-toogle .status-online.offline {
+    background-color: #c42424;
+}
+
+.row-toogle > input[type="checkbox"] {
+    display: none;
+}
+
+.row-toogle > .toogle {
+    display: block;
+    width: 48px;
+    height: 24px;
+    background-color: white;
+    border: solid 1px #DDDDDC;
+    border-radius: 15px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.toogle > .ball {
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    border: solid 1px #DDDDDC;
+    border-radius: 100%;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.35);
+    transition: all .3s;
+}
+
+.row-toogle > input[value="2"] + .toogle {
+    background-color: var(--orange);
+}
+
+.row-toogle > input[value="2"] + .toogle > .ball {
+    border: solid 1px #ef9652;
+    transform: translateX(100%);
 }
 
 /* periodo */

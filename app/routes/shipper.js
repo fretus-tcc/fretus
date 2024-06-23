@@ -59,6 +59,10 @@ router.put('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigP
     ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/perfil', `/entregador/perfil/${req.params.id}`);
 });
 
+router.put('/perfil-status/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
+    ConfigPerfilController.updateShipper(req, res, 'pages/cliente-entregador/perfil', `/entregador/perfil/${req.params.id}`, false);
+});
+
 router.put('/veiculo/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
     ConfigPerfilController.updateVehicle(req, res, 'pages/cliente-entregador/perfil', `/entregador/perfil/${req.params.id}`);
 });

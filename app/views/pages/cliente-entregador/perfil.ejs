@@ -46,29 +46,37 @@
     <main>
         <div class="profile-container">
 
-            <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
+            <div class="Seu-Perfil">
+                <h2>Seu Perfil</h2>
+            </div>
 
-                <div class="Seu-Perfil">
-                    <h2>Seu Perfil</h2>
+            <div class="action-perfil">
+                <label class="action__upload-btn" for="img-selector">Alterar sua foto de perfil</label>
+                <input type="file" name="" id="img-selector" class="action__hiddenField js__profile-upload-btn">
+            </div>
+            <div class="profile-p">
+                <div class="profile__image js__profile-image"
+                    style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
                 </div>
-                <div class="action-perfil">
-                    <label class="action__upload-btn" for="img-selector">Alterar sua foto de perfil</label>
-                    <input type="file" name="" id="img-selector" class="action__hiddenField js__profile-upload-btn">
-                </div>
-                <div class="profile-p">
-                    <div class="profile__image js__profile-image"
-                        style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
-                    </div>
-                </div>
+            </div>
                 
-                <% if (!isClient) { %>
-                    <aside class="botaoDisponivel">
-                        <p id="disponibilidade">Não disponível</p>
-                        <input id="toggle" onclick="disponivel()" class="toggle" type="checkbox">
-                        <label for="toggle"></label>
-                    </aside>
-                <% } %>
+            <% if (!isClient) { %>
+                <!-- 1 == false, 2 == true -->
+                <form class="form-perfil" action="/entregador/perfil-status/<%= result.id_usuario %>?_method=PUT" method="post">
+                    <section class="row row-toogle">
+                        <div class="info">
+                            <span class="status-online <%= result.status_disponivel == 1 ? 'offline' : '' %>"></span>
+                            <span><%= result.status_disponivel == 2 ? 'Disponível' : 'Indisponível' %></span>
+                        </div>
+                        <input type="checkbox" name="status_disponivel" value="<%= result.status_disponivel %>" id="status">
+                        <label for="status" class="toogle">
+                            <article class="ball"></article>
+                        </label>
+                    </section>
+                </form>
+            <% } %>
 
+            <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
                 <div class="row">
                     <label for="name">Nome: </label>
                     <div class="edit-row">
@@ -135,7 +143,7 @@
                         <label for="vehicles">Tipo do Veículo </label>
                         <section class="edit-row">
                             <!-- <article class="input-container"> -->
-                                <select name="tipo_veiculo" class="select-field" id="veiculo" <%= !hasPermission ? 'disabled' : '' %>>
+                                <select name="tipo_veiculo" class="select-field" id="vehicles" <%= !hasPermission ? 'disabled' : '' %>>
                                     <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
                                     <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
                                     <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
@@ -146,7 +154,7 @@
                         <span class="error"><%= erros?.tipo_veiculo?.msg %></span>
                     </section>
                     <section class="row">
-                        <label for="raio">Modelo do Veículo:</label>
+                        <label for="modelo_veiculo">Modelo do Veículo:</label>
                         <div class="edit-row">
                             <div class="input-container">
                                 <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="modelo_veiculo" value="<%= dados?.modelo_veiculo ?? result.modelo_veiculo %>">
@@ -191,7 +199,6 @@
     <script src="/JS/shipper/profile.js"></script>
     <!-- foto perfil, mascara telefone -->
     <script src="/JS/perfil.js"></script>
-    <script src="/JS/shipper/toggle.js"></script>
 </body>
 
 </html>

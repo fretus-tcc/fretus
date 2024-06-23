@@ -5,6 +5,7 @@ const input = document.querySelectorAll('.input-container > .input-field')
 const confirmCall = document.querySelectorAll('.input-container > .confirm')
 const select = document.querySelector('.select-field')
 const nasc = document.querySelector('#nasc')
+const toggle = document.querySelector('#status')
 
 if (!noPermission) {
     change.forEach((item, i) => {
@@ -28,6 +29,15 @@ if (!noPermission) {
     select?.addEventListener('change', () => {
         if (noPermission) return
         select.form.submit()
+    })
+
+    toggle?.addEventListener('click', () => {
+        // 1 == false, 2 == true
+        const checked = toggle.value == '2' ? '1' : '2'
+        console.log(checked);
+        toggle.value = checked
+        const formIndex = [...form].indexOf(toggle.form)
+        update(formIndex)
     })
     
     const update = (i) => {
