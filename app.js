@@ -28,7 +28,6 @@ app.use(flash())
 const main = require("./app/routes/main")
 app.use("/", main)
 
-
 const client = require("./app/routes/client")
 app.use("/cliente", client)
 
@@ -40,6 +39,9 @@ app.use("/admin", adm)
 
 const help = require("./app/routes/help")
 app.use("/admin/ajuda", help)
+
+const locaisPerigosos = require("./app/routes/locaisPerigosos")
+app.use("/locais-perigosos", locaisPerigosos)
 
 app.listen(port, () => {
   console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`)

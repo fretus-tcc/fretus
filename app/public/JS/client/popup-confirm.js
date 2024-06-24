@@ -11,7 +11,7 @@ const close = document.querySelector('.close')
 const priceContainer = document.querySelector('.price')
 
 submit.addEventListener('click', e => {
-  checkValidation()  
+  checkValidation()
   if (inputStart.validity.valid == true && inputEnd.validity.valid == true && vehicle.validity.valid && weight.validity.valid && checkValidation()) {
         e.preventDefault()
         popup.classList.add('show')
@@ -33,7 +33,6 @@ const setPrice = distance => {
     
     /* fazer os calculos aqui */
     const preco = calcularPreco(distance, typeVehicle);
-
     
     let price = f.format(preco) // linha que transforma qualquer valor em reais
     priceContainer.textContent = price // coloca o preco no popup
