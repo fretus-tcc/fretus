@@ -73,7 +73,12 @@ const ConfigPerfilController = {
             })
         }
 
-        await ConfigPerfilModel.updateUser(req.body, id)
+        // verifica se o formulario é de alterar foto de perfil, ou nao
+        if (req.file) {
+            await ConfigPerfilModel.updateUser({ foto_de_perfil: req.file.buffer }, id)
+        } else {
+            await ConfigPerfilModel.updateUser(req.body, id)
+        }
         
         req.flash('success', `Usuário alterado com sucesso`)
         res.redirect(redirect)

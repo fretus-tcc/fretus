@@ -1,11 +1,12 @@
 var express = require("express")
 var router = express.Router()
-
+const multer = require('multer')
 var pool = require("../../config/connection-factory");
 const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
-
 const ConfigPerfilController = require('../controller/ConfigPerfilController')
+
+const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
 router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     // formatando mensagens notificacao
@@ -34,9 +35,15 @@ router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), functio
     ConfigPerfilController.showProfile(req, res, true);
 });
 
-router.put('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
-    ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/perfil', `/cliente/perfil/${req.params.id}`, true);
-});
+router.put(
+    '/perfil/:id',
+    verificarUsuAutorizado([1], 'pages/restrito'),
+    upload,
+    ConfigPerfilController.regrasValidacaoPerfil,
+    function (req, res) {
+        ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/perfil', `/cliente/perfil/${req.params.id}`, true);
+    }
+);
 
 router.get('/escolher-entregador', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado })

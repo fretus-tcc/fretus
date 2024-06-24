@@ -16,13 +16,33 @@ main {
     border-radius: 20px;
 }
 
-.disable-form .action-perfil,
 .disable-form .changeCall {
     display: none;
 }
 
-.disable-form .profile__image {
+/* .disable-form .profile__image {
     top: 20px;
+} */
+
+.input-foto {
+    display: none;
+}
+
+.label-foto {
+    display: block;
+    width: fit-content;
+    font-weight: 700;
+    font-size: 1.2em;
+    color: var(--orange);
+    margin: auto;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.label-foto:hover {
+    text-decoration: underline;
+    color: chocolate;
 }
 
 .disable-form .botaoDisponivel {

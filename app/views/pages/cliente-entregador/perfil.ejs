@@ -27,7 +27,7 @@
     <% } %>
 
     <%
-        <!-- const customError = {} -->
+        // const customError = {}
         if (erros) {
             const keys = Object.keys(erros)
             keys.forEach(key => {
@@ -37,12 +37,11 @@
                     <script>notify('<%= msg %>', 'Verifique este campo', 'error')</script>
                 <%
             })
-            // console.log(customError)
         }
     %>
 
-    <%- include('../../partial/header-client-shipper.ejs', { isClient/* , autenticado: autenticado */ }) %>
-    <span><%# JSON.stringify(erros) %></span>
+    <%- include('../../partial/header-client-shipper.ejs', { isClient }) %>
+    
     <main>
         <div class="profile-container">
 
@@ -50,15 +49,18 @@
                 <h2>Seu Perfil</h2>
             </div>
 
-            <div class="action-perfil">
-                <label class="action__upload-btn" for="img-selector">Alterar sua foto de perfil</label>
-                <input type="file" name="" id="img-selector" class="action__hiddenField js__profile-upload-btn">
-            </div>
-            <div class="profile-p">
-                <div class="profile__image js__profile-image"
-                    style="background-image:url(https://via.placeholder.com/300x300/cccccc/666666/?text=Fretus)">
-                </div>
-            </div>
+            <% if (result?.foto_de_perfil) { %>
+                <img src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
+            <% } else { %>
+                <img src="https://via.placeholder.com/150x150/cccccc/666666/?text=Fretus">
+            <% } %>
+
+            <% if (hasPermission) { %>
+                <form action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post" enctype="multipart/form-data">
+                    <input type="file" name="foto_de_perfil" id="foto_perfil" class="input-foto">
+                    <label for="foto_perfil" class="label-foto">Alterar foto de perfil</label>
+                </form>
+            <% } %>
                 
             <% if (!isClient) { %>
                 <!-- 1 == false, 2 == true -->
@@ -131,27 +133,17 @@
             </form>
 
             <% if (!isClient) { %>
-                <!-- <section class="row">
-                    <label for="periodo">período de disponibilidade:</label>
-                    <aside class="edit-periodo">
-                        <input type="time">
-                        <span>até</span>
-                        <input type="time" name="periodo">
-                    </aside>
-                </section> -->
                 <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.id_usuario %>?_method=PUT" method="post">
                     <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
                     <section class="row">
-                        <label for="vehicles">Tipo do Veículo </label>
+                        <label for="vehicles">Tipo do Veículo</label>
                         <section class="edit-row">
-                            <!-- <article class="input-container"> -->
-                                <select name="tipo_veiculo" class="select-field" id="vehicles" <%= !hasPermission ? 'disabled' : '' %>>
-                                    <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
-                                    <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
-                                    <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
-                                    <option value="caminhao" <%= result.tipo_veiculo == 'caminhao' ? 'selected': '' %>>Caminhão</option>
-                                </select>
-                            <!-- </article> -->
+                            <select name="tipo_veiculo" class="select-field" id="vehicles" <%= !hasPermission ? 'disabled' : '' %>>
+                                <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
+                                <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
+                                <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
+                                <option value="caminhao" <%= result.tipo_veiculo == 'caminhao' ? 'selected': '' %>>Caminhão</option>
+                            </select>
                         </section>
                         <span class="error"><%= erros?.tipo_veiculo?.msg %></span>
                     </section>
@@ -167,17 +159,6 @@
                         </div>
                         <span class="error"><%= erros?.modelo_veiculo?.msg %></span>
                     </section>
-                    <!-- <section class="row">
-                        <label for="raio">Raio de Atuação</label>
-                        <div class="edit-row">
-                            <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Digite aqui seu raio de atuacao" readonly id="raio_de_atuacao" name="modelo_veiculo" value="<%= result.raio_de_atuacao %>">
-                                <input type="button" class="btn" value="Cancelar">
-                                <button class="btn confirm">Confirmar</button>
-                            </div>
-                            <span class="changeCall">Alterar</span>
-                        </div>
-                    </section> -->
                 </form>
             <% } %>
             <div class="containerm-p">
