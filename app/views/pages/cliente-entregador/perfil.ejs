@@ -68,10 +68,12 @@
                             <span class="status-online <%= result.status_disponivel == 1 ? 'offline' : '' %>"></span>
                             <span><%= result.status_disponivel == 2 ? 'Disponível' : 'Indisponível' %></span>
                         </div>
-                        <input type="checkbox" name="status_disponivel" value="<%= result.status_disponivel %>" id="status">
-                        <label for="status" class="toogle">
-                            <article class="ball"></article>
-                        </label>
+                        <% if (hasPermission) { %>
+                            <input type="checkbox" name="status_disponivel" value="<%= result.status_disponivel %>" id="status">
+                            <label for="status" class="toogle">
+                                <article class="ball"></article>
+                            </label>
+                        <% } %>
                     </section>
                 </form>
             <% } %>
