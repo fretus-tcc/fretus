@@ -49,11 +49,13 @@
                 <h2>Seu Perfil</h2>
             </div>
 
-            <% if (result?.foto_de_perfil) { %>
-                <img src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
-            <% } else { %>
-                <img src="https://via.placeholder.com/150x150/cccccc/666666/?text=Fretus">
-            <% } %>
+            <div class="img-container">
+                <% if (result?.foto_de_perfil) { %>
+                    <img src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
+                <% } else { %>
+                    <img src="https://via.placeholder.com/150x150/cccccc/666666/?text=Fretus">
+                <% } %>
+            </div>
 
             <% if (hasPermission) { %>
                 <form action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post" enctype="multipart/form-data">

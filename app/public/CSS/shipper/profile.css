@@ -24,6 +24,15 @@ main {
     top: 20px;
 } */
 
+.img-container img {
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 7px;
+    width: fit-content;
+    display: block;
+    margin: 18px auto;
+}
+
 .input-foto {
     display: none;
 }
