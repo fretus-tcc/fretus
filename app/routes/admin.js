@@ -59,10 +59,5 @@ router.put('/cadastroAdm/editar/:id', verificarUsuAutorizado([3], 'pages/restrit
 router.get('/AdmFaleConosco', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/FaleConosco/AdmFaleConosco')
 })
-router.get('/AdmFaleConosco', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    res.render('pages/adm/FaleConosco/AdmFaleConosco')
-})
-
-
 
 module.exports = router

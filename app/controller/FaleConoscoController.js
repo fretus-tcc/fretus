@@ -84,17 +84,6 @@ const FaleConoscoControl = {
 
     ],
 
-    // Detalhes
-    /*  listUsersId: async (req, res) => {
-         const { id } = req.params
-         try {
-             const result = await FaleConoscoModel.findByUserId(id)
-             res.render('pages/adm/CadastroAdmGeral/detealhesAd', { result, id })
-         } catch (error) {
-             res.json({ error })
-         }
-     }, */
-
 
 };
 
