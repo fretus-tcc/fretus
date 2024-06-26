@@ -83,6 +83,20 @@
     text-decoration: underline;
 }
 
+.img-container img {
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 7px;
+    display: block;
+    width: min(80%, 750px);
+}
+
+@media (max-width: 800px) {
+    .img-container img {
+        width: 100% !important;
+    }
+}
+
 /* ! Perfil */
 
 .action-perfil {

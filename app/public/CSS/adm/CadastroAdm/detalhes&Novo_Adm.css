@@ -27,7 +27,7 @@ main {
     justify-content: center;
     margin: 20px 0;
     padding: 20px;
-    background: linear-gradient(to right, yellow, green);
+    /* background: linear-gradient(to right, yellow, green); */
     min-height: 100px;
     max-height: 300px;
 }

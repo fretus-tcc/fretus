@@ -137,8 +137,10 @@
                     </form>
                     <h2 style="text-decoration: underline;">Documentos</h2>
                     <br>
-                    <img style="width: 100%;" src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
-                <% } %> 
+                    <div class="img-container">
+                        <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
+                    </div>
+                <% } %>
             </section>
         </section>
     </main>
