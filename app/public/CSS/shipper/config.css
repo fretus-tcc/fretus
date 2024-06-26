@@ -85,16 +85,36 @@
 
 .img-container img {
     max-height: 300px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 7px;
     display: block;
-    width: min(80%, 750px);
+    width: 100%;
 }
 
-@media (max-width: 800px) {
-    .img-container img {
-        width: 100% !important;
-    }
+.see-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.see-container .see {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.600);
+    height: 100%;
+    border-radius: 7px;
+    opacity: 0;
+    transition: all .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.see-container:hover .see {
+    opacity: 1;
 }
 
 /* ! Perfil */

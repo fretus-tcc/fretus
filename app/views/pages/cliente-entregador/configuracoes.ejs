@@ -138,7 +138,10 @@
                     <h2 style="text-decoration: underline;">Documentos</h2>
                     <br>
                     <div class="img-container">
-                        <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
+                        <a class="see-container" href="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" data-lity>
+                            <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>" alt="">
+                            <div class="see">Clique para ver em tela cheia</div>
+                        </a>
                     </div>
                 <% } %>
             </section>
@@ -155,6 +158,8 @@
     <script src="/JS/shipper/burguer-config.js"></script>
     <!-- <script src="/JS/perfil.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js" integrity="sha512-UU0D/t+4/SgJpOeBYkY+lG16MaNF8aqmermRIz8dlmQhOlBnw6iQrnt4Ijty513WB3w+q4JO75IX03lDj6qQNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css" integrity="sha512-UiVP2uTd2EwFRqPM4IzVXuSFAzw+Vo84jxICHVbOA1VZFUyr4a6giD9O3uvGPFIuB2p3iTnfDVLnkdY7D/SJJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="/JS/login-cadastro/mascara.js"></script>
 </body>
