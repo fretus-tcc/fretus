@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Escolher Entregador</title>
     <%- include('../../partial/config/config.ejs') %>
-    <%- include('../../partial/config/config-client-shipper.ejs') %>
-    <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
-    <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
-    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
-    <link rel="stylesheet" href="/CSS/client/pay-popup.css">
-    <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
+        <%- include('../../partial/config/config-client-shipper.ejs') %>
+            <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
+            <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
+            <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+            <link rel="stylesheet" href="/CSS/client/pay-popup.css">
+            <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
 </head>
 
 <body>
@@ -38,8 +38,15 @@
                             <h1>João</h1>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                             <article class="actions">
-                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                                <section class="description_button">
+                                    <button class="indicator">
+                                        <span><b>Descrição</b></span>
+                                    </button>
+                                </section>
+                                <section class="actions_icon">
+                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                                </section>
                             </article>
                         </section>
                     </section>
@@ -63,8 +70,15 @@
                             <h1>João</h1>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                             <article class="actions">
-                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                                <section class="description_button">
+                                    <button class="indicator">
+                                        <span><b>Descrição</b></span>
+                                    </button>
+                                </section>
+                                <section class="actions_icon">
+                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                                </section>
                             </article>
                         </section>
                     </section>
@@ -88,8 +102,15 @@
                             <h1>João</h1>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                             <article class="actions">
-                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                                <section class="description_button">
+                                    <button class="indicator">
+                                        <span><b>Descrição</b></span>
+                                    </button>
+                                </section>
+                                <section class="actions_icon">
+                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                                </section>
                             </article>
                         </section>
                     </section>
@@ -138,15 +159,17 @@
         </main>
         <section class="notification-container"></section>
 
+        <%- include('../../partial/popup/description.ejs') %>
         <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
-            <script src="/JS/burguer.js"></script>
-            <script src="/JS/client/shipper-carousel.js"></script>
-            <script src="/JS/client/show-notification.js"></script>
-            <script src="/JS/client/fav.js"></script>
-            <script src="/JS/client/show-shipper.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
-            <script src="/JS/client/pay-popup.js"></script>
+                <script src="/JS/burguer.js"></script>
+                <!--   <script src="/JS/client/shipper-carousel.js"></script> -->
+                <script src="/JS/client/show-notification.js"></script>
+                <script src="/JS/client/fav.js"></script>
+                <script src="/JS/client/show-shipper.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+                <script src="/JS/client/pay-popup.js"></script>
+                <script src="/JS/shipper/description.js"></script>
 </body>
 
 </html>
