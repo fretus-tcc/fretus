@@ -83,24 +83,12 @@ main {
 .products .actions {
     display: flex;
     gap: 7px;
-    justify-content: space-between;
+    justify-content: end;
     margin-top: 40px;
     margin-left: auto;
     align-items: center;
 }
-.actions_icon{
-    display: flex;
-}
-.description_button button{
-    padding: 13px 30%;
-    cursor: pointer;
-    border-radius: 15px;
-    color: #fff;
-    background-color: orange;
-    border: 2px solid orange;
-    transition: 200ms all ease-in-out;
 
-}
 .description_button button:hover{
     color: orange;
     background-color: transparent;
