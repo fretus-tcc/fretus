@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="/imgs/logotca.png" type="image/x-icon">
     <link rel="stylesheet" href="/CSS/index.css">
     <link rel="stylesheet" href="/CSS/cadastro/cadastro.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- SIMPLE NOTIFY - Notificações -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
@@ -125,6 +127,23 @@
                     <span class="<%= cssErro.senha %>">
                         <%= msgErro.senha %>
                     </span>
+                    <div class="requirements-container">
+                        <h1>Senha deve conter:</h1>
+                        <ul class="requirements-list">
+                            <li class="requirements-item">
+                                <i class="fa-solid fa-circle"></i> Pelo menos 8 caracteres
+                            </li>
+                            <li class="requirements-item">
+                                <i class="fa-solid fa-circle"></i> Pelo menos 1 letra
+                            </li>
+                            <li class="requirements-item">
+                                <i class="fa-solid fa-circle"></i> Pelo menos 1 número
+                            </li>
+                            <li class="requirements-item">
+                                <i class="fa-solid fa-circle"></i> Pelo menos 1 caractere especial
+                            </li>
+                        </ul>
+                    </div>
                     <!-- <p id="messageSenha"></p> -->
                     <!--  <label for="password" class="input__label"></label> -->
                     <img alt="Eye Icon" title="Eye Icon" src="/imgs/login-cadastro/eye-off.svg" class="input__icon">
@@ -154,8 +173,9 @@
         </section> -->
           
 
-        <script src="/JS/login-cadastro/validacao.js"></script>
+        <!-- <script src="/JS/login-cadastro/validacao.js"></script> -->
         <script src="/JS/login-cadastro/eye.js"></script>
+        <script src="/JS/login-cadastro/password-requirements.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
         <script src="/JS/login-cadastro/mascara.js"></script>
