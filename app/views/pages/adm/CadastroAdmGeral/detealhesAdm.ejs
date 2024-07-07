@@ -27,102 +27,102 @@
         <% }) %>
     <% } %>
 
-        <main>
-            <section class="LinkUser">
-                <% if (result.tipo_usuario =="1") { %>
-                    <a href="/admin/cadastroAdm/clientes">
-                        <h3><- volta para página anterior </h3>
-                    </a>
-                <% } else { %>
-                    <a href="/admin/cadastroAdm/entregador">
-                        <h3><- volta para página anterior </h3>
-                    </a>
-                <% } %>
-                <h2 style="margin: 30px 0;">Usuário - nome: <%= result.nome_usuario %></h2>
-            </section>
+    <main>
+        <section class="LinkUser">
+            <% if (result.tipo_usuario =="1") { %>
+                <a href="/admin/cadastroAdm/clientes">
+                    <h3><- volta para página anterior </h3>
+                </a>
+            <% } else { %>
+                <a href="/admin/cadastroAdm/entregador">
+                    <h3><- volta para página anterior </h3>
+                </a>
+            <% } %>
+            <h2 style="margin: 30px 0;">Usuário - nome: <%= result.nome_usuario %></h2>
+        </section>
 
-            <section class="containerDetealhes">
-                <section class="ContainerAdm_Use">
-                    <header class="Header_container">
-                        <article class="boxDados">
-                            <span class="name_user">Nome: <%= result.nome_usuario %></span>
-                        </article>
-                        <article class="boxDados">
-                            <span>Status: Status </span>
-                        </article>
-                    </header>
+        <section class="containerDetealhes">
+            <section class="ContainerAdm_Use">
+                <header class="Header_container">
+                    <article class="boxDados">
+                        <span class="name_user">Nome: <%= result.nome_usuario %></span>
+                    </article>
+                    <article class="boxDados">
+                        <span>Status: Status </span>
+                    </article>
+                </header>
 
-                    <article class="DadosUserIMG">
-                        <% if (result.foto_de_perfil != null) { %>
-                            <img src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
+                <article class="DadosUserIMG">
+                    <% if (result.foto_de_perfil != null) { %>
+                        <img src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
+                    <% } else { %>
+                        <h2>Usuário não adicionou foto de perfil</h2>
+                    <% } %>      
+                </article>
+
+                <article class="boxDados DADOS">
+                    <p><b>Nome:</b> <%= result.nome_usuario %></p>
+                    <br>
+                    <p><b>Cpf:</b> <%= result.cpf_usuario %></p>
+                    <br>
+                    <p><b>E-mail:</b> <%= result.email_usuario %></p>
+                    <br>
+                    <p><b>Telefone:</b> <%= result.telefone_usuario %></p>
+                    <br>
+                    <p><b>Data de Nascimento:</b>
+                        <%= new Date(result.data_usuario).toLocaleDateString('pt-br', { year:"numeric", month:"short", day:"numeric"}) %>
+                    </p>
+                    <br>
+                        
+                    <% if (result.tipo_usuario == "2") { %>
+
+                        <% if (!isSubscribed) { %>
+                            <h1>Entregador ainda não finalizou cadastro</h1>
                         <% } else { %>
-                            <img src="/imgs/adm/incon_people.svg">
-                        <% } %>      
-                    </article>
+                            <p><b>Raio de Atuação:</b> <%= result.raio_de_atuacao %></p>
+                            <br>
+                            <p><b>Status Aprovação:</b> <%= result.status_aprovacao %></p>
+                            <br>
 
-                    <article class="boxDados DADOS">
-                        <p><b>Nome:</b> <%= result.nome_usuario %></p>
-                        <br>
-                        <p><b>Cpf:</b> <%= result.cpf_usuario %></p>
-                        <br>
-                        <p><b>E-mail:</b> <%= result.email_usuario %></p>
-                        <br>
-                        <p><b>Telefone:</b> <%= result.telefone_usuario %></p>
-                        <br>
-                        <p><b>Data de Nascimento:</b>
-                            <%= new Date(result.data_usuario).toLocaleDateString('pt-br', { year:"numeric", month:"short", day:"numeric"}) %>
-                        </p>
-                        <br>
-                            
-                        <% if (result.tipo_usuario == "2") { %>
-
-                            <% if (!isSubscribed) { %>
-                                <h1>Entregador ainda não finalizou cadastro</h1>
-                            <% } else { %>
-                                <p><b>Raio de Atuação:</b> <%= result.raio_de_atuacao %></p>
+                            <section class="DocumentoUserEnt">
+                                <h1>Veículos:</h1>
+                                <article class="DadosUserIMG">
+                                    <img src="data:image/png;base64,<%= result.foto_veiculo.toString('base64') %>">
+                                </article>
+                                <p><b>Tipo de Veículo:</b> <%= result.tipo_veiculo %></p>
                                 <br>
-                                <p><b>Status Aprovação:</b> <%= result.status_aprovacao %></p>
+                                <p><b>Modelo de Veículo:</b> <%= result.modelo_veiculo %></p>
                                 <br>
-    
-                                <section class="DocumentoUserEnt">
-                                    <h1>Veículos:</h1>
-                                    <article class="DadosUserIMG">
-                                        <img src="data:image/png;base64,<%= result.foto_veiculo.toString('base64') %>">
-                                    </article>
-                                    <p><b>Tipo de Veículo:</b> <%= result.tipo_veiculo %></p>
-                                    <br>
-                                    <p><b>Modelo de Veículo:</b> <%= result.modelo_veiculo %></p>
-                                    <br>
-                                    <p><b>Placa do Veículo:</b> <%= result.placa %></p>
-                                    <br>
-    
-                                    <h1>Documentos:</h1>
-                                    <article class="DadosUserIMG">
-                                        <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>">
-                                    </article>
+                                <p><b>Placa do Veículo:</b> <%= result.placa %></p>
+                                <br>
 
-                                    <% if (result.status_aprovacao == 0) { %>
-                                        <div class="btns">
-                                            <form action="/admin/cadastroAdm/status/<%= id %>?_method=PUT" method="post">
-                                                <input type="hidden" name="status_aprovacao" value="1">
-                                                <button class="cta" type="submit">Negar</button>
-                                            </form>
-                                            <form action="/admin/cadastroAdm/status/<%= id %>?_method=PUT" method="post">
-                                                <input type="hidden" name="status_aprovacao" value="2">
-                                                <button class="cta" type="submit">Aprovar</button>
-                                            </form>
-                                        </div>
-                                    <% } %>
-                                </section>
-                            <% } %>
+                                <h1>Documentos:</h1>
+                                <article class="DadosUserIMG">
+                                    <img src="data:image/png;base64,<%= result.cnh_entregador.toString('base64') %>">
+                                </article>
+
+                                <% if (result.status_aprovacao == 0) { %>
+                                    <div class="btns">
+                                        <form action="/admin/cadastroAdm/status/<%= id %>?_method=PUT" method="post">
+                                            <input type="hidden" name="status_aprovacao" value="1">
+                                            <button class="cta" type="submit">Negar</button>
+                                        </form>
+                                        <form action="/admin/cadastroAdm/status/<%= id %>?_method=PUT" method="post">
+                                            <input type="hidden" name="status_aprovacao" value="2">
+                                            <button class="cta" type="submit">Aprovar</button>
+                                        </form>
+                                    </div>
+                                <% } %>
+                            </section>
                         <% } %>
+                    <% } %>
 
-                    </article>
-                </section>
+                </article>
             </section>
-        </main>
+        </section>
+    </main>
 
-        <script src="/JS/adm/sidebar.js"></script>
+    <script src="/JS/adm/sidebar.js"></script>
 </body>
 
 </html>

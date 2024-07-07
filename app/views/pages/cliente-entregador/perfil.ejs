@@ -53,7 +53,7 @@
                 <% if (result?.foto_de_perfil) { %>
                     <img src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
                 <% } else { %>
-                    <img src="https://via.placeholder.com/150x150/cccccc/666666/?text=Fretus">
+                    <img src="https://placehold.co/350x350?font=montserrat&text=<%= result.nome_usuario %>" alt="">
                 <% } %>
             </div>
 
