@@ -32,8 +32,12 @@ gravarUsuAutenticado = async (req, res, next) => {
             ]
         }
 
-        var results = await usuario.findByEmail(req.body.email); 
-        var total = Object.keys(results).length;
+        var results = await usuario.findByEmail(req.body.email);
+
+        // Filtra apenas os usuários ativos, para que os usuarios desativados não possam logar nas suas contas
+        var activeUsers = results.filter(item => item.status_usuario == 1)
+
+        var total = Object.keys(activeUsers).length;
         if (total == 1) {
             if (bcrypt.compareSync(req.body.senha, results[0].senha_usuario)) {
                 var autenticado = {
@@ -73,8 +77,14 @@ gravarUsuAutenticadoCadastro = (req, res, next) => {
 }
 
 verificarUsuAutorizado = (tipoPermitido, destinoFalha) => {
-    return (req, res, next) => {
-        if (req.session?.autenticado != null && tipoPermitido.find((item) => { return item == req.session.autenticado.tipo }) != undefined) {
+    return async (req, res, next) => {
+        var results = await usuario.findById(req.session?.autenticado?.id);
+
+        // Filtra apenas os usuários ativos, para que os usuarios desativados não possam logar nas suas contas
+        var activeUsers = results.filter(item => item.status_usuario == 1)
+        var total = Object.keys(activeUsers).length;
+
+        if (total != 0 && req.session?.autenticado != null && tipoPermitido.find((item) => { return item == req.session.autenticado.tipo }) != undefined) {
             next();
         } else {
             res.render(destinoFalha, { autenticado: req.session.autenticado });

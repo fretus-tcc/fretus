@@ -16,6 +16,14 @@ const tarefasModel = {
             throw error; 
         }
     },
+    findById: async (id) => {
+        try { 
+            const [linhas] = await pool.query(`SELECT * FROM usuario WHERE id_usuario = ?`, [id])
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
     findByEmail: async (data, id) => {
         try { 
             const [linhas] = await pool.query(`SELECT * FROM usuario WHERE email_usuario = ? ${id ? 'AND id_usuario != ?' : ''}` , [ data, id ])
