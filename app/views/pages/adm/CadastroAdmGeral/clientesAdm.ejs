@@ -44,7 +44,7 @@
     </a> -->
     <% results.forEach(item=> { %>
 
-        <section class="ContainerAdm_Use">
+        <section class="ContainerAdm_Use <%= item.status_usuario == 0 ? 'disabled' : '' %>">
             <article class="boxDados">
                 <h3>Nome Usuário: </h3>
                 <p>
@@ -66,19 +66,23 @@
             <article class="boxDados">
                 <h3>Status Usuário: </h3>
                 <p>
-                    Status
+                    <%= item.status_usuario == 1 ? 'Ativo' : 'Desativado' %>
                 </p>
             </article>
             <section class="boXaCao">
                 <h3>Ações: </h3>
                 <section class="flex">
-                   <!--  <a href="/admin/cadastroAdm/editar/<%= item.id_usuario %>">
+                    <!-- <a href="/admin/cadastroAdm/editar/<%= item.id_usuario %>">
                         <button class="button1">Editar</button>
-                    </a>  -->   
-                        <a href="/admin/cadastroAdm/detalhesAdm/<%= item.id_usuario %>">
-                            <button class="button2">Detalhes</button>
-                        </a>
-                        <form class="delete-form" action="/admin/cadastroAdm/delete/<%= item.id_usuario %>/<%= item.tipo_usuario %>?_method=DELETE" method="post">
+                    </a>  -->
+                    <a href="/admin/cadastroAdm/detalhesAdm/<%= item.id_usuario %>">
+                        <button class="button2">Detalhes</button>
+                    </a>
+                    <form class="delete-form" action="/admin/cadastroAdm/update/<%= item.id_usuario %>?_method=PUT" method="post">
+                        <input type="hidden" name="status_usuario" value="<%= item.status_usuario == 1 ? '0' : '1' %>">
+                        <button class="button1"><%= item.status_usuario == 1 ? 'Desativar' : 'Ativar' %></button>
+                    </form>
+                    <form class="delete-form" action="/admin/cadastroAdm/delete/<%= item.id_usuario %>/<%= item.tipo_usuario %>?_method=DELETE" method="post">
                         <button class="delete button3">Excluir</button>
                     </form>
                 </section>

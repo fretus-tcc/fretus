@@ -146,40 +146,16 @@ const admCadastroController = {
             res.json({ error })
         }
     },
-    // Editar - Atualizar User
     updateUser: async (req, res) => {
         const { id } = req.params
-        const errors = validationResult(req);
-        const result = await admCadastroModel.findByUserId(id);
-
-        if (!errors.isEmpty()) {
-            const dados = req.body;
-
-            return res.render('pages/adm/CadastroAdmGeral/editar', {
-                result: result[0],
-                id,
-                msgs: [],
-                listaErros: errors,
-                dados: dados
-            })
-        }
-
         try {
-
-            const data = {
-                nome_usuario: req.body.nome,
-                email_usuario: req.body.email,
-                cpf_usuario: req.body.cpf,
-                telefone_usuario: req.body.tel,
-            }
-            await admCadastroModel.updateUser(data, id)
-            req.flash('info', 'Usuário atualizado')
-            res.redirect(`/admin/cadastroAdm/editar/${id}`)
-
+            await admCadastroModel.updateUser(req.body, id)
+            req.flash('success', 'Usuário Atualizado')
+            res.redirect('back')
         } catch (error) {
+            console.log(error)
             res.json({ error })
         }
-
     },
     //Excluir usuário da tabela 
     deleteUse: async (req, res) => {

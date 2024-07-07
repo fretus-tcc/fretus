@@ -48,7 +48,7 @@
                         <span class="name_user">Nome: <%= result.nome_usuario %></span>
                     </article>
                     <article class="boxDados">
-                        <span>Status: Status </span>
+                        <span>Status: <%= result.status_usuario == 1 ? 'Ativo' : 'Desativado' %></span>
                     </article>
                 </header>
 

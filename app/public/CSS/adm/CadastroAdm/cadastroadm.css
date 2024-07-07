@@ -101,6 +101,10 @@ main {
     border-radius: 10px;
 }
 
+.ContainerAdm_Use.disabled {
+    opacity: .5;
+}
+
 .boxDados {
     display: flex;
     flex-direction: column;
