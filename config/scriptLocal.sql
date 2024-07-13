@@ -1,6 +1,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+/* SET time_zone = "+00:00"; */
 
 CREATE DATABASE fretus;
 USE fretus;
@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.detalhamento_entregador (
   id_entregador INT NOT NULL AUTO_INCREMENT,
   raio_de_atuacao FLOAT NOT NULL,
   status_disponivel INT NOT NULL DEFAULT '2',
+  data_disponivel DATETIME NULL,
   status_aprovacao INT NOT NULL DEFAULT '0',
   /* cnh_entregador VARCHAR(255) NOT NULL, */
   cnh_entregador MEDIUMBLOB NOT NULL,
@@ -135,6 +136,20 @@ CREATE TABLE IF NOT EXISTS FRETUS.detalhamento_entregador (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Create a trigger that will update the data_disponivel column if status_disponivel changes.
+drop trigger if exists upd_disponivel;
+delimiter //
+create trigger upd_disponivel BEFORE UPDATE ON detalhamento_entregador
+FOR EACH ROW
+BEGIN
+  IF (  (old.status_disponivel is not null and new.status_disponivel is not null and old.status_disponivel <> new.status_disponivel)
+      OR (old.status_disponivel is null and new.status_disponivel is not null)
+      OR (old.status_disponivel is not null and new.status_disponivel is null)  ) THEN
+    SET NEW.data_disponivel = CURRENT_TIMESTAMP();
+  END IF;
+END;//
+delimiter ;
 
 /* INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
 VALUES ('francisco', '731.571.950-42', '(96) 96924-6462', '2022-01-01', 'francisco@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
@@ -219,29 +234,202 @@ ENGINE = InnoDB; */
 -- -----------------------------------------------------
 -- Table FRETUS.PEDIDOS
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.PEDIDOS (
+CREATE TABLE IF NOT EXISTS FRETUS.pedidos (
   id_pedido INT NOT NULL AUTO_INCREMENT,
-  data_pedido DATETIME NOT NULL,
-  preco_sugerido_pedido DECIMAL(10,2) NOT NULL,
-  id_usuario_cliente INT NOT NULL,
+  id_cliente INT NOT NULL,
+  id_entregador INT NULL,
+  latitude_partida DECIMAL(8,6) NOT NULL,
+  longitude_partida DECIMAL(9,6) NOT NULL,
+  latitude_destino DECIMAL(8,6) NOT NULL,
+  longitude_destino DECIMAL(9,6) NOT NULL,
+  agendamento INT NOT NULL,
+  data_agendamento DATETIME NULL,
+  horario_agendamento DATETIME NULL,
+  cod_carga ENUM('P', 'M', 'G') NOT NULL,
+  veiculo_pedido VARCHAR(45) NOT NULL,
+  /* preco_sugerido_pedido DECIMAL(10,2) NOT NULL, */
+  preco_pedido DECIMAL(10,2) NOT NULL,
+  data_solicitacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+  /* id_usuario_cliente INT NOT NULL,
   data_agendada DATETIME NULL,
-  id_entregador INT NOT NULL,
-  PRIMARY KEY (id_pedido),
+  id_entregador INT NOT NULL, */
+  PRIMARY KEY (id_pedido), 
   UNIQUE INDEX IDPEDIDO_UNIQUE (id_pedido ASC) VISIBLE,
-  INDEX fk_PEDIDOS_USUARIOS1_idx (id_usuario_cliente ASC) VISIBLE,
+  INDEX fk_PEDIDOS_USUARIOS1_idx (id_cliente ASC) VISIBLE,
   INDEX fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1_idx (id_entregador ASC) VISIBLE,
   CONSTRAINT fk_PEDIDOS_USUARIOS1
-    FOREIGN KEY (id_usuario_cliente)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
+    FOREIGN KEY (id_cliente)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1
     FOREIGN KEY (id_entregador)
-    REFERENCES FRETUS.DETALHAMENTO_ENTREGADOR (id_entregador)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table FRETUS.entregadores_pedidos
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.entregadores_pedidos (
+  id_pedido INT NOT NULL,
+  id_entregador INT NOT NULL,
+  status_resposta ENUM('ACEITO', 'NEGADO') NULL,
+  PRIMARY KEY (id_pedido, id_entregador),
+  INDEX fk_PEDIDOS_ENTREGADORES1_idx (id_pedido ASC) VISIBLE,
+  INDEX fk_ENTREGADORES_PEDIDOS1_idx (id_entregador ASC) VISIBLE,
+  CONSTRAINT fk_PEDIDOS_ENTREGADORES1
+    FOREIGN KEY (id_pedido)
+    REFERENCES FRETUS.pedidos (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_ENTREGADORES_PEDIDOS1
+    FOREIGN KEY (id_entregador)
+    REFERENCES FRETUS.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table FRETUS.status_entrega
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.status_entrega (
+  id_status INT NOT NULL AUTO_INCREMENT,
+  id_pedido INT NOT NULL,
+  status_entrega INT NOT NULL,
+  data_status DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_status), 
+  UNIQUE INDEX IDSTATUS_UNIQUE (id_status ASC) VISIBLE,
+  INDEX fk_PEDIDOS_STATUS1_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_PEDIDOS_STATUS1
+    FOREIGN KEY (id_pedido)
+    REFERENCES FRETUS.pedidos (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table FRETUS.historico
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.historico (
+  id_entrega INT NOT NULL AUTO_INCREMENT,
+  data_realizada DATETIME NOT NULL,
+  tempo_realizada_horas INT NOT NULL,
+  id_pedido INT NOT NULL,
+  id_entrega_registrada INT NOT NULL,
+  cep_entrega CHAR(8) NOT NULL,
+  complemento_entrega VARCHAR(45) NOT NULL,
+  num_entrega INT NOT NULL,
+  tempo_realizada_minutos INT NOT NULL,
+  observacao_cliente TEXT(200) NULL,
+  terminio_entrega DATETIME NOT NULL,
+  id_pagamento INT NOT NULL,
+  PRIMARY KEY (id_entrega),
+  INDEX fk_ENTREGA_REALIZADA_PEDIDOS1_idx (id_pedido ASC) VISIBLE,
+  INDEX fk_historico_PAGAMENTOS1_idx (id_pagamento ASC) VISIBLE,
+  CONSTRAINT fk_ENTREGA_REALIZADA_PEDIDOS1
+    FOREIGN KEY (id_pedido)
+    REFERENCES FRETUS.PEDIDOS (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_historico_PAGAMENTOS1
+    FOREIGN KEY (id_pagamento)
+    REFERENCES FRETUS.PAGAMENTOS (id_pagamento)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+/* -- -----------------------------------------------------
+-- Table FRETUS.PRODUTOS_ENTREGA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.PRODUTOS_ENTREGA (
+  id_produto INT NOT NULL AUTO_INCREMENT,
+  peso FLOAT NULL,
+  id_pedido INT NOT NULL,
+  tamanho_produto VARCHAR(45) NOT NULL,
+  tipo_veiculo_solicitado VARCHAR(45) NOT NULL,
+  cod_tamanho INT NOT NULL,
+  altura_produto FLOAT NULL,
+  comprimento_produto FLOAT NULL,
+  PRIMARY KEY (id_produto),
+  INDEX fk_PRODUTOS_ENTREGA_PEDIDOS1_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_PRODUTOS_ENTREGA_PEDIDOS1
+    FOREIGN KEY (id_pedido)
+    REFERENCES FRETUS.PEDIDOS (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB; */
+
+
+-- -----------------------------------------------------
+-- Table FRETUS.AC_ENTREGA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.AC_ENTREGA (
+  id_ac INT NOT NULL,
+  nome_ac VARCHAR(45) NOT NULL,
+  cpf_ac CHAR(11) NOT NULL,
+  endereco_ac VARCHAR(45) NOT NULL,
+  id_entrega INT NOT NULL,
+  PRIMARY KEY (id_ac),
+  UNIQUE INDEX cpf_ac_UNIQUE (cpf_ac ASC) VISIBLE,
+  INDEX fk_AC_ENTREGA_ENTREGA_REALIZADA1_idx (id_entrega ASC) VISIBLE,
+  CONSTRAINT fk_AC_ENTREGA_ENTREGA_REALIZADA1
+    FOREIGN KEY (id_entrega)
+    REFERENCES FRETUS.historico (id_entrega)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+/* -- -----------------------------------------------------
+-- Table FRETUS.DESTINO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.DESTINO (
+  id_coleta_entrega INT NOT NULL AUTO_INCREMENT,
+  endereco VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_coleta_entrega),
+  UNIQUE INDEX IDENTREGAS_UNIQUE (id_coleta_entrega ASC) VISIBLE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table FRETUS.COLETA
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.COLETA (
+  id_coleta INT NOT NULL,
+  endereco_coleta VARCHAR(45) NOT NULL,
+  cep_colerta CHAR(8) NOT NULL,
+  id_pedido INT NOT NULL,
+  PRIMARY KEY (id_coleta),
+  UNIQUE INDEX cep_colerta_UNIQUE (cep_colerta ASC) VISIBLE,
+  INDEX fk_COLETA_PEDIDOS1_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_COLETA_PEDIDOS1
+    FOREIGN KEY (id_pedido)
+    REFERENCES FRETUS.PEDIDOS (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table FRETUS.COLETA_has_DESTINO
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.COLETA_has_DESTINO (
+  COLETA_id_coleta INT NOT NULL,
+  DESTINO_id_coleta_entrega INT NOT NULL,
+  PRIMARY KEY (COLETA_id_coleta, DESTINO_id_coleta_entrega),
+  INDEX fk_COLETA_has_DESTINO_DESTINO1_idx (DESTINO_id_coleta_entrega ASC) VISIBLE,
+  INDEX fk_COLETA_has_DESTINO_COLETA1_idx (COLETA_id_coleta ASC) VISIBLE,
+  CONSTRAINT fk_COLETA_has_DESTINO_COLETA1
+    FOREIGN KEY (COLETA_id_coleta)
+    REFERENCES FRETUS.COLETA (id_coleta)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_COLETA_has_DESTINO_DESTINO1
+    FOREIGN KEY (DESTINO_id_coleta_entrega)
+    REFERENCES FRETUS.DESTINO (id_coleta_entrega)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB; */
 
 -- -----------------------------------------------------
 -- Table FRETUS.CUPONS
@@ -270,18 +458,6 @@ CREATE TABLE IF NOT EXISTS FRETUS.CUPONS (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table FRETUS.DESTINO
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.DESTINO (
-  id_coleta_entrega INT NOT NULL AUTO_INCREMENT,
-  endereco VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_coleta_entrega),
-  UNIQUE INDEX IDENTREGAS_UNIQUE (id_coleta_entrega ASC) VISIBLE)
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table FRETUS.RAKING
@@ -382,100 +558,6 @@ CREATE TABLE IF NOT EXISTS FRETUS.PAGAMENTOS (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table FRETUS.historico
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.historico (
-  id_entrega INT NOT NULL AUTO_INCREMENT,
-  data_realizada DATETIME NOT NULL,
-  tempo_realizada_horas INT NOT NULL,
-  id_pedido INT NOT NULL,
-  id_entrega_registrada INT NOT NULL,
-  cep_entrega CHAR(8) NOT NULL,
-  complemento_entrega VARCHAR(45) NOT NULL,
-  num_entrega INT NOT NULL,
-  tempo_realizada_minutos INT NOT NULL,
-  observacao_cliente TEXT(200) NULL,
-  terminio_entrega DATETIME NOT NULL,
-  id_pagamento INT NOT NULL,
-  PRIMARY KEY (id_entrega),
-  INDEX fk_ENTREGA_REALIZADA_PEDIDOS1_idx (id_pedido ASC) VISIBLE,
-  INDEX fk_historico_PAGAMENTOS1_idx (id_pagamento ASC) VISIBLE,
-  CONSTRAINT fk_ENTREGA_REALIZADA_PEDIDOS1
-    FOREIGN KEY (id_pedido)
-    REFERENCES FRETUS.PEDIDOS (id_pedido)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_historico_PAGAMENTOS1
-    FOREIGN KEY (id_pagamento)
-    REFERENCES FRETUS.PAGAMENTOS (id_pagamento)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table FRETUS.PRODUTOS_ENTREGA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.PRODUTOS_ENTREGA (
-  id_produto INT NOT NULL AUTO_INCREMENT,
-  peso FLOAT NULL,
-  id_pedido INT NOT NULL,
-  tamanho_produto VARCHAR(45) NOT NULL,
-  tipo_veiculo_solicitado VARCHAR(45) NOT NULL,
-  cod_tamanho INT NOT NULL,
-  altura_produto FLOAT NULL,
-  comprimento_produto FLOAT NULL,
-  PRIMARY KEY (id_produto),
-  INDEX fk_PRODUTOS_ENTREGA_PEDIDOS1_idx (id_pedido ASC) VISIBLE,
-  CONSTRAINT fk_PRODUTOS_ENTREGA_PEDIDOS1
-    FOREIGN KEY (id_pedido)
-    REFERENCES FRETUS.PEDIDOS (id_pedido)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table FRETUS.AC_ENTREGA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.AC_ENTREGA (
-  id_ac INT NOT NULL,
-  nome_ac VARCHAR(45) NOT NULL,
-  cpf_ac CHAR(11) NOT NULL,
-  endereco_ac VARCHAR(45) NOT NULL,
-  id_entrega INT NOT NULL,
-  PRIMARY KEY (id_ac),
-  UNIQUE INDEX cpf_ac_UNIQUE (cpf_ac ASC) VISIBLE,
-  INDEX fk_AC_ENTREGA_ENTREGA_REALIZADA1_idx (id_entrega ASC) VISIBLE,
-  CONSTRAINT fk_AC_ENTREGA_ENTREGA_REALIZADA1
-    FOREIGN KEY (id_entrega)
-    REFERENCES FRETUS.historico (id_entrega)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table FRETUS.COLETA
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.COLETA (
-  id_coleta INT NOT NULL,
-  endereco_coleta VARCHAR(45) NOT NULL,
-  cep_colerta CHAR(8) NOT NULL,
-  id_pedido INT NOT NULL,
-  PRIMARY KEY (id_coleta),
-  UNIQUE INDEX cep_colerta_UNIQUE (cep_colerta ASC) VISIBLE,
-  INDEX fk_COLETA_PEDIDOS1_idx (id_pedido ASC) VISIBLE,
-  CONSTRAINT fk_COLETA_PEDIDOS1
-    FOREIGN KEY (id_pedido)
-    REFERENCES FRETUS.PEDIDOS (id_pedido)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table FRETUS.CHAT
 -- -----------------------------------------------------
@@ -538,28 +620,6 @@ CREATE TABLE IF NOT EXISTS FRETUS.avaliacoes (
   CONSTRAINT fk_avaliacoes_RAKING1
     FOREIGN KEY (RAKING_id_posicao)
     REFERENCES FRETUS.RAKING (id_posicao)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table FRETUS.COLETA_has_DESTINO
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.COLETA_has_DESTINO (
-  COLETA_id_coleta INT NOT NULL,
-  DESTINO_id_coleta_entrega INT NOT NULL,
-  PRIMARY KEY (COLETA_id_coleta, DESTINO_id_coleta_entrega),
-  INDEX fk_COLETA_has_DESTINO_DESTINO1_idx (DESTINO_id_coleta_entrega ASC) VISIBLE,
-  INDEX fk_COLETA_has_DESTINO_COLETA1_idx (COLETA_id_coleta ASC) VISIBLE,
-  CONSTRAINT fk_COLETA_has_DESTINO_COLETA1
-    FOREIGN KEY (COLETA_id_coleta)
-    REFERENCES FRETUS.COLETA (id_coleta)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_COLETA_has_DESTINO_DESTINO1
-    FOREIGN KEY (DESTINO_id_coleta_entrega)
-    REFERENCES FRETUS.DESTINO (id_coleta_entrega)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
