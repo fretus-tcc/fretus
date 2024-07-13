@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
   id_entregador INT NOT NULL AUTO_INCREMENT,
   raio_de_atuacao FLOAT NOT NULL,
   status_disponivel INT NOT NULL DEFAULT '2',
+  data_disponivel DATETIME NULL,
   status_aprovacao INT NOT NULL DEFAULT '0',
   /* cnh_entregador VARCHAR(255) NOT NULL, */
   cnh_entregador MEDIUMBLOB NOT NULL,
@@ -137,7 +138,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.veiculos (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CEP` (
+CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.`CEP` (
   `id_cep` INT NOT NULL AUTO_INCREMENT,
   `complemento` VARCHAR(45) NOT NULL,
   `num` INT NOT NULL,
@@ -153,25 +154,71 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CEP` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`PEDIDOS` (
-  `id_pedido` INT NOT NULL AUTO_INCREMENT,
-  `data_pedido` DATETIME NOT NULL,
-  `preco_sugerido_pedido` DECIMAL(10,2) NOT NULL,
-  `id_usuario_cliente` INT NOT NULL,
-  `data_agendada` DATETIME NULL,
-  `id_entregador` INT NOT NULL,
-  PRIMARY KEY (`id_pedido`),
-  UNIQUE INDEX `IDPEDIDO_UNIQUE` (`id_pedido` ASC) VISIBLE,
-  INDEX `fk_PEDIDOS_USUARIOS1_idx` (`id_usuario_cliente` ASC) VISIBLE,
-  INDEX `fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1_idx` (`id_entregador` ASC) VISIBLE,
-  CONSTRAINT `fk_PEDIDOS_USUARIOS1`
-    FOREIGN KEY (`id_usuario_cliente`)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
+CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.pedidos (
+  id_pedido INT NOT NULL AUTO_INCREMENT,
+  id_cliente INT NOT NULL,
+  id_entregador INT NULL,
+  latitude_partida DECIMAL(8,6) NOT NULL,
+  longitude_partida DECIMAL(9,6) NOT NULL,
+  latitude_destino DECIMAL(8,6) NOT NULL,
+  longitude_destino DECIMAL(9,6) NOT NULL,
+  agendamento INT NOT NULL,
+  data_agendamento DATETIME NULL,
+  horario_agendamento DATETIME NULL,
+  cod_carga ENUM('P', 'M', 'G') NOT NULL,
+  veiculo_pedido VARCHAR(45) NOT NULL,
+  /* preco_sugerido_pedido DECIMAL(10,2) NOT NULL, */
+  preco_pedido DECIMAL(10,2) NOT NULL,
+  data_solicitacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+  /* id_usuario_cliente INT NOT NULL,
+  data_agendada DATETIME NULL,
+  id_entregador INT NOT NULL, */
+  PRIMARY KEY (id_pedido), 
+  UNIQUE INDEX IDPEDIDO_UNIQUE (id_pedido ASC) VISIBLE,
+  INDEX fk_PEDIDOS_USUARIOS1_idx (id_cliente ASC) VISIBLE,
+  INDEX fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1_idx (id_entregador ASC) VISIBLE,
+  CONSTRAINT fk_PEDIDOS_USUARIOS1
+    FOREIGN KEY (id_cliente)
+    REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1`
-    FOREIGN KEY (`id_entregador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.detalhamento_entregador (`id_entregador`)
+  CONSTRAINT fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1
+    FOREIGN KEY (id_entregador)
+    REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.entregadores_pedidos (
+  id_pedido INT NOT NULL,
+  id_entregador INT NOT NULL,
+  status_resposta ENUM('ACEITO', 'NEGADO') NULL,
+  PRIMARY KEY (id_pedido, id_entregador),
+  INDEX fk_PEDIDOS_ENTREGADORES1_idx (id_pedido ASC) VISIBLE,
+  INDEX fk_ENTREGADORES_PEDIDOS1_idx (id_entregador ASC) VISIBLE,
+  CONSTRAINT fk_PEDIDOS_ENTREGADORES1
+    FOREIGN KEY (id_pedido)
+    REFERENCES bzt6iht1cder66rlnctv.pedidos (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_ENTREGADORES_PEDIDOS1
+    FOREIGN KEY (id_entregador)
+    REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.status_entrega (
+  id_status INT NOT NULL AUTO_INCREMENT,
+  id_pedido INT NOT NULL,
+  status_entrega INT NOT NULL,
+  data_status DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_status), 
+  UNIQUE INDEX IDSTATUS_UNIQUE (id_status ASC) VISIBLE,
+  INDEX fk_PEDIDOS_STATUS1_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_PEDIDOS_STATUS1
+    FOREIGN KEY (id_pedido)
+    REFERENCES bzt6iht1cder66rlnctv.pedidos (id_pedido)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -199,13 +246,6 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CUPONS` (
     REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`DESTINO` (
-  `id_coleta_entrega` INT NOT NULL AUTO_INCREMENT,
-  `endereco` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_coleta_entrega`),
-  UNIQUE INDEX `IDENTREGAS_UNIQUE` (`id_coleta_entrega` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`RAKING` (
@@ -311,30 +351,12 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`historico` (
   INDEX `fk_historico_PAGAMENTOS1_idx` (`id_pagamento` ASC) VISIBLE,
   CONSTRAINT `fk_ENTREGA_REALIZADA_PEDIDOS1`
     FOREIGN KEY (`id_pedido`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`PEDIDOS` (`id_pedido`)
+    REFERENCES `bzt6iht1cder66rlnctv`.pedidos (`id_pedido`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_historico_PAGAMENTOS1`
     FOREIGN KEY (`id_pagamento`)
     REFERENCES `bzt6iht1cder66rlnctv`.`PAGAMENTOS` (`id_pagamento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`PRODUTOS_ENTREGA` (
-  `id_produto` INT NOT NULL AUTO_INCREMENT,
-  `peso` FLOAT NULL,
-  `id_pedido` INT NOT NULL,
-  `tamanho_produto` VARCHAR(45) NOT NULL,
-  `tipo_veiculo_solicitado` VARCHAR(45) NOT NULL,
-  `cod_tamanho` INT NOT NULL,
-  `altura_produto` FLOAT NULL,
-  `comprimento_produto` FLOAT NULL,
-  PRIMARY KEY (`id_produto`),
-  INDEX `fk_PRODUTOS_ENTREGA_PEDIDOS1_idx` (`id_pedido` ASC) VISIBLE,
-  CONSTRAINT `fk_PRODUTOS_ENTREGA_PEDIDOS1`
-    FOREIGN KEY (`id_pedido`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`PEDIDOS` (`id_pedido`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -351,21 +373,6 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`AC_ENTREGA` (
   CONSTRAINT `fk_AC_ENTREGA_ENTREGA_REALIZADA1`
     FOREIGN KEY (`id_entrega`)
     REFERENCES `bzt6iht1cder66rlnctv`.`historico` (`id_entrega`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`COLETA` (
-  `id_coleta` INT NOT NULL,
-  `endereco_coleta` VARCHAR(45) NOT NULL,
-  `cep_colerta` CHAR(8) NOT NULL,
-  `id_pedido` INT NOT NULL,
-  PRIMARY KEY (`id_coleta`),
-  UNIQUE INDEX `cep_colerta_UNIQUE` (`cep_colerta` ASC) VISIBLE,
-  INDEX `fk_COLETA_PEDIDOS1_idx` (`id_pedido` ASC) VISIBLE,
-  CONSTRAINT `fk_COLETA_PEDIDOS1`
-    FOREIGN KEY (`id_pedido`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`PEDIDOS` (`id_pedido`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -425,24 +432,6 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`avaliacoes` (
   CONSTRAINT `fk_avaliacoes_RAKING1`
     FOREIGN KEY (`RAKING_id_posicao`)
     REFERENCES `bzt6iht1cder66rlnctv`.`RAKING` (`id_posicao`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`COLETA_has_DESTINO` (
-  `COLETA_id_coleta` INT NOT NULL,
-  `DESTINO_id_coleta_entrega` INT NOT NULL,
-  PRIMARY KEY (`COLETA_id_coleta`, `DESTINO_id_coleta_entrega`),
-  INDEX `fk_COLETA_has_DESTINO_DESTINO1_idx` (`DESTINO_id_coleta_entrega` ASC) VISIBLE,
-  INDEX `fk_COLETA_has_DESTINO_COLETA1_idx` (`COLETA_id_coleta` ASC) VISIBLE,
-  CONSTRAINT `fk_COLETA_has_DESTINO_COLETA1`
-    FOREIGN KEY (`COLETA_id_coleta`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`COLETA` (`id_coleta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_COLETA_has_DESTINO_DESTINO1`
-    FOREIGN KEY (`DESTINO_id_coleta_entrega`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`DESTINO` (`id_coleta_entrega`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
