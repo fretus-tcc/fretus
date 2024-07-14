@@ -1,7 +1,7 @@
 const inputStart = document.querySelector('.start')
 const inputEnd = document.querySelector('.end')
-const weight = document.querySelector('input[name="weight"]')
-const vehicle = document.querySelector('input[name="vehicles"]')
+const weight = document.querySelector('input[name="carga"]')
+const vehicle = document.querySelector('input[name="veiculo"]')
 const submit = document.querySelector('[type="submit"].cta')
 const popup = document.querySelector('.popup')
 const formContainer = document.querySelector('main > .form')
@@ -24,15 +24,15 @@ submit.addEventListener('click', e => {
     }
 })
 
-const setPrice = distance => {
-    const typeVehicle = document.querySelector('input[name="vehicles"]:checked').id // pega o tipo do veiculo
+const setPrice = async (distance) => {
+    const typeVehicle = document.querySelector('input[name="veiculo"]:checked').value // pega o tipo do veiculo
     const f = new Intl.NumberFormat('pt-br', {
         currency: 'BRL',
         style: 'currency'
     }) // classe que transforma qualquer valor em reais
     
     /* fazer os calculos aqui */
-    const preco = calcularPreco(distance, typeVehicle);
+    const preco = await calcularPreco(distance, typeVehicle);
     
     let price = f.format(preco) // linha que transforma qualquer valor em reais
     priceContainer.textContent = price // coloca o preco no popup
@@ -51,24 +51,12 @@ close.addEventListener('click', () => {
 
 //var distancia = (route.distance/1000)
 //typeVehicle = document.querySelector('input[name="vehicles"]:checked').id
-function calcularPreco(distancia,veiculo) {
-    let precoPorKm;
-
-    if (veiculo=== 'bike') {
-      precoPorKm = 2;
-    } else if (veiculo=== 'car') {
-      precoPorKm = 4;
-    } else if (veiculo === 'truck') {
-      precoPorKm = 15;
-    } else if(veiculo === 'van'){
-      precoPorKm = 9; 
-      
-    }
-  
-    var precoTotal = distancia * precoPorKm;
-
-    return precoTotal;
-  }
+async function calcularPreco(distancia,veiculo) {
+  const resObj = await fetch(`/locais-perigosos/calcular/preco?veiculo=${veiculo}&distancia=${distancia}`)
+  const dataRes = await resObj.json()
+  // console.log(dataRes);
+  return dataRes.precoTotal
+}
  
   // DIMENSÃO DO ENTREGA MAIS KILOMETRAGEM
 

@@ -70,6 +70,25 @@ function sendEmail(to, subject, text) {
     })
 }
 
+function calcularPrecoEntrega(veiculo, distancia) {
+    let precoPorKm;
+
+    if (veiculo === 'moto') {
+        precoPorKm = 2;
+    } else if (veiculo === 'carro') {
+        precoPorKm = 4;
+    } else if (veiculo === 'caminhao') {
+        precoPorKm = 15;
+    } else if (veiculo === 'van') {
+        precoPorKm = 9;
+    } else {
+        return 'ERRO: veiculo não encontrado'
+    }
+
+    var precoTotal = distancia * precoPorKm;
+    return precoTotal
+}
+
 /* function ZeroEsqueda (num){
     return num >=10 ? num : `0${num}`;
 }
@@ -90,3 +109,4 @@ function age(data){
 exports.validaCPF = validaCPF;
 exports.notifyMessages = notifyMessages;
 exports.sendEmail = sendEmail;
+exports.calcularPrecoEntrega = calcularPrecoEntrega;

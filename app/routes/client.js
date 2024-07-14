@@ -5,13 +5,18 @@ var pool = require("../../config/connection-factory");
 const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
 const ConfigPerfilController = require('../controller/ConfigPerfilController')
+const pedidosController = require('../controller/pedidosController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
 router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     // formatando mensagens notificacao
     const msgs = notifyMessages(req, res)
-    res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs })
+    res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs, loading: false })
+})
+
+router.post('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    pedidosController.createPedido(req, res)
 })
 
 router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {

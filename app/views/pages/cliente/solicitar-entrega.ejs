@@ -40,13 +40,13 @@
     <main>
         <section class="form">
             <section class="form-wrapper">
-                <form class="form-container">
+                <form action="/cliente/solicitar-entrega" method="post" class="form-container">
                     <h1>Solicitar Entrega</h1>
-                    <input type="text" required="" class="address start" placeholder="Local de partida">
+                    <input name="partida" type="text" required="" class="address start" placeholder="Local de partida">
                     <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
                     </aside>
-                    <input type="text" required="" class="address end" placeholder="Local de destino">
+                    <input name="destino" type="text" required="" class="address end" placeholder="Local de destino">
                     <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
                     </aside>
@@ -54,7 +54,7 @@
                     
                     <section class="toogle-container">
                         <span>Entrega Imediata</span>
-                        <input type="checkbox" name="schedule" id="schedule">
+                        <input type="checkbox" name="agendamento" id="schedule">
                         <label for="schedule" class="toogle">
                             <article class="ball"></article>
                         </label>
@@ -62,29 +62,29 @@
                     </section>
                     <section class="schedules-container">
                         <aside class="schedule-content">
-                            <input type="date" class="date-time">
-                            <input type="time" class="date-time">
+                            <input name="data_agendamento" type="date" class="date-time">
+                            <input name="hora_agendamento" type="time" class="date-time">
                         </aside>
                     </section>
                     
                     <section class="weight-container">
                         <h2>Carga</h2>
                         <div class="content">
-                            <input required type="radio" name="weight" id="s">
+                            <input required type="radio" name="carga" value="P" id="s">
                             <label for="s">
                                 <article class="card">
                                     <img src="/imgs/client/small-icon.svg" alt="">
                                     <h2>Pequena</h2>
                                 </article>
                             </label>
-                            <input type="radio" name="weight" id="m">
+                            <input type="radio" name="carga" value="M" id="m">
                             <label for="m">
                                 <article class="card">
                                     <img src="/imgs/client/medium-icon.svg" alt="">
                                     <h2>Média</h2>
                                 </article>
                             </label>
-                            <input type="radio" name="weight" id="l">
+                            <input type="radio" name="carga" value="G" id="l">
                             <label for="l">
                                 <article class="card">
                                     <img src="/imgs/client/large-icon.svg" alt="">
@@ -97,28 +97,28 @@
                     <section class="vehicles-container">
                         <h2>Veículos</h2>
                         <section class="content">
-                            <input data-index="0" required type="radio" name="vehicles" id="bike">
+                            <input data-index="0" required type="radio" name="veiculo" value="moto" id="bike">
                             <label for="bike">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-motocicleta-50.png" alt="">
                                     <h2>Moto</h2>
                                 </article>
                             </label>
-                            <input data-index="1" type="radio" name="vehicles" id="car">
+                            <input data-index="1" type="radio" name="veiculo" value="carro" id="car">
                             <label for="car">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-carro-50.png" alt="">
                                     <h2>Carro</h2>
                                 </article>
                             </label>
-                            <input data-index="2" type="radio" name="vehicles" id="van">
+                            <input data-index="2" type="radio" name="veiculo" value="van" id="van">
                             <label for="van">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-van-50.png" alt="">
                                     <h2>Van</h2>
                                 </article>
                             </label>
-                            <input data-index="3" type="radio" name="vehicles" id="truck">
+                            <input data-index="3" type="radio" name="veiculo" value="caminhao" id="truck">
                             <label for="truck">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-semi-truck-side-view-50.png " alt="">
@@ -127,7 +127,7 @@
                             </label>
                         </section>
                     </section>
-                    <input type="submit" value="Continuar" class="cta">
+                    <input type="submit" value="Continuar" class="cta entrega-submit">
                 </form>
             </section>
         </section>
@@ -143,26 +143,26 @@
                     <img src="/imgs/client/close-icon.svg" alt="">
                 </div>
                 <article class="popup-wrapper">
-                    <h1>Preço Sugerido: <span class="price"></span><a href="#" class="indicator">?</a></h1>
+                    <h1>Preço do seu pedido:</h1>
                     <p>Você pode escolher negociar esse preço com o entregador. Essa escolha aparecerá para o entregador, que poderá ou não negociar com você. A negociação será feita pelo chat, e não nos responsabilizamos por nada disso.</p>
                     <aside class="confirm">
                         <input type="checkbox" name="confirm-negotiation" id="confirm-negotiation">
                         <label for="confirm-negotiation">Entendo essas condições e desejo negociar o preço.</label>
                     </aside>
-                    <a href="#" id="continue-button" class="cta">Continuar</a>
+                    <button id="continue-button" class="cta">Continuar</a>
                 </article>
             </article>
         </section>
 
-        <!-- todo: tela de carrregamento  -->
-
-        <section class="loader-container" id="loader-container">
-            <article class="loader-content">
-                <aside class="loader"></aside>
-                <h2 class="loader-message">Por Favor, Aguarde</h2>
-                <p class="loader-message">Em busca de motoristas disponíveis...</p>
-            </article>
-        </section>
+        <% if (loading) { %>
+            <section class="loader-container" id="loader-container">
+                <article class="loader-content">
+                    <aside class="loader"></aside>
+                    <h2 class="loader-message">Por Favor, Aguarde</h2>
+                    <p class="loader-message">Em busca de motoristas disponíveis...</p>
+                </article>
+            </section>
+        <% } %>
     </main>
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
@@ -170,8 +170,11 @@
     <script src="/JS/burguer.js"></script>
     <!-- <script src="/JS/client/vehicles-carousel.js"></script> -->
     <script src="/JS/client/geolocation.js"></script>
+    <!-- seta o preço -->
     <script src="/JS/client/popup-confirm.js"></script>
+    <!-- valida a carga -->
     <script src="/JS/client/weight-validation.js"></script>
+    <!-- envia formulario -->
     <script src="/JS/client/carregamento.js"></script>
 </body>
 </html>

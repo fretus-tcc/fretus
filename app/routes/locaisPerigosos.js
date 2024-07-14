@@ -1,5 +1,6 @@
 var express = require("express")
 var router = express.Router()
+var { calcularPrecoEntrega } = require("../util/Funcao")
 
 router.get('/:cidade', function (req, res) {
     var CidadesOeste = ["barueri", "osasco", "itapevi", "jandira", "carapicuiba", "santanadeparnaiba", "pirapora"];
@@ -49,6 +50,12 @@ router.get('/:cidade', function (req, res) {
     
     res.json({cidade, zona, perigo})
     
+})
+
+router.get('/calcular/preco', function(req, res) {
+    const { veiculo, distancia } = req.query
+    const precoTotal = calcularPrecoEntrega(veiculo, distancia)
+    res.json({veiculo, distancia, precoTotal});
 })
 
 module.exports = router

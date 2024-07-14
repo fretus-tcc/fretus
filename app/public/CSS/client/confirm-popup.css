@@ -149,7 +149,7 @@ input[type="file"] {
 /* todo: tela de carregamento  de carregamento  */
 
 .loader-container {
-    display: none;
+    display: flex;
     position: fixed; 
     top: 0;
     left: 0;
