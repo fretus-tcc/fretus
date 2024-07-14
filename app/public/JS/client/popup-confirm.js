@@ -10,7 +10,7 @@ const backForm = document.querySelector('.return-form')
 const close = document.querySelector('.close')
 const priceContainer = document.querySelector('.price')
 
-submit.addEventListener('click', async (e) => {
+submit.addEventListener('click', (e) => {
   checkValidation()
   if (inputStart.validity.valid == true && inputEnd.validity.valid == true && vehicle.validity.valid && weight.validity.valid && checkValidation()) {
         e.preventDefault()
@@ -19,7 +19,7 @@ submit.addEventListener('click', async (e) => {
         backForm.classList.add('show')
         map.resize()
         setZoomRoute(route)
-        await setPrice(route.distance / 1000)
+        setPrice(route.distance / 1000)
         popup.classList.add('show')
     }
 })
