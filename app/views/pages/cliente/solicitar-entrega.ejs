@@ -38,18 +38,22 @@
     <% } %>
 
     <main>
-        <section class="form">
+        <section class="form <%= loading ? 'mobile' : '' %>">
             <section class="form-wrapper">
                 <form action="/cliente/solicitar-entrega" method="post" class="form-container">
                     <h1>Solicitar Entrega</h1>
-                    <input name="partida" type="text" required="" class="address start" placeholder="Local de partida">
+                    <input class="hidden-coords" type="hidden" name="partida_coords" value="<%= dados?.partida_coords %>">
+                    <input name="partida" type="text" required="" value="<%= dados?.partida %>" class="address start" placeholder="Local de partida" autocomplete="off">
                     <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
                     </aside>
-                    <input name="destino" type="text" required="" class="address end" placeholder="Local de destino">
+
+                    <input class="hidden-coords" type="hidden" name="destino_coords" value="<%= dados?.destino_coords %>">
+                    <input name="destino" type="text" required="" value="<%= dados?.destino %>" class="address end" placeholder="Local de destino" autocomplete="off">
                     <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
                     </aside>
+
                     <h2>Agendamento</h2>
                     
                     <section class="toogle-container">
@@ -70,21 +74,21 @@
                     <section class="weight-container">
                         <h2>Carga</h2>
                         <div class="content">
-                            <input required type="radio" name="carga" value="P" id="s">
+                            <input required type="radio" name="carga" value="P" id="s" <%= dados?.carga == 'P' ? 'checked' : '' %>>
                             <label for="s">
                                 <article class="card">
                                     <img src="/imgs/client/small-icon.svg" alt="">
                                     <h2>Pequena</h2>
                                 </article>
                             </label>
-                            <input type="radio" name="carga" value="M" id="m">
+                            <input type="radio" name="carga" value="M" id="m" <%= dados?.carga == 'M' ? 'checked' : '' %>>
                             <label for="m">
                                 <article class="card">
                                     <img src="/imgs/client/medium-icon.svg" alt="">
                                     <h2>Média</h2>
                                 </article>
                             </label>
-                            <input type="radio" name="carga" value="G" id="l">
+                            <input type="radio" name="carga" value="G" id="l" <%= dados?.carga == 'G' ? 'checked' : '' %>>
                             <label for="l">
                                 <article class="card">
                                     <img src="/imgs/client/large-icon.svg" alt="">
@@ -97,28 +101,28 @@
                     <section class="vehicles-container">
                         <h2>Veículos</h2>
                         <section class="content">
-                            <input data-index="0" required type="radio" name="veiculo" value="moto" id="bike">
+                            <input data-index="0" required type="radio" name="veiculo" value="moto" id="bike" <%= dados?.veiculo == 'moto' ? 'checked' : '' %>>
                             <label for="bike">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-motocicleta-50.png" alt="">
                                     <h2>Moto</h2>
                                 </article>
                             </label>
-                            <input data-index="1" type="radio" name="veiculo" value="carro" id="car">
+                            <input data-index="1" type="radio" name="veiculo" value="carro" id="car" <%= dados?.veiculo == 'carro' ? 'checked' : '' %>>
                             <label for="car">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-carro-50.png" alt="">
                                     <h2>Carro</h2>
                                 </article>
                             </label>
-                            <input data-index="2" type="radio" name="veiculo" value="van" id="van">
+                            <input data-index="2" type="radio" name="veiculo" value="van" id="van" <%= dados?.veiculo == 'van' ? 'checked' : '' %>>
                             <label for="van">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-van-50.png" alt="">
                                     <h2>Van</h2>
                                 </article>
                             </label>
-                            <input data-index="3" type="radio" name="veiculo" value="caminhao" id="truck">
+                            <input data-index="3" type="radio" name="veiculo" value="caminhao" id="truck" <%= dados?.veiculo == 'caminhao' ? 'checked' : '' %>>
                             <label for="truck">
                                 <article class="card">
                                     <img src="/imgs/client/Solicitar/icons8-semi-truck-side-view-50.png " alt="">
@@ -132,8 +136,8 @@
             </section>
         </section>
 
-        <section class="map access" id="map"></section>
-        <section class="return-form">
+        <section class="map access <%= loading ? 'mobile' : '' %>" id="map"></section>
+        <section class="return-form <%= loading ? 'show' : '' %>">
             <img src="/imgs/burguer-config-icon.png" alt="">
         </section>
 
@@ -143,12 +147,19 @@
                     <img src="/imgs/client/close-icon.svg" alt="">
                 </div>
                 <article class="popup-wrapper">
-                    <h1>Preço do seu pedido: <span class="price"></span></h1>
-                    <p>Você pode escolher negociar esse preço com o entregador. Essa escolha aparecerá para o entregador, que poderá ou não negociar com você. A negociação será feita pelo chat, e não nos responsabilizamos por nada disso.</p>
-                    <aside class="confirm">
+                    <h1>
+                        Preço do seu pedido:
+                        <% if (loading) { %>
+                            <span><%= new Intl.NumberFormat('pt-br', {currency: 'BRL', style: 'currency'}).format(preco) %></span>
+                        <% } else { %>
+                            <span class="price"></span>
+                        <% } %>
+                    </h1>
+                    <p>O preço da entrega é calculado com base em diversos fatores para garantir que você receba seus produtos de maneira eficiente e econômica.</p>
+                    <!-- <aside class="confirm">
                         <input type="checkbox" name="confirm-negotiation" id="confirm-negotiation">
                         <label for="confirm-negotiation">Entendo essas condições e desejo negociar o preço.</label>
-                    </aside>
+                    </aside> -->
                     <button id="continue-button" class="cta">Continuar</a>
                 </article>
             </article>

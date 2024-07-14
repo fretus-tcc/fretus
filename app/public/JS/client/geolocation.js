@@ -1,4 +1,5 @@
 const inputs = document.querySelectorAll('.address')
+const hidden = document.querySelectorAll('.hidden-coords')
 const results = document.querySelectorAll('.suggestions-options')
 const accessToken = 'pk.eyJ1IjoiZ2FicmllbGNhcnZhbGgwIiwiYSI6ImNscG14ZDB6OTAwc3Eya29pM2dvZm5uamYifQ.IPac1tcfJTcmQLrrn937wQ'
 let route
@@ -29,29 +30,26 @@ const start = new mapboxgl.Marker({
 const end = new mapboxgl.Marker({
     color: '#ef9652',
     draggable: true
-
 })
 
 start.on('dragend', async () => {
     const newCoords = start._lngLat
     start.setLngLat(newCoords)
+    hidden[0].value = `${newCoords.lng}, ${newCoords.lat}`
     getRoute(start, end)
     const newAddress = await dataResult(newCoords)
     inputs[0].value = `${newAddress.features[0].place_name}`
     inputs[0].setCustomValidity('')
-    // console.log(route.distance / 1000)
-    // setPrice(route.distance / 1000)
 })
 
 end.on('dragend', async () => {
     const newCoords = end._lngLat
     end.setLngLat(newCoords)
+    hidden[1].value = `${newCoords.lng}, ${newCoords.lat}`
     getRoute(start, end)
     const newAddress = await dataResult(newCoords)
     inputs[1].value = `${newAddress.features[0].place_name}`
     inputs[1].setCustomValidity('')
-    // console.log(route.distance / 1000)
-    // setPrice(route.distance / 1000)
 })
 
 const dataResult = async (query) => {
@@ -65,35 +63,58 @@ const dataResult = async (query) => {
     return dataRes
 }
 
-inputs.forEach((input, i) => {
-    input.addEventListener('input', async () => {
-        input.setCustomValidity('Endereço não válido!')
-        input.classList.add('border')
-        const dataRes = await dataResult(input.value)
-        results[i].innerHTML = ''
-        dataRes.features.forEach((suggestion) => {
-            const suggestionItem = document.createElement('li')
-            suggestionItem.innerText = suggestion.place_name
-            suggestionItem.addEventListener('click', (e) => {
-                input.setCustomValidity('')
-                const coords = suggestion.geometry.coordinates
-                input.value = e.target.innerText
-                if (input.classList.contains('start')) {
-                    start.setLngLat(coords).addTo(map)
-                } else {
-                    end.setLngLat(coords).addTo(map)
-                }
+const setMarkers = async (input, i) => {
+    input.setCustomValidity('Endereço não válido!')
+    input.classList.add('border')
+    const dataRes = await dataResult(input.value)
+    results[i].innerHTML = ''
+    dataRes.features.forEach((suggestion) => {
+        const suggestionItem = document.createElement('li')
+        suggestionItem.innerText = suggestion.place_name
+        suggestionItem.addEventListener('click', (e) => {
+            input.setCustomValidity('')
+            const coords = suggestion.geometry.coordinates
+            input.value = e.target.innerText
+            if (input.classList.contains('start')) {
+                start.setLngLat(coords).addTo(map)
+                hidden[0].value = `${coords[0]}, ${coords[1]}`
+            } else {
+                end.setLngLat(coords).addTo(map)
+                hidden[1].value = `${coords[0]}, ${coords[1]}`
+            }
 
-                getRoute(start, end)
+            getRoute(start, end)
 
-                map.easeTo({
-                    center: coords
-                })
-                removeSuggestions(input, i)
+            map.easeTo({
+                center: coords
             })
-            results[i].appendChild(suggestionItem)
+            removeSuggestions(input, i)
         })
+        results[i].appendChild(suggestionItem)
     })
+}
+
+const setRoute = async (input) => {
+    const idx = input.classList.contains('start') ? 0 : 1
+    const coords = hidden[idx].value.split(',').map(Number)
+    if (input.classList.contains('start')) {
+        start.setLngLat(coords).addTo(map)
+    } else {
+        end.setLngLat(coords).addTo(map)
+    }
+
+    getRoute(start, end)
+
+    map.easeTo({
+        center: coords
+    })
+}
+
+inputs.forEach((input, i) => {
+    input.addEventListener('input', () => setMarkers(input, i))
+    
+    // seta a rota quando o form ja foi enviado, na tela de loading
+    setRoute(input)
 })
 
 async function getRoute(start, end) {

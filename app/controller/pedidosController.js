@@ -20,20 +20,13 @@ const pedidosController = {
     createPedido: async (req, res) => {
         try {
             // console.log(req.body);
-            // formatando locais de partida e destino
-            const resObjPartida = await fetch(`https://mapbox-hidden-api.vercel.app/geocoding/${req.body.partida}`)
-            const dataResPartida = await resObjPartida.json()
-            const [longitude_partida, latitude_partida] = dataResPartida.features[0].center
-            
-            const resObjDestino = await fetch(`https://mapbox-hidden-api.vercel.app/geocoding/${req.body.destino}`)
-            const dataResDestino = await resObjDestino.json()
-            const [longitude_destino, latitude_destino] = dataResDestino.features[0].center
+            const [longitude_partida, latitude_partida] = req.body.partida_coords.split(',').map(Number)
+            const [longitude_destino, latitude_destino] = req.body.destino_coords.split(',').map(Number)
             
             // formatando preco
-            console.log('url', `https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`)
-            const resObjDistancia = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`)
-            const dataResDistancia = await resObjDistancia.json()
-            const distancia = dataResDistancia.routes[0].distance
+            const resObj = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`)
+            const dataRes = await resObj.json()
+            const distancia = dataRes.routes[0].distance
             const preco_pedido = calcularPrecoEntrega(req.body.veiculo, distancia / 1000)
 
             // formatando campos para salvar no banco
@@ -50,9 +43,9 @@ const pedidosController = {
                 cod_carga: req.body.carga,
                 veiculo_pedido: req.body.veiculo,
             }
-            // console.log(data);
             await pedidosModel.insert(data)
-            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs: [], loading: true })
+
+            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs: [], dados: req.body, preco: preco_pedido, loading: true })
         } catch (error) {
             console.log(error)
             res.json({ error })
