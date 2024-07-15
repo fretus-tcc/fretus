@@ -29,6 +29,9 @@ const pedidosController = {
             const distancia = dataRes.routes[0].distance
             const preco_pedido = calcularPrecoEntrega(req.body.veiculo, distancia / 1000)
 
+            // formatando data e hora agendamento
+            const data_agendamento = `${req.body.data_agendamento} ${req.body.hora_agendamento}`
+
             // formatando campos para salvar no banco
             const data = {
                 id_cliente: req.session.autenticado.id,
@@ -38,8 +41,8 @@ const pedidosController = {
                 longitude_destino,
                 preco_pedido,
                 agendamento: req.body?.agendamento ? '1' : '0',
-                data_agendamento: req.body.data_agendamento == '' ? null : req.body.data_agendamento,
-                horario_agendamento: req.body.hora_agendamento == '' ? null : req.body.hora_agendamento,
+                data_agendamento: req.body.data_agendamento == '' ? null : data_agendamento,
+                /* horario_agendamento: req.body.hora_agendamento == '' ? null : req.body.hora_agendamento, */
                 cod_carga: req.body.carga,
                 veiculo_pedido: req.body.veiculo,
             }

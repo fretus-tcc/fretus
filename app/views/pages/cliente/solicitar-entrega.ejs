@@ -58,7 +58,7 @@
                     
                     <section class="toogle-container">
                         <span>Entrega Imediata</span>
-                        <input type="checkbox" name="agendamento" id="schedule">
+                        <input type="checkbox" name="agendamento" id="schedule" value="1" <%= dados?.agendamento ? 'checked' : '' %>>
                         <label for="schedule" class="toogle">
                             <article class="ball"></article>
                         </label>
@@ -66,8 +66,8 @@
                     </section>
                     <section class="schedules-container">
                         <aside class="schedule-content">
-                            <input name="data_agendamento" type="date" class="date-time">
-                            <input name="hora_agendamento" type="time" class="date-time">
+                            <input name="data_agendamento" type="date" class="date-time" value="<%= dados?.data_agendamento %>">
+                            <input name="hora_agendamento" type="time" class="date-time" value="<%= dados?.hora_agendamento %>">
                         </aside>
                     </section>
                     
@@ -185,6 +185,8 @@
     <script src="/JS/client/popup-confirm.js"></script>
     <!-- valida a carga -->
     <script src="/JS/client/weight-validation.js"></script>
+    <!-- valida o agendamento -->
+    <script src="/JS/client/agendamento-validation.js"></script>
     <!-- envia formulario -->
     <script src="/JS/client/carregamento.js"></script>
 </body>
