@@ -12,10 +12,10 @@ const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfi
 router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     // formatando mensagens notificacao
     const msgs = notifyMessages(req, res)
-    res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs, dados: null, preco: null, loading: false })
+    res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs, dados: null, preco: null, loading: false })
 })
 
-router.post('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+router.post('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), pedidosController.validationPedido, function (req, res) {
     pedidosController.createPedido(req, res)
 })
 

@@ -1,5 +1,7 @@
 const inputStart = document.querySelector('.start')
 const inputEnd = document.querySelector('.end')
+const inputDate = document.querySelector('input[name="data_agendamento"]')
+const inputTime = document.querySelector('input[name="hora_agendamento"]')
 const weight = document.querySelector('input[name="carga"]')
 const vehicle = document.querySelector('input[name="veiculo"]')
 const submit = document.querySelector('[type="submit"].cta')
@@ -12,7 +14,13 @@ const priceContainer = document.querySelector('.price')
 
 submit.addEventListener('click', (e) => {
   checkValidation()
-  if (inputStart.validity.valid == true && inputEnd.validity.valid == true && vehicle.validity.valid && weight.validity.valid && checkValidation()) {
+  if (inputStart.validity.valid == true &&
+      inputEnd.validity.valid == true &&
+      inputDate.validity.valid == true &&
+      inputTime.validity.valid == true &&
+      vehicle.validity.valid &&
+      weight.validity.valid &&
+      checkValidation()) {
         e.preventDefault()
         formContainer.classList.add('mobile')
         mapContainer.classList.add('mobile')

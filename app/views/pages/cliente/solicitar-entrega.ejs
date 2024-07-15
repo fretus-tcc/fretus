@@ -67,7 +67,9 @@
                     <section class="schedules-container">
                         <aside class="schedule-content">
                             <input name="data_agendamento" type="date" class="date-time" value="<%= dados?.data_agendamento %>">
+                            <span class="error margin"><%= erros?.data_agendamento?.msg %></span>
                             <input name="hora_agendamento" type="time" class="date-time" value="<%= dados?.hora_agendamento %>">
+                            <span class="error margin"><%= erros?.hora_agendamento?.msg %></span>
                         </aside>
                     </section>
                     
@@ -96,6 +98,7 @@
                                 </article>
                             </label>
                         </div>
+                        <span class="error"><%= erros?.carga?.msg %></span>
                     </section>
 
                     <section class="vehicles-container">
@@ -130,6 +133,7 @@
                                 </article>
                             </label>
                         </section>
+                        <span class="error"><%= erros?.veiculo?.msg %></span>
                     </section>
                     <input type="submit" value="Continuar" class="cta entrega-submit">
                 </form>

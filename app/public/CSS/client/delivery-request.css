@@ -24,6 +24,17 @@ main {
     overflow: auto;
 }
 
+.form .error {
+    color: red;
+    display: block;
+    margin-top: 15px;
+}
+
+.form .error.margin {
+    margin-top: -10px;
+    margin-bottom: 17px;
+}
+
 .form::-webkit-scrollbar {
     width: 10px;
 }

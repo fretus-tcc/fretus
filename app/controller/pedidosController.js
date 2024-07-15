@@ -4,26 +4,56 @@ const fetch = require('node-fetch')
 const { body, validationResult } = require('express-validator')
 
 const pedidosController = {
-    validation: [
-        body('titulo')
-            .notEmpty().withMessage('Campo não preenchido')
-            .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
-            .custom(async (value, { req }) => {
-                const existingTitle = await quotesModel.repeatedTitle(value, req.params.id)
-                if (existingTitle) {
-                    throw new Error('Título já utilizado!')
+    validationPedido: [
+        
+        body('data_agendamento')
+            .custom((value, { req }) => {
+                if (req.body?.agendamento) {
+                    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+                        throw new Error('Data inválida')
+                    }
+                    
+                    const todayDate = new Date();
+                    const todayString = todayDate.toISOString().split('T')[0];
+                    if (value <= todayString) {
+                        throw new Error('Data deve ser no futuro')                   
+                    }
                 }
+                return true
             }),
-        body('conteudo').notEmpty().withMessage('Campo não preenchido')
+
+        body('hora_agendamento')
+            .custom((value, { req }) => {
+                if (req.body?.agendamento) {
+                    if (!/^([01]\d|2[0-3]):([0-5]\d)$/.test(value)) {
+                        throw new Error('Horário inválido')
+                    }
+                }
+                return true
+            }),
+
+        body('carga')
+            .isIn(['P', 'M', 'G'])
+            .withMessage('Carga inválida'),
+        
+        body('veiculo')
+            .isIn(['moto', 'carro', 'van', 'caminhao'])
+            .withMessage('Veículo inválido')
     ],
     
     createPedido: async (req, res) => {
+        console.table(req.body);
+        const erros = validationResult(req)
+        if (!erros.isEmpty()) {
+            console.log(erros.mapped());
+            return res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: erros.mapped(), msgs: [], dados: req.body, preco: null, loading: false })
+        }
+
         try {
-            // console.log(req.body);
             const [longitude_partida, latitude_partida] = req.body.partida_coords.split(',').map(Number)
             const [longitude_destino, latitude_destino] = req.body.destino_coords.split(',').map(Number)
             
-            // formatando preco
+            // formatando preco, com base na distancia
             const resObj = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`)
             const dataRes = await resObj.json()
             const distancia = dataRes.routes[0].distance
@@ -48,7 +78,7 @@ const pedidosController = {
             }
             await pedidosModel.insert(data)
 
-            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, msgs: [], dados: req.body, preco: preco_pedido, loading: true })
+            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs: [], dados: req.body, preco: preco_pedido, loading: true })
         } catch (error) {
             console.log(error)
             res.json({ error })
