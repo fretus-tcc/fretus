@@ -51,6 +51,17 @@ const pedidosController = {
         body('veiculo')
             .isIn(['moto', 'carro', 'van', 'caminhao'])
             .withMessage('Veículo inválido')
+            .custom((value, { req }) => {
+                if (value == 'moto' && req.body?.carga != 'P') {
+                    throw new Error('Veículo não suporta esse tipo de carga')
+                }
+                
+                if (value == 'carro' && req.body?.carga == 'G') {
+                    throw new Error('Veículo não suporta esse tipo de carga')
+                }
+
+                return true
+            })
     ],
     
     createPedido: async (req, res) => {
