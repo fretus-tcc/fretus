@@ -35,7 +35,7 @@ const end = new mapboxgl.Marker({
 start.on('dragend', async () => {
     const newCoords = start._lngLat
     start.setLngLat(newCoords)
-    hidden[0].value = `${newCoords.lng}, ${newCoords.lat}`
+    hidden[0].value = `${newCoords.lat}, ${newCoords.lng}`
     getRoute(start, end)
     const newAddress = await dataResult(newCoords)
     inputs[0].value = `${newAddress.features[0].place_name}`
@@ -45,7 +45,7 @@ start.on('dragend', async () => {
 end.on('dragend', async () => {
     const newCoords = end._lngLat
     end.setLngLat(newCoords)
-    hidden[1].value = `${newCoords.lng}, ${newCoords.lat}`
+    hidden[1].value = `${newCoords.lat}, ${newCoords.lng}`
     getRoute(start, end)
     const newAddress = await dataResult(newCoords)
     inputs[1].value = `${newAddress.features[0].place_name}`
@@ -77,10 +77,10 @@ const setMarkers = async (input, i) => {
             input.value = e.target.innerText
             if (input.classList.contains('start')) {
                 start.setLngLat(coords).addTo(map)
-                hidden[0].value = `${coords[0]}, ${coords[1]}`
+                hidden[0].value = `${coords[1]}, ${coords[0]}`
             } else {
                 end.setLngLat(coords).addTo(map)
-                hidden[1].value = `${coords[0]}, ${coords[1]}`
+                hidden[1].value = `${coords[1]}, ${coords[0]}`
             }
 
             getRoute(start, end)
@@ -97,6 +97,7 @@ const setMarkers = async (input, i) => {
 const setRoute = async (input) => {
     const idx = input.classList.contains('start') ? 0 : 1
     const coords = hidden[idx].value.split(',').map(Number)
+    coords.reverse() // inverte o array para ficar [lng, lat]
     if (input.classList.contains('start')) {
         start.setLngLat(coords).addTo(map)
     } else {

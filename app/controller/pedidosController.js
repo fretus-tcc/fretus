@@ -6,6 +6,18 @@ const { body, validationResult } = require('express-validator')
 const pedidosController = {
     validationPedido: [
         
+        body('partida_coords')
+            .notEmpty()
+            .withMessage('Endereço Inválido')
+            .isLatLong()
+            .withMessage('Endereço Inválido'),
+
+        body('destino_coords')
+            .notEmpty()
+            .withMessage('Endereço Inválido')
+            .isLatLong()
+            .withMessage('Endereço Inválido'),
+
         body('data_agendamento')
             .custom((value, { req }) => {
                 if (req.body?.agendamento) {
@@ -50,8 +62,8 @@ const pedidosController = {
         }
 
         try {
-            const [longitude_partida, latitude_partida] = req.body.partida_coords.split(',').map(Number)
-            const [longitude_destino, latitude_destino] = req.body.destino_coords.split(',').map(Number)
+            const [latitude_partida, longitude_partida] = req.body.partida_coords.split(',').map(Number)
+            const [latitude_destino, longitude_destino] = req.body.destino_coords.split(',').map(Number)
             
             // formatando preco, com base na distancia
             const resObj = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`)

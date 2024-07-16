@@ -43,16 +43,18 @@
                 <form action="/cliente/solicitar-entrega" method="post" class="form-container">
                     <h1>Solicitar Entrega</h1>
                     <input class="hidden-coords" type="hidden" name="partida_coords" value="<%= dados?.partida_coords %>">
-                    <input name="partida" type="text" required="" value="<%= dados?.partida %>" class="address start" placeholder="Local de partida" autocomplete="off">
+                    <input name="partida" type="text" required="" value="<%= erros?.partida_coords ? '' : dados?.partida %>" class="address start" placeholder="Local de partida" autocomplete="off">
                     <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
                     </aside>
+                    <span class="error margin"><%= erros?.partida_coords?.msg %></span>
 
                     <input class="hidden-coords" type="hidden" name="destino_coords" value="<%= dados?.destino_coords %>">
-                    <input name="destino" type="text" required="" value="<%= dados?.destino %>" class="address end" placeholder="Local de destino" autocomplete="off">
+                    <input name="destino" type="text" required="" value="<%= erros?.destino_coords? '' : dados?.destino %>" class="address end" placeholder="Local de destino" autocomplete="off">
                     <aside class="suggestions">
                         <ul class="suggestions-options"></ul>
                     </aside>
+                    <span class="error margin"><%= erros?.partida_coords?.msg %></span>
 
                     <h2>Agendamento</h2>
                     
