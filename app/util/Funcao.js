@@ -89,6 +89,11 @@ function calcularPrecoEntrega(veiculo, distancia) {
     return precoTotal
 }
 
+exports.validaCPF = validaCPF;
+exports.notifyMessages = notifyMessages;
+exports.sendEmail = sendEmail;
+exports.calcularPrecoEntrega = calcularPrecoEntrega;
+
 /* function ZeroEsqueda (num){
     return num >=10 ? num : `0${num}`;
 }
@@ -105,8 +110,3 @@ function age(data){
     }
 
 } */
-
-exports.validaCPF = validaCPF;
-exports.notifyMessages = notifyMessages;
-exports.sendEmail = sendEmail;
-exports.calcularPrecoEntrega = calcularPrecoEntrega;

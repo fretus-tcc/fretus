@@ -4,6 +4,7 @@ const multer = require('multer')
 const { notifyMessages } = require('../util/Funcao')
 var pool = require("../../config/connection-factory");
 const ConfigPerfilController = require('../controller/ConfigPerfilController')
+const pedidosController = require('../controller/pedidosController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
@@ -43,8 +44,7 @@ router.put('/configuracoes-entregador/:id', verificarUsuAutorizado([2], 'pages/r
 });
 
 router.get('/entregas-solicitadas', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    const msgs = notifyMessages(req, res)
-    res.render('pages/entregador/entregas-solicitadas', { autenticado: req.session.autenticado, msgs })
+    pedidosController.listPedidos(req, res)
 })
 
 router.get('/historico', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {

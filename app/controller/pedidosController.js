@@ -65,7 +65,7 @@ const pedidosController = {
     ],
     
     createPedido: async (req, res) => {
-        console.table(req.body);
+        // console.table(req.body);
         const erros = validationResult(req)
         if (!erros.isEmpty()) {
             console.log(erros.mapped());
@@ -108,24 +108,20 @@ const pedidosController = {
         }
     },
 
-    /* showQuote: async (req, res) => {
-        const { slug } = req.params
+    listPedidos: async (req, res) => {
         try {
-            const results = await quotesModel.findBySlug(slug)
-            if (!results.length) {
-                return res.redirect('/ajuda')
-            }
-
-            // formatando mensagens notificacao
             const msgs = notifyMessages(req, res)
 
-            res.render('pages/duvida', { autenticado: req.session.autenticado, results: results[0], content: sanitizeHTML(marked.parse(results[0].conteudo_duvida)), msgs })
+            const pedidos = await pedidosModel.findPendingByShipper(req.session.autenticado.id, 'moto')
+
+            res.render('pages/entregador/entregas-solicitadas', { autenticado: req.session.autenticado, msgs, pedidos })
         } catch (error) {
+            console.log(error)
             return res.json({ error })
         }
     },
 
-    updateQuote: async (req, res) => {
+    /* updateQuote: async (req, res) => {
         const { id } = req.params
         const data = quotesController.formatData(req, res, 'update', { ...req.body, id_duvida: id })
         if (data) {
