@@ -158,6 +158,8 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.pedidos (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   id_cliente INT NOT NULL,
   id_entregador INT NULL,
+  partida_pedido VARCHAR(400) NOT NULL,
+  destino_pedido VARCHAR(400) NOT NULL,
   latitude_partida DECIMAL(8,6) NOT NULL,
   longitude_partida DECIMAL(9,6) NOT NULL,
   latitude_destino DECIMAL(8,6) NOT NULL,
