@@ -1,4 +1,5 @@
 const pedidosModel = require('../models/pedidosModel')
+const admCadastroModel = require('../models/admCadastroModel')
 const { notifyMessages, calcularPrecoEntrega } = require('../util/Funcao')
 const fetch = require('node-fetch')
 const { body, validationResult } = require('express-validator')
@@ -120,9 +121,12 @@ const pedidosController = {
 
     listPedidos: async (req, res) => {
         try {
+            const id = req.session.autenticado.id
             const msgs = notifyMessages(req, res)
 
-            const pedidos = await pedidosModel.findPendingByShipper(req.session.autenticado.id, 'moto')
+            const [entregador] = await admCadastroModel.findShipper(id)
+
+            const pedidos = await pedidosModel.findPendingByShipper(id, entregador.tipo_veiculo)
 
             res.render('pages/entregador/entregas-solicitadas', { autenticado: req.session.autenticado, msgs, pedidos })
         } catch (error) {

@@ -45,6 +45,15 @@ main > h1 {
     padding-right: 25px;
 }
 
+.row .address-name {
+    display: block;
+    /* configura os 3 pontos no final */
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .top > .row.track {
     width: fit-content;
     margin-left: 9px;
