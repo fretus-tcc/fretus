@@ -48,6 +48,7 @@
                         <ul class="suggestions-options"></ul>
                     </aside>
                     <span class="error margin"><%= erros?.partida_coords?.msg %></span>
+                    <span class="error margin"><%= erros?.partida?.msg %></span>
 
                     <input class="hidden-coords" type="hidden" name="destino_coords" value="<%= dados?.destino_coords %>">
                     <input name="destino" type="text" required="" value="<%= erros?.destino_coords? '' : dados?.destino %>" class="address end" placeholder="Local de destino" autocomplete="off">
@@ -55,6 +56,7 @@
                         <ul class="suggestions-options"></ul>
                     </aside>
                     <span class="error margin"><%= erros?.destino_coords?.msg %></span>
+                    <span class="error margin"><%= erros?.destino?.msg %></span>
 
                     <h2>Agendamento</h2>
                     

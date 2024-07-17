@@ -18,6 +18,14 @@ const pedidosController = {
             .isLatLong()
             .withMessage('Endereço Inválido'),
 
+        body('partida')
+            .notEmpty()
+            .withMessage('Endereço não preenchido'),
+
+        body('destino')
+            .notEmpty()
+            .withMessage('Endereço não preenchido'),
+
         body('data_agendamento')
             .custom((value, { req }) => {
                 if (req.body?.agendamento) {
@@ -93,6 +101,8 @@ const pedidosController = {
                 latitude_destino,
                 longitude_destino,
                 preco_pedido,
+                partida_pedido: req.body.partida,
+                destino_pedido: req.body.destino,
                 agendamento: req.body?.agendamento ? '1' : '0',
                 data_agendamento: req.body.data_agendamento == '' ? null : data_agendamento,
                 /* horario_agendamento: req.body.hora_agendamento == '' ? null : req.body.hora_agendamento, */
