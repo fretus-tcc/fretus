@@ -130,6 +130,32 @@ main > h1 {
     font-weight: 700;
 }
 
+/* Paginador */
+.notificador {
+    margin-top: 50px;
+}
+
+.notificador ul {
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.notificador a {
+    color: white;
+    background-color: var(--orange);
+    border: solid var(--orange);
+    font-weight: bold;
+    padding: 10px;
+    transition: all .3s;
+}
+
+.notificador a:hover {
+    background-color: transparent;
+    color: #333;
+}
+
 @media (max-width: 795px) {
     .requests-container {
         grid-template-columns: 100%;

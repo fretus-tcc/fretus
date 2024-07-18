@@ -11,10 +11,40 @@ const pedidosModel = {
         }
     }, */
 
-    findPendingByShipper: async (id, vehicle) => {
+    /* findPendingByShipper: async (id, vehicle) => {
         try {
             const [result] = await pool.query(
                 'SELECT * FROM pedidos as p ' +
+                'LEFT JOIN entregadores_pedidos AS ep ' +
+                'ON p.id_pedido = ep.id_pedido AND ep.id_entregador = ? ' +
+                'WHERE ep.status_resposta IS NULL AND p.veiculo_pedido = ? ' +
+                'ORDER BY p.data_solicitacao DESC', [id, vehicle])
+            return result
+        } catch (error) {
+            return error
+        }
+    }, */
+
+    findPaginate: async (id, vehicle, pagina, total) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT * FROM pedidos as p ' +
+                'LEFT JOIN entregadores_pedidos AS ep ' +
+                'ON p.id_pedido = ep.id_pedido AND ep.id_entregador = ? ' +
+                'WHERE ep.status_resposta IS NULL AND p.veiculo_pedido = ? ' +
+                'ORDER BY p.data_solicitacao DESC ' +
+                'LIMIT ?, ?', [id, vehicle, pagina, total])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
+    totalReg: async (id, vehicle) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT count(*) total FROM pedidos as p ' +
                 'LEFT JOIN entregadores_pedidos AS ep ' +
                 'ON p.id_pedido = ep.id_pedido AND ep.id_entregador = ? ' +
                 'WHERE ep.status_resposta IS NULL AND p.veiculo_pedido = ? ' +

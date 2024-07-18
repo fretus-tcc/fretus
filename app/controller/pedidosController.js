@@ -126,9 +126,29 @@ const pedidosController = {
 
             const [entregador] = await admCadastroModel.findShipper(id)
 
-            const pedidos = await pedidosModel.findPendingByShipper(id, entregador.tipo_veiculo)
+            // const pedidos = await pedidosModel.findPendingByShipper(id, entregador.tipo_veiculo)
 
-            res.render('pages/entregador/entregas-solicitadas', { autenticado: req.session.autenticado, msgs, pedidos })
+            // paginação
+            let pagina = req.query.pagina == undefined ? 1 : Number(req.query.pagina);
+            let pedidos = null
+            let regPagina = 4
+            let inicio = parseInt(pagina - 1) * regPagina
+            let totReg = await pedidosModel.totalReg(id, entregador.tipo_veiculo);
+            let totPaginas = Math.ceil(totReg[0].total / regPagina);
+            
+            // validacao parametro pagina
+            if (pagina <= 0 || isNaN(pagina)) {
+                return res.redirect('/entregador/entregas-solicitadas')
+            } else if (pagina > totPaginas && totPaginas > 0) {
+                return res.redirect(`/entregador/entregas-solicitadas?pagina=${totPaginas}`)
+            }
+
+            pedidos = await pedidosModel.findPaginate(id, entregador.tipo_veiculo, inicio, regPagina);
+            let paginador = totReg[0].total <= regPagina 
+                ? null 
+                : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+
+            res.render('pages/entregador/entregas-solicitadas', { autenticado: req.session.autenticado, msgs, pedidos, paginador })
         } catch (error) {
             console.log(error)
             return res.json({ error })

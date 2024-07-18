@@ -89,6 +89,28 @@
             <img src="/imgs/shipper/error-icon.png" alt="">
             <p>Você ainda não foi solicitado para nenhuma entrega</p>
         </article>
+
+        <% if(pedidos.length > 0 && paginador){ %>
+            <div class="notificador">
+                <ul>
+                    <% for(var i=1; i <=paginador.total_paginas; i++){ 
+                        if(paginador.pagina_atual==i){ 
+                    %>
+                        <li><a class="atual" href="?pagina=<%= i %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% } else { %>
+                            <li><a href="?pagina=<%= i %>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                        <% } 
+                    } %>
+                </ul>
+            </div>
+            
+        <% } %>
     </main>
     <article class="notification-container"></article>
 
