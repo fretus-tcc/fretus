@@ -1,13 +1,15 @@
 const infoCall = document.querySelectorAll('.indicator')
-const popupInfo = document.querySelector('.popup.info')
-const popupClose = document.querySelector('.info .close')
+const popupInfo = document.querySelectorAll('.popup.info')
+const popupClose = document.querySelectorAll('.info .close')
 
-infoCall.forEach(item => {
+infoCall.forEach((item, i) => {
     item.addEventListener('click', () => {
-        popupInfo.classList.add('show')
+        popupInfo[i].classList.add('show')
     })
 })
 
-popupClose.addEventListener('click', () => {
-    popupInfo.classList.remove('show')
+popupClose.forEach((item, i) => {
+    item.addEventListener('click', () => {
+        popupInfo[i].classList.remove('show')
+    })
 })

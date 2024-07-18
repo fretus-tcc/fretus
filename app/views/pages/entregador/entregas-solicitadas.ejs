@@ -38,7 +38,7 @@
     <main>
         <h1>Entregas Solicitadas</h1>
         <section class="requests-container">
-            <% if (pedidos) { %>
+            <% if (pedidos.length > 0) { %>
                 <% pedidos.forEach(pedido => { %>
                     <article class="card">
                         <section class="top">
@@ -92,7 +92,13 @@
     </main>
     <article class="notification-container"></article>
 
-    <%- include('../../partial/popup/info.ejs') %>
+    <!-- Popup's -->
+    <% if (pedidos.length > 0) { %>
+        <% pedidos.forEach(pedido => { %>
+            <%- include('../../partial/popup/info.ejs', { pedido }) %>
+        <% }) %>
+    <% } %>
+
     <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
     <script src="/JS/burguer.js"></script>
