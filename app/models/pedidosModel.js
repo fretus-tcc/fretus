@@ -28,7 +28,7 @@ const pedidosModel = {
     findPaginate: async (id, vehicle, pagina, total) => {
         try {
             const [result] = await pool.query(
-                'SELECT * FROM pedidos as p ' +
+                'SELECT p.* FROM pedidos as p ' +
                 'LEFT JOIN entregadores_pedidos AS ep ' +
                 'ON p.id_pedido = ep.id_pedido AND ep.id_entregador = ? ' +
                 'WHERE ep.status_resposta IS NULL AND p.veiculo_pedido = ? ' +
@@ -58,6 +58,15 @@ const pedidosModel = {
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO pedidos SET ?', [data])
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
+    insertShipper: async (data) => {
+        try {
+            await pool.query('INSERT INTO entregadores_pedidos SET ?', [data])
         } catch (error) {
             console.log(error)
             return error

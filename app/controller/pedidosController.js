@@ -155,6 +155,30 @@ const pedidosController = {
         }
     },
 
+    insertShipperReply: async (req, res) => {
+        const { id } = req.params
+        const { resposta } = req.body
+        
+        try {
+            if (resposta.toUpperCase() != 'ACEITO' && resposta.toUpperCase() != 'NEGADO') {
+                // req.flash('error', '0')
+                return res.redirect('/entregador/entregas-solicitadas')
+            }
+
+            const data = {
+                id_pedido: id,
+                id_entregador: req.session.autenticado.id,
+                status_resposta: resposta
+            }
+            await pedidosModel.insertShipper(data)
+            // req.flash('success', `1-Pedido ${resposta.toLowerCase()}`)
+            res.redirect('/entregador/entregas-solicitadas')
+        } catch (error) {
+            console.log(error)
+            res.json({ error })
+        }
+    },
+
     /* updateQuote: async (req, res) => {
         const { id } = req.params
         const data = quotesController.formatData(req, res, 'update', { ...req.body, id_duvida: id })
