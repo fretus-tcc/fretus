@@ -54,11 +54,6 @@ const quotesController = {
             // formatando mensagens notificacao
             const msgs = notifyMessages(req, res)
 
-            // formatando conteudo dúvida
-            result.forEach(item => {
-                item.conteudo_duvida = marked.parse(item.conteudo_duvida).replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, '').slice(0, 300).concat('...')
-            })
-
             res.render('pages/adm/read', { result, paginador, msgs })
         } catch (error) {
             res.json({ error })

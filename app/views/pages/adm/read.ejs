@@ -38,7 +38,7 @@
                 <div class="grid-card">
                     <h2><%= item.titulo_duvida %></h2>
                     <p>Criada em: <%= item.data_duvida.toLocaleDateString() %></p>
-                    <p><%= item.conteudo_duvida %></p>
+                    <p class="content"><%= item.conteudo_duvida %></p>
                     <div class="actions">
                         <a href="/ajuda/<%= item.slug_duvida %>">
                             <img src="/imgs/adm/view.svg" alt="">

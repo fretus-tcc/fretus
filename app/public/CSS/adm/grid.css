@@ -35,6 +35,13 @@
     font-family: var(--font-2);
 }
 
+.grid-card .content {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .grid-card .actions {
     display: flex;
     justify-content: flex-end;
