@@ -30,7 +30,7 @@ const TarefasControl = {
             // definindo id_usuario autenticacao cadastro
             req.session.autenticado.id = result[0].insertId
 
-            req.flash('success', `Bem-vindo, ${req.body.nome}`)
+            req.flash('success', `Bem-vindo, ${req.body.nome} ; Cadastro realizado com sucesso`)
 
             res.redirect('/verificar-autenticacao')
         } catch (error) {
@@ -130,7 +130,7 @@ const TarefasControl = {
             return res.render("pages/login", { listaErros: erros, dados: null })
         }
 
-        req.flash('success', 'Usuário logado')
+        req.flash('success', `Olá, ${req.session.autenticado.autenticado} ; Bem-vindo de volta`)
 
         res.redirect('/verificar-autenticacao')
     },

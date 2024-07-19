@@ -161,17 +161,18 @@ const pedidosController = {
         
         try {
             if (resposta.toUpperCase() != 'ACEITO' && resposta.toUpperCase() != 'NEGADO') {
-                // req.flash('error', '0')
+                req.flash('error', 'Tente Novamente ; Erro ao inserir resposta do pedido')
                 return res.redirect('/entregador/entregas-solicitadas')
             }
-
+            
             const data = {
                 id_pedido: id,
                 id_entregador: req.session.autenticado.id,
                 status_resposta: resposta
             }
+
             await pedidosModel.insertShipper(data)
-            // req.flash('success', `1-Pedido ${resposta.toLowerCase()}`)
+            req.flash('success', `Pedido ${resposta.toLowerCase()} ; Pedido ${resposta.toLowerCase()} com sucesso`)
             res.redirect('/entregador/entregas-solicitadas')
         } catch (error) {
             console.log(error)

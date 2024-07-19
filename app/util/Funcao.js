@@ -26,10 +26,11 @@ function notifyMessages(req, res) {
     const statusMsgs = Object.keys(flash)
     const msgs = []
     if (statusMsgs.length > 0) { 
-        statusMsgs.forEach(status => { 
-            const texts = [...flash[status]] 
-            texts.forEach(text => { 
-                msgs.push({status, text})
+        statusMsgs.forEach(status => {
+            const texts = [...flash[status]]
+            texts.forEach(text => {
+                const [title, description] = text.split(' ; ')
+                msgs.push({status, title, description})
             })
         })
     }

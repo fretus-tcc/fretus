@@ -112,7 +112,7 @@ const quotesController = {
         if (data) {
             try {
                 await quotesModel.create(data)
-                req.flash('success', 'Dúvida criada')
+                req.flash('success', 'Dúvida criada ; Dúvida criada com sucesso')
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })
@@ -126,7 +126,7 @@ const quotesController = {
         if (data) {
             try {
                 await quotesModel.update(data, id)
-                req.flash('info', 'Dúvida atualizada')
+                req.flash('info', 'Dúvida atualizada ; Dúvida atualizada com sucesso')
                 res.redirect(`/ajuda/${data.slug_duvida}`)
             } catch (error) {
                 return res.json({ error })
@@ -138,7 +138,7 @@ const quotesController = {
         const { id } = req.params
         try {
             await quotesModel.delete(id)
-            req.flash('error', 'Dúvida deletada')
+            req.flash('error', 'Dúvida deletada ; Dúvida deletada com sucesso')
             res.redirect('/admin/ajuda')
         } catch (error) {
             res.json({ error })

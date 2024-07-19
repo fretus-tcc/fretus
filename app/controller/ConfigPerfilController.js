@@ -80,7 +80,7 @@ const ConfigPerfilController = {
             await ConfigPerfilModel.updateUser(req.body, id)
         }
         
-        req.flash('success', `Usuário alterado com sucesso`)
+        req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
 
         /* try {
@@ -125,7 +125,7 @@ const ConfigPerfilController = {
         }
         
         await ConfigPerfilModel.updateShipper(req.body, id)
-        req.flash('success', `Usuário alterado com sucesso`)
+        req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
 
         /* try {
@@ -170,7 +170,7 @@ const ConfigPerfilController = {
         }
         
         await ConfigPerfilModel.updateVehicle(req.body, req.body.id_entregador)
-        req.flash('success', `Usuário alterado com sucesso`)
+        req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
 
         /* try {

@@ -133,13 +133,13 @@ const admCadastroController = {
             await admCadastroModel.updateShipper(req.body, id)
             const shipper = await admCadastroModel.findEmailById(id)
             const email = shipper[0].email_usuario
-            console.log(email);
+            // console.log(email);
             if (req.body.status_aprovacao == 1) {
                 await sendEmail(email, 'Atualizações sobre o seu cadastro', 'Negado')
-                req.flash('success', 'Entregador Negado')
+                req.flash('success', 'Entregador Negado ; Entregador Negado com sucesso')
             } else {
-                await sendEmail(email, 'Seu cadastro foi aprovado  ', 'Aprovado')
-                req.flash('success', 'Entregador Aprovado')
+                await sendEmail(email, 'Seu cadastro foi aprovado', 'Aprovado')
+                req.flash('success', 'Entregador Aprovado ; Entregador Aprovado com sucesso')
             }
             res.redirect(`/admin/cadastroAdm/detalhesAdm/${id}`)
         } catch (error) {
@@ -150,7 +150,8 @@ const admCadastroController = {
         const { id } = req.params
         try {
             await admCadastroModel.updateUser(req.body, id)
-            req.flash('success', 'Usuário Atualizado')
+            const action = req.body.status_usuario == '0' ? 'desativado' : 'ativado'
+            req.flash('success', `Usuário ${action} ; Usuário ${action} com sucesso`)
             res.redirect('back')
         } catch (error) {
             console.log(error)
@@ -162,7 +163,7 @@ const admCadastroController = {
         const { id, type } = req.params
         try {
             await admCadastroModel.findByTypeDelete(id)
-            req.flash('error', 'Usuário deletado')
+            req.flash('error', 'Usuário deletado ; Usuário deletado com sucesso')
             if (type == '1') {
                 res.redirect('/admin/cadastroAdm/clientes')
             } else {

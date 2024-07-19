@@ -21,7 +21,7 @@
     <!-- Notificações -->
     <% if (msgs.length > 0) { %>
         <% msgs.forEach(msg => { %>
-            <script>notify('<%= msg.text %>', '<%= msg.text %> com sucesso', '<%= msg.status %>')</script>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
 

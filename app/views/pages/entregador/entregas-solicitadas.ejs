@@ -29,7 +29,7 @@
     <!-- Notificações -->
     <% if (msgs.length > 0) { %>
         <% msgs.forEach(msg => { %>
-            <script>notify('Olá, <%= autenticado.autenticado %>', 'Bem-vindo de volta', '<%= msg.status %>')</script>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
 

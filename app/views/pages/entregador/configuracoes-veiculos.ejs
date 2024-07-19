@@ -23,7 +23,7 @@
     <!-- Notificações -->
     <% if (msgs.length > 0) { %>
         <% msgs.forEach(msg => { %>
-            <script>notify('Alteração feita', '<%= msg.text %>', '<%= msg.status %>')</script>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
 
