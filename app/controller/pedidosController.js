@@ -155,6 +155,18 @@ const pedidosController = {
         }
     },
 
+    listPedidosByUser: async (req, res) => {
+        try {
+            const id = req.session.autenticado.id
+            const pedidos = await pedidosModel.findByUser(id)
+
+            res.render('pages/cliente/historico', { autenticado: req.session.autenticado, pedidos })
+        } catch (error) {
+            console.log(error)
+            return res.json({ error })
+        }
+    },
+
     insertShipperReply: async (req, res) => {
         const { id } = req.params
         const { resposta } = req.body

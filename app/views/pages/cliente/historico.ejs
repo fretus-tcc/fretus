@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
     <link rel="stylesheet" href="/CSS/shipper/history.css">
     <link rel="stylesheet" href="/CSS/shipper/requests.css">
+    <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
     <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
     <link rel="stylesheet" href="/CSS/client/rate-popup.css">
     <link rel="stylesheet" href="/CSS/shipper/requests-modal.css">
@@ -25,281 +26,196 @@
 
 <body>
 
-    <!--  utilizando tecnologia EJS  -->
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
-    <%- include('../../partial/header-client-shipper.ejs', { isClient: true/* , autenticado: autenticado */ }) %>
+    <main>
+        <section class="history-header">
+            <h1>Histórico</h1>
+        </section>
 
-        <!--conteudo principal da pagina-->
-
-        <main>
-            <section class="history-header">
-                <h1>Histórico</h1>
-            </section>
-
-            <section class="requests-container">
-                <article class="card">
-                    <section class="top">
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carlos José de Castilho</span>
+        <section class="requests-container">
+            <% if (pedidos.length > 0) { %>
+                <% pedidos.forEach(pedido => { %>
+                    <article class="card">
+                        <section class="top">
+                            <summary class="row">
+                                <img src="/imgs/shipper/partida-icon.svg" alt="">
+                                <span class="address-name"><%= pedido.partida_pedido %></span>
+                            </summary>
+                            <aside class="row track">
+                                <img src="/imgs/shipper/track.png" alt="">
+                            </aside>
+                            <summary class="row">
+                                <img src="/imgs/shipper/destino-icon.svg" alt="">
+                                <span class="address-name"><%= pedido.destino_pedido %></span>
+                            </summary>
+                        </section>
+                        <section class="description">
+                            <p>
+                                <span class="description-title">Carga:</span>
+                                <% if (pedido.cod_carga == 'P') { %>
+                                    Pequena (até 15 Kg)
+                                <% } else if (pedido.cod_carga == 'M') { %>
+                                    Média (15 Kg até Y Kg)
+                                <% } else { %>
+                                    Grande (Z Kg em diante)
+                                <% } %>
+                            </p>
+                            <p><span class="description-title">Agendamento:</span> <%= pedido.agendamento == 0 ? 'Entrega Imediata' : 'Entrega Agendada' %></p>
+                        </section>
+                        <summary class="bottom">
+                            <span class="price"><%= new Intl.NumberFormat('pt-br', {currency: 'BRL', style: 'currency'}).format(pedido.preco_pedido) %></span>
+                            <span class="actions">
+                                <% if (pedido.id_entregador) { %>
+                                    <img class="location-call" src="/imgs/client/location-icon.svg" alt="">
+                                    <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    <img class="rate" src="/imgs/client/star-icon.svg" alt="">
+                                <% } else { %>
+                                    <a href="/cliente/escolher-entregador">
+                                        <img src="/imgs/client/check-icon.svg" alt="">
+                                    </a>
+                                <% } %>
+                            </span>
                         </summary>
-                        <aside class="row track">
-                            <img src="../../imgs/shipper/track.png" alt="">
+                        <aside class="details">
+                            <span class="indicator">i</span>
                         </aside>
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carneiro Leão</span>
-                        </summary>
-                    </section>
-                    <section class="description">
-                        <p><span class="description-title">Carga:</span> Pequena (até 15 Kg)</p>
-                        <p><span class="description-title">Agendamento:</span> Entrega Imediata</p>
-                    </section>
-                    <summary class="bottom">
-                        <span class="price">R$51,00</span>
-                        <span class="actions">
-                            <img class="location-call" src="../../imgs/home/client/card-icon-3.svg" alt="">
-                            <img class="report-call" src="../../imgs/client/report-icon.svg" alt="">
-                            <img class="fav-call" src="../../imgs/client/fav-icon.svg" alt="">
-                            <img class="rate" src="../../imgs/client/star-icon.svg" alt="">
-                        </span>
-                    </summary>
-                    <aside class="details">
-                        <span class="indicator">i</span>
-                    </aside>
-                </article>
+                    </article>
+                <% }) %>
+            <% } %>
+        </section>
+        <article class="empty-alert">
+            <img src="/imgs/shipper/error-icon.png" alt="">
+            <p>Você ainda não solicitou nenhuma entrega</p>
+        </article>
 
-
-                <article class="card">
-                    <section class="top">
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carlos José de Castilho</span>
-                        </summary>
-                        <aside class="row track">
-                            <img src="../../imgs/shipper/track.png" alt="">
-                        </aside>
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carneiro Leão</span>
-                        </summary>
-                    </section>
-                    <section class="description">
-                        <p><span class="description-title">Carga:</span> Pequena (até 15 Kg)</p>
-                        <p><span class="description-title">Agendamento:</span> Entrega Imediata</p>
-                    </section>
-                    <summary class="bottom">
-                        <span class="price">R$51,00</span>
-                        <span class="actions">
-                            <img class="location-call" src="../../imgs/home/client/card-icon-3.svg" alt="">
-                            <img class="report-call" src="../../imgs/client/report-icon.svg" alt="">
-                            <img class="fav-call" src="../../imgs/client/fav-icon.svg" alt="">
-                            <img class="rate" src="../../imgs/client/star-icon.svg" alt="">
-                        </span>
-                    </summary>
-                    <aside class="details">
-                        <span class="indicator">i</span>
-                    </aside>
-                </article>
-
-
-                <article class="card">
-                    <section class="top">
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carlos José de Castilho</span>
-                        </summary>
-                        <aside class="row track">
-                            <img src="../../imgs/shipper/track.png" alt="">
-                        </aside>
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carneiro Leão</span>
-                        </summary>
-                    </section>
-                    <section class="description">
-                        <p><span class="description-title">Carga:</span> Pequena (até 15 Kg)</p>
-                        <p><span class="description-title">Agendamento:</span> Entrega Imediata</p>
-                    </section>
-                    <summary class="bottom">
-                        <span class="price">R$51,00</span>
-                        <span class="actions">
-                            <img class="location-call" src="../../imgs/home/client/card-icon-3.svg" alt="">
-                            <img class="report-call" src="../../imgs/client/report-icon.svg" alt="">
-                            <img class="fav-call" src="../../imgs/client/fav-icon.svg" alt="">
-                            <img class="rate" src="../../imgs/client/star-icon.svg" alt="">
-                        </span>
-                    </summary>
-                    <aside class="details">
-                        <span class="indicator">i</span>
-                    </aside>
-                </article>
-
-
-                <article class="card">
-                    <section class="top">
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u12.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carlos José de Castilho</span>
-                        </summary>
-                        <aside class="row track">
-                            <img src="../../imgs/shipper/track.png" alt="">
-                        </aside>
-                        <summary class="row">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u13.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
-                                alt="">
-                            <span>Rua Carneiro Leão</span>
-                        </summary>
-                    </section>
-                    <section class="description">
-                        <p><span class="description-title">Carga:</span> Pequena (até 15 Kg)</p>
-                        <p><span class="description-title">Agendamento:</span> Entrega Imediata</p>
-                    </section>
-                    <summary class="bottom">
-                        <span class="price">R$51,00</span>
-                        <span class="actions">
-                            <img class="location-call" src="../../imgs/home/client/card-icon-3.svg" alt="">
-                            <img class="report-call" src="../../imgs/client/report-icon.svg" alt="">
-                            <img class="fav-call" src="../../imgs/client/fav-icon.svg" alt="">
-                            <img class="rate" src="../../imgs/client/star-icon.svg" alt="">
-                        </span>
-                    </summary>
-                    <aside class="details">
-                        <span class="indicator">i</span>
-                    </aside>
-                </article>
-            </section>
-
-            <section class="product-wrapper">
-                <section class="head">
-                    <h1>Entregadores Favoritados</h1>
-                    <aside class="controls">
-                        <span id="prev">
-                            < </span>
-                                <span id="next">
-                                    >
-                                </span>
-                                </div>
-                </section>
-
-                <section class="carousel">
-                    <section class="content">
-                        <article class="products">
-                            <img src="../../imgs/historico/1.jpg" alt="" class="photo"><!-- ! todo motorista 1  -->
-                            <h1>João</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <aside class="actions">
-                                <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                                <a href="./chat.html">
-                                    <img src="../../imgs/home/client/card-icon-2.svg">
-                                </a>
-                            </aside>
-                        </article>
-
-                        <article class="products">
-                            <img src="../../imgs/historico/2.jpg" alt="" class="photo"> <!-- ? todo motorista 2  -->
-                            <h1>Miguel</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <aside class="actions">
-                                <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                                <a href="./chat.html">
-                                    <img src="../../imgs/home/client/card-icon-2.svg">
-                                </a>
-                            </aside>
-                        </article>
-
-                        <article class="products">
-                            <img src="../../imgs/historico/3.jpg" alt="" class="photo"> <!-- ! todo motorista 3  -->
-                            <h1>Arthur</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <aside class="actions">
-                                <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                                <a href="./chat.html">
-                                    <img src="../../imgs/home/client/card-icon-2.svg">
-                                </a>
-                            </aside>
-                        </article>
-
-                        <article class="products">
-                            <img src="../../imgs/historico/4.jpg" alt="" class="photo"> <!-- ? todo motorista 4  -->
-                            <h1>Heitor</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <aside class="actions">
-                                <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                                <a href="./chat.html">
-                                    <img src="../../imgs/home/client/card-icon-2.svg">
-                                </a>
-                            </aside>
-                        </article>
-
-                        <article class="products">
-                            <img src="../../imgs/historico/5.jpg" alt="" class="photo"> <!-- ? todo motorista 4  -->
-                            <h1>Theo</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <aside class="actions">
-                                <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                                <a href="./chat.html">
-                                    <img src="../../imgs/home/client/card-icon-2.svg">
-                                </a>
-                            </aside>
-                        </article>
-                    </section>
-                </section>
-            </section>
-        </main>
-
-        <section class="notification-container"></section>
-
-        <section class="popup">
-            <section class="popup-content">
-                <aside class="close">
-                    <img src="../../imgs/client/close-icon.svg" alt="">
+        <section class="product-wrapper">
+            <section class="head">
+                <h1>Entregadores Favoritados</h1>
+                <aside class="controls">
+                    <span id="prev"> < </span>
+                    <span id="next"> > </span>
                 </aside>
-                <section class="popup-wrapper">
-                    <h1>Avaliar o Motorista</h1>
-                    <aside class="stars">
-                        <aside class="star">
-                            <aside class="star-form"></aside>
+            </section>
+
+            <section class="carousel">
+                <section class="content">
+                    <article class="products">
+                        <img src="../../imgs/historico/1.jpg" alt="" class="photo"><!-- ! todo motorista 1  -->
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <aside class="actions">
+                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
+                            <a href="./chat.html">
+                                <img src="../../imgs/home/client/card-icon-2.svg">
+                            </a>
                         </aside>
-                        <aside class="star">
-                            <aside class="star-form"></aside>
+                    </article>
+
+                    <article class="products">
+                        <img src="../../imgs/historico/2.jpg" alt="" class="photo"> <!-- ? todo motorista 2  -->
+                        <h1>Miguel</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <aside class="actions">
+                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
+                            <a href="./chat.html">
+                                <img src="../../imgs/home/client/card-icon-2.svg">
+                            </a>
                         </aside>
-                        <aside class="star">
-                            <aside class="star-form"></aside>
+                    </article>
+
+                    <article class="products">
+                        <img src="../../imgs/historico/3.jpg" alt="" class="photo"> <!-- ! todo motorista 3  -->
+                        <h1>Arthur</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <aside class="actions">
+                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
+                            <a href="./chat.html">
+                                <img src="../../imgs/home/client/card-icon-2.svg">
+                            </a>
                         </aside>
-                        <aside class="star">
-                            <aside class="star-form"></aside>
+                    </article>
+
+                    <article class="products">
+                        <img src="../../imgs/historico/4.jpg" alt="" class="photo"> <!-- ? todo motorista 4  -->
+                        <h1>Heitor</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <aside class="actions">
+                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
+                            <a href="./chat.html">
+                                <img src="../../imgs/home/client/card-icon-2.svg">
+                            </a>
                         </aside>
-                        <aside class="star">
-                            <aside class="star-form"></aside>
+                    </article>
+
+                    <article class="products">
+                        <img src="../../imgs/historico/5.jpg" alt="" class="photo"> <!-- ? todo motorista 4  -->
+                        <h1>Theo</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <aside class="actions">
+                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
+                            <a href="./chat.html">
+                                <img src="../../imgs/home/client/card-icon-2.svg">
+                            </a>
                         </aside>
-                    </aside>
-                    <textarea class="rate-field" placeholder="Deixe seu feedback aqui (opcional)"></textarea>
-                    <span class="error-container">Nenhuma estrela marcada!</span>
-                    <button class="cta">Enviar</button>
+                    </article>
                 </section>
             </section>
         </section>
+    </main>
 
-        <%- include('../../partial/popup/location.ejs') %>
-        <%- include('../../partial/popup/report.ejs') %>
-        <%- include('../../partial/popup/info.ejs', { pedido: null }) %>
-        <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+    <section class="notification-container"></section>
 
-        <script src="/JS/burguer.js"></script>
-        <script src="/JS/client/shipper-carousel.js"></script>
-        <script src="/JS/client/rate-popup.js"></script>
-        <script src="/JS/client/fav-unfav.js"></script>
-        <script src="/JS/shipper/popup-info.js"></script>
-        <script src="/JS/shipper/popup-location.js"></script>
-        <script src="/JS/shipper/report-popup.js"></script>
+    <section class="popup">
+        <section class="popup-content">
+            <aside class="close">
+                <img src="../../imgs/client/close-icon.svg" alt="">
+            </aside>
+            <section class="popup-wrapper">
+                <h1>Avaliar o Motorista</h1>
+                <aside class="stars">
+                    <aside class="star">
+                        <aside class="star-form"></aside>
+                    </aside>
+                    <aside class="star">
+                        <aside class="star-form"></aside>
+                    </aside>
+                    <aside class="star">
+                        <aside class="star-form"></aside>
+                    </aside>
+                    <aside class="star">
+                        <aside class="star-form"></aside>
+                    </aside>
+                    <aside class="star">
+                        <aside class="star-form"></aside>
+                    </aside>
+                </aside>
+                <textarea class="rate-field" placeholder="Deixe seu feedback aqui (opcional)"></textarea>
+                <span class="error-container">Nenhuma estrela marcada!</span>
+                <button class="cta">Enviar</button>
+            </section>
+        </section>
+    </section>
+
+    <!-- Popup's -->
+    <% if (pedidos.length > 0) { %>
+        <% pedidos.forEach(pedido => { %>
+            <%- include('../../partial/popup/info.ejs', { pedido }) %>
+        <% }) %>
+    <% } %>
+
+    <%- include('../../partial/popup/location.ejs') %>
+    <%- include('../../partial/popup/report.ejs') %>
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/client/shipper-carousel.js"></script>
+    <script src="/JS/client/rate-popup.js"></script>
+    <script src="/JS/client/fav-unfav.js"></script>
+    <script src="/JS/shipper/popup-info.js"></script>
+    <script src="/JS/shipper/popup-location.js"></script>
+    <script src="/JS/shipper/report-popup.js"></script>
 </body>
 
 </html>

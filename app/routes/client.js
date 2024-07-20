@@ -24,7 +24,7 @@ router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req
 })
 
 router.get('/historico', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    res.render('pages/cliente/historico', { autenticado: req.session.autenticado })
+    pedidosController.listPedidosByUser(req, res)
 })
 
 router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {

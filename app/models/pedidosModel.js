@@ -55,6 +55,20 @@ const pedidosModel = {
         }
     },
 
+    findByUser: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT p.* FROM usuario AS u ' +
+                'INNER JOIN pedidos AS p ' +
+                'ON u.id_usuario = p.id_cliente ' +
+                'WHERE id_usuario = ? ' +
+                'ORDER BY p.data_solicitacao DESC' , [id])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO pedidos SET ?', [data])
