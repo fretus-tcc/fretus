@@ -218,11 +218,14 @@ form p a {
     display: flex;
     align-items: center;
     gap: 7px;
+}
+
+.requirements-item span {
     transition: all .3s;
     opacity: 1;
 }
 
-.requirements-item.active {
+.requirements-item.active span {
     opacity: 0.3;
 }
 
@@ -231,9 +234,12 @@ form p a {
     font-size: .3rem;
     width: 15px;
     text-align: center;
+    opacity: .7;
+    transition: all .3s;
 }
 
 .requirements-item.active i {
+    opacity: 1;
     color: var(--orange);
     font-size: .8rem;
 }
