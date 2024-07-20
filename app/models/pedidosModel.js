@@ -55,14 +55,29 @@ const pedidosModel = {
         }
     },
 
-    findByUser: async (id) => {
+    findByUser: async (id, pagina, total) => {
         try {
             const [result] = await pool.query(
                 'SELECT p.* FROM usuario AS u ' +
                 'INNER JOIN pedidos AS p ' +
                 'ON u.id_usuario = p.id_cliente ' +
                 'WHERE id_usuario = ? ' +
-                'ORDER BY p.data_solicitacao DESC' , [id])
+                'ORDER BY p.data_solicitacao DESC ' +
+                'LIMIT ?, ?' , [id, pagina, total])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
+    totalRegByUser: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT count(*) total FROM usuario AS u ' +
+                'INNER JOIN pedidos AS p ' +
+                'ON u.id_usuario = p.id_cliente ' +
+                'WHERE id_usuario = ? ' +
+                'ORDER BY p.data_solicitacao DESC', [id])
             return result
         } catch (error) {
             return error

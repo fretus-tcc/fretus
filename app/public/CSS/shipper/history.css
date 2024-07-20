@@ -17,10 +17,20 @@ main > .history-header {
     color: #333;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-direction: row;
 }
+
 main > .history-header h1 {
     font-size: 2em;
+}
+
+main > .history-header a {
+    color: var(--orange);
+}
+
+main > .history-header a:hover {
+    text-decoration: underline;
 }
 
 .history-header > .history-nav {

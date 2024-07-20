@@ -27,6 +27,10 @@ router.get('/historico', verificarUsuAutorizado([1], 'pages/restrito'), function
     pedidosController.listPedidosByUser(req, res)
 })
 
+router.get('/historico-completo', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    pedidosController.listPedidosByUserPaginate(req, res)
+})
+
 router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/cupons', { autenticado: req.session.autenticado })
 })

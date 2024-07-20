@@ -158,9 +158,40 @@ const pedidosController = {
     listPedidosByUser: async (req, res) => {
         try {
             const id = req.session.autenticado.id
-            const pedidos = await pedidosModel.findByUser(id)
+            const pedidos = await pedidosModel.findByUser(id, 0, 4)
 
             res.render('pages/cliente/historico', { autenticado: req.session.autenticado, pedidos })
+        } catch (error) {
+            console.log(error)
+            return res.json({ error })
+        }
+    },
+
+    listPedidosByUserPaginate: async (req, res) => {
+        try {
+            const id = req.session.autenticado.id
+
+            // paginação
+            let pagina = req.query.pagina == undefined ? 1 : Number(req.query.pagina);
+            let pedidos = null
+            let regPagina = 4
+            let inicio = parseInt(pagina - 1) * regPagina
+            let totReg = await pedidosModel.totalRegByUser(id); //
+            let totPaginas = Math.ceil(totReg[0].total / regPagina);
+            
+            // validacao parametro pagina
+            if (pagina <= 0 || isNaN(pagina)) {
+                return res.redirect('/cliente/historico-completo') //
+            } else if (pagina > totPaginas && totPaginas > 0) {
+                return res.redirect(`/cliente/historico-completo?pagina=${totPaginas}`) //
+            }
+
+            pedidos = await pedidosModel.findByUser(id, inicio, regPagina); //
+            let paginador = totReg[0].total <= regPagina 
+                ? null 
+                : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+
+            res.render('pages/cliente-entregador/historico-completo', { autenticado: req.session.autenticado, isClient: true, pedidos, paginador })
         } catch (error) {
             console.log(error)
             return res.json({ error })

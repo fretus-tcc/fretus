@@ -96,6 +96,18 @@ main > h1 {
     cursor: pointer;
 }
 
+.actions img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    opacity: .6;
+    cursor: pointer;
+}
+
+.actions img:hover {
+    opacity: .85;
+}
+
 .bottom > .btns {
     display: flex;
     column-gap: 7px;

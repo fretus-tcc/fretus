@@ -52,7 +52,7 @@ router.post('/entregas-solicitadas/:id', verificarUsuAutorizado([2], 'pages/rest
 })
 
 router.get('/historico', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    res.render('pages/entregador/historico', { autenticado: req.session.autenticado })
+    res.render('pages/cliente-entregador/historico-completo', { autenticado: req.session.autenticado, isClient: false, pedidos: [], paginador: null })
 })
 
 router.get('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
