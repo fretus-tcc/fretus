@@ -19,6 +19,11 @@ router.post('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'),
     pedidosController.createPedido(req, res)
 })
 
+router.get('/escolher-entregador/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    /* res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado }) */
+    pedidosController.listShipperAccept(req, res)
+})
+
 router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/chat', { autenticado: req.session.autenticado })
 })
@@ -53,10 +58,6 @@ router.put(
         ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/perfil', `/cliente/perfil/${req.params.id}`, true);
     }
 );
-
-router.get('/escolher-entregador', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado })
-})
 
 router.get('/configuracoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     /* res.render('pages/cliente-entregador/configuracoes', { isClient: true, autenticado: req.session.autenticado }) */

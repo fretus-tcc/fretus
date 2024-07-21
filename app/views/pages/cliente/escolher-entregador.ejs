@@ -7,151 +7,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Escolher Entregador</title>
     <%- include('../../partial/config/config.ejs') %>
-        <%- include('../../partial/config/config-client-shipper.ejs') %>
-            <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
-            <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
-            <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
-            <link rel="stylesheet" href="/CSS/client/pay-popup.css">
-            <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
+    <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
+    <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
+    <link rel="stylesheet" href="/CSS/client/pay-popup.css">
+    <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
 </head>
 
 <body>
 
-    <%- include('../../partial/header-client-shipper.ejs', { isClient: true/* , autenticado: autenticado */ }) %>
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
-        <main>
-            <section class="product-wrapper">
-                <section class="head">
-                    <h1>Perto da sua região</h1>
-                    <section class="controls">
-                        <span id="prev">
-                            < </span>
-                                <span id="next">
-                                    >
-                                </span>
-                    </section>
+    <main>
+
+        <section class="product-wrapper">
+            <section class="head">
+                <h1>Escolha o entregador</h1>
+                <section class="controls">
+                    <span id="prev"> < </span>
+                    <span id="next"> > </span>
                 </section>
-                <section class="carousel">
-                    <section class="content">
-                        <section class="products">
-                            <img src="/imgs/historico/1.jpg" alt="" class="photo">
-                            <h1>João</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <article class="actions">
-                                <img class="indicator" src="/imgs/client/info.svg" alt="">
-                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                <img class="pay-call" src="/imgs/client/pay-icon.svg">
-                            </article>
-                        </section>
+            </section>
+            <section class="carousel">
+                <section class="content">
+                    <section class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <article class="actions">
+                            <img class="indicator" src="/imgs/client/info.svg" alt="">
+                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                            <img src="/imgs/client/check-icon.svg" alt="">
+                            <!-- <img class="pay-call" src="/imgs/client/pay-icon.svg"> -->
+                        </article>
                     </section>
                 </section>
             </section>
-            <section class="product-wrapper">
-                <section class="head">
-                    <h1>Com base nas últimas entregas</h1>
-                    <section class="controls">
-                        <span id="prev">
-                            < </span>
-                                <span id="next">
-                                    >
-                                </span>
-                    </section>
+        </section>
+
+        <!-- <section class="product-wrapper">
+            <section class="head">
+                <h1>Perto da sua região</h1>
+                <section class="controls">
+                    <span id="prev"> < </span>
+                    <span id="next"> > </span>
                 </section>
-                <section class="carousel">
-                    <section class="content">
-                        <section class="products">
-                            <img src="/imgs/historico/1.jpg" alt="" class="photo"><!-- ! todo motorista 1  -->
-                            <h1>João</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <article class="actions">
-                                <img src="/imgs/client/info.svg" alt="" class="indicator">
-                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                <img class="pay-call" src="/imgs/client/pay-icon.svg">
-                            </article>
-                        </section>
+            </section>
+            <section class="carousel">
+                <section class="content">
+                    <section class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <article class="actions">
+                            <img class="indicator" src="/imgs/client/info.svg" alt="">
+                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                        </article>
                     </section>
                 </section>
             </section>
-            <section class="product-wrapper">
-                <section class="head">
-                    <h1>Mais bem avaliados</h1>
-                    <section class="controls">
-                        <span id="prev">
-                            < </span>
-                                <span id="next">
-                                    >
-                                </span>
-                    </section>
+        </section>
+
+        <section class="product-wrapper">
+            <section class="head">
+                <h1>Com base nas últimas entregas</h1>
+                <section class="controls">
+                    <span id="prev"> < </span>
+                    <span id="next"> > </span>
                 </section>
-                <section class="carousel">
-                    <section class="content">
-                        <section class="products">
-                            <img src="/imgs/historico/1.jpg" alt="" class="photo"><!-- ! todo motorista 1  -->
-                            <h1>João</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                            <article class="actions">
-                                <img src="/imgs/client/info.svg" alt="" class="indicator">
-                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                <img class="pay-call" src="/imgs/client/pay-icon.svg">
-                            </article>
-                        </section>
+            </section>
+            <section class="carousel">
+                <section class="content">
+                    <section class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <article class="actions">
+                            <img src="/imgs/client/info.svg" alt="" class="indicator">
+                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                        </article>
                     </section>
                 </section>
             </section>
-            <section class="popup">
-                <section class="popup-content">
-                    <section class="close">
-                        <img src="/imgs/client/close-icon.svg" alt="">
+        </section>
+
+        <section class="product-wrapper">
+            <section class="head">
+                <h1>Mais bem avaliados</h1>
+                <section class="controls">
+                    <span id="prev"> < </span>
+                    <span id="next"> > </span>
+                </section>
+            </section>
+            <section class="carousel">
+                <section class="content">
+                    <section class="products">
+                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
+                        <h1>João</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <article class="actions">
+                            <img src="/imgs/client/info.svg" alt="" class="indicator">
+                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
+                        </article>
                     </section>
-                    <form class="popup-wrapper" action="/cliente/chat">
-                        <h1>Pagamento</h1>
-                        <section class="payment-method">
-                            <section class="pix-field field">
-                                <input required type="radio" name="pay-method" id="pix">
-                                <label for="pix">Pix</label>
-                                <section class="pay-field">
-                                    <input class="input-field" type="text" readonly value="123e4567-e12b-12d1">
-                                    <button type="button">Copiar</button>
-                                </section>
+                </section>
+            </section>
+        </section> -->
+
+        <section class="popup">
+            <section class="popup-content">
+                <section class="close">
+                    <img src="/imgs/client/close-icon.svg" alt="">
+                </section>
+                <form class="popup-wrapper" action="/cliente/chat">
+                    <h1>Pagamento</h1>
+                    <section class="payment-method">
+                        <section class="pix-field field">
+                            <input required type="radio" name="pay-method" id="pix">
+                            <label for="pix">Pix</label>
+                            <section class="pay-field">
+                                <input class="input-field" type="text" readonly value="123e4567-e12b-12d1">
+                                <button type="button">Copiar</button>
                             </section>
-                            <section class="card-field field">
-                                <input required type="radio" name="pay-method" id="card">
-                                <label for="card">Cartão</label>
-                                <section class="pay-field">
-                                    <article class="card-input">
-                                        <input class="input-field card-info" minlength="16"
-                                            placeholder="Número do Cartão" type="text" id="card-number">
-                                        <img src="/imgs/client/card-icons/unknown.svg">
-                                    </article>
-                                    <input class="input-field card-info" minlength="5" placeholder="Validade"
-                                        type="text" id="card-validity">
-                                    <input class="input-field card-info" placeholder="CVV" type="text" id="card-cvv">
-                                    <input class="input-field card-info" placeholder="Nome" type="text" id="card-name">
-                                </section>
+                        </section>
+                        <section class="card-field field">
+                            <input required type="radio" name="pay-method" id="card">
+                            <label for="card">Cartão</label>
+                            <section class="pay-field">
+                                <article class="card-input">
+                                    <input class="input-field card-info" minlength="16" placeholder="Número do Cartão" type="text" id="card-number">
+                                    <img src="/imgs/client/card-icons/unknown.svg">
+                                </article>
+                                <input class="input-field card-info" minlength="5" placeholder="Validade" type="text" id="card-validity">
+                                <input class="input-field card-info" placeholder="CVV" type="text" id="card-cvv">
+                                <input class="input-field card-info" placeholder="Nome" type="text" id="card-name">
                             </section>
                         </section>
-                        <input type="text" class="input-field" placeholder="Aplique aqui algum cupom de desconto">
-                        <textarea class="input-field"
-                            placeholder="Deixe uma observação ao motorista (opcional)"></textarea>
-                        <p class="price">Valor Total: <span>R$25,00</span></p>
-                        <button type="submit" class="cta">Pagar</button>
-                    </form>
-                </section>
+                    </section>
+                    <input type="text" class="input-field" placeholder="Aplique aqui algum cupom de desconto">
+                    <textarea class="input-field" placeholder="Deixe uma observação ao motorista (opcional)"></textarea>
+                    <p class="price">Valor Total: <span>R$25,00</span></p>
+                    <button type="submit" class="cta">Pagar</button>
+                </form>
             </section>
-        </main>
-        <section class="notification-container"></section>
+        </section>
 
-        <%- include('../../partial/popup/description.ejs') %>
-            <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+    </main>
 
-                <script src="/JS/burguer.js"></script>
-                  <script src="/JS/client/shipper-carousel.js"></script>
-                <script src="/JS/client/show-notification.js"></script>
-                <script src="/JS/client/fav.js"></script>
-                <script src="/JS/client/show-shipper.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
-                <script src="/JS/client/pay-popup.js"></script>
-                <script src="/JS/shipper/description.js"></script>
+    <section class="notification-container"></section>
+
+    <%- include('../../partial/popup/description.ejs') %>
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+    <script src="/JS/client/shipper-carousel.js"></script>
+    <!-- Exibem notificação ao favoritar -->
+    <script src="/JS/client/show-notification.js"></script>
+    <script src="/JS/client/fav.js"></script>
+    
+    <!-- Exibe entregadores de pouco a pouco -->
+    <!-- <script src="/JS/client/show-shipper.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+    <script src="/JS/client/pay-popup.js"></script>
+    <script src="/JS/shipper/description.js"></script>
 </body>
 
 </html>

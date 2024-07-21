@@ -73,6 +73,7 @@ const pedidosController = {
             })
     ],
     
+    /* Solicitar Entrega */
     createPedido: async (req, res) => {
         // console.table(req.body);
         const erros = validationResult(req)
@@ -119,6 +120,20 @@ const pedidosController = {
         }
     },
 
+    /* Escolher Entregador */
+    listShipperAccept: async (req, res) => {
+        try {
+            const { id } = req.params
+            console.log(id)
+
+            res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado })
+        } catch (error) {
+            console.log(error)
+            return res.json({ error })
+        }
+    },
+
+    /* Entregas Solicitadas - GET */
     listPedidos: async (req, res) => {
         try {
             const id = req.session.autenticado.id
@@ -155,6 +170,33 @@ const pedidosController = {
         }
     },
 
+    /* Entregas Solicitadas - POST */
+    insertShipperReply: async (req, res) => {
+        const { id } = req.params
+        const { resposta } = req.body
+        
+        try {
+            if (resposta.toUpperCase() != 'ACEITO' && resposta.toUpperCase() != 'NEGADO') {
+                req.flash('error', 'Tente Novamente ; Erro ao inserir resposta do pedido')
+                return res.redirect('/entregador/entregas-solicitadas')
+            }
+            
+            const data = {
+                id_pedido: id,
+                id_entregador: req.session.autenticado.id,
+                status_resposta: resposta
+            }
+
+            await pedidosModel.insertShipper(data)
+            req.flash('success', `Pedido ${resposta.toLowerCase()} ; Pedido ${resposta.toLowerCase()} com sucesso`)
+            res.redirect('/entregador/entregas-solicitadas')
+        } catch (error) {
+            console.log(error)
+            res.json({ error })
+        }
+    },
+
+    /* Histórico - Cliente */
     listPedidosByUser: async (req, res) => {
         try {
             const id = req.session.autenticado.id
@@ -167,6 +209,7 @@ const pedidosController = {
         }
     },
 
+    /* Histórico Completo - Cliente */
     listPedidosByUserPaginate: async (req, res) => {
         try {
             const id = req.session.autenticado.id
@@ -195,31 +238,6 @@ const pedidosController = {
         } catch (error) {
             console.log(error)
             return res.json({ error })
-        }
-    },
-
-    insertShipperReply: async (req, res) => {
-        const { id } = req.params
-        const { resposta } = req.body
-        
-        try {
-            if (resposta.toUpperCase() != 'ACEITO' && resposta.toUpperCase() != 'NEGADO') {
-                req.flash('error', 'Tente Novamente ; Erro ao inserir resposta do pedido')
-                return res.redirect('/entregador/entregas-solicitadas')
-            }
-            
-            const data = {
-                id_pedido: id,
-                id_entregador: req.session.autenticado.id,
-                status_resposta: resposta
-            }
-
-            await pedidosModel.insertShipper(data)
-            req.flash('success', `Pedido ${resposta.toLowerCase()} ; Pedido ${resposta.toLowerCase()} com sucesso`)
-            res.redirect('/entregador/entregas-solicitadas')
-        } catch (error) {
-            console.log(error)
-            res.json({ error })
         }
     },
 
