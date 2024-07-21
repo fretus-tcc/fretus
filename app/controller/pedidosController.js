@@ -124,9 +124,19 @@ const pedidosController = {
     listShipperAccept: async (req, res) => {
         try {
             const { id } = req.params
-            console.log(id)
+            
+            const [pedido] = await pedidosModel.findById(id)
+            
+            // verificando se o usuario solicitou o pedido, e logo tem permissão de acessar
+            if (pedido.id_cliente != req.session.autenticado.id) {
+                return res.render('pages/restrito', { autenticado: req.session.autenticado })
+            }
 
-            res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado })
+            const entregadores = await pedidosModel.findByShipperAccept(id)
+
+            console.log(entregadores);
+
+            res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores })
         } catch (error) {
             console.log(error)
             return res.json({ error })

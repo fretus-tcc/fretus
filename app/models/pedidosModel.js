@@ -2,15 +2,6 @@ const pool = require('../../config/connection-factory')
 
 const pedidosModel = {
     
-    /* findById: async (id) => {
-        try {
-            const [result] = await pool.query('SELECT * FROM duvidas WHERE id_duvida = ?', [id])
-            return result
-        } catch (error) {
-            return error
-        }
-    }, */
-
     /* findPendingByShipper: async (id, vehicle) => {
         try {
             const [result] = await pool.query(
@@ -24,6 +15,15 @@ const pedidosModel = {
             return error
         }
     }, */
+
+    findById: async (id) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM pedidos WHERE id_pedido = ?', [id])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
 
     findPaginate: async (id, vehicle, pagina, total) => {
         try {
@@ -64,6 +64,19 @@ const pedidosModel = {
                 'WHERE id_usuario = ? ' +
                 'ORDER BY p.data_solicitacao DESC ' +
                 'LIMIT ?, ?' , [id, pagina, total])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
+    findByShipperAccept: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT u.* FROM usuario AS u ' +
+                'INNER JOIN entregadores_pedidos AS ep ' +
+                'ON u.id_usuario = ep.id_entregador ' +
+                'WHERE ep.id_pedido = ? AND ep.status_resposta = "ACEITO"', [id])
             return result
         } catch (error) {
             return error
