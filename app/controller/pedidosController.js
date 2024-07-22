@@ -120,7 +120,7 @@ const pedidosController = {
         }
     },
 
-    /* Escolher Entregador */
+    /* Escolher Entregador - GET */
     listShipperAccept: async (req, res) => {
         try {
             const { id } = req.params
@@ -134,7 +134,22 @@ const pedidosController = {
 
             const entregadores = await pedidosModel.findByShipperAccept(id)
 
-            res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores })
+            res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores, id_pedido: id })
+        } catch (error) {
+            console.log(error)
+            return res.json({ error })
+        }
+    },
+
+    /* Escolher Entregador - POST */
+    chooseShipper: async (req, res) => {
+        try {
+            // console.log(req.params);
+            const { id_entregador, id_pedido } = req.params
+
+            await pedidosModel.insertShipperAccepted(id_entregador, id_pedido)
+
+            res.redirect('back')
         } catch (error) {
             console.log(error)
             return res.json({ error })

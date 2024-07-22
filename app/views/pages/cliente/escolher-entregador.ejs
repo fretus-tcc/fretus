@@ -40,7 +40,11 @@
                                 <article class="actions">
                                     <img class="indicator" src="/imgs/client/info.svg" alt="">
                                     <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                    <img src="/imgs/client/check-icon.svg" alt="">
+                                    <form action="/cliente/escolher-entregador/<%= id_pedido %>/<%= entregador.id_usuario %>?_method=PUT" method="post">
+                                        <button class="accept-btn">
+                                            <img src="/imgs/client/check-icon.svg" alt="">
+                                        </button>
+                                    </form>
                                     <!-- <img class="pay-call" src="/imgs/client/pay-icon.svg"> -->
                                 </article>
                             </section>

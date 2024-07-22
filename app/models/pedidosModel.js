@@ -115,6 +115,15 @@ const pedidosModel = {
         }
     },
 
+    insertShipperAccepted: async (id_entregador, id_pedido) => {
+        try {
+            await pool.query('UPDATE pedidos SET id_entregador = ? WHERE id_pedido = ?', [id_entregador, id_pedido])
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     /* update: async (data, id) => {
         try {
             await pool.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])

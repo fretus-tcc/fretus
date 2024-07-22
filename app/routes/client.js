@@ -24,6 +24,10 @@ router.get('/escolher-entregador/:id', verificarUsuAutorizado([1], 'pages/restri
     pedidosController.listShipperAccept(req, res)
 })
 
+router.put('/escolher-entregador/:id_pedido/:id_entregador', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    pedidosController.chooseShipper(req, res)
+})
+
 router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/chat', { autenticado: req.session.autenticado })
 })

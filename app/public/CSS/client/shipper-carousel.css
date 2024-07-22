@@ -89,6 +89,10 @@ main {
     align-items: center;
 }
 
+.actions .accept-btn {
+    all: unset;
+}
+
 .description_button button:hover{
     color: orange;
     background-color: transparent;
