@@ -134,8 +134,6 @@ const pedidosController = {
 
             const entregadores = await pedidosModel.findByShipperAccept(id)
 
-            console.log(entregadores);
-
             res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores })
         } catch (error) {
             console.log(error)

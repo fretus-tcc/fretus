@@ -31,18 +31,26 @@
             </section>
             <section class="carousel">
                 <section class="content">
-                    <section class="products">
-                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
-                        <h1>João</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <article class="actions">
-                            <img class="indicator" src="/imgs/client/info.svg" alt="">
-                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                            <img src="/imgs/client/check-icon.svg" alt="">
-                            <!-- <img class="pay-call" src="/imgs/client/pay-icon.svg"> -->
-                        </article>
-                    </section>
+                    <% if (entregadores.length > 0) { %>
+                        <% entregadores.forEach(entregador => { %>
+                            <section class="products">
+                                <img src="data:image/png;base64,<%= entregador.foto_de_perfil.toString('base64') %>" alt="" class="photo">
+                                <h1><%= entregador.nome_usuario %></h1>
+                                <p><%= entregador.descricao_usuario %></p>
+                                <article class="actions">
+                                    <img class="indicator" src="/imgs/client/info.svg" alt="">
+                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    <img src="/imgs/client/check-icon.svg" alt="">
+                                    <!-- <img class="pay-call" src="/imgs/client/pay-icon.svg"> -->
+                                </article>
+                            </section>
+                        <% }) %>
+                    <% } %>
                 </section>
+                <div class="empty-alert">
+                    <img src="/imgs/shipper/error-icon.png" alt="">
+                    <p>Por enquanto, nenhum entregador aceitou seu pedido</p>
+                </div>
             </section>
         </section>
 
@@ -171,6 +179,7 @@
     
     <!-- Exibe entregadores de pouco a pouco -->
     <!-- <script src="/JS/client/show-shipper.js"></script> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
     <script src="/JS/client/pay-popup.js"></script>
     <script src="/JS/shipper/description.js"></script>

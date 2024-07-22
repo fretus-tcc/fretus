@@ -2,7 +2,7 @@
     display: none;
 }
 
-.requests-container:not(:has(.card)) + .empty-alert, .content:not(:has(.products.show)) + .empty-alert  {
+.requests-container:not(:has(.card)) + .empty-alert, .content:not(:has(.products)) + .empty-alert  {
     display: block;
     width: fit-content;
     opacity: .25;
