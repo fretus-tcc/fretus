@@ -134,45 +134,56 @@ router.get('/:cidade', function (req, res) {
 
     var regiaoDescoberta = identificarRegiao(cidade)
     if(regiaoDescoberta == "Grande São Paulo"){
-        var regiao = grandeS
-    
+        var regiao = valorGrandeS
     }else if(regiaoDescoberta == "Campinas"){
-        var regiao = campinas
+        var regiao = valorCampinas
     
     }else if(regiaoDescoberta == "Araçatuba"){
-          var regiao = aracatuba
+          var regiao = valorAracatuba
     
     }else if(regiaoDescoberta  == "Sorocaba"){
-        var regiao = sorocaba
+        var regiao = valorSorocaba
         
     }else if(regiaoDescoberta == "Bauru"){
-        var regiao = bauru
+        var regiao = valorBauru
     
     }else if(regiaoDescoberta == "São José do Rio Preto"){
-        regiao = riopreto
+        regiao = valorRioPreto
     
     }else if(regiaoDescoberta == "Presidente Prudente"){
-         regiao = presidente
+         regiao = valorPresidente
     
     }else if(regiaoDescoberta == "Ribeirão Preto"){
     
-       regiao = ribeirao
+       regiao = valorRiberao
     }else if(regiaoDescoberta == "Santos"){
-        regiao = santos
+        regiao = valorSantos
     
     }else if(regiaoDescoberta == "Piracicaba" ){
-        regiao = piracicaba
+        regiao = valorPiracicaba
     
     
     }else if(regiaoDescoberta == "São José dos Campos"){
-        regiao = josecampos
+        regiao = valorJoseCampos
     
     }else if(regiaoDescoberta == "capital"){
-        regiao = capital
+        regiao = valorCapital
     
     }
+
+    var perigoRegiao
+    if(regiao >= meioPerigoso && regiao <= perigoso){
+        perigoRegiao = 'meio'
+        console.log(" regiao é meio")
+    }else if(regiao >= perigoso){
+        perigoRegiao = 'perigoso'
+       console.log(" regiao é perigoso")
+    }else{
+        perigoRegiao = 'seguro'
+        console.log(" regiao é seguro")
+    }
     
-    res.json({cidade, zona, perigoZona})
+    res.json({cidade, zona, perigoZona, regiao, perigoRegiao})
 })
 
 router.get('/calcular/preco', function(req, res) {
