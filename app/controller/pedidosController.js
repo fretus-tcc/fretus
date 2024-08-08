@@ -126,7 +126,12 @@ const pedidosController = {
             const { id } = req.params
             
             const [pedido] = await pedidosModel.findById(id)
-            
+
+            // verificando se o pedido existe
+            if (pedido == null) {
+                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: true })
+            }
+
             // verificando se o usuario solicitou o pedido, e logo tem permissão de acessar
             if (pedido.id_cliente != req.session.autenticado.id) {
                 return res.render('pages/restrito', { autenticado: req.session.autenticado })
@@ -134,7 +139,7 @@ const pedidosController = {
 
             const entregadores = await pedidosModel.findByShipperAccept(id)
 
-            res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores, id_pedido: id })
+            res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores, id_pedido: id, erro_pedido: false })
         } catch (error) {
             console.log(error)
             return res.json({ error })

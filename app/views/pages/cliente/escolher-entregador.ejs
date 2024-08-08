@@ -53,7 +53,11 @@
                 </section>
                 <div class="empty-alert">
                     <img src="/imgs/shipper/error-icon.png" alt="">
-                    <p>Por enquanto, nenhum entregador aceitou seu pedido</p>
+                    <% if (erro_pedido) { %>
+                        <p>Pedido não encontrado</p>
+                    <% } else { %>
+                        <p>Por enquanto, nenhum entregador aceitou seu pedido</p>
+                    <% } %>
                 </div>
             </section>
         </section>
