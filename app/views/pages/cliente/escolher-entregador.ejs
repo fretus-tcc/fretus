@@ -9,7 +9,8 @@
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-client-shipper.ejs') %>
     <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
-    <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
+    <!-- <link rel="stylesheet" href="/CSS/client/shipper-carousel.css"> -->
+    <link rel="stylesheet" href="/CSS/shipper/shipper-wrapper.css">
     <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
     <link rel="stylesheet" href="/CSS/client/pay-popup.css">
     <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
@@ -20,46 +21,43 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <main>
-
-        <section class="product-wrapper">
+        <section class="shipper-wrapper">
             <section class="head">
                 <h1>Escolha o entregador</h1>
-                <section class="controls">
+                <!-- <section class="controls">
                     <span id="prev"> < </span>
                     <span id="next"> > </span>
-                </section>
+                </section> -->
             </section>
-            <section class="carousel">
-                <section class="content">
-                    <% if (entregadores.length > 0) { %>
-                        <% entregadores.forEach(entregador => { %>
-                            <section class="products">
-                                <img src="data:image/png;base64,<%= entregador.foto_de_perfil.toString('base64') %>" alt="" class="photo">
-                                <h1><%= entregador.nome_usuario %></h1>
-                                <p><%= entregador.descricao_usuario %></p>
-                                <article class="actions">
-                                    <img class="indicator" src="/imgs/client/info.svg" alt="">
-                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                                    <form action="/cliente/escolher-entregador/<%= id_pedido %>/<%= entregador.id_usuario %>?_method=PUT" method="post">
-                                        <button class="accept-btn">
-                                            <img src="/imgs/client/check-icon.svg" alt="">
-                                        </button>
-                                    </form>
-                                    <!-- <img class="pay-call" src="/imgs/client/pay-icon.svg"> -->
-                                </article>
-                            </section>
-                        <% }) %>
-                    <% } %>
-                </section>
-                <div class="empty-alert">
-                    <img src="/imgs/shipper/error-icon.png" alt="">
-                    <% if (erro_pedido) { %>
-                        <p>Pedido não encontrado</p>
-                    <% } else { %>
-                        <p>Por enquanto, nenhum entregador aceitou seu pedido</p>
-                    <% } %>
-                </div>
+            <section class="content">
+                <% if (entregadores.length > 0) { %>
+                    <% entregadores.forEach(entregador => { %>
+                        <section class="shipper">
+                            <img src="data:image/png;base64,<%= entregador.foto_de_perfil.toString('base64') %>" alt="" class="photo">
+                            <h1><%= entregador.nome_usuario %></h1>
+                            <p><%= entregador.descricao_usuario %></p>
+                            <article class="actions">
+                                <img class="indicator" src="/imgs/client/info.svg" alt="">
+                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                <form action="/cliente/escolher-entregador/<%= id_pedido %>/<%= entregador.id_usuario %>?_method=PUT" method="post">
+                                    <button class="accept-btn">
+                                        <img src="/imgs/client/check-icon.svg" alt="">
+                                    </button>
+                                </form>
+                                <!-- <img class="pay-call" src="/imgs/client/pay-icon.svg"> -->
+                            </article>
+                        </section>
+                    <% }) %>
+                <% } %>
             </section>
+            <div class="empty-alert">
+                <img src="/imgs/shipper/error-icon.png" alt="">
+                <% if (erro_pedido) { %>
+                    <p>Pedido não encontrado</p>
+                <% } else { %>
+                    <p>Por enquanto, nenhum entregador aceitou seu pedido</p>
+                <% } %>
+            </div>
         </section>
 
         <!-- <section class="product-wrapper">

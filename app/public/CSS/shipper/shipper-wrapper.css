@@ -1,0 +1,29 @@
+main {
+    padding-bottom: 45px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.shipper-wrapper {
+    margin: 45px auto 0;
+}
+
+.head h1 {
+    color: #333;
+    font-family: var(--font-1);
+    font-size: 24px;
+}
+
+.shipper-wrapper .content {
+    display: flex;
+    color: #333;
+}
+
+.shipper-wrapper .shipper {
+    background-color: white;
+    width: 25%;
+}
+
+.shipper img {
+    width: 100%;
+}
