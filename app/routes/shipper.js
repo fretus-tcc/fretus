@@ -78,11 +78,11 @@ router.put('/perfil-status/:id', verificarUsuAutorizado([2], 'pages/restrito'), 
 router.put('/veiculo/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
     ConfigPerfilController.updateVehicle(req, res, 'pages/cliente-entregador/perfil', `/entregador/perfil/${req.params.id}`);
 });
-
+/*
 router.get('/ranking', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/entregador/ranking', { autenticado: req.session.autenticado })
 })
-
+/*/
 router.get('/resultados', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/entregador/resultados', { autenticado: req.session.autenticado })
 })
