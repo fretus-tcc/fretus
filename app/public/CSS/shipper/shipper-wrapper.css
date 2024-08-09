@@ -16,13 +16,17 @@ main {
 
 .shipper-wrapper .content {
     margin-top: 28px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+    gap: 15px;
     color: #333;
 }
 
 .shipper-wrapper .shipper {
     background-color: white;
-    width: 25%;
+    display: flex;
+    flex-direction: column;
+    height: 415px;
     padding: 15px;
     border-radius: 5px;
 }
@@ -43,15 +47,22 @@ main {
 
 .shipper .description {
     font-size: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .shipper .actions {
-    display: flex !important;
+    display: flex;
+    flex-grow: 1;
     gap: 7px;
     justify-content: end;
-    margin-top: 20px;
-    margin-left: auto;
-    align-items: center;
+    align-items: end;
+}
+
+.actions form {
+    height: 30px;
 }
 
 .actions .accept-btn {
