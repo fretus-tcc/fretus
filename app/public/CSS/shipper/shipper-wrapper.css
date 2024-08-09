@@ -15,6 +15,7 @@ main {
 }
 
 .shipper-wrapper .content {
+    margin-top: 28px;
     display: flex;
     color: #333;
 }
@@ -22,8 +23,49 @@ main {
 .shipper-wrapper .shipper {
     background-color: white;
     width: 25%;
+    padding: 15px;
+    border-radius: 5px;
 }
 
-.shipper img {
-    width: 100%;
+.shipper .photo {
+    width: min(250px, 100%);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.shipper .name {
+    font-size: 24px;
+}
+
+.shipper .description {
+    font-size: 16px;
+}
+
+.shipper .actions {
+    display: flex !important;
+    gap: 7px;
+    justify-content: end;
+    margin-top: 20px;
+    margin-left: auto;
+    align-items: center;
+}
+
+.actions .accept-btn {
+    all: unset;
+}
+
+.actions img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    opacity: .6;
+    cursor: pointer;
+}
+
+.actions img:hover {
+    opacity: .85;
 }
