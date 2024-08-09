@@ -25,26 +25,31 @@ stars.forEach((star, i) => {
 })
 
 submit.addEventListener('click', () => {
-    let hasChecked = false
+   /* let hasChecked = false
     stars.forEach(star => {
         if (star.classList.contains('checked')) {
             hasChecked = true
         }
     })
-
-    if (hasChecked) {
+*/
+    /*/if (hasChecked) {
         error.classList.remove('error')
         rate[popup.dataset.shipper].remove()
         closePopup()
         showModal()
-    } else {
+    } /*else {
         error.classList.add('error')
-    }
+    }*/
+    console.log( rate[popup.dataset.shipper])
+    //rate[popup.dataset.shipper].remove()
+    closePopup()
+    showModal()
+
 })
 
 function closePopup() {
     popup.classList.remove('show')
-    removeClass(stars, 'checked')
+   // removeClass(stars, 'checked')
     rateField.value = ''
 }
 
@@ -63,8 +68,8 @@ function addClass(el, i) {
 }
 
 function showModal() {
-    if (main.children.length > 3) {
-        main.children[3].remove()
+    if (main.children.length > 4) {
+        main.children[4].remove()
     }
     let modal = document.createElement('div')
     modal.innerHTML = `<p>Avaliação enviada com sucesso!</p>
