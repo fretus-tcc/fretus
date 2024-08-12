@@ -34,8 +34,8 @@
                     <% entregadores.forEach(entregador => { %>
                         <section class="shipper">
                             <img src="data:image/png;base64,<%= entregador.foto_de_perfil.toString('base64') %>" alt="" class="photo">
-                            <h1><%= entregador.nome_usuario %></h1>
-                            <p><%= entregador.descricao_usuario %></p>
+                            <h1 class="name"><%= entregador.nome_usuario %></h1>
+                            <p class="description"><%= entregador.descricao_usuario %></p>
                             <article class="actions">
                                 <img class="indicator" src="/imgs/client/info.svg" alt="">
                                 <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
@@ -49,25 +49,6 @@
                         </section>
                     <% }) %>
                 <% } %>
-
-                <% for (var i = 0; i < 10; i++) { %>
-                    <section class="shipper">
-                        <img src="https://gabrioviski.github.io/fretus/imgs/historico/1.jpg" alt="" class="photo">
-                        <h1 class="name">Nome</h1>
-                        <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro nisi architecto obcaecati autem nobis reiciendis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eius quod excepturi ex amet. Nesciunt praesentium laudantium in magnam dolorum, nobis a, dolor doloribus numquam illum unde, beatae minima omnis.</p>
-                        <article class="actions">
-                            <img class="indicator" src="/imgs/client/info.svg" alt="">
-                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                            <form action="/cliente/escolher-entregador/1/2?_method=PUT" method="post">
-                                <button class="accept-btn">
-                                    <img src="/imgs/client/check-icon.svg" alt="">
-                                </button>
-                            </form>
-                            <!-- <img class="pay-call" src="/imgs/client/pay-icon.svg"> -->
-                        </article>
-                    </section>
-                <% } %>
-
             </section>
             <div class="empty-alert">
                 <img src="/imgs/shipper/error-icon.png" alt="">
@@ -197,7 +178,10 @@
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
     <script src="/JS/burguer.js"></script>
-    <script src="/JS/client/shipper-carousel.js"></script>
+
+    <!-- Executa as funcoes do carrosel -->
+    <!-- <script src="/JS/client/shipper-carousel.js"></script> -->
+
     <!-- Exibem notificação ao favoritar -->
     <script src="/JS/client/show-notification.js"></script>
     <script src="/JS/client/fav.js"></script>

@@ -17,7 +17,7 @@ main {
 .shipper-wrapper .content {
     margin-top: 28px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+    grid-template-columns: repeat(auto-fill, minmax(280px, auto));
     gap: 15px;
     color: #333;
 }
