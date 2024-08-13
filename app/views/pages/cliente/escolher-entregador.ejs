@@ -53,7 +53,7 @@
             <div class="empty-alert">
                 <img src="/imgs/shipper/error-icon.png" alt="">
                 <% if (erro_pedido) { %>
-                    <p>Pedido não encontrado</p>
+                    <p><%= erro_pedido %></p>
                 <% } else { %>
                     <p>Por enquanto, nenhum entregador aceitou seu pedido</p>
                 <% } %>

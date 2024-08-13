@@ -129,7 +129,12 @@ const pedidosController = {
 
             // verificando se o pedido existe
             if (pedido == null) {
-                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: true })
+                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido não encontrado' })
+            }
+
+            // verificando se o pedido ja possui entregador escolhido
+            if (pedido.id_entregador != null) {
+                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido já possui entregador escolhido' })
             }
 
             // verificando se o usuario solicitou o pedido, e logo tem permissão de acessar
