@@ -6,6 +6,7 @@ const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
 const ConfigPerfilController = require('../controller/ConfigPerfilController')
 const pedidosController = require('../controller/pedidosController')
+const favoritadosController = require('../controller/favoritadosController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
@@ -26,6 +27,10 @@ router.get('/escolher-entregador/:id', verificarUsuAutorizado([1], 'pages/restri
 
 router.put('/escolher-entregador/:id_pedido/:id_entregador', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     pedidosController.chooseShipper(req, res)
+})
+
+router.post('/favoritar-desfavoritar/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    favoritadosController.toggleFavoritados(req, res)
 })
 
 router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {

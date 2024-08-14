@@ -14,11 +14,23 @@
     <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
     <link rel="stylesheet" href="/CSS/client/pay-popup.css">
     <link rel="stylesheet" href="/CSS/shipper/requests-notification.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
 
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+    
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
 
     <main>
         <section class="shipper-wrapper">
@@ -33,12 +45,16 @@
                 <% if (entregadores.length > 0) { %>
                     <% entregadores.forEach(entregador => { %>
                         <section class="shipper">
-                            <img src="data:image/png;base64,<%= entregador.foto_de_perfil.toString('base64') %>" alt="" class="photo">
+                            <img src="data:image/png;base64,<%= entregador.foto_de_perfil?.toString('base64') %>" alt="" class="photo">
                             <h1 class="name"><%= entregador.nome_usuario %></h1>
                             <p class="description"><%= entregador.descricao_usuario %></p>
                             <article class="actions">
                                 <img class="indicator" src="/imgs/client/info.svg" alt="">
-                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                <form action="/cliente/favoritar-desfavoritar/<%= entregador.id_usuario %>" method="POST">
+                                    <button class="accept-btn">
+                                        <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    </button>
+                                </form>
                                 <form action="/cliente/escolher-entregador/<%= id_pedido %>/<%= entregador.id_usuario %>?_method=PUT" method="post">
                                     <button class="accept-btn">
                                         <img src="/imgs/client/check-icon.svg" alt="">
@@ -183,8 +199,8 @@
     <!-- <script src="/JS/client/shipper-carousel.js"></script> -->
 
     <!-- Exibem notificação ao favoritar -->
-    <script src="/JS/client/show-notification.js"></script>
-    <script src="/JS/client/fav.js"></script>
+    <!-- <script src="/JS/client/show-notification.js"></script>
+    <script src="/JS/client/fav.js"></script> -->
     
     <!-- Exibe entregadores de pouco a pouco -->
     <!-- <script src="/JS/client/show-shipper.js"></script> -->
