@@ -129,12 +129,12 @@ const pedidosController = {
 
             // verificando se o pedido existe
             if (pedido == null) {
-                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido não encontrado' })
+                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido não encontrado', msgs: [] })
             }
 
             // verificando se o pedido ja possui entregador escolhido
             if (pedido.id_entregador != null) {
-                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido já possui entregador escolhido' })
+                return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido já possui entregador escolhido', msgs: [] })
             }
 
             // verificando se o usuario solicitou o pedido, e logo tem permissão de acessar
@@ -142,7 +142,7 @@ const pedidosController = {
                 return res.render('pages/restrito', { autenticado: req.session.autenticado })
             }
 
-            const entregadores = await pedidosModel.findByShipperAccept(id)
+            const entregadores = await pedidosModel.findByShipperAccept(req.session.autenticado.id, id)
 
             const msgs = notifyMessages(req, res)
 

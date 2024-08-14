@@ -26,10 +26,10 @@ const favoritadosController = {
             // Verifica se o usuario ja e favoritado, e realiza o toggle
             if (isFavoritado.length > 0) {
                 await favoritadosModel.delete(id_favoritou, id_favoritado)
-                req.flash('success', 'Entregador desfavoritado ; Entregador desfavoritado com sucesso')
+                req.flash('success', 'Entregador desfavoritado ; Ação realizada com sucesso')
             } else {
                 await favoritadosModel.create({ id_favoritou, id_favoritado })
-                req.flash('success', 'Entregador favoritado ; Entregador favoritado com sucesso')
+                req.flash('success', 'Entregador favoritado ; Ação realizada com sucesso')
             }
 
             res.redirect(`back`)

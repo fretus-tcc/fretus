@@ -70,13 +70,19 @@ const pedidosModel = {
         }
     },
 
-    findByShipperAccept: async (id) => {
+    findByShipperAccept: async (id_usuario, id_pedido) => {
         try {
             const [result] = await pool.query(
-                'SELECT u.* FROM usuario AS u ' +
+                'SELECT * FROM usuario AS u ' +
                 'INNER JOIN entregadores_pedidos AS ep ' +
                 'ON u.id_usuario = ep.id_entregador ' +
-                'WHERE ep.id_pedido = ? AND ep.status_resposta = "ACEITO"', [id])
+                'INNER JOIN detalhamento_entregador AS e ' +
+                'ON u.id_usuario = e.id_usuario ' +
+                'INNER JOIN veiculos AS v ' +
+                'ON e.id_entregador = v.id_entregador ' +
+                'LEFT JOIN favoritados AS f ' +
+                'ON u.id_usuario = f.id_favoritado AND f.id_favoritou = ? ' +
+                'WHERE ep.id_pedido = ? AND ep.status_resposta = "ACEITO"', [id_usuario, id_pedido])
             return result
         } catch (error) {
             return error

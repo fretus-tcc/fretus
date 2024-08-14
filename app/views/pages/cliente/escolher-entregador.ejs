@@ -52,7 +52,11 @@
                                 <img class="indicator" src="/imgs/client/info.svg" alt="">
                                 <form action="/cliente/favoritar-desfavoritar/<%= entregador.id_usuario %>" method="POST">
                                     <button class="accept-btn">
-                                        <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                        <% if (entregador.id_favoritou == null) { %>
+                                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                        <% } else { %>
+                                            <img class="fav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                                        <% } %>
                                     </button>
                                 </form>
                                 <form action="/cliente/escolher-entregador/<%= id_pedido %>/<%= entregador.id_usuario %>?_method=PUT" method="post">
@@ -75,78 +79,6 @@
                 <% } %>
             </div>
         </section>
-
-        <!-- <section class="product-wrapper">
-            <section class="head">
-                <h1>Perto da sua região</h1>
-                <section class="controls">
-                    <span id="prev"> < </span>
-                    <span id="next"> > </span>
-                </section>
-            </section>
-            <section class="carousel">
-                <section class="content">
-                    <section class="products">
-                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
-                        <h1>João</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <article class="actions">
-                            <img class="indicator" src="/imgs/client/info.svg" alt="">
-                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
-                        </article>
-                    </section>
-                </section>
-            </section>
-        </section>
-
-        <section class="product-wrapper">
-            <section class="head">
-                <h1>Com base nas últimas entregas</h1>
-                <section class="controls">
-                    <span id="prev"> < </span>
-                    <span id="next"> > </span>
-                </section>
-            </section>
-            <section class="carousel">
-                <section class="content">
-                    <section class="products">
-                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
-                        <h1>João</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <article class="actions">
-                            <img src="/imgs/client/info.svg" alt="" class="indicator">
-                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
-                        </article>
-                    </section>
-                </section>
-            </section>
-        </section>
-
-        <section class="product-wrapper">
-            <section class="head">
-                <h1>Mais bem avaliados</h1>
-                <section class="controls">
-                    <span id="prev"> < </span>
-                    <span id="next"> > </span>
-                </section>
-            </section>
-            <section class="carousel">
-                <section class="content">
-                    <section class="products">
-                        <img src="/imgs/historico/1.jpg" alt="" class="photo">
-                        <h1>João</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <article class="actions">
-                            <img src="/imgs/client/info.svg" alt="" class="indicator">
-                            <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
-                            <img class="pay-call" src="/imgs/client/pay-icon.svg">
-                        </article>
-                    </section>
-                </section>
-            </section>
-        </section> -->
 
         <section class="popup">
             <section class="popup-content">
@@ -188,7 +120,7 @@
 
     </main>
 
-    <section class="notification-container"></section>
+    <!-- <section class="notification-container"></section> -->
 
     <%- include('../../partial/popup/description.ejs') %>
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
