@@ -10,14 +10,18 @@ const favoritadosModel = {
         }
     },
 
-    /* findAll: async () => {
+    findAllById: async (id) => {
         try {
-            const [result] = await pool.query('SELECT titulo_duvida, slug_duvida FROM duvidas')
+            const [result] = await pool.query(
+                'SELECT * FROM usuario AS u ' +
+	            'INNER JOIN favoritados AS f ' +
+	            'ON u.id_usuario = f.id_favoritado ' +
+	            'WHERE f.id_favoritou = ?', [id])
             return result
         } catch (error) {
             return error
         }
-    }, */
+    },
 
     create: async (data) => {
         try {

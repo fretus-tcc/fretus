@@ -1,4 +1,5 @@
 const pedidosModel = require('../models/pedidosModel')
+const favoritadosModel = require('../models/favoritadosModel')
 const admCadastroModel = require('../models/admCadastroModel')
 const { notifyMessages, calcularPrecoEntrega } = require('../util/Funcao')
 const fetch = require('node-fetch')
@@ -236,8 +237,11 @@ const pedidosController = {
         try {
             const id = req.session.autenticado.id
             const pedidos = await pedidosModel.findByUser(id, 0, 4)
+            const favoritados = await favoritadosModel.findAllById(id)
 
-            res.render('pages/cliente/historico', { autenticado: req.session.autenticado, pedidos })
+            const msgs = notifyMessages(req, res)
+        
+            res.render('pages/cliente/historico', { autenticado: req.session.autenticado, pedidos, favoritados, msgs })
         } catch (error) {
             console.log(error)
             return res.json({ error })
