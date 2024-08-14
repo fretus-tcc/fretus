@@ -151,17 +151,8 @@ BEGIN
 END;//
 delimiter ;
 
-/* INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
-VALUES ('francisco', '731.571.950-42', '(96) 96924-6462', '2022-01-01', 'francisco@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
-
-INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador)
-VALUES ('2', '30', './cnh.pdf');
-
 INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
-VALUES ('geraldo', '518.255.750-70', '(81) 97446-3199', '2022-01-01', 'geraldo@outlook.com', '$2a$10$vx1VnptGoDDt4Vl.RBGu9.NEmjFnEHY8l0.F5yLlFH41gsirUWlbC', '2');
-
-INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador, status_aprovacao)
-VALUES ('3', '30', './cnh.pdf', '2'); */
+VALUES ('Cliente', '536.131.950-38', '(22) 96656-1935', '2006-01-01', 'teste1@teste.com', '$2a$10$pcfJQWXoSsasBNM2HrLMLeEhB3I9t9RElpMarZB6kPWUqgoTQ/oJS', '1');
 
 -- -----------------------------------------------------
 -- Table FRETUS.VEICULOS
@@ -184,6 +175,13 @@ CREATE TABLE IF NOT EXISTS FRETUS.veiculos (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario)
+VALUES ('Entregador', '506.101.180-56', '(46) 96399-7271', '2006-01-01', 'teste2@teste.com', '$2a$10$I.loNVPUL4l7sfU3sSkFUeXlioyh8pUiDy7UpOOgjm3q0ia4b12Ma', '2');
+INSERT INTO detalhamento_entregador (id_usuario, raio_de_atuacao, cnh_entregador, status_aprovacao)
+VALUES ('3', '30', './cnh.pdf', '2');
+INSERT INTO veiculos (tipo_veiculo, placa, modelo_veiculo, id_entregador, foto_veiculo) 
+VALUES ('moto', 'test-0100', 'xj6', '1', './foto.png');
 
 -- -----------------------------------------------------
 -- Table FRETUS.CEP
@@ -504,30 +502,33 @@ CREATE TABLE IF NOT EXISTS FRETUS.USUARIOS_has_CUPONS (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table FRETUS.FAVORITADOS
+-- Table FRETUS.favoritados
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.FAVORITADOS (
-  id_favoritado INT NOT NULL AUTO_INCREMENT,
-  id_usuario INT NOT NULL,
+CREATE TABLE IF NOT EXISTS FRETUS.favoritados (
+  id INT NOT NULL AUTO_INCREMENT,
+  id_favoritou INT NOT NULL,
+  id_favoritado INT NOT NULL,
+  /* id_usuario INT NOT NULL,
   id_usuario_favoritou INT NOT NULL,
-  id_usuario_favoritado INT NOT NULL,
-  PRIMARY KEY (id_favoritado),
-  INDEX fk_FAVORITADOS_USUARIOS1_idx (id_usuario ASC) VISIBLE,
-  INDEX fk_FAVORITADOS_USUARIOS2_idx (id_usuario_favoritou ASC) VISIBLE,
-  INDEX fk_FAVORITADOS_USUARIOS3_idx (id_usuario_favoritado ASC) VISIBLE,
-  CONSTRAINT fk_FAVORITADOS_USUARIOS1
+  id_usuario_favoritado INT NOT NULL, */
+  PRIMARY KEY (id),
+  UNIQUE (id_favoritou, id_favoritado),
+  /* INDEX fk_FAVORITADOS_USUARIOS1_idx (id_usuario ASC) VISIBLE, */
+  INDEX fk_FAVORITADOS_USUARIOS2_idx (id_favoritou ASC) VISIBLE,
+  INDEX fk_FAVORITADOS_USUARIOS3_idx (id_favoritado ASC) VISIBLE,
+  /* CONSTRAINT fk_FAVORITADOS_USUARIOS1
     FOREIGN KEY (id_usuario)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE NO ACTION, */
   CONSTRAINT fk_FAVORITADOS_USUARIOS2
-    FOREIGN KEY (id_usuario_favoritou)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
+    FOREIGN KEY (id_favoritou)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_FAVORITADOS_USUARIOS3
-    FOREIGN KEY (id_usuario_favoritado)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
+    FOREIGN KEY (id_favoritado)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
