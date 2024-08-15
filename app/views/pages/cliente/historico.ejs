@@ -22,6 +22,7 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'/>
+    
     <!-- SIMPLE NOTIFY - Notificações -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
@@ -184,11 +185,15 @@
                         </aside>
                     </article> -->
                 </section>
+                <article class="empty-alert">
+                    <img src="/imgs/shipper/error-icon.png" alt="">
+                    <p>Você não favoritou nenhum entregador</p>
+                </article>
             </section>
         </section>
     </main>
 
-    <section class="notification-container"></section>
+    <!-- <section class="notification-container"></section> -->
 
     <%- include('../../partial/popup/rate.ejs') %>
 
