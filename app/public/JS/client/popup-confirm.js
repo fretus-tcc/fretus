@@ -84,3 +84,37 @@ async function calcularPreco(distancia,veiculo) {
     return precoMaximo
   }
   
+
+  //function precoPeculiaridade(){
+    //recebe se é perigoso
+
+   //if(/*se regiao é segura  && zona é perigosa*/){
+
+        //preco aumenta 20%
+   //}else if(/*se região é segura && zona é segura*/){
+
+       // preco aumenta 0%
+  // }else if(/*se regiao é segura && zona é meio*/ ){
+
+         //10%      
+   //}else if(/*se regiao e perigosa && zona é meio*/){
+
+         //16%
+   //}else if(/*se regiao é perigosa && zona é perigosa*/){
+
+         //20%
+   //}else if(/*se regiao é perigosa && zona é segura*/ ){
+
+         //15%
+   //}else if(/** se regiao é meio && zona é segura */){
+
+         //5%
+   //}else if(/** se regiao é meio && zona é meio */){
+ 
+        //10%
+   //}else if(/**se regiao é meio && zona é perigosa */){
+             //15%
+   //}
+
+
+ //}

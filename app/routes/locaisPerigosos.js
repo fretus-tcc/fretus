@@ -2,8 +2,14 @@ var express = require("express")
 var router = express.Router()
 var { calcularPrecoEntrega } = require("../util/Funcao")
 
-router.get('/:cidade', function (req, res) {
-    // Zonas
+router.get('/calcular/preco', function(req, res) {
+    const { veiculo, distancia } = req.query
+    const precoTotal = calcularPrecoEntrega(veiculo, distancia)
+    res.json({veiculo, distancia, precoTotal});
+})
+
+/* router.get('/calcular/preco/:cidade', async function(req, res) {
+// Zonas
     var CidadesOeste = ["Barueri", "Osasco", "Itapevi", "Jandira", "Carapicuíba", "Santana de Parnaíba", "Pirapora"];
     var CidadesSudeste = ["Diadema", "São Bernardo do Campo", "Santo André", "Ribeirão Pires", "Rio Grande da Serra", "Mauá"];
     var CidadeNorte = ["Francisco Morato", "Franco da Rocha", "Cajamar", "Mairiporã", "Caieiras"];
@@ -26,26 +32,28 @@ router.get('/:cidade', function (req, res) {
             identificarZona = "Cidade não encontrada";
         }
 
-        return identificarZona
+        const mediaZonas = 10423;
+    
+        var meioPerigoso = (0.10*mediaZonas)+mediaZonas
+        var perigoso =(0.20*mediaZonas)+mediaZonas
+        // var zona = identificarZona(cidade)
+        
+        var perigoZona
+        if (zona != 'Cidade não encontrada') {
+            if(zona >= meioPerigoso && zona <= perigoso){
+                perigoZona = 'meio'
+            }else if(zona >= perigoso){
+                perigoZona = 'perigosa'
+            }else{
+                perigoZona = 'segura'
+            }
+        }
+
+        return {identificarZona}
     }
     
     var { cidade } = req.params;
-    const mediaZonas = 10423;
     
-    var meioPerigoso = (0.10*mediaZonas)+mediaZonas
-    var perigoso =(0.20*mediaZonas)+mediaZonas
-    var zona = identificarZona(cidade)
-    
-    var perigoZona
-    if (zona != 'Cidade não encontrada') {
-        if(zona >= meioPerigoso && zona <= perigoso){
-            perigoZona = 'meio'
-        }else if(zona >= perigoso){
-            perigoZona = 'perigosa'
-        }else{
-            perigoZona = 'segura'
-        }
-    }
     
     // Regioes
     const regioesSP = {
@@ -176,20 +184,16 @@ router.get('/:cidade', function (req, res) {
         perigoRegiao = 'meio'
         console.log(" regiao é meio")
     }else if(regiao >= perigoso){
-        perigoRegiao = 'perigoso'
+        perigoRegiao = 'perigoso' 
        console.log(" regiao é perigoso")
     }else{
         perigoRegiao = 'seguro'
         console.log(" regiao é seguro")
     }
-    
-    res.json({cidade, zona, perigoZona, regiao, perigoRegiao})
-})
-
-router.get('/calcular/preco', function(req, res) {
+    //retorna se é perigoso ou não é enviar pro arquivo função
     const { veiculo, distancia } = req.query
-    const precoTotal = calcularPrecoEntrega(veiculo, distancia)
-    res.json({veiculo, distancia, precoTotal});
-})
+    const precoTotal = calcularPrecoEntrega(veiculo, distancia, perigoZona, perigoRegiao)
+    res.json({cidade, zona, perigoZona, regiao, perigoRegiao, veiculo, distancia, precoTotal});
+}) */
 
 module.exports = router
