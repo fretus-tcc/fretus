@@ -51,11 +51,11 @@
                             <p>
                                 <span class="description-title">Carga:</span>
                                 <% if (pedido.cod_carga == 'P') { %>
-                                    Pequena (até 15 Kg)
+                                    Pequena (até 11,5 Kg)
                                 <% } else if (pedido.cod_carga == 'M') { %>
-                                    Média (15 Kg até Y Kg)
+                                    Média (11,5 Kg até 80 Kg)
                                 <% } else { %>
-                                    Grande (Z Kg em diante)
+                                    Grande (80 Kg em diante)
                                 <% } %>
                             </p>
                             <p><span class="description-title">Agendamento:</span> <%= pedido.agendamento == 0 ? 'Entrega Imediata' : 'Entrega Agendada' %></p>
