@@ -96,7 +96,7 @@ const pedidosController = {
             const resObj = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`, { agent })
             const dataRes = await resObj.json()
             const distancia = dataRes.routes[0].distance
-            const preco_pedido = calcularPrecoEntrega(req.body.veiculo, distancia / 1000, latitude_destino, longitude_destino)
+            const preco_pedido = await calcularPrecoEntrega(req.body.veiculo, distancia / 1000, latitude_destino, longitude_destino)
 
             // formatando data e hora agendamento
             const data_agendamento = `${req.body.data_agendamento} ${req.body.hora_agendamento}`

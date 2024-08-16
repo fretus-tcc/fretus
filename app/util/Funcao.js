@@ -71,8 +71,22 @@ function sendEmail(to, subject, text) {
     })
 }
 
-function calcularPrecoEntrega(veiculo, distancia, lat=30, lng=30) {
-    console.log(lat, lng)
+var { identificarZona, identificarDadosRegiao, identificarCidade, calcularTaxa } = require('../util/identificar-locais-perigosos')
+
+async function calcularPrecoEntrega(veiculo, distancia, lat=30, lng=30) {
+    
+    // Cidade
+    const cidade = await identificarCidade(lat, lng)
+    
+    // Zonas
+    const { zona, perigoZona } = identificarZona(cidade)
+    
+    // Regioes
+    const { regiaoDescoberta, dadosRegiao, perigoRegiao } = identificarDadosRegiao(cidade)
+    
+    // Taxa baseada na zona e regiao
+    const taxa = calcularTaxa(perigoZona, perigoRegiao)
+    // console.log(cidade, zona, perigoZona, regiaoDescoberta, dadosRegiao, perigoRegiao)
 
     let precoPorKm;
 

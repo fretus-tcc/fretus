@@ -224,6 +224,38 @@ function identificarDadosRegiao(cidade) {
 
 }
 
+function calcularTaxa(zona, regiao) {
+
+    // Se zona ou regiao nao estiverem definidas, elas serao consideradas como meio perigosas
+    const perigoZona = zona == undefined ? 'meio' : zona
+    const perigoRegiao = regiao == undefined ? 'meio' : regiao
+
+    // console.log(perigoZona, perigoRegiao);
+    // console.log(zona, regiao);
+    
+    // if (/*se regiao é segura  && zona é perigosa*/) {
+    //     // preco aumenta 20 %
+    // } else if (/*se região é segura && zona é segura*/) {
+    //     // preco aumenta 0 %
+    // } else if (/*se regiao é segura && zona é meio*/ ) {
+    //     // 10 %      
+    // } else if (/*se regiao e perigosa && zona é meio*/) {
+    //     // 16 %
+    // } else if (/*se regiao é perigosa && zona é perigosa*/) {
+    //     // 20 %
+    // } else if (/*se regiao é perigosa && zona é segura*/ ) {
+    //     // 15 %
+    // } else if (/** se regiao é meio && zona é segura */) {
+    //     // 5 %
+    // } else if (/** se regiao é meio && zona é meio */) {
+    //     // 10 %
+    // } else if (/**se regiao é meio && zona é perigosa */) {
+    //     // 15 %
+    // }
+
+}
+
 exports.identificarZona = identificarZona;
 exports.identificarDadosRegiao = identificarDadosRegiao;
 exports.identificarCidade = identificarCidade;
+exports.calcularTaxa = calcularTaxa;
