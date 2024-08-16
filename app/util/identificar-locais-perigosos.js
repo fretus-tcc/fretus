@@ -5,7 +5,7 @@ async function identificarCidade(lat, lng) {
     const dataRes = await resObj.text()
     console.log('dataRes', dataRes)
     const data = JSON.parse(dataRes)
-    console.log('resObj', resObj, 'dataRes', dataRes, 'data', data)
+    // console.log('resObj', resObj, 'dataRes', dataRes, 'data', data)
 
     // Caso não estiver especificado a propriedade "city" na API, use a propriedade "town"
     if (data.address.city == undefined) {
