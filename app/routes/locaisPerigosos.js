@@ -9,7 +9,7 @@ router.get('/calcular/preco', function(req, res) {
     res.json({veiculo, distancia, precoTotal});
 })
 
-/* router.get('/cidades/:lat/:lng', async function(req, res) {
+router.get('/cidades/:lat/:lng', async function(req, res) {
     // URL's TESTE
     // localhost:3001/locais-perigosos/cidades/-23.51221435/-46.89020982176999 - Barueri
     // localhost:3001/locais-perigosos/cidades/-23.365011615628166/-46.86314063504268 - Cajamar
@@ -27,6 +27,6 @@ router.get('/calcular/preco', function(req, res) {
     const { regiaoDescoberta, dadosRegiao, perigoRegiao } = identificarDadosRegiao(cidade)
 
     res.json({cidade, zona, perigoZona, regiaoDescoberta, dadosRegiao, perigoRegiao});
-}) */
+})
 
 module.exports = router

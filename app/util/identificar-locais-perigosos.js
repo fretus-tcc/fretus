@@ -1,7 +1,12 @@
 const fetch = require('node-fetch')
+const https = require('https')
+
+const agent = new https.Agent({
+    rejectUnauthorized: false
+})  
 
 async function identificarCidade(lat, lng) {
-    const resObj = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+    const resObj = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&email=gabrioviski@gmail.com&lat=${lat}&lon=${lng}`, { agent })
     const dataRes = await resObj.text()
     console.log('dataRes', dataRes)
     const data = JSON.parse(dataRes)
