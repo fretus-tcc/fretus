@@ -3,13 +3,13 @@ const https = require('https')
 
 const agent = new https.Agent({
     rejectUnauthorized: false
-})  
+})
 
 async function identificarCidade(lat, lng) {
     const resObj = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&email=gabrioviski@gmail.com&lat=${lat}&lon=${lng}`, { agent })
     const dataRes = await resObj.text()
-    console.log('dataRes', dataRes)
     const data = JSON.parse(dataRes)
+    // console.log('dataRes', dataRes)
     // console.log('resObj', resObj, 'dataRes', dataRes, 'data', data)
 
     // Caso não estiver especificado a propriedade "city" na API, use a propriedade "town"
@@ -43,23 +43,55 @@ function identificarZona(cidade) {
         zona = "Cidade não encontrada";
     }
 
+    var indicador = 0
+    if (zona === "Oeste") {
+        indicador = 1
+    } else if (zona === "Leste") {
+        indicador = 2
+    } else if (zona === "Norte") {
+        indicador = 3
+    } else if (zona === "Sudeste") {
+        indicador = 4
+    } else if (zona === "Sudoeste") {
+        indicador = 5
+    }
+    
+    // Dados zonas fixos
+    const oeste = 9550;
+    const norte = 2662;
+    const sudeste = 15272;
+    const leste = 17283;
+    const sudoeste = 7349;
     const mediaZonas = 10423;
+
+    var zonaDados
+    if (indicador == 1) {
+        zonaDados = oeste
+    } else if (indicador == 2) {
+        zonaDados = leste
+    } else if (indicador == 3) {
+        zonaDados = norte
+    } else if (indicador == 4) {
+        zonaDados = sudeste
+    } else if (indicador == 5) {
+        zonaDados = sudoeste
+    }
 
     const meioPerigoso = (0.10 * mediaZonas) + mediaZonas
     const perigoso = (0.20 * mediaZonas) + mediaZonas
 
     var perigoZona
     if (zona != 'Cidade não encontrada') {
-        if (zona >= meioPerigoso && zona <= perigoso) {
+        if (zonaDados >= meioPerigoso && zonaDados <= perigoso) {
             perigoZona = 'meio'
-        } else if (zona >= perigoso) {
+        } else if (zonaDados >= perigoso) {
             perigoZona = 'perigosa'
         } else {
             perigoZona = 'segura'
         }
     }
 
-    return { zona, perigoZona }
+    return { zona, zonaDados, perigoZona }
 }
 
 function identificarDadosRegiao(cidade) {

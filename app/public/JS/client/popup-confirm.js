@@ -60,7 +60,8 @@ close.addEventListener('click', () => {
 //var distancia = (route.distance/1000)
 //typeVehicle = document.querySelector('input[name="vehicles"]:checked').id
 async function calcularPreco(distancia,veiculo) {
-  const resObj = await fetch(`/locais-perigosos/calcular/preco?veiculo=${veiculo}&distancia=${distancia}`)
+  const destino_coords_preco = end._lngLat
+  const resObj = await fetch(`/locais-perigosos/calcular/preco?veiculo=${veiculo}&distancia=${distancia}&lat=${destino_coords_preco.lat}&lng=${destino_coords_preco.lng}`)
   const dataRes = await resObj.json()
   // console.log(dataRes);
   return dataRes.precoTotal

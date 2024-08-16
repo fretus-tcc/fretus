@@ -3,7 +3,12 @@ const favoritadosModel = require('../models/favoritadosModel')
 const admCadastroModel = require('../models/admCadastroModel')
 const { notifyMessages, calcularPrecoEntrega } = require('../util/Funcao')
 const fetch = require('node-fetch')
+const https = require('https')
 const { body, validationResult } = require('express-validator')
+
+const agent = new https.Agent({
+    rejectUnauthorized: false
+})
 
 const pedidosController = {
     validationPedido: [
@@ -88,10 +93,10 @@ const pedidosController = {
             const [latitude_destino, longitude_destino] = req.body.destino_coords.split(',').map(Number)
             
             // formatando preco, com base na distancia
-            const resObj = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`)
+            const resObj = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`, { agent })
             const dataRes = await resObj.json()
             const distancia = dataRes.routes[0].distance
-            const preco_pedido = calcularPrecoEntrega(req.body.veiculo, distancia / 1000)
+            const preco_pedido = calcularPrecoEntrega(req.body.veiculo, distancia / 1000, latitude_destino, longitude_destino)
 
             // formatando data e hora agendamento
             const data_agendamento = `${req.body.data_agendamento} ${req.body.hora_agendamento}`

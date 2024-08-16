@@ -71,9 +71,9 @@ function sendEmail(to, subject, text) {
     })
 }
 
-function calcularPrecoEntrega(veiculo, distancia) {
+function calcularPrecoEntrega(veiculo, distancia, lat=30, lng=30) {
+    console.log(lat, lng)
 
-    // vai receber se é perigoso ou não
     let precoPorKm;
 
     if (veiculo === 'moto') {
