@@ -3,6 +3,7 @@ const fetch = require('node-fetch')
 async function identificarCidade(lat, lng) {
     const resObj = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
     const dataRes = await resObj.text()
+    console.log('dataRes', dataRes)
     const data = JSON.parse(dataRes)
     console.log('resObj', resObj, 'dataRes', dataRes, 'data', data)
 
