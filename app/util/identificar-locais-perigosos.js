@@ -1,15 +1,17 @@
 const fetch = require('node-fetch')
 
 async function identificarCidade(lat, lng) {
-    const resObj = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
-    const dataRes = await resObj.json()
+    const resObj = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+    const dataRes = await resObj.text()
+    const data = JSON.parse(dataRes)
+    console.log('resObj', resObj, 'dataRes', dataRes, 'data', data)
 
     // Caso não estiver especificado a propriedade "city" na API, use a propriedade "town"
-    if (dataRes.address.city == undefined) {
-        return dataRes.address.town
+    if (data.address.city == undefined) {
+        return data.address.town
     }
 
-    return dataRes.address.city
+    return data.address.city
 }
 
 function identificarZona(cidade) {
