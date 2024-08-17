@@ -214,9 +214,9 @@ function identificarDadosRegiao(cidade) {
         if (dadosRegiao >= meioPerigoso && dadosRegiao <= perigoso) {
             perigoRegiao = 'meio'
         } else if (dadosRegiao >= perigoso) {
-            perigoRegiao = 'perigoso'
+            perigoRegiao = 'perigosa'
         } else {
-            perigoRegiao = 'seguro'
+            perigoRegiao = 'segura'
         }
     }
 
@@ -230,29 +230,40 @@ function calcularTaxa(zona, regiao) {
     const perigoZona = zona == undefined ? 'meio' : zona
     const perigoRegiao = regiao == undefined ? 'meio' : regiao
 
-    // console.log(perigoZona, perigoRegiao);
     // console.log(zona, regiao);
+    // console.log(perigoZona, perigoRegiao);
     
-    // if (/*se regiao é segura  && zona é perigosa*/) {
-    //     // preco aumenta 20 %
-    // } else if (/*se região é segura && zona é segura*/) {
-    //     // preco aumenta 0 %
-    // } else if (/*se regiao é segura && zona é meio*/ ) {
-    //     // 10 %      
-    // } else if (/*se regiao e perigosa && zona é meio*/) {
-    //     // 16 %
-    // } else if (/*se regiao é perigosa && zona é perigosa*/) {
-    //     // 20 %
-    // } else if (/*se regiao é perigosa && zona é segura*/ ) {
-    //     // 15 %
-    // } else if (/** se regiao é meio && zona é segura */) {
-    //     // 5 %
-    // } else if (/** se regiao é meio && zona é meio */) {
-    //     // 10 %
-    // } else if (/**se regiao é meio && zona é perigosa */) {
-    //     // 15 %
-    // }
+    let taxa
+    if (perigoRegiao == 'segura' && perigoZona == 'perigosa') {
+        // preco aumenta 20%
+        taxa = 20
+    } else if (perigoRegiao == 'segura' && perigoZona == 'segura') {
+        // preco aumenta 0%
+        taxa = 0
+    } else if (perigoRegiao == 'segura' && perigoZona == 'meio') {
+        // 10%
+        taxa = 10     
+    } else if (perigoRegiao == 'perigosa' && perigoZona == 'meio') {
+        // 16%
+        taxa = 16
+    } else if (perigoRegiao == 'perigosa' && perigoZona == 'perigosa') {
+        // 20%
+        taxa = 20
+    } else if (perigoRegiao == 'perigosa' && perigoZona == 'segura') {
+        // 15%
+        taxa = 15
+    } else if (perigoRegiao == 'meio' && perigoZona == 'segura') {
+        // 5%
+        taxa = 5
+    } else if (perigoRegiao == 'meio' && perigoZona == 'meio') {
+        // 10%
+        taxa = 10
+    } else if (perigoRegiao == 'meio' && perigoZona == 'perigosa') {
+        // 15%
+        taxa = 15
+    }
 
+    return taxa
 }
 
 exports.identificarZona = identificarZona;

@@ -103,6 +103,11 @@ async function calcularPrecoEntrega(veiculo, distancia, lat=30, lng=30) {
     }
 
     var precoTotal = distancia * precoPorKm;
+    
+    // Calcula o quanto adicionar de taxa no preço total do pedido
+    var taxaLocaisPerigosos =  precoTotal * (taxa / 100)
+    precoTotal += taxaLocaisPerigosos
+
     return precoTotal
 }
 
