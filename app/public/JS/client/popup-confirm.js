@@ -11,6 +11,7 @@ const mapContainer = document.querySelector('main > .map')
 const backForm = document.querySelector('.return-form')
 const close = document.querySelector('.close')
 const priceContainer = document.querySelector('.price')
+const loadPrice = document.querySelector('.load-price')
 
 submit.addEventListener('click', (e) => {
   checkValidation()
@@ -27,7 +28,12 @@ submit.addEventListener('click', (e) => {
         backForm.classList.add('show')
         map.resize()
         setZoomRoute(route)
+        
+        // exibe o loading enquanto o preco nao é exibido
+        priceContainer.textContent = ''
+        loadPrice.classList.remove('hidden')
         setPrice(route.distance / 1000)
+
         popup.classList.add('show')
     }
 })
@@ -41,8 +47,11 @@ const setPrice = async (distance) => {
     
     /* fazer os calculos aqui */
     const preco = await calcularPreco(distance, typeVehicle);
-    
     let price = f.format(preco) // linha que transforma qualquer valor em reais
+    
+    // tira o loading antes do preco ser exibido
+    loadPrice.classList.add('hidden')
+    
     priceContainer.textContent = price // coloca o preco no popup
 }
     

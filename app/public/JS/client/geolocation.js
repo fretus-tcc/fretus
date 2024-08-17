@@ -163,6 +163,10 @@ async function getRoute(start, end) {
         }
         
         setZoomRoute(route)
+
+        // exibe o loading enquanto o preco nao é exibido
+        priceContainer.textContent = ''
+        loadPrice.classList.remove('hidden')
         setPrice(route.distance / 1000)
     }
 }

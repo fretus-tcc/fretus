@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
     <link rel="stylesheet" href="/CSS/client/delivery-request-mobile.css">
     <link rel="stylesheet" href="/CSS/client/price-indicator.css">
+    <link rel="stylesheet" href="/CSS/client/load-price.css">
     <!-- SIMPLE NOTIFY - Notificações -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
@@ -155,6 +156,7 @@
                             <span><%= new Intl.NumberFormat('pt-br', {currency: 'BRL', style: 'currency'}).format(preco) %></span>
                         <% } else { %>
                             <span class="price"></span>
+                            <span class="load-price"></span>
                         <% } %>
                     </h1>
                     <p>O preço da entrega é calculado com base em diversos fatores para garantir que você receba seus produtos de maneira eficiente e econômica.</p>
