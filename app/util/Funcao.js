@@ -71,23 +71,10 @@ function sendEmail(to, subject, text) {
     })
 }
 
-var { identificarZona, identificarDadosRegiao, identificarCidade, calcularTaxa } = require('../util/identificar-locais-perigosos')
+var { calcularLocaisPerigosos } = require('../util/identificar-locais-perigosos')
 
 async function calcularPrecoEntrega(veiculo, distancia, lat=30, lng=30) {
     
-    // Cidade
-    const cidade = await identificarCidade(lat, lng)
-    
-    // Zonas
-    const { zona, perigoZona } = identificarZona(cidade)
-    
-    // Regioes
-    const { regiaoDescoberta, dadosRegiao, perigoRegiao } = identificarDadosRegiao(cidade)
-    
-    // Taxa baseada na zona e regiao
-    const taxa = calcularTaxa(perigoZona, perigoRegiao)
-    // console.log(cidade, zona, perigoZona, regiaoDescoberta, dadosRegiao, perigoRegiao)
-
     let precoPorKm;
 
     if (veiculo === 'moto') {
@@ -104,6 +91,9 @@ async function calcularPrecoEntrega(veiculo, distancia, lat=30, lng=30) {
 
     var precoTotal = distancia * precoPorKm;
     
+    // Locais Perigosos
+    const taxa = await calcularLocaisPerigosos(lat, lng)
+
     // Calcula o quanto adicionar de taxa no preço total do pedido
     var taxaLocaisPerigosos =  precoTotal * (taxa / 100)
     precoTotal += taxaLocaisPerigosos

@@ -266,7 +266,24 @@ function calcularTaxa(zona, regiao) {
     return taxa
 }
 
+async function calcularLocaisPerigosos(lat, lng) {
+    // Cidade
+    const cidade = await identificarCidade(lat, lng)
+    
+    // Zonas
+    const { zona, perigoZona } = identificarZona(cidade)
+    
+    // Regioes
+    const { regiaoDescoberta, dadosRegiao, perigoRegiao } = identificarDadosRegiao(cidade)
+    
+    // Taxa baseada na zona e regiao
+    const taxa = calcularTaxa(perigoZona, perigoRegiao)
+
+    return taxa
+}
+
 exports.identificarZona = identificarZona;
 exports.identificarDadosRegiao = identificarDadosRegiao;
 exports.identificarCidade = identificarCidade;
 exports.calcularTaxa = calcularTaxa;
+exports.calcularLocaisPerigosos = calcularLocaisPerigosos;
