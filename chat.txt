@@ -1,0 +1,13 @@
+passo a passo que vamos fazer 
+
+1° Baixar pacotes 
+    - foi baixado npm install socket.io
+
+2° Configura no app
+    -Andamento...{
+        Substituí app.listen por server.listen para que o servidor HTTP possa ser usado pelo Socket.io.
+        Adicionei a configuração do Socket.io com io.on('connection') para lidar com as conexões dos clientes.
+    }
+
+3°  configuração do arquivo do Socket.io 
+    - Andamento...
