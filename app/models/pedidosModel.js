@@ -25,6 +25,19 @@ const pedidosModel = {
         }
     },
 
+    findShipperAccept: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT * FROM pedidos as p ' +
+                'LEFT JOIN usuario as u ' +
+                'ON p.id_entregador = u.id_usuario ' +
+                'WHERE id_pedido = ?', [id])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
     findPaginate: async (id, vehicle, pagina, total) => {
         try {
             const [result] = await pool.query(

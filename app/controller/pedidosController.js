@@ -167,7 +167,7 @@ const pedidosController = {
 
             await pedidosModel.insertShipperAccepted(id_entregador, id_pedido)
 
-            res.redirect('back')
+            res.redirect(`/cliente/pagamento/${id_pedido}`)
         } catch (error) {
             console.log(error)
             return res.json({ error })

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Pagamento</title>
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/payment.css">
+</head>
+<body>
+
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
+    <% if (pedido) { %>
+        <div class="payment-container">
+            <h1>Finalize o Pagamento</h1>
+            <div class="info">
+                <img class="profile-picture" src="data:image/png;base64,<%= pedido.foto_de_perfil?.toString('base64') %>" alt="">
+                <div class="description">
+                    <p class="name"><%= pedido.nome_usuario %></p>
+                    <p>Partida: <%= pedido.partida_pedido %></p>
+                    <p>Destino: <%= pedido.destino_pedido %></p>
+                    <p>Veículo: <span class="capitalize"><%= pedido.veiculo_pedido %></span></p>
+                </div>
+            </div>
+            <div class="total">
+                <span>Total:</span>
+                <span><%= new Intl.NumberFormat('pt-br', {currency: 'BRL', style: 'currency'}).format(pedido.preco_pedido) %></span>
+            </div>
+            <a class="cta pay-btn" href="">Ir para o checkout</a>
+        </div>
+    <% } %>
+
+    <% if (erro_pedido) { %>
+        <div class="error-alert">
+            <img src="/imgs/shipper/error-icon.png" alt="">
+            <p><%= erro_pedido %></p>
+        </div>
+    <% } %>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+</body>
+</html>
