@@ -31,9 +31,12 @@ const pedidosModel = {
                 'SELECT * FROM pedidos as p ' +
                 'LEFT JOIN usuario as u ' +
                 'ON p.id_entregador = u.id_usuario ' +
-                'WHERE id_pedido = ?', [id])
+                'LEFT JOIN pagamentos as pg ' +
+                'ON p.id_pedido = pg.id_pedido ' +
+                'WHERE p.id_pedido = ?', [id])
             return result
         } catch (error) {
+            console.log(error)
             return error
         }
     },
