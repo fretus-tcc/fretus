@@ -1,6 +1,7 @@
 const pedidosModel = require('../models/pedidosModel')
 const favoritadosModel = require('../models/favoritadosModel')
 const admCadastroModel = require('../models/admCadastroModel')
+const pagamentoModel = require('../models/pagamentoModel')
 const { notifyMessages, calcularPrecoEntrega } = require('../util/Funcao')
 const fetch = require('node-fetch')
 const https = require('https')
@@ -166,6 +167,9 @@ const pedidosController = {
             const { id_entregador, id_pedido } = req.params
 
             await pedidosModel.insertShipperAccepted(id_entregador, id_pedido)
+
+            // Gera a preferência do mercado pago
+            await pagamentoModel.createPreferenceMP(id_pedido)
 
             res.redirect(`/cliente/pagamento/${id_pedido}`)
         } catch (error) {
