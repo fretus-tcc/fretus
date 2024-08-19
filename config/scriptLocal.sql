@@ -371,15 +371,15 @@ CREATE TABLE IF NOT EXISTS FRETUS.AC_ENTREGA (
   nome_ac VARCHAR(45) NOT NULL,
   cpf_ac CHAR(11) NOT NULL,
   endereco_ac VARCHAR(45) NOT NULL,
-  id_entrega INT NOT NULL,
+  /* id_entrega INT NOT NULL, */
   PRIMARY KEY (id_ac),
-  UNIQUE INDEX cpf_ac_UNIQUE (cpf_ac ASC) VISIBLE,
-  INDEX fk_AC_ENTREGA_ENTREGA_REALIZADA1_idx (id_entrega ASC) VISIBLE,
+  UNIQUE INDEX cpf_ac_UNIQUE (cpf_ac ASC) VISIBLE
+  /* INDEX fk_AC_ENTREGA_ENTREGA_REALIZADA1_idx (id_entrega ASC) VISIBLE,
   CONSTRAINT fk_AC_ENTREGA_ENTREGA_REALIZADA1
     FOREIGN KEY (id_entrega)
     REFERENCES FRETUS.historico (id_entrega)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION */)
 ENGINE = InnoDB;
 
 /* -- -----------------------------------------------------

@@ -312,56 +312,37 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.favoritados (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`PAGAMENTOS` (
-  `id_pagamento` INT NOT NULL,
-  `data_transicao` DATETIME NOT NULL,
-  `valor_pago` DECIMAL(10,2) NOT NULL,
-  `preco_sugerido` DECIMAL(10,2) NOT NULL,
-  `metodo_pagamento` VARCHAR(45) NOT NULL,
-  `estado_pagamento` VARCHAR(45) NOT NULL,
-  `id_usuario_pagador` INT NOT NULL,
-  `id_usuario_recebidor` INT NOT NULL,
-  PRIMARY KEY (`id_pagamento`),
-  INDEX `fk_PAGAMENTOS_USUARIOS1_idx` (`id_usuario_pagador` ASC) VISIBLE,
-  INDEX `fk_PAGAMENTOS_USUARIOS2_idx` (`id_usuario_recebidor` ASC) VISIBLE,
-  CONSTRAINT `fk_PAGAMENTOS_USUARIOS1`
-    FOREIGN KEY (`id_usuario_pagador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
+CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.pagamentos (
+  id_pagamento INT NOT NULL AUTO_INCREMENT,
+  id_pedido INT NOT NULL,
+  /* data_transicao DATETIME NOT NULL, */
+  /* valor_pago DECIMAL(10,2) NOT NULL, */
+  /* preco_sugerido DECIMAL(10,2) NOT NULL, */
+  /* metodo_pagamento VARCHAR(45) NOT NULL, */
+  estado_pagamento ENUM('aprovado', 'pendente') NOT NULL DEFAULT 'pendente',
+  /* id_usuario_pagador INT NOT NULL, */
+  /* id_usuario_recebidor INT NOT NULL, */
+  id_preferencia_mp VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id_pagamento),
+  UNIQUE INDEX id_pedido_pagamento_UNIQUE (id_pedido ASC) VISIBLE,
+  INDEX fk_PAGAMENTOS_USUARIOS1_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_PAGAMENTOS_USUARIOS1
+    FOREIGN KEY (id_pedido)
+    REFERENCES `bzt6iht1cder66rlnctv`.pedidos (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+  /* INDEX fk_PAGAMENTOS_USUARIOS1_idx (id_usuario_pagador ASC) VISIBLE,
+  INDEX fk_PAGAMENTOS_USUARIOS2_idx (id_usuario_recebidor ASC) VISIBLE,
+  CONSTRAINT fk_PAGAMENTOS_USUARIOS1
+    FOREIGN KEY (id_usuario_pagador)
+    REFERENCES FRETUS.USUARIOS (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_PAGAMENTOS_USUARIOS2`
-    FOREIGN KEY (`id_usuario_recebidor`)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
+  CONSTRAINT fk_PAGAMENTOS_USUARIOS2
+    FOREIGN KEY (id_usuario_recebidor)
+    REFERENCES FRETUS.USUARIOS (id_usuario)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`historico` (
-  `id_entrega` INT NOT NULL AUTO_INCREMENT,
-  `data_realizada` DATETIME NOT NULL,
-  `tempo_realizada_horas` INT NOT NULL,
-  `id_pedido` INT NOT NULL,
-  `id_entrega_registrada` INT NOT NULL,
-  `cep_entrega` CHAR(8) NOT NULL,
-  `complemento_entrega` VARCHAR(45) NOT NULL,
-  `num_entrega` INT NOT NULL,
-  `tempo_realizada_minutos` INT NOT NULL,
-  `observacao_cliente` TEXT(200) NULL,
-  `terminio_entrega` DATETIME NOT NULL,
-  `id_pagamento` INT NOT NULL,
-  PRIMARY KEY (`id_entrega`),
-  INDEX `fk_ENTREGA_REALIZADA_PEDIDOS1_idx` (`id_pedido` ASC) VISIBLE,
-  INDEX `fk_historico_PAGAMENTOS1_idx` (`id_pagamento` ASC) VISIBLE,
-  CONSTRAINT `fk_ENTREGA_REALIZADA_PEDIDOS1`
-    FOREIGN KEY (`id_pedido`)
-    REFERENCES `bzt6iht1cder66rlnctv`.pedidos (`id_pedido`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_historico_PAGAMENTOS1`
-    FOREIGN KEY (`id_pagamento`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`PAGAMENTOS` (`id_pagamento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION */)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`AC_ENTREGA` (
@@ -369,15 +350,15 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`AC_ENTREGA` (
   `nome_ac` VARCHAR(45) NOT NULL,
   `cpf_ac` CHAR(11) NOT NULL,
   `endereco_ac` VARCHAR(45) NOT NULL,
-  `id_entrega` INT NOT NULL,
+  /* `id_entrega` INT NOT NULL, */
   PRIMARY KEY (`id_ac`),
-  UNIQUE INDEX `cpf_ac_UNIQUE` (`cpf_ac` ASC) VISIBLE,
-  INDEX `fk_AC_ENTREGA_ENTREGA_REALIZADA1_idx` (`id_entrega` ASC) VISIBLE,
+  UNIQUE INDEX `cpf_ac_UNIQUE` (`cpf_ac` ASC) VISIBLE
+  /* INDEX `fk_AC_ENTREGA_ENTREGA_REALIZADA1_idx` (`id_entrega` ASC) VISIBLE,
   CONSTRAINT `fk_AC_ENTREGA_ENTREGA_REALIZADA1`
     FOREIGN KEY (`id_entrega`)
     REFERENCES `bzt6iht1cder66rlnctv`.`historico` (`id_entrega`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION */)
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CHAT` (
