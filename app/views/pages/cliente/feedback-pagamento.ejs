@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Pagamento</title>
+    <%- include('../../partial/config/config.ejs') %>
+    <%- include('../../partial/config/config-client-shipper.ejs') %>
+    <link rel="stylesheet" href="/CSS/client/payment-feedback.css">
+</head>
+<body>
+
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
+
+    <div class="payment-feedback">
+        <% if (approved) { %>
+            <h1>Pagamento Aprovado</h1>
+        <% } else { %>
+            <h1>Algo deu errado no pagamento</h1>
+        <% } %>
+    </div>
+
+    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <script src="/JS/burguer.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+.payment-feedback {
+    color: #333;
+    margin: 0 auto;
+    margin-top: 60px;
+    width: min(400px, 90%);
+    text-align: center;
+}

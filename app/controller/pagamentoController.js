@@ -32,6 +32,16 @@ const pagamentoController = {
             return res.json({ error })
         }
     },
+
+    showFeedback: async (req, res) => {
+        const { status } = req.query
+
+        if (status == 'approved') {
+            return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, approved: true })
+        }
+        
+        res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, approved: false })
+    },
 }
 
 module.exports = pagamentoController

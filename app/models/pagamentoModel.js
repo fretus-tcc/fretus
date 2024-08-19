@@ -26,9 +26,9 @@ const pagamentoModel = {
                         }
                     ],
                     back_urls: {
-                        "success": `${process.env.SITE_URL}/feedback`,
-                        "failure": `${process.env.SITE_URL}/feedback`,
-                        "pending": `${process.env.SITE_URL}/feedback`
+                        "success": `${process.env.SITE_URL}/cliente/feedback-pagamento`,
+                        "failure": `${process.env.SITE_URL}/cliente/feedback-pagamento`,
+                        "pending": `${process.env.SITE_URL}/cliente/feedback-pagamento`
                     },
                     auto_return: "approved",
                     external_reference: "teste123",

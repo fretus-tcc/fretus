@@ -38,6 +38,10 @@ router.get('/pagamento/:id', verificarUsuAutorizado([1], 'pages/restrito'), func
     pagamentoController.showPagamento(req, res)
 })
 
+router.get('/feedback-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    pagamentoController.showFeedback(req, res)
+})
+
 router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/chat', { autenticado: req.session.autenticado })
 })
