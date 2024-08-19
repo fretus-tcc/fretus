@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.status_entrega (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
+/* -- -----------------------------------------------------
 -- Table FRETUS.historico
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS FRETUS.historico (
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.historico (
     REFERENCES FRETUS.PAGAMENTOS (id_pagamento)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB; */
 
 
 /* -- -----------------------------------------------------
@@ -535,19 +535,28 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table FRETUS.PAGAMENTOS
+-- Table FRETUS.pagamentos
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.PAGAMENTOS (
-  id_pagamento INT NOT NULL,
-  data_transicao DATETIME NOT NULL,
-  valor_pago DECIMAL(10,2) NOT NULL,
-  preco_sugerido DECIMAL(10,2) NOT NULL,
-  metodo_pagamento VARCHAR(45) NOT NULL,
-  estado_pagamento VARCHAR(45) NOT NULL,
-  id_usuario_pagador INT NOT NULL,
-  id_usuario_recebidor INT NOT NULL,
+CREATE TABLE IF NOT EXISTS FRETUS.pagamentos (
+  id_pagamento INT NOT NULL AUTO_INCREMENT,
+  id_pedido INT NOT NULL,
+  /* data_transicao DATETIME NOT NULL, */
+  /* valor_pago DECIMAL(10,2) NOT NULL, */
+  /* preco_sugerido DECIMAL(10,2) NOT NULL, */
+  /* metodo_pagamento VARCHAR(45) NOT NULL, */
+  estado_pagamento ENUM('aprovado', 'pendente') NOT NULL DEFAULT 'pendente',
+  /* id_usuario_pagador INT NOT NULL, */
+  /* id_usuario_recebidor INT NOT NULL, */
+  id_preferencia_mp VARCHAR(255) NOT NULL,
   PRIMARY KEY (id_pagamento),
-  INDEX fk_PAGAMENTOS_USUARIOS1_idx (id_usuario_pagador ASC) VISIBLE,
+  UNIQUE INDEX id_pedido_pagamento_UNIQUE (id_pedido ASC) VISIBLE,
+  INDEX fk_PAGAMENTOS_USUARIOS1_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_PAGAMENTOS_USUARIOS1
+    FOREIGN KEY (id_pedido)
+    REFERENCES FRETUS.pedidos (id_pedido)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+  /* INDEX fk_PAGAMENTOS_USUARIOS1_idx (id_usuario_pagador ASC) VISIBLE,
   INDEX fk_PAGAMENTOS_USUARIOS2_idx (id_usuario_recebidor ASC) VISIBLE,
   CONSTRAINT fk_PAGAMENTOS_USUARIOS1
     FOREIGN KEY (id_usuario_pagador)
@@ -558,7 +567,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.PAGAMENTOS (
     FOREIGN KEY (id_usuario_recebidor)
     REFERENCES FRETUS.USUARIOS (id_usuario)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION */)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
