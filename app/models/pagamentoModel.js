@@ -66,7 +66,7 @@ const pagamentoModel = {
         }
     },
 
-    // Consulta um pagamento com o MP (Mercado Pago)
+    /* // Consulta um pagamento com o MP (Mercado Pago)
     getPagamentoMP: async (id) => {
         try {
             const response = await payment.get({ id })
@@ -75,7 +75,7 @@ const pagamentoModel = {
             console.log(error)
             return res.json({ error })
         }
-    },
+    }, */
 
     insert: async (data) => {
         try {

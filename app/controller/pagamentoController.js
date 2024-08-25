@@ -33,7 +33,7 @@ const pagamentoController = {
         }
     },
 
-    notifyPagamento: async (req, res) => {
+    /* notifyPagamento: async (req, res) => {
         const { id, topic } = req.params
         console.log(id, topic)
         
@@ -41,7 +41,7 @@ const pagamentoController = {
         console.log(pagamento)
 
         res.status(200)
-    },
+    }, */
 
     showFeedback: async (req, res) => {
         const { status } = req.query
