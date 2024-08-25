@@ -1,9 +1,10 @@
 const pool = require('../../config/connection-factory')
 const pedidosModel = require('./pedidosModel')
 
-const { MercadoPagoConfig, Preference } = require('mercadopago')
+const { MercadoPagoConfig, Preference, Payment } = require('mercadopago')
 const client = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN })
 const preference = new Preference(client)
+const payment = new Payment(client)
 
 const pagamentoModel = {
     
@@ -58,6 +59,17 @@ const pagamentoModel = {
     getPreferenceMP: async (id) => {
         try {
             const response = await preference.get({ preferenceId: id })
+            return response
+        } catch (error) {
+            console.log(error)
+            return res.json({ error })
+        }
+    },
+
+    // Consulta um pagamento com o MP (Mercado Pago)
+    getPagamentoMP: async (id) => {
+        try {
+            const response = await payment.get({ id })
             return response
         } catch (error) {
             console.log(error)

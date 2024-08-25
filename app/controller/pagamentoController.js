@@ -34,7 +34,12 @@ const pagamentoController = {
     },
 
     notifyPagamento: async (req, res) => {
-        console.log(req.body);
+        const { id, topic } = req.params
+        console.log(id, topic)
+        
+        const pagamento = await pagamentoModel.getPagamentoMP(id)
+        console.log(pagamento)
+
         res.status(200)
     },
 
