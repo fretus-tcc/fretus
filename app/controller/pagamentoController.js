@@ -10,7 +10,7 @@ const pagamentoController = {
 
             // Verifica se pedido existe
             if (pedido == null) {
-                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não encontrado', url: null })
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não encontrado' })
             }
 
             // Verifica se cliente solicitou pedido
@@ -20,17 +20,25 @@ const pagamentoController = {
 
             // Verfica se pedido nao possui entregador escolhido
             if (pedido.id_entregador == null) {
-                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não possui entregador escolhido', url: null})
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não possui entregador escolhido' })
             }
 
-            const { init_point } = await pagamentoModel.getPreferenceMP(pedido.id_preferencia_mp)
-            // console.log(init_point)
-
-            res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido, erro_pedido: null, url: init_point })
+            res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido, erro_pedido: null })
         } catch (error) {
             console.log(error);
             return res.json({ error })
         }
+    },
+
+    createPagamento: async (req, res) => {
+        const { id } = req.params
+        
+        const [pedido] = await pedidosModel.findShipperAccept(id)
+
+        const response = await pagamentoModel.createPreferenceMP(id, pedido.id_preferencia_mp)
+        // console.log(response)
+        
+        res.redirect(response.init_point)
     },
 
     /* notifyPagamento: async (req, res) => {

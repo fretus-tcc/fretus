@@ -38,9 +38,9 @@ router.get('/pagamento/:id', verificarUsuAutorizado([1], 'pages/restrito'), func
     pagamentoController.showPagamento(req, res)
 })
 
-/* router.post('/notificacoes-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    pagamentoController.notifyPagamento(req, res)
-}) */
+router.post('/pagamento/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    pagamentoController.createPagamento(req, res)
+})
 
 router.get('/feedback-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     pagamentoController.showFeedback(req, res)
