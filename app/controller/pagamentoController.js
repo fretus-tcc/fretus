@@ -23,6 +23,12 @@ const pagamentoController = {
                 return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não possui entregador escolhido' })
             }
 
+            // Verifica se pedido ja passou da data de agendamento
+            const date = new Date()
+            if (pedido.data_agendamento != null && pedido.data_agendamento < date) {
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido passou do prazo de pagamento' })
+            }
+
             res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido, erro_pedido: null })
         } catch (error) {
             console.log(error);
@@ -40,16 +46,6 @@ const pagamentoController = {
         
         res.redirect(response.init_point)
     },
-
-    /* notifyPagamento: async (req, res) => {
-        const { id, topic } = req.params
-        console.log(id, topic)
-        
-        const pagamento = await pagamentoModel.getPagamentoMP(id)
-        console.log(pagamento)
-
-        res.status(200)
-    }, */
 
     showFeedback: async (req, res) => {
         const { status } = req.query
