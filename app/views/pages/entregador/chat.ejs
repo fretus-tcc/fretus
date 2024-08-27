@@ -271,19 +271,6 @@
                                         </form>
                                     </article>
                                 </article>
-                                <!-- <article class="row other-msg">
-                                    <article class="user-icon rounded-icon">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="msg payment">
-                                        <h1>Cliente enviou uma proposta para você</h1>
-                                        <span>R$50,00</span>
-                                        <article class="btn-container">
-                                            <button class="yes pay-call">Aceitar</button>
-                                            <button class="no">Negar</button>
-                                        </article>
-                                    </article>
-                                </article> -->
                                 <section class="row other-msg">
                                     <article class="user-icon rounded-icon">
                                         <img src="/imgs/client/user-icon.svg"
@@ -317,12 +304,6 @@
                                     </article>
                                     <span>Documento</span>
                                 </li>
-                                <!-- <li>
-                                    <article class="rounded-icon pay">
-                                        <img src="/imgs/shipper/icon-money.svg" alt="">
-                                    </article>
-                                    <span>Nova Proposta</span>
-                                </li> -->
                             </ul>
                         </section>
                     </section>
@@ -344,66 +325,17 @@
             </section>
         </main>
         <section class="notification-container"></section>
-        <!-- <section class="popup pay-modal">
-    <article class="modal-content">
-        <input class="money" placeholder="Digite aqui o valor desejado. (Apenas números)" type="text">
-        <article class="btn-container">
-            <button class="yes">Aceitar</button>
-            <button class="no">Cancelar</button>
-        </article>
-    </article>
-</section> -->
-        <!-- <section class="popup">
-    <article class="popup-content">
-        <article class="close">
-            <img src="/imgs/client/close-icon.svg" alt="">
-        </article>
-        <form class="popup-wrapper" action="">
-            <h1>Pagamento</h1>
-            <section class="payment-method">
-                <article class="pix-field field">
-                    <input required type="radio" name="pay-method" id="pix">
-                    <label for="pix">Pix</label>
-                    <article class="pay-field">
-                        <input class="input-field" type="text" readonly value="123e4567-e12b-12d1">
-                        <button type="button">Copiar</button>
-                    </article>
-                </article>
-                <article class="card-field field">
-                    <input required type="radio" name="pay-method" id="card">
-                    <label for="card">Cartão</label>
-                    <article class="pay-field">
-                        <article class="card-input">
-                            <input class="input-field card-info" minlength="16" placeholder="Número do Cartão" type="text" id="card-number">
-                            <img src="/imgs/client/card-icons/unknown.svg">
-                        </article>
-                        <input class="input-field card-info" minlength="5" placeholder="Validade" type="text" id="card-validity">
-                        <input class="input-field card-info" placeholder="CVV" type="text" id="card-cvv">
-                        <input class="input-field card-info" placeholder="Nome" type="text" id="card-name">
-                    </article>
-                </article>
-            </section>
-            <input type="text" class="input-field" placeholder="Aplique aqui algum cupom de desconto">
-            <textarea class="input-field" placeholder="Deixe uma observação ao motorista (opcional)"></textarea>
-            <p class="price">Valor Total: <span>R$50,00</span></p>
-            <button type="submit" class="cta">Pagar</button>
-        </form>
-    </article>
-</section> -->
 
         <%- include('../../partial/popup/report.ejs') %>
         <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script> -->
         <script src="/JS/burguer.js"></script>
         <script src="/JS/shipper/burguer-config.js"></script>
         <script src="/JS/shipper/textarea-resize.js"></script>
         <script src="/JS/shipper/send-msg.js"></script>
         <script src="/JS/shipper/clip-popup.js"></script>
-        <!-- <script src="/JS/shipper/payment.js"></script>
-        <script src="/JS/shipper/allow-payment.js"></script>
-        <script src="/JS/client/pay-popup.js"></script> -->
+        
         <script src="/JS/shipper/confirm-ship.js"></script>
         <script src="/JS/shipper/report-popup.js"></script>
 </body>
