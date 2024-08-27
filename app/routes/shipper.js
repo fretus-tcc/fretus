@@ -2,6 +2,7 @@ var express = require("express")
 var router = express.Router()
 const multer = require('multer')
 const { notifyMessages } = require('../util/Funcao')
+const { verificarUsuAutorizado, verificarCadastroCompleto } = require('../models/autenticador_middleware')
 var pool = require("../../config/connection-factory");
 const ConfigPerfilController = require('../controller/ConfigPerfilController')
 const pedidosController = require('../controller/pedidosController')
