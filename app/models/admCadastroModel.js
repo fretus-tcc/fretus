@@ -101,7 +101,31 @@ const admCadastroModel = {
         }
     },
 
+    findPendingPaginate: async (pagina, total) => {
+        try {
+            const [linhas] = await pool.query(
+                'SELECT u.*, e.status_aprovacao FROM usuario AS u ' +
+                'INNER JOIN detalhamento_entregador AS e ' +
+                'ON u.id_usuario = e.id_usuario ' +
+                'WHERE e.status_aprovacao = 0 limit ?, ?', [pagina, total])
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
 
+    totalRegPending: async () => {
+        try {
+            const [linhas] = await pool.query(
+                'SELECT count(*) total FROM usuario AS u ' +
+                'INNER JOIN detalhamento_entregador AS e ' +
+                'ON u.id_usuario = e.id_usuario ' +
+                'WHERE e.status_aprovacao = 0')
+            return linhas;
+        } catch (error) {
+            return error;
+        }
+    },
 
 }
 

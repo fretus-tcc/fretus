@@ -6,12 +6,11 @@ var pool = require("../../config/connection-factory");
 const admCadastroController = require('../controller/admCadastroController')
 const FaleConoscoController = require('../controller/FaleConoscoController')
 const { notifyMessages } = require('../util/Funcao')
-
+const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
 const { body, validationResult } = require("express-validator")
 
 router.get('/', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    const msgs = notifyMessages(req, res)
-    res.render('pages/adm/admin', { msgs })
+    admCadastroController.listUsersPending(req, res)
 })
 
 router.get('/cadastroAdm', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {

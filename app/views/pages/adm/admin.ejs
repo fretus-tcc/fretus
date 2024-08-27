@@ -6,11 +6,35 @@
     <title>Fretus - Admin</title>
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+
     <!-- SIMPLE NOTIFY - Notificações -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <script src="/JS/notify.js"></script>
     <link rel="stylesheet" href="/CSS/notify.css">
+    <style>
+        .error-alert {
+            display: block;
+            width: fit-content;
+            opacity: .25;
+            margin: 100px auto;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .error-alert img {
+            max-width: 250px;
+            aspect-ratio: 1/1;
+            margin-bottom: 30px;
+        }
+
+        .error-alert p {
+            max-width: 700px;
+        }
+    </style>
 </head>
 <body>
 
@@ -23,6 +47,85 @@
 
     <%- include('../../partial/adm/sidebar.ejs') %>
     
+    <main class="content-container">
+        <h1 style="margin-bottom: 20px; display: inline-block;">Entregadores Pendentes</h1>
+        <span class="indicator-pending"><%= total %></span>
+
+        <% entregadores.forEach(item => { %>
+
+            <section class="ContainerAdm_Use <%= item.status_usuario == 0 ? 'disabled' : '' %>">
+                <article class="boxDados">
+                    <h3>Nome Usuário: </h3>
+                    <p><%= item.nome_usuario %></p>
+                </article>
+                <article class="boxDados">
+                    <h3>Email Usuário: </h3>
+                    <p><%= item.email_usuario %></p>
+                </article>
+                <article class="boxDados">
+                    <h3>CPF Usuário: </h3>
+                    <p><%= item.cpf_usuario %></p>
+                </article>
+                <article class="boxDados">
+                    <h3>Status Usuário: </h3>
+                    <p><%= item.status_usuario == 1 ? 'Ativo' : 'Desativado' %></p>
+                </article>
+                <% if (item.status_aprovacao != null) { %>
+                    <article class="boxDados">
+                        <h3>Status Aprovação: </h3>
+    
+                        <% if (item.status_aprovacao == '0') { %>
+                            <p>Pendente</p>
+                        <% } else if (item.status_aprovacao == '1') { %>
+                            <p>Negado</p>
+                        <% } else { %>
+                            <p>Aprovado</p>
+                        <% } %>
+                        
+                    </article>
+                <% } %>
+                <section class="boXaCao">
+                    <h3>Ações: </h3>
+                    <section class="flex">
+                        <a href="/admin/cadastroAdm/detalhesAdm/<%= item.id_usuario %>">
+                            <button class="button2">Detalhes</button>
+                        </a>
+                    </section>
+                </section>
+            </section>
+
+        <% }) %>
+
+        <% if (erro) { %>
+            <div class="error-alert">
+                <img src="/imgs/shipper/error-icon.png" alt="">
+                <p><%= erro %></p>
+            </div>
+        <% } %>
+
+        <% if(paginador){ %>
+
+            <div class="notificador">
+                <ul>
+                    <% for(var i=1; i <=paginador.total_paginas; i++){ 
+                        if(paginador.pagina_atual==i){ 
+                    %>
+                        <li><a class="atual" href="?pagina=<%= i %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% } else { %>
+                            <li><a href="?pagina=<%= i %>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                        <% } 
+                    } %>
+                </ul>
+            </div>
+    
+        <% } %>
+    </main>
 
     <script src="/JS/adm/sidebar.js"></script>
 </body>

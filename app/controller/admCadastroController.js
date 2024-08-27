@@ -65,6 +65,49 @@ const admCadastroController = {
             }),
 
     ],
+    
+    listUsersPending: async (req, res) => {
+        try {
+
+            // paginação
+            let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+            let results = null
+            let regPagina = 2
+            let inicio = parseInt(pagina - 1) * regPagina
+            let totReg = await admCadastroModel.totalRegPending();
+            let totPaginas = Math.ceil(totReg[0].total / regPagina);
+
+            // validacao parametro pagina
+            if (pagina <= 0 || isNaN(pagina)) {
+                return res.redirect('/admin')
+            } else if (pagina > totPaginas && totPaginas > 0) {
+                return res.redirect(`/admin?pagina=${totPaginas}`)
+            }
+
+            results = await admCadastroModel.findPendingPaginate(inicio, regPagina);
+            let paginador = totReg[0].total <= regPagina
+                ? null
+                : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+
+            // formatando mensagens notificacao
+            const msgs = notifyMessages(req, res)
+
+            // verifica se nao existe nenhum entregador pendente
+            if (results.length == 0) {
+                return res.render('pages/adm/admin', { msgs, entregadores: [], paginador, total: totReg[0].total, erro: 'Por enquanto, todos entregadores foram aceitos' })
+            }
+
+            // console.log(results)
+            res.render('pages/adm/admin', { msgs, entregadores: results, paginador, total: totReg[0].total, erro: null })
+
+        } catch (error) {
+            console.log(error)
+            res.json({ error: "Falha ao acessar dados" })
+
+        }
+        
+
+    },
     //Pegar dados da tabela 
     listUsers: async (req, res, type) => {
         try { 

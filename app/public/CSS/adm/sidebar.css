@@ -58,7 +58,7 @@ a {
     width: 100%;
 }
 
-.home {
+.home, .close {
     display: flex;
 	flex-basis: 100%;
 }
