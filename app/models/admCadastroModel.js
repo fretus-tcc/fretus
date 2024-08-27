@@ -80,7 +80,11 @@ const admCadastroModel = {
     findPage: async (pagina, total, type) => {
         try {
             /* const [linhas] = await pool.query('SELECT * FROM usuario WHERE status_usuario = 1 AND tipo_usuario = ? limit ?, ?', [type, pagina, total]) */
-            const [linhas] = await pool.query('SELECT * FROM usuario WHERE tipo_usuario = ? limit ?, ?', [type, pagina, total])
+            const [linhas] = await pool.query(
+                'SELECT u.*, e.status_aprovacao FROM usuario AS u ' +
+                'LEFT JOIN detalhamento_entregador AS e ' +
+                'ON u.id_usuario = e.id_usuario ' +
+                'WHERE tipo_usuario = ? limit ?, ?', [type, pagina, total])
             return linhas;
         } catch (error) {
             return error;
