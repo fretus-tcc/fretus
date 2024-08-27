@@ -71,6 +71,14 @@ const pagamentoModel = {
             return error
         }
     },
+
+    updateByUUID: async (data, uuid) => {
+        try {
+            await pool.query('UPDATE pagamentos SET ? WHERE id_preferencia_mp = ?', [data, uuid])
+        } catch (error) {
+            return error
+        }
+    },
 }
 
 module.exports = pagamentoModel

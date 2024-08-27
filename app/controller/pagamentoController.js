@@ -48,9 +48,10 @@ const pagamentoController = {
     },
 
     showFeedback: async (req, res) => {
-        const { status } = req.query
+        const { status, external_reference } = req.query
 
         if (status == 'approved') {
+            await pagamentoModel.updateByUUID({ estado_pagamento: 'aprovado' }, external_reference)
             return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, approved: true })
         }
         
