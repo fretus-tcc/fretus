@@ -10,7 +10,7 @@ const pagamentoController = {
 
             // Verifica se pedido existe
             if (pedido == null) {
-                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não encontrado', url: null })
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não encontrado' })
             }
 
             // Verifica se cliente solicitou pedido
@@ -20,33 +20,38 @@ const pagamentoController = {
 
             // Verfica se pedido nao possui entregador escolhido
             if (pedido.id_entregador == null) {
-                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não possui entregador escolhido', url: null})
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não possui entregador escolhido' })
             }
 
-            const { init_point } = await pagamentoModel.getPreferenceMP(pedido.id_preferencia_mp)
-            // console.log(init_point)
+            // Verifica se pedido ja passou da data de agendamento
+            const date = new Date()
+            if (pedido.data_agendamento != null && pedido.data_agendamento < date) {
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido passou do prazo de pagamento' })
+            }
 
-            res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido, erro_pedido: null, url: init_point })
+            res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido, erro_pedido: null })
         } catch (error) {
             console.log(error);
             return res.json({ error })
         }
     },
 
-    /* notifyPagamento: async (req, res) => {
-        const { id, topic } = req.params
-        console.log(id, topic)
+    createPagamento: async (req, res) => {
+        const { id } = req.params
         
-        const pagamento = await pagamentoModel.getPagamentoMP(id)
-        console.log(pagamento)
+        const [pedido] = await pedidosModel.findShipperAccept(id)
 
-        res.status(200)
-    }, */
+        const response = await pagamentoModel.createPreferenceMP(id, pedido.id_preferencia_mp)
+        // console.log(response)
+        
+        res.redirect(response.init_point)
+    },
 
     showFeedback: async (req, res) => {
-        const { status } = req.query
+        const { status, external_reference } = req.query
 
         if (status == 'approved') {
+            await pagamentoModel.updateByUUID({ estado_pagamento: 'aprovado' }, external_reference)
             return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, approved: true })
         }
         

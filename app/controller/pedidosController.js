@@ -2,10 +2,12 @@ const pedidosModel = require('../models/pedidosModel')
 const favoritadosModel = require('../models/favoritadosModel')
 const admCadastroModel = require('../models/admCadastroModel')
 const pagamentoModel = require('../models/pagamentoModel')
+
 const { notifyMessages, calcularPrecoEntrega } = require('../util/Funcao')
 const fetch = require('node-fetch')
 const https = require('https')
 const { body, validationResult } = require('express-validator')
+const crypto = require('crypto')
 
 const agent = new https.Agent({
     rejectUnauthorized: false
@@ -149,6 +151,12 @@ const pedidosController = {
                 return res.render('pages/restrito', { autenticado: req.session.autenticado })
             }
 
+            // Verifica se pedido ja passou da data de agendamento
+            const date = new Date()
+            if (pedido.data_agendamento != null && pedido.data_agendamento < date) {
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido passou do prazo de agendamento' })
+            }
+
             const entregadores = await pedidosModel.findByShipperAccept(req.session.autenticado.id, id)
 
             const msgs = notifyMessages(req, res)
@@ -168,8 +176,9 @@ const pedidosController = {
 
             await pedidosModel.insertShipperAccepted(id_entregador, id_pedido)
 
-            // Gera a preferência do mercado pago
-            await pagamentoModel.createPreferenceMP(id_pedido)
+            // Cria pagamento do pedido
+            const uuid = crypto.randomUUID()
+            await pagamentoModel.insert({ id_pedido, id_preferencia_mp: uuid })
 
             res.redirect(`/cliente/pagamento/${id_pedido}`)
         } catch (error) {

@@ -74,9 +74,11 @@ const pedidosModel = {
     findByUser: async (id, pagina, total) => {
         try {
             const [result] = await pool.query(
-                'SELECT p.* FROM usuario AS u ' +
+                'SELECT p.*, pg.estado_pagamento FROM usuario AS u ' +
                 'INNER JOIN pedidos AS p ' +
                 'ON u.id_usuario = p.id_cliente ' +
+                'LEFT JOIN pagamentos AS pg ' +
+                'ON p.id_pedido = pg.id_pedido ' +
                 'WHERE id_usuario = ? ' +
                 'ORDER BY p.data_solicitacao DESC ' +
                 'LIMIT ?, ?' , [id, pagina, total])
