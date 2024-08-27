@@ -122,9 +122,12 @@ const admCadastroController = {
         try {
             const result = await admCadastroModel.findByUserId(id)
             const msgs = notifyMessages(req, res)
+
             res.render('pages/adm/CadastroAdmGeral/editar', { result: result[0], id, msgs, dados: null, listaErros: null })
+
         } catch (error) {
             res.json({ error })
+            
         }
     },
     updateStatus: async (req, res) => {

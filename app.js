@@ -40,6 +40,9 @@ app.use("/admin", adm)
 const help = require("./app/routes/help")
 app.use("/admin/ajuda", help)
 
+const chat = require('./app/routes/chat');
+app.use('/', chat);
+
 const locaisPerigosos = require("./app/routes/locaisPerigosos")
 app.use("/locais-perigosos", locaisPerigosos)
 

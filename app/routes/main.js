@@ -21,6 +21,7 @@ router.get("/", function (req, res) {
   res.render("pages/index", { autenticado: req.session.autenticado, pagina:"home", dadosNotificacao: null })
 })
 
+
 /* ============================CADASTRO======================================== */
 
 router.get('/cadastro', function (req, res) {

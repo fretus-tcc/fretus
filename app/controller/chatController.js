@@ -1,34 +1,24 @@
 const ChatModel = require('../models/chatModel');
 
 const ChatController = {
-    getChatMessages: async (req, res) => {
-        const { chatId } = req.params;
+  
+    listUsersId: async (req, res) => {
+        const { id } = req.params
         try {
-            const messages = await ChatModel.getMessagesByChatId(chatId);
-            res.json(messages);
+            const result = await ChatModel.findByUserId(id)
+
+            const tipo = req.session.autenticado.tipo 
+
+            res.render('pages/cliente-entregador/chat', { result: result[0], id, dados: null, listaErros: null, type:tipo, autenticado: req.session.autenticado})
+
+
         } catch (error) {
-            console.error('Erro ao obter mensagens do chat:', error);
-            res.status(500).send('Erro ao obter mensagens');
+
+            res.json({ error })
         }
     },
 
-    sendMessage: async (req, res) => {
-        const { message, chatId, userId, recipientId } = req.body;
-        const messageData = {
-            conteudo_mensagem: message,
-            tipo_mensagem: 'text',
-            id_usuario: userId,
-            id_usuario_destinatario: recipientId,
-            id_usuario_rementente: userId
-        };
-        try {
-            await ChatModel.sendMessage(messageData);
-            res.status(201).send('Mensagem enviada com sucesso');
-        } catch (error) {
-            console.error('Erro ao enviar mensagem:', error);
-            res.status(500).send('Erro ao enviar mensagem');
-        }
-    }
+
 };
 
 module.exports = ChatController;

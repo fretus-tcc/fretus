@@ -8,9 +8,6 @@ const pedidosController = require('../controller/pedidosController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
-router.get('/chat', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    res.render('pages/entregador/chat', { autenticado: req.session.autenticado })
-})
 
 /* router.get('/configuracoes-notificacoes', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: false, autenticado: req.session.autenticado })

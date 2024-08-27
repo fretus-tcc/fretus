@@ -46,9 +46,6 @@ router.get('/feedback-pagamento', verificarUsuAutorizado([1], 'pages/restrito'),
     pagamentoController.showFeedback(req, res)
 })
 
-router.get('/chat', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    res.render('pages/cliente/chat', { autenticado: req.session.autenticado })
-})
 
 router.get('/historico', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     pedidosController.listPedidosByUser(req, res)

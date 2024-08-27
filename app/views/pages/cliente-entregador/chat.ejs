@@ -10,7 +10,16 @@
 </head>
 <body>
     
-    <%- include('../../partial/header-client-shipper.ejs', { isClient: true/* , autenticado: autenticado */ }) %>
+    
+    <% if (type=="1") { %>
+
+        <%- include('../../partial/header-client-shipper.ejs', { isClient: true/* , autenticado: autenticado */ }) %>
+        
+    <% } else { %>
+        <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
+
+    <% } %>
+
 
     <main>
         <section class="sidebar">
@@ -306,10 +315,20 @@
         </section>
     </main>
     <section class="notification-container"></section>
-    
 
-    <%- include('../../partial/popup/report.ejs') %>
-    <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    
+    <% if (type=="1") { %>
+        <%- include('../../partial/popup/report.ejs') %>
+        <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
+
+    <% } else { %>
+
+        <%- include('../../partial/popup/report.ejs') %>
+        <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
+
+    <% } %>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/JS/burguer.js"></script>
@@ -319,5 +338,12 @@
     <script src="/JS/client/send-confirm.js"></script>
     <script src="/JS/shipper/clip-popup.js"></script>
     <script src="/JS/shipper/report-popup.js"></script>
+   
+
+
+    
+    
+
+
 </body>
 </html>
