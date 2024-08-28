@@ -107,6 +107,8 @@ const admCadastroModel = {
                 'SELECT u.*, e.status_aprovacao FROM usuario AS u ' +
                 'INNER JOIN detalhamento_entregador AS e ' +
                 'ON u.id_usuario = e.id_usuario ' +
+                'INNER JOIN veiculos AS v ' +
+                'ON e.id_entregador = v.id_entregador ' +
                 'WHERE e.status_aprovacao = 0 limit ?, ?', [pagina, total])
             return linhas;
         } catch (error) {
@@ -120,6 +122,8 @@ const admCadastroModel = {
                 'SELECT count(*) total FROM usuario AS u ' +
                 'INNER JOIN detalhamento_entregador AS e ' +
                 'ON u.id_usuario = e.id_usuario ' +
+                'INNER JOIN veiculos AS v ' +
+                'ON e.id_entregador = v.id_entregador ' +
                 'WHERE e.status_aprovacao = 0')
             return linhas;
         } catch (error) {

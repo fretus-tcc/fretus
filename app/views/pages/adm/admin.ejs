@@ -7,34 +7,13 @@
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-adm.ejs') %>
     <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+    <link rel="stylesheet" href="/CSS/adm/error-alert.css">
 
     <!-- SIMPLE NOTIFY - Notificações -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
     <script src="/JS/notify.js"></script>
     <link rel="stylesheet" href="/CSS/notify.css">
-    <style>
-        .error-alert {
-            display: block;
-            width: fit-content;
-            opacity: .25;
-            margin: 100px auto;
-            text-align: center;
-            font-size: 32px;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .error-alert img {
-            max-width: 250px;
-            aspect-ratio: 1/1;
-            margin-bottom: 30px;
-        }
-
-        .error-alert p {
-            max-width: 700px;
-        }
-    </style>
 </head>
 <body>
 
@@ -98,7 +77,7 @@
 
         <% if (erro) { %>
             <div class="error-alert">
-                <img src="/imgs/shipper/error-icon.png" alt="">
+                <img src="/imgs/shipper/success-icon.png" alt="">
                 <p><%= erro %></p>
             </div>
         <% } %>
