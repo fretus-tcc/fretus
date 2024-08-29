@@ -573,7 +573,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table FRETUS.CHAT
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.CHAT (
+/* CREATE TABLE IF NOT EXISTS FRETUS.CHAT (
   id_mensagem INT NOT NULL,
   conteudo_mensagem TEXT(1500) NOT NULL,
   id_conversa INT NOT NULL AUTO_INCREMENT,
@@ -582,6 +582,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.CHAT (
   id_usuario INT NOT NULL,
   id_usuario_destinatario INT NOT NULL,
   id_usuario_rementente INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id_conversa),
   UNIQUE INDEX id_conversa_UNIQUE (id_conversa ASC) VISIBLE,
   INDEX fk_CHAT_USUARIOS1_idx (id_usuario ASC) VISIBLE,
@@ -602,7 +603,17 @@ CREATE TABLE IF NOT EXISTS FRETUS.CHAT (
     REFERENCES FRETUS.USUARIOS (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB; */
+
+CREATE TABLE IF NOT EXISTS FRETUS.CHAT (
+  id_mensagem INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  message TEXT NOT NULL,
+  tipo_mensagem VARCHAR(45) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES usuario(id_usuario), 
+  PRIMARY KEY (id_mensagem)
+);
 
 
 -- -----------------------------------------------------

@@ -8,6 +8,12 @@ const port = 3003
 const dotenv = require('dotenv');
 dotenv.config();
 
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server);
+require('./config/socket').init(server, io);
+
 app.use(express.static("./app/public"))
 
 app.set("view engine", "ejs")
@@ -46,6 +52,6 @@ app.use('/', chat);
 const locaisPerigosos = require("./app/routes/locaisPerigosos")
 app.use("/locais-perigosos", locaisPerigosos)
 
-app.listen(port, () => {
-  console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`)
-})
+server.listen(port, () => {
+  console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`);
+});
