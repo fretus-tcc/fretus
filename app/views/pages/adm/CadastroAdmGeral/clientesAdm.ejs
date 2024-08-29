@@ -69,6 +69,20 @@
                     <%= item.status_usuario == 1 ? 'Ativo' : 'Desativado' %>
                 </p>
             </article>
+            <% if (item.status_aprovacao != null) { %>
+                <article class="boxDados">
+                    <h3>Status Aprovação: </h3>
+
+                    <% if (item.status_aprovacao == '0') { %>
+                        <p>Pendente</p>
+                    <% } else if (item.status_aprovacao == '1') { %>
+                        <p>Negado</p>
+                    <% } else { %>
+                        <p>Aprovado</p>
+                    <% } %>
+                    
+                </article>
+            <% } %>
             <section class="boXaCao">
                 <h3>Ações: </h3>
                 <section class="flex">

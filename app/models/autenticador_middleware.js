@@ -110,5 +110,6 @@ module.exports = {
     limparSessao,
     gravarUsuAutenticado,
     verificarUsuAutorizado,
+    verificarCadastroCompleto,
     gravarUsuAutenticadoCadastro
 }

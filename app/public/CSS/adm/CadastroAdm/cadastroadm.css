@@ -74,15 +74,23 @@ main {
 
 }
 
-.ContainerAdm_cadastroClient a {
+.ContainerAdm_cadastroClient a, .notificador a {
     color: #333;
     font-size: 1.3rem;
 }
 
-.ContainerAdm_cadastroClient a:hover {
+.ContainerAdm_cadastroClient a:hover, .notificador a:hover {
     cursor: pointer;
     text-decoration: underline;
+}
 
+.indicator-pending {
+    background-color: var(--orange);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 100%;
+    transform: translate(7px, -7px);
+    display: inline-block;
 }
 
 .ContainerAdm_cadastroClient h1 {

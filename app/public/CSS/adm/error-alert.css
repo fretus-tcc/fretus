@@ -1,0 +1,20 @@
+.error-alert {
+    display: block;
+    width: fit-content;
+    opacity: .25;
+    margin: 100px auto;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+}
+
+.error-alert img {
+    max-width: 250px;
+    aspect-ratio: 1/1;
+    margin-bottom: 30px;
+}
+
+.error-alert p {
+    max-width: 700px;
+}
