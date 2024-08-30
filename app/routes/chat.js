@@ -9,11 +9,12 @@ router.get('/cliente/chat', verificarUsuAutorizado([1], 'pages/restrito'), funct
 })
 
 router.get('/entregador/chat', verificarUsuAutorizado([2], 'pages/restrito'), function (req, res) {
-    ChatController.listUsersId(req, res )
+    ChatController.listUsersId(req, res)
 })
 
-
-
+router.post('/chat', (req, res) => {
+    ChatController.postMessage(req, res);
+});
 
 
 module.exports = router;

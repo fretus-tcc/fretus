@@ -7,6 +7,7 @@
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-client-shipper.ejs') %>
     <%- include('../../partial/config/config-chat.ejs') %>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     
@@ -30,7 +31,7 @@
                     </article>
                     <input placeholder="Buscar" type="text">
                 </section>
-                <section class="online">
+                <!-- <section class="online">
                     <h1>Online Agora</h1>
                     <section class="online-users">
                         <article class="photo">
@@ -50,7 +51,7 @@
                             <span class="online-icon"></span>
                         </article>
                     </section>
-                </section>
+                </section> -->
                 <ul>
                     <a href="#">
                         <li>
@@ -237,7 +238,7 @@
                 <section class="chat-msgs">
                     <section class="msgs-container">
                         <section class="msgs-content">
-                            <section class="row chat-info">
+                           <!--  <section class="row chat-info">
                                 <article class="msg">
                                     Para finalizar a entrega, clique no clipe e envie a solicitação de confimação de entrega, para o entregador aceitar ou negar sua entrega.
                                 </article>
@@ -255,7 +256,22 @@
                                 <article class="msg">
                                     <p>Lorem ipsum dolor sit amet</p>
                                 </article>
-                            </section>
+                            </section> -->
+                            <div id="new-message">Mensagem nova</div>
+                                <div class="chat-box" id="chat-box">
+                                <ul id="messages">
+                                    <% messages.forEach(function(message) { %>
+                                    <li class="<%= message.username === username ? 'message-sent' : 'message-received' %>">
+                                        <% if (message.username !== username) { %>
+                                        <span class="username"><%= message.username %></span>
+                                        <% } %>
+                                        <span class="message"><%= message.message %></span>
+                                    </li>
+                                    <% }); %>
+                                </ul>
+                                </div>
+
+
                           
                             <section class="row other-msg">
                                 <article class="user-icon rounded-icon">
@@ -300,7 +316,12 @@
                     </section>
                 </section>
 
-                <section class="chat-inputs">
+                <form id="form" action="/chat" method="post">
+                    <input name="message" autocomplete="off" /><button>Send</button>
+                </form>
+
+
+               <!--  <section class="chat-inputs">
                     <textarea rows="1" placeholder="Digite sua mensagem aqui"></textarea>
                     <section class="actions">
                         <button class="clip rounded-icon">
@@ -310,7 +331,7 @@
                             <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u207.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
                         </button>
                     </section>
-                </section>
+                </section> -->
             </section>
         </section>
     </main>
@@ -338,12 +359,129 @@
     <script src="/JS/client/send-confirm.js"></script>
     <script src="/JS/shipper/clip-popup.js"></script>
     <script src="/JS/shipper/report-popup.js"></script>
-   
+
+    <script>
+        const socket = io();
+  
+        function scrollToBottom() {
+          const chatBox = document.getElementById('chat-box');
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+  
+        socket.on('chat message', function (data) {
+          const messages = document.getElementById('messages');
+          const item = document.createElement('li');
+          item.className = data.username === '<%= username %>' ? 'message-sent' : 'message-received';
+          if (data.username !== '<%= username %>') {
+            item.innerHTML = `<span class="username">${data.username}</span> ${data.message}`;
+          } else {
+            item.innerHTML = `${data.message}`;
+          }
+          messages.appendChild(item);
+  
+          if (data.username !== '<%= username %>') {
+            const newMessageNotification = document.getElementById('new-message');
+            newMessageNotification.style.display = 'block';
+            setTimeout(() => {
+              newMessageNotification.style.display = 'none';
+            }, 5000);
+          }
+  
+          scrollToBottom();
+        });
+  
+        document.getElementById('form').addEventListener('submit', function (event) {
+          event.preventDefault();
+  
+          const form = event.target;
+          const message = form.message.value;
+          socket.emit('chat message', { userId: '<%= userId %>', username: '<%= username %>', message });
+  
+          form.message.value = '';
+          scrollToBottom();
+        });
+  
+        window.onload = scrollToBottom;
+    
+        function scrollToBottom() {
+          const chatBox = document.getElementById('chat-box');
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    
+        socket.on('chat message', function (data) {
+          const messages = document.getElementById('messages');
+          const item = document.createElement('li');
+          item.className = data.username === '<%= username %>' ? 'message-sent' : 'message-received';
+          if (data.username !== '<%= username %>') {
+            item.innerHTML = `<span class="username">${data.username}</span> ${data.message}`;
+          } else {
+            item.innerHTML = `${data.message}`;
+          }
+          messages.appendChild(item);
+    
+          if (data.username !== '<%= username %>') {
+            const newMessageNotification = document.getElementById('new-message');
+            newMessageNotification.style.display = 'block';
+            setTimeout(() => {
+              newMessageNotification.style.display = 'none';
+            }, 5000);
+          }
+    
+          scrollToBottom();
+        });
+    
+        document.getElementById('form').addEventListener('submit', function (event) {
+          event.preventDefault();
+    
+          const form = event.target;
+          const message = form.message.value;
+          socket.emit('chat message', { userId: '<%= userId %>', username: '<%= username %>', message });
+    
+          form.message.value = '';
+          scrollToBottom();
+        });
+    
+        // Modal
+        const modal = document.getElementById("addPersonModal");
+        const btn = document.getElementById("add-person");
+        const span = document.getElementsByClassName("close")[0];
+    
+        btn.onclick = function () {
+          modal.style.display = "block";
+        }
+    
+        span.onclick = function () {
+          modal.style.display = "none";
+        }
+    
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    
+        document.getElementById('addPersonForm').addEventListener('submit', function (event) {
+          event.preventDefault();
+          const identifier = document.getElementById('friendIdentifier').value;
+          if (identifier) {
+            socket.emit('add person', { userId: '<%= userId %>', friendIdentifier: identifier });
+            modal.style.display = "none";
+          }
+        });
+    
+        document.getElementById('toggle-identifier').addEventListener('click', function () {
+          const identifierDiv = document.getElementById('identifier');
+          identifierDiv.style.display = identifierDiv.style.display === 'none' ? 'block' : 'none';
+        });
+    
+        document.getElementById('logout').addEventListener('click', function () {
+          window.location.href = '/logout';
+        });
+    
+        window.onload = scrollToBottom;
+      </script>
 
 
     
-    
-
-
 </body>
 </html>
