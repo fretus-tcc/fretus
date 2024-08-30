@@ -605,7 +605,7 @@ ENGINE = InnoDB;
     ON UPDATE NO ACTION)
 ENGINE = InnoDB; */
 
-CREATE TABLE IF NOT EXISTS FRETUS.CHAT (
+CREATE TABLE IF NOT EXISTS FRETUS.chat (
   id_mensagem INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   message TEXT NOT NULL,
@@ -615,6 +615,26 @@ CREATE TABLE IF NOT EXISTS FRETUS.CHAT (
   PRIMARY KEY (id_mensagem)
 );
 
+CREATE TABLE IF NOT EXISTS FRETUS.conversas (
+  id_conversa INT NOT NULL AUTO_INCREMENT,
+  id_cliente INT NOT NULL,
+  id_entregador INT NOT NULL,
+  data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_conversa),
+  FOREIGN KEY (id_cliente) REFERENCES usuario(id_usuario),
+  FOREIGN KEY (id_entregador) REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS FRETUS.mensagens (
+  id_mensagem INT NOT NULL AUTO_INCREMENT,
+  id_conversa INT NOT NULL,
+  id_usuario INT NOT NULL,
+  mensagem TEXT NOT NULL,
+  data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_mensagem),
+  FOREIGN KEY (id_conversa) REFERENCES conversas(id_conversa),
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
 
 -- -----------------------------------------------------
 -- Table FRETUS.avaliacoes

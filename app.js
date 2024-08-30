@@ -13,7 +13,6 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server);
 require('./config/socket').init(server, io);
-require('./config/socket').init(server, io);
 
 app.use(express.static("./app/public"))
 
