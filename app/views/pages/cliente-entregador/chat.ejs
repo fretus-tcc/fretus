@@ -7,6 +7,7 @@
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-client-shipper.ejs') %>
     <%- include('../../partial/config/config-chat.ejs') %>
+   <!--  <link rel="stylesheet" href="/CSS/Testechat.css"> -->
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
@@ -31,27 +32,6 @@
                     </article>
                     <input placeholder="Buscar" type="text">
                 </section>
-                <!-- <section class="online">
-                    <h1>Online Agora</h1>
-                    <section class="online-users">
-                        <article class="photo">
-                            C
-                            <span class="online-icon"></span>
-                        </article>
-                        <article class="photo">
-                            F
-                            <span class="online-icon"></span>
-                        </article>
-                        <article class="photo">
-                            T
-                            <span class="online-icon"></span>
-                        </article>
-                        <article class="photo">
-                            P
-                            <span class="online-icon"></span>
-                        </article>
-                    </section>
-                </section> -->
                 <ul>
                     <a href="#">
                         <li>
@@ -257,7 +237,9 @@
                                     <p>Lorem ipsum dolor sit amet</p>
                                 </article>
                             </section> -->
-                            <div id="new-message">Mensagem nova</div>
+
+                            <!-- <div id="new-message">Mensagem nova</div> -->
+
                                 <div class="chat-box" id="chat-box">
                                 <ul id="messages">
                                     <% messages.forEach(function(message) { %>
@@ -270,10 +252,8 @@
                                     <% }); %>
                                 </ul>
                                 </div>
-
-
                           
-                            <section class="row other-msg">
+                           <!--  <section class="row other-msg">
                                 <article class="user-icon rounded-icon">
                                     <img src="/imgs/client/user-icon.svg" alt="">
                                 </article>
@@ -282,7 +262,7 @@
                                     <article class="ball"></article>
                                     <article class="ball"></article>
                                 </article>
-                            </section>
+                            </section> -->
                         </section>
                     </section>
                     <section class="clip-popup">
@@ -317,7 +297,7 @@
                 </section>
 
                 <form id="form" action="/chat" method="post">
-                    <input name="message" autocomplete="off" /><button>Send</button>
+                    <input name="message" autocomplete="off" /><button class="cta">Send</button>
                 </form>
 
 
@@ -362,126 +342,49 @@
 
     <script>
         const socket = io();
-  
+
         function scrollToBottom() {
-          const chatBox = document.getElementById('chat-box');
-          chatBox.scrollTop = chatBox.scrollHeight;
+            const chatBox = document.getElementById('chat-box');
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
-  
+
         socket.on('chat message', function (data) {
-          const messages = document.getElementById('messages');
-          const item = document.createElement('li');
-          item.className = data.username === '<%= username %>' ? 'message-sent' : 'message-received';
-          if (data.username !== '<%= username %>') {
+        const messages = document.getElementById('messages');
+        const item = document.createElement('li');
+
+        item.className = data.username === '<%= username %>' ? 'message-sent' : 'message-received';
+        if (data.username !== '<%= username %>') {
             item.innerHTML = `<span class="username">${data.username}</span> ${data.message}`;
-          } else {
+        } else {
             item.innerHTML = `${data.message}`;
-          }
-          messages.appendChild(item);
-  
-          if (data.username !== '<%= username %>') {
+        }
+
+        messages.appendChild(item);
+
+        if (data.username !== '<%= username %>') {
             const newMessageNotification = document.getElementById('new-message');
             newMessageNotification.style.display = 'block';
             setTimeout(() => {
-              newMessageNotification.style.display = 'none';
+            newMessageNotification.style.display = 'none';
             }, 5000);
-          }
-  
-          scrollToBottom();
-        });
-  
-        document.getElementById('form').addEventListener('submit', function (event) {
-          event.preventDefault();
-  
-          const form = event.target;
-          const message = form.message.value;
-          socket.emit('chat message', { userId: '<%= userId %>', username: '<%= username %>', message });
-  
-          form.message.value = '';
-          scrollToBottom();
-        });
-  
-        window.onload = scrollToBottom;
-    
-        function scrollToBottom() {
-          const chatBox = document.getElementById('chat-box');
-          chatBox.scrollTop = chatBox.scrollHeight;
         }
-    
-        socket.on('chat message', function (data) {
-          const messages = document.getElementById('messages');
-          const item = document.createElement('li');
-          item.className = data.username === '<%= username %>' ? 'message-sent' : 'message-received';
-          if (data.username !== '<%= username %>') {
-            item.innerHTML = `<span class="username">${data.username}</span> ${data.message}`;
-          } else {
-            item.innerHTML = `${data.message}`;
-          }
-          messages.appendChild(item);
-    
-          if (data.username !== '<%= username %>') {
-            const newMessageNotification = document.getElementById('new-message');
-            newMessageNotification.style.display = 'block';
-            setTimeout(() => {
-              newMessageNotification.style.display = 'none';
-            }, 5000);
-          }
-    
-          scrollToBottom();
-        });
-    
-        document.getElementById('form').addEventListener('submit', function (event) {
-          event.preventDefault();
-    
-          const form = event.target;
-          const message = form.message.value;
-          socket.emit('chat message', { userId: '<%= userId %>', username: '<%= username %>', message });
-    
-          form.message.value = '';
-          scrollToBottom();
-        });
-    
-        // Modal
-        const modal = document.getElementById("addPersonModal");
-        const btn = document.getElementById("add-person");
-        const span = document.getElementsByClassName("close")[0];
-    
-        btn.onclick = function () {
-          modal.style.display = "block";
-        }
-    
-        span.onclick = function () {
-          modal.style.display = "none";
-        }
-    
-        window.onclick = function (event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-    
-        document.getElementById('addPersonForm').addEventListener('submit', function (event) {
-          event.preventDefault();
-          const identifier = document.getElementById('friendIdentifier').value;
-          if (identifier) {
-            socket.emit('add person', { userId: '<%= userId %>', friendIdentifier: identifier });
-            modal.style.display = "none";
-          }
-        });
-    
-        document.getElementById('toggle-identifier').addEventListener('click', function () {
-          const identifierDiv = document.getElementById('identifier');
-          identifierDiv.style.display = identifierDiv.style.display === 'none' ? 'block' : 'none';
-        });
-    
-        document.getElementById('logout').addEventListener('click', function () {
-          window.location.href = '/logout';
-        });
-    
-        window.onload = scrollToBottom;
-      </script>
 
+        scrollToBottom();
+        });
 
+        document.getElementById('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+            const form = event.target;
+            const message = form.message.value;
+            socket.emit('chat message', { userId: '<%= userId %>', username: '<%= username %>', message });
+
+            form.message.value = '';
+            scrollToBottom();
+        });
+
+        window.onload = scrollToBottom;   
+
+    </script>
     
 </body>
 </html>

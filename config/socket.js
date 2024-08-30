@@ -22,7 +22,7 @@ module.exports = {
         }
       });
 
-      socket.on('add person', async (data) => {
+     /*  socket.on('add person', async (data) => {
         const { userId, friendIdentifier } = data;
         try {
           await ModelChat.addFriend(userId, friendIdentifier);
@@ -30,7 +30,7 @@ module.exports = {
         } catch (error) {
           socket.emit('friend added', { success: false, message: error.message });
         }
-      });
+      }); */
     });
   },
   getIO: () => {
