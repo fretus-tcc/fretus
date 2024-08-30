@@ -434,27 +434,49 @@ ENGINE = InnoDB; */
 -- -----------------------------------------------------
 -- Table FRETUS.CUPONS
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.CUPONS (
-  id_cupon INT NOT NULL AUTO_INCREMENT,
-  prazo_cupon DATETIME NOT NULL,
-  desconto_cupom INT NOT NULL,
-  limite_uso INT NOT NULL,
-  estado_cupon VARCHAR(45) NOT NULL,
-  codigo_cupon VARCHAR(45) NOT NULL,
-  id_usuario_criador INT NOT NULL,
-  id_usuario_utilizador INT NOT NULL,
-  PRIMARY KEY (id_cupon),
-  UNIQUE INDEX IDCUPON_UNIQUE (id_cupon ASC) VISIBLE,
-  INDEX fk_CUPONS_USUARIOS1_idx (id_usuario_criador ASC) VISIBLE,
-  INDEX fk_CUPONS_USUARIOS2_idx (id_usuario_utilizador ASC) VISIBLE,
+CREATE TABLE IF NOT EXISTS FRETUS.cupons (
+  id_cupom INT NOT NULL AUTO_INCREMENT,
+  codigo_cupom VARCHAR(45) NOT NULL,
+  porcentagem_cupom INT NOT NULL,
+  /* prazo_cupon DATETIME NOT NULL, */
+  uso_restante_cupom INT NULL,
+  status_cupom INT NOT NULL DEFAULT '1',
+  id_criador INT NOT NULL,
+  /* id_usuario_utilizador INT NOT NULL, */
+  PRIMARY KEY (id_cupom),
+  UNIQUE INDEX IDCUPON_UNIQUE (id_cupom ASC) VISIBLE,
+  INDEX fk_CUPONS_USUARIOS1_idx (id_criador ASC) VISIBLE,
+  /* INDEX fk_CUPONS_USUARIOS2_idx (id_usuario_utilizador ASC) VISIBLE, */
   CONSTRAINT fk_CUPONS_USUARIOS1
-    FOREIGN KEY (id_usuario_criador)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
+    FOREIGN KEY (id_criador)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE NO ACTION /* ,
   CONSTRAINT fk_CUPONS_USUARIOS2
     FOREIGN KEY (id_usuario_utilizador)
     REFERENCES FRETUS.USUARIOS (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION */)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table FRETUS.USUARIOS_has_CUPONS
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS FRETUS.usuario_cupons (
+  id_usuario INT NOT NULL,
+  id_cupom INT NOT NULL,
+  estado_cupom ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
+  PRIMARY KEY (id_usuario, id_cupom),
+  INDEX fk_USUARIOS_has_CUPONS_CUPONS1_idx (id_cupom ASC) VISIBLE,
+  INDEX fk_USUARIOS_has_CUPONS_USUARIOS1_idx (id_usuario ASC) VISIBLE,
+  CONSTRAINT fk_USUARIOS_has_CUPONS_USUARIOS1
+    FOREIGN KEY (id_usuario)
+    REFERENCES FRETUS.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_USUARIOS_has_CUPONS_CUPONS1
+    FOREIGN KEY (id_cupom)
+    REFERENCES FRETUS.cupons (id_cupom)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -475,28 +497,6 @@ CREATE TABLE IF NOT EXISTS FRETUS.RAKING (
   CONSTRAINT fk_RAKING_USUARIOS1
     FOREIGN KEY (id_usuario)
     REFERENCES FRETUS.USUARIOS (id_usuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table FRETUS.USUARIOS_has_CUPONS
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS FRETUS.USUARIOS_has_CUPONS (
-  USUARIOS_id_usuario INT NOT NULL,
-  CUPONS_id_cupon INT NOT NULL,
-  PRIMARY KEY (USUARIOS_id_usuario, CUPONS_id_cupon),
-  INDEX fk_USUARIOS_has_CUPONS_CUPONS1_idx (CUPONS_id_cupon ASC) VISIBLE,
-  INDEX fk_USUARIOS_has_CUPONS_USUARIOS1_idx (USUARIOS_id_usuario ASC) VISIBLE,
-  CONSTRAINT fk_USUARIOS_has_CUPONS_USUARIOS1
-    FOREIGN KEY (USUARIOS_id_usuario)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_USUARIOS_has_CUPONS_CUPONS1
-    FOREIGN KEY (CUPONS_id_cupon)
-    REFERENCES FRETUS.CUPONS (id_cupon)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
