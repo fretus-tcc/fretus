@@ -29,11 +29,11 @@ const ChatModel = {
                 'SELECT u.nome_usuario, u.foto_de_perfil, c.*, m.mensagem, m.data_envio FROM conversas AS c ' +
                 'INNER JOIN usuario AS u ' +
                 'ON IF(? = 2, c.id_cliente, c.id_entregador) = u.id_usuario ' +
-                'JOIN ( ' +
+                'LEFT JOIN ( ' +
                 '	SELECT id_conversa, MAX(data_envio) AS last_message_time FROM mensagens ' +
                 '	GROUP BY id_conversa ' +
                 ') lm ON c.id_conversa = lm.id_conversa ' +
-                'JOIN mensagens m ON m.id_conversa = c.id_conversa AND m.data_envio = lm.last_message_time ' +
+                'LEFT JOIN mensagens m ON m.id_conversa = c.id_conversa AND m.data_envio = lm.last_message_time ' +
                 'WHERE c.id_cliente = ? OR c.id_entregador = ?', [tipo, id, id])
             return result
         } catch (error) {

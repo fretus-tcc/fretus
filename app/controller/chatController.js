@@ -23,7 +23,10 @@ const chatController = {
 
             // formatando datas da ultima mensagem da conversa
             conversas.forEach(conversa => {
-                conversa.data_envio = dayjs(conversa.data_envio).fromNow()
+                // console.log(conversa.data_envio);
+                if (conversa.data_envio != null) {
+                    conversa.data_envio = dayjs(conversa.data_envio).fromNow()
+                }
             })
             
             // verifica se conversa nao esta selecionada
