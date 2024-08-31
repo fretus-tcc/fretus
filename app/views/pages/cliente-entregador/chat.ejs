@@ -19,7 +19,7 @@
 
     <main>
         
-        <section class="sidebar">
+        <section class="sidebar <%= id_conversa == null ? 'show' : '' %>">
             <section class="nav">
                 <section class="search-bar">
                     <article class="icon">
@@ -85,33 +85,13 @@
                                 </section>
 
                                 <% mensagens.forEach(mensagem => { %>
-                                    <section class="row <%= mensagem.id_usuario == userId ? 'my-msg' : 'other-msg' %>">
+                                    <section class="row <%= mensagem.id_usuario == autenticado.id ? 'my-msg' : 'other-msg' %>">
                                         <!-- <article class="user-icon rounded-icon">
                                             <img src="/imgs/client/user-icon.svg" alt="">
                                         </article> -->
                                         <article class="msg"><%= mensagem.mensagem %></article>
                                     </section>
                                 <% }) %>
-    
-                                <!-- <section class="row my-msg">
-                                    <article class="user-icon rounded-icon">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="msg">
-                                        <p>Lorem ipsum dolor sit amet</p>
-                                    </article>
-                                </section>
-                              
-                                <section class="row other-msg">
-                                    <article class="user-icon rounded-icon">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="msg typing">
-                                        <article class="ball"></article>
-                                        <article class="ball"></article>
-                                        <article class="ball"></article>
-                                    </article>
-                                </section> -->
     
                                 <!-- conversas sem CSS -->
                                 <!-- <div id="new-message">Mensagem nova</div> -->

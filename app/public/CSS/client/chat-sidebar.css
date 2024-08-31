@@ -119,6 +119,7 @@ main {
     justify-content: center;
     align-items: center;
     font-size: 20px;
+    overflow: hidden;
 }
 
 .online .photo {
@@ -128,7 +129,7 @@ main {
 }
 
 .photo img {
-    width: 80%;
+    width: 100%;
     height: auto;
     opacity: .5;
 }
