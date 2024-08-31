@@ -467,6 +467,9 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.mensagens (
   FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
+INSERT INTO conversas (id_cliente, id_entregador) VALUES (2, 3);
+INSERT INTO mensagens (id_conversa, id_usuario, mensagem) VALUES (1, 3, 'Olá!');
+
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`avaliacoes` (
   `id_avaliacoes` INT NOT NULL AUTO_INCREMENT,
   `qnt_estrelas` INT NOT NULL,

@@ -7,23 +7,18 @@
     <%- include('../../partial/config/config.ejs') %>
     <%- include('../../partial/config/config-client-shipper.ejs') %>
     <%- include('../../partial/config/config-chat.ejs') %>
-   <!--  <link rel="stylesheet" href="/CSS/Testechat.css"> -->
-    <script src="/socket.io/socket.io.js"></script>
+    <!--  <link rel="stylesheet" href="/CSS/Testechat.css"> -->
 </head>
 <body>
     
-    
-    <% if (type=="1") { %>
-
-        <%- include('../../partial/header-client-shipper.ejs', { isClient: true/* , autenticado: autenticado */ }) %>
-        
+    <% if (type == "1") { %>
+        <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
     <% } else { %>
         <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
-
     <% } %>
 
-
     <main>
+        
         <section class="sidebar">
             <section class="nav">
                 <section class="search-bar">
@@ -32,315 +27,186 @@
                     </article>
                     <input placeholder="Buscar" type="text">
                 </section>
-                <ul>
-                    <a href="#">
+
+                <ul class="contact-list">
+                    <% conversas.forEach(item => { %>
                         <li>
-                            <section class="chat-contact">
+                            <a href="/<%= type == '1' ? 'cliente' : 'entregador' %>/chat/<%= item.id_conversa %>" class="chat-contact">
                                 <section class="contact-info">
                                     <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
+                                        <% if (item.foto_de_perfil != null) { %>
+                                            <img src="data:image/png;base64,<%= item.foto_de_perfil.toString('base64') %>" alt="">
+                                        <% } else { %>
+                                            <img src="/imgs/client/user-icon.svg" alt="">
+                                        <% } %>
                                     </article>
                                     <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
+                                        <h1><%= item.nome_usuario %></h1>
+                                        <p><%= item.mensagem %></p>
                                     </article>
                                 </section>
                                 <article class="contact-time">
-                                    <p>09:39 AM</p>
+                                    <p><%= item.data_envio %></p>
                                 </article>
-                            </section>
+                            </a>
                         </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>07:43 AM</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>Ontem</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>Ontem</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>Semana Passada</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>Semana Passada</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>Mês Passado</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Mês Passado</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>Mês Passado</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
-                    <a href="#">
-                        <li>
-                            <section class="chat-contact">
-                                <section class="contact-info">
-                                    <article class="photo">
-                                        <img src="/imgs/client/user-icon.svg" alt="">
-                                    </article>
-                                    <article class="contact-msg">
-                                        <h1>Nome</h1>
-                                        <p>Ultima mensagem</p>
-                                    </article>
-                                </section>
-                                <article class="contact-time">
-                                    <p>Mês Passado</p>
-                                </article>
-                            </section>
-                        </li>
-                    </a>
+                    <% }) %>
                 </ul>
             </section>
         </section>
-        <section class="chat">
-            <article class="sidebar-burguer">
-                <img src="/imgs/burguer-config-icon.png" alt="">
-            </article>
-            <section class="chat-container">
-                <section class="chat-header">
-                    <article class="info">
-                        <h1>Nome</h1>
-                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
-                    </article>
-                    <article class="action">
-                        <button class="rounded-icon">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u202.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                        </button>
-                    </article>
-                </section>
 
-                <section class="chat-msgs">
-                    <section class="msgs-container">
-                        <section class="msgs-content">
-                           <!--  <section class="row chat-info">
-                                <article class="msg">
-                                    Para finalizar a entrega, clique no clipe e envie a solicitação de confimação de entrega, para o entregador aceitar ou negar sua entrega.
-                                </article>
-                            </section>
-                            <section class="row other-msg">
-                                <article class="user-icon rounded-icon">
-                                    <img src="/imgs/client/user-icon.svg" alt="">
-                                </article>
-                                <article class="msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin </article>
-                            </section>
-                            <section class="row my-msg">
-                                <article class="user-icon rounded-icon">
-                                    <img src="/imgs/client/user-icon.svg" alt="">
-                                </article>
-                                <article class="msg">
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                </article>
-                            </section> -->
+        <% if (id_conversa != null) { %>
+            <section class="chat">
+                <article class="sidebar-burguer">
+                    <img src="/imgs/burguer-config-icon.png" alt="">
+                </article>
+    
+                <section class="chat-container">
+    
+                    <section class="chat-header">
+                        <article class="info">
+                            <h1><%= conversas.find(item => item.id_conversa == id_conversa).nome_usuario %></h1>
+                            <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                        </article>
+                        <!-- <article class="action">
+                            <button class="rounded-icon">
+                                <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u202.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
+                            </button>
+                        </article> -->
+                    </section>
+                    
+                    <section class="chat-msgs">
+                        <section class="msgs-container">
+                            <section class="msgs-content">
+                                <section class="row chat-info">
+                                    <article class="msg">
+                                        Para finalizar a entrega, clique no clipe e envie a solicitação de confimação de entrega, para o entregador aceitar ou negar sua entrega.
+                                    </article>
+                                </section>
 
-                            <!-- <div id="new-message">Mensagem nova</div> -->
-
-                                <div class="chat-box" id="chat-box">
-                                <ul id="messages">
+                                <% mensagens.forEach(mensagem => { %>
+                                    <section class="row <%= mensagem.id_usuario == userId ? 'my-msg' : 'other-msg' %>">
+                                        <!-- <article class="user-icon rounded-icon">
+                                            <img src="/imgs/client/user-icon.svg" alt="">
+                                        </article> -->
+                                        <article class="msg"><%= mensagem.mensagem %></article>
+                                    </section>
+                                <% }) %>
+    
+                                <!-- <section class="row my-msg">
+                                    <article class="user-icon rounded-icon">
+                                        <img src="/imgs/client/user-icon.svg" alt="">
+                                    </article>
+                                    <article class="msg">
+                                        <p>Lorem ipsum dolor sit amet</p>
+                                    </article>
+                                </section>
+                              
+                                <section class="row other-msg">
+                                    <article class="user-icon rounded-icon">
+                                        <img src="/imgs/client/user-icon.svg" alt="">
+                                    </article>
+                                    <article class="msg typing">
+                                        <article class="ball"></article>
+                                        <article class="ball"></article>
+                                        <article class="ball"></article>
+                                    </article>
+                                </section> -->
+    
+                                <!-- conversas sem CSS -->
+                                <!-- <div id="new-message">Mensagem nova</div> -->
+                                
+                                <!-- <div class="chat-box" id="chat-box">
+                                    <ul id="messages">
                                     <% messages.forEach(function(message) { %>
-                                    <li class="<%= message.username === username ? 'message-sent' : 'message-received' %>">
-                                        <% if (message.username !== username) { %>
-                                        <span class="username"><%= message.username %></span>
-                                        <% } %>
-                                        <span class="message"><%= message.message %></span>
-                                    </li>
-                                    <% }); %>
-                                </ul>
-                                </div>
-                          
-                           <!--  <section class="row other-msg">
-                                <article class="user-icon rounded-icon">
-                                    <img src="/imgs/client/user-icon.svg" alt="">
-                                </article>
-                                <article class="msg typing">
-                                    <article class="ball"></article>
-                                    <article class="ball"></article>
-                                    <article class="ball"></article>
-                                </article>
-                            </section> -->
+                                        <li class="<%= message.username === username ? 'message-sent' : 'message-received' %>">
+                                            <% if (message.username !== username) { %>
+                                                <span class="username"><%= message.username %></span>
+                                            <% } %>
+                                            <span class="message"><%= message.message %></span>
+                                        </li>
+                                    <% }) %>
+                                    </ul>
+                                </div> -->
+                            </section>
+                        </section>
+                        <section class="clip-popup">
+                            <ul>
+                                <!-- <li>
+                                    <article class="rounded-icon">
+                                        <img src="/imgs/shipper/icon-image.svg" alt="">
+                                    </article>
+                                    <span>Fotos e Vídeos</span>
+                                </li>
+                                <li>
+                                    <article class="rounded-icon">
+                                        <img src="/imgs/shipper/icon-camera.svg" alt="">
+                                    </article>
+                                    <span>Câmera</span>
+                                </li>
+                                <li>
+                                    <article class="rounded-icon">
+                                        <img src="/imgs/shipper/icon-document.svg" alt="">
+                                    </article>
+                                    <span>Documento</span>
+                                </li> -->
+                                <li>
+                                    <article class="rounded-icon confirm-ship">
+                                        <img src="/imgs/client/check-icon-1.svg" alt="">
+                                    </article>
+                                    <span>Confirmação de Entrega</span>
+                                </li>
+                            </ul>
                         </section>
                     </section>
-                    <section class="clip-popup">
-                        <ul>
-                            <li>
-                                <article class="rounded-icon">
-                                    <img src="/imgs/shipper/icon-image.svg" alt="">
-                                </article>
-                                <span>Fotos e Vídeos</span>
-                            </li>
-                            <li>
-                                <article class="rounded-icon">
-                                    <img src="/imgs/shipper/icon-camera.svg" alt="">
-                                </article>
-                                <span>Câmera</span>
-                            </li>
-                            <li>
-                                <article class="rounded-icon">
-                                    <img src="/imgs/shipper/icon-document.svg" alt="">
-                                </article>
-                                <span>Documento</span>
-                            </li>
-                            <li>
-                                <article class="rounded-icon confirm-ship">
-                                    <img src="/imgs/client/check-icon-1.svg" alt="">
-                                </article>
-                                <span>Confirmação de Entrega</span>
-                            </li>
-                           
-                        </ul>
+    
+                    <!-- chat sem CSS -->
+                    <!-- <form id="form" action="/chat" method="post">
+                        <input name="message" autocomplete="off" /><button class="cta">Send</button>
+                    </form> -->
+    
+                    <section class="chat-inputs">
+                        <textarea rows="1" placeholder="Digite sua mensagem aqui"></textarea>
+                        <section class="actions">
+                            <button class="clip rounded-icon">
+                                <img src="/imgs/client/clip-chat-icon.svg" alt="">
+                            </button>
+                            <button class="send rounded-icon">
+                                <img src="/imgs/client/send-chat-icon.svg" alt="">
+                            </button>
+                        </section>
                     </section>
                 </section>
+            </section>    
+        <% } %>
 
-                <form id="form" action="/chat" method="post">
-                    <input name="message" autocomplete="off" /><button class="cta">Send</button>
-                </form>
-
-
-               <!--  <section class="chat-inputs">
-                    <textarea rows="1" placeholder="Digite sua mensagem aqui"></textarea>
-                    <section class="actions">
-                        <button class="clip rounded-icon">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u208.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                        </button>
-                        <button class="send rounded-icon">
-                            <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_cliente__desktop_/u207.svg?pageId=a1cd8bfa-51f9-4251-8edd-b9adceed65b6" alt="">
-                        </button>
-                    </section>
-                </section> -->
-            </section>
-        </section>
     </main>
     <section class="notification-container"></section>
 
-
+    <%- include('../../partial/popup/report.ejs') %>
     
-    <% if (type=="1") { %>
-        <%- include('../../partial/popup/report.ejs') %>
+    <% if (type == "1") { %>
         <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
-
     <% } else { %>
-
-        <%- include('../../partial/popup/report.ejs') %>
         <%- include('../../partial/menu-burguer.ejs', { type: 'shipper' }) %>
-
     <% } %>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+
     <script src="/JS/burguer.js"></script>
     <script src="/JS/shipper/burguer-config.js"></script>
     <script src="/JS/shipper/textarea-resize.js"></script>
+
+    <!-- Envia mensagem -->
     <script src="/JS/shipper/send-msg.js"></script>
+    <!-- Envia mensagem de confirmação -->
     <script src="/JS/client/send-confirm.js"></script>
+    
     <script src="/JS/shipper/clip-popup.js"></script>
     <script src="/JS/shipper/report-popup.js"></script>
 
-    <script>
+    <!-- <script>
         const socket = io();
 
         function scrollToBottom() {
@@ -384,7 +250,7 @@
 
         window.onload = scrollToBottom;   
 
-    </script>
+    </script> -->
     
 </body>
 </html>
