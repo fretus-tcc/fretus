@@ -16,14 +16,11 @@ const chatController = {
 
         try {
             
-            const messages = await chatModel.getMessages()
-            
             // selecionando conversas do usuario
-            const conversas = await chatModel.findConversasById(tipo, userId)
+            const conversas = await chatModel.findConversasByUser(tipo, userId)
 
             // formatando datas da ultima mensagem da conversa
             conversas.forEach(conversa => {
-                // console.log(conversa.data_envio);
                 if (conversa.data_envio != null) {
                     conversa.data_envio = dayjs(conversa.data_envio).fromNow()
                 }
@@ -31,26 +28,27 @@ const chatController = {
             
             // verifica se conversa nao esta selecionada
             if (id_conversa == undefined) {
-                return res.render('pages/cliente-entregador/chat', { 
-                    autenticado: req.session.autenticado, type: tipo, conversas, id_conversa: null,
-                    messages, username, userId
+                return res.render('pages/cliente-entregador/chat', {
+                    autenticado: req.session.autenticado, type: tipo, conversas, id_conversa: null, id_destinatario: null,
+                    username, userId
                 })
             }
 
+            const id_destinatario = await chatModel.findDestinatarioConversa(tipo, id_conversa)
             const mensagens = await chatModel.findMensagensById(id_conversa)
-            // console.log(conversas)
 
             res.render('pages/cliente-entregador/chat', { 
-                autenticado: req.session.autenticado, type: tipo, conversas, id_conversa, mensagens,
-                messages, username, userId
+                autenticado: req.session.autenticado, type: tipo, conversas, id_conversa, id_destinatario, mensagens,
+                username, userId
             })
 
         } catch (error) {
+            console.log(error)
             res.json({ error })
         }
     },
 
-    postMessage: async (req, res) => {
+    /* postMessage: async (req, res) => {
         try {
             const message = req.body.message;
             const io = require('../../config/socket').getIO();
@@ -64,8 +62,8 @@ const chatController = {
         } catch (error) {
             res.status(500).send('Erro ao enviar mensagem.');
         }
-    }
+    } */
 
-};
+}
 
-module.exports = chatController;
+module.exports = chatController

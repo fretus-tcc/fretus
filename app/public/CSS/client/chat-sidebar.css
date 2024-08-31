@@ -92,12 +92,13 @@ main {
 .sidebar li {
     border-bottom: none;
     height: auto;
-    padding: 15px;
+    padding: 0;
     width: 100%;
 }
 
 .sidebar li > .chat-contact {
     width: 100%;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
 }

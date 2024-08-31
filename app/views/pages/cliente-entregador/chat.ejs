@@ -92,22 +92,6 @@
                                         <article class="msg"><%= mensagem.mensagem %></article>
                                     </section>
                                 <% }) %>
-    
-                                <!-- conversas sem CSS -->
-                                <!-- <div id="new-message">Mensagem nova</div> -->
-                                
-                                <!-- <div class="chat-box" id="chat-box">
-                                    <ul id="messages">
-                                    <% messages.forEach(function(message) { %>
-                                        <li class="<%= message.username === username ? 'message-sent' : 'message-received' %>">
-                                            <% if (message.username !== username) { %>
-                                                <span class="username"><%= message.username %></span>
-                                            <% } %>
-                                            <span class="message"><%= message.message %></span>
-                                        </li>
-                                    <% }) %>
-                                    </ul>
-                                </div> -->
                             </section>
                         </section>
                         <section class="clip-popup">
@@ -140,11 +124,6 @@
                         </section>
                     </section>
     
-                    <!-- chat sem CSS -->
-                    <!-- <form id="form" action="/chat" method="post">
-                        <input name="message" autocomplete="off" /><button class="cta">Send</button>
-                    </form> -->
-    
                     <section class="chat-inputs">
                         <textarea rows="1" placeholder="Digite sua mensagem aqui"></textarea>
                         <section class="actions">
@@ -161,6 +140,7 @@
         <% } %>
 
     </main>
+
     <section class="notification-container"></section>
 
     <%- include('../../partial/popup/report.ejs') %>
@@ -172,14 +152,22 @@
     <% } %>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js" integrity="sha512-jGh38w63cHRzfBHtyKgEMMkJswUFXDA3YXrDjaE8ptzxV5DDkLDUDjtGUy5tmDkOXHWsItKfFjocaEtj1WuVnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
 
     <script src="/JS/burguer.js"></script>
     <script src="/JS/shipper/burguer-config.js"></script>
     <script src="/JS/shipper/textarea-resize.js"></script>
 
     <!-- Envia mensagem -->
-    <script src="/JS/shipper/send-msg.js"></script>
+    <% if (id_conversa != null) { %>  
+        <script>
+            const id_conversa = '<%= id_conversa %>'
+            const id_usuario = '<%= autenticado.id %>'
+            const id_destinatario = '<%= id_destinatario %>'
+        </script>
+        <script src="/JS/shipper/send-msg.js"></script>
+    <% } %>
+
     <!-- Envia mensagem de confirmação -->
     <script src="/JS/client/send-confirm.js"></script>
     

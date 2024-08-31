@@ -11,7 +11,7 @@ const ChatModel = {
         }
     }, */
 
-    getMessages: async () => {
+    /* getMessages: async () => {
         const [rows] = await pool.query('SELECT u.nome_usuario, m.message FROM chat m JOIN usuario u ON m.user_id = u.id_usuario ORDER BY m.created_at ASC');
         return rows;
     },
@@ -21,9 +21,9 @@ const ChatModel = {
             throw new Error('User ID and message are required');
         }
         await pool.query('INSERT INTO chat (user_id, message, tipo_mensagem) VALUES (?, ?, 1)', [userId, message]);
-    },
+    }, */
 
-    findConversasById: async (tipo, id) => {
+    findConversasByUser: async (tipo, id) => {
         try {
             const [result] = await pool.query(
                 'SELECT u.nome_usuario, u.foto_de_perfil, c.*, m.mensagem, m.data_envio FROM conversas AS c ' +
@@ -41,10 +41,29 @@ const ChatModel = {
         }
     },
 
+    findDestinatarioConversa: async (tipo, id_conversa) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT IF(? = 2, id_cliente, id_entregador) AS id_destinatario ' +
+                'FROM conversas WHERE id_conversa = 1;', [tipo, id_conversa])
+            return result[0].id_destinatario
+        } catch (error) {
+            return error
+        }
+    },
+
     findMensagensById: async (id_conversa) => {
         try {
             const [result] = await pool.query('SELECT * FROM mensagens WHERE id_conversa = ?', [id_conversa])
             return result
+        } catch (error) {
+            return error
+        }
+    },
+
+    insertMensagem: async (data) => {
+        try {
+            await pool.query('INSERT INTO mensagens SET ?', [data])
         } catch (error) {
             return error
         }
