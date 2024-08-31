@@ -1,5 +1,13 @@
 const chatModel = require('../models/chatModel');
 
+const dayjs = require('dayjs')
+const relativeTime = require('dayjs/plugin/relativeTime')
+const locale = require('dayjs/locale/pt-br') // Importa o locale pt-BR
+
+// Extende dayjs com plugins
+dayjs.extend(relativeTime)
+dayjs.locale(locale) // Define o locale como pt-BR
+
 const chatController = {
 
     getChat: async (req, res) => {
@@ -12,6 +20,11 @@ const chatController = {
             
             // selecionando conversas do usuario
             const conversas = await chatModel.findConversasById(tipo, userId)
+
+            // formatando datas da ultima mensagem da conversa
+            conversas.forEach(conversa => {
+                conversa.data_envio = dayjs(conversa.data_envio).fromNow()
+            })
             
             // verifica se conversa nao esta selecionada
             if (id_conversa == undefined) {
