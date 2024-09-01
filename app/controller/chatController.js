@@ -29,7 +29,7 @@ const chatController = {
             // verifica se conversa nao esta selecionada
             if (id_conversa == undefined) {
                 return res.render('pages/cliente-entregador/chat', {
-                    autenticado: req.session.autenticado, type: tipo, conversas, id_conversa: null, id_destinatario: null,
+                    autenticado: req.session.autenticado, type: tipo, conversas, id_conversa: null, id_destinatario: null, mensagens: [],
                     username, userId
                 })
             }

@@ -36,8 +36,7 @@
                         </ul>
                     </section>
                 </section>
-        
-
+                
                 <ul class="contact-list">
                     <% conversas.forEach(item => { %>
                         <li data-id-conversa="<%= item.id_conversa %>" title="<%= item.mensagem %>" class="<%= item.id_conversa == id_conversa ? 'active' : '' %>">
@@ -65,7 +64,7 @@
             </section>
         </section>
 
-        <% if (id_conversa != null) { %>
+        <% if (id_conversa != null && conversas.find(item => item.id_conversa == id_conversa) != undefined) { %>
             <section class="chat">
                 <article class="sidebar-burguer">
                     <img src="/imgs/burguer-config-icon.png" alt="">
@@ -75,7 +74,7 @@
     
                     <section class="chat-header">
                         <article class="info">
-                            <h1><%= conversas.find(item => item.id_conversa == id_conversa).nome_usuario %></h1>
+                            <h1><%= conversas.find(item => item.id_conversa == id_conversa)?.nome_usuario %></h1>
                             <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
                         </article>
                         <!-- <article class="action">
@@ -147,6 +146,19 @@
                     </section>
                 </section>
             </section>    
+        <% } else { %>
+            <section class="error-container">
+                <% if (conversas.length == 0) { %>
+                    <img class="error-img" src="/imgs/shipper/error-icon.png" alt="">
+                    <p class="error-msg">Por enquanto, você não tem nenhuma conversa criada</p>  
+                <% } else if (id_conversa != null && conversas.find(item => item.id_conversa == id_conversa) == undefined) { %>
+                    <img class="error-img" src="/imgs/shipper/error-icon.png" alt="">
+                    <p class="error-msg">Conversa não encontrada</p>
+                <% } else { %>
+                    <img class="error-img" src="/imgs/home/client/card-icon-2.svg" alt="">
+                    <p class="error-msg">Selecione a conversa, e acerte os últimos detalhes da entrega</p>
+                <% } %>
+            </section>
         <% } %>
 
     </main>
