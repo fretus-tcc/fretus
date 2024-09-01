@@ -26,11 +26,21 @@
                         <img src="/imgs/home/client/card-icon-1.svg" alt="">
                     </article>
                     <input placeholder="Buscar" type="text">
+                    <section class="suggestions">
+                        <ul class="suggestions-options">
+                            <% conversas.forEach(item => { %>
+                                <li>
+                                    <a href="/<%= type == '1' ? 'cliente' : 'entregador' %>/chat/<%= item.id_conversa %>"><%= item.nome_usuario %></a>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </section>
                 </section>
+        
 
                 <ul class="contact-list">
                     <% conversas.forEach(item => { %>
-                        <li data-id-conversa="<%= item.id_conversa %>">
+                        <li data-id-conversa="<%= item.id_conversa %>" title="<%= item.mensagem %>">
                             <a href="/<%= type == '1' ? 'cliente' : 'entregador' %>/chat/<%= item.id_conversa %>" class="chat-contact">
                                 <section class="contact-info">
                                     <article class="photo">
@@ -163,6 +173,8 @@
         const id_usuario = '<%= autenticado?.id %>'
         const id_destinatario = '<%= id_destinatario ?? null %>'
     </script>
+
+    <script src="/JS/search-quotes.js"></script>
     <!-- Configura o socket, e atualiza a sidebar -->
     <script src="/JS/shipper/change-sidebar.js"></script>
 

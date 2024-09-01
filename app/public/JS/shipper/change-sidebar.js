@@ -11,6 +11,7 @@ function changeSidebar(message) {
     const msg = contact.querySelector('.contact-msg > .msg-text')
     const sent = contact.querySelector('.contact-time > .time-text')
 
+    contact.title = message.msg
     msg.textContent = message.msg
     sent.textContent = 'há poucos segundos'
 
