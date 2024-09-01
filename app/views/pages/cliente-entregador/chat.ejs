@@ -30,7 +30,7 @@
 
                 <ul class="contact-list">
                     <% conversas.forEach(item => { %>
-                        <li>
+                        <li data-id-conversa="<%= item.id_conversa %>">
                             <a href="/<%= type == '1' ? 'cliente' : 'entregador' %>/chat/<%= item.id_conversa %>" class="chat-contact">
                                 <section class="contact-info">
                                     <article class="photo">
@@ -42,11 +42,11 @@
                                     </article>
                                     <article class="contact-msg">
                                         <h1><%= item.nome_usuario %></h1>
-                                        <p><%= item.mensagem %></p>
+                                        <p class="msg-text"><%= item.mensagem %></p>
                                     </article>
                                 </section>
                                 <article class="contact-time">
-                                    <p><%= item.data_envio %></p>
+                                    <p class="time-text"><%= item.data_envio %></p>
                                 </article>
                             </a>
                         </li>
@@ -158,16 +158,17 @@
     <script src="/JS/shipper/burguer-config.js"></script>
     <script src="/JS/shipper/textarea-resize.js"></script>
 
-    <!-- Envia mensagem -->
-    <% if (id_conversa != null) { %>  
-        <script>
-            const id_conversa = '<%= id_conversa %>'
-            const id_usuario = '<%= autenticado.id %>'
-            const id_destinatario = '<%= id_destinatario %>'
-        </script>
-        <script src="/JS/shipper/send-msg.js"></script>
-    <% } %>
+    <script>
+        const id_conversa = '<%= id_conversa ?? null %>'
+        const id_usuario = '<%= autenticado?.id %>'
+        const id_destinatario = '<%= id_destinatario ?? null %>'
+    </script>
+    <!-- Configura o socket, e atualiza a sidebar -->
+    <script src="/JS/shipper/change-sidebar.js"></script>
 
+    <!-- Envia mensagem -->
+    <script src="/JS/shipper/send-msg.js"></script>
+    
     <!-- Envia mensagem de confirmação -->
     <script src="/JS/client/send-confirm.js"></script>
     

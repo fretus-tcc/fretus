@@ -34,7 +34,8 @@ const ChatModel = {
                 '	GROUP BY id_conversa ' +
                 ') lm ON c.id_conversa = lm.id_conversa ' +
                 'LEFT JOIN mensagens m ON m.id_conversa = c.id_conversa AND m.data_envio = lm.last_message_time ' +
-                'WHERE c.id_cliente = ? OR c.id_entregador = ?', [tipo, id, id])
+                'WHERE c.id_cliente = ? OR c.id_entregador = ? ' +
+                'ORDER BY m.data_envio DESC', [tipo, id, id])
             return result
         } catch (error) {
             return error
@@ -45,7 +46,7 @@ const ChatModel = {
         try {
             const [result] = await pool.query(
                 'SELECT IF(? = 2, id_cliente, id_entregador) AS id_destinatario ' +
-                'FROM conversas WHERE id_conversa = 1;', [tipo, id_conversa])
+                'FROM conversas WHERE id_conversa = ?', [tipo, id_conversa])
             return result[0].id_destinatario
         } catch (error) {
             return error

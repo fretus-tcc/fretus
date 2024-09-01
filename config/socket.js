@@ -28,7 +28,7 @@ module.exports = {
                     const socket_destinatario = chatUsers.find(user => user.id_usuario == id_destinatario)?.socketId
 
                     if (socket_destinatario) {
-                        io.to(socket_destinatario).emit('receive message', { id_conversa, id_usuario, mensagem })
+                        io.to(socket_destinatario).emit('receive message', { id_conversa, id_usuario, msg: mensagem })
                     }
                     
                 } catch (error) {

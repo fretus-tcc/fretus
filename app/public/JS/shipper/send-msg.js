@@ -2,9 +2,6 @@ const send = document.querySelector('.send')
 const chat = document.querySelector('.msgs-content')
 const chatContainer = document.querySelector('.chat-msgs')
 
-const socket = io()
-socket.emit('connect new user', { id_usuario })
-
 scrollBottom()
 send.addEventListener('click', sendMsg)
 
@@ -25,6 +22,7 @@ function sendMsg() {
         textarea.style = 'height: 24px;'
 
         socket.emit('chat message', { id_conversa, id_usuario, id_destinatario, msg })
+        changeSidebar({ id_conversa, id_usuario, id_destinatario, msg })
     }
 }
 
@@ -32,7 +30,7 @@ function sendMsg() {
 socket.on('receive message', (data) => {
     // Verifica se a mensagem pertence a conversa
     if (data.id_conversa == id_conversa) {
-        createMsg(data.mensagem, 'other-msg')
+        createMsg(data.msg, 'other-msg')
         scrollBottom()
     }
 })
