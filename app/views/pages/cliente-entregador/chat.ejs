@@ -40,7 +40,7 @@
 
                 <ul class="contact-list">
                     <% conversas.forEach(item => { %>
-                        <li data-id-conversa="<%= item.id_conversa %>" title="<%= item.mensagem %>">
+                        <li data-id-conversa="<%= item.id_conversa %>" title="<%= item.mensagem %>" class="<%= item.id_conversa == id_conversa ? 'active' : '' %>">
                             <a href="/<%= type == '1' ? 'cliente' : 'entregador' %>/chat/<%= item.id_conversa %>" class="chat-contact">
                                 <section class="contact-info">
                                     <article class="photo">
