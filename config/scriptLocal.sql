@@ -643,6 +643,8 @@ CREATE TABLE IF NOT EXISTS FRETUS.mensagens (
   FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
+ALTER TABLE mensagens CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+
 INSERT INTO conversas (id_cliente, id_entregador) VALUES (2, 3);
 INSERT INTO conversas (id_cliente, id_entregador) VALUES (2, 4);
 INSERT INTO mensagens (id_conversa, id_usuario, mensagem) VALUES (1, 3, 'Olá!');
