@@ -182,6 +182,7 @@
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/JS/burguer.js"></script>
     <!-- <script src="/JS/client/vehicles-carousel.js"></script> -->
     <script src="/JS/client/geolocation.js"></script>
@@ -193,5 +194,14 @@
     <script src="/JS/client/agendamento-validation.js"></script>
     <!-- envia formulario -->
     <script src="/JS/client/carregamento.js"></script>
+    <% if (loading) { %>
+        <script>
+            const socket = io()
+            socket.emit('connect new client', { id_usuario: '<%= autenticado.id %>' })
+            const id_pedido = '<%= id_pedido %>'
+        </script>
+        <!-- redireciona quando entregador aceita pedido -->
+        <script src="/JS/client/pedido-aceito.js"></script>
+    <% } %>
 </body>
 </html>

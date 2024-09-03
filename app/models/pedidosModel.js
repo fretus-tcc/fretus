@@ -123,7 +123,8 @@ const pedidosModel = {
 
     insert: async (data) => {
         try {
-            await pool.query('INSERT INTO pedidos SET ?', [data])
+            const result = await pool.query('INSERT INTO pedidos SET ?', [data])
+            return result
         } catch (error) {
             console.log(error)
             return error

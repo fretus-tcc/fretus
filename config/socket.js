@@ -36,6 +36,14 @@ module.exports = {
                 }
             })
 
+            socket.on('connect new client', (data) => {
+                socket.join(data.id_usuario)
+            })
+
+            socket.on('pedido aceito', (data) => {
+                io.emit('pedido recebido', { id_pedido: data.id_pedido })
+            })
+
             /*  socket.on('add person', async (data) => {
                const { userId, friendIdentifier } = data;
                try {

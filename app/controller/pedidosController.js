@@ -2,8 +2,8 @@ const pedidosModel = require('../models/pedidosModel')
 const favoritadosModel = require('../models/favoritadosModel')
 const admCadastroModel = require('../models/admCadastroModel')
 const pagamentoModel = require('../models/pagamentoModel')
-
 const { notifyMessages, calcularPrecoEntrega } = require('../util/Funcao')
+
 const fetch = require('node-fetch')
 const https = require('https')
 const { body, validationResult } = require('express-validator')
@@ -88,7 +88,7 @@ const pedidosController = {
         const erros = validationResult(req)
         if (!erros.isEmpty()) {
             console.log(erros.mapped());
-            return res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: erros.mapped(), msgs: [], dados: req.body, preco: null, loading: false })
+            return res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: erros.mapped(), msgs: [], dados: req.body, preco: null, loading: false, id_pedido: null })
         }
 
         try {
@@ -120,9 +120,10 @@ const pedidosController = {
                 cod_carga: req.body.carga,
                 veiculo_pedido: req.body.veiculo,
             }
-            await pedidosModel.insert(data)
-
-            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs: [], dados: req.body, preco: preco_pedido, loading: true })
+            const [result] = await pedidosModel.insert(data)
+            const id_pedido = result.insertId
+            
+            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs: [], dados: req.body, preco: preco_pedido, loading: true, id_pedido })
         } catch (error) {
             console.log(error)
             res.json({ error })
@@ -226,8 +227,7 @@ const pedidosController = {
 
     /* Entregas Solicitadas - POST */
     insertShipperReply: async (req, res) => {
-        const { id } = req.params
-        const { resposta } = req.body
+        const { id, resposta } = req.params
         
         try {
             if (resposta.toUpperCase() != 'ACEITO' && resposta.toUpperCase() != 'NEGADO') {

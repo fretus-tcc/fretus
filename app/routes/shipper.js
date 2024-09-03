@@ -45,7 +45,7 @@ router.get('/entregas-solicitadas', verificarUsuAutorizado([2], 'pages/restrito'
     pedidosController.listPedidos(req, res)
 })
 
-router.post('/entregas-solicitadas/:id', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
+router.post('/entregas-solicitadas/:id/:resposta', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     pedidosController.insertShipperReply(req, res)
 })
 
