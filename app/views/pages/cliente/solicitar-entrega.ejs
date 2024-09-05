@@ -79,42 +79,46 @@
                             <label for="s">
                                 <article class="card">
                                     <section class="box-card-car">
-                                        <img src="/imgs/client/small-icon.svg" alt="">
-                                        <h2>Pequena</h2>
+                                        <section class="box-card-img">
+                                            <img src="/imgs/client/small-icon.svg" alt="">
+                                        </section>
+                                        <section class="carga_box">
+                                            <h2 style="margin-bottom: 8px;">Pequena</h2>   
+                                                <span><b>Peso:</b> até 11,5 Kg</span>
+                                                <span><b>Dimensões:</b> até 20x10cm</span>
+                                        </section>
                                     </section>
-                                    <p class="carga_box">
-                                        <span><b>Peso:</b> até 11,5 Kg</span>
-                                        <span><b>Dimensões:</b> até 20x10cm</span>
-                                    </p>
                                 </article>
                             </label>
                             <input type="radio" name="carga" value="M" id="m" <%= dados?.carga == 'M' ? 'checked' : '' %>>
                             <label for="m">
                                 <article class="card">
                                     <section class="box-card-car">
-                                        <img src="/imgs/client/medium-icon.svg" alt="">
-                                        <h2>Média</h2>
+                                        <section class="box-card-img">
+                                            <img src="/imgs/client/medium-icon.svg" alt="">
+                                        </section>
+                                        
+                                        <section class="carga_box">
+                                            <h2 style="margin-bottom: 8px;">Média</h2> 
+                                                <span><b>Peso:</b>11,5 Kg até 80 Kg</span>
+                                                <span><b>Dimensões:</b> de 20x10cm até 60x70cm</span>
+                                        </section>
                                     </section>
-                                    <p class="carga_box">
-                                        <span><b>Peso:</b>11,5 Kg até 80 Kg</span>
-                                        <span><b>Dimensões:</b> de 20x10cm até 60x70cm</span>
-                                    </p>
-
                                 </article>
                             </label>
                             <input type="radio" name="carga" value="G" id="l" <%= dados?.carga == 'G' ? 'checked' : '' %>>
                             <label for="l">
                                 <article class="card">
                                     <section class="box-card-car">
-                                        <img src="/imgs/client/large-icon.svg" alt="">
-                                        <h2>Grande</h2>
-                                    </section>
-                                    <p class="carga_box">
-                                        <span><b>Peso:</b> 80 Kg em diante</span>
-                                        <span><b>Dimensões:</b> 60x70cm em diante</span>
-                                    </p>
-
-
+                                        <section class="box-card-img">
+                                            <img src="/imgs/client/large-icon.svg" alt="">
+                                        </section>
+                                        <section class="carga_box">
+                                            <h2 style="margin-bottom: 8px;">Grande</h2>
+                                            <span><b>Peso:</b> 80 Kg em diante</span>
+                                            <span><b>Dimensões:</b> 60x70cm em diante</span>
+                                        </section>
+                                </section>
                                 </article>
                             </label>
                         </div>
@@ -126,28 +130,28 @@
                         <section class="content">
                             <input data-index="0" required type="radio" name="veiculo" value="moto" id="bike" <%= dados?.veiculo == 'moto' ? 'checked' : '' %>>
                             <label for="bike">
-                                <article class="card">
+                                <article class="card flex">
                                     <img src="/imgs/client/Solicitar/icons8-motocicleta-50.png" alt="">
                                     <h2>Moto</h2>
                                 </article>
                             </label>
                             <input data-index="1" type="radio" name="veiculo" value="carro" id="car" <%= dados?.veiculo == 'carro' ? 'checked' : '' %>>
                             <label for="car">
-                                <article class="card">
+                                <article class="card flex">
                                     <img src="/imgs/client/Solicitar/icons8-carro-50.png" alt="">
                                     <h2>Carro</h2>
                                 </article>
                             </label>
                             <input data-index="2" type="radio" name="veiculo" value="van" id="van" <%= dados?.veiculo == 'van' ? 'checked' : '' %>>
                             <label for="van">
-                                <article class="card">
+                                <article class="card flex">
                                     <img src="/imgs/client/Solicitar/icons8-van-50.png" alt="">
                                     <h2>Van</h2>
                                 </article>
                             </label>
                             <input data-index="3" type="radio" name="veiculo" value="caminhao" id="truck" <%= dados?.veiculo == 'caminhao' ? 'checked' : '' %>>
                             <label for="truck">
-                                <article class="card">
+                                <article class="card flex">
                                     <img src="/imgs/client/Solicitar/icons8-semi-truck-side-view-50.png " alt="">
                                     <h2>Caminhão</h2>
                                 </article>
