@@ -29,6 +29,11 @@ const pagamentoController = {
                 return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido passou do prazo de pagamento' })
             }
 
+            // Verifica se pedido ja foi pago
+            if (pedido.estado_pagamento == 'aprovado') {
+                return res.redirect(`/cliente/feedback-pagamento?status=approved&external_reference=${pedido.id_preferencia_mp}`)
+            }
+
             res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido, erro_pedido: null })
         } catch (error) {
             console.log(error);
