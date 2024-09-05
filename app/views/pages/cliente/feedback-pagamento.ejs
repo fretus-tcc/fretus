@@ -14,9 +14,22 @@
 
     <div class="payment-feedback">
         <% if (approved) { %>
-            <h1>Pagamento Aprovado</h1>
+            <img class="feedback-img" src="/imgs/client/check-round-icon.svg" alt="">
+            <h1 class="feedback-title">Pagamento Aprovado</h1>
+            <p class="feedback-text">
+                Parabéns, seu pagamento foi efetuado com sucesso. Agora você pode conversar com o entregador, visualizar o status da entrega em tempo real, e muito mais
+            </p>
         <% } else { %>
-            <h1>Algo deu errado no pagamento</h1>
+            <img class="feedback-img" src="/imgs/client/error-round-icon.svg" alt="">
+            <h1 class="feedback-title">Algo deu errado</h1>
+            <% if (error) { %>
+                <p class="feedback-text"><%= error %></p>
+            <% } else { %>
+                <p class="feedback-text">
+                    Não foi possível efetuar seu pagamento. <br>
+                    <a class="feedback-link" href="/cliente/pagamento/<%= pedido.id_pedido %>">Tente novamente.</a>
+                </p>
+            <% } %>
         <% } %>
     </div>
 

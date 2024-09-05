@@ -64,6 +64,15 @@ const pagamentoModel = {
         }
     }, */
 
+    findByUUID: async (uuid) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM pagamentos WHERE id_preferencia_mp = ?', [uuid])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO pagamentos SET ?', [data])

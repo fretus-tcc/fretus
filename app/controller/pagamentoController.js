@@ -49,13 +49,19 @@ const pagamentoController = {
 
     showFeedback: async (req, res) => {
         const { status, external_reference } = req.query
+        const [pedido] = await pagamentoModel.findByUUID(external_reference)
+
+        // Verificando se pedido foi encontrado
+        if (pedido == null) {
+            return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, error: 'Pedido não encontrado', approved: null, pedido: null })
+        }
 
         if (status == 'approved') {
             await pagamentoModel.updateByUUID({ estado_pagamento: 'aprovado' }, external_reference)
-            return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, approved: true })
+            return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, error: null, approved: true, pedido })
         }
         
-        res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, approved: false })
+        res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, error: null, approved: false, pedido })
     },
 }
 

@@ -2,6 +2,14 @@
     color: #333;
     margin: 0 auto;
     margin-top: 60px;
-    width: min(400px, 90%);
+    width: min(450px, 90%);
     text-align: center;
+}
+
+.feedback-title {
+    margin-bottom: 12px;
+}
+
+.feedback-link {
+    color: var(--orange);
 }
