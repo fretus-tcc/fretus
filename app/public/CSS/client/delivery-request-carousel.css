@@ -81,6 +81,15 @@
 .card img {
     width: 45px;
 }
+.box-card-img{
+    padding: 14px;
+    border-radius: 50%;
+    border: 1.8px solid orange;
+}
+.flex-indicator{
+    display: flex;
+    
+}
 
 @media (max-width: 550px) {
     .vehicles-container .content>label {

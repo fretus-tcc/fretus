@@ -73,7 +73,12 @@
                     </section>
                     
                     <section class="weight-container">
-                        <h2>Carga</h2>
+                        <section class="flex-indicator">
+                            <h2>Carga</h2> 
+                            <section>
+                                <a class="indicator" href="/ajuda/informacoes-detalhadas-sobre-pesos-e-dimensoes-das-cargas">i</a>
+                            </section>
+                        </section>
                         <div class="content">
                             <input required type="radio" name="carga" value="P" id="s" <%= dados?.carga == 'P' ? 'checked' : '' %>>
                             <label for="s">
@@ -83,7 +88,7 @@
                                             <img src="/imgs/client/small-icon.svg" alt="">
                                         </section>
                                         <section class="carga_box">
-                                            <h2 style="margin-bottom: 8px;">Pequena</h2>   
+                                            <h2 style="margin-bottom: 4px;">Pequena</h2>   
                                                 <span><b>Peso:</b> até 11,5 Kg</span>
                                                 <span><b>Dimensões:</b> até 20x10cm</span>
                                         </section>
@@ -99,7 +104,7 @@
                                         </section>
                                         
                                         <section class="carga_box">
-                                            <h2 style="margin-bottom: 8px;">Média</h2> 
+                                            <h2 style="margin-bottom: 4px;">Média</h2> 
                                                 <span><b>Peso:</b>11,5 Kg até 80 Kg</span>
                                                 <span><b>Dimensões:</b> de 20x10cm até 60x70cm</span>
                                         </section>
@@ -114,7 +119,7 @@
                                             <img src="/imgs/client/large-icon.svg" alt="">
                                         </section>
                                         <section class="carga_box">
-                                            <h2 style="margin-bottom: 8px;">Grande</h2>
+                                            <h2 style="margin-bottom: 4px;">Grande</h2>
                                             <span><b>Peso:</b> 80 Kg em diante</span>
                                             <span><b>Dimensões:</b> 60x70cm em diante</span>
                                         </section>
