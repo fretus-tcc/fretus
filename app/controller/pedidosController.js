@@ -291,7 +291,9 @@ const pedidosController = {
                 ? null 
                 : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
 
-            res.render('pages/cliente-entregador/historico-completo', { autenticado: req.session.autenticado, isClient: true, pedidos, paginador })
+            const msgs = notifyMessages(req, res)
+
+            res.render('pages/cliente-entregador/historico-completo', { autenticado: req.session.autenticado, isClient: true, pedidos, paginador, msgs })
         } catch (error) {
             console.log(error)
             return res.json({ error })

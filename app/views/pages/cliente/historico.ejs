@@ -85,7 +85,15 @@
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
                                     <img class="location-call" src="/imgs/client/location-icon.svg" alt="">
                                     <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
-                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    <form action="/cliente/favoritar-desfavoritar/<%= pedido?.id_entregador %>" method="POST">
+                                        <button class="accept-btn">
+                                            <% if (pedido?.id_favoritou == null) { %>
+                                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                            <% } else { %>
+                                                <img class="fav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                                            <% } %>
+                                        </button>
+                                    </form>
                                     <img class="rate" src="/imgs/client/star-icon.svg" alt="">
                                 <% } else if (pedido.id_entregador) { %>
                                     <a href="/cliente/pagamento/<%= pedido.id_pedido %>">

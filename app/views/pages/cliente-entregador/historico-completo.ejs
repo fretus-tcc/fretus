@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/CSS/shipper/history.css">
     <link rel="stylesheet" href="/CSS/shipper/requests.css">
     <link rel="stylesheet" href="/CSS/shipper/empty-alert.css">
+    <link rel="stylesheet" href="/CSS/client/shipper-carousel.css">
     <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
     <link rel="stylesheet" href="/CSS/client/rate-popup.css">
     <link rel="stylesheet" href="/CSS/client/report-popup.css">
@@ -18,11 +19,24 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'/>
+
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
 
     <%- include('../../partial/header-client-shipper.ejs', { isClient }) %>
+
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
 
     <main>
         <section class="history-header">
@@ -66,7 +80,15 @@
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
                                     <img class="location-call" src="/imgs/client/location-icon.svg" alt="">
                                     <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
-                                    <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                    <form action="/cliente/favoritar-desfavoritar/<%= pedido?.id_entregador %>" method="POST">
+                                        <button class="accept-btn">
+                                            <% if (pedido?.id_favoritou == null) { %>
+                                                <img class="fav-call" src="/imgs/client/fav-icon.svg" alt="">
+                                            <% } else { %>
+                                                <img class="fav-call" src="/imgs/client/unfav-icon.svg" alt="">
+                                            <% } %>
+                                        </button>
+                                    </form>
                                     <img class="rate" src="/imgs/client/star-icon.svg" alt="">
                                 <% } else if (pedido.id_entregador) { %>
                                     <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
