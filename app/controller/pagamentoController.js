@@ -1,5 +1,6 @@
 const pedidosModel = require('../models/pedidosModel')
 const pagamentoModel = require('../models/pagamentoModel')
+const chatModel = require('../models/chatModel')
 
 const pagamentoController = {
 
@@ -63,6 +64,7 @@ const pagamentoController = {
 
         if (status == 'approved') {
             await pagamentoModel.updateByUUID({ estado_pagamento: 'aprovado' }, external_reference)
+            await chatModel.insertConversa({ id_cliente: pedido.id_cliente, id_entregador: pedido.id_entregador })
             return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, error: null, approved: true, pedido })
         }
         

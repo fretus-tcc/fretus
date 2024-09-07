@@ -66,9 +66,14 @@ const pagamentoModel = {
 
     findByUUID: async (uuid) => {
         try {
-            const [result] = await pool.query('SELECT * FROM pagamentos WHERE id_preferencia_mp = ?', [uuid])
+            const [result] = await pool.query(
+                'SELECT * FROM pagamentos AS pg ' +
+                'INNER JOIN pedidos AS p ' +
+                'ON p.id_pedido = pg.id_pedido ' +
+                'WHERE id_preferencia_mp = ?', [uuid])
             return result
         } catch (error) {
+            console.log(error)
             return error
         }
     },

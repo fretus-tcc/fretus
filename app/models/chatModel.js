@@ -23,6 +23,14 @@ const ChatModel = {
         await pool.query('INSERT INTO chat (user_id, message, tipo_mensagem) VALUES (?, ?, 1)', [userId, message]);
     }, */
 
+    insertConversa: async (data) => {
+        try {
+            await pool.query('INSERT INTO conversas SET ?', [data])
+        } catch (error) {
+            return error
+        }
+    },
+
     findConversasByUser: async (tipo, id) => {
         try {
             const [result] = await pool.query(
