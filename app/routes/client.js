@@ -35,7 +35,7 @@ router.post('/favoritar-desfavoritar/:id', verificarUsuAutorizado([1], 'pages/re
     favoritadosController.toggleFavoritados(req, res)
 })
 
-router.post('/avaliacoes/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+router.post('/avaliacoes/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), avaliacoesController.validation, function (req, res) {
     avaliacoesController.createAvaliacao(req, res)
 })
 

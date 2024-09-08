@@ -4,22 +4,34 @@ const { notifyMessages } = require('../util/Funcao')
 const { body, validationResult } = require('express-validator')
 
 const avaliacoesController = {
-    // validation: [
-    //     body('titulo')
-    //         .notEmpty().withMessage('Campo não preenchido')
-    //         .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
-    //         .custom(async (value, { req }) => {
-    //             const existingTitle = await quotesModel.repeatedTitle(value, req.params.id)
-    //             if (existingTitle) {
-    //                 throw new Error('Título já utilizado!')
-    //             }
-    //         }),
-    //     body('conteudo').notEmpty().withMessage('Campo não preenchido')
-    // ],
+    validation: [
+        body('avaliacao')
+            .notEmpty()
+            .withMessage('Campo não preenchido')
+            .bail()
+            .isLength({ min: 3, max: 200 })
+            .withMessage('Campo deve ter no entre 3 e 200 caracteres')
+            .bail()
+            .custom(async (value, { req }) => {
+                const { id_pedido } = req.params
+                const avaliacao = await avaliacoesModel.findByIdPedido(id_pedido)
+                
+                if (avaliacao.length != 0) {
+                    throw new Error('Pedido já possui avaliação enviada')
+                }
+
+                return true
+            }),
+    ],
 
     createAvaliacao: async (req, res) => {
         const { id_pedido } = req.params
         const { avaliacao } = req.body
+
+        const erros = validationResult(req)
+        if (!erros.isEmpty()) {
+            return res.json({ erros: erros.mapped(), success: false })
+        }
 
         try {
 
@@ -32,8 +44,7 @@ const avaliacoesController = {
                 feedback_avaliacao: avaliacao
             }
             await avaliacoesModel.insert(data)
-            req.flash('success', 'Avaliação enviada ; Avaliação enviada com sucesso')
-            res.redirect('back')
+            res.json({ erros: false, success: true })
 
         } catch (error) {
             console.log(error)

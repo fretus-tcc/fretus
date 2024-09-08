@@ -32,12 +32,19 @@
     background-color: var(--orange);
 }
 
+.rate-field.error {
+    border-color: red;
+}
+
 .popup span.error-container {
     display: none;
 }
 
-.popup .error-container.error {
+.popup .error-container.show {
     display: block;
     color: red;
-    font-weight: 700;
+}
+
+.sn-notifications-container {
+    z-index: 100000000 !important;
 }

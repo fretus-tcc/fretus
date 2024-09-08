@@ -90,7 +90,7 @@
                                         </button>
                                     </form>
                                     <% if (pedido?.id_avaliacao == null) { %>
-                                        <img class="rate-call" src="/imgs/client/star-icon.svg" alt="">
+                                        <img class="rate-call" src="/imgs/client/star-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>">
                                     <% } %>
                                 <% } else if (pedido.id_entregador) { %>
                                     <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
@@ -143,11 +143,11 @@
     <!-- Popup's -->
     <% if (pedidos.length > 0) { %>
         <% pedidos.forEach(pedido => { %>
-            <%- include('../../partial/popup/rate.ejs', { pedido }) %>
             <%- include('../../partial/popup/info.ejs', { pedido }) %>
         <% }) %>
     <% } %>
-    
+            
+    <%- include('../../partial/popup/rate.ejs') %>
     <%- include('../../partial/popup/location.ejs') %>
     <%- include('../../partial/popup/report.ejs') %>
     <%- include('../../partial/menu-burguer.ejs', { type: isClient ? 'client' : 'shipper' }) %>
