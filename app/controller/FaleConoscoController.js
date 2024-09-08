@@ -19,15 +19,16 @@ const FaleConoscoControl = {
             }
             try {
                 await FaleConoscoModel.createFaleconosco(req.body);
-
-                res.render(
-                    "pages/index",
-                    {
-                        autenticado: req.session.autenticado, pagina: "home", dadosNotificacao: {
-                            titulo: "Enviado", mensagem: "Mensagem enviada com sucesso", tipo: "success"
-                        }
-                    });
-
+                
+                req.session.dadosNotificacao = {
+                    titulo: "Enviado",
+                    mensagem: "Mensagem enviada com sucesso",
+                    tipo: "success"
+                };
+                req.session.autenticado = req.session.autenticado;
+            
+                res.redirect("/");
+                
             } catch (error) {
                 return error;
             }
@@ -75,7 +76,7 @@ const FaleConoscoControl = {
         body("mensagem")
             .custom((value) => {
                 const wordCount = value.split(/\s+/).length;
-                if (wordCount >= 10) {
+                if (wordCount >= 5) {
                     return true;
                 } else {
                     throw new Error('Mensagem inválida, mínimo 10 palavras');

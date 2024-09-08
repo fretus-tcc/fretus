@@ -18,8 +18,11 @@ const fields = [
 const upload = multer({ storage: multer.memoryStorage() }).fields(fields)
 
 router.get("/", function (req, res) {
-  res.render("pages/index", { autenticado: req.session.autenticado, pagina:"home", dadosNotificacao: null })
-})
+  const dadosNotificacao = req.session.dadosNotificacao || null;
+  delete req.session.dadosNotificacao;
+
+  res.render("pages/index", { autenticado: req.session.autenticado, pagina: "home", dadosNotificacao: dadosNotificacao });
+});
 
 
 /* ============================CADASTRO======================================== */
