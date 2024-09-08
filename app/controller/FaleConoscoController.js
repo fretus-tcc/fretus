@@ -19,16 +19,16 @@ const FaleConoscoControl = {
             }
             try {
                 await FaleConoscoModel.createFaleconosco(req.body);
-                
+
                 req.session.dadosNotificacao = {
                     titulo: "Enviado",
                     mensagem: "Mensagem enviada com sucesso",
                     tipo: "success"
                 };
                 req.session.autenticado = req.session.autenticado;
-            
+
                 res.redirect("/");
-                
+
             } catch (error) {
                 return error;
             }
