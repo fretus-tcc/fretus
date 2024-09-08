@@ -256,7 +256,7 @@ ENGINE = InnoDB;
     ON UPDATE NO ACTION)
 ENGINE = InnoDB; */
 
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`RAKING` (
+/* CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`RAKING` (
   `id_posicao` INT NOT NULL,
   `qnt_entregas` INT NOT NULL,
   `media_avaliacao` FLOAT NOT NULL,
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`RAKING` (
     REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB; */
 
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.cupons (
   id_cupom INT NOT NULL AUTO_INCREMENT,
@@ -482,30 +482,25 @@ INSERT INTO conversas (id_cliente, id_entregador) VALUES (2, 3);
 INSERT INTO conversas (id_cliente, id_entregador) VALUES (2, 4);
 INSERT INTO mensagens (id_conversa, id_usuario, mensagem) VALUES (1, 3, 'Olá!');
 
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`avaliacoes` (
-  `id_avaliacoes` INT NOT NULL AUTO_INCREMENT,
-  `qnt_estrelas` INT NOT NULL,
-  `feedback` VARCHAR(200) NULL,
-  `id_usuario_entregador` INT NOT NULL,
-  `id_usuario_avaliador` INT NOT NULL,
-  `RAKING_id_posicao` INT NOT NULL,
-  PRIMARY KEY (`id_avaliacoes`),
-  INDEX `fk_avaliacoes_USUARIOS1_idx` (`id_usuario_entregador` ASC) VISIBLE,
-  INDEX `fk_avaliacoes_USUARIOS2_idx` (`id_usuario_avaliador` ASC) VISIBLE,
-  INDEX `fk_avaliacoes_RAKING1_idx` (`RAKING_id_posicao` ASC) VISIBLE,
-  CONSTRAINT `fk_avaliacoes_USUARIOS1`
-    FOREIGN KEY (`id_usuario_entregador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
+CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.avaliacoes (
+  id_avaliacao INT NOT NULL AUTO_INCREMENT,
+  /* qnt_estrelas INT NOT NULL, */
+  feedback_avaliacao VARCHAR(200) NOT NULL,
+  id_entregador INT NOT NULL,
+  id_avaliador INT NOT NULL,
+  /* RAKING_id_posicao INT NOT NULL, */
+  PRIMARY KEY (id_avaliacao),
+  INDEX fk_avaliacoes_USUARIOS1_idx (id_entregador ASC) VISIBLE,
+  INDEX fk_avaliacoes_USUARIOS2_idx (id_avaliador ASC) VISIBLE,
+  /* INDEX fk_avaliacoes_RAKING1_idx (RAKING_id_posicao ASC) VISIBLE, */
+  CONSTRAINT fk_avaliacoes_USUARIOS1
+    FOREIGN KEY (id_entregador)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_avaliacoes_USUARIOS2`
-    FOREIGN KEY (`id_usuario_avaliador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_avaliacoes_RAKING1`
-    FOREIGN KEY (`RAKING_id_posicao`)
-    REFERENCES `bzt6iht1cder66rlnctv`.`RAKING` (`id_posicao`)
+  CONSTRAINT fk_avaliacoes_USUARIOS2
+    FOREIGN KEY (id_avaliador)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

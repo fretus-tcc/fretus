@@ -489,7 +489,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.usuario_cupons (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
+/* -- -----------------------------------------------------
 -- Table FRETUS.RAKING
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS FRETUS.RAKING (
@@ -507,7 +507,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.RAKING (
     REFERENCES FRETUS.USUARIOS (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB; */
 
 -- -----------------------------------------------------
 -- Table FRETUS.favoritados
@@ -650,35 +650,36 @@ ALTER TABLE mensagens CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 INSERT INTO conversas (id_cliente, id_entregador) VALUES (2, 3);
 INSERT INTO conversas (id_cliente, id_entregador) VALUES (2, 4);
 INSERT INTO mensagens (id_conversa, id_usuario, mensagem) VALUES (1, 3, 'Olá!');
+ 
 -- -----------------------------------------------------
 -- Table FRETUS.avaliacoes
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS FRETUS.avaliacoes (
-  id_avaliacoes INT NOT NULL AUTO_INCREMENT,
-  qnt_estrelas INT NOT NULL,
-  feedback VARCHAR(200) NULL,
-  id_usuario_entregador INT NOT NULL,
-  id_usuario_avaliador INT NOT NULL,
-  RAKING_id_posicao INT NOT NULL,
-  PRIMARY KEY (id_avaliacoes),
-  INDEX fk_avaliacoes_USUARIOS1_idx (id_usuario_entregador ASC) VISIBLE,
-  INDEX fk_avaliacoes_USUARIOS2_idx (id_usuario_avaliador ASC) VISIBLE,
-  INDEX fk_avaliacoes_RAKING1_idx (RAKING_id_posicao ASC) VISIBLE,
+  id_avaliacao INT NOT NULL AUTO_INCREMENT,
+  /* qnt_estrelas INT NOT NULL, */
+  feedback_avaliacao VARCHAR(200) NOT NULL,
+  id_entregador INT NOT NULL,
+  id_avaliador INT NOT NULL,
+  /* RAKING_id_posicao INT NOT NULL, */
+  PRIMARY KEY (id_avaliacao),
+  INDEX fk_avaliacoes_USUARIOS1_idx (id_entregador ASC) VISIBLE,
+  INDEX fk_avaliacoes_USUARIOS2_idx (id_avaliador ASC) VISIBLE,
+  /* INDEX fk_avaliacoes_RAKING1_idx (RAKING_id_posicao ASC) VISIBLE, */
   CONSTRAINT fk_avaliacoes_USUARIOS1
-    FOREIGN KEY (id_usuario_entregador)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
+    FOREIGN KEY (id_entregador)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT fk_avaliacoes_USUARIOS2
-    FOREIGN KEY (id_usuario_avaliador)
-    REFERENCES FRETUS.USUARIOS (id_usuario)
+    FOREIGN KEY (id_avaliador)
+    REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE NO ACTION/* ,
   CONSTRAINT fk_avaliacoes_RAKING1
     FOREIGN KEY (RAKING_id_posicao)
     REFERENCES FRETUS.RAKING (id_posicao)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION */)
 ENGINE = InnoDB;
 
 
