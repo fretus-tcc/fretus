@@ -19,6 +19,7 @@ const upload = multer({ storage: multer.memoryStorage() }).fields(fields)
 
 router.get("/", function (req, res) {
   const dadosNotificacao = req.session.dadosNotificacao || null;
+  delete req.session.dadosNotificacao; 
 
   res.render("pages/index", { autenticado: req.session.autenticado, pagina: "home", dadosNotificacao: dadosNotificacao });
 });
