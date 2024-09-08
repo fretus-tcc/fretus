@@ -485,13 +485,15 @@ INSERT INTO mensagens (id_conversa, id_usuario, mensagem) VALUES (1, 3, 'Olá!')
 CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.avaliacoes (
   id_avaliacao INT NOT NULL AUTO_INCREMENT,
   /* qnt_estrelas INT NOT NULL, */
-  feedback_avaliacao VARCHAR(200) NOT NULL,
+  id_pedido INT NOT NULL,
   id_entregador INT NOT NULL,
   id_avaliador INT NOT NULL,
+  feedback_avaliacao VARCHAR(200) NOT NULL,
   /* RAKING_id_posicao INT NOT NULL, */
   PRIMARY KEY (id_avaliacao),
   INDEX fk_avaliacoes_USUARIOS1_idx (id_entregador ASC) VISIBLE,
   INDEX fk_avaliacoes_USUARIOS2_idx (id_avaliador ASC) VISIBLE,
+  INDEX fk_avaliacoes_USUARIOS3_idx (id_pedido ASC) VISIBLE,
   /* INDEX fk_avaliacoes_RAKING1_idx (RAKING_id_posicao ASC) VISIBLE, */
   CONSTRAINT fk_avaliacoes_USUARIOS1
     FOREIGN KEY (id_entregador)
@@ -501,6 +503,11 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.avaliacoes (
   CONSTRAINT fk_avaliacoes_USUARIOS2
     FOREIGN KEY (id_avaliador)
     REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_avaliacoes_USUARIOS3
+    FOREIGN KEY (id_pedido)
+    REFERENCES `bzt6iht1cder66rlnctv`.pedidos (id_pedido)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

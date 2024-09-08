@@ -89,7 +89,9 @@
                                             <% } %>
                                         </button>
                                     </form>
-                                    <img class="rate" src="/imgs/client/star-icon.svg" alt="">
+                                    <% if (pedido?.id_avaliacao == null) { %>
+                                        <img class="rate-call" src="/imgs/client/star-icon.svg" alt="">
+                                    <% } %>
                                 <% } else if (pedido.id_entregador) { %>
                                     <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
                                         <img src="/imgs/client/pay-icon.svg" alt="">
@@ -137,11 +139,11 @@
         <% } %>
     </main>
 
-    <%- include('../../partial/popup/rate.ejs') %>
-
+    
     <!-- Popup's -->
     <% if (pedidos.length > 0) { %>
         <% pedidos.forEach(pedido => { %>
+            <%- include('../../partial/popup/rate.ejs', { pedido }) %>
             <%- include('../../partial/popup/info.ejs', { pedido }) %>
         <% }) %>
     <% } %>

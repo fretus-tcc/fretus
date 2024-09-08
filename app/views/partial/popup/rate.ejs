@@ -1,9 +1,9 @@
-<section class="popup">
+<section class="popup rate">
     <section class="popup-content">
         <aside class="close">
             <img src="/imgs/client/close-icon.svg" alt="">
         </aside>
-        <section class="popup-wrapper">
+        <form action="/cliente/avaliacoes/<%= pedido.id_pedido %>" method="POST" class="popup-wrapper">
             <h1>Avaliar o Motorista</h1>
             <!--<aside class="stars">
                 <aside class="star">
@@ -22,9 +22,9 @@
                     <aside class="star-form"></aside>
                 </aside>
             </aside>!-->
-            <textarea class="rate-field" placeholder="Deixe seu feedback aqui!"></textarea>
+            <textarea name="avaliacao" class="rate-field" placeholder="Deixe seu feedback aqui!"></textarea>
             <span class="error-container">Nenhuma estrela marcada!</span>
             <button class="cta">Enviar</button>
-        </section>
+        </form>
     </section>
 </section>

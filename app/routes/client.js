@@ -8,6 +8,7 @@ const ConfigPerfilController = require('../controller/ConfigPerfilController')
 const pedidosController = require('../controller/pedidosController')
 const favoritadosController = require('../controller/favoritadosController')
 const pagamentoController = require('../controller/pagamentoController')
+const avaliacoesController = require('../controller/avaliacoesController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
@@ -32,6 +33,10 @@ router.put('/escolher-entregador/:id_pedido/:id_entregador', verificarUsuAutoriz
 
 router.post('/favoritar-desfavoritar/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     favoritadosController.toggleFavoritados(req, res)
+})
+
+router.post('/avaliacoes/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    avaliacoesController.createAvaliacao(req, res)
 })
 
 router.get('/pagamento/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
