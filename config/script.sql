@@ -491,6 +491,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.avaliacoes (
   feedback_avaliacao VARCHAR(200) NOT NULL,
   /* RAKING_id_posicao INT NOT NULL, */
   PRIMARY KEY (id_avaliacao),
+  UNIQUE (id_pedido),
   INDEX fk_avaliacoes_USUARIOS1_idx (id_entregador ASC) VISIBLE,
   INDEX fk_avaliacoes_USUARIOS2_idx (id_avaliador ASC) VISIBLE,
   INDEX fk_avaliacoes_USUARIOS3_idx (id_pedido ASC) VISIBLE,
@@ -512,25 +513,34 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.avaliacoes (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`DENUNCIAS` (
-  `id_denuncia` INT NOT NULL AUTO_INCREMENT,
-  `motivo_denuncia` VARCHAR(45) NOT NULL,
-  `descricao_denuncia` TEXT(300) NOT NULL,
-  `foto_do_ocorrido` VARCHAR(255) NULL,
-  `data_denuncia` DATETIME NOT NULL,
-  `id_usuario_denunciador` INT NOT NULL,
-  `id_usuario_denunciado` INT NOT NULL,
-  PRIMARY KEY (`id_denuncia`),
-  INDEX `fk_DENUNCIAS_USUARIOS1_idx` (`id_usuario_denunciador` ASC) VISIBLE,
-  INDEX `fk_DENUNCIAS_USUARIOS2_idx` (`id_usuario_denunciado` ASC) VISIBLE,
-  CONSTRAINT `fk_DENUNCIAS_USUARIOS1`
-    FOREIGN KEY (`id_usuario_denunciador`)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
+CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.denuncias (
+  id_denuncia INT NOT NULL AUTO_INCREMENT,
+  id_pedido INT NOT NULL,
+  id_denunciador INT NOT NULL,
+  id_denunciado INT NOT NULL,
+  foto_denuncia MEDIUMBLOB NULL,
+  motivo_denuncia VARCHAR(75) NOT NULL,
+  outros_motivos VARCHAR(255) NULL,
+  data_denuncia DATETIME NOT NULL,
+  descricao_denuncia TEXT NOT NULL,
+  PRIMARY KEY (id_denuncia),
+  UNIQUE (id_pedido),
+  INDEX fk_DENUNCIAS_USUARIOS1_idx (id_denunciador ASC) VISIBLE,
+  INDEX fk_DENUNCIAS_USUARIOS2_idx (id_denunciado ASC) VISIBLE,
+  INDEX fk_DENUNCIAS_USUARIOS3_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_DENUNCIAS_USUARIOS1
+    FOREIGN KEY (id_denunciador)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_DENUNCIAS_USUARIOS2`
-    FOREIGN KEY (`id_usuario_denunciado`)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (`id_usuario`)
+  CONSTRAINT fk_DENUNCIAS_USUARIOS2
+    FOREIGN KEY (id_denunciado)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_DENUNCIAS_USUARIOS3
+    FOREIGN KEY (id_pedido)
+    REFERENCES `bzt6iht1cder66rlnctv`.pedidos (id_pedido)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
