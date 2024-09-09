@@ -9,6 +9,7 @@ const pedidosController = require('../controller/pedidosController')
 const favoritadosController = require('../controller/favoritadosController')
 const pagamentoController = require('../controller/pagamentoController')
 const avaliacoesController = require('../controller/avaliacoesController')
+const denunciasController = require('../controller/denunciasController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
@@ -37,6 +38,10 @@ router.post('/favoritar-desfavoritar/:id', verificarUsuAutorizado([1], 'pages/re
 
 router.post('/avaliacoes/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), avaliacoesController.validation, function (req, res) {
     avaliacoesController.createAvaliacao(req, res)
+})
+
+router.post('/denuncias/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    denunciasController.createDenuncia(req, res)
 })
 
 router.get('/pagamento/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {

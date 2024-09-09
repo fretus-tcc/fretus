@@ -3,26 +3,26 @@
         <section class="close">
             <img src="/imgs/client/close-icon.svg" alt="">
         </section>
-        <form class="popup-wrapper">
+        <form action="" class="popup-wrapper" enctype="multipart/form-data">
             <h1>Denúncia</h1>
-            <label class="file-field" for="report-photo">
-                <input class="field" required type="file" name="files" id="report-photo">
+            <!-- <label class="file-field" for="report-photo">
+                <input class="field" type="file" name="files" id="report-photo">
                 <article class="icon">
                     <img src="/imgs/cadastro-entregador/upload-icon.svg" alt="">
                 </article>
-                <span class="msg">Foto do Ocorrido</span>
-            </label>
+                <span class="msg">Foto do Ocorrido (Opcional)</span>
+            </label> -->
             <select required class="input-field field">
                 <option value="">Motivo da Denúncia</option>
-                <option value="1">Assédio ou Comportamento inadequado</option>
-                <option value="2">Problemas de Qualidade do Serviço</option>
-                <option value="3">Violar Regras do Site</option>
-                <option value="4">Suspeita de Fraude</option>
+                <option value="Assédio ou Comportamento inadequado">Assédio ou Comportamento inadequado</option>
+                <option value="Problemas de Qualidade do Serviço">Problemas de Qualidade do Serviço</option>
+                <option value="Violar Regras do Site">Violar Regras do Site</option>
+                <option value="Suspeita de Fraude">Suspeita de Fraude</option>
                 <option value="Outros">Outros</option>
             </select>
-            <input placeholder="Motivo da Denúncia" class="report-reason input-field field" type="text">
-            <input required placeholder="Data do ocorrido" class="input-field field" type="text" onfocus="this.type='date'">
-            <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
+            <input placeholder="Motivo da Denúncia" class="report-reason input-field field" name="outros_motivos" type="text">
+            <input required placeholder="Data do ocorrido" class="input-field field" type="text" name="data_ocorrido" onfocus="this.type='date'">
+            <textarea required class="rate-field field" placeholder="Descrição do ocorrido" name="descricao_ocorrido"></textarea>
             <button class="cta">Enviar</button>
         </form>
     </section>

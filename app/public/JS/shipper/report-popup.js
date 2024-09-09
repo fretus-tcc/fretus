@@ -1,43 +1,105 @@
 const reportCall = document.querySelectorAll('.report-call')
 const reportPopup = document.querySelector('.popup.report')
 const closeReport = document.querySelector('.popup.report .close')
+const reportForm = document.querySelector('.popup.report form.popup-wrapper')
 const inputs = document.querySelectorAll('.report .field')
-const inputFile = document.querySelectorAll('input[type="file"]')
+const inputFile = document.querySelectorAll('.popup.report input[type="file"]')
 const labelFile = document.querySelectorAll('.file-field .msg')
 const reportSubmit = document.querySelector('.report .cta')
-// const notificationContainer = document.querySelector('.notification-container')
 const reportSelect = document.querySelector('.report select')
 const reportReason = document.querySelector('.report-reason')
+const outros_motivos = document.querySelector('.popup.report [name="outros_motivos"]')
+const data_ocorrido = document.querySelector('.popup.report [name="data_ocorrido"]')
+const descricao_ocorrido = document.querySelector('.popup.report [name="descricao_ocorrido"]')
 let clicked
 
 reportCall.forEach((item, i) => {
     item.addEventListener('click', () => {
         reportPopup.classList.add('show')
+        reportForm.action = `/cliente/denuncias/${item.dataset.idPedido}`
         clicked = i
     })
 })
-
-const closeReportPopup = () => {
-    reportPopup.classList.remove('show')
-    inputs.forEach(input => input.value = '')
-    labelFile[0].textContent = 'Foto do Ocorrido'
-    reportReason.classList.remove('show')
-    reportReason.removeAttribute('required')
-}
 
 closeReport.addEventListener('click', () => {
     closeReportPopup()
 })
 
-reportSubmit.addEventListener('click', (e) => {
-    if (isValid()) { 
-        e.preventDefault()
-        closeReportPopup()
-        showReportNotification('Denúncia Enviada! ')
-        reportCall[clicked].remove()
+reportForm.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    const url = e.target.action
+
+    var formData = formatData()
+
+    const data = await sendDenunciaData(url, formData)
+    console.log(data)
+    
+    if (data.erros != false) {
+        return
     }
+    
+    closeReportPopup()
+    reportCall[clicked].remove()
+    notify('Denúncia enviada', 'Denúncia enviada com sucesso', 'success')
 })
 
+function formatData() {
+
+    const data = {
+        // foto_denuncia: null,
+        motivo_denuncia: reportSelect.value,
+        outros_motivos: outros_motivos.value,
+        data_denuncia: data_ocorrido.value,
+        descricao_denuncia: descricao_ocorrido.value,
+    }
+
+    // let file = inputFile[0].files[0]
+    // if (file) {
+    //     const reader = new FileReader()
+    //     reader.readAsText(file)
+    //     reader.onload = () => {
+    //         data.foto_denuncia = reader.result
+    //         console.log(data.foto_denuncia)
+    //     }
+    // }
+
+    return data
+}
+
+async function sendDenunciaData(url, formData) {
+    try {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        const data = await res.json()
+
+        if (!res.ok) {
+            console.log(res)
+            return
+        }
+
+        return data
+
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+function closeReportPopup() {
+    reportPopup.classList.remove('show')
+    inputs.forEach(input => input.value = '')
+    // labelFile[0].textContent = 'Foto do Ocorrido (Opcional)'
+    reportReason.classList.remove('show')
+    reportReason.removeAttribute('required')
+}
+
+// Exibir nome do arquivo
 inputFile.forEach((input, i) => {
     input.addEventListener('change', () => {
         if (input.files[0]) {
@@ -48,6 +110,7 @@ inputFile.forEach((input, i) => {
     })
 })
 
+// Exibir outro motivo denuncia
 reportSelect.addEventListener('change', () => {
     if (reportSelect.value == 'Outros') {
         reportReason.classList.add('show')
@@ -58,38 +121,38 @@ reportSelect.addEventListener('change', () => {
     }
 })
 
+// Validação formulário
+// const isValid = () => {
+//     let valid = true
+//     inputs.forEach(item => {
+//         if (item.validity.valid == false) {
+//             valid = false
+//         }
+//     })
+//     return valid
+// }
 
-function showReportNotification(m) {
-    if (document.querySelector('.notification-container').innerHTML != '') {
-        document.querySelector('.notification').remove()
-    }
+// function showReportNotification(m) {
+//     if (document.querySelector('.notification-container').innerHTML != '') {
+//         document.querySelector('.notification').remove()
+//     }
     
-    document.querySelector('.notification-container').classList.add('show')
+//     document.querySelector('.notification-container').classList.add('show')
     
-    const notification = document.createElement('div')
-    notification.classList.add('notification')
+//     const notification = document.createElement('div')
+//     notification.classList.add('notification')
 
-    const msg = document.createElement('p')
-    msg.textContent = m
+//     const msg = document.createElement('p')
+//     msg.textContent = m
     
-    notification.appendChild(msg)
-    const loading = document.createElement('div')
-    loading.classList.add('loading')
-    notification.appendChild(loading)
+//     notification.appendChild(msg)
+//     const loading = document.createElement('div')
+//     loading.classList.add('loading')
+//     notification.appendChild(loading)
 
-    document.querySelector('.notification-container').addEventListener('animationend', () => {
-        document.querySelector('.notification-container').classList.remove('show')
-    })
+//     document.querySelector('.notification-container').addEventListener('animationend', () => {
+//         document.querySelector('.notification-container').classList.remove('show')
+//     })
 
-    document.querySelector('.notification-container').appendChild(notification)
-}
-
-const isValid = () => {
-    let valid = true
-    inputs.forEach(item => {
-        if (item.validity.valid == false) {
-            valid = false
-        }
-    })
-    return valid
-}
+//     document.querySelector('.notification-container').appendChild(notification)
+// }

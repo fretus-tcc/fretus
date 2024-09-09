@@ -84,7 +84,7 @@
                             <span class="actions">
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
                                     <img class="location-call" src="/imgs/client/location-icon.svg" alt="">
-                                    <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                                    <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>">
                                     <form action="/cliente/favoritar-desfavoritar/<%= pedido?.id_entregador %>" method="POST">
                                         <button class="accept-btn">
                                             <% if (pedido?.id_favoritou == null) { %>
@@ -217,8 +217,8 @@
     <% } %>
             
     <%- include('../../partial/popup/rate.ejs') %>
-    <%- include('../../partial/popup/location.ejs') %>
     <%- include('../../partial/popup/report.ejs') %>
+    <%- include('../../partial/popup/location.ejs') %>
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
     <script src="/JS/burguer.js"></script>
