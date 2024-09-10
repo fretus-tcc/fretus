@@ -40,7 +40,7 @@ router.post('/avaliacoes/:id_pedido', verificarUsuAutorizado([1], 'pages/restrit
     avaliacoesController.createAvaliacao(req, res)
 })
 
-router.post('/denuncias/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+router.post('/denuncias/:id_denunciado', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     denunciasController.createDenuncia(req, res)
 })
 

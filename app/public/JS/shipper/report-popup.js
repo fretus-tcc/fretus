@@ -16,7 +16,7 @@ let clicked
 reportCall.forEach((item, i) => {
     item.addEventListener('click', () => {
         reportPopup.classList.add('show')
-        reportForm.action = `/cliente/denuncias/${item.dataset.idPedido}`
+        reportForm.action = `/cliente/denuncias/${item.dataset.idEntregador}`
         clicked = i
     })
 })
@@ -120,39 +120,3 @@ reportSelect.addEventListener('change', () => {
         reportReason.removeAttribute('required')
     }
 })
-
-// Validação formulário
-// const isValid = () => {
-//     let valid = true
-//     inputs.forEach(item => {
-//         if (item.validity.valid == false) {
-//             valid = false
-//         }
-//     })
-//     return valid
-// }
-
-// function showReportNotification(m) {
-//     if (document.querySelector('.notification-container').innerHTML != '') {
-//         document.querySelector('.notification').remove()
-//     }
-    
-//     document.querySelector('.notification-container').classList.add('show')
-    
-//     const notification = document.createElement('div')
-//     notification.classList.add('notification')
-
-//     const msg = document.createElement('p')
-//     msg.textContent = m
-    
-//     notification.appendChild(msg)
-//     const loading = document.createElement('div')
-//     loading.classList.add('loading')
-//     notification.appendChild(loading)
-
-//     document.querySelector('.notification-container').addEventListener('animationend', () => {
-//         document.querySelector('.notification-container').classList.remove('show')
-//     })
-
-//     document.querySelector('.notification-container').appendChild(notification)
-// }

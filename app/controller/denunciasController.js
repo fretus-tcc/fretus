@@ -24,15 +24,15 @@ const denunciasController = {
     // ],
 
     createDenuncia: async (req, res) => {
-        const { id_pedido } = req.params
+        const { id_denunciado } = req.params
         const { motivo_denuncia, outros_motivos, data_denuncia, descricao_denuncia } = req.body
         try {
-            const [pedido] = await pedidosModel.findById(id_pedido)
+            // const [pedido] = await pedidosModel.findById(id_pedido)
 
             const data = {
-                id_pedido,
+                // id_pedido,
                 id_denunciador: req.session.autenticado.id,
-                id_denunciado: pedido.id_entregador,
+                id_denunciado,
                 motivo_denuncia,
                 outros_motivos,
                 data_denuncia,

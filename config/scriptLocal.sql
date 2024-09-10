@@ -696,7 +696,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS FRETUS.denuncias (
   id_denuncia INT NOT NULL AUTO_INCREMENT,
-  id_pedido INT NOT NULL,
+  id_pedido INT NULL,
   id_denunciador INT NOT NULL,
   id_denunciado INT NOT NULL,
   foto_denuncia MEDIUMBLOB NULL,
