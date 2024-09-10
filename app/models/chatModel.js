@@ -34,7 +34,7 @@ const ChatModel = {
     findConversasByUser: async (tipo, id) => {
         try {
             const [result] = await pool.query(
-                'SELECT u.nome_usuario, u.foto_de_perfil, c.*, m.mensagem, m.data_envio FROM conversas AS c ' +
+                'SELECT u.nome_usuario, u.id_usuario, u.foto_de_perfil, c.*, m.mensagem, m.data_envio FROM conversas AS c ' +
                 'INNER JOIN usuario AS u ' +
                 'ON IF(? = 2, c.id_cliente, c.id_entregador) = u.id_usuario ' +
                 'LEFT JOIN ( ' +

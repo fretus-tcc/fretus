@@ -8,6 +8,12 @@
     <%- include('../../partial/config/config-client-shipper.ejs') %>
     <%- include('../../partial/config/config-chat.ejs') %>
     <!--  <link rel="stylesheet" href="/CSS/Testechat.css"> -->
+
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
     
@@ -75,7 +81,7 @@
                     <section class="chat-header">
                         <article class="info">
                             <h1><%= conversas.find(item => item.id_conversa == id_conversa)?.nome_usuario %></h1>
-                            <img class="report-call" src="/imgs/client/report-icon.svg" alt="">
+                            <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= conversas.find(item => item.id_conversa == id_conversa)?.id_usuario %>">
                         </article>
                         <!-- <article class="action">
                             <button class="rounded-icon">
