@@ -81,7 +81,9 @@
                     <section class="chat-header">
                         <article class="info">
                             <h1><%= conversas.find(item => item.id_conversa == id_conversa)?.nome_usuario %></h1>
-                            <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= conversas.find(item => item.id_conversa == id_conversa)?.id_usuario %>">
+                            <% if (conversas.find(item => item.id_conversa == id_conversa)?.id_denunciado == null) { %>
+                                <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= conversas.find(item => item.id_conversa == id_conversa)?.id_usuario %>">
+                            <% } %>
                         </article>
                         <!-- <article class="action">
                             <button class="rounded-icon">

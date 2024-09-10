@@ -53,6 +53,7 @@
             <% if (pedidos.length > 0) { %>
                 <% pedidos.forEach(pedido => { %>
                     <article class="card">
+                        <p><%=  %></p>
                         <section class="top">
                             <summary class="row">
                                 <img src="/imgs/shipper/partida-icon.svg" alt="">
@@ -84,7 +85,9 @@
                             <span class="actions">
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
                                     <img class="location-call" src="/imgs/client/location-icon.svg" alt="">
-                                    <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= pedido.id_entregador %>">
+                                    <% if (pedido?.id_denunciado == null) { %>
+                                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= pedido.id_entregador %>">
+                                    <% } %>
                                     <form action="/cliente/favoritar-desfavoritar/<%= pedido?.id_entregador %>" method="POST">
                                         <button class="accept-btn">
                                             <% if (pedido?.id_favoritou == null) { %>

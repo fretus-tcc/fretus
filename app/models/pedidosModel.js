@@ -74,7 +74,7 @@ const pedidosModel = {
     findByUser: async (id, pagina, total) => {
         try {
             const [result] = await pool.query(
-                'SELECT p.*, pg.estado_pagamento, f.*, a.id_avaliacao FROM usuario AS u ' +
+                'SELECT p.*, pg.estado_pagamento, f.*, a.id_avaliacao, d.id_denunciado FROM usuario AS u ' +
                 'INNER JOIN pedidos AS p ' +
                 'ON u.id_usuario = p.id_cliente ' +
                 'LEFT JOIN pagamentos AS pg ' +
@@ -83,6 +83,8 @@ const pedidosModel = {
                 'ON p.id_entregador = f.id_favoritado AND f.id_favoritou = ? ' +
                 'LEFT JOIN avaliacoes AS a ' +
                 'ON p.id_pedido = a.id_pedido ' +
+                'LEFT JOIN denuncias AS d ' +
+                'ON p.id_entregador = d.id_denunciado ' +
                 'WHERE id_usuario = ? ' +
                 'ORDER BY p.data_solicitacao DESC ' +
                 'LIMIT ?, ?' , [id, id, pagina, total])
