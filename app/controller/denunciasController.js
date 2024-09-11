@@ -1,9 +1,21 @@
 const denunciasModel = require('../models/denunciasModel')
 const pedidosModel = require('../models/pedidosModel')
-const { body, validationResult } = require('express-validator')
+const { body, param, validationResult } = require('express-validator')
 
 const denunciasController = {
     validation: [
+        param('id_denunciado')
+            .isInt()
+            .withMessage('Tente novamente')
+            .custom(async (value, { req }) => {
+                const result = await denunciasModel.findByIdDenunciado(value)
+                if (result.length != 0) {
+                    throw new Error('Tente novamente')
+                }
+
+                return true
+            }),
+
         body('motivo_denuncia')
             .notEmpty()
             .withMessage('Motivo da denúncia não preenchido')

@@ -42,9 +42,11 @@ reportForm.addEventListener('submit', async (e) => {
         data.erros.forEach(erro => {
             // console.log(erro)
             notify('Algo deu errado', erro.msg, 'error')
-            const element = document.querySelector(`.error.${erro.path}`)
-            element.textContent = erro.msg
-            element.classList.add('show')
+            if (erro.path != 'id_denunciado') {
+                const element = document.querySelector(`.error.${erro.path}`)
+                element.textContent = erro.msg
+                element.classList.add('show')
+            }
         })
         return
     }
