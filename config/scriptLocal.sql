@@ -444,19 +444,27 @@ ENGINE = InnoDB; */
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS FRETUS.cupons (
   id_cupom INT NOT NULL AUTO_INCREMENT,
+  tipo_cupom ENUM('1', '2') NOT NULL,
   codigo_cupom VARCHAR(45) NOT NULL,
   porcentagem_cupom INT NOT NULL,
   /* prazo_cupon DATETIME NOT NULL, */
   uso_restante_cupom INT NULL,
   status_cupom INT NOT NULL DEFAULT '1',
-  id_criador INT NOT NULL,
+  id_criador INT NULL,
+  id_compartilhado INT NULL,
   /* id_usuario_utilizador INT NOT NULL, */
   PRIMARY KEY (id_cupom),
   UNIQUE INDEX IDCUPON_UNIQUE (id_cupom ASC) VISIBLE,
+  UNIQUE INDEX CODIGOCUPON_UNIQUE (codigo_cupom ASC) VISIBLE,
   INDEX fk_CUPONS_USUARIOS1_idx (id_criador ASC) VISIBLE,
   /* INDEX fk_CUPONS_USUARIOS2_idx (id_usuario_utilizador ASC) VISIBLE, */
   CONSTRAINT fk_CUPONS_USUARIOS1
     FOREIGN KEY (id_criador)
+    REFERENCES FRETUS.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_CUPONS_USUARIOS2
+    FOREIGN KEY (id_compartilhado)
     REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION /* ,
