@@ -10,7 +10,8 @@
     <%- include('../../../partial/config/config.ejs') %>
         <%- include('../../../partial/config/config-adm.ejs') %>
 
-        <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+            <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+            <link rel="stylesheet" href="/CSS/client/pay-popup.css">
 
 
 </head>
@@ -25,17 +26,52 @@
                     Mensagens - Fale Conosco
                 </h1>
             </div>
-            
 
 
-            
-            
+            <% mensagem.forEach(user=> { %>
+                <section class="ContainerMensgns">
+                    <section>
+                        <h1>Assunto: <%= user.assunto %>
+                        </h1><br>
+                        <span><b>Mensagem:</b>
+                            <%= user.mensagem %>
+                        </span>
+                    </section> <br>
+                    <section class="MensgnsBTN">
+                        <button class="indicator">Detalhes</button>
+                        <!-- <button>Responder</button> -->
+                    </section>
+                </section> <br>
+
+                <% }) %>
+
+
+
         </main>
 
         <script src="/JS/adm/sidebar.js"></script>
 
 
+        <script>
+            const infoModal = document.querySelectorAll('.indicator')
+            const ModalInfo = document.querySelector('.description')
+            const Close = document.querySelector('.close')
 
+
+
+            infoModal.forEach(item => {
+                item.addEventListener('click', () => {
+                    ModalInfo.classList.add('add')
+                    infoModal.forEach(buttonremove => buttonremove.classList.add('removeButton'));
+
+                })
+            })
+
+            Close.addEventListener('click', () => {
+                ModalInfo.classList.remove('add')
+                infoModal.forEach(buttonremove => buttonremove.classList.remove('removeButton'));
+            })
+        </script>
 </body>
 
 </html>

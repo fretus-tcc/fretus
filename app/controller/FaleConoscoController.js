@@ -76,7 +76,7 @@ const FaleConoscoControl = {
         body("mensagem")
             .custom((value) => {
                 const wordCount = value.split(/\s+/).length;
-                if (wordCount >= 5) {
+                if (wordCount >= 10) {
                     return true;
                 } else {
                     throw new Error('Mensagem inválida, mínimo 10 palavras');
@@ -84,6 +84,19 @@ const FaleConoscoControl = {
             }),
 
     ],
+    ListMensg: async (req, res) => {
+        try {
+            const mensagem = await FaleConoscoModel.findByMensg();
+
+            res.render('pages/adm/FaleConosco/AdmFaleConosco',{ mensagem , autenticado: req.session.autenticado })
+
+
+        } catch (error) {
+            return error;
+        }
+
+
+    },
 
 
 };

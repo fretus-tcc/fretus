@@ -742,6 +742,18 @@ CREATE TABLE IF NOT EXISTS FaleConosco (
 )  
 ENGINE = InnoDB;
 
+INSERT INTO FaleConosco (tipo_usuario, nome_usuario, email_usuario, cpf_usuario, assunto, mensagem)
+VALUES
+('Cliente', 'Cliente1', 'cliente1@example.com', '123.456.789-00', 'Problemas com Navegação',
+ 'Estou escrevendo para relatar um problema que encontrei ao usar o seu site. A navegação parece confusa e alguns links importantes não estão funcionando corretamente. Isso está tornando difícil encontrar as informações que estou procurando e está afetando a minha experiência geral.\nSugiro uma revisão das seções e links do site para garantir que todos estejam funcionando corretamente e que a navegação seja mais intuitiva. Acredito que isso ajudará a melhorar a usabilidade e a satisfação dos visitantes.\nAgradeço pela atenção e estou à disposição para fornecer mais detalhes se necessário.');
+
+INSERT INTO FaleConosco (tipo_usuario, nome_usuario, email_usuario, cpf_usuario, assunto, mensagem)VALUES
+('Cliente', 'Cliente2', 'cleinete2@example.com', '987.654.321-00', 'Conteúdo Desatualizado',
+ 'Gostaria de informar que alguns conteúdos no seu site parecem estar desatualizados. Encontrei informações que não correspondem mais à realidade ou que não foram atualizadas há algum tempo. Isso pode causar confusão e desinformação para os visitantes.\nSugiro que revisem e atualizem o conteúdo regularmente para garantir que todas as informações no site estejam corretas e relevantes. Isso pode ajudar a melhorar a credibilidade e a confiança dos usuários no seu site.\nObrigado pela atenção a esta questão.');
+
+INSERT INTO FaleConosco (tipo_usuario, nome_usuario, email_usuario, cpf_usuario, assunto, mensagem)VALUES
+('Cliente', 'cliente3', 'cliente3@example.com', '321.654.987-00', 'Otimização do Site',
+ 'Gostaria de expressar minha preocupação em relação à otimização do seu site. Percebi que ele está carregando lentamente e que a navegação pode ser um pouco difícil em dispositivos móveis. Isso está afetando a minha experiência e, possivelmente, a de outros visitantes.\nEntendo que questões técnicas podem surgir, mas gostaria de sugerir que revisem a performance e a usabilidade do site para melhorar a experiência do usuário. Acredito que essas melhorias podem fazer uma grande diferença na satisfação dos visitantes e na eficiência geral do site.\nAgradeço pela atenção e espero que estas questões possam ser resolvidas em breve.');
 
 /*
 -- -----------------------------------------------------

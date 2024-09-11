@@ -63,7 +63,7 @@ router.put('/cadastroAdm/editar/:id', verificarUsuAutorizado([3], 'pages/restrit
 
 //Fale Conosco 
 router.get('/AdmFaleConosco', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    res.render('pages/adm/FaleConosco/AdmFaleConosco')
+    FaleConoscoController.ListMensg(req, res)
 })
 
 module.exports = router

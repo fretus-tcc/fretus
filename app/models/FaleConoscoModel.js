@@ -14,12 +14,12 @@ const FaleconoscoModel = {
 
         }
     },
-    findByUserId: async (userId) => {
+    findByMensg: async () => {
         try {
-            const [result] = await pool.query('SELECT * FROM FaleConosco WHERE `id_solicitacao` = ?', [userId]);
+            const [result] = await pool.query('SELECT * FROM FaleConosco');
             return result; 
         } catch (error) {
-            throw new Error(`Erro ao buscar o ID ${userId}: ${error.message}`);
+            throw new Error(`Erro: ${error.message}`, error);
         }
     },
     
