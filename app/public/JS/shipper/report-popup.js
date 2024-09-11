@@ -8,9 +8,11 @@ const labelFile = document.querySelectorAll('.file-field .msg')
 const reportSubmit = document.querySelector('.report .cta')
 const reportSelect = document.querySelector('.report select')
 const reportReason = document.querySelector('.report-reason')
+const reportReasonError = document.querySelector('.report-reason + .error')
 const outros_motivos = document.querySelector('.popup.report [name="outros_motivos"]')
 const data_ocorrido = document.querySelector('.popup.report [name="data_ocorrido"]')
 const descricao_ocorrido = document.querySelector('.popup.report [name="descricao_ocorrido"]')
+const errors = document.querySelectorAll('.error')
 let clicked
 
 reportCall.forEach((item, i) => {
@@ -33,9 +35,17 @@ reportForm.addEventListener('submit', async (e) => {
     var formData = formatData()
 
     const data = await sendDenunciaData(url, formData)
-    console.log(data)
+    // console.log(data)
     
+    clearError()
     if (data.erros != false) {
+        data.erros.forEach(erro => {
+            // console.log(erro)
+            notify('Algo deu errado', erro.msg, 'error')
+            const element = document.querySelector(`.error.${erro.path}`)
+            element.textContent = erro.msg
+            element.classList.add('show')
+        })
         return
     }
     
@@ -49,7 +59,7 @@ function formatData() {
     const data = {
         // foto_denuncia: null,
         motivo_denuncia: reportSelect.value,
-        outros_motivos: outros_motivos.value,
+        outros_motivos: outros_motivos.value == '' && reportSelect.value != 'Outros' ? undefined : outros_motivos.value,
         data_denuncia: data_ocorrido.value,
         descricao_denuncia: descricao_ocorrido.value,
     }
@@ -91,12 +101,20 @@ async function sendDenunciaData(url, formData) {
     }
 }
 
+function clearError() {
+    errors.forEach(error => {
+        error.textContent = ''
+        error.classList.remove('show')
+    })
+}
+
 function closeReportPopup() {
     reportPopup.classList.remove('show')
     inputs.forEach(input => input.value = '')
     // labelFile[0].textContent = 'Foto do Ocorrido (Opcional)'
     reportReason.classList.remove('show')
     reportReason.removeAttribute('required')
+    clearError()
 }
 
 // Exibir nome do arquivo
@@ -115,8 +133,12 @@ reportSelect.addEventListener('change', () => {
     if (reportSelect.value == 'Outros') {
         reportReason.classList.add('show')
         reportReason.setAttribute('required', 'true')
+        if (reportReasonError.textContent != '') {
+            reportReasonError.classList.add('show')
+        }
     } else {
         reportReason.classList.remove('show')
         reportReason.removeAttribute('required')
+        reportReasonError.classList.remove('show')
     }
 })

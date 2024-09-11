@@ -5,3 +5,12 @@
 .report-reason.show {
     display: block;
 }
+
+.report .error {
+    display: none;
+}
+
+.report .error.show {
+    display: block;
+    color: red;
+}

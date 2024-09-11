@@ -20,9 +20,13 @@
                 <option value="Suspeita de Fraude">Suspeita de Fraude</option>
                 <option value="Outros">Outros</option>
             </select>
+            <span class="error motivo_denuncia"></span>
             <input placeholder="Motivo da Denúncia" class="report-reason input-field field" name="outros_motivos" type="text">
+            <span class="error outros_motivos"></span>
             <input required placeholder="Data do ocorrido" class="input-field field" type="text" name="data_ocorrido" onfocus="this.type='date'">
+            <span class="error data_denuncia"></span>
             <textarea required class="rate-field field" placeholder="Descrição do ocorrido" name="descricao_ocorrido"></textarea>
+            <span class="error descricao_denuncia"></span>
             <button class="cta">Enviar</button>
         </form>
     </section>
