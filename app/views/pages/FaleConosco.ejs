@@ -108,10 +108,18 @@
                     <%= msgErro.email %>
                 </span>
 
-                <input type="text" name="tipo" placeholder="Sou:(Cliente/entregador)" class="<%= cssErroBorda.tipo %>" value="<%=valorCampos.tipo%>" maxlength="10">
-                <span class="<%= cssErro.tipo %>">
-                    <%= msgErro.tipo %>
-                </span>
+                <section class="radiosBox">
+                    <label>
+                        <input type="radio" name="tipo" value="Cliente" <%= valorCampos.tipo === 'Cliente' ? 'checked' : '' %> class="<%= cssErroBorda.tipo %>"> Cliente
+                      </label>
+                      <label>
+                        <input type="radio" name="tipo" value="Entregador" <%= valorCampos.tipo === 'Entregador' ? 'checked' : '' %> class="<%= cssErroBorda.tipo %>"> Entregador
+                      </label>
+                      <span class="<%= cssErro.tipo %>">
+                        <%= msgErro.tipo %>
+                      </span>                      
+                </section>
+                  
 
                 <input type="text" name="assunto" placeholder="Assunto:" maxlength="30" class="<%= cssErroBorda.assunto %>" value="<%=valorCampos.assunto%>">
                 <span class="<%= cssErro.assunto %>">

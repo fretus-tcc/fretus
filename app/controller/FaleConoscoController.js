@@ -57,7 +57,12 @@ const FaleConoscoControl = {
             .isEmail()
             .withMessage("Email invalido "),
         body("tipo")
-            .isLength({ min: 4, max: 10 })
+
+        .isIn(["Cliente", "Entregador"])
+        .withMessage('Por favor, selecione "Cliente" ou "Entregador".')
+        .bail()    
+
+           /*  .isLength({ min: 4, max: 10 })
             .withMessage("tipo invalido ")
             .bail()
             .custom((value) => {
@@ -67,7 +72,7 @@ const FaleConoscoControl = {
                 } else {
                     throw new Error('Por favor, preencha os campos com "Cliente" ou "Entregador".');
                 }
-            }),
+            }) */,
 
         body("assunto")
             .isLength({ min: 4, max: 50 })
@@ -88,7 +93,30 @@ const FaleConoscoControl = {
         try {
             const mensagem = await FaleConoscoModel.findByMensg();
 
-            res.render('pages/adm/FaleConosco/AdmFaleConosco',{ mensagem , autenticado: req.session.autenticado })
+            
+                /* const result = await admCadastroModel.findByType(type) */
+    
+                // paginação
+    
+              /*   let pagina = req.query.pagina == undefined ? 1 : req.query.pagina;
+                let results = null
+                let regPagina = 2
+                let inicio = parseInt(pagina - 1) * regPagina
+                let totReg = await admCadastroModel.totalReg(type);
+                let totPaginas = Math.ceil(totReg[0].total / regPagina);
+                results = await admCadastroModel.findPage(inicio, regPagina, type);
+                let paginador = totReg[0].total <= regPagina
+                    ? null
+                    : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+    
+            
+                
+                console.log(results) */
+
+                /* res.render('pages/adm/CadastroAdmGeral/clientesAdm', { type, results, paginador, msgs }) */
+
+
+            res.render('pages/adm/FaleConosco/AdmFaleConosco',{ mensagem , autenticado: req.session.autenticado, results, paginador })
 
 
         } catch (error) {
