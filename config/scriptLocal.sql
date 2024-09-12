@@ -475,6 +475,9 @@ CREATE TABLE IF NOT EXISTS FRETUS.cupons (
     ON UPDATE NO ACTION */)
 ENGINE = InnoDB;
 
+INSERT INTO cupons (tipo_cupom, codigo_cupom, porcentagem_cupom) VALUES (1, 'PRIMEIRAENTREGA15', 15);
+INSERT INTO cupons (tipo_cupom, codigo_cupom, porcentagem_cupom, id_criador) VALUES (2, '91c38c2e-2ed7-40b3-90d2-312f0dc9fbfc', 15, 2);
+
 -- -----------------------------------------------------
 -- Table FRETUS.USUARIOS_has_CUPONS
 -- -----------------------------------------------------

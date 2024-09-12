@@ -10,6 +10,7 @@ const favoritadosController = require('../controller/favoritadosController')
 const pagamentoController = require('../controller/pagamentoController')
 const avaliacoesController = require('../controller/avaliacoesController')
 const denunciasController = require('../controller/denunciasController')
+const cuponsController = require('../controller/cuponsController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
@@ -66,7 +67,7 @@ router.get('/historico-completo', verificarUsuAutorizado([1], 'pages/restrito'),
 })
 
 router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    res.render('pages/cliente/cupons', { autenticado: req.session.autenticado })
+    cuponsController.showCupons(req, res)
 })
 
 /* router.get('/perfil', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
