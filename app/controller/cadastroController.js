@@ -1,9 +1,11 @@
 // Criação de usúario no Back-end 
 const cadastroModel = require("../models/cadastroModel");
+const cuponsModel = require("../models/cuponsModel");
 const { validaCPF } = require("../util/Funcao");
 const { body, validationResult } = require("express-validator");
 const bycrypt = require('bcryptjs')
 const salt = bycrypt.genSaltSync(10)
+const crypto = require('crypto')
 
 const TarefasControl = {
 
@@ -29,6 +31,16 @@ const TarefasControl = {
             const result = await cadastroModel.create({ ...req.body, senha: bycrypt.hashSync(req.body.senha) });
             // definindo id_usuario autenticacao cadastro
             req.session.autenticado.id = result[0].insertId
+
+            // inserindo cupom compartilhamento
+            if (req.session.autenticado.tipo == '1') {
+                await cuponsModel.insert({
+                    tipo_cupom: 2,
+                    codigo_cupom: crypto.randomUUID(),
+                    porcentagem_cupom: 15,
+                    id_criador: req.session.autenticado.id
+                })
+            }
 
             req.flash('success', `Bem-vindo, ${req.body.nome} ; Cadastro realizado com sucesso`)
 
