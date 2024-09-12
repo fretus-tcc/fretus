@@ -26,16 +26,16 @@
                     Mensagens - Fale Conosco
                 </h1>
             </div>
-
-
+            <section class="flex">
+                
             <% mensagem.forEach(user=> { %>
                 <section class="ContainerMensgns">
                     <section>
-                        <h1>Assunto: <%= user.assunto %>
-                        </h1><br>
-                        <span><b>Mensagem:</b>
-                            <%= user.mensagem %>
-                        </span>
+                        <span style="font-size: 1.7rem;"><b>Assunto:</b> <%= user.assunto %>
+                        </span><br><br>
+                            <span><b>Mensagem:</b>
+                                <%= user.mensagem %>
+                            </span>
                     </section> <br>
                     <section class="MensgnsBTN">
                         <button class="indicator">Detalhes</button>
@@ -44,34 +44,25 @@
                 </section> <br>
 
                 <% }) %>
-
-
+            </section> <br><br>
+            <% if(paginador){ %>
+                <div class="notificador">
+                    <ul>
+                        <% for(var i=1; i <= paginador.total_paginas; i++){ 
+                            if(paginador.pagina_atual == i){ 
+                        %>
+                            <li><a class="atual" href="?pagina=<%= i %>"><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="?pagina=<%= i %>"><%= i %></a></li>
+                        <% } 
+                        } %>
+                    </ul>
+                </div>
+            <% } %>
 
         </main>
-
         <script src="/JS/adm/sidebar.js"></script>
 
-
-        <script>
-            const infoModal = document.querySelectorAll('.indicator')
-            const ModalInfo = document.querySelector('.description')
-            const Close = document.querySelector('.close')
-
-
-
-            infoModal.forEach(item => {
-                item.addEventListener('click', () => {
-                    ModalInfo.classList.add('add')
-                    infoModal.forEach(buttonremove => buttonremove.classList.add('removeButton'));
-
-                })
-            })
-
-            Close.addEventListener('click', () => {
-                ModalInfo.classList.remove('add')
-                infoModal.forEach(buttonremove => buttonremove.classList.remove('removeButton'));
-            })
-        </script>
 </body>
 
 </html>
