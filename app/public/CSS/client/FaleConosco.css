@@ -81,7 +81,9 @@ button:active {
     opacity: 0.6;
 }
 
-
+.radiosBox input{
+    width: 10px;
+}
 @media (max-width: 320px) {
     .form-contain {
         padding: 10px;
