@@ -11,9 +11,42 @@ const cuponsModel = {
         }
     },
 
+    findByCodigo: async (codigo) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM cupons WHERE codigo_cupom = ?', [codigo])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
+    findActiveByUser: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT c.*, uc.estado_cupom FROM cupons AS c ' +
+                'INNER JOIN usuario_cupons AS uc ' +
+                'ON c.id_cupom = uc.id_cupom ' +
+                'WHERE uc.id_usuario = ? AND c.status_cupom = 1', [id]
+            )
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO cupons SET ?', [data])
+        } catch (error) {
+            return error
+        }
+    },
+
+    insertActive: async (data) => {
+        try {
+            await pool.query('INSERT INTO usuario_cupons SET ?', [data])
         } catch (error) {
             return error
         }

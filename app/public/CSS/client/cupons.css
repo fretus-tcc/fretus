@@ -59,7 +59,7 @@ main {
 
 .cupon h1 {
     font-size: 22px;
-    margin-bottom: 7px;
+    /* margin-bottom: 7px; */
 }
 
 .description p {

@@ -70,6 +70,10 @@ router.get('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), function (r
     cuponsController.showCupons(req, res)
 })
 
+router.post('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), cuponsController.validation, function (req, res) {
+    cuponsController.activeCupom(req, res)
+})
+
 /* router.get('/perfil', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente/perfil')
 }) */

@@ -14,33 +14,46 @@
     <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
     
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
     <main>
         <section class="cupons">
             <h1>Cupons</h1>
-            <section class="cupon-input">
-                <input placeholder="Digite o código do cupom de desconto" type="text">
-                <button class="cta" type="button">Enviar</button>
-            </section>
+            <form action="/cliente/cupons" method="POST" class="cupon-input">
+                <input required name="codigo" placeholder="Digite o código do cupom de desconto" type="text" value="<%= valores?.codigo %>">
+                <button class="cta">Enviar</button>
+            </form>
+            <p class="error"><%= erro_validacao?.codigo?.msg %></p>
+
             <form class="cupons-container">
                 <span class="active-cupons">
                     <h2>Ativos</h2>
-                    <section class="cupon">
-                        <section class="content">
-                            <figure class="icon">
-                                <img src="/imgs/client/icon-cupon.svg" alt="">
-                            </figure>
-                            <summary class="description">
-                                <h1>10% de desconto</h1>
-                                <p>A partir de R$10,00</p>
-                            </summary>
-                        </section>
-                        <header class="expirate">
-                            <span>Vence em 22/10/2023</span>
-                        </header>
-                    </section>
+                    <% if (ativos.length > 0) { %>
+                        <% ativos.forEach(cupom => { %>
+                            <section class="cupon">
+                                <section class="content">
+                                    <figure class="icon">
+                                        <img src="/imgs/client/icon-cupon.svg" alt="">
+                                    </figure>
+                                    <summary class="description">
+                                        <h1><%= cupom.porcentagem_cupom %>% de desconto</h1>
+                                    </summary>
+                                </section>
+                                <header class="expirate">
+                                    <span><%= cupom.codigo_cupom %></span>
+                                </header>
+                            </section>
+                        <% }) %>
+                    <% } else { %>
+                        <p>Nenhum cupom ativo</p>
+                    <% } %>
                 </span>
                 <section class="disable-cupons">
                     <h2>Inativos</h2>

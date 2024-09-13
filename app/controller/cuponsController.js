@@ -3,32 +3,68 @@ const { notifyMessages } = require('../util/Funcao')
 
 const { body, validationResult } = require('express-validator')
 
-const quotesController = {
-    // validation: [
-    //     body('titulo')
-    //         .notEmpty().withMessage('Campo não preenchido')
-    //         .isLength({ max: 125 }).withMessage('Campo deve ter no máximo 125 caracteres')
-    //         .custom(async (value, { req }) => {
-    //             const existingTitle = await quotesModel.repeatedTitle(value, req.params.id)
-    //             if (existingTitle) {
-    //                 throw new Error('Título já utilizado!')
-    //             }
-    //         }),
-    //     body('conteudo').notEmpty().withMessage('Campo não preenchido')
-    // ],
+const cuponsController = {
+    validation: [
+        body('codigo')
+            .notEmpty()
+            .withMessage('Código do cupom não preenchido')
+            .bail()
+            .custom(async value => {
+                const [cupom] = await cuponsModel.findByCodigo(value)
+                
+                if (cupom == undefined){
+                    throw new Error('Cupom não encontrado')
+                }
+
+                return true
+            }),
+    ],
     
-    showCupons: async (req, res) => {
+    showCupons: async (req, res, erro_validacao = null) => {
         const { id } = req.session.autenticado
+        
         try {
             
             const [compartilhamento] = await cuponsModel.findCompartilhamento(id)
+            const cupons = await cuponsModel.findActiveByUser(id)
+            const ativos = cupons.filter(cupom => cupom.estado_cupom == 'ativo')
+            console.log(cupons)
 
-            res.render('pages/cliente/cupons', { autenticado: req.session.autenticado, compartilhamento })
+            const msgs = notifyMessages(req, res)
+
+            // Verifica se possui erros
+            if (erro_validacao != null) {
+                return res.render('pages/cliente/cupons', { autenticado: req.session.autenticado, compartilhamento, ativos, erro_validacao, valores: req.body, msgs })
+            }
+
+            res.render('pages/cliente/cupons', { autenticado: req.session.autenticado, compartilhamento, ativos, erro_validacao: null, valores: null, msgs })
         } catch (error) {
+            res.json({ error })
+        }
+    },
+
+    activeCupom: async (req, res) => {
+        const { codigo } = req.body
+        const erros = validationResult(req)
+        
+        if (!erros.isEmpty()) {
+            return cuponsController.showCupons(req, res, erros.mapped())
+        }
+
+        try {
+
+            const [cupom] = await cuponsModel.findByCodigo(codigo)
+            
+            await cuponsModel.insertActive({ id_usuario: req.session.autenticado.id, id_cupom: cupom.id_cupom })
+            req.flash('success', 'Cupom ativado ; Cupom ativado com sucesso')
+            
+            res.redirect('back')
+        } catch (error) {
+            console.log(error)
             res.json({ error })
         }
     },
 
 }
 
-module.exports = quotesController
+module.exports = cuponsController
