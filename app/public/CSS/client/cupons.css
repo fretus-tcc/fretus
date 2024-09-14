@@ -17,6 +17,10 @@ main {
     height: fit-content;
 }
 
+.cupons h1 {
+    font-size: 32px;
+}
+
 .cupons, .cupons-container, .cupons-container > * {
     display: flex;
     flex-direction: column;
@@ -126,6 +130,25 @@ main {
     padding: 8px 10px;
     font-family: var(--font-2);
     font-size: 16px;
+}
+
+.cupon-input input.error-input {
+    border: solid 1px red;
+}
+
+.error-msg {
+    color: red;
+}
+
+.error-img {
+    opacity: .25;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.error-text {
+    opacity: .75;
+    text-align: center;
 }
 
 .cupon-input .cta {

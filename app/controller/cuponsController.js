@@ -9,11 +9,20 @@ const cuponsController = {
             .notEmpty()
             .withMessage('Código do cupom não preenchido')
             .bail()
-            .custom(async value => {
+            .custom(async (value, { req }) => {
                 const [cupom] = await cuponsModel.findByCodigo(value)
-                
+                const { id } = req.session.autenticado
                 if (cupom == undefined){
                     throw new Error('Cupom não encontrado')
+                }
+
+                if (cupom.id_criador == id) {
+                    throw new Error('Cupom não pode ser ativado')
+                }
+
+                const isActive = await cuponsModel.findActiveById(id, cupom.id_cupom)
+                if (isActive.length > 0) {
+                    throw new Error('Cupom já ativado')
                 }
 
                 return true
@@ -26,9 +35,9 @@ const cuponsController = {
         try {
             
             const [compartilhamento] = await cuponsModel.findCompartilhamento(id)
-            const cupons = await cuponsModel.findActiveByUser(id)
+            const cupons = await cuponsModel.findAllActive(id)
             const ativos = cupons.filter(cupom => cupom.estado_cupom == 'ativo')
-            console.log(cupons)
+            // console.log(cupons)
 
             const msgs = notifyMessages(req, res)
 

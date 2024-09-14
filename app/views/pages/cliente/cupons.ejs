@@ -20,6 +20,20 @@
             <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
+
+    <%
+        // const customError = {}
+        if (erro_validacao) {
+            const keys = Object.keys(erro_validacao)
+            keys.forEach(key => {
+                const campoAtual = key
+                const msg = erro_validacao[campoAtual].msg 
+                %>
+                    <script>notify('<%= msg %>', 'Verifique este campo', 'error')</script>
+                <%
+            })
+        }
+    %>
     
     <%- include('../../partial/header-client-shipper.ejs', { isClient: true }) %>
 
@@ -27,10 +41,10 @@
         <section class="cupons">
             <h1>Cupons</h1>
             <form action="/cliente/cupons" method="POST" class="cupon-input">
-                <input required name="codigo" placeholder="Digite o código do cupom de desconto" type="text" value="<%= valores?.codigo %>">
+                <input required class="<%= erro_validacao?.codigo ? 'error-input' : '' %>" name="codigo" placeholder="Digite o código do cupom de desconto" type="text" value="<%= valores?.codigo %>">
                 <button class="cta">Enviar</button>
             </form>
-            <p class="error"><%= erro_validacao?.codigo?.msg %></p>
+            <p class="error-msg"><%= erro_validacao?.codigo?.msg %></p>
 
             <form class="cupons-container">
                 <span class="active-cupons">
@@ -52,9 +66,11 @@
                             </section>
                         <% }) %>
                     <% } else { %>
-                        <p>Nenhum cupom ativo</p>
+                        <img class="error-img" src="/imgs/shipper/error-icon.png" alt="">
+                        <p class="error-text">Nenhum cupom ativo</p>
                     <% } %>
                 </span>
+
                 <section class="disable-cupons">
                     <h2>Inativos</h2>
                     <header class="cupon">
