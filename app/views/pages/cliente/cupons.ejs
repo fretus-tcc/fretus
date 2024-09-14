@@ -29,7 +29,7 @@
                 const campoAtual = key
                 const msg = erro_validacao[campoAtual].msg 
                 %>
-                    <script>notify('<%= msg %>', 'Verifique este campo', 'error')</script>
+                    <script>notify('<%= msg %>', 'Falha ao ativar cupom', 'error')</script>
                 <%
             })
         }
@@ -73,84 +73,53 @@
 
                 <section class="disable-cupons">
                     <h2>Inativos</h2>
-                    <header class="cupon">
-                        <section class="content">
-                            <figure class="icon">
-                                <img src="/imgs/client/icon-cupon.svg" alt="">
-                            </figure>
-                            <summary class="description">
-                                <h1>10% de desconto</h1>
-                                <p>A partir de R$10,00</p>
-                            </summary>
+                    <% for (let i = 0; i < 3; i++) { %>
+                        <section class="cupon">
+                            <section class="content">
+                                <figure class="icon">
+                                    <img src="/imgs/client/icon-cupon.svg" alt="">
+                                </figure>
+                                <summary class="description">
+                                    <h1>10% de desconto</h1>
+                                </summary>
+                            </section>
+                            <header class="expirate">
+                                <span>codigo cupom</span>
+                            </header>
                         </section>
-                        <header class="expirate">
-                            <span>Vence em 22/10/2023</span>
-                        </header>
-                    </header>
-                    <section class="cupon">
-                        <section class="content">
-                            <figure class="icon">
-                                <img src="/imgs/client/icon-cupon.svg" alt="">
-                            </figure>
-                            <summary class="description">
-                                <h1>10% de desconto</h1>
-                                <p>A partir de R$10,00</p>
-                            </summary>
-                        </section>
-                        <header class="expirate">
-                            <span>Vence em 22/10/2023</span>
-                        </header>
-                    </section>
-                    <section class="cupon">
-                        <section class="content">
-                            <figure class="icon">
-                                <img src="/imgs/client/icon-cupon.svg" alt="">
-                            </figure>
-                            <summary class="description">
-                                <h1>10% de desconto</h1>
-                                <p>A partir de R$10,00</p>
-                            </summary>
-                        </section>
-                        <header class="expirate">
-                            <span>Vence em 22/10/2023</span>
-                        </header>
-                    </section>
-                    <section class="cupon">
-                        <section class="content">
-                            <figure class="icon">
-                                <img src="/imgs/client/icon-cupon.svg" alt="">
-                            </figure>
-                            <summary class="description">
-                                <h1>10% de desconto</h1>
-                                <p>A partir de R$10,00</p>
-                            </summary>
-                        </section>
-                        <header class="expirate">
-                            <span>Vence em 22/10/2023</span>
-                        </header>
-                    </section>
+                    <% } %>
                 </section>
             </form>
         </section>
+
         <section class="invite-friends">
-            <h1>Convide seus amigos</h1>
-            <p>Convidando um amigo, você e ele ganham desconto na próxima entrega.</p>
-            <section class="cupon-input">
-                <input class="paste-input" readonly type="text" value="<%= compartilhamento.codigo_cupom %>">
-                <button class="cta paste-cupon" type="button">Copiar</button>
-            </section>
-            <section class="social-media">
-                <!-- <figure class="icon twitter">
-                    <img src="/imgs/client/icon-twitter.svg" alt="">
-                </figure> -->
-                <a href="https://wa.me/?text=Use meu cupom <%= compartilhamento.codigo_cupom %> e ganhe desconto na sua entrega com a Fretus" target="_blank" class="icon whatsapp">
-                    <img src="/imgs/client/icon-whatsapp.svg" alt="">
-                </a>
-                <a href="https://www.facebook.com/?locale=pt_BR" target="_blank" class="icon facebook">
-                    <img src="/imgs/client/icon-facebook.svg" alt="">
-                </a>
-            </section>
+            <% if (compartilhamento.status_cupom == 0) { %>
+                <h1>Obrigado por ter entrado na Fretus</h1>
+                <p>Agora você pode usar esse cupom em alguma entrega</p>
+            <% } else if (compartilhamento.id_compartilhado != null) { %>
+                <h1>Obrigado por compartilhar a Fretus</h1>
+                <p>Como recompensa liberamos um cupom para você</p>
+            <% } else { %>
+                <h1>Convide seus amigos</h1>
+                <p>Convidando um amigo, você e ele ganham desconto na próxima entrega.</p>
+                <section class="cupon-input">
+                    <input class="paste-input" readonly type="text" value="<%= compartilhamento.codigo_cupom %>">
+                    <button class="cta paste-cupon" type="button">Copiar</button>
+                </section>
+                <section class="social-media">
+                    <!-- <figure class="icon twitter">
+                        <img src="/imgs/client/icon-twitter.svg" alt="">
+                    </figure> -->
+                    <a href="https://wa.me/?text=Use meu cupom <%= compartilhamento.codigo_cupom %> e ganhe desconto na sua entrega com a Fretus" target="_blank" class="icon whatsapp">
+                        <img src="/imgs/client/icon-whatsapp.svg" alt="">
+                    </a>
+                    <a href="https://www.facebook.com/?locale=pt_BR" target="_blank" class="icon facebook">
+                        <img src="/imgs/client/icon-facebook.svg" alt="">
+                    </a>
+                </section>
+            <% } %>
         </section>
+
     </main>
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>

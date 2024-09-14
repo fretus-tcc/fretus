@@ -16,13 +16,13 @@ const cuponsController = {
                     throw new Error('Cupom não encontrado')
                 }
 
-                if (cupom.id_criador == id) {
-                    throw new Error('Cupom não pode ser ativado')
-                }
-
                 const isActive = await cuponsModel.findActiveById(id, cupom.id_cupom)
                 if (isActive.length > 0) {
                     throw new Error('Cupom já ativado')
+                }
+                
+                if (cupom.id_criador == id || cupom.id_compartilhado != null) {
+                    throw new Error('Cupom não pode ser ativado')
                 }
 
                 return true
@@ -54,6 +54,7 @@ const cuponsController = {
 
     activeCupom: async (req, res) => {
         const { codigo } = req.body
+        const { id } = req.session.autenticado
         const erros = validationResult(req)
         
         if (!erros.isEmpty()) {
@@ -63,8 +64,20 @@ const cuponsController = {
         try {
 
             const [cupom] = await cuponsModel.findByCodigo(codigo)
+            const [compartilhamento] = await cuponsModel.findCompartilhamento(id)
             
-            await cuponsModel.insertActive({ id_usuario: req.session.autenticado.id, id_cupom: cupom.id_cupom })
+            await cuponsModel.insertActive({ id_usuario: id, id_cupom: cupom.id_cupom })
+            if (cupom.tipo_cupom == 2) {
+                // ativar cupom para usuario compartilhador
+                await cuponsModel.insertActive({ id_usuario: cupom.id_criador, id_cupom: cupom.id_cupom })
+
+                // inserindo id usuario entrou
+                await cuponsModel.update({ id_compartilhado: id }, cupom.id_cupom)
+
+                // desativando cupom compartilhamento usuario que entrou
+                await cuponsModel.update({ status_cupom: 0 }, compartilhamento.id_cupom)
+            }
+
             req.flash('success', 'Cupom ativado ; Cupom ativado com sucesso')
             
             res.redirect('back')
