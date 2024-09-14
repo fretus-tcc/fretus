@@ -144,6 +144,9 @@ VALUES ('4', '30', x'89504E470D0A1A0A0000000D49484452000000100000001008020000009
 INSERT INTO veiculos (tipo_veiculo, placa, modelo_veiculo, id_entregador, foto_veiculo) 
 VALUES ('moto', 'test-0110', 'bis', '2', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082');
 
+INSERT INTO usuario (nome_usuario, cpf_usuario, telefone_usuario, data_usuario, email_usuario, senha_usuario, tipo_usuario, foto_de_perfil, descricao_usuario)
+VALUES ('Cliente 2', '542.720.530-60', '(87) 98033-3415', '2006-01-01', 'teste11@teste.com', '$2a$10$pcfJQWXoSsasBNM2HrLMLeEhB3I9t9RElpMarZB6kPWUqgoTQ/oJS', '1', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 'Cliente necessitando de entregas');
+
 CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.`CEP` (
   `id_cep` INT NOT NULL AUTO_INCREMENT,
   `complemento` VARCHAR(45) NOT NULL,
@@ -160,10 +163,68 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.`CEP` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.cupons (
+  id_cupom INT NOT NULL AUTO_INCREMENT,
+  tipo_cupom ENUM('1', '2') NOT NULL,
+  codigo_cupom VARCHAR(45) NOT NULL,
+  porcentagem_cupom INT NOT NULL,
+  /* prazo_cupon DATETIME NOT NULL, */
+  uso_restante_cupom INT NULL,
+  status_cupom INT NOT NULL DEFAULT '1',
+  id_criador INT NULL,
+  id_compartilhado INT NULL,
+  /* id_usuario_utilizador INT NOT NULL, */
+  PRIMARY KEY (id_cupom),
+  UNIQUE INDEX IDCUPON_UNIQUE (id_cupom ASC) VISIBLE,
+  UNIQUE INDEX CODIGOCUPON_UNIQUE (codigo_cupom ASC) VISIBLE,
+  INDEX fk_CUPONS_USUARIOS1_idx (id_criador ASC) VISIBLE,
+  /* INDEX fk_CUPONS_USUARIOS2_idx (id_usuario_utilizador ASC) VISIBLE, */
+  CONSTRAINT fk_CUPONS_USUARIOS1
+    FOREIGN KEY (id_criador)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_CUPONS_USUARIOS2
+    FOREIGN KEY (id_compartilhado)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION /* ,
+  CONSTRAINT fk_CUPONS_USUARIOS2
+    FOREIGN KEY (id_usuario_utilizador)
+    REFERENCES `bzt6iht1cder66rlnctv`.USUARIOS (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION */)
+ENGINE = InnoDB;
+
+INSERT INTO cupons (tipo_cupom, codigo_cupom, porcentagem_cupom) VALUES (1, 'PRIMEIRAENTREGA15', 15);
+INSERT INTO cupons (tipo_cupom, codigo_cupom, porcentagem_cupom, id_criador) VALUES (2, '91c38c2e-2ed7-40b3-90d2-312f0dc9fbfc', 15, 2);
+INSERT INTO cupons (tipo_cupom, codigo_cupom, porcentagem_cupom, id_criador) VALUES (2, '6c5ec3e7-962e-4cdd-a78b-bf9d9aa263cb', 15, 5);
+
+CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.usuario_cupons (
+  id_usuario INT NOT NULL,
+  id_cupom INT NOT NULL,
+  estado_cupom ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
+  PRIMARY KEY (id_usuario, id_cupom),
+  INDEX fk_USUARIOS_has_CUPONS_CUPONS1_idx (id_cupom ASC) VISIBLE,
+  INDEX fk_USUARIOS_has_CUPONS_USUARIOS1_idx (id_usuario ASC) VISIBLE,
+  CONSTRAINT fk_USUARIOS_has_CUPONS_USUARIOS1
+    FOREIGN KEY (id_usuario)
+    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_USUARIOS_has_CUPONS_CUPONS1
+    FOREIGN KEY (id_cupom)
+    REFERENCES `bzt6iht1cder66rlnctv`.cupons (id_cupom)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.pedidos (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   id_cliente INT NOT NULL,
   id_entregador INT NULL,
+  id_cupom INT NULL,
   partida_pedido VARCHAR(400) NOT NULL,
   destino_pedido VARCHAR(400) NOT NULL,
   latitude_partida DECIMAL(8,6) NOT NULL,
@@ -185,6 +246,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.pedidos (
   UNIQUE INDEX IDPEDIDO_UNIQUE (id_pedido ASC) VISIBLE,
   INDEX fk_PEDIDOS_USUARIOS1_idx (id_cliente ASC) VISIBLE,
   INDEX fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1_idx (id_entregador ASC) VISIBLE,
+  INDEX fk_PEDIDOS_DETALHAMENTO_ENTREGADOR2_idx (id_cupom ASC) VISIBLE,
   CONSTRAINT fk_PEDIDOS_USUARIOS1
     FOREIGN KEY (id_cliente)
     REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
@@ -193,6 +255,11 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.pedidos (
   CONSTRAINT fk_PEDIDOS_DETALHAMENTO_ENTREGADOR1
     FOREIGN KEY (id_entregador)
     REFERENCES bzt6iht1cder66rlnctv.usuario (id_usuario)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_PEDIDOS_DETALHAMENTO_ENTREGADOR2
+    FOREIGN KEY (id_cupom)
+    REFERENCES bzt6iht1cder66rlnctv.cupons (id_cupom)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -272,61 +339,6 @@ ENGINE = InnoDB; */
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB; */
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.cupons (
-  id_cupom INT NOT NULL AUTO_INCREMENT,
-  tipo_cupom ENUM('1', '2') NOT NULL,
-  codigo_cupom VARCHAR(45) NOT NULL,
-  porcentagem_cupom INT NOT NULL,
-  /* prazo_cupon DATETIME NOT NULL, */
-  uso_restante_cupom INT NULL,
-  status_cupom INT NOT NULL DEFAULT '1',
-  id_criador INT NULL,
-  id_compartilhado INT NULL,
-  /* id_usuario_utilizador INT NOT NULL, */
-  PRIMARY KEY (id_cupom),
-  UNIQUE INDEX IDCUPON_UNIQUE (id_cupom ASC) VISIBLE,
-  UNIQUE INDEX CODIGOCUPON_UNIQUE (codigo_cupom ASC) VISIBLE,
-  INDEX fk_CUPONS_USUARIOS1_idx (id_criador ASC) VISIBLE,
-  /* INDEX fk_CUPONS_USUARIOS2_idx (id_usuario_utilizador ASC) VISIBLE, */
-  CONSTRAINT fk_CUPONS_USUARIOS1
-    FOREIGN KEY (id_criador)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_CUPONS_USUARIOS2
-    FOREIGN KEY (id_compartilhado)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION /* ,
-  CONSTRAINT fk_CUPONS_USUARIOS2
-    FOREIGN KEY (id_usuario_utilizador)
-    REFERENCES `bzt6iht1cder66rlnctv`.USUARIOS (id_usuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION */)
-ENGINE = InnoDB;
-
-INSERT INTO cupons (tipo_cupom, codigo_cupom, porcentagem_cupom) VALUES (1, 'PRIMEIRAENTREGA15', 15);
-INSERT INTO cupons (tipo_cupom, codigo_cupom, porcentagem_cupom, id_criador) VALUES (2, '91c38c2e-2ed7-40b3-90d2-312f0dc9fbfc', 15, 2);
-
-CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.usuario_cupons (
-  id_usuario INT NOT NULL,
-  id_cupom INT NOT NULL,
-  estado_cupom ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
-  PRIMARY KEY (id_usuario, id_cupom),
-  INDEX fk_USUARIOS_has_CUPONS_CUPONS1_idx (id_cupom ASC) VISIBLE,
-  INDEX fk_USUARIOS_has_CUPONS_USUARIOS1_idx (id_usuario ASC) VISIBLE,
-  CONSTRAINT fk_USUARIOS_has_CUPONS_USUARIOS1
-    FOREIGN KEY (id_usuario)
-    REFERENCES `bzt6iht1cder66rlnctv`.usuario (id_usuario)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_USUARIOS_has_CUPONS_CUPONS1
-    FOREIGN KEY (id_cupom)
-    REFERENCES `bzt6iht1cder66rlnctv`.cupons (id_cupom)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 /* CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`USUARIOS_has_CUPONS` (
   `USUARIOS_id_usuario` INT NOT NULL,
