@@ -2,6 +2,7 @@ const pedidosModel = require('../models/pedidosModel')
 const favoritadosModel = require('../models/favoritadosModel')
 const admCadastroModel = require('../models/admCadastroModel')
 const pagamentoModel = require('../models/pagamentoModel')
+const cuponsModel = require('../models/cuponsModel')
 const { notifyMessages, calcularPrecoEntrega } = require('../util/Funcao')
 
 const fetch = require('node-fetch')
@@ -86,9 +87,10 @@ const pedidosController = {
     createPedido: async (req, res) => {
         // console.table(req.body);
         const erros = validationResult(req)
+        const cupons = await cuponsModel.findAllPayment(req.session.autenticado.id)
         if (!erros.isEmpty()) {
             console.log(erros.mapped());
-            return res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: erros.mapped(), msgs: [], dados: req.body, preco: null, loading: false, id_pedido: null })
+            return res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: erros.mapped(), msgs: [], cupons, dados: req.body, preco: null, loading: false, id_pedido: null })
         }
 
         try {
@@ -123,7 +125,7 @@ const pedidosController = {
             const [result] = await pedidosModel.insert(data)
             const id_pedido = result.insertId
             
-            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs: [], dados: req.body, preco: preco_pedido, loading: true, id_pedido })
+            res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs: [], cupons, dados: req.body, preco: preco_pedido, loading: true, id_pedido })
         } catch (error) {
             console.log(error)
             res.json({ error })

@@ -36,6 +36,21 @@ const cuponsModel = {
         }
     },
 
+    findAllPayment: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT c.*, uc.estado_cupom FROM cupons AS c ' +
+                'INNER JOIN usuario_cupons AS uc ' +
+                'ON c.id_cupom = uc.id_cupom ' +
+                'WHERE uc.id_usuario = ? AND uc.estado_cupom = "ativo" AND c.status_cupom = 1', [id]
+            )
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     findActiveById: async (id_usuario, id_cupom) => {
         try {
             const [result] = await pool.query('SELECT * FROM usuario_cupons WHERE id_usuario = ? AND id_cupom = ?', [id_usuario, id_cupom])

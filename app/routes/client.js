@@ -11,13 +11,15 @@ const pagamentoController = require('../controller/pagamentoController')
 const avaliacoesController = require('../controller/avaliacoesController')
 const denunciasController = require('../controller/denunciasController')
 const cuponsController = require('../controller/cuponsController')
+const cuponsModel = require('../models/cuponsModel')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
-router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+router.get('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), async function (req, res) {
     // formatando mensagens notificacao
     const msgs = notifyMessages(req, res)
-    res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs, dados: null, preco: null, loading: false, id_pedido: null })
+    const cupons = await cuponsModel.findAllPayment(req.session.autenticado.id)
+    res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs, cupons, dados: null, preco: null, loading: false, id_pedido: null })
 })
 
 router.post('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'), pedidosController.validationPedido, function (req, res) {

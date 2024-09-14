@@ -12,7 +12,7 @@ const cuponsController = {
             .custom(async (value, { req }) => {
                 const [cupom] = await cuponsModel.findByCodigo(value)
                 const { id } = req.session.autenticado
-                if (cupom == undefined){
+                if (cupom == undefined) {
                     throw new Error('Cupom não encontrado')
                 }
 
