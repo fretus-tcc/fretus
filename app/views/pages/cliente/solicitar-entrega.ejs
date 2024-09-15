@@ -165,9 +165,9 @@
                         <span class="error"><%= erros?.veiculo?.msg %></span>
                     </section>
 
-                    <% if (cupons.length > 0) { %>
-                        <section>
-                            <h2>Cupons</h2>
+                    <section>
+                        <h2>Cupons</h2>
+                        <% if (cupons.length > 0) { %>
                             <select class="select-cupon" name="cupon">
                                 <option value="null">Selecione o cupom</option>
                                 <% cupons.forEach(cupom => { %>
@@ -175,8 +175,10 @@
                                 <% }) %>
                             </select>
                             <span class="error"><%= erros?.cupon?.msg %></span>
-                        </section>
-                    <% } %>
+                        <% } else { %>
+                            <p class="cupon-message">Nenhum cupom ativo no momento. <a href="/cliente/cupons">Clique aqui</a> para ativá-los</p>
+                        <% } %>
+                    </section>
 
                     <input type="submit" value="Continuar" class="cta entrega-submit">
                 </form>

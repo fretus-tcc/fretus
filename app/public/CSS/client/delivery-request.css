@@ -154,6 +154,14 @@ main {
     color: #333;
 }
 
+.cupon-message {
+    color: #333;
+}
+
+.cupon-message a {
+    color: var(--orange);
+}
+
 form > .cta {
     width: 100%;
     border-radius: 5px;
