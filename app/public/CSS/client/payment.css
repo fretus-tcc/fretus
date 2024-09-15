@@ -6,6 +6,7 @@
 
 .payment-container .info {
     margin-top: 20px;
+    margin-bottom: 36px;
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -32,11 +33,19 @@
 }
 
 .payment-container .total {
-    margin-top: 38px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     font-size: 24px;
     font-weight: 700;
+}
+
+.payment-container .total.sub {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .payment-container .pay-btn {

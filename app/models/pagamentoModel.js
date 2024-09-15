@@ -7,11 +7,29 @@ const preference = new Preference(client)
 
 const pagamentoModel = {
     
+
+    findInfoById: async (id) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT *, c.porcentagem_cupom FROM pedidos AS p ' +
+                'LEFT JOIN cupons AS c ' +
+                'ON p.id_cupom = c.id_cupom ' +
+                'WHERE p.id_pedido = ?', [id])
+            return result
+        } catch (error) {
+            return error
+        }
+    },
+
     // Cria uma preferencia com o MP (Mercado Pago)
     createPreferenceMP: async (id_pedido, uuid) => {
         try {
 
-            const [pedido] = await pedidosModel.findById(id_pedido)
+            const [pedido] = await pagamentoModel.findInfoById(id_pedido)
+            let preco_pedido = pedido.preco_pedido
+            if (pedido.porcentagem_cupom != null) {
+                preco_pedido -= (pedido.porcentagem_cupom / 100) * preco_pedido
+            }
 
             const response = await preference.create({
                 body: {
@@ -22,7 +40,7 @@ const pagamentoModel = {
                             picture_url: 'https://fretus.onrender.com/imgs/logotca.png',
                             quantity: 1,
                             currency_id: 'BRL',
-                            unit_price: Number(pedido.preco_pedido),
+                            unit_price: Number(preco_pedido),
                         }
                     ],
                     back_urls: {

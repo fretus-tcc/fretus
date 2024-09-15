@@ -28,11 +28,13 @@ const pedidosModel = {
     findShipperAccept: async (id) => {
         try {
             const [result] = await pool.query(
-                'SELECT * FROM pedidos as p ' +
+                'SELECT p.*, u.*, pg.*, c.porcentagem_cupom FROM pedidos as p ' +
                 'LEFT JOIN usuario as u ' +
                 'ON p.id_entregador = u.id_usuario ' +
                 'LEFT JOIN pagamentos as pg ' +
                 'ON p.id_pedido = pg.id_pedido ' +
+                'LEFT JOIN cupons as c ' +
+                'ON p.id_cupom = c.id_cupom ' +
                 'WHERE p.id_pedido = ?', [id])
             return result
         } catch (error) {
@@ -44,9 +46,11 @@ const pedidosModel = {
     findPaginate: async (id, vehicle, pagina, total) => {
         try {
             const [result] = await pool.query(
-                'SELECT p.* FROM pedidos as p ' +
+                'SELECT p.*, c.porcentagem_cupom FROM pedidos as p ' +
                 'LEFT JOIN entregadores_pedidos AS ep ' +
                 'ON p.id_pedido = ep.id_pedido AND ep.id_entregador = ? ' +
+                'LEFT JOIN cupons AS c ' +
+                'ON p.id_cupom = c.id_cupom ' +
                 'WHERE ep.status_resposta IS NULL AND p.veiculo_pedido = ? ' +
                 'ORDER BY p.data_solicitacao DESC ' +
                 'LIMIT ?, ?', [id, vehicle, pagina, total])
@@ -74,9 +78,11 @@ const pedidosModel = {
     findByUser: async (id, pagina, total) => {
         try {
             const [result] = await pool.query(
-                'SELECT p.*, pg.estado_pagamento, f.*, a.id_avaliacao, d.id_denunciado FROM usuario AS u ' +
+                'SELECT p.*, pg.estado_pagamento, f.*, a.id_avaliacao, d.id_denunciado, c.porcentagem_cupom FROM usuario AS u ' +
                 'INNER JOIN pedidos AS p ' +
                 'ON u.id_usuario = p.id_cliente ' +
+                'LEFT JOIN cupons AS c ' +
+                'ON p.id_cupom = c.id_cupom ' +
                 'LEFT JOIN pagamentos AS pg ' +
                 'ON p.id_pedido = pg.id_pedido ' +
                 'LEFT JOIN favoritados AS f ' +
