@@ -38,16 +38,16 @@ const cuponsController = {
             const [compartilhamento] = await cuponsModel.findCompartilhamento(id)
             const cupons = await cuponsModel.findAllActive(id)
             const ativos = cupons.filter(cupom => cupom.estado_cupom == 'ativo')
-            // console.log(cupons)
+            const inativos = cupons.filter(cupom => cupom.estado_cupom == 'inativo')
 
             const msgs = notifyMessages(req, res)
 
             // Verifica se possui erros
             if (erro_validacao != null) {
-                return res.render('pages/cliente/cupons', { autenticado: req.session.autenticado, compartilhamento, ativos, erro_validacao, valores: req.body, msgs })
+                return res.render('pages/cliente/cupons', { autenticado: req.session.autenticado, compartilhamento, ativos, inativos, erro_validacao, valores: req.body, msgs })
             }
 
-            res.render('pages/cliente/cupons', { autenticado: req.session.autenticado, compartilhamento, ativos, erro_validacao: null, valores: null, msgs })
+            res.render('pages/cliente/cupons', { autenticado: req.session.autenticado, compartilhamento, ativos, inativos, erro_validacao: null, valores: null, msgs })
         } catch (error) {
             res.json({ error })
         }

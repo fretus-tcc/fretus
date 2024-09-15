@@ -71,24 +71,27 @@
                     <% } %>
                 </span>
 
-                <section class="disable-cupons">
-                    <h2>Inativos</h2>
-                    <% for (let i = 0; i < 3; i++) { %>
-                        <section class="cupon">
-                            <section class="content">
-                                <figure class="icon">
-                                    <img src="/imgs/client/icon-cupon.svg" alt="">
-                                </figure>
-                                <summary class="description">
-                                    <h1>10% de desconto</h1>
-                                </summary>
+                <% if (inativos.length > 0) { %>
+                    <section class="disable-cupons">
+                        <h2>Inativos</h2>
+                        <% inativos.forEach(cupom => { %>
+                            <section class="cupon">
+                                <section class="content">
+                                    <figure class="icon">
+                                        <img src="/imgs/client/icon-cupon.svg" alt="">
+                                    </figure>
+                                    <summary class="description">
+                                        <h1><%= cupom.porcentagem_cupom %>% de desconto</h1>
+                                    </summary>
+                                </section>
+                                <header class="expirate">
+                                    <span><%= cupom.codigo_cupom %></span>
+                                </header>
                             </section>
-                            <header class="expirate">
-                                <span>codigo cupom</span>
-                            </header>
-                        </section>
-                    <% } %>
-                </section>
+                        <% }) %>
+                    </section>
+                <% } %>
+                
             </form>
         </section>
 
