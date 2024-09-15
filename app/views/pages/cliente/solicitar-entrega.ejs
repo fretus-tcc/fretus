@@ -228,6 +228,16 @@
 
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
 
+    <% 
+        const porcentagens = []
+        cupons.forEach(element => {
+            porcentagens.push(element.porcentagem_cupom)
+        })
+    %>
+    <script>
+       const porcentagens = '<%= porcentagens %>'.split(',')
+       porcentagens.unshift('')
+    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/JS/burguer.js"></script>
     <!-- <script src="/JS/client/vehicles-carousel.js"></script> -->

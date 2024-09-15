@@ -40,6 +40,10 @@ submit.addEventListener('click', (e) => {
 
 const setPrice = async (distance) => {
     const typeVehicle = document.querySelector('input[name="veiculo"]:checked').value // pega o tipo do veiculo
+    const cupom = document.querySelector('.select-cupon')
+    const porcentagem = (porcentagens[cupom.selectedIndex])
+    // console.log(porcentagens, porcentagem)
+
     const f = new Intl.NumberFormat('pt-br', {
         currency: 'BRL',
         style: 'currency'
@@ -52,7 +56,14 @@ const setPrice = async (distance) => {
     // tira o loading antes do preco ser exibido
     loadPrice.classList.add('hidden')
     
-    priceContainer.textContent = price // coloca o preco no popup
+    priceContainer.innerHTML = price // coloca o preco no popup
+
+    // muda o preco caso tenha cupom
+    if (porcentagem != undefined) {
+      const novoPreco = preco - ((porcentagem / 100) * preco)
+      const newPrice = f.format(novoPreco)
+      priceContainer.innerHTML = `<strike>${price}</strike> ${newPrice}`
+    }
 }
     
 backForm.addEventListener('click', () => {
