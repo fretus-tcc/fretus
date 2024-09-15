@@ -147,7 +147,6 @@ main {
     height: 50px;
     padding: 10px;
     outline: none;
-    margin-bottom: 20px;
     border: none;
     border-radius: 5px;
     font-family: var(--font-2);
@@ -158,6 +157,7 @@ main {
 form > .cta {
     width: 100%;
     border-radius: 5px;
+    margin-top: 15px;
 }
 
 main .return-form {

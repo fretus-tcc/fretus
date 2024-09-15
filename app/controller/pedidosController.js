@@ -80,7 +80,17 @@ const pedidosController = {
                 }
 
                 return true
-            })
+            }),
+
+        body('cupon')
+            .custom(async (value, { req }) => {
+                const isActive = await cuponsModel.findActiveById(req.session.autenticado.id, value)
+                if (isActive.length <= 0) {
+                    throw new Error('Cupom não foi ativado')
+                }
+
+                return true
+            }),
     ],
     
     /* Solicitar Entrega */
@@ -109,6 +119,7 @@ const pedidosController = {
             // formatando campos para salvar no banco
             const data = {
                 id_cliente: req.session.autenticado.id,
+                id_cupom: req.body.cupon == 'null' ? null : req.body.cupon,
                 latitude_partida,
                 longitude_partida,
                 latitude_destino,

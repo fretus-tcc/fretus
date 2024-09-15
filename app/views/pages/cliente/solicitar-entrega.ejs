@@ -169,11 +169,12 @@
                         <section>
                             <h2>Cupons</h2>
                             <select class="select-cupon" name="cupon">
-                                <option value="">Selecione o cupom</option>
+                                <option value="null">Selecione o cupom</option>
                                 <% cupons.forEach(cupom => { %>
                                     <option <%= dados?.cupon == cupom.id_cupom ? 'selected' : '' %> value="<%= cupom.id_cupom %>"><%= cupom.porcentagem_cupom %>% de desconto - <%= cupom.codigo_cupom %></option>
                                 <% }) %>
                             </select>
+                            <span class="error"><%= erros?.cupon?.msg %></span>
                         </section>
                     <% } %>
 
