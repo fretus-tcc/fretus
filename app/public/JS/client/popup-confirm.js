@@ -59,7 +59,7 @@ const setPrice = async (distance) => {
     priceContainer.innerHTML = price // coloca o preco no popup
 
     // muda o preco caso tenha cupom
-    if (porcentagem != undefined) {
+    if (porcentagem != '') {
       const novoPreco = preco - ((porcentagem / 100) * preco)
       const newPrice = f.format(novoPreco)
       priceContainer.innerHTML = `<strike>${price}</strike> ${newPrice}`
