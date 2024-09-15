@@ -66,8 +66,13 @@
                             </section>
                         <% }) %>
                     <% } else { %>
-                        <img class="error-img" src="/imgs/shipper/error-icon.png" alt="">
-                        <p class="error-text">Nenhum cupom ativo</p>
+                        <% if (inativos.find((item) => item.codigo_cupom == 'PRIMEIRAENTREGA15') == null) { %>
+                            <img class="error-img" src="/imgs/shipper/error-icon.png" alt="">
+                            <p class="error-text">Ative o cupom PRIMEIRAENTREGA15, para ganhar 15% de desconto em sua entrega</p>
+                        <% } else { %>
+                            <img class="error-img" src="/imgs/shipper/error-icon.png" alt="">
+                            <p class="error-text">Nenhum cupom ativo</p>
+                        <% } %>
                     <% } %>
                 </span>
 
