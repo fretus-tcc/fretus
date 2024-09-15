@@ -11,6 +11,16 @@ const cuponsModel = {
         }
     },
 
+    findById: async (id_cupom) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM cupons WHERE id_cupom = ? AND status_cupom = 1', [id_cupom])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     findByCodigo: async (codigo) => {
         try {
             const [result] = await pool.query('SELECT * FROM cupons WHERE codigo_cupom = ? AND status_cupom = 1', [codigo])
@@ -80,6 +90,14 @@ const cuponsModel = {
     update: async (data, id) => {
         try {
             await pool.query('UPDATE cupons SET ? WHERE id_cupom = ?', [data, id])
+        } catch (error) {
+            return error
+        }
+    },
+
+    updateActive: async (data, id_usuario, id_cupom) => {
+        try {
+            await pool.query('UPDATE usuario_cupons SET ? WHERE id_usuario = ? AND id_cupom = ?', [data, id_usuario, id_cupom])
         } catch (error) {
             return error
         }

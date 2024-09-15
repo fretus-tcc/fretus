@@ -83,10 +83,13 @@ const pedidosController = {
             }),
 
         body('cupon')
+            .optional()
             .custom(async (value, { req }) => {
-                const isActive = await cuponsModel.findActiveById(req.session.autenticado.id, value)
-                if (isActive.length <= 0) {
-                    throw new Error('Cupom não foi ativado')
+                if (value != 'null') {
+                    const isActive = await cuponsModel.findActiveById(req.session.autenticado.id, value)
+                    if (isActive.length <= 0) {
+                        throw new Error('Cupom não foi ativado')
+                    }
                 }
 
                 return true
@@ -111,7 +114,7 @@ const pedidosController = {
             const resObj = await fetch(`https://mapbox-hidden-api.vercel.app/routes?startLng=${longitude_partida}&startLat=${latitude_partida}&endLng=${longitude_destino}&endLat=${latitude_destino}`, { agent })
             const dataRes = await resObj.json()
             const distancia = dataRes.routes[0].distance
-            const preco_pedido = await calcularPrecoEntrega(req.body.veiculo, distancia / 1000, latitude_destino, longitude_destino)
+            let preco_pedido = await calcularPrecoEntrega(req.body.veiculo, distancia / 1000, latitude_destino, longitude_destino)
 
             // formatando data e hora agendamento
             const data_agendamento = `${req.body.data_agendamento} ${req.body.hora_agendamento}`
@@ -135,6 +138,15 @@ const pedidosController = {
             }
             const [result] = await pedidosModel.insert(data)
             const id_pedido = result.insertId
+            
+            if (req.body.cupon != undefined && req.body.cupon != 'null') {
+                // alterar estado cupom para inativo
+                await cuponsModel.updateActive({ estado_cupom: 'inativo' }, req.session.autenticado.id, req.body.cupon)
+                
+                // alterando preco para com o cupom ativo
+                const [cupom] = await cuponsModel.findById(req.body.cupon)
+                preco_pedido -= (cupom.porcentagem_cupom / 100) * preco_pedido
+            }
             
             res.render('pages/cliente/solicitar-entrega', { autenticado: req.session.autenticado, erros: null, msgs: [], cupons, dados: req.body, preco: preco_pedido, loading: true, id_pedido })
         } catch (error) {
