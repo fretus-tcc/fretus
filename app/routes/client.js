@@ -47,6 +47,10 @@ router.post('/denuncias/:id_denunciado', verificarUsuAutorizado([1, 2], 'pages/r
     denunciasController.createDenuncia(req, res)
 })
 
+router.post('/desativar-cupom/:id_cupom/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    cuponsController.disableCupom(req, res)
+})
+
 router.get('/pagamento/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     pagamentoController.showPagamento(req, res)
 })
@@ -58,7 +62,6 @@ router.post('/pagamento/:id', verificarUsuAutorizado([1], 'pages/restrito'), fun
 router.get('/feedback-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     pagamentoController.showFeedback(req, res)
 })
-
 
 router.get('/historico', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     pedidosController.listPedidosByUser(req, res)

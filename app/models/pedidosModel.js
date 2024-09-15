@@ -28,7 +28,7 @@ const pedidosModel = {
     findShipperAccept: async (id) => {
         try {
             const [result] = await pool.query(
-                'SELECT p.*, u.*, pg.*, c.porcentagem_cupom FROM pedidos as p ' +
+                'SELECT p.*, u.*, pg.*, c.id_cupom, c.porcentagem_cupom FROM pedidos as p ' +
                 'LEFT JOIN usuario as u ' +
                 'ON p.id_entregador = u.id_usuario ' +
                 'LEFT JOIN pagamentos as pg ' +
@@ -161,15 +161,15 @@ const pedidosModel = {
         }
     },
 
-    /* update: async (data, id) => {
+    update: async (data, id) => {
         try {
-            await pool.query('UPDATE duvidas SET ? WHERE id_duvida = ?', [data, id])
+            await pool.query('UPDATE pedidos SET ? WHERE id_pedido = ?', [data, id])
         } catch (error) {
             return error
         }
     },
 
-    delete: async (id) => {
+    /* delete: async (id) => {
         try {
             await pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
         } catch (error) {

@@ -106,10 +106,24 @@
                                         <img class="rate-call" src="/imgs/client/star-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>">
                                     <% } %>
                                 <% } else if (pedido.id_entregador) { %>
+                                    <% if (pedido.porcentagem_cupom != null) { %>
+                                        <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
+                                            <button class="accept-btn">
+                                                <img title="Retirar cupom" src="/imgs/client/icon-cupon-close.svg" alt="">
+                                            </button>
+                                        </form>
+                                    <% } %>
                                     <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
                                         <img src="/imgs/client/pay-icon.svg" alt="">
                                     </a>
                                 <% } else { %>
+                                    <% if (pedido.porcentagem_cupom != null) { %>
+                                        <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
+                                            <button class="accept-btn">
+                                                <img title="Retirar cupom" src="/imgs/client/icon-cupon-close.svg" alt="">
+                                            </button>
+                                        </form>
+                                    <% } %>
                                     <a href="/cliente/escolher-entregador/<%= pedido.id_pedido %>">
                                         <img src="/imgs/client/check-icon.svg" alt="">
                                     </a>
@@ -158,54 +172,6 @@
                             </article>
                         <% }) %>
                     <% } %>
-                    
-                    <!-- <article class="products">
-                        <img src="../../imgs/historico/2.jpg" alt="" class="photo">
-                        <h1>Miguel</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <aside class="actions">
-                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                            <a href="./chat.html">
-                                <img src="../../imgs/home/client/card-icon-2.svg">
-                            </a>
-                        </aside>
-                    </article>
-
-                    <article class="products">
-                        <img src="../../imgs/historico/3.jpg" alt="" class="photo">
-                        <h1>Arthur</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <aside class="actions">
-                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                            <a href="./chat.html">
-                                <img src="../../imgs/home/client/card-icon-2.svg">
-                            </a>
-                        </aside>
-                    </article>
-
-                    <article class="products">
-                        <img src="../../imgs/historico/4.jpg" alt="" class="photo">
-                        <h1>Heitor</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <aside class="actions">
-                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                            <a href="./chat.html">
-                                <img src="../../imgs/home/client/card-icon-2.svg">
-                            </a>
-                        </aside>
-                    </article>
-
-                    <article class="products">
-                        <img src="../../imgs/historico/5.jpg" alt="" class="photo">
-                        <h1>Theo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <aside class="actions">
-                            <img class="unfav-call" src="../../imgs/client/unfav-icon.svg" alt="">
-                            <a href="./chat.html">
-                                <img src="../../imgs/home/client/card-icon-2.svg">
-                            </a>
-                        </aside>
-                    </article> -->
                 </section>
                 <article class="empty-alert">
                     <img src="/imgs/shipper/error-icon.png" alt="">

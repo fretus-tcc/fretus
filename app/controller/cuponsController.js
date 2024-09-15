@@ -1,4 +1,5 @@
 const cuponsModel = require('../models/cuponsModel')
+const pedidosModel = require('../models/pedidosModel')
 const { notifyMessages } = require('../util/Funcao')
 
 const { body, validationResult } = require('express-validator')
@@ -81,6 +82,24 @@ const cuponsController = {
             req.flash('success', 'Cupom ativado ; Cupom ativado com sucesso')
             
             res.redirect('back')
+        } catch (error) {
+            console.log(error)
+            res.json({ error })
+        }
+    },
+
+    disableCupom: async (req, res) => {
+        const { id_cupom, id_pedido } = req.params
+        const { id } = req.session.autenticado
+        
+        try {
+            
+            await cuponsModel.updateActive({ estado_cupom: 'ativo' }, id, id_cupom)
+            await pedidosModel.update({ id_cupom: null }, id_pedido)
+
+            req.flash('success', 'Cupom retirado ; Cupom retirado com sucesso')
+            
+            res.redirect(req.get("Referrer") || '/')
         } catch (error) {
             console.log(error)
             res.json({ error })
