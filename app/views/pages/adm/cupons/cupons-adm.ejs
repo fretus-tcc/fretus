@@ -52,12 +52,6 @@
                 <section class="boXaCao">
                     <h3>Ações</h3>
                     <section class="flex">
-                        <!-- <a href="/admin/cadastroAdm/editar/<%= item.id_usuario %>">
-                            <button class="button1">Editar</button>
-                        </a>  -->
-                        <a href="/admin/cupons/<%= item.id_cupom %>">
-                            <button class="button2">Detalhes</button>
-                        </a>
                         <form action="/admin/cupons/status/<%= item.id_cupom %>?_method=PUT" method="post">
                             <input type="hidden" name="status_cupom" value="<%= item.status_cupom == 1 ? '0' : '1' %>">
                             <button class="button1"><%= item.status_cupom == 1 ? 'Desativar' : 'Ativar' %></button>

@@ -11,7 +11,7 @@
         <%- include('../../../partial/config/config-adm.ejs') %>
 
             <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
-            <link rel="stylesheet" href="/CSS/client/pay-popup.css">
+            <link rel="stylesheet" href="/CSS/client/confirm-popup.css">
 
 
 </head>
@@ -45,6 +45,22 @@
 
                 <% }) %>
             </section> <br><br>
+
+            <!-- Popup detalhes -->
+            <% mensagem.forEach(mensagem => { %>
+                <section class="popup info">
+                    <article class="popup-content">
+                        <article class="close">
+                            <img src="/imgs/client/close-icon.svg" alt="">
+                        </article>
+                        <section class="popup-wrapper" style="row-gap: 10px;">
+                            <span><b>Assunto:</b><%= mensagem.assunto %></span>
+                            <span><b>Mensagem:</b> <%= mensagem.mensagem %></span>
+                        </section>
+                    </article>
+                </section>
+            <% }) %>
+
             <% if(paginador){ %>
                 <div class="notificador">
                     <ul>
@@ -62,6 +78,7 @@
 
         </main>
         <script src="/JS/adm/sidebar.js"></script>
+        <script src="/JS/adm/popup-mensagens.js"></script>
 
 </body>
 

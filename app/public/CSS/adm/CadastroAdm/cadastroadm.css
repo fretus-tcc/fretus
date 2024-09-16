@@ -9,6 +9,7 @@
     border: 1px solid var(--blue);
     padding: 10px;
     transition: all .3s;
+    color: #333;
 }
 
 .notificador a:not(.atual):hover {
@@ -74,12 +75,12 @@ main {
 
 }
 
-.ContainerAdm_cadastroClient a, .notificador a {
+.ContainerAdm_cadastroClient a {
     color: #333;
     font-size: 1.3rem;
 }
 
-.ContainerAdm_cadastroClient a:hover, .notificador a:hover {
+.ContainerAdm_cadastroClient a:hover {
     cursor: pointer;
     text-decoration: underline;
 }
@@ -138,7 +139,7 @@ main {
     font-size: 1.1rem;
     font-weight: 600;
     border: none;
-
+    font-family: var(--font-1);
 }
 
 .buttonNovo{

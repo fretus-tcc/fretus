@@ -190,7 +190,7 @@ const cuponsController = {
         })
 
         req.flash('success', 'Cupom gerado ; Cupom gerado com sucesso')
-        res.redirect(req.get("Referrer") || '/')
+        res.redirect('/admin/cupons')
     },
 }
 
