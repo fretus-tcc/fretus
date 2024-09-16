@@ -21,9 +21,11 @@ const cuponsModel = {
         }
     },
 
-    findByCodigo: async (codigo) => {
+    findByCodigo: async (codigo, status = 1) => {
         try {
-            const [result] = await pool.query('SELECT * FROM cupons WHERE codigo_cupom = ? AND status_cupom = 1', [codigo])
+            const [result] = await pool.query(
+                `SELECT * FROM cupons WHERE codigo_cupom = ? ${status == 1 ? 'AND status_cupom = ?' : ''}`, [codigo, status]
+            )
             return result
         } catch (error) {
             console.log(error)
@@ -107,7 +109,7 @@ const cuponsModel = {
     // ADMIN
     findPaginate: async (pagina, total) => {
         try {
-            const [result] = await pool.query('SELECT * FROM cupons WHERE tipo_cupom = 1 LIMIT ?, ?', [pagina, total])
+            const [result] = await pool.query('SELECT * FROM cupons WHERE tipo_cupom = 1 ORDER BY id_cupom DESC LIMIT ?, ?', [pagina, total])
             return result
         } catch (error) {
             console.log(error)

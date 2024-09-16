@@ -149,6 +149,49 @@ const cuponsController = {
             res.json({ error })
         }
     },
+
+    validationAdm: [
+        body('codigo')
+            .notEmpty()
+            .withMessage('Campo código deve ser preenchido')
+            .bail()
+            .isLength({ max: 45 })
+            .withMessage('Campo código deve possuir até 45 caracteres')
+            .bail()
+            .custom(async (value) => {
+                const cupom = await cuponsModel.findByCodigo(value, false)
+                if (cupom.length > 0) {
+                    throw new Error('Código já utilizado')
+                }
+
+                return true
+            }),
+
+        body('porcentagem')
+            .notEmpty()
+            .withMessage('Campo porcentagem deve ser preenchido')
+            .bail()
+            .isInt({ max: 60 }) 
+            .withMessage('Campo porcentagem deve conter um número menor que 60')
+    ],
+
+    generate: async (req, res) => {
+        const { codigo, porcentagem } = req.body
+        const erros = validationResult(req)
+        if (!erros.isEmpty()) {
+            // console.log(erros.mapped())
+            return res.render('pages/adm/cupons/gerar-cupom', { erros: erros.mapped(), dados: req.body, msgs: [] })
+        }
+        
+        await cuponsModel.insert({
+            tipo_cupom: 1,
+            codigo_cupom: codigo,
+            porcentagem_cupom: porcentagem,
+        })
+
+        req.flash('success', 'Cupom gerado ; Cupom gerado com sucesso')
+        res.redirect(req.get("Referrer") || '/')
+    },
 }
 
 module.exports = cuponsController

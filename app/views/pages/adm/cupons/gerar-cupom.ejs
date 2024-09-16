@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Admin</title>
+    <%- include('../../../partial/config/config.ejs') %>
+    <%- include('../../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/error-alert.css">
+    <link rel="stylesheet" href="/CSS/adm/form.css">
+
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
+</head>
+<body>
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
+
+    <%
+        // const customError = {}
+        if (erros) {
+            const keys = Object.keys(erros)
+            keys.forEach(key => {
+                const campoAtual = key
+                const msg = erros[campoAtual].msg 
+                %>
+                    <script>notify('<%= msg %>', 'Falha ao gerar cupom', 'error')</script>
+                <%
+            })
+        }
+    %>
+
+    <%- include('../../../partial/adm/sidebar.ejs') %>
+    
+    <main class="content-container">
+        <h1>Gerar cupom</h1>
+        <form action="/admin/cupons/gerar" method="POST" class="form">
+            <input name="codigo" type="text" placeholder="Código do Cupom" value="<%= dados?.codigo %>" class="<%= erros?.codigo ? 'error' : '' %>">
+            <span class="error-text"><%= erros?.codigo?.msg %></span>
+
+            <input name="porcentagem" type="number" max="60"
+                placeholder="Porcentagem do Cupom" value="<%= dados?.porcentagem %>" class="<%= erros?.porcentagem ? 'error' : '' %>">
+            <span class="error-text"><%= erros?.porcentagem?.msg %></span>
+            
+            <button class="cta">Gerar</button>
+        </form>
+    </main>
+
+    <script src="/JS/adm/sidebar.js"></script>
+</body>
+</html>

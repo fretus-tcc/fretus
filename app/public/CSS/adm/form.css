@@ -33,3 +33,6 @@
 .error {
     border-color: red !important;
 }
+.error-text {
+    color: red !important;
+}
