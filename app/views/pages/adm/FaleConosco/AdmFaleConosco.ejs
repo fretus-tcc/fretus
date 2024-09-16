@@ -54,7 +54,9 @@
                             <img src="/imgs/client/close-icon.svg" alt="">
                         </article>
                         <section class="popup-wrapper" style="row-gap: 10px;">
-                            <span><b>Assunto:</b><%= mensagem.assunto %></span>
+                            <span><b>De:</b> <%= mensagem.email_usuario %> - <%= mensagem.nome_usuario %></span>
+                            <span><b>para:</b> FreetusEmpresa@gmail.com</span>
+                            <span><b>Assunto:</b> <%= mensagem.assunto %></span>
                             <span><b>Mensagem:</b> <%= mensagem.mensagem %></span>
                         </section>
                     </article>
