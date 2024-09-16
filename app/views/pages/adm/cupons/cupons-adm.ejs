@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - Admin</title>
+    <%- include('../../../partial/config/config.ejs') %>
+    <%- include('../../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+    <link rel="stylesheet" href="/CSS/adm/error-alert.css">
+
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
+</head>
+<body>
+
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
+
+    <%- include('../../../partial/adm/sidebar.ejs') %>
+    
+    <main class="content-container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="margin-bottom: 30px;">Cupons</h1>
+            <a href="/admin/cupons/gerar">
+                <button class="button3">Criar</button>
+            </a>
+        </div>
+
+        <% result.forEach(item=> { %>
+
+            <section class="ContainerAdm_Use <%= item.status_cupom == 0 ? 'disabled' : '' %>">
+                <article class="boxDados">
+                    <h3>Código do Cupom</h3>
+                    <p><%= item.codigo_cupom %></p>
+                </article>
+                <article class="boxDados">
+                    <h3>Porcentagem do Cupom</h3>
+                    <p><%= item.porcentagem_cupom %>% de desconto</p>
+                </article>
+                <article class="boxDados">
+                    <h3>Status do Cupom</h3>
+                    <p><%= item.status_cupom == 1 ? 'Ativo' : 'Desativado' %></p>
+                </article>
+                <section class="boXaCao">
+                    <h3>Ações</h3>
+                    <section class="flex">
+                        <!-- <a href="/admin/cadastroAdm/editar/<%= item.id_usuario %>">
+                            <button class="button1">Editar</button>
+                        </a>  -->
+                        <a href="/admin/cupons/<%= item.id_cupom %>">
+                            <button class="button2">Detalhes</button>
+                        </a>
+                        <form action="/admin/cupons/status/<%= item.id_cupom %>?_method=PUT" method="post">
+                            <input type="hidden" name="status_cupom" value="<%= item.status_cupom == 1 ? '0' : '1' %>">
+                            <button class="button1"><%= item.status_cupom == 1 ? 'Desativar' : 'Ativar' %></button>
+                        </form>
+                    </section>
+                </section>
+            </section>
+    
+        <% }) %>
+
+        <% if(paginador){ %>
+
+            <div class="notificador">
+                <ul>
+                    <% for (var i = 1; i <= paginador.total_paginas; i++) { %>
+                        <% if (paginador.pagina_atual == i){ %>
+                            <li>
+                                <a class="atual" href="?pagina=<%= i %>"><%= i %></a>
+                            </li>
+                        <% } else { %>
+                            <li>
+                                <a href="?pagina=<%= i %>"><%= i %></a>
+                            </li>
+                        <% } %>
+                    <% } %>
+                </ul>
+            </div>
+            
+        <% } %>
+    </main>
+
+    <script src="/JS/adm/sidebar.js"></script>
+</body>
+</html>

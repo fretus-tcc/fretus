@@ -106,6 +106,49 @@ const cuponsController = {
         }
     },
 
+    // ADMIN
+    listPaginate: async (req, res) => {
+        // paginação
+        let pagina = req.query.pagina == undefined ? 1 : Number(req.query.pagina);
+        let result = null
+        let regPagina = 2
+        let inicio = parseInt(pagina - 1) * regPagina
+        let totReg = await cuponsModel.totalReg();
+        let totPaginas = Math.ceil(totReg[0].total / regPagina);
+        
+        // validacao parametro pagina
+        if (pagina <= 0 || isNaN(pagina)) {
+            return res.redirect('/admin/cupons')
+        } else if (pagina > totPaginas) {
+            return res.redirect(`/admin/cupons?pagina=${totPaginas}`)
+        }
+
+        result = await cuponsModel.findPaginate(inicio, regPagina);
+        let paginador = totReg[0].total <= regPagina 
+            ? null 
+            : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+
+        const msgs = notifyMessages(req, res)
+
+        res.render('pages/adm/cupons/cupons-adm', { result, paginador, msgs })
+    },
+
+    updateStatus: async (req, res) => {
+        const { id_cupom } = req.params
+        const { status_cupom } = req.body
+        
+        try {
+            
+            await cuponsModel.update({ status_cupom }, id_cupom)
+
+            req.flash('success', 'Cupom alterado ; Cupom alterado com sucesso')
+            
+            res.redirect(req.get("Referrer") || '/')
+        } catch (error) {
+            console.log(error)
+            res.json({ error })
+        }
+    },
 }
 
 module.exports = cuponsController

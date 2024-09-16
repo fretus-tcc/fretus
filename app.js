@@ -46,6 +46,9 @@ app.use("/admin", adm)
 const help = require("./app/routes/help")
 app.use("/admin/ajuda", help)
 
+const cupons = require("./app/routes/cupons-admin")
+app.use("/admin/cupons", cupons)
+
 const chat = require('./app/routes/chat');
 app.use('/', chat);
 

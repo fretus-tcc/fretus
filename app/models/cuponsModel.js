@@ -91,6 +91,7 @@ const cuponsModel = {
         try {
             await pool.query('UPDATE cupons SET ? WHERE id_cupom = ?', [data, id])
         } catch (error) {
+            console.log(error)
             return error
         }
     },
@@ -98,6 +99,26 @@ const cuponsModel = {
     updateActive: async (data, id_usuario, id_cupom) => {
         try {
             await pool.query('UPDATE usuario_cupons SET ? WHERE id_usuario = ? AND id_cupom = ?', [data, id_usuario, id_cupom])
+        } catch (error) {
+            return error
+        }
+    },
+
+    // ADMIN
+    findPaginate: async (pagina, total) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM cupons WHERE tipo_cupom = 1 LIMIT ?, ?', [pagina, total])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
+    totalReg: async () => {
+        try {
+            const [result] = await pool.query('SELECT count(*) total FROM cupons WHERE tipo_cupom = 1')
+            return result
         } catch (error) {
             return error
         }
