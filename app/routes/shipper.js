@@ -82,7 +82,7 @@ router.get('/resultados', verificarUsuAutorizado([2], 'pages/restrito'), verific
 })
 
 router.get('/historico', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    res.render('pages/cliente-entregador/historico-completo', { autenticado: req.session.autenticado, isClient: false, pedidos: [], paginador: null, msgs: [] })
+    resultadosController.showHistorico(req, res)
 })
 
 router.get('/panel', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {

@@ -82,7 +82,7 @@
                                     <%= new Intl.NumberFormat('pt-br',{currency: 'BRL', style: 'currency'}).format(pedido.preco_pedido - ((pedido.porcentagem_cupom / 100) * pedido.preco_pedido)) %> 
                                 <% } %>
                             </span>
-                            <span class="actions">
+                            <span class="actions <%= autenticado.tipo == 2 ? 'hidden' : '' %>">
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
                                     <img class="location-call" src="/imgs/client/location-icon.svg" alt="">
                                     <% if (pedido?.id_denunciado == null) { %>

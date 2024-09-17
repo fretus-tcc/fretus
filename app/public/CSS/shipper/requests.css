@@ -91,6 +91,10 @@ main > h1 {
     gap: 7px;
 }
 
+.bottom > .actions.hidden {
+    display: none;
+}
+
 .bottom > .actions img {
     width: 30px;
     cursor: pointer;

@@ -37,6 +37,7 @@ main {
 .results-container > .results-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 2fr;
     gap: 15px;
 }
 
@@ -163,6 +164,7 @@ main {
 @media (max-width: 975px), (max-height: 750px) {
     .results-container > .results-cards {
         grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
     }
     .results-cards > .card-history {
         display: none;
