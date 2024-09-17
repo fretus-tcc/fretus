@@ -15,9 +15,11 @@ const avaliacoesModel = {
     findAllByEntregador: async (id_entregador) => {
         try {
             const [result] = await pool.query(
-                'SELECT a.*, u.nome_usuario FROM avaliacoes AS a ' + 
+                'SELECT a.*, u.nome_usuario, d.id_denuncia FROM avaliacoes AS a ' + 
                 'INNER JOIN usuario AS u ' + 
                 'ON u.id_usuario = a.id_avaliador ' + 
+                'LEFT JOIN denuncias AS d ' + 
+                'ON d.id_denunciado = a.id_avaliador ' + 
                 'WHERE a.id_entregador = ?', [id_entregador])
             return result
         } catch (error) {

@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="/CSS/client/report-popup.css">
     <link rel="stylesheet" href="/CSS/client/cupon-popup.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 
 <body>
@@ -118,7 +124,9 @@
                                             <div class="swiper-slide content">
                                                 <div class="header">
                                                     <h1><%= avaliacao.nome_usuario %></h1>
-                                                    <img class="report-call" src="../../imgs/client/report-icon.svg" alt="">
+                                                    <% if (avaliacao.id_denuncia == null) { %>
+                                                        <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= avaliacao.id_avaliador %>">
+                                                    <% } %>
                                                 </div>
                                                 <p><%= avaliacao.feedback_avaliacao %></p>
                                             </div>
