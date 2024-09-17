@@ -12,6 +12,20 @@ const avaliacoesModel = {
         }
     },
 
+    findAllByEntregador: async (id_entregador) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT a.*, u.nome_usuario FROM avaliacoes AS a ' + 
+                'INNER JOIN usuario AS u ' + 
+                'ON u.id_usuario = a.id_avaliador ' + 
+                'WHERE a.id_entregador = ?', [id_entregador])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO avaliacoes SET ?', [data])

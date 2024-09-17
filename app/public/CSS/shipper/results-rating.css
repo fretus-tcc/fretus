@@ -25,7 +25,12 @@
     font-weight: 700;
 }
 
+.rating-controls .swiper-button-disabled {
+    opacity: 0.5;
+}
+
 .rating-controls > * {
+    all: unset;
     cursor: pointer;
 }
 
@@ -51,8 +56,7 @@
     display: flex;
 }
 
-.rating-content > .content {
-    width: 100%;
+.rating-container .content {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -63,6 +67,7 @@
     display: flex;
     column-gap: 7px;
 }
+
 
 .content h1 {
     font-family: var(--font-1);
@@ -86,6 +91,11 @@
     font-size: 18px;
     font-style: italic;
     margin-bottom: 3px;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .rating-controls {
@@ -96,7 +106,7 @@
     .results-cards > .rating-cupon {
         height: fit-content;
     }
-    .results-cards .card-rating {
+    .results-cards .card-rating, .results-cards .card-help {
         height: 218px;
     }
 }

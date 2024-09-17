@@ -66,6 +66,18 @@ main {
     gap: 15px;
 }
 
+.results-cards .card-help {
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    row-gap: 3px;
+    text-align: center;
+}
+
+.card-help p {
+    width: max(50%, 150px);
+}
+
 .results-cards > .history-link {
     display: none;
 }
