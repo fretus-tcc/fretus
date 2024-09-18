@@ -42,7 +42,7 @@ const quotesController = {
             // validacao parametro pagina
             if (pagina <= 0 || isNaN(pagina)) {
                 return res.redirect('/admin/ajuda')
-            } else if (pagina > totPaginas) {
+            } else if (pagina > totPaginas && totPaginas > 0) {
                 return res.redirect(`/admin/ajuda?pagina=${totPaginas}`)
             }
 
