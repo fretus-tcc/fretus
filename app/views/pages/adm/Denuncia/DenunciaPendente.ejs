@@ -1,68 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fretus - Admin - denuncias pendentes </title>
+    <title>Fretus - admin</title>
     <%- include('../../../partial/config/config.ejs') %>
-        <%- include('../../../partial/config/config-adm.ejs') %>
-            <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
-
+    <%- include('../../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/grid.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
-
 <body>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
-        <main>
-            <section class="conteinerH1">
-                <h1>DENÚNCIAS PENDENTES</h1>
-            </section>
 
-            <section class="container_cads">
-            
-                    <section class="container_box ">
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
 
-                        
-                        <h1>MOTIVO: blá blá</h1>
-                        <h1 class="data">Data: 10/10/2024</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae earum nesciunt aperiam facere magnam, quibusdam beatae illum. Consequatur molestias iusto architecto odit vero quae debitis ipsam! Atque aliquam sunt quis!</p>
-                       
-
-                    </section>
-
-   
-                    <section class="container_box">
-
-                        
-                        <h1>Histórico de Denúncias (resolvidas) </h1>
-                    </section>
-          
-                    <section class="container_box">
-
-                        
-                        <h1>Contas Suspensas</h1>
-                    </section>
-               
-                    <section class="container_box">
-
-                        
-                        <h1>Usuários Bloqueadas </h1>
-                    </section>
+    <main class="content-container">    
         
-                <!-- <a href="/CadastroAdm/CreateCadastroAdm">
-                    <section class="container_box">
-                        <img src="/imgs/adm/iconplu.svg" alt="">
-                        <h1> Criar um novo Usuário </h1>
-                    </section>
-                </a> -->
-            </section>
-        </main>
+        <div class="header">
+            <h1>Denúncias Pendentes</h1>
+        </div>
 
+        <div class="grid">
+            <% result.forEach(item => { %>
+                <div class="grid-card">
+                    <h2><%= item.motivo_denuncia %></h2>
+                    <p>Criada em: <%= item.data_denuncia.toLocaleDateString() %></p>
+                    <p class="content"><%= item.descricao_denuncia %></p>
+                    
+                </div>
+            <% }) %>
+        </div>
 
-        <script src="/JS/adm/sidebar.js"></script>
+        <% if(paginador){ %>
 
-
+            <div class="notificador">
+                <ul>
+                    <% for(var i=1; i <=paginador.total_paginas; i++){ 
+                        if(paginador.pagina_atual==i){ 
+                    %>
+                        <li><a class="atual" href="?pagina=<%= i %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% } else { %>
+                            <li><a href="?pagina=<%= i %>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                        <% } 
+                    } %>
+                </ul>
+            </div>
+            
+        <% } %>
+    </main>
+    
+    <script src="/JS/adm/sidebar.js"></script>
+    <script src="/JS/quotes/delete-confirm.js"></script>
 </body>
-
 </html>

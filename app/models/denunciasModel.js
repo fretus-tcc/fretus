@@ -11,7 +11,24 @@ const denunciasModel = {
             return error
         }
     },
-
+    findPaginate: async (pagina, total) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM denuncias limit ?, ?', [pagina, total])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+    totalReg: async () => {
+        try {
+            const [result] = await pool.query('SELECT count (*) total FROM denuncias')
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO denuncias SET ?', [data])

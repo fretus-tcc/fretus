@@ -5,6 +5,7 @@ var router = express.Router()
 var pool = require("../../config/connection-factory");
 const admCadastroController = require('../controller/admCadastroController')
 const FaleConoscoController = require('../controller/FaleConoscoController')
+const denunciasController = require('../controller/denunciasController')
 const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
 const { body, validationResult } = require("express-validator")
@@ -72,7 +73,7 @@ router.get('/AdmDenuncia', verificarUsuAutorizado([3], 'pages/restrito'), functi
 })
 
 router.get('/DenunciaPendente', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    res.render('pages/adm/Denuncia/DenunciaPendente')
+    denunciasController.listPaginate(req, res)
 })
 
 router.get('/HistoricoDenuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
@@ -83,8 +84,6 @@ router.get('/ContaSuspensa', verificarUsuAutorizado([3], 'pages/restrito'), func
     res.render('pages/adm/Denuncia/ContaSuspensa')
 })
 
-router.get('/UsuariosBloqueados', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    res.render('pages/adm/Denuncia/UsuariosBloqueados')
-})
+
 
 module.exports = router

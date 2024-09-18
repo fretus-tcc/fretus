@@ -1,5 +1,6 @@
 const denunciasModel = require('../models/denunciasModel')
 const pedidosModel = require('../models/pedidosModel')
+const { notifyMessages} = require('../util/Funcao')
 const { body, param, validationResult } = require('express-validator')
 
 const denunciasController = {
@@ -96,6 +97,35 @@ const denunciasController = {
         
     },
 
+    // ADMIN
+
+    listPaginate: async (req, res) => {
+        // paginação
+
+        let pagina = req.query.pagina == undefined ? 1 : Number(req.query.pagina);
+        let result = null
+        let regPagina = 2
+        let inicio = parseInt(pagina - 1) * regPagina
+        let totReg = await denunciasModel.totalReg();
+        let totPaginas = Math.ceil(totReg[0].total / regPagina);
+        
+        // validacao parametro pagina
+        if (pagina <= 0 || isNaN(pagina)) {
+            return res.redirect('/admin/DenunciaPendente')
+        } else if (pagina > totPaginas && totPaginas > 0) {
+            return res.redirect(`/admin/DenunciaPendente?pagina=${totPaginas}`)
+        }
+
+        result = await denunciasModel.findPaginate(inicio, regPagina);
+        let paginador = totReg[0].total <= regPagina 
+            ? null 
+            : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
+
+        const msgs = notifyMessages(req, res)
+
+       /* res.render('pages/adm/cupons/cupons-adm', { result, paginador, msgs })*/
+        res.render('pages/adm/Denuncia/DenunciaPendente',{ result, paginador, msgs })
+    },
 }
 
 module.exports = denunciasController
