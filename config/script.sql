@@ -91,13 +91,15 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.detalhamento_entregador (
   crvl_entregador VARCHAR(255) NULL,
   ipva_entregador VARCHAR(255) NULL,
   qtn_visualizacoes_perfil INT NULL DEFAULT '0',
-  qtn_cupons_ativos INT NULL DEFAULT '0',
-  qtn_entregas_aceitas INT NULL DEFAULT '0',
-  qtn_entregas_canceladas INT NULL DEFAULT '0',
-  qtn_entregas_recusadas INT NULL DEFAULT '0',
+  qtn_dinheiro_ganho INT NULL DEFAULT '0',
+  qtn_entregas_realizadas INT NULL DEFAULT '0',
+  /* qtn_cupons_ativos INT NULL DEFAULT '0', */
+  /* qtn_entregas_aceitas INT NULL DEFAULT '0', */
+  /* qtn_entregas_canceladas INT NULL DEFAULT '0', */
+  /* qtn_entregas_recusadas INT NULL DEFAULT '0', */
   disponivel_inicio TIME NULL,
   disponivel_final TIME NULL,
-  qtn_entregas_solicitadas INT NULL DEFAULT '0',
+  /* qtn_entregas_solicitadas INT NULL DEFAULT '0', */
   INDEX fk_ESPECIFICA_ENTREGADOR_USUARIOS1_idx (id_usuario ASC) VISIBLE,
   PRIMARY KEY (id_entregador),
   UNIQUE INDEX id_entregador_UNIQUE (id_entregador ASC) VISIBLE,
