@@ -66,4 +66,25 @@ router.get('/AdmFaleConosco', verificarUsuAutorizado([3], 'pages/restrito'), fun
     FaleConoscoController.ListMensg(req, res)
 })
 
+// Denuncias
+router.get('/AdmDenuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    res.render('pages/adm/Denuncia/AdmDenuncia')
+})
+
+router.get('/DenunciaPendente', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    res.render('pages/adm/Denuncia/DenunciaPendente')
+})
+
+router.get('/HistoricoDenuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    res.render('pages/adm/Denuncia/HistoricoDenuncia')
+})
+
+router.get('/ContaSuspensa', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    res.render('pages/adm/Denuncia/ContaSuspensa')
+})
+
+router.get('/UsuariosBloqueados', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    res.render('pages/adm/Denuncia/UsuariosBloqueados')
+})
+
 module.exports = router
