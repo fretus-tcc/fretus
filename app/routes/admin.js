@@ -68,22 +68,25 @@ router.get('/AdmFaleConosco', verificarUsuAutorizado([3], 'pages/restrito'), fun
 })
 
 // Denuncias
-router.get('/AdmDenuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+router.get('/denuncias', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/Denuncia/AdmDenuncia')
 })
 
-router.get('/DenunciaPendente', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+router.get('/denuncias/pendentes', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     denunciasController.listPaginate(req, res)
 })
 
-router.get('/HistoricoDenuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+router.get('/denuncias/pendentes/:id_denuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    denunciasController.showDenuncia(req, res)
+})
+
+router.get('/denuncias/resolvidas', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/Denuncia/HistoricoDenuncia')
 })
 
-router.get('/ContaSuspensa', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+router.get('/denuncias/suspensas', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/Denuncia/ContaSuspensa')
 })
-
 
 
 module.exports = router

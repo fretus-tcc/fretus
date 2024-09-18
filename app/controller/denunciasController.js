@@ -111,9 +111,9 @@ const denunciasController = {
         
         // validacao parametro pagina
         if (pagina <= 0 || isNaN(pagina)) {
-            return res.redirect('/admin/DenunciaPendente')
+            return res.redirect('/admin/denuncias/pendentes')
         } else if (pagina > totPaginas && totPaginas > 0) {
-            return res.redirect(`/admin/DenunciaPendente?pagina=${totPaginas}`)
+            return res.redirect(`/admin/denuncias/pendentes?pagina=${totPaginas}`)
         }
 
         result = await denunciasModel.findPaginate(inicio, regPagina);
@@ -124,8 +124,22 @@ const denunciasController = {
         const msgs = notifyMessages(req, res)
 
        /* res.render('pages/adm/cupons/cupons-adm', { result, paginador, msgs })*/
-        res.render('pages/adm/Denuncia/DenunciaPendente',{ result, paginador, msgs })
+        res.render('pages/adm/Denuncia/DenunciaPendente', { result, paginador, msgs })
     },
+
+    showDenuncia: async (req, res) => {
+        const { id_denuncia } = req.params
+        try {
+            const [denuncia] = await denunciasModel.findById(id_denuncia)
+            console.log(denuncia)
+
+            res.render('pages/adm/Denuncia/detalhes-denuncia', { denuncia })
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
 }
 
 module.exports = denunciasController

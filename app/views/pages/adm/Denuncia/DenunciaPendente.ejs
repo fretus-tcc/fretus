@@ -33,10 +33,14 @@
         <div class="grid">
             <% result.forEach(item => { %>
                 <div class="grid-card">
-                    <h2><%= item.motivo_denuncia %></h2>
+                    <h2>Motivo: <%= item.motivo_denuncia %></h2>
                     <p>Criada em: <%= item.data_denuncia.toLocaleDateString() %></p>
-                    <p class="content"><%= item.descricao_denuncia %></p>
-                    
+                    <p class="content">Descrição: <%= item.descricao_denuncia %></p>
+                    <div class="actions">
+                        <a href="/admin/denuncias/pendentes/<%= item.id_denuncia %>">
+                            <img src="/imgs/adm/view.svg" alt="">
+                        </a>
+                    </div>
                 </div>
             <% }) %>
         </div>

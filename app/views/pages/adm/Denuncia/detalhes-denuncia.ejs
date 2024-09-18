@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretus - admin</title>
+    <%- include('../../../partial/config/config.ejs') %>
+    <%- include('../../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/grid.css">
+</head>
+<body>
+
+    <%- include('../../../partial/adm/sidebar.ejs') %>
+
+    <main class="content-container">    
+        
+        <div class="header">
+            <h1>Detalhes Denúncia</h1>
+        </div>
+
+        <h2>denunciador</h2>
+        <p><%= denuncia.denunciador %></p>
+
+        <h2>denunciado</h2>
+        <p><%= denuncia.denunciado %></p>
+        
+        <h2>Motivo: <%= denuncia.motivo_denuncia %></h2>
+        <p>data: <%= denuncia.data_denuncia.toLocaleDateString() %></p>
+        <p class="content">Descrição: <%= denuncia.descricao_denuncia %></p>
+    </main>
+    
+    <script src="/JS/adm/sidebar.js"></script>
+</body>
+</html>

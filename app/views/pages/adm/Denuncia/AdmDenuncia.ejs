@@ -6,55 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretus - Admin - denuncia </title>
     <%- include('../../../partial/config/config.ejs') %>
-        <%- include('../../../partial/config/config-adm.ejs') %>
-            <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+    <%- include('../../../partial/config/config-adm.ejs') %>
+    <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
 
 </head>
 
 <body>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
-        <main>
-            <section class="conteinerH1">
-                <h1>Área de visualização de denúncias</h1>
-            </section>
+    <main>
+        <section class="conteinerH1">
+            <h1>Área de visualização de denúncias</h1>
+        </section>
 
-            <section class="container_cads">
-                <a href="/admin/DenunciaPendente">
-                    <section class="container_box ">
+        <section class="container_cads">
+            <a href="/admin/denuncias/pendentes">
+                <section class="container_box ">
 
-                        
-                        <h1>Denuncias Pendentes </h1>
+                    
+                    <h1>Denuncias Pendentes </h1>
 
-                    </section>
-                </a>
-                <a href="/admin/HistoricoDenuncia">
-                    <section class="container_box">
+                </section>
+            </a>
+            <a href="/admin/denuncias/resolvidas">
+                <section class="container_box">
 
-                        
-                        <h1>Histórico de Denúncias (resolvidas) </h1>
-                    </section>
-                </a>
-                <a href="/admin/ContaSuspensa">
-                    <section class="container_box">
-
-                        
-                        <h1>Contas Suspensas</h1>
-                    </section>
-                </a>
-
-                <!-- <a href="/CadastroAdm/CreateCadastroAdm">
-                    <section class="container_box">
-                        <img src="/imgs/adm/iconplu.svg" alt="">
-                        <h1> Criar um novo Usuário </h1>
-                    </section>
-                </a> -->
-            </section>
-        </main>
+                    
+                    <h1>Histórico de Denúncias (resolvidas) </h1>
+                </section>
+            </a>
+            <a href="/admin/denuncias/suspensas">
+                <section class="container_box">
 
 
-        <script src="/JS/adm/sidebar.js"></script>
+                    <h1>Contas Suspensas</h1>
+                </section>
+            </a>
 
+            <!-- <a href="/CadastroAdm/CreateCadastroAdm">
+                <section class="container_box">
+                    <img src="/imgs/adm/iconplu.svg" alt="">
+                    <h1> Criar um novo Usuário </h1>
+                </section>
+            </a> -->
+        </section>
+    </main>
+
+
+    <script src="/JS/adm/sidebar.js"></script>
 
 </body>
 
