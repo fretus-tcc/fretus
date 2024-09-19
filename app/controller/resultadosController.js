@@ -6,13 +6,15 @@ const resultadosController = {
     listResults: async (req, res) => {
         const { id } = req.session.autenticado
         try {
+            const [entregador] = await resultadosModel.findEntregadorById(id)
             const pedidos = await resultadosModel.findPedidoPaginate(id, 0, 10)
-            // console.log(pedidos);
+            // console.log(entregador);
             
             const avaliacoes = await avaliacoesModel.findAllByEntregador(id)
 
-            res.render('pages/entregador/resultados', { autenticado: req.session.autenticado, pedidos, avaliacoes })
+            res.render('pages/entregador/resultados', { autenticado: req.session.autenticado, entregador, pedidos, avaliacoes })
         } catch (error) {
+            console.log(error)
             res.json({ error })
         }
     },

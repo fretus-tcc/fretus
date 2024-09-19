@@ -36,6 +36,16 @@ const resultadosModel = {
         }
     },
 
+    findEntregadorById: async (id) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM detalhamento_entregador WHERE id_usuario = ?', [id])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
 }
 
 module.exports = resultadosModel

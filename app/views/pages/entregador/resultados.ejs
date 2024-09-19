@@ -44,7 +44,9 @@
                         </article>
                     </article>
                     <article class="card-bottom">
-                        <span class="money">R$500,00</span>
+                        <span class="money">
+                            <%= new Intl.NumberFormat('pt-br', {currency: 'BRL', style: 'currency'}).format(entregador.qtn_dinheiro_ganho) %>
+                        </span>
                         <article class="graph">
                             <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u142.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                                 alt="">

@@ -85,9 +85,11 @@ const pagamentoModel = {
     findByUUID: async (uuid) => {
         try {
             const [result] = await pool.query(
-                'SELECT * FROM pagamentos AS pg ' +
+                'SELECT p.*, pg.*, c.porcentagem_cupom FROM pagamentos AS pg ' +
                 'INNER JOIN pedidos AS p ' +
                 'ON p.id_pedido = pg.id_pedido ' +
+                'LEFT JOIN cupons AS c ' +
+                'ON p.id_cupom = c.id_cupom ' +
                 'WHERE id_preferencia_mp = ?', [uuid])
             return result
         } catch (error) {
@@ -107,6 +109,14 @@ const pagamentoModel = {
     updateByUUID: async (data, uuid) => {
         try {
             await pool.query('UPDATE pagamentos SET ? WHERE id_preferencia_mp = ?', [data, uuid])
+        } catch (error) {
+            return error
+        }
+    },
+
+    updateDinheiroGanho: async (data, id) => {
+        try {
+            await pool.query('UPDATE detalhamento_entregador SET qtn_dinheiro_ganho = qtn_dinheiro_ganho + ? WHERE id_usuario = ?', [data, id])
         } catch (error) {
             return error
         }

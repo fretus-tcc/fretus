@@ -65,6 +65,14 @@ const pagamentoController = {
         if (status == 'approved') {
             await pagamentoModel.updateByUUID({ estado_pagamento: 'aprovado' }, external_reference)
             await chatModel.insertConversa({ id_cliente: pedido.id_cliente, id_entregador: pedido.id_entregador })
+            
+            let preco_pedido = pedido.preco_pedido
+            if (pedido.porcentagem_cupom != null) {
+                preco_pedido -= (pedido.porcentagem_cupom / 100) * preco_pedido
+            }
+            // console.log(preco_pedido);
+            await pagamentoModel.updateDinheiroGanho(preco_pedido, pedido.id_entregador)
+            
             return res.render('pages/cliente/feedback-pagamento', { autenticado: req.session.autenticado, error: null, approved: true, pedido })
         }
         
