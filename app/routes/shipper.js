@@ -4,7 +4,7 @@ const multer = require('multer')
 const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado, verificarCadastroCompleto } = require('../models/autenticador_middleware')
 var pool = require("../../config/connection-factory");
-const ConfigPerfilController = require('../controller/configPerfilController')
+const ConfigPerfilController = require('../controller/perfilConfigController')
 const pedidosController = require('../controller/pedidosController')
 const resultadosController = require('../controller/resultadosController')
 

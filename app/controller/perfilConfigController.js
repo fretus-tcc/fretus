@@ -1,4 +1,4 @@
-const ConfigPerfilModel = require('../models/configPerfilModel')
+const perfilConfigModel = require('../models/perfilConfigModel')
 const { body, validationResult } = require("express-validator")
 const cadastroModel = require('../models/cadastroModel')
 const { validaCPF, notifyMessages } = require('../util/Funcao')
@@ -12,7 +12,7 @@ const ConfigPerfilController = {
         
         try {
             // const type = isClient ? 1 : 2
-            const [result] = await ConfigPerfilModel.findUserByType(id)
+            const [result] = await perfilConfigModel.findUserByType(id)
             const isClient = result.tipo_usuario == '1' ? true : false
 
             const hasPermission = id == id_autenticado
@@ -32,7 +32,7 @@ const ConfigPerfilController = {
         const { id } = req.session.autenticado
         try {
             // const type = isClient ? 1 : 2
-            const result = await ConfigPerfilModel.findUserByType(id)
+            const result = await perfilConfigModel.findUserByType(id)
 
             const msgs = notifyMessages(req, res)
 
@@ -62,7 +62,7 @@ const ConfigPerfilController = {
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const [fields] = await ConfigPerfilModel.findUserByType(id)
+            const [fields] = await perfilConfigModel.findUserByType(id)
             const isClient = fields.tipo_usuario == '1' ? true : false
 
             return res.render(view, {
@@ -78,9 +78,9 @@ const ConfigPerfilController = {
 
         // verifica se o formulario é de alterar foto de perfil, ou nao
         if (req.file) {
-            await ConfigPerfilModel.updateUser({ foto_de_perfil: req.file.buffer }, id)
+            await perfilConfigModel.updateUser({ foto_de_perfil: req.file.buffer }, id)
         } else {
-            await ConfigPerfilModel.updateUser(req.body, id)
+            await perfilConfigModel.updateUser(req.body, id)
         }
         
         req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
@@ -99,7 +99,7 @@ const ConfigPerfilController = {
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const fields = await ConfigPerfilModel.findUserByType(id, 2)
+            const fields = await perfilConfigModel.findUserByType(id, 2)
 
             return res.render(view, {
                 result: fields[0],
@@ -112,7 +112,7 @@ const ConfigPerfilController = {
             })
         }
         
-        await ConfigPerfilModel.updateShipper(req.body, id)
+        await perfilConfigModel.updateShipper(req.body, id)
         req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
 
@@ -129,7 +129,7 @@ const ConfigPerfilController = {
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const fields = await ConfigPerfilModel.findUserByType(id, 2)
+            const fields = await perfilConfigModel.findUserByType(id, 2)
 
             return res.render(view, {
                 result: fields[0],
@@ -142,7 +142,7 @@ const ConfigPerfilController = {
             })
         }
         
-        await ConfigPerfilModel.updateVehicle(req.body, req.body.id_entregador)
+        await perfilConfigModel.updateVehicle(req.body, req.body.id_entregador)
         req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
 
