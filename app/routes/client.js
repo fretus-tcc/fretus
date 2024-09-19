@@ -4,7 +4,7 @@ const multer = require('multer')
 var pool = require("../../config/connection-factory");
 const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado } = require('../models/autenticador_middleware')
-const ConfigPerfilController = require('../controller/ConfigPerfilController')
+const ConfigPerfilController = require('../controller/configPerfilController')
 const pedidosController = require('../controller/pedidosController')
 const favoritadosController = require('../controller/favoritadosController')
 const pagamentoController = require('../controller/pagamentoController')
@@ -27,7 +27,6 @@ router.post('/solicitar-entrega', verificarUsuAutorizado([1], 'pages/restrito'),
 })
 
 router.get('/escolher-entregador/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    /* res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado }) */
     pedidosController.listShipperAccept(req, res)
 })
 
@@ -79,13 +78,8 @@ router.post('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), cuponsCont
     cuponsController.activeCupom(req, res)
 })
 
-/* router.get('/perfil', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    res.render('pages/cliente/perfil')
-}) */
-
 router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    /* ConfigPerfilController.showClientProfile(req, res); */
-    ConfigPerfilController.showProfile(req, res, true);
+    ConfigPerfilController.showProfile(req, res);
 });
 
 router.put(
@@ -94,18 +88,16 @@ router.put(
     upload,
     ConfigPerfilController.regrasValidacaoPerfil,
     function (req, res) {
-        ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/perfil', `/cliente/perfil/${req.params.id}`, true);
+        ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/perfil', `/cliente/perfil/${req.params.id}`);
     }
 );
 
 router.get('/configuracoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
-    /* res.render('pages/cliente-entregador/configuracoes', { isClient: true, autenticado: req.session.autenticado }) */
-    /* ConfigPerfilController.showClientConfig(req, res); */
     ConfigPerfilController.showConfig(req, res, 'pages/cliente-entregador/configuracoes', true);
 })
 
 router.put('/configuracoes/:id', verificarUsuAutorizado([1], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
-    ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/configuracoes', `/cliente/configuracoes`, true);
+    ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/configuracoes', `/cliente/configuracoes`);
 });
 
 router.get('/configuracoes-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {

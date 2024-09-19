@@ -40,7 +40,7 @@
         }
     %>
 
-    <%- include('../../partial/header-client-shipper.ejs', { isClient }) %>
+    <%- include('../../partial/header-client-shipper.ejs', { isClient: autenticado.tipo == '1' ? true : false }) %>
     
     <main>
         <div class="profile-container">
@@ -58,7 +58,7 @@
             </div>
 
             <% if (hasPermission) { %>
-                <form action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post" enctype="multipart/form-data">
+                <form action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post" enctype="multipart/form-data">
                     <input type="file" name="foto_de_perfil" id="foto_perfil" class="input-foto">
                     <label for="foto_perfil" class="label-foto">Alterar foto de perfil</label>
                 </form>
@@ -66,7 +66,7 @@
                 
             <% if (!isClient) { %>
                 <!-- 1 == false, 2 == true -->
-                <form class="form-perfil" action="/entregador/perfil-status/<%= result.id_usuario %>?_method=PUT" method="post">
+                <form class="form-perfil" action="/entregador/perfil-status/<%= result.usuario_id %>?_method=PUT" method="post">
                     <section class="row row-toogle">
                         <div class="info">
                             <span class="status-online <%= result.status_disponivel == 1 ? 'offline' : '' %>"></span>
@@ -82,7 +82,7 @@
                 </form>
             <% } %>
 
-            <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.id_usuario %>?_method=PUT" method="post">
+            <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post">
                 <div class="row">
                     <label for="name">Nome: </label>
                     <div class="edit-row">
@@ -135,7 +135,7 @@
             </form>
 
             <% if (!isClient) { %>
-                <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.id_usuario %>?_method=PUT" method="post">
+                <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.usuario_id %>?_method=PUT" method="post">
                     <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
                     <section class="row">
                         <label for="vehicles">Tipo do Veículo</label>
@@ -172,7 +172,7 @@
         </div>
     </main>
 
-    <%- include('../../partial/menu-burguer.ejs', { type: isClient ? 'client' : 'shipper' }) %>
+    <%- include('../../partial/menu-burguer.ejs', { type: autenticado.tipo == '1' ? 'client' : 'shipper' }) %>
 
     <script>
         const noPermission = <%= !hasPermission %>

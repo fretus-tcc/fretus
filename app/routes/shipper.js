@@ -4,7 +4,7 @@ const multer = require('multer')
 const { notifyMessages } = require('../util/Funcao')
 const { verificarUsuAutorizado, verificarCadastroCompleto } = require('../models/autenticador_middleware')
 var pool = require("../../config/connection-factory");
-const ConfigPerfilController = require('../controller/ConfigPerfilController')
+const ConfigPerfilController = require('../controller/configPerfilController')
 const pedidosController = require('../controller/pedidosController')
 const resultadosController = require('../controller/resultadosController')
 
@@ -15,7 +15,6 @@ const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfi
 }) */
 
 router.get('/configuracoes-veiculos', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    /* res.render('pages/entregador/configuracoes-veiculos', { autenticado: req.session.autenticado }) */
     ConfigPerfilController.showConfig(req, res, 'pages/entregador/configuracoes-veiculos', false);
 })
 
@@ -34,7 +33,7 @@ router.get('/configuracoes', verificarUsuAutorizado([2], 'pages/restrito'), veri
 })
 
 router.put('/configuracoes/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
-    ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/configuracoes', `/entregador/configuracoes`, false);
+    ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/configuracoes', `/entregador/configuracoes`);
 });
 
 router.put('/configuracoes-entregador/:id', verificarUsuAutorizado([2], 'pages/restrito'), ConfigPerfilController.regrasValidacaoPerfil, function (req, res) {
@@ -51,7 +50,7 @@ router.post('/entregas-solicitadas/:id/:resposta', verificarUsuAutorizado([2], '
 
 router.get('/perfil/:id', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     /* ConfigPerfilController.showShipperProfile(req, res) */
-    ConfigPerfilController.showProfile(req, res, false)
+    ConfigPerfilController.showProfile(req, res)
     // res.render('pages/entregador/perfil', { autenticado: req.session.autenticado })
 })
 

@@ -1,24 +1,27 @@
-const ConfigPerfilModel = require('../models/ConfigPerfilModel')
-const { body, validationResult } = require("express-validator");
+const ConfigPerfilModel = require('../models/configPerfilModel')
+const { body, validationResult } = require("express-validator")
 const cadastroModel = require('../models/cadastroModel')
 const { validaCPF, notifyMessages } = require('../util/Funcao')
 
 const ConfigPerfilController = {
 
     // Editar - Mostrar Campos
-    showProfile: async (req, res, isClient) => {
+    showProfile: async (req, res) => {
         const { id } = req.params
+        const { id: id_autenticado } = req.session.autenticado
         
         try {
-            /* const result = await ConfigPerfilModel.findByUserId(id) */
-            const type = isClient ? 1 : 2
-            const result = await ConfigPerfilModel.findUserByType(id, type)
+            // const type = isClient ? 1 : 2
+            const [result] = await ConfigPerfilModel.findUserByType(id)
+            const isClient = result.tipo_usuario == '1' ? true : false
 
-            const hasPermission = id == req.session.autenticado.id
+            const hasPermission = id == id_autenticado
 
             const msgs = notifyMessages(req, res)
             
-            res.render('pages/cliente-entregador/perfil', { result: result[0], dados: null, erros: null, autenticado: req.session.autenticado, hasPermission, isClient, msgs })
+            res.render('pages/cliente-entregador/perfil', {
+                autenticado: req.session.autenticado, result, hasPermission, isClient, dados: null, erros: null, msgs
+            })
         } catch (error) {
             res.json({ error })
             console.log(error)
@@ -28,8 +31,8 @@ const ConfigPerfilController = {
     showConfig: async (req, res, view, isClient) => {
         const { id } = req.session.autenticado
         try {
-            const type = isClient ? 1 : 2
-            const result = await ConfigPerfilModel.findUserByType(id, type)
+            // const type = isClient ? 1 : 2
+            const result = await ConfigPerfilModel.findUserByType(id)
 
             const msgs = notifyMessages(req, res)
 
@@ -41,7 +44,7 @@ const ConfigPerfilController = {
     },
 
     // Editar - Atualizar User
-    updateUser: async (req, res, view, redirect, isClient) => {
+    updateUser: async (req, res, view, redirect) => {
         const { id } = req.params
 
         // formatando data nascimento
@@ -59,16 +62,16 @@ const ConfigPerfilController = {
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const type = isClient ? 1 : 2
-            const fields = await ConfigPerfilModel.findUserByType(id, type)
+            const [fields] = await ConfigPerfilModel.findUserByType(id)
+            const isClient = fields.tipo_usuario == '1' ? true : false
 
             return res.render(view, {
-                result: fields[0],
-                dados: req.body,
-                erros: errors.mapped(),
                 autenticado: req.session.autenticado,
+                result: fields,
                 hasPermission,
                 isClient,
+                dados: req.body,
+                erros: errors.mapped(),
                 msgs: []
             })
         }
@@ -82,21 +85,6 @@ const ConfigPerfilController = {
         
         req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
-
-        /* try {
-
-            const data = {
-                nome_usuario: req.body.nome,
-                email_usuario: req.body.email,
-                
-            }
-            await ConfigPerfilModel.updateUser(data, id)
-            req.flash('info', 'Usuário atualizado')
-            res.redirect(`/admin/cadastroAdm/editar/${id}`)
-
-        } catch (error) {
-            res.json({ error })
-        } */
 
     },
 
@@ -128,21 +116,6 @@ const ConfigPerfilController = {
         req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
 
-        /* try {
-
-            const data = {
-                nome_usuario: req.body.nome,
-                email_usuario: req.body.email,
-                
-            }
-            await ConfigPerfilModel.updateUser(data, id)
-            req.flash('info', 'Usuário atualizado')
-            res.redirect(`/admin/cadastroAdm/editar/${id}`)
-
-        } catch (error) {
-            res.json({ error })
-        } */
-
     },
 
     updateVehicle: async (req, res, view, redirect) => {
@@ -172,21 +145,6 @@ const ConfigPerfilController = {
         await ConfigPerfilModel.updateVehicle(req.body, req.body.id_entregador)
         req.flash('success', `Alteração feita ; Usuário alterado com sucesso`)
         res.redirect(redirect)
-
-        /* try {
-
-            const data = {
-                nome_usuario: req.body.nome,
-                email_usuario: req.body.email,
-                
-            }
-            await ConfigPerfilModel.updateUser(data, id)
-            req.flash('info', 'Usuário atualizado')
-            res.redirect(`/admin/cadastroAdm/editar/${id}`)
-
-        } catch (error) {
-            res.json({ error })
-        } */
 
     },
 

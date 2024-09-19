@@ -2,17 +2,14 @@ const pool = require('../../config/connection-factory');
 
 const PerfilModel = {
 
-    findUserByType: async (id, type) => {
+    findUserByType: async (id) => {
         try {
-            const queryShipper = 
-                'INNER JOIN detalhamento_entregador AS e ' +
-                'ON u.id_usuario = e.id_usuario ' +
-                'INNER JOIN veiculos AS v ' +
-                'ON v.id_entregador = e.id_entregador'
-
             const [result] = await pool.query(
-                'SELECT * FROM usuario AS u ' + 
-                `${ type == 1 ? '' : queryShipper } ` +
+                'SELECT *, u.id_usuario AS usuario_id FROM usuario AS u ' + 
+                'LEFT JOIN detalhamento_entregador AS e ' +
+                'ON u.id_usuario = e.id_usuario ' +
+                'LEFT JOIN veiculos AS v ' +
+                'ON v.id_entregador = e.id_entregador ' +
                 'WHERE u.id_usuario = ?', [id]);
             return result;
         } catch (error) {
