@@ -7,15 +7,16 @@
     <%- include('../../../partial/config/config.ejs') %>
     <%- include('../../../partial/config/config-adm.ejs') %>
     <link rel="stylesheet" href="/CSS/adm/grid.css">
+    <link rel="stylesheet" href="/CSS/adm/admdenuncia.css">
 </head>
 <body>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
     <main class="content-container">    
-        
+        <div class="container-card">
         <div class="header">
-            <h1>Detalhes Denúncia</h1>
+            <h1 class="tit">Detalhes Denúncia</h1>
         </div>
 
         <h2>denunciador</h2>
@@ -27,6 +28,7 @@
         <h2>Motivo: <%= denuncia.motivo_denuncia %></h2>
         <p>data: <%= denuncia.data_denuncia.toLocaleDateString() %></p>
         <p class="content">Descrição: <%= denuncia.descricao_denuncia %></p>
+    </div>
     </main>
     
     <script src="/JS/adm/sidebar.js"></script>

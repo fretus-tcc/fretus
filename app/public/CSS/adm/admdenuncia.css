@@ -1,0 +1,79 @@
+.cib ul {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    justify-content: center;
+}
+
+.notificador a {
+    border: 1px solid var(--blue);
+    padding: 10px;
+    transition: all .3s;
+    color: #333;
+}
+
+.notificador a:not(.atual):hover {
+    background-color: var(--blue-2);
+    border: 1px solid var(--blue-2);
+    color: white;
+}
+
+.notificador .atual {
+    background-color: var(--blue);
+    color: white;
+}
+
+main {
+    padding: 50px;
+    /* width: 60vw; */
+}
+
+.conteinerH1 {
+    margin: 30px 0;
+    font-size: 1.7rem;
+    color: #333;
+}
+
+.container_cads {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os containers se movam para a linha seguinte se não houver espaço suficiente */
+    gap: 20px; /* Espaço entre os containers */
+    justify-content: center; /* Alinha os containers no centro da linha */
+    padding: 20px; /* Adiciona um pouco de espaço ao redor dos containers */
+}
+
+.container-card {
+    display: flex;
+
+    align-items: start;
+    flex-direction: column;
+    background-color: #fff;
+    min-height: 240px; /* Garante uma altura mínima */
+    width: 350px; /* Define uma largura fixa para todos os containers */
+    padding: 30px;
+    border-radius: 10px;
+   
+}
+
+
+.container-card h1 {
+    color: #333;
+    margin-top: 10px;
+}
+
+/* ================ */
+.container-card {
+    width: 100%;
+    padding: 50px;
+    color: #333;
+    max-height: 100vh;
+    overflow: auto;
+
+}
+
+
+
+.container-card h1 {
+    margin: 40px 0px;
+    font-size: 2rem;
+}
