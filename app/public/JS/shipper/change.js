@@ -7,7 +7,7 @@ const select = document.querySelector('.select-field')
 const nasc = document.querySelector('#nasc')
 const toggle = document.querySelector('#status')
 
-if (!noPermission) {
+if (noPermission == 'false') {
     change.forEach((item, i) => {
         item.addEventListener('click', () => {
             const lastValue = input[i].value
@@ -27,7 +27,7 @@ if (!noPermission) {
     })
     
     select?.addEventListener('change', () => {
-        if (noPermission) return
+        if (noPermission == 'true') return
         select.form.submit()
     })
 
@@ -42,7 +42,7 @@ if (!noPermission) {
     
     const update = (i) => {
         console.log('update');
-        if (noPermission) return
+        if (noPermission == 'true') return
         form[i].submit()
     }
     

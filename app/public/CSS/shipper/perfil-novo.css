@@ -1,0 +1,9 @@
+body {
+    background-image: var(--gray-gradient);
+    color: #333;
+    min-height: 100vh;
+}
+
+main {
+    padding-top: 50px;
+}

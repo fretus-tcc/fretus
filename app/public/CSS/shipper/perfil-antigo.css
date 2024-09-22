@@ -1,30 +1,127 @@
-body {
-    background-image: var(--gray-gradient);
-    min-height: 100vh;
+.disable-form .changeCall {
+    display: none;
+}
+
+.error {
+    display: block;
+    margin-top: 10px;
+    color: red;
+}
+
+.changeCall {
+    cursor: pointer;
+    opacity: .6;
+}
+
+.changeCall:hover {
+    opacity: 1;
+}
+
+.img-container {
+    width: 300px;
+    aspect-ratio: 1/1;
+    position: relative;
+    overflow: hidden;
+}
+
+.img-container .photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.img-container .update-img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: -100%;
+    transition: all .5s;
+}
+
+.img-container:hover .update-img {
+    bottom: 0;
+}
+
+.img-container .input-foto {
+    display: none;
+}
+
+.img-container .label-foto {
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    cursor: pointer;
+}
+
+.img-container .label-text {
+    display: block;
+    padding: 5px;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+}
+
+select[disabled] {
+    border: none;
+    padding: 0;
+    opacity: 1;
+    cursor: text;
+    color: #333;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+select[disabled]::-ms-expand {
+    display: none;
+}
+
+.row textarea {
+    width: 100%;
+    height: 48px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 20px;
+    font-family: var(--font-2);
+    background-color: transparent;
     color: #333;
 }
 
-main {
-    padding-top: 50px;
+.edit-row > .input-container {
+    width: 100%;
+    height: fit-content;
 }
 
-.profile-container {
+.edit-row textarea ~ .btn {
+    height: 40%;
+}
+
+.edit-row textarea + span {
+    font-size: 13px;
+    width: 78px;
+    color: #333;
+    align-self: flex-end;
+    display: none;
+}
+
+.edit-row > .input-container.edit textarea + span {
+    display: block;
+}
+
+/* .profile-container {
     width: min(750px, 90%);
     padding: 40px;
     margin: 0 auto;
     background-color: white;
     border-radius: 20px;
-}
-
-.disable-form .changeCall {
-    display: none;
-}
-
-/* .disable-form .profile__image {
-    top: 20px;
 } */
 
-.img-container img {
+/* .img-container img {
     max-height: 300px;
     object-fit: contain;
     border-radius: 7px;
@@ -56,21 +153,6 @@ main {
 
 .disable-form .botaoDisponivel {
     margin-top: 30px;
-}
-
-select[disabled] {
-    border: none;
-    padding: 0;
-    opacity: 1;
-    cursor: text;
-    color: #333;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-}
-
-/* For IE10 */
-select[disabled]::-ms-expand {
-    display: none;
 }
 
 .profile-container > * {
@@ -116,10 +198,9 @@ select[disabled]::-ms-expand {
 
 footer{
     padding: 25px; 
-}
+} */
 
-/* botao toggle */
-.row-toogle {
+/* .row-toogle {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -177,44 +258,4 @@ footer{
 .row-toogle > input[value="2"] + .toogle > .ball {
     border: solid 1px #ef9652;
     transform: translateX(100%);
-}
-
-/* periodo */
-input[type="time"] {
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid rgba(184, 175, 175, 0.596);
-    height: 40px;
-    width: 120px;
-    font-size: 20px;
-}
-
-.edit-periodo {
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-
-}
-
-.edit-periodo span {
-    font-size: 20px;
-}
-
-@media(max-width:407px) {
-    .edit-periodo {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .edit-periodo span {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-left: 20%;
-    }
-}
-
-.error {
-    display: block;
-    margin-top: 10px;
-    color: red;
-}
+} */
