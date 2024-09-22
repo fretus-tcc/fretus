@@ -1,7 +1,9 @@
 const perfilConfigModel = require('../models/perfilConfigModel')
-const { body, validationResult } = require("express-validator")
 const cadastroModel = require('../models/cadastroModel')
+const favoritadosModel = require('../models/favoritadosModel')
+const avaliacoesModel = require('../models/avaliacoesModel')
 const { validaCPF, notifyMessages } = require('../util/Funcao')
+const { body, validationResult } = require("express-validator")
 
 const ConfigPerfilController = {
 
@@ -11,16 +13,17 @@ const ConfigPerfilController = {
         const { id: id_autenticado } = req.session.autenticado
         
         try {
-            // const type = isClient ? 1 : 2
             const [result] = await perfilConfigModel.findUserByType(id)
             const isClient = result.tipo_usuario == '1' ? true : false
-
+            
+            const data = await ConfigPerfilController.fetchData(isClient, id)
+            
             const hasPermission = id == id_autenticado
 
             const msgs = notifyMessages(req, res)
             
             res.render('pages/cliente-entregador/perfil', {
-                autenticado: req.session.autenticado, result, hasPermission, isClient, dados: null, erros: null, msgs
+                autenticado: req.session.autenticado, result, hasPermission, isClient, dados: null, erros: null, msgs, data
             })
         } catch (error) {
             res.json({ error })
@@ -31,7 +34,6 @@ const ConfigPerfilController = {
     showConfig: async (req, res, view, isClient) => {
         const { id } = req.session.autenticado
         try {
-            // const type = isClient ? 1 : 2
             const result = await perfilConfigModel.findUserByType(id)
 
             const msgs = notifyMessages(req, res)
@@ -41,6 +43,20 @@ const ConfigPerfilController = {
             res.json({ error })
             console.log(error)
         }
+    },
+
+    fetchData: async (isClient, id) => {
+        const data = {}
+        if (isClient) {
+            data.favoritados = await favoritadosModel.findAllById(id)
+            data.solicitadas = await perfilConfigModel.countPedidosById(id)
+        } else {
+            data.avaliacoes = await avaliacoesModel.findAllByEntregador(id)
+            data.clientes = await perfilConfigModel.countClientesById(id)
+            data.entregas = 0
+        }
+        
+        return data
     },
 
     // Editar - Atualizar User
@@ -64,6 +80,7 @@ const ConfigPerfilController = {
         if (!errors.isEmpty()) {
             const [fields] = await perfilConfigModel.findUserByType(id)
             const isClient = fields.tipo_usuario == '1' ? true : false
+            const data = await ConfigPerfilController.fetchData(isClient, id)
 
             return res.render(view, {
                 autenticado: req.session.autenticado,
@@ -72,7 +89,8 @@ const ConfigPerfilController = {
                 isClient,
                 dados: req.body,
                 erros: errors.mapped(),
-                msgs: []
+                msgs: [],
+                data
             })
         }
 
@@ -100,6 +118,7 @@ const ConfigPerfilController = {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             const fields = await perfilConfigModel.findUserByType(id, 2)
+            const data = await ConfigPerfilController.fetchData(false, id)
 
             return res.render(view, {
                 result: fields[0],
@@ -108,7 +127,8 @@ const ConfigPerfilController = {
                 autenticado: req.session.autenticado,
                 hasPermission,
                 isClient: false,
-                msgs: []
+                msgs: [],
+                data
             })
         }
         
@@ -130,6 +150,7 @@ const ConfigPerfilController = {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             const fields = await perfilConfigModel.findUserByType(id, 2)
+            const data = await ConfigPerfilController.fetchData(false, id)
 
             return res.render(view, {
                 result: fields[0],
@@ -138,7 +159,8 @@ const ConfigPerfilController = {
                 autenticado: req.session.autenticado,
                 hasPermission,
                 isClient: false,
-                msgs: []
+                msgs: [],
+                data
             })
         }
         

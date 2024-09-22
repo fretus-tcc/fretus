@@ -42,7 +42,7 @@
                 <% if (result?.foto_de_perfil) { %>
                     <img class="photo" src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
                 <% } else { %>
-                    <img class="photo" src="https://placehold.co/350x350?font=montserrat&text=<%= result.nome_usuario %>" alt="">
+                    <img class="photo" src="/imgs/client/user-icon.svg" alt="">
                 <% } %>
 
                 <% if (hasPermission) { %>
@@ -55,7 +55,20 @@
                 <% } %>
             </div>
 
-            
+            <% if (isClient) { %>
+                <p>Favoritados</p>
+                <p><%= data.favoritados.length %></p>
+
+                <p>Entregas Solicitadas</p>
+                <p><%= data.solicitadas %></p>
+            <% } else { %>
+                <p>Clientes</p>
+                <p><%= data.clientes %></p>
+
+                <p>Entregas feitas</p>
+                <p><%= data.entregas %></p>
+            <% } %>
+
             <!-- <%# if (!isClient) { %>
                 <form class="form-perfil" action="/entregador/perfil-status/<%= result.usuario_id %>?_method=PUT" method="post">
                     <section class="row row-toogle">
@@ -159,6 +172,34 @@
                         <span class="error"><%= erros?.modelo_veiculo?.msg %></span>
                     </section>
                 </form>
+            <% } %>
+
+            <% if (isClient) { %>
+
+                <h2>Entregadores Favoritados</h2>
+                <% data.favoritados.forEach(usuario => { %>
+                    <% if (usuario.foto_de_perfil != null) { %>
+                        <img src="data:image/png;base64,<%= usuario.foto_de_perfil.toString('base64') %>">
+                    <% } else { %>
+                        <img src="/imgs/client/user-icon.svg">
+                    <% } %>
+                    <p><%= usuario.nome_usuario %></p>
+                    <p><%= usuario.descricao_usuario %></p>
+                <% }) %>
+
+            <% } else { %>
+
+                <h2>Avaliações</h2>
+                <% data.avaliacoes.forEach(avaliacao => { %>
+                    <% if (avaliacao.foto_de_perfil != null) { %>
+                        <img src="data:image/png;base64,<%= avaliacao.foto_de_perfil.toString('base64') %>">
+                    <% } else { %>
+                        <img src="/imgs/client/user-icon.svg">
+                    <% } %>
+                    <p><%= avaliacao.nome_usuario %></p>
+                    <p><%= avaliacao.feedback_avaliacao %></p>
+                <% }) %>
+
             <% } %>
         </div>
     </main>

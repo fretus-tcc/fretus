@@ -17,6 +17,26 @@ const PerfilModel = {
             return error;
         }
     },
+    
+    countPedidosById: async (id) => {
+        try {
+            const [result] = await pool.query('SELECT count(*) AS total FROM pedidos WHERE id_cliente = ?', [id]);
+            return result[0].total;
+        } catch (error) {
+            console.log(error)
+            return error;
+        }
+    },
+
+    countClientesById: async (id) => {
+        try {
+            const [result] = await pool.query('SELECT count(*) AS total FROM favoritados WHERE id_favoritado = ?', [id]);
+            return result[0].total;
+        } catch (error) {
+            console.log(error)
+            return error;
+        }
+    },
 
     //atualizando usuário da tabela 
     updateUser: async (data, id) => {
