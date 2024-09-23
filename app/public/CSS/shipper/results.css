@@ -42,7 +42,7 @@ main {
 }
 
 .results-cards .cards {
-    height: fit-content;
+    height: 218px;
     padding: 15px;
     border-radius: 15px;
     background-color: white;
@@ -89,6 +89,7 @@ main {
 }
 
 .results-cards .cards > .card-bottom {
+    padding-top: 10px;
     align-items: center;
 }
 

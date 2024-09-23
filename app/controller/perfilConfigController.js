@@ -19,6 +19,9 @@ const ConfigPerfilController = {
             const data = await ConfigPerfilController.fetchData(isClient, id)
             
             const hasPermission = id == id_autenticado
+            if (!hasPermission && !isClient) {
+                await perfilConfigModel.updateViewsPerfil(id)
+            }
 
             const msgs = notifyMessages(req, res)
             

@@ -66,6 +66,15 @@ const PerfilModel = {
         }
     },
 
+    updateViewsPerfil: async (id) => {
+        try {
+            await pool.query('UPDATE detalhamento_entregador SET qtn_visualizacoes_perfil = qtn_visualizacoes_perfil + 1 WHERE id_usuario = ?', [id])
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
 }
 
 // module.exports = ConfigModel

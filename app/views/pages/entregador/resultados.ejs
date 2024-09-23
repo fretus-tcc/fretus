@@ -47,11 +47,11 @@
                         <span class="money">
                             <%= new Intl.NumberFormat('pt-br', {currency: 'BRL', style: 'currency'}).format(entregador.qtn_dinheiro_ganho) %>
                         </span>
-                        <article class="graph">
+                        <!-- <article class="graph">
                             <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u142.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                                 alt="">
                             <span><span class="percentage up">25%</span> desde a última semana</span>
-                        </article>
+                        </article> -->
                     </article>
                 </section>
 
@@ -64,11 +64,11 @@
                     </article>
                     <article class="card-bottom">
                         <span class="money">15 entregas</span>
-                        <article class="graph">
+                        <!-- <article class="graph">
                             <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u142.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                                 alt="">
                             <span><span class="percentage up">10%</span> desde a última semana</span>
-                        </article>
+                        </article> -->
                     </article>
                 </section>
 
@@ -80,12 +80,12 @@
                         </article>
                     </article>
                     <article class="card-bottom">
-                        <span class="money">40 visitas</span>
-                        <article class="graph">
+                        <span class="money"><%= entregador.qtn_visualizacoes_perfil %> visitas</span>
+                        <!-- <article class="graph">
                             <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u142.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                                 alt="">
                             <span><span class="percentage up">10%</span> desde a última semana</span>
-                        </article>
+                        </article> -->
                     </article>
                 </section>
 
