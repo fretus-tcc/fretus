@@ -123,7 +123,6 @@ const denunciasController = {
 
         const msgs = notifyMessages(req, res)
 
-       /* res.render('pages/adm/cupons/cupons-adm', { result, paginador, msgs })*/
         res.render('pages/adm/Denuncia/DenunciaPendente', { result, paginador, msgs })
     },
 
@@ -131,9 +130,40 @@ const denunciasController = {
         const { id_denuncia } = req.params
         try {
             const [denuncia] = await denunciasModel.findById(id_denuncia)
-            console.log(denuncia)
+            // console.log(denuncia)
 
-            res.render('pages/adm/Denuncia/detalhes-denuncia', { denuncia })
+            const msgs = notifyMessages(req, res)
+
+            res.render('pages/adm/Denuncia/detalhes-denuncia', { denuncia, msgs })
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
+    resolverDenuncia: async (req, res) => {
+        const { id_denuncia } = req.params
+        const { action } = req.body
+        try {
+
+            const [denuncia] = await denunciasModel.findById(id_denuncia)
+
+            if (action != 'ignorar' && action != 'suspender') {
+                req.flash('error', 'Algo deu errado ; Tente novamente')
+                return res.redirect('back')
+            }
+
+            await denunciasModel.update({
+                estado_denuncia: action == 'ignorar' ? 'resolvida' : 'suspensa'
+            }, id_denuncia)
+            
+            if (action == 'suspender') {
+                await denunciasModel.suspenderUsuario(denuncia.id_denunciado)
+            }
+
+            req.flash('success', 'Denúncia resolvida ; Denúncia resolvida com sucesso')
+
+            res.redirect('back')
         } catch (error) {
             console.log(error)
             return error

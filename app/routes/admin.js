@@ -80,6 +80,10 @@ router.get('/denuncias/pendentes/:id_denuncia', verificarUsuAutorizado([3], 'pag
     denunciasController.showDenuncia(req, res)
 })
 
+router.post('/denuncias/pendentes/:id_denuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    denunciasController.resolverDenuncia(req, res)
+})
+
 router.get('/denuncias/resolvidas', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     res.render('pages/adm/Denuncia/HistoricoDenuncia')
 })

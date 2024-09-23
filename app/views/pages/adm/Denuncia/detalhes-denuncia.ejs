@@ -8,8 +8,21 @@
     <%- include('../../../partial/config/config-adm.ejs') %>
     <link rel="stylesheet" href="/CSS/adm/grid.css">
     <link rel="stylesheet" href="/CSS/adm/admdenuncia.css">
+    <link rel="stylesheet" href="/CSS/adm/CadastroAdm/cadastroadm.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
+
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
 
     <%- include('../../../partial/adm/sidebar.ejs') %>
 
@@ -28,6 +41,20 @@
         <h2>Motivo: <%= denuncia.motivo_denuncia %></h2>
         <p>data: <%= denuncia.data_denuncia.toLocaleDateString() %></p>
         <p class="content">Descrição: <%= denuncia.descricao_denuncia %></p>
+
+        <% if (denuncia.estado_denuncia == 'pendente') { %>
+            <h2>Ações</h2>
+            <form action="/admin/denuncias/pendentes/<%= denuncia.id_denuncia %>" method="POST">
+                <button class="button2" name="action" value="ignorar">ignorar</button>
+            </form>
+
+            <form action="/admin/denuncias/pendentes/<%= denuncia.id_denuncia %>" method="POST">
+                <button class="button3" name="action" value="suspender">suspender usuario</button>
+            </form>
+        <% } else { %>
+            <p>estado denuncia: <%= denuncia.estado_denuncia %></p>
+        <% } %>
+
     </div>
     </main>
     

@@ -56,7 +56,27 @@ const denunciasModel = {
             console.log(error)
             return error
         }
-    }
+    },
+
+    update: async (data, id) => {
+        try {
+            const [linhas] = await pool.query('UPDATE denuncias SET ? WHERE id_denuncia = ?', [data, id])
+            return linhas;
+        } catch (error) {
+            console.log(error)
+            return error;
+        }
+    },
+
+    suspenderUsuario: async (id) => {
+        try {
+            const [linhas] = await pool.query('UPDATE usuario SET status_usuario = 0 WHERE id_usuario = ?', [id])
+            return linhas;
+        } catch (error) {
+            console.log(error)
+            return error;
+        }
+    },
 }
 
 module.exports = denunciasModel
