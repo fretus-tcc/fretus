@@ -7,6 +7,7 @@ var pool = require("../../config/connection-factory");
 const ConfigPerfilController = require('../controller/perfilConfigController')
 const pedidosController = require('../controller/pedidosController')
 const resultadosController = require('../controller/resultadosController')
+const panelController = require('../controller/panelController')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
 
@@ -85,7 +86,7 @@ router.get('/historico', verificarUsuAutorizado([2], 'pages/restrito'), verifica
 })
 
 router.get('/panel', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
-    res.render('pages/entregador/panel', { autenticado: req.session.autenticado })
+    panelController.listEntregas(req, res)
 })
 
 module.exports = router

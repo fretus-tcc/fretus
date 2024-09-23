@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/CSS/client/pay-popup.css">
     <link rel="stylesheet" href="/CSS/client/report-popup.css">
     <link rel="stylesheet" href="/CSS/shipper/panel.css">
+    <link rel="stylesheet" href="/CSS/adm/error-alert.css">
 </head>
 <body>
     
@@ -27,43 +28,38 @@
             <section class="form-wrapper">
                 <section class="form-container">
                     <h1>Envie suas entregas</h1>
+
                     <section>
-                        <div class="ships" data-lng="-46.725275" data-lat="-23.633795">
-                            <div class="info">
-                                <div class="photo">C</div>
-                                <div>
-                                    <h2 class="name">Nome</h2>
-                                    <p class="address">De: Rua Coleta; Para: Rua Destino</p>
+                        <% if (entregas.length > 0) { %>
+                            <% entregas.forEach(entrega => { %>
+                                <div class="ships" data-lng="<%= entrega.longitude_partida %>" data-lat="<%= entrega.latitude_partida %>">
+                                    <div class="info">
+                                        <div class="photo">
+                                            <% if (entrega.foto_de_perfil != null) { %>
+                                                <img src="data:image/png;base64,<%= entrega.foto_de_perfil.toString('base64') %>" alt="">
+                                            <% } else { %>
+                                                <img src="/imgs/client/user-icon.svg" alt="">
+                                            <% } %>
+                                        </div>
+                                        <div>
+                                            <h2 class="name"><%= entrega.nome_usuario %></h2>
+                                            <p class="address">
+                                                De: <%= entrega.partida_pedido %><br>
+                                                Para: <%= entrega.destino_pedido %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <a href="/cliente/chat/<%= entrega.id_conversa %>" class="img_chat">
+                                        <img src="/imgs/client/chat.svg" alt="" class="">
+                                    </a>
                                 </div>
+                            <% }) %>
+                        <% } else { %>
+                            <div class="error-alert">
+                                <img src="/imgs/shipper/error-icon.png" alt="">
+                                <p>No momento, você não tem nenhuma entrega para ser enviada</p>
                             </div>
-                            <a href="/cliente/chat" class="img_chat">
-                                <img src="/imgs/client/chat.svg" alt="" class="">
-                            </a>
-                        </div>
-                        <div class="ships" data-lng="-46.925275" data-lat="-23.733795">
-                            <div class="info">
-                                <div class="photo">C</div>
-                                <div>
-                                    <h2 class="name">Nome</h2>
-                                    <p class="address">De: Rua Coleta; Para: Rua Destino</p>
-                                </div>
-                            </div>
-                            <a href="/cliente/chat" class="img_chat">
-                                <img src="/imgs/client/chat.svg" alt="" class="">
-                            </a>
-                        </div>
-                        <div class="ships" data-lng="-46.425275" data-lat="-23.133795">
-                            <div class="info">
-                                <div class="photo">C</div>
-                                <div>
-                                    <h2 class="name">Nome</h2>
-                                    <p class="address">De: Rua Coleta; Para: Rua Destino</p>
-                                </div>
-                            </div>
-                            <a href="/cliente/chat" class="img_chat">
-                                <img src="/imgs/client/chat.svg" alt="" class="">
-                            </a>
-                        </div>
+                        <% } %>
                     </section>
                 </section>
             </section>
