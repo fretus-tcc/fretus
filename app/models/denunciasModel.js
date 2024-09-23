@@ -29,9 +29,9 @@ const denunciasModel = {
         }
     },
 
-    findPaginate: async (pagina, total) => {
+    findPaginate: async (pagina, total, estado_denuncia) => {
         try {
-            const [result] = await pool.query('SELECT * FROM denuncias limit ?, ?', [pagina, total])
+            const [result] = await pool.query('SELECT * FROM denuncias WHERE estado_denuncia = ? limit ?, ?', [estado_denuncia, pagina, total])
             return result
         } catch (error) {
             console.log(error)
@@ -39,9 +39,9 @@ const denunciasModel = {
         }
     },
 
-    totalReg: async () => {
+    totalReg: async (estado_denuncia) => {
         try {
-            const [result] = await pool.query('SELECT count (*) total FROM denuncias')
+            const [result] = await pool.query('SELECT count (*) total FROM denuncias WHERE estado_denuncia = ?', [estado_denuncia])
             return result
         } catch (error) {
             console.log(error)

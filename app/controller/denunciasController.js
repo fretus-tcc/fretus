@@ -99,31 +99,31 @@ const denunciasController = {
 
     // ADMIN
 
-    listPaginate: async (req, res) => {
+    listPaginate: async (req, res, estado_denuncia) => {
         // paginação
 
         let pagina = req.query.pagina == undefined ? 1 : Number(req.query.pagina);
         let result = null
         let regPagina = 2
         let inicio = parseInt(pagina - 1) * regPagina
-        let totReg = await denunciasModel.totalReg();
+        let totReg = await denunciasModel.totalReg(estado_denuncia);
         let totPaginas = Math.ceil(totReg[0].total / regPagina);
         
         // validacao parametro pagina
         if (pagina <= 0 || isNaN(pagina)) {
-            return res.redirect('/admin/denuncias/pendentes')
+            return res.redirect(`admin/denuncias/${estado_denuncia}`)
         } else if (pagina > totPaginas && totPaginas > 0) {
-            return res.redirect(`/admin/denuncias/pendentes?pagina=${totPaginas}`)
+            return res.redirect(`/admin/denuncias/${estado_denuncia}?pagina=${totPaginas}`)
         }
 
-        result = await denunciasModel.findPaginate(inicio, regPagina);
+        result = await denunciasModel.findPaginate(inicio, regPagina, estado_denuncia);
         let paginador = totReg[0].total <= regPagina 
             ? null 
             : { "pagina_atual": pagina, "total_reg": totReg[0].total, "total_paginas": totPaginas };
 
         const msgs = notifyMessages(req, res)
 
-        res.render('pages/adm/Denuncia/DenunciaPendente', { result, paginador, msgs })
+        res.render('pages/adm/Denuncia/DenunciaPendente', { result, paginador, msgs, estado_denuncia })
     },
 
     showDenuncia: async (req, res) => {

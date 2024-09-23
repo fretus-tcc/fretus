@@ -72,24 +72,24 @@ router.get('/denuncias', verificarUsuAutorizado([3], 'pages/restrito'), function
     res.render('pages/adm/Denuncia/AdmDenuncia')
 })
 
-router.get('/denuncias/pendentes', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    denunciasController.listPaginate(req, res)
+router.get('/denuncias/pendente', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    denunciasController.listPaginate(req, res, 'pendente')
 })
 
-router.get('/denuncias/pendentes/:id_denuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+router.get('/denuncias/pendente/:id_denuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     denunciasController.showDenuncia(req, res)
 })
 
-router.post('/denuncias/pendentes/:id_denuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+router.post('/denuncias/pendente/:id_denuncia', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
     denunciasController.resolverDenuncia(req, res)
 })
 
-router.get('/denuncias/resolvidas', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    res.render('pages/adm/Denuncia/HistoricoDenuncia')
+router.get('/denuncias/resolvida', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    denunciasController.listPaginate(req, res, 'resolvida')
 })
 
-router.get('/denuncias/suspensas', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
-    res.render('pages/adm/Denuncia/ContaSuspensa')
+router.get('/denuncias/suspensa', verificarUsuAutorizado([3], 'pages/restrito'), function (req, res) {
+    denunciasController.listPaginate(req, res, 'suspensa')
 })
 
 

@@ -44,11 +44,11 @@
 
         <% if (denuncia.estado_denuncia == 'pendente') { %>
             <h2>Ações</h2>
-            <form action="/admin/denuncias/pendentes/<%= denuncia.id_denuncia %>" method="POST">
+            <form action="/admin/denuncias/pendente/<%= denuncia.id_denuncia %>" method="POST">
                 <button class="button2" name="action" value="ignorar">ignorar</button>
             </form>
 
-            <form action="/admin/denuncias/pendentes/<%= denuncia.id_denuncia %>" method="POST">
+            <form action="/admin/denuncias/pendente/<%= denuncia.id_denuncia %>" method="POST">
                 <button class="button3" name="action" value="suspender">suspender usuario</button>
             </form>
         <% } else { %>

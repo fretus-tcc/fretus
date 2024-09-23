@@ -27,7 +27,7 @@
     <main class="content-container">    
         
         <div class="header">
-            <h1>Denúncias Pendentes</h1>
+            <h1>Denúncias <%= estado_denuncia %>s</h1>
         </div>
 
         <div class="grid">
@@ -37,7 +37,7 @@
                     <p>Criada em: <%= item.data_denuncia.toLocaleDateString() %></p>
                     <p class="content">Descrição: <%= item.descricao_denuncia %></p>
                     <div class="actions">
-                        <a href="/admin/denuncias/pendentes/<%= item.id_denuncia %>">
+                        <a href="/admin/denuncias/pendente/<%= item.id_denuncia %>">
                             <img src="/imgs/adm/view.svg" alt="">
                         </a>
                     </div>
