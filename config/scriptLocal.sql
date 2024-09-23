@@ -719,7 +719,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS FRETUS.denuncias (
   id_denuncia INT NOT NULL AUTO_INCREMENT,
-  id_pedido INT NULL,
+  /* id_pedido INT NULL, */
   id_denunciador INT NOT NULL,
   id_denunciado INT NOT NULL,
   foto_denuncia MEDIUMBLOB NULL,
@@ -727,11 +727,12 @@ CREATE TABLE IF NOT EXISTS FRETUS.denuncias (
   outros_motivos VARCHAR(255) NULL,
   data_denuncia DATETIME NOT NULL,
   descricao_denuncia TEXT NOT NULL,
+  estado_denuncia ENUM('pendente', 'resolvida', 'suspensa') NOT NULL DEFAULT 'pendente',
   PRIMARY KEY (id_denuncia),
-  UNIQUE (id_pedido),
+  /* UNIQUE (id_pedido), */
   INDEX fk_DENUNCIAS_USUARIOS1_idx (id_denunciador ASC) VISIBLE,
   INDEX fk_DENUNCIAS_USUARIOS2_idx (id_denunciado ASC) VISIBLE,
-  INDEX fk_DENUNCIAS_USUARIOS3_idx (id_pedido ASC) VISIBLE,
+  /* INDEX fk_DENUNCIAS_USUARIOS3_idx (id_pedido ASC) VISIBLE, */
   CONSTRAINT fk_DENUNCIAS_USUARIOS1
     FOREIGN KEY (id_denunciador)
     REFERENCES FRETUS.usuario (id_usuario)
@@ -741,12 +742,12 @@ CREATE TABLE IF NOT EXISTS FRETUS.denuncias (
     FOREIGN KEY (id_denunciado)
     REFERENCES FRETUS.usuario (id_usuario)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE NO ACTION /*,
   CONSTRAINT fk_DENUNCIAS_USUARIOS3
     FOREIGN KEY (id_pedido)
     REFERENCES FRETUS.pedidos (id_pedido)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION */)
 ENGINE = InnoDB;
 
 
