@@ -23,7 +23,7 @@ const panelModel = {
     findStatus: async (id_entregador) => {
         try {
             const [result] = await pool.query(
-                'SELECT p.id_pedido, s.id_status, MAX(s.status_entrega) AS status_entrega, s.data_status FROM pedidos AS p ' + 
+                'SELECT s.id_pedido, MAX(s.status_entrega) AS status_entrega FROM pedidos AS p ' + 
                 'INNER JOIN status_entrega AS s ' +
                 'ON p.id_pedido = s.id_pedido ' +
                 'WHERE p.id_entregador = ? ' +
