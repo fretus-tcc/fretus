@@ -6,9 +6,11 @@ const panelController = {
         const { id } = req.session.autenticado
         try {
             const entregas = await panelModel.findEntregas(id)
-            // console.log(entregas)
+            const status = await panelModel.findStatus(id)
+                
+            // console.log(status)
 
-            res.render('pages/entregador/panel', { autenticado: req.session.autenticado, entregas })
+            res.render('pages/entregador/panel', { autenticado: req.session.autenticado, entregas, status })
         } catch (error) {
             console.log(error)
             res.json({ error })

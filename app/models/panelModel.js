@@ -20,6 +20,21 @@ const panelModel = {
         }
     },
 
+    findStatus: async (id_entregador) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT p.id_pedido, s.id_status, MAX(s.status_entrega) AS status_entrega, s.data_status FROM pedidos AS p ' + 
+                'INNER JOIN status_entrega AS s ' +
+                'ON p.id_pedido = s.id_pedido ' +
+                'WHERE p.id_entregador = ? ' +
+                'GROUP BY s.id_pedido', [id_entregador])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     // findEntregadorById: async (id) => {
     //     try {
     //         const [result] = await pool.query('SELECT * FROM detalhamento_entregador WHERE id_usuario = ?', [id])
