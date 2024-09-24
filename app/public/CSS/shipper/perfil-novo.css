@@ -16,9 +16,30 @@ main {
 .section{
     max-width: 90rem;
     width: 100%;
-    border:red 1px solid ;
+    /* border:red 1px solid ; */
+    max-height: 700px;
+    height: 100%;
+    overflow: auto;
+    margin: 10px;
 }
 .flex{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+}
+.MinBox{
+    display: flex;
+    gap: 20px;
+    text-align: right;
+    padding: 20px 25px;
+}
+#form-perfil{
+    padding: 20px 25px;
+
+
+    
+}
+.spanBox{
+    font-size: 20px;
+
 }

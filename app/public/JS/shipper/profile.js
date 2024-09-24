@@ -1,4 +1,4 @@
-const textarea = document.querySelectorAll('textarea')
+/* const textarea = document.querySelectorAll('textarea')
 const count = document.querySelector('.count')
 
 textarea.forEach((item, i) => {
@@ -22,4 +22,4 @@ function resize(e) {
             return
         }
     })
-}
+} */

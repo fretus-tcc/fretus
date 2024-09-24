@@ -82,7 +82,7 @@ select[disabled]::-ms-expand {
 
 .row textarea {
     width: 100%;
-    height: 48px;
+   min-height: 100px; 
     border: none;
     outline: none;
     resize: none;
@@ -90,6 +90,7 @@ select[disabled]::-ms-expand {
     font-family: var(--font-2);
     background-color: transparent;
     color: #333;
+
 }
 
 .edit-row > .input-container {
