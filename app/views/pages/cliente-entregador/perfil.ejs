@@ -36,38 +36,41 @@
     <%- include('../../partial/header-client-shipper.ejs', { isClient: autenticado.tipo == '1' ? true : false }) %>
     
     <main>
-        <div class="profile-container">
+        <div class="profile-container section">
 
-            <div class="img-container">
-                <% if (result?.foto_de_perfil) { %>
-                    <img class="photo" src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
+            <div class="flex">
+                <div class="img-container">
+                    <% if (result?.foto_de_perfil) { %>
+                        <img class="photo" src="data:image/png;base64,<%= result.foto_de_perfil.toString('base64') %>">
+                    <% } else { %>
+                        <img class="photo" src="/imgs/client/user-icon.svg" alt="">
+                    <% } %>
+    
+                    <% if (hasPermission) { %>
+                        <form class="update-img" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post" enctype="multipart/form-data">
+                            <input type="file" name="foto_de_perfil" id="foto_perfil" class="input-foto">
+                            <label for="foto_perfil" class="label-foto">
+                                <span class="label-text">Alterar foto de perfil</span>
+                            </label>
+                        </form>
+                    <% } %>
+                </div>
+                <section class="">
+                <% if (isClient) { %>
+                    <p>Favoritados</p>
+                    <p><%= data.favoritados.length %></p>
+    
+                    <p>Entregas Solicitadas</p>
+                    <p><%= data.solicitadas %></p>
                 <% } else { %>
-                    <img class="photo" src="/imgs/client/user-icon.svg" alt="">
+                    <p>Clientes</p>
+                    <p><%= data.clientes %></p>
+    
+                    <p>Entregas feitas</p>
+                    <p><%= data.entregas %></p>
                 <% } %>
-
-                <% if (hasPermission) { %>
-                    <form class="update-img" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post" enctype="multipart/form-data">
-                        <input type="file" name="foto_de_perfil" id="foto_perfil" class="input-foto">
-                        <label for="foto_perfil" class="label-foto">
-                            <span class="label-text">Alterar foto de perfil</span>
-                        </label>
-                    </form>
-                <% } %>
+                </section>
             </div>
-
-            <% if (isClient) { %>
-                <p>Favoritados</p>
-                <p><%= data.favoritados.length %></p>
-
-                <p>Entregas Solicitadas</p>
-                <p><%= data.solicitadas %></p>
-            <% } else { %>
-                <p>Clientes</p>
-                <p><%= data.clientes %></p>
-
-                <p>Entregas feitas</p>
-                <p><%= data.entregas %></p>
-            <% } %>
 
             <!-- <%# if (!isClient) { %>
                 <form class="form-perfil" action="/entregador/perfil-status/<%= result.usuario_id %>?_method=PUT" method="post">
