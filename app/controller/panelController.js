@@ -7,9 +7,6 @@ const panelController = {
         try {
             const entregas = await panelModel.findEntregas(id)
             const status = await panelModel.findStatus(id)
-            
-            // console.log('entregas', entregas)
-            // console.log('status', status)
 
             entregas.forEach((entrega, i) => {
                 if (status[i] == null) {
@@ -22,6 +19,20 @@ const panelController = {
             // console.log(entregas)
 
             res.render('pages/entregador/panel', { autenticado: req.session.autenticado, entregas })
+        } catch (error) {
+            console.log(error)
+            res.json({ error })
+        }
+    },
+
+    updateStatus: async (req, res) => {
+        const { id } = req.session.autenticado
+        const { id_pedido, status } = req.params
+        try {
+            console.log(id_pedido, status)
+            await panelModel.insert({ id_pedido, status_entrega: status })
+
+            res.redirect(req.get("Referrer") || "/")
         } catch (error) {
             console.log(error)
             res.json({ error })

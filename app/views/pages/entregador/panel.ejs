@@ -84,14 +84,14 @@
                         <% } %>
                     </section>
                     <p class="text-time">Vá para <%= entrega.partida_pedido %></p>
-                    <div class="btn-container">
+                    <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="POST" class="btn-container">
                         <% if (entrega.status_entrega != null) { %>
                             <button class="cta">Próxima Etapa</button>
                             <button class="cta notify-call">Notificar Impeditivo</button>
                         <% } else { %>
                             <button class="cta">Começar entrega</button>
                         <% } %>
-                    </div>
+                    </form>
                 </div>
             <% }) %>
 

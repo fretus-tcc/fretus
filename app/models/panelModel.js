@@ -35,6 +35,14 @@ const panelModel = {
         }
     },
 
+    insert: async (data) => {
+        try {
+            await pool.query('INSERT INTO status_entrega SET ?', [data])
+        } catch (error) {
+            return error
+        }
+    },
+
     // findEntregadorById: async (id) => {
     //     try {
     //         const [result] = await pool.query('SELECT * FROM detalhamento_entregador WHERE id_usuario = ?', [id])

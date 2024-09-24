@@ -43,16 +43,7 @@ module.exports = {
             socket.on('pedido aceito', (data) => {
                 io.emit('pedido recebido', { id_pedido: data.id_pedido })
             })
-
-            /*  socket.on('add person', async (data) => {
-               const { userId, friendIdentifier } = data;
-               try {
-                 await chatModel.addFriend(userId, friendIdentifier);
-                 socket.emit('friend added', { success: true });
-               } catch (error) {
-                 socket.emit('friend added', { success: false, message: error.message });
-               }
-             }); */
+            
         });
     },
     getIO: () => {
