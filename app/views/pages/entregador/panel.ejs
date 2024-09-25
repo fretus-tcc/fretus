@@ -43,7 +43,10 @@
                     <section>
                         <% if (entregas.length > 0) { %>
                             <% entregas.forEach(entrega => { %>
-                                <div class="ships <%= entrega.id_pedido == id_pedido ? 'active' : '' %>" data-lng="<%= entrega.longitude_partida %>" data-lat="<%= entrega.latitude_partida %>">
+                                <div class="ships <%= entrega.id_pedido == id_pedido ? 'active' : '' %>"
+                                    data-lng="<%= entrega.status_entrega <= 1 ? entrega.longitude_partida : entrega.longitude_destino %>"
+                                    data-lat="<%= entrega.status_entrega <= 1 ? entrega.latitude_partida : entrega.latitude_destino %>"
+                                >
                                     <div class="info">
                                         <div class="photo">
                                             <% if (entrega.foto_de_perfil != null) { %>
@@ -79,29 +82,46 @@
         <section class="map">
             <div id="map"></div>
             <% entregas.forEach(entrega => { %>
-                <% const status_msgs = ['Entrega não iniciada', 'Buscando Produto', 'A caminho', 'Receba seu produto', 'Entrega Finalizada'] %>
+                <% const status_msgs = ['Entrega não iniciada', 'Busque o Produto', 'Indo ao destino', 'Aguarde o Recebimento', 'Entrega Finalizada'] %>
                 <div class="status <%= entrega.id_pedido == id_pedido ? 'active' : '' %>">
                     <div class="header">
                         <h1><%= status_msgs[entrega.status_entrega] %></h1>
                     </div>
+
                     <section class="container_bar_count">
                         <% for (let index = 0; index < 4; index++) { %>
                             <section class="bar_count <%= entrega.status_entrega > index ? 'count1' : '' %>"></section>
                         <% } %>
                     </section>
-                    <p class="text-time">Vá para <%= entrega.partida_pedido %></p>
-                    <div class="btn-container">
-                        <% if (entrega.status_entrega != 0) { %>
-                            <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
-                                <button class="cta">Próxima Etapa</button>
-                            </form>
-                            <button class="cta notify-call">Notificar Impeditivo</button>
-                        <% } else { %>
-                            <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
-                                <button class="cta">Começar entrega</button>
-                            </form>
+
+                    <p class="text-time">
+                        <% if (entrega.status_entrega == 0) { %>
+                            Inicie sua entrega
+                        <% } else if (entrega.status_entrega == 1) { %>
+                            Vá para <%= entrega.partida_pedido %>
+                        <% } else if (entrega.status_entrega == 2) { %>
+                            Vá para <%= entrega.destino_pedido %>
+                        <% } else if (entrega.status_entrega == 3) { %>
+                            Caso esteja demorando, chame o cliente no chat
+                        <% } else if (entrega.status_entrega == 4) { %>
+                            Entrega realizada com sucesso
                         <% } %>
-                    </div>
+                    </p>
+
+                    <% if (entrega.status_entrega < 4) { %>
+                        <div class="btn-container">
+                            <% if (entrega.status_entrega != 0) { %>
+                                <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
+                                    <button class="cta">Próxima Etapa</button>
+                                </form>
+                                <button class="cta notify-call">Notificar Impeditivo</button>
+                            <% } else { %>
+                                <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
+                                    <button class="cta">Começar entrega</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    <% } %>
                 </div>
             <% }) %>
 
