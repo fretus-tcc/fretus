@@ -3,6 +3,7 @@ const locationPopup = document.querySelector('.popup.location')
 const closelocation = document.querySelector('.popup.location .close')
 const accessToken = 'pk.eyJ1IjoiZ2FicmllbGNhcnZhbGgwIiwiYSI6ImNscG14ZDB6OTAwc3Eya29pM2dvZm5uamYifQ.IPac1tcfJTcmQLrrn937wQ'
 const menuItems = document.querySelectorAll('.menu-item')
+const errorContainer = document.querySelector('.popup.location .error')
 
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
@@ -28,10 +29,27 @@ locationCall.forEach(async item => {
 
 function showStatus(status) {
 	status.shift()
-	const elements = [...menuItems].reverse()
-	status.forEach((item, i) => {
-		elements[i].classList.add('active')
+	const statusItems = [...menuItems].reverse()
+
+	errorContainer.classList.remove('show')
+	statusItems.forEach(item => {
+		item.classList.remove('active')
+		item.classList.remove('color')
 	})
+
+	if (status.length <= 0) {
+		errorContainer.classList.add('show')
+		return
+	}
+
+	status.forEach((item, i) => {
+		statusItems[i].classList.add('active')
+		const time = statusItems[i].querySelector('.time-status')
+		const data_status = new Date(item.data_status)
+		time.textContent = data_status.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+	})
+	
+	statusItems[status.length - 1].classList.add('color')
 }
 
 async function fetchStatus(id_pedido) {
@@ -56,17 +74,17 @@ closelocation.addEventListener('click', () => {
 	locationPopup.classList.remove('show')
 })
 
-function toggleItens() {
-	var itens = document.querySelector('.itens');
-	var icon = document.getElementById("arrow-icon");
+// function toggleItens() {
+// 	var itens = document.querySelector('.itens');
+// 	var icon = document.getElementById("arrow-icon");
 
-	itens.style.display = itens.style.display === 'block' ? 'none' : 'block';
+// 	itens.style.display = itens.style.display === 'block' ? 'none' : 'block';
 
-	if (icon.classList.contains("down-arrow")) {
-		icon.classList.remove("down-arrow");
-		icon.classList.add("up-arrow");
-	} else {
-		icon.classList.remove("up-arrow");
-		icon.classList.add("down-arrow");
-	}
-}
+// 	if (icon.classList.contains("down-arrow")) {
+// 		icon.classList.remove("down-arrow");
+// 		icon.classList.add("up-arrow");
+// 	} else {
+// 		icon.classList.remove("up-arrow");
+// 		icon.classList.add("down-arrow");
+// 	}
+// }

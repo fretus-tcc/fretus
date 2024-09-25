@@ -97,7 +97,7 @@
 
 .descricao {
     padding: 10px 10px 0 10px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .descricao .icon_s {
@@ -105,9 +105,8 @@
 }
 
 .itens {
-    display: none;
+    display: block;
     padding: 8px 10px;
-
 }
 
 .itens ul {
@@ -131,9 +130,6 @@
     display: flex;
 }
 
-.color {
-    background-color: #EF9652 !important;
-}
 
 .y-line {
     width: 20px;
@@ -141,6 +137,10 @@
     background-color: hsl(26, 83%, 63%, .4);
     border-radius: 2px;
     margin: 20px 12px;
+}
+
+.menu-item.color .y-line {
+    background-color: #EF9652 !important;
 }
 
 .x-line {
@@ -209,6 +209,23 @@
     }
 
  
+}
+
+.error {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.error.show {
+    display: flex;
+}
+
+.error p {
+    font-family: var(--font-1) !important;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 /* =================mediaQ============== */

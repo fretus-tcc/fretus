@@ -7,6 +7,7 @@
             <section class="map-container">
                 <div id="map"></div>
             </section>
+
             <section class="location-info">
                 <section class="location_box">
                     <h1>Buscando produto</h1>
@@ -25,9 +26,11 @@
                         <img src="/imgs/client/chat.svg" alt="" class="">
                     </a>
                 </section>
-                <section class="descricao" onclick="toggleItens()">
-                    <h3>Histórico <img id="arrow-icon" src="/imgs/client/icon_s.svg" alt="" class="icon_s rotate down-arrow"></h3>
+
+                <section class="descricao">
+                    <h3>Histórico <!-- <img id="arrow-icon" src="/imgs/client/icon_s.svg" alt="" class="icon_s rotate down-arrow"> --></h3>
                 </section>
+
                 <section class="itens">
                     <ul class="menu-container">
                         <li class="menu-item">
@@ -36,45 +39,52 @@
                             <section class="conatainer_text">
                                 <article class="box_text">
                                     <h3>Entrega Finalizada</h3>
-                                    <span>2:36 PM</span>
+                                    <span class="time-status">2:36 PM</span>
                                 </article>
                                 <p>Entregador entregou o produto ao destino</p>
                             </section>
                         </li>
+
                         <li class="menu-item">
                             <section class="y-line"></section>
                             <section class="x-line"></section>
                             <section class="conatainer_text">
                                 <article class="box_text">
                                     <h3>Receba seu produto</h3>
-                                    <span>2:07 PM</span>
+                                    <span class="time-status">2:07 PM</span>
                                 </article>
                                 <p>Busque o produto no destino</p>
                             </section>
                         </li>
+
                         <li class="menu-item">
                             <section class="y-line"></section>
                             <section class="x-line"></section>
                             <section class="conatainer_text">
                                 <article class="box_text">
                                     <h3>A caminho</h3>
-                                    <span>1:47 PM</span>
+                                    <span class="time-status">1:47 PM</span>
                                 </article>
                                 <p>Entregador está a caminho do endereço de destino</p>
                             </section>
                         </li>
+
                         <li class="menu-item">
                             <section class="y-line"></section>
                             <section class="conatainer_text">
                                 <article class="box_text">
                                     <h3>Buscando Produto</h3>
-                                    <span>1:24 PM</span>
+                                    <span class="time-status">1:24 PM</span>
                                 </article>
                                 <p>Entregador está a caminho do endereço de coleta</p>
                             </section>
                         </li>
                     </ul>
                 </section>
+                <section class="error">
+                    <p>Entrega não iniciada</p>
+                </section>
+
             </section>
     </article>
 </section>

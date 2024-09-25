@@ -53,7 +53,7 @@ const panelController = {
 
         try {
             const status = await panelModel.findAllStatusById(id_pedido)
-            console.log(status)
+            // console.log(status)
 
             res.json({ sucess: true, error: null, status })
         } catch (error) {
