@@ -4,6 +4,9 @@ const closelocation = document.querySelector('.popup.location .close')
 const accessToken = 'pk.eyJ1IjoiZ2FicmllbGNhcnZhbGgwIiwiYSI6ImNscG14ZDB6OTAwc3Eya29pM2dvZm5uamYifQ.IPac1tcfJTcmQLrrn937wQ'
 const menuItems = document.querySelectorAll('.menu-item')
 const errorContainer = document.querySelector('.popup.location .error')
+const statusText = document.querySelector('.popup.location .status-text')
+const statusBar = document.querySelectorAll('.popup.location .bar_count')
+const loading = document.querySelector('.popup.location .loading')
 
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
@@ -23,6 +26,7 @@ locationCall.forEach(async item => {
 		map.resize()
 
 		const { status } = await fetchStatus(item.dataset.idPedido)
+		loading.classList.remove('show')
 		showStatus(status)
 	})
 })
@@ -31,14 +35,9 @@ function showStatus(status) {
 	status.shift()
 	const statusItems = [...menuItems].reverse()
 
-	errorContainer.classList.remove('show')
-	statusItems.forEach(item => {
-		item.classList.remove('active')
-		item.classList.remove('color')
-	})
-
 	if (status.length <= 0) {
 		errorContainer.classList.add('show')
+		statusText.textContent = 'Entrega não iniciada'
 		return
 	}
 
@@ -47,6 +46,9 @@ function showStatus(status) {
 		const time = statusItems[i].querySelector('.time-status')
 		const data_status = new Date(item.data_status)
 		time.textContent = data_status.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+		const status_msgs = ['Buscando Produto', 'A caminho', 'Receba seu produto', 'Entrega Finalizada']
+		statusText.textContent = status_msgs[item.status_entrega - 1]
+		statusBar[i].classList.add('count1')
 	})
 	
 	statusItems[status.length - 1].classList.add('color')
@@ -71,7 +73,16 @@ async function fetchStatus(id_pedido) {
 }
 
 closelocation.addEventListener('click', () => {
+	const statusItems = [...menuItems].reverse()
+
 	locationPopup.classList.remove('show')
+	errorContainer.classList.remove('show')
+	statusItems.forEach((item, i) => {
+		item.classList.remove('active')
+		item.classList.remove('color')
+		statusBar[i].classList.remove('count1')
+		loading.classList.add('show')
+	})
 })
 
 // function toggleItens() {
