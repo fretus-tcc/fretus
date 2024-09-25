@@ -89,7 +89,7 @@ router.get('/panel', verificarUsuAutorizado([2], 'pages/restrito'), verificarCad
     panelController.listEntregas(req, res)
 })
 
-router.post('/panel/update-status/:id_pedido/:status', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
+router.post('/panel/update-status/:id_pedido', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     panelController.updateStatus(req, res)
 })
 

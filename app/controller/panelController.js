@@ -30,7 +30,13 @@ const panelController = {
         const { id_pedido, status } = req.params
         
         try {
-            await panelModel.insert({ id_pedido, status_entrega: status })
+            const [status] = await panelModel.findStatusById(id_pedido)
+            const status_entrega = status.status_entrega + 1
+
+            // console.log(status_entrega)
+            if (status_entrega <= 4) {
+                await panelModel.insert({ id_pedido, status_entrega })
+            }
 
             req.flash('success', 'Etapa finalizada ; Etapa finalizada com sucesso')
 
