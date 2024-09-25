@@ -1,6 +1,7 @@
 const pedidosModel = require('../models/pedidosModel')
 const pagamentoModel = require('../models/pagamentoModel')
 const chatModel = require('../models/chatModel')
+const panelModel = require('../models/panelModel')
 
 const pagamentoController = {
 
@@ -65,7 +66,8 @@ const pagamentoController = {
         if (status == 'approved') {
             await pagamentoModel.updateByUUID({ estado_pagamento: 'aprovado' }, external_reference)
             await chatModel.insertConversa({ id_cliente: pedido.id_cliente, id_entregador: pedido.id_entregador })
-            
+            await panelModel.insert({ id_pedido: pedido.id_pedido, status_entrega: 0 })
+
             let preco_pedido = pedido.preco_pedido
             if (pedido.porcentagem_cupom != null) {
                 preco_pedido -= (pedido.porcentagem_cupom / 100) * preco_pedido

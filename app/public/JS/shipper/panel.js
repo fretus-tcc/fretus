@@ -56,14 +56,7 @@ ships.forEach((item, index) => {
         backForm.classList.add('show')
         
         const shipCoords = [item.dataset.lng, item.dataset.lat]
-        start.addTo(map)
-        end.setLngLat(shipCoords).addTo(map)
-
-        map.easeTo({
-            center: shipCoords
-        })
-
-        getRoute(start.getLngLat(), end.getLngLat())
+        setRoute(shipCoords)
     })
 })
 
@@ -118,6 +111,22 @@ const setZoomRoute = route => {
     })
 
     map.fitBounds(bounds, { padding: 300 })
+}
+
+const setRoute = (shipCoords) => {
+    start.addTo(map)
+    end.setLngLat(shipCoords).addTo(map)
+
+    map.easeTo({
+        center: shipCoords
+    })
+
+    getRoute(start.getLngLat(), end.getLngLat())
+}
+
+const currentActive = document.querySelector('.ships.active')
+if (currentActive != null) {
+    setRoute([currentActive.dataset.lng, currentActive.dataset.lat])
 }
 
 window.addEventListener('resize', () => {

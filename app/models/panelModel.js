@@ -39,6 +39,7 @@ const panelModel = {
         try {
             await pool.query('INSERT INTO status_entrega SET ?', [data])
         } catch (error) {
+            console.log(error)
             return error
         }
     },

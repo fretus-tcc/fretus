@@ -18,8 +18,19 @@
     <link rel="stylesheet" href="/CSS/client/report-popup.css">
     <link rel="stylesheet" href="/CSS/shipper/panel.css">
     <link rel="stylesheet" href="/CSS/adm/error-alert.css">
+    <!-- SIMPLE NOTIFY - Notificações -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+    <script src="/JS/notify.js"></script>
+    <link rel="stylesheet" href="/CSS/notify.css">
 </head>
 <body>
+    <!-- Notificações -->
+    <% if (msgs.length > 0) { %>
+        <% msgs.forEach(msg => { %>
+            <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
+        <% }) %>
+    <% } %>
     
     <%- include('../../partial/header-client-shipper.ejs', { isClient: false }) %>
 
@@ -32,7 +43,7 @@
                     <section>
                         <% if (entregas.length > 0) { %>
                             <% entregas.forEach(entrega => { %>
-                                <div class="ships" data-lng="<%= entrega.longitude_partida %>" data-lat="<%= entrega.latitude_partida %>">
+                                <div class="ships <%= entrega.id_pedido == id_pedido ? 'active' : '' %>" data-lng="<%= entrega.longitude_partida %>" data-lat="<%= entrega.latitude_partida %>">
                                     <div class="info">
                                         <div class="photo">
                                             <% if (entrega.foto_de_perfil != null) { %>
@@ -67,15 +78,11 @@
 
         <section class="map">
             <div id="map"></div>
-            <% entregas.forEach((entrega, i) => { %>
-                <% const status_msgs = ['Buscando Produto', 'A caminho', 'Receba seu produto', 'Entrega Finalizada'] %>
-                <div class="status">
+            <% entregas.forEach(entrega => { %>
+                <% const status_msgs = ['Entrega não iniciada', 'Buscando Produto', 'A caminho', 'Receba seu produto', 'Entrega Finalizada'] %>
+                <div class="status <%= entrega.id_pedido == id_pedido ? 'active' : '' %>">
                     <div class="header">
-                        <% if (entrega.status_entrega != null) { %>
-                            <h1><%= status_msgs[entrega.status_entrega - 1] %></h1>
-                        <% } else { %>
-                            <h1>Entrega não iniciada</h1>
-                        <% } %>
+                        <h1><%= status_msgs[entrega.status_entrega] %></h1>
                         <!-- <div class="time">30 min</div> -->
                     </div>
                     <section class="container_bar_count">
@@ -85,7 +92,7 @@
                     </section>
                     <p class="text-time">Vá para <%= entrega.partida_pedido %></p>
                     <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="POST" class="btn-container">
-                        <% if (entrega.status_entrega != null) { %>
+                        <% if (entrega.status_entrega != 0) { %>
                             <button class="cta">Próxima Etapa</button>
                             <button class="cta notify-call">Notificar Impeditivo</button>
                         <% } else { %>
