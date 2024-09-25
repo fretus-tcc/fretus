@@ -50,6 +50,20 @@ const panelModel = {
         }
     },
 
+    findAllStatusById: async (id_pedido) => {
+        try {
+            const [result] = await pool.query(
+                'SELECT s.* FROM pedidos AS p ' + 
+                'INNER JOIN status_entrega AS s ' +
+                'ON p.id_pedido = s.id_pedido ' +
+                'WHERE p.id_pedido = ?', [id_pedido])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO status_entrega SET ?', [data])

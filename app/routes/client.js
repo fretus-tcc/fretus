@@ -11,6 +11,7 @@ const pagamentoController = require('../controller/pagamentoController')
 const avaliacoesController = require('../controller/avaliacoesController')
 const denunciasController = require('../controller/denunciasController')
 const cuponsController = require('../controller/cuponsController')
+const panelController = require('../controller/panelController')
 const cuponsModel = require('../models/cuponsModel')
 
 const upload = multer({ storage: multer.memoryStorage() }).single('foto_de_perfil')
@@ -80,6 +81,10 @@ router.post('/cupons', verificarUsuAutorizado([1], 'pages/restrito'), cuponsCont
 
 router.get('/perfil/:id', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     ConfigPerfilController.showProfile(req, res);
+});
+
+router.get('/status-entrega/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    panelController.listStatus(req, res)
 });
 
 router.put(

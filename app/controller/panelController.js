@@ -47,6 +47,21 @@ const panelController = {
         }
     },
 
+    // Histórico - Cliente
+    listStatus: async (req, res) => {
+        const { id_pedido } = req.params
+
+        try {
+            const status = await panelModel.findAllStatusById(id_pedido)
+            console.log(status)
+
+            res.json({ sucess: true, error: null, status })
+        } catch (error) {
+            console.log(error)
+            res.json({ sucess: false, error, status: null })
+        }
+    },
+
 }
 
 module.exports = panelController

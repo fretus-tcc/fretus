@@ -2,41 +2,71 @@ const locationCall = document.querySelectorAll('.location-call')
 const locationPopup = document.querySelector('.popup.location')
 const closelocation = document.querySelector('.popup.location .close')
 const accessToken = 'pk.eyJ1IjoiZ2FicmllbGNhcnZhbGgwIiwiYSI6ImNscG14ZDB6OTAwc3Eya29pM2dvZm5uamYifQ.IPac1tcfJTcmQLrrn937wQ'
+const menuItems = document.querySelectorAll('.menu-item')
 
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v12',
-  center: [-46.625290, -23.533773],
-  zoom: 12,
-  minZoom: 5,
-  language: 'pt'
+	container: 'map',
+	style: 'mapbox://styles/mapbox/streets-v12',
+	center: [-46.625290, -23.533773],
+	zoom: 12,
+	minZoom: 5,
+	language: 'pt'
 })
 
 map.addControl(new mapboxgl.NavigationControl());
 
-locationCall.forEach(item => {
-  item.addEventListener('click', () => {
-    locationPopup.classList.add('show')
-    map.resize()
-  })
+locationCall.forEach(async item => {
+	item.addEventListener('click', async () => {
+		locationPopup.classList.add('show')
+		map.resize()
+
+		const { status } = await fetchStatus(item.dataset.idPedido)
+		showStatus(status)
+	})
 })
 
+function showStatus(status) {
+	status.shift()
+	const elements = [...menuItems].reverse()
+	status.forEach((item, i) => {
+		elements[i].classList.add('active')
+	})
+}
+
+async function fetchStatus(id_pedido) {
+	try {
+        const res = await fetch(`/cliente/status-entrega/${id_pedido}`)
+        const data = await res.json()
+
+        if (!res.ok) {
+            console.log(res)
+            return
+        }
+
+        return data
+
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
 closelocation.addEventListener('click', () => {
-  locationPopup.classList.remove('show')
+	locationPopup.classList.remove('show')
 })
 
 function toggleItens() {
-  var itens = document.querySelector('.itens');
-  var icon = document.getElementById("arrow-icon");
+	var itens = document.querySelector('.itens');
+	var icon = document.getElementById("arrow-icon");
 
-  itens.style.display = itens.style.display === 'block' ? 'none' : 'block';
+	itens.style.display = itens.style.display === 'block' ? 'none' : 'block';
 
-  if (icon.classList.contains("down-arrow")) {
-    icon.classList.remove("down-arrow");
-    icon.classList.add("up-arrow");
-} else {
-    icon.classList.remove("up-arrow");
-    icon.classList.add("down-arrow");
-}
+	if (icon.classList.contains("down-arrow")) {
+		icon.classList.remove("down-arrow");
+		icon.classList.add("up-arrow");
+	} else {
+		icon.classList.remove("up-arrow");
+		icon.classList.add("down-arrow");
+	}
 }
