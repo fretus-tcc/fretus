@@ -30,7 +30,13 @@ const panelController = {
         const { id_pedido, status } = req.params
         
         try {
-            await panelModel.insert({ id_pedido, status_entrega: status })
+            const [status] = await panelModel.findStatusById(id_pedido)
+            const status_entrega = status.status_entrega + 1
+
+            // console.log(status_entrega)
+            if (status_entrega <= 4) {
+                await panelModel.insert({ id_pedido, status_entrega })
+            }
 
             req.flash('success', 'Etapa finalizada ; Etapa finalizada com sucesso')
 
@@ -38,6 +44,21 @@ const panelController = {
         } catch (error) {
             console.log(error)
             res.json({ error })
+        }
+    },
+
+    // Histórico - Cliente
+    listStatus: async (req, res) => {
+        const { id_pedido } = req.params
+
+        try {
+            const status = await panelModel.findAllStatusById(id_pedido)
+            console.log(status)
+
+            res.json({ sucess: true, error: null, status })
+        } catch (error) {
+            console.log(error)
+            res.json({ sucess: false, error, status: null })
         }
     },
 

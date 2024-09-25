@@ -120,11 +120,15 @@
 }
 
 .menu-item {
-    display: flex;
+    display: none;
     flex-direction: column;
     position: relative;
     width: 100%;
 
+}
+
+.menu-item.active {
+    display: flex;
 }
 
 .color {

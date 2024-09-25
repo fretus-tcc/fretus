@@ -111,12 +111,12 @@
                     <% if (entrega.status_entrega < 4) { %>
                         <div class="btn-container">
                             <% if (entrega.status_entrega != 0) { %>
-                                <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
+                                <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>" method="post">
                                     <button class="cta">Próxima Etapa</button>
                                 </form>
                                 <button class="cta notify-call">Notificar Impeditivo</button>
                             <% } else { %>
-                                <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
+                                <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>" method="post">
                                     <button class="cta">Começar entrega</button>
                                 </form>
                             <% } %>
