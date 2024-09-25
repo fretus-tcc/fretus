@@ -6,40 +6,51 @@ body {
 
 main {
     padding-top: 50px;
-    display: flex;
+   /*  display: flex;
     justify-content: center;
-    align-items: center;
-    /* max-width: 120rem;
+    align-items: center; */
+    max-width: 120rem;
     margin: 0 auto;
-    padding: 50px 8rem; */
-}
-.section{
-    max-width: 90rem;
-    width: 100%;
-    /* border:red 1px solid ; */
-    max-height: 700px;
-    height: 100%;
-    overflow: auto;
-    margin: 10px;
+    padding: 50px 9rem;
 }
 .flex{
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
 }
-.MinBox{
+.containerFlex{
+  /*   border: 1px solid red ; */
     display: flex;
-    gap: 20px;
-    text-align: right;
+}
+.contanerRow{
+    display: flex;
+    justify-content: space-between;
+   /*  border: 1px solid orange; */
+    width: 100%;
     padding: 20px 25px;
 }
-#form-perfil{
-    padding: 20px 25px;
-
-
-    
+.form-perfil{
+    max-width: 60%;
+    width: 100%;
 }
-.spanBox{
-    font-size: 20px;
+.aside-profile{
+    /* border: 1px solid green ; */
+}
+.box-info-profile{
+    /* border: 1px solid pink; */
+}
+#form-perfil-box{
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    /* gap: 3px; */
+    margin-top: 20px;    
+}
 
+@media(max-width: 1452px){
+   /*  main{
+        padding: 50px 6rem ;
+    } */
+    .contanerRow{
+        flex-direction: column;
+        justify-content: inherit;
+    }
 }
