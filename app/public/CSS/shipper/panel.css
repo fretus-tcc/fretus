@@ -143,15 +143,24 @@ h2.name {
     gap: 15px;
 }
 
+.btn-container form {
+    width: 100%;
+}
+
 .cta {
     margin: 0;
     width: 100%;
     border-radius: 5px;
     font-size: 14px;
+    margin-top: 0 !important;
 }
 
 .notify-call {
     background-color: #F0F0F0;
     color: #333 !important;
     border: 2px solid #F0F0F0;
+}
+
+.sn-notifications-container {
+    z-index: 100000 !important;
 }

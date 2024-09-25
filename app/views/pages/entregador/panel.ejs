@@ -83,7 +83,6 @@
                 <div class="status <%= entrega.id_pedido == id_pedido ? 'active' : '' %>">
                     <div class="header">
                         <h1><%= status_msgs[entrega.status_entrega] %></h1>
-                        <!-- <div class="time">30 min</div> -->
                     </div>
                     <section class="container_bar_count">
                         <% for (let index = 0; index < 4; index++) { %>
@@ -91,14 +90,18 @@
                         <% } %>
                     </section>
                     <p class="text-time">Vá para <%= entrega.partida_pedido %></p>
-                    <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="POST" class="btn-container">
+                    <div class="btn-container">
                         <% if (entrega.status_entrega != 0) { %>
-                            <button class="cta">Próxima Etapa</button>
+                            <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
+                                <button class="cta">Próxima Etapa</button>
+                            </form>
                             <button class="cta notify-call">Notificar Impeditivo</button>
                         <% } else { %>
-                            <button class="cta">Começar entrega</button>
+                            <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>/<%= entrega.status_entrega + 1 %>" method="post">
+                                <button class="cta">Começar entrega</button>
+                            </form>
                         <% } %>
-                    </form>
+                    </div>
                 </div>
             <% }) %>
 
