@@ -18,6 +18,13 @@ const setUserCoords = async () => {
 
 const coords = await setUserCoords()
 
+setInterval(async () => {
+    const pos = await setUserCoords()
+    // console.log(pos)
+    start.setLngLat(pos)
+    getRoute(start.getLngLat(), end.getLngLat())
+}, 5000)
+
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
     container: 'map',
