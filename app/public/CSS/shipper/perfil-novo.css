@@ -6,13 +6,20 @@ body {
 
 main {
     padding-top: 50px;
-   /*  display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
-    max-width: 120rem;
+    align-items: center;
+    
+    /*  max-width: 120rem;
     margin: 0 auto;
-    padding: 50px 9rem;
+    padding: 50px 7rem; */
     position: relative;
+    border: 1px red solid ;
+}
+.profile-container{
+    width: 100%;
+    padding: 0 7rem;
+    border: 1px solid pink;
 }
 .flex{
     display: flex;
@@ -29,7 +36,7 @@ main {
     padding: 20px 25px;
     width: 100%;
     height: fit-content;
-    flex-wrap: wrap; 
+    /* flex-wrap: wrap;  */
 }
 .form-perfil{
     max-width: 60%;
@@ -52,23 +59,74 @@ main {
 .ContainerEntregafav{
     position: absolute;
     top: 13rem;
-    left: 28rem;
+    left: 26.5rem;
+}
+.input-box-profile{
+    font-size: 2rem;
+}
+.input-field{
+    font-size: 20px;
+}
+.LabelBox{
+    font-size: 24px;
+}
+.input-font-profile{
+    font-size: 2rem !important;
+}
+.font-rpofile-fav{
+    font-size: 32px ;
+}
+.font-profile-span{
+    font-size: 1.4rem;
+
 }
 
 
-@media(max-width: 1690px){
-    main{
-        padding: 50px 4rem ;
+@media(max-width:1510px){
+    .font-profile-span{
+        font-size: 1.2rem;
     }
-    /* .contanerRow{
-        flex-direction: column;
-        justify-content: inherit;
-    } */
+    .profile-container{
+        padding: 0 3.5rem;
+    }
+    .ContainerEntregafav{
+        position: absolute;
+        top: 13rem;
+        left: 23rem;
+    }
 }
-@media(max-width: 1450px){
+@media(max-width:1275px){
+    .font-profile-span{
+        font-size: 1rem;
+    }
+    .font-rpofile-fav{
+        font-size: 20px;
+    }
+}
+@media(max-width: 1150px){
     .contanerRow{
-        /* flex-direction: column;
-        justify-content: inherit; */
-        display: block;
+       flex-direction: column;
     }
+    .ContainerEntregafav{
+        position: absolute;
+        top: 15rem;
+        left: 22.5rem;
+    }
+    .form-perfil{
+        max-width: 100%;
+    }
+    .row textarea{
+        min-height: inherit;
+        
+    }
+
+}
+@media(max-width:830px){
+    .ContainerEntregafav{
+        /* position: inherit; */
+    }
+    /* .BoxFav-profile{
+        margin-top: 10px;
+    } */
+    
 }
