@@ -191,7 +191,12 @@
     <%- include('../../partial/popup/report.ejs') %>
     <%- include('../../partial/popup/location.ejs') %>
     <%- include('../../partial/menu-burguer.ejs', { type: 'client' }) %>
-
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io()
+        socket.emit('connect new client', { id_usuario: '<%= autenticado.id %>' })
+    </script>
     <script src="/JS/burguer.js"></script>
     <script src="/JS/client/shipper-carousel.js"></script>
     <script src="/JS/client/rate-popup.js"></script>

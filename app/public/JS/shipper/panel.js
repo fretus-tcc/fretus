@@ -1,5 +1,6 @@
 const accessToken = 'pk.eyJ1IjoiZ2FicmllbGNhcnZhbGgwIiwiYSI6ImNscG14ZDB6OTAwc3Eya29pM2dvZm5uamYifQ.IPac1tcfJTcmQLrrn937wQ'
 let route
+const socket = io()
 
 const getUserPosition = () => {
     return new Promise((resolve, reject) => {
@@ -22,7 +23,10 @@ setInterval(async () => {
     const pos = await setUserCoords()
     // console.log(pos)
     start.setLngLat(pos)
+    socket.emit('nova localizacao', { start: start.getLngLat(), end: end.getLngLat(), id_entregador: 'teste' })
+    
     getRoute(start.getLngLat(), end.getLngLat())
+    
 }, 5000)
 
 mapboxgl.accessToken = accessToken

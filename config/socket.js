@@ -43,6 +43,10 @@ module.exports = {
             socket.on('pedido aceito', (data) => {
                 io.emit('pedido recebido', { id_pedido: data.id_pedido })
             })
+
+            socket.on('nova localizacao', (data) => {
+                io.emit('localizacao recebida', { start: data.start, end: data.end, id_entregador: data.id_entregador })
+            })
             
         });
     },

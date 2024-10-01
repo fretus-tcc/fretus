@@ -8,6 +8,10 @@ const statusText = document.querySelector('.popup.location .status-text')
 const statusBar = document.querySelectorAll('.popup.location .bar_count')
 const loading = document.querySelector('.popup.location .loading')
 
+socket.on('localizacao recebida', (data) => {
+	console.log(data)
+})
+
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
 	container: 'map',
