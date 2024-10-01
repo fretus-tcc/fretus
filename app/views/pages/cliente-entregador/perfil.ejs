@@ -56,48 +56,52 @@
                                 <% } %>
                                 
                             </div>
-                                <form id="form-perfil-box" class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post">
-                                    <div class="row">
-                                        <label for="email" style="font-size: 24px ;">Email: </label>
-                                        <div class="edit-row">
-                                            <div class="input-container">
-                                                <input class="input-field" style="font-size: 20px ;" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email_usuario" value="<%= dados?.email_usuario ?? result.email_usuario %>">
-                                                <input type="button" class="btn" value="Cancelar">
-                                                <button class="btn confirm">Confirmar</button>
-                                            </div>
-                                            <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
+                            <form id="form-perfil-box" class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post">
+                                <div class="row">
+                                    <label for="email" style="font-size: 24px ;">Email: </label>
+                                    <div class="edit-row">
+                                        <div class="input-container">
+                                            <input class="input-field" style="font-size: 20px ;" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email_usuario" value="<%= dados?.email_usuario ?? result.email_usuario %>">
+                                            <input type="button" class="btn" value="Cancelar">
+                                            <button class="btn confirm">Confirmar</button>
                                         </div>
-                                        <span class="error"><%= erros?.email_usuario?.msg %></span>
+                                        <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
                                     </div>
-                    
-                                    <div class="row">
-                                        <label for="number" style="font-size: 24px;">Telefone: </label>
-                                        <div class="edit-row">
-                                            <div class="input-container">
-                                                <input class="input-field" style="font-size: 20px ;" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone_usuario" maxlength="15" value="<%= dados?.telefone_usuario ?? result.telefone_usuario %>">
-                                                <input type="button" class="btn" value="Cancelar">
-                                                <button class="btn confirm">Confirmar</button>
-                                            </div>
-                                            <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
+                                    <span class="error"><%= erros?.email_usuario?.msg %></span>
+                                </div>
+                
+                                <div class="row">
+                                    <label for="number" style="font-size: 24px;">Telefone: </label>
+                                    <div class="edit-row">
+                                        <div class="input-container">
+                                            <input class="input-field" style="font-size: 20px ;" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone_usuario" maxlength="15" value="<%= dados?.telefone_usuario ?? result.telefone_usuario %>">
+                                            <input type="button" class="btn" value="Cancelar">
+                                            <button class="btn confirm">Confirmar</button>
                                         </div>
-                                        <span class="error"><%= erros?.telefone_usuario?.msg %></span>
-                                    </div> 
-                    
-                                    <!-- <div class="row">
-                                        <label for="descricao">Descrição: </label>
-                                        <div class="edit-row">
-                                            <div class="input-container">
-                                                <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao_usuario"><%= dados?.descricao_usuario ?? result.descricao_usuario %></textarea>
-                                                <span class="count">0/200</span>
-                                                <input type="button" class="btn" value="Cancelar">
-                                                <button class="btn confirm">Confirmar</button>
-                                            </div>
-                                            <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
+                                        <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
+                                    </div>
+                                    <span class="error"><%= erros?.telefone_usuario?.msg %></span>
+                                </div> 
+                
+                                <!-- <div class="row">
+                                    <label for="descricao">Descrição: </label>
+                                    <div class="edit-row">
+                                        <div class="input-container">
+                                            <textarea class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao_usuario"><%= dados?.descricao_usuario ?? result.descricao_usuario %></textarea>
+                                            <span class="count">0/200</span>
+                                            <input type="button" class="btn" value="Cancelar">
+                                            <button class="btn confirm">Confirmar</button>
                                         </div>
-                                        <span class="error"><%= erros?.descricao_usuario?.msg %></span>
-                                    </div> -->
-                                </form>
-                        </section> 
+                                        <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
+                                    </div>
+                                    <span class="error"><%= erros?.descricao_usuario?.msg %></span>
+                                </div> -->
+                            </form>
+                            
+                            </section>
+                        </section>          
+                            
+                         
                             
                             <div class="contanerRow">
                                 <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" id="form-perfil" method="post">
@@ -154,7 +158,11 @@
                                 </section>
 
                             </div>
+                            
                     </section>
+                    
+                   
+                    
 
             <!-- <%# if (!isClient) { %>
                 <form class="form-perfil" action="/entregador/perfil-status/<%= result.usuario_id %>?_method=PUT" method="post">
@@ -172,35 +180,6 @@
                     </section>
                 </form>
             <%# } %> -->
-            <!-- <section>
-                <% if (isClient) { %>
-
-                    <h2>Entregadores Favoritados</h2>
-                    <% data.favoritados.forEach(usuario => { %>
-                        <% if (usuario.foto_de_perfil != null) { %>
-                            <img src="data:image/png;base64,<%= usuario.foto_de_perfil.toString('base64') %>">
-                        <% } else { %>
-                            <img src="/imgs/client/user-icon.svg">
-                        <% } %>
-                        <p><%= usuario.nome_usuario %></p>
-                        <p><%= usuario.descricao_usuario %></p>
-                    <% }) %>
-    
-                <% } else { %>
-    
-                    <h2>Avaliações</h2>
-                    <% data.avaliacoes.forEach(avaliacao => { %>
-                        <% if (avaliacao.foto_de_perfil != null) { %>
-                            <img src="data:image/png;base64,<%= avaliacao.foto_de_perfil.toString('base64') %>">
-                        <% } else { %>
-                            <img src="/imgs/client/user-icon.svg">
-                        <% } %>
-                        <p><%= avaliacao.nome_usuario %></p>
-                        <p><%= avaliacao.feedback_avaliacao %></p>
-                    <% }) %>
-    
-                <% } %>
-            </section>   -->
 
             <% if (!isClient) { %>
                 <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.usuario_id %>?_method=PUT" method="post">
@@ -235,6 +214,35 @@
             <% } %>
 
         </div>
+        <section class="ContainerEntregafav">
+            <% if (isClient) { %>
+                <h2>Entregadores Favoritados</h2>
+                <% data.favoritados.forEach(usuario => { %>
+                    <div class="favorito-item">
+                        <% if (usuario.foto_de_perfil != null) { %>
+                            <img src="data:image/png;base64,<%= usuario.foto_de_perfil.toString('base64') %>" alt="Foto de perfil">
+                        <% } else { %>
+                            <img src="/imgs/client/user-icon.svg" alt="Usuário sem foto">
+                        <% } %>
+                        <p><%= usuario.nome_usuario %></p>
+                        <p><%= usuario.descricao_usuario %></p>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <h2>Avaliações</h2>
+                <% data.avaliacoes.forEach(avaliacao => { %>
+                    <div class="avaliacao-item">
+                        <% if (avaliacao.foto_de_perfil != null) { %>
+                            <img src="data:image/png;base64,<%= avaliacao.foto_de_perfil.toString('base64') %>" alt="Foto de perfil">
+                        <% } else { %>
+                            <img src="/imgs/client/user-icon.svg" alt="Usuário sem foto">
+                        <% } %>
+                        <p><%= avaliacao.nome_usuario %></p>
+                        <p><%= avaliacao.feedback_avaliacao %></p>
+                    </div>
+                <% }) %>
+            <% } %>
+        </section>
     </main>
 
     <%- include('../../partial/menu-burguer.ejs', { type: autenticado.tipo == '1' ? 'client' : 'shipper' }) %>

@@ -12,6 +12,7 @@ main {
     max-width: 120rem;
     margin: 0 auto;
     padding: 50px 9rem;
+    position: relative;
 }
 .flex{
     display: flex;
@@ -26,17 +27,21 @@ main {
    /*  border: 1px solid orange; */
     width: 100%;
     padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    flex-wrap: wrap; 
 }
 .form-perfil{
     max-width: 60%;
     width: 100%;
 }
-.aside-profile{
-    /* border: 1px solid green ; */
+.ContainerEntregafav {
+    clear: both; /* Garante que a seção esteja abaixo de outros elementos */
+    margin-top: 30px; /* Espaço acima da seção */
+    padding: 20px;
+
 }
-.box-info-profile{
-    /* border: 1px solid pink; */
-}
+
 #form-perfil-box{
     max-width: 100% !important;
     display: flex;
@@ -44,13 +49,26 @@ main {
     /* gap: 3px; */
     margin-top: 20px;    
 }
+.ContainerEntregafav{
+    position: absolute;
+    top: 13rem;
+    left: 28rem;
+}
 
-@media(max-width: 1452px){
-   /*  main{
-        padding: 50px 6rem ;
-    } */
-    .contanerRow{
+
+@media(max-width: 1690px){
+    main{
+        padding: 50px 4rem ;
+    }
+    /* .contanerRow{
         flex-direction: column;
         justify-content: inherit;
+    } */
+}
+@media(max-width: 1450px){
+    .contanerRow{
+        /* flex-direction: column;
+        justify-content: inherit; */
+        display: block;
     }
 }
