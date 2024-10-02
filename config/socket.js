@@ -44,6 +44,10 @@ module.exports = {
                 io.emit('pedido recebido', { id_pedido: data.id_pedido })
             })
 
+            socket.on('connect new status', (data) => {
+                socket.join(data.id_usuario)
+            })
+
             socket.on('nova localizacao', (data) => {
                 io.emit('localizacao recebida', { start: data.start, end: data.end, id_entregador: data.id_entregador })
             })

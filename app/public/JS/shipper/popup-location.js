@@ -8,10 +8,6 @@ const statusText = document.querySelector('.popup.location .status-text')
 const statusBar = document.querySelectorAll('.popup.location .bar_count')
 const loading = document.querySelector('.popup.location .loading')
 
-socket.on('localizacao recebida', (data) => {
-	console.log(data)
-})
-
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
 	container: 'map',
@@ -53,6 +49,7 @@ function showStatus(status) {
 		const status_msgs = ['Buscando Produto', 'A caminho', 'Receba seu produto', 'Entrega Finalizada']
 		statusText.textContent = status_msgs[item.status_entrega - 1]
 		statusBar[i].classList.add('count1')
+		locationPopup.setAttribute('data-id-entregador', item.id_entregador)
 	})
 	
 	statusItems[status.length - 1].classList.add('color')
@@ -86,8 +83,83 @@ closelocation.addEventListener('click', () => {
 		item.classList.remove('color')
 		statusBar[i].classList.remove('count1')
 		loading.classList.add('show')
+		locationPopup.setAttribute('data-id-entregador', '')
 	})
 })
+
+socket.on('localizacao recebida', async (data) => {
+	if (locationPopup.classList.contains('show') && locationPopup.dataset.idEntregador == data.id_entregador) {
+		console.log(data)
+		await setMarkers(data.start, data.end)
+	}
+})
+
+const startMarker = new mapboxgl.Marker({
+	color: 'rgb(15, 118, 110)',
+})
+
+const endMarker = new mapboxgl.Marker({
+	color: 'rgb(15, 118, 110)',
+})
+
+async function setMarkers(start, end) {
+	startMarker.setLngLat(start).addTo(map)
+	endMarker.setLngLat(end).addTo(map)
+	await getRoute(start, end)
+}
+
+const getRoute = async (start, end) => {
+    const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}?geometries=geojson&access_token=${accessToken}`
+    const data = await fetch(url)
+    const json = await data.json()
+    route = json.routes[0]
+
+    const geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+            type: 'LineString',
+            coordinates: route.geometry.coordinates
+        }
+    }
+
+    if (map.getSource('route')) {
+        map.getSource('route').setData(geojson)
+    } else {
+        map.addLayer({
+            id: 'route',
+            type: 'line',
+            source: {
+                type: 'geojson',
+                data: geojson
+            },
+            layout: {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            paint: {
+                'line-color': '#3887be',
+                'line-width': 5,
+                'line-opacity': 0.75
+            }
+        })
+    }
+
+    setZoomRoute(route)
+}
+
+const setZoomRoute = route => {
+    const bounds = new mapboxgl.LngLatBounds(
+        route.geometry.coordinates[0],
+        route.geometry.coordinates[0]
+    )
+    
+    route.geometry.coordinates.forEach(coord => {
+        bounds.extend(coord)
+    })
+
+    map.fitBounds(bounds, { padding: 50 })
+}
 
 // function toggleItens() {
 // 	var itens = document.querySelector('.itens');

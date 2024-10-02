@@ -53,7 +53,7 @@ const panelModel = {
     findAllStatusById: async (id_pedido) => {
         try {
             const [result] = await pool.query(
-                'SELECT s.* FROM pedidos AS p ' + 
+                'SELECT s.*, p.id_entregador FROM pedidos AS p ' + 
                 'INNER JOIN status_entrega AS s ' +
                 'ON p.id_pedido = s.id_pedido ' +
                 'WHERE p.id_pedido = ?', [id_pedido])

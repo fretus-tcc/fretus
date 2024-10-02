@@ -21,12 +21,12 @@ const coords = await setUserCoords()
 
 setInterval(async () => {
     const pos = await setUserCoords()
-    // console.log(pos)
     start.setLngLat(pos)
-    socket.emit('nova localizacao', { start: start.getLngLat(), end: end.getLngLat(), id_entregador: 'teste' })
     
-    getRoute(start.getLngLat(), end.getLngLat())
-    
+    if (end.getLngLat() != undefined) {
+        socket.emit('nova localizacao', { start: start.getLngLat(), end: end.getLngLat(), id_entregador })
+        getRoute(start.getLngLat(), end.getLngLat())
+    }
 }, 5000)
 
 mapboxgl.accessToken = accessToken
