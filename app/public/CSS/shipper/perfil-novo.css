@@ -2,24 +2,25 @@ body {
     background-image: var(--gray-gradient);
     color: #333;
     min-height: 100vh;
+    /* height: 100%; */
 }
 
 main {
     padding-top: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
     
     /*  max-width: 120rem;
     margin: 0 auto;
     padding: 50px 7rem; */
     position: relative;
-    border: 1px red solid ;
+   /*  border: 1px red solid ; */
 }
 .profile-container{
     width: 100%;
     padding: 0 7rem;
-    border: 1px solid pink;
+  /*   border: 1px solid pink; */
 }
 .flex{
     display: flex;
@@ -42,12 +43,7 @@ main {
     max-width: 60%;
     width: 100%;
 }
-.ContainerEntregafav {
-    clear: both; /* Garante que a seção esteja abaixo de outros elementos */
-    margin-top: 30px; /* Espaço acima da seção */
-    padding: 20px;
 
-}
 
 #form-perfil-box{
     max-width: 100% !important;
@@ -59,7 +55,7 @@ main {
 .ContainerEntregafav{
     position: absolute;
     top: 13rem;
-    left: 26.5rem;
+    left: 27.5rem;
 }
 .input-box-profile{
     font-size: 2rem;
@@ -92,7 +88,7 @@ main {
     .ContainerEntregafav{
         position: absolute;
         top: 13rem;
-        left: 23rem;
+        left: 24rem;
     }
 }
 @media(max-width:1275px){
@@ -110,7 +106,7 @@ main {
     .ContainerEntregafav{
         position: absolute;
         top: 15rem;
-        left: 22.5rem;
+        left: 24rem;
     }
     .form-perfil{
         max-width: 100%;
@@ -122,11 +118,15 @@ main {
 
 }
 @media(max-width:830px){
-    .ContainerEntregafav{
-        /* position: inherit; */
+    body{
+        min-height: 130vh;
     }
-    /* .BoxFav-profile{
-        margin-top: 10px;
-    } */
+    .ContainerEntregafav {
+        position: absolute;
+        top: 33rem;
+        left: 3.5rem;
+        margin-top: auto;
+      /*   padding: inherit; */
+    }
     
 }
