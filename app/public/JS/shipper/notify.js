@@ -10,4 +10,4 @@ notify.forEach((item, idx) => {
 
 close.addEventListener('click', () => notifyPopup.classList.remove('show'))
 
-console.log(notify);
+// console.log(notify);

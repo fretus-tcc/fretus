@@ -23,8 +23,11 @@ setInterval(async () => {
     const pos = await setUserCoords()
     start.setLngLat(pos)
     
-    if (end.getLngLat() != undefined) {
-        socket.emit('nova localizacao', { start: start.getLngLat(), end: end.getLngLat(), id_entregador })
+    const active = document.querySelector('.ships.active')
+    // console.log(active.dataset.idPedido);
+    
+    if (active != null) {
+        socket.emit('nova localizacao', { start: start.getLngLat(), end: end.getLngLat(), id_entregador, id_pedido: active.dataset.idPedido })
         getRoute(start.getLngLat(), end.getLngLat())
     }
 }, 5000)

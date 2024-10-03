@@ -49,7 +49,7 @@ module.exports = {
             })
 
             socket.on('nova localizacao', (data) => {
-                io.emit('localizacao recebida', { start: data.start, end: data.end, id_entregador: data.id_entregador })
+                io.emit('localizacao recebida', data)
             })
             
         });

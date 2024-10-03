@@ -50,6 +50,7 @@ function showStatus(status) {
 		statusText.textContent = status_msgs[item.status_entrega - 1]
 		statusBar[i].classList.add('count1')
 		locationPopup.setAttribute('data-id-entregador', item.id_entregador)
+		locationPopup.setAttribute('data-id-pedido', item.id_pedido)
 	})
 	
 	statusItems[status.length - 1].classList.add('color')
@@ -83,12 +84,13 @@ closelocation.addEventListener('click', () => {
 		item.classList.remove('color')
 		statusBar[i].classList.remove('count1')
 		loading.classList.add('show')
-		locationPopup.setAttribute('data-id-entregador', '')
+        locationPopup.setAttribute('data-id-entregador', '')
+		locationPopup.setAttribute('data-id-pedido', '')
 	})
 })
 
 socket.on('localizacao recebida', async (data) => {
-	if (locationPopup.classList.contains('show') && locationPopup.dataset.idEntregador == data.id_entregador) {
+	if (locationPopup.classList.contains('show') && locationPopup.dataset.idEntregador == data.id_entregador && locationPopup.dataset.idPedido == data.id_pedido) {
 		console.log(data)
 		await setMarkers(data.start, data.end)
 	}

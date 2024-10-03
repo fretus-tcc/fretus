@@ -44,6 +44,7 @@
                         <% if (entregas.length > 0) { %>
                             <% entregas.forEach(entrega => { %>
                                 <div class="ships <%= entrega.id_pedido == id_pedido ? 'active' : '' %>"
+                                    data-id-pedido="<%= entrega.id_pedido %>"
                                     data-lng="<%= entrega.status_entrega <= 1 ? entrega.longitude_partida : entrega.longitude_destino %>"
                                     data-lat="<%= entrega.status_entrega <= 1 ? entrega.latitude_partida : entrega.latitude_destino %>"
                                 >
