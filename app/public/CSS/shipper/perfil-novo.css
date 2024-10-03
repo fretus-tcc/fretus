@@ -4,13 +4,13 @@ body {
     min-height: 100vh;
     /* height: 100%; */
 }
-
+ 
 main {
     padding-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;    
-    
+   
     /*  max-width: 120rem;
     margin: 0 auto;
     padding: 50px 7rem; */
@@ -43,8 +43,7 @@ main {
     max-width: 60%;
     width: 100%;
 }
-
-
+ 
 #form-perfil-box{
     max-width: 100% !important;
     display: flex;
@@ -64,7 +63,7 @@ main {
     font-size: 20px;
 }
 .LabelBox{
-    font-size: 24px;
+    font-size: 18px !important;
 }
 .input-font-profile{
     font-size: 2rem !important;
@@ -74,10 +73,33 @@ main {
 }
 .font-profile-span{
     font-size: 1.4rem;
-
+ 
 }
-
-
+.Box-fav-item,.Box-fav-itemEnt {
+    background-color: #fff;
+    /* background-color: #f0f0f0; */
+    border-radius: 3px;
+    margin-top: 10px;
+    display: flex;
+    max-height: 25vh;
+    min-width: 30vw;
+    max-width: 30vw;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.favorito-item{
+    border-radius: 3px;
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+   /*  align-items: ce; */
+}
+.favorito-item img{
+    width: 50px;
+    /* border-radius: 50%; */
+    height: 50px;
+ 
+}
+ 
 @media(max-width:1510px){
     .font-profile-span{
         font-size: 1.2rem;
@@ -105,7 +127,7 @@ main {
     }
     .ContainerEntregafav{
         position: absolute;
-        top: 15rem;
+        top: 16rem;
         left: 24rem;
     }
     .form-perfil{
@@ -113,9 +135,12 @@ main {
     }
     .row textarea{
         min-height: inherit;
-        
+       
     }
-
+    .favorito-item p {
+        font-size: .75rem;
+    }
+ 
 }
 @media(max-width:830px){
     body{
@@ -123,10 +148,48 @@ main {
     }
     .ContainerEntregafav {
         position: absolute;
-        top: 33rem;
+        top: 27rem;
         left: 3.5rem;
         margin-top: auto;
       /*   padding: inherit; */
     }
-    
+    .Box-fav-item {
+        min-width: 260px;
+    }
+    .Positionfav{
+        position: absolute;
+        top: 11rem;
+        margin-top: auto;
+    }
+    /* -------------Teste---------- */
+    .img-container img{
+        max-height: inherit;
+
+    }
+   .img-container .photo {
+    max-width: 160px;
+    height: 160px;
+   }
+   .img-container{
+    width: 213px;
+    aspect-ratio:5/4;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+
+   }
+   .contanerRow{
+    padding: 20px 0;
+   }
+}
+@media(max-width:630px){
+    .contanerRow{
+        padding: 10px 0;
+    }
+    .profile-container{
+        padding: 0 2rem;
+    }
+    .ContainerEntregafav{
+        left: 2rem;
+    }
 }

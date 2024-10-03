@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,24 +17,24 @@
     <script src="/JS/notify.js"></script>
     <link rel="stylesheet" href="/CSS/notify.css">
 </head>
-
+ 
 <body>
-
+ 
     <!-- Notificações -->
     <% if (msgs.length > 0) { %>
         <% msgs.forEach(msg => { %>
             <script>notify('<%= msg.title %>', '<%= msg.description %>', '<%= msg.status %>')</script>
         <% }) %>
     <% } %>
-
+ 
     <% if (erros) { %>
         <% Object.keys(erros).forEach(key => { %>
             <script>notify('<%= erros[key].msg %>', 'Verifique este campo', 'error')</script>
         <% }) %>
     <% } %>
-
+ 
     <%- include('../../partial/header-client-shipper.ejs', { isClient: autenticado.tipo == '1' ? true : false }) %>
-    
+   
     <main>
         <div class="profile-container">
                     <heaeder class="containerFlex">
@@ -45,7 +45,7 @@
                                 <% } else { %>
                                     <img class="photo" src="/imgs/client/user-icon.svg" alt="">
                                 <% } %>
-                
+               
                                 <% if (hasPermission) { %>
                                     <form class="update-img" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post" enctype="multipart/form-data">
                                         <input type="file" name="foto_de_perfil" id="foto_perfil" class="input-foto">
@@ -54,9 +54,42 @@
                                         </label>
                                     </form>
                                 <% } %>
-                                
+                               
                             </div>
+                            <% if (!isClient) { %>
+                                <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.usuario_id %>?_method=PUT" method="post">
+                                    <h1 style="margin: 10px 0; font-size: 1.8rem; text-decoration: underline;">Veículo</h1>
+                                    <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
+               
+                                    <section class="row">
+                                        <label for="vehicles" class="LabelBox">Tipo do Veículo</label>
+                                        <section class="edit-row">
+                                            <select name="tipo_veiculo" class="select-field" id="vehicles" <%= !hasPermission ? 'disabled' : '' %>>
+                                                <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
+                                                <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
+                                                <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
+                                                <option value="caminhao" <%= result.tipo_veiculo == 'caminhao' ? 'selected': '' %>>Caminhão</option>
+                                            </select>
+                                        </section>
+                                        <span class="error"><%= erros?.tipo_veiculo?.msg %></span>
+                                    </section>
+               
+                                    <section class="row">
+                                        <label for="modelo_veiculo" class="LabelBox">Modelo do Veículo:</label>
+                                        <div class="edit-row">
+                                            <div class="input-container">
+                                                <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="modelo_veiculo" value="<%= dados?.modelo_veiculo ?? result.modelo_veiculo %>">
+                                                <input type="button" class="btn" value="Cancelar">
+                                                <button class="btn confirm">Confirmar</button>
+                                            </div>
+                                            <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
+                                        </div>
+                                        <span class="error"><%= erros?.modelo_veiculo?.msg %></span>
+                                    </section>
+                                </form>
+                            <% } %>
                             <form id="form-perfil-box" class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post">
+                                <h1 style="margin-bottom: 10px; text-decoration: underline">Contato</h1>
                                 <div class="row">
                                     <label for="email" class="LabelBox">Email: </label>
                                     <div class="edit-row">
@@ -69,7 +102,7 @@
                                     </div>
                                     <span class="error"><%= erros?.email_usuario?.msg %></span>
                                 </div>
-                
+                               
                                 <div class="row">
                                     <label for="number" class="LabelBox">Telefone: </label>
                                     <div class="edit-row">
@@ -81,8 +114,8 @@
                                         <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
                                     </div>
                                     <span class="error"><%= erros?.telefone_usuario?.msg %></span>
-                                </div> 
-                
+                                </div>
+                               
                                 <!-- <div class="row">
                                     <label for="descricao">Descrição: </label>
                                     <div class="edit-row">
@@ -97,43 +130,12 @@
                                     <span class="error"><%= erros?.descricao_usuario?.msg %></span>
                                 </div> -->
                             </form>
-                            <% if (!isClient) { %>
-                                <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.usuario_id %>?_method=PUT" method="post">
-                                    <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
-                
-                                    <section class="row">
-                                        <label for="vehicles">Tipo do Veículo</label>
-                                        <section class="edit-row">
-                                            <select name="tipo_veiculo" class="select-field" id="vehicles" <%= !hasPermission ? 'disabled' : '' %>>
-                                                <option value="moto" <%= result.tipo_veiculo == 'moto' ? 'selected': '' %>>Moto</option>
-                                                <option value="carro" <%= result.tipo_veiculo == 'carro' ? 'selected': '' %>>Carro</option>
-                                                <option value="van" <%= result.tipo_veiculo == 'van' ? 'selected': '' %>>Van</option>
-                                                <option value="caminhao" <%= result.tipo_veiculo == 'caminhao' ? 'selected': '' %>>Caminhão</option>
-                                            </select>
-                                        </section>
-                                        <span class="error"><%= erros?.tipo_veiculo?.msg %></span>
-                                    </section>
-                
-                                    <section class="row">
-                                        <label for="modelo_veiculo">Modelo do Veículo:</label>
-                                        <div class="edit-row">
-                                            <div class="input-container">
-                                                <input class="input-field" type="text" placeholder="Digite aqui seu modelo de veículo" readonly id="modelo_veiculo" name="modelo_veiculo" value="<%= dados?.modelo_veiculo ?? result.modelo_veiculo %>">
-                                                <input type="button" class="btn" value="Cancelar">
-                                                <button class="btn confirm">Confirmar</button>
-                                            </div>
-                                            <img class="changeCall" src="/imgs/client/edit-icon.svg" alt="">
-                                        </div>
-                                        <span class="error"><%= erros?.modelo_veiculo?.msg %></span>
-                                    </section>
-                                </form>
-                            <% } %>
-                            
+                           
                             </section>
                         </section>          
-                            
+                           
                          
-                            
+                           
                             <div class="contanerRow">
                                 <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" id="form-perfil" method="post">
                                     <div class="row">
@@ -162,39 +164,39 @@
                                         <span class="error"><%= erros?.descricao_usuario?.msg %></span>
                                     </div>
                                 </form>
-
-                                <section style="display: flex; gap: 20px;" class="BoxFav-profile">
+ 
+                                <section style="display: flex; gap: 20px; text-align: right;" class="BoxFav-profile">
                                     <% if (isClient) { %>
                                         <div>
                                             <span class="font-profile-span">Favoritados</span>
                                             <b><p  class="font-rpofile-fav"><%= data.favoritados.length %></p></b>
                                         </div>
-                                        
+                                       
                                         <div>
                                             <span class="font-profile-span">Entregas Solicitadas</span>
                                             <b><p class="font-rpofile-fav"><%= data.solicitadas %></p></b>
                                         </div>
-                                        
+                                       
                                     <% } else { %>
                                         <div>
                                             <span class="font-profile-span">Clientes</span>
                                             <b><p class="font-rpofile-fav" data.clientes %></p></b>
                                         </div>
-                        
+                       
                                         <div>
                                             <span class="font-profile-span">Entregas feitas</span>
                                             <b><p class="font-rpofile-fav"><%= data.entregas %></p></b>
                                         </div>
                                     <% } %>
                                 </section>
-
+ 
                             </div>
-                            
+                           
                     </section>
-                    
                    
-                    
-
+                   
+                   
+ 
             <!-- <%# if (!isClient) { %>
                 <form class="form-perfil" action="/entregador/perfil-status/<%= result.usuario_id %>?_method=PUT" method="post">
                     <section class="row row-toogle">
@@ -211,43 +213,51 @@
                     </section>
                 </form>
             <%# } %> -->
-
-
+ 
+ 
         </div>
         <section class="ContainerEntregafav">
             <% if (isClient) { %>
                 <h2>Entregadores Favoritados</h2>
-                <% data.favoritados.forEach(usuario => { %>
-                    <div class="favorito-item">
-                        <% if (usuario.foto_de_perfil != null) { %>
-                            <img src="data:image/png;base64,<%= usuario.foto_de_perfil.toString('base64') %>" alt="Foto de perfil">
-                        <% } else { %>
-                            <img src="/imgs/client/user-icon.svg" alt="Usuário sem foto">
-                        <% } %>
-                        <p><%= usuario.nome_usuario %></p>
-                        <p><%= usuario.descricao_usuario %></p>
-                    </div>
-                <% }) %>
+                <section class="Box-fav-item">
+                        <% data.favoritados.forEach(usuario => { %>
+                            <div class="favorito-item">
+                                <% if (usuario.foto_de_perfil != null) { %>
+                                    <img src="data:image/png;base64,<%= usuario.foto_de_perfil.toString('base64') %>" alt="Foto de perfil">
+                                <% } else { %>
+                                    <img src="/imgs/client/user-icon.svg" alt="Usuário sem foto">
+                                <% } %>
+                              <section>
+                                <h4><%= usuario.nome_usuario %></h4>
+                                <p><%= usuario.descricao_usuario %></p>
+                              </section>
+                            </div>
+                        <% }) %>
+                </section>
             <% } else { %>
-                <h2>Avaliações</h2>
-                <% data.avaliacoes.forEach(avaliacao => { %>
-                    <div class="avaliacao-item">
-                        <% if (avaliacao.foto_de_perfil != null) { %>
-                            <img src="data:image/png;base64,<%= avaliacao.foto_de_perfil.toString('base64') %>" alt="Foto de perfil">
-                        <% } else { %>
-                            <img src="/imgs/client/user-icon.svg" alt="Usuário sem foto">
-                        <% } %>
-                        <p><%= avaliacao.nome_usuario %></p>
-                        <p><%= avaliacao.feedback_avaliacao %></p>
-                    </div>
-                <% }) %>
+                <div class="Positionfav">
+                    <h2>Avaliações</h2>
+                <section class="Box-fav-item">
+                        <% data.avaliacoes.forEach(avaliacao => { %>
+                            <div class="avaliacao-item">
+                                <% if (avaliacao.foto_de_perfil != null) { %>
+                                    <img src="data:image/png;base64,<%= avaliacao.foto_de_perfil.toString('base64') %>" alt="Foto de perfil">
+                                <% } else { %>
+                                    <img src="/imgs/client/user-icon.svg" alt="Usuário sem foto">
+                                <% } %>
+                                <p><%= avaliacao.nome_usuario %></p>
+                                <p><%= avaliacao.feedback_avaliacao %></p>
+                            </div>
+                        <% }) %>
+                </section>
+                </div>
             <% } %>
         </section>
        
     </main>
-
+ 
     <%- include('../../partial/menu-burguer.ejs', { type: autenticado.tipo == '1' ? 'client' : 'shipper' }) %>
-
+ 
     <script>
         const noPermission = '<%= !hasPermission %>'
     </script>
@@ -259,5 +269,5 @@
     <!-- foto perfil, mascara telefone -->
     <script src="/JS/perfil.js"></script>
 </body>
-
+ 
 </html>
