@@ -84,7 +84,7 @@
                             </span>
                             <span class="actions <%= autenticado.tipo == 2 ? 'hidden' : '' %>">
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
-                                    <img class="location-call" src="/imgs/client/location-icon.svg" alt="">
+                                    <img class="location-call" src="/imgs/client/location-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>" data-partida="<%= pedido.longitude_partida %>,<%= pedido.latitude_partida %>" data-destino="<%= pedido.longitude_destino %>,<%= pedido.latitude_destino %>">
                                     <% if (pedido?.id_denunciado == null) { %>
                                         <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= pedido.id_entregador %>">
                                     <% } %>
@@ -173,7 +173,12 @@
     <%- include('../../partial/popup/location.ejs') %>
     <%- include('../../partial/popup/report.ejs') %>
     <%- include('../../partial/menu-burguer.ejs', { type: isClient ? 'client' : 'shipper' }) %>
-
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io()
+        socket.emit('connect new status', { id_usuario: '<%= autenticado.id %>' })
+    </script>
     <script src="/JS/burguer.js"></script>
     <script src="/JS/client/rate-popup.js"></script>
     <script src="/JS/shipper/popup-info.js"></script>
