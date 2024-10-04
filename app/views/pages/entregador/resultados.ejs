@@ -63,7 +63,7 @@
                         </article>
                     </article>
                     <article class="card-bottom">
-                        <span class="money">15 entregas</span>
+                        <span class="money"><%= entregas %> entregas</span>
                         <!-- <article class="graph">
                             <img src="https://files.axshare.com/gsc/NW3CCE/d7/2e/63/d72e6396c33043df9eca85714bda96d5/images/area_do_entregador__desktop_/u142.svg?pageId=162fbb92-5d69-4bc4-b5d2-9ac969f79156"
                                 alt="">
@@ -99,7 +99,7 @@
                         <% if (pedidos.length > 0) { %>
                             <% pedidos.forEach(pedido => { %>
                                 <tr>
-                                    <td>Em Andamento</td>
+                                    <td><%= pedido.status_finalizacao == 'andamento' ? 'Em Andamento' : 'Finalizada' %></td>
                                     <td><%= pedido.partida_pedido %> - <%= pedido.destino_pedido %></td>
                                     <td><%= pedido.nome_usuario %></td>
                                     <td>

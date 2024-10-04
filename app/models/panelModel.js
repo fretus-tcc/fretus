@@ -73,15 +73,14 @@ const panelModel = {
         }
     },
 
-    // findEntregadorById: async (id) => {
-    //     try {
-    //         const [result] = await pool.query('SELECT * FROM detalhamento_entregador WHERE id_usuario = ?', [id])
-    //         return result
-    //     } catch (error) {
-    //         console.log(error)
-    //         return error
-    //     }
-    // },
+    finishPedido: async (id) => {
+        try {
+            await pool.query('UPDATE pedidos SET status_finalizacao = "finalizado" WHERE id_pedido = ?', [id])
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
 
 }
 

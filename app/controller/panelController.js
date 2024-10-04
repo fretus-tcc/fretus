@@ -38,6 +38,11 @@ const panelController = {
                 await panelModel.insert({ id_pedido, status_entrega })
             }
 
+            if (status_entrega == 4) {
+                // console.log('finalizada')
+                await panelModel.finishPedido(id_pedido)
+            }
+
             req.flash('success', 'Etapa finalizada ; Etapa finalizada com sucesso')
 
             res.redirect(`/entregador/panel?id_pedido=${id_pedido}`)

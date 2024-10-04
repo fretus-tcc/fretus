@@ -7,12 +7,13 @@ const resultadosController = {
         const { id } = req.session.autenticado
         try {
             const [entregador] = await resultadosModel.findEntregadorById(id)
+            const entregas = await resultadosModel.countEntregasRealizadas(id)
             const pedidos = await resultadosModel.findPedidoPaginate(id, 0, 10)
-            // console.log(entregador);
+            // console.log(entregas);
             
             const avaliacoes = await avaliacoesModel.findAllByEntregador(id)
 
-            res.render('pages/entregador/resultados', { autenticado: req.session.autenticado, entregador, pedidos, avaliacoes })
+            res.render('pages/entregador/resultados', { autenticado: req.session.autenticado, entregador, entregas, pedidos, avaliacoes })
         } catch (error) {
             console.log(error)
             res.json({ error })

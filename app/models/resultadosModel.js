@@ -46,6 +46,16 @@ const resultadosModel = {
         }
     },
 
+    countEntregasRealizadas: async (id) => {
+        try {
+            const [result] = await pool.query('SELECT count(*) AS total FROM pedidos WHERE id_entregador = ? AND status_finalizacao = "finalizado"', [id])
+            return result[0].total
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
 }
 
 module.exports = resultadosModel

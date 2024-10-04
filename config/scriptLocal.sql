@@ -325,6 +325,7 @@ CREATE TABLE IF NOT EXISTS FRETUS.pedidos (
   /* preco_sugerido_pedido DECIMAL(10,2) NOT NULL, */
   preco_pedido DECIMAL(10,2) NOT NULL,
   data_solicitacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+  status_finalizacao ENUM('andamento', 'finalizado') NOT NULL DEFAULT 'andamento',
   /* id_usuario_cliente INT NOT NULL,
   data_agendada DATETIME NULL,
   id_entregador INT NOT NULL, */
