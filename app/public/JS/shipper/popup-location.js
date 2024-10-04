@@ -25,13 +25,19 @@ locationCall.forEach(async item => {
 		locationPopup.classList.add('show')
 		map.resize()
 
+        const { partida, destino } = item.dataset
+        const start = partida.split(',').map(Number)
+        const end = destino.split(',').map(Number)
+        // await setMarkers(start, end)
+
 		const { status } = await fetchStatus(item.dataset.idPedido)
 		loading.classList.remove('show')
-		showStatus(status)
+		showStatus(status, start, end)
+
 	})
 })
 
-function showStatus(status) {
+function showStatus(status, start, end) {
 	status.shift()
 	const statusItems = [...menuItems].reverse()
 
@@ -51,6 +57,7 @@ function showStatus(status) {
 		statusBar[i].classList.add('count1')
 		locationPopup.setAttribute('data-id-entregador', item.id_entregador)
 		locationPopup.setAttribute('data-id-pedido', item.id_pedido)
+        setMarkers({ lng: start[0], lat: start[1] }, { lng: end[0], lat: end[1] })
 	})
 	
 	statusItems[status.length - 1].classList.add('color')

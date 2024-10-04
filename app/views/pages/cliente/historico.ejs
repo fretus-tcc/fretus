@@ -89,7 +89,7 @@
                             </span>
                             <span class="actions">
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
-                                    <img class="location-call" src="/imgs/client/location-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>">
+                                    <img class="location-call" src="/imgs/client/location-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>" data-partida="<%= pedido.longitude_partida %>,<%= pedido.latitude_partida %>" data-destino="<%= pedido.longitude_destino %>,<%= pedido.latitude_destino %>">
                                     <% if (pedido?.id_denunciado == null) { %>
                                         <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= pedido.id_entregador %>">
                                     <% } %>
