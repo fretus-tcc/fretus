@@ -102,7 +102,7 @@
                                             <% } %>
                                         </button>
                                     </form>
-                                    <% if (pedido?.id_avaliacao == null) { %>
+                                    <% if (pedido.status_finalizacao == 'finalizado' && pedido?.id_avaliacao == null) { %>
                                         <img class="rate-call" src="/imgs/client/star-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>">
                                     <% } %>
                                 <% } else if (pedido.id_entregador) { %>
