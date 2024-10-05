@@ -252,21 +252,30 @@ const pedidosController = {
 
     /* Entregas Solicitadas - POST */
     insertShipperReply: async (req, res) => {
-        const { id, resposta } = req.params
+        const { id: id_pedido, resposta } = req.params
+        const { id: id_entregador } = req.session.autenticado
         
         try {
             if (resposta.toUpperCase() != 'ACEITO' && resposta.toUpperCase() != 'NEGADO') {
                 req.flash('error', 'Tente Novamente ; Erro ao inserir resposta do pedido')
                 return res.redirect('/entregador/entregas-solicitadas')
             }
+
+            const [pedido] = await pedidosModel.findById(id_pedido)
+            // console.log(pedido)
+
+            if (pedido.id_entregador != null && resposta.toUpperCase() == 'ACEITO') {
+                req.flash('error', 'Não foi possível ; Entrega já possui um entregador')
+                return res.redirect('/entregador/entregas-solicitadas')
+            }
             
-            const data = {
-                id_pedido: id,
-                id_entregador: req.session.autenticado.id,
-                status_resposta: resposta
+            await pedidosModel.insertShipper({ id_pedido, id_entregador, status_resposta: resposta })
+
+            // definindo id_entregador em pedidos, caso seja imediato
+            if (pedido.agendamento == 0 && resposta.toUpperCase() == 'ACEITO') {
+                await pedidosModel.insertShipperAccepted(id_entregador, id_pedido)
             }
 
-            await pedidosModel.insertShipper(data)
             req.flash('success', `Pedido ${resposta.toLowerCase()} ; Pedido ${resposta.toLowerCase()} com sucesso`)
             res.redirect('/entregador/entregas-solicitadas')
         } catch (error) {

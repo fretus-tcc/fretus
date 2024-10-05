@@ -51,7 +51,7 @@ const pedidosModel = {
                 'ON p.id_pedido = ep.id_pedido AND ep.id_entregador = ? ' +
                 'LEFT JOIN cupons AS c ' +
                 'ON p.id_cupom = c.id_cupom ' +
-                'WHERE ep.status_resposta IS NULL AND p.veiculo_pedido = ? ' +
+                'WHERE ep.status_resposta IS NULL AND p.veiculo_pedido = ? AND p.id_entregador IS NULL ' +
                 'ORDER BY p.data_solicitacao DESC ' +
                 'LIMIT ?, ?', [id, vehicle, pagina, total])
             return result
