@@ -1,4 +1,5 @@
 const chatModel = require('../app/models/chatModel')
+const pedidosModel = require('../app/models/pedidosModel')
 
 let io
 let chatUsers = []
@@ -40,8 +41,9 @@ module.exports = {
                 socket.join(data.id_usuario)
             })
 
-            socket.on('pedido aceito', (data) => {
-                io.emit('pedido recebido', { id_pedido: data.id_pedido })
+            socket.on('pedido aceito', async (data) => {
+                const [pedido] = await pedidosModel.findById(data.id_pedido)
+                io.emit('pedido recebido', { id_pedido: data.id_pedido, agendamento: pedido.agendamento })
             })
 
             socket.on('connect new status', (data) => {
