@@ -274,6 +274,10 @@ const pedidosController = {
             // definindo id_entregador em pedidos, caso seja imediato
             if (pedido.agendamento == 0 && resposta.toUpperCase() == 'ACEITO') {
                 await pedidosModel.insertShipperAccepted(id_entregador, id_pedido)
+                
+                // Cria pagamento do pedido
+                const uuid = crypto.randomUUID()
+                await pagamentoModel.insert({ id_pedido, id_preferencia_mp: uuid })
             }
 
             req.flash('success', `Pedido ${resposta.toLowerCase()} ; Pedido ${resposta.toLowerCase()} com sucesso`)
@@ -334,30 +338,6 @@ const pedidosController = {
         }
     },
 
-    /* updateQuote: async (req, res) => {
-        const { id } = req.params
-        const data = quotesController.formatData(req, res, 'update', { ...req.body, id_duvida: id })
-        if (data) {
-            try {
-                await quotesModel.update(data, id)
-                req.flash('info', 'Dúvida atualizada')
-                res.redirect(`/ajuda/${data.slug_duvida}`)
-            } catch (error) {
-                return res.json({ error })
-            }
-        }
-    },
-
-    deleteQuote: async (req, res) => {
-        const { id } = req.params
-        try {
-            await quotesModel.delete(id)
-            req.flash('error', 'Dúvida deletada')
-            res.redirect('/admin/ajuda')
-        } catch (error) {
-            res.json({ error })
-        }
-    }, */
 }
 
 module.exports = pedidosController
