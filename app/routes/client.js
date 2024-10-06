@@ -67,6 +67,10 @@ router.get('/historico', verificarUsuAutorizado([1], 'pages/restrito'), function
     pedidosController.listPedidosByUser(req, res)
 })
 
+router.delete('/cancelar-pedido/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    pedidosController.cancelPedido(req, res)
+})
+
 router.get('/historico-completo', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     pedidosController.listPedidosByUserPaginate(req, res)
 })

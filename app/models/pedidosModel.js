@@ -169,13 +169,14 @@ const pedidosModel = {
         }
     },
 
-    /* delete: async (id) => {
+    delete: async (id) => {
         try {
-            await pool.query('DELETE FROM duvidas WHERE id_duvida = ?', [id])
+            await pool.query('DELETE FROM pedidos WHERE id_pedido = ?', [id])
         } catch (error) {
+            console.log(error)
             return error
         }
-    }, */
+    },
 
 }
 

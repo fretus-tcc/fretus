@@ -84,6 +84,13 @@
                             </span>
                             <span class="actions <%= autenticado.tipo == 2 ? 'hidden' : '' %>">
                                 <% if (pedido?.estado_pagamento == 'aprovado') { %>
+                                    <% if (pedido.status_finalizacao == 'andamento') { %>
+                                        <form action="/cliente/cancelar-pedido/<%= pedido.id_pedido %>?_method=DELETE" method="POST">
+                                            <button class="accept-btn">
+                                                <img title="Cancelar pedido" src="/imgs/client/cancel-icon.svg" alt="">
+                                            </button>
+                                        </form>
+                                    <% } %>
                                     <img class="location-call" src="/imgs/client/location-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>" data-partida="<%= pedido.longitude_partida %>,<%= pedido.latitude_partida %>" data-destino="<%= pedido.longitude_destino %>,<%= pedido.latitude_destino %>">
                                     <% if (pedido?.id_denunciado == null) { %>
                                         <img class="report-call" src="/imgs/client/report-icon.svg" alt="" data-id-entregador="<%= pedido.id_entregador %>">
@@ -101,6 +108,11 @@
                                         <img class="rate-call" src="/imgs/client/star-icon.svg" alt="" data-id-pedido="<%= pedido.id_pedido %>">
                                     <% } %>
                                 <% } else if (pedido.id_entregador) { %>
+                                    <form action="/cliente/cancelar-pedido/<%= pedido.id_pedido %>?_method=DELETE" method="POST">
+                                        <button class="accept-btn">
+                                            <img title="Cancelar pedido" src="/imgs/client/cancel-icon.svg" alt="">
+                                        </button>
+                                    </form>
                                     <% if (pedido.porcentagem_cupom != null) { %>
                                         <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
                                             <button class="accept-btn">
@@ -112,6 +124,11 @@
                                         <img src="/imgs/client/pay-icon.svg" alt="">
                                     </a>
                                 <% } else { %>
+                                    <form action="/cliente/cancelar-pedido/<%= pedido.id_pedido %>?_method=DELETE" method="POST">
+                                        <button class="accept-btn">
+                                            <img title="Cancelar pedido" src="/imgs/client/cancel-icon.svg" alt="">
+                                        </button>
+                                    </form>
                                     <% if (pedido.porcentagem_cupom != null) { %>
                                         <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
                                             <button class="accept-btn">
@@ -119,9 +136,15 @@
                                             </button>
                                         </form>
                                     <% } %>
-                                    <a href="/cliente/escolher-entregador/<%= pedido.id_pedido %>">
-                                        <img src="/imgs/client/check-icon.svg" alt="">
-                                    </a>
+                                    <% if (pedido.agendamento == 0) { %>
+                                        <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
+                                            <img src="/imgs/client/pay-icon.svg" alt="">
+                                        </a>
+                                    <% } else { %>
+                                        <a href="/cliente/escolher-entregador/<%= pedido.id_pedido %>">
+                                            <img src="/imgs/client/check-icon.svg" alt="">
+                                        </a>
+                                    <% } %>
                                 <% } %>
                             </span>
                         </summary>

@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.entregadores_pedidos (
   CONSTRAINT fk_PEDIDOS_ENTREGADORES1
     FOREIGN KEY (id_pedido)
     REFERENCES bzt6iht1cder66rlnctv.pedidos (id_pedido)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT fk_ENTREGADORES_PEDIDOS1
     FOREIGN KEY (id_entregador)
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.status_entrega (
   CONSTRAINT fk_PEDIDOS_STATUS1
     FOREIGN KEY (id_pedido)
     REFERENCES bzt6iht1cder66rlnctv.pedidos (id_pedido)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -407,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.pagamentos (
   CONSTRAINT fk_PAGAMENTOS_USUARIOS1
     FOREIGN KEY (id_pedido)
     REFERENCES `bzt6iht1cder66rlnctv`.pedidos (id_pedido)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION
   /* INDEX fk_PAGAMENTOS_USUARIOS1_idx (id_usuario_pagador ASC) VISIBLE,
   INDEX fk_PAGAMENTOS_USUARIOS2_idx (id_usuario_recebidor ASC) VISIBLE,
@@ -535,7 +535,7 @@ CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.avaliacoes (
   CONSTRAINT fk_avaliacoes_USUARIOS3
     FOREIGN KEY (id_pedido)
     REFERENCES `bzt6iht1cder66rlnctv`.pedidos (id_pedido)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

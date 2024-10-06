@@ -343,6 +343,23 @@ const pedidosController = {
         }
     },
 
+    /* Cancelar Pedido - DELETE */
+    cancelPedido: async (req, res) => {
+        try {
+            const { id_pedido } = req.params
+            
+            await pedidosModel.delete(id_pedido)
+            // console.log(id_pedido)
+
+            req.flash('error', 'Pedido cancelado ; Pedido cancelado com sucesso')
+
+            res.redirect(req.get("Referrer") || "/")
+        } catch (error) {
+            console.log(error)
+            return res.json({ error })
+        }
+    },
+
 }
 
 module.exports = pedidosController
