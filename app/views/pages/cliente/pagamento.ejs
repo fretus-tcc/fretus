@@ -48,6 +48,9 @@
     <% } %>
 
     <% if (erro_pedido) { %>
+        <div class="payment-container">
+            <h1>Finalize o Pagamento</h1>
+        </div>
         <div class="error-alert">
             <img src="/imgs/shipper/error-icon.png" alt="">
             <p><%= erro_pedido %></p>

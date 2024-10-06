@@ -22,7 +22,8 @@ const pagamentoController = {
 
             // Verfica se pedido nao possui entregador escolhido
             if (pedido.id_entregador == null) {
-                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido: 'Pedido não possui entregador escolhido' })
+                const erro_pedido = pedido.agendamento == 0 ? 'Aguarde um entregador escolher o pedido' : 'Pedido não possui entregador escolhido'
+                return res.render('pages/cliente/pagamento', { autenticado: req.session.autenticado, pedido: null, erro_pedido })
             }
 
             // Verifica se pedido ja passou da data de agendamento

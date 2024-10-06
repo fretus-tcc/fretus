@@ -167,6 +167,11 @@ const pedidosController = {
                 return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido não encontrado', msgs: [] })
             }
 
+            // verificando se o pedido eh imediato
+            if (pedido.agendamento == 0) {
+                return res.redirect(`/cliente/pagamento/${pedido.id_pedido}`)
+            }
+
             // verificando se o pedido ja possui entregador escolhido
             if (pedido.id_entregador != null) {
                 return res.render('pages/cliente/escolher-entregador', { autenticado: req.session.autenticado, entregadores: [], id_pedido: id, erro_pedido: 'Pedido já possui entregador escolhido', msgs: [] })

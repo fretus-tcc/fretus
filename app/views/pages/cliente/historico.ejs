@@ -124,9 +124,15 @@
                                             </button>
                                         </form>
                                     <% } %>
-                                    <a href="/cliente/escolher-entregador/<%= pedido.id_pedido %>">
-                                        <img src="/imgs/client/check-icon.svg" alt="">
-                                    </a>
+                                    <% if (pedido.agendamento == 0) { %>
+                                        <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
+                                            <img src="/imgs/client/pay-icon.svg" alt="">
+                                        </a>
+                                    <% } else { %>
+                                        <a href="/cliente/escolher-entregador/<%= pedido.id_pedido %>">
+                                            <img src="/imgs/client/check-icon.svg" alt="">
+                                        </a>
+                                    <% } %>
                                 <% } %>
                             </span>
                         </summary>
