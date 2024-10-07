@@ -56,7 +56,7 @@ const ConfigPerfilController = {
         } else {
             data.avaliacoes = await avaliacoesModel.findAllByEntregador(id)
             data.clientes = await perfilConfigModel.countClientesById(id)
-            data.entregas = 0
+            data.entregas = await perfilConfigModel.countEntregasById(id)
         }
         
         return data

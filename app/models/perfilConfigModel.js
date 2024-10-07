@@ -38,7 +38,17 @@ const PerfilModel = {
         }
     },
 
-    //atualizando usuário da tabela 
+    countEntregasById: async (id) => {
+        try {
+            const [result] = await pool.query('SELECT count(*) AS total FROM pedidos WHERE id_entregador = ? AND status_finalizacao = "finalizado"', [id]);
+            return result[0].total;
+        } catch (error) {
+            console.log(error)
+            return error;
+        }
+    },
+
+    // atualizando usuário da tabela 
     updateUser: async (data, id) => {
         try {
             await pool.query('UPDATE usuario SET ? WHERE id_usuario = ?', [data, id])
