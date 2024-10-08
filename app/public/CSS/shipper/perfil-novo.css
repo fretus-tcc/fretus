@@ -193,3 +193,42 @@ main {
         left: 2rem;
     }
 }
+@media(max-width:550px){
+    .input-font-profile{
+        font-size: 1.5rem !important;
+    }
+   /*  .input-field{
+        font-size: 1.6rem !important;
+    } */
+    .font-desc{
+        font-size: 1rem !important;
+    }
+    .font-profile-span{
+        font-size: .8rem;
+    }
+}
+@media(max-width: 490px){
+    .LabelBox {
+        font-size: 15px !important;
+    }
+    .font-h1-desc{
+        font-size: 1.2rem;
+    }
+    .font-input{
+        font-size: 1rem !important;
+    }
+    .img-container {
+        width: 175px;
+        /* aspect-ratio: 8 / 7; */
+    }
+    .img-container .photo {
+        max-width: 140px;
+        height: 140px;
+    }
+    .img-container {
+        width: 177px;
+    }
+    .ContainerEntregafav {
+        top: 23.5rem;
+    }
+}

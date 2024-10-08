@@ -89,12 +89,12 @@
                                 </form>
                             <% } %>
                             <form id="form-perfil-box" class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/<%= isClient ? 'cliente' : 'entregador' %>/perfil/<%= result.usuario_id %>?_method=PUT" method="post">
-                                <h1 style="margin-bottom: 10px; text-decoration: underline">Contato</h1>
+                                <h1 class="font-h1-desc" style="margin-bottom: 10px; text-decoration: underline">Contato</h1>
                                 <div class="row">
                                     <label for="email" class="LabelBox">Email: </label>
                                     <div class="edit-row">
                                         <div class="input-container">
-                                            <input class="input-field" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email_usuario" value="<%= dados?.email_usuario ?? result.email_usuario %>">
+                                            <input class="input-field font-input" type="text" placeholder="Digite aqui seu email" readonly id="email" name="email_usuario" value="<%= dados?.email_usuario ?? result.email_usuario %>">
                                             <input type="button" class="btn" value="Cancelar">
                                             <button class="btn confirm">Confirmar</button>
                                         </div>
@@ -107,7 +107,7 @@
                                     <label for="number" class="LabelBox">Telefone: </label>
                                     <div class="edit-row">
                                         <div class="input-container">
-                                            <input class="input-field" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone_usuario" maxlength="15" value="<%= dados?.telefone_usuario ?? result.telefone_usuario %>">
+                                            <input class="input-field font-input" type="text" placeholder="Digite aqui seu telefone" readonly id="number" name="telefone_usuario" maxlength="15" value="<%= dados?.telefone_usuario ?? result.telefone_usuario %>">
                                             <input type="button" class="btn" value="Cancelar">
                                             <button class="btn confirm">Confirmar</button>
                                         </div>
@@ -154,7 +154,7 @@
                                         <!-- <label for="descricao">Descrição: </label> -->
                                         <div class="edit-row">
                                             <div class="input-container">
-                                                <textarea  class="input-field" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao_usuario"><%= dados?.descricao_usuario ?? result.descricao_usuario %></textarea>
+                                                <textarea  class="input-field font-desc" placeholder="Digite aqui sua descrição" readonly id="descricao" name="descricao_usuario"><%= dados?.descricao_usuario ?? result.descricao_usuario %></textarea>
                                                 <span class="count">0/200</span>
                                                 <input type="button" class="btn" value="Cancelar">
                                                 <button class="btn confirm">Confirmar</button>
