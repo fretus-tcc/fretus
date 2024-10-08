@@ -232,3 +232,42 @@ main {
         top: 23.5rem;
     }
 }
+@media(max-width:455px){
+    .img-container .photo{
+        max-width: 100px;
+        height: 100px;
+    }
+    .img-container {
+        width: 125px;
+    }
+    .font-input {
+        font-size: .7rem !important;
+    }
+    .changeCall{
+        width: 15px;
+    }
+    .column-gap{
+        column-gap: inherit !important;
+    }
+    .profile-container {
+        padding: 0 1.5rem;
+    }
+    .ContainerEntregafav {
+        top: 19.5rem;
+        left: 1.5rem;
+    }
+    .font-h2{
+        font-size: 1.2rem;
+    }
+}
+@media(max-width:387px){
+    .contanerRow {
+        padding: 5px 0;
+    }
+      .contanerRow {
+        padding: 10px 0;
+    }
+    .font-profile-span {
+        font-size: .6rem;
+    }
+}
