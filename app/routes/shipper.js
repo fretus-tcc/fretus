@@ -23,9 +23,9 @@ router.put('/configuracoes-veiculos/:id', verificarUsuAutorizado([2], 'pages/res
     ConfigPerfilController.updateVehicle(req, res, 'pages/entregador/configuracoes-veiculos', `/entregador/configuracoes-veiculos`);
 });
 
-router.get('/configuracoes-pagamento', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
+/* router.get('/configuracoes-pagamento', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: false, autenticado: req.session.autenticado })
-})
+}) */
 
 router.get('/configuracoes', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
     /* res.render('pages/cliente-entregador/configuracoes', { isClient: false, autenticado: req.session.autenticado }) */

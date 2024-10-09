@@ -109,9 +109,9 @@ router.put('/configuracoes/:id', verificarUsuAutorizado([1], 'pages/restrito'), 
     ConfigPerfilController.updateUser(req, res, 'pages/cliente-entregador/configuracoes', `/cliente/configuracoes`);
 });
 
-router.get('/configuracoes-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+/* router.get('/configuracoes-pagamento', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-pagamento', { isClient: true, autenticado: req.session.autenticado })
-})
+}) */
 
 /* router.get('/configuracoes-notificacoes', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
     res.render('pages/cliente-entregador/configuracoes-notificacoes', { isClient: true, autenticado: req.session.autenticado })
