@@ -168,6 +168,29 @@ form > .cta {
     margin-top: 15px;
 }
 
+form > .cta[disabled] {
+    opacity: .5;
+}
+
+form > .cta + .msg-next {
+    position: absolute;
+    top: 103%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    height: 0;
+    transition: all .3s;
+    background-color: var(--orange);
+    color: white;
+    text-align: center;
+    border-radius: 5px 5px;
+}
+
+form > .cta[disabled]:hover + .msg-next {
+    height: 50%;
+    opacity: 1;
+}
+
 main .return-form {
     display: none;
     width: 36px;

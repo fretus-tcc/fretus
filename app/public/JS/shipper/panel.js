@@ -24,11 +24,20 @@ setInterval(async () => {
     start.setLngLat(pos)
     
     const active = document.querySelector('.ships.active')
+    const next = document.querySelector('.status.active .next-step')
     // console.log(active.dataset.idPedido);
     
     if (active != null) {
         socket.emit('nova localizacao', { start: start.getLngLat(), end: end.getLngLat(), id_entregador, id_pedido: active.dataset.idPedido })
         getRoute(start.getLngLat(), end.getLngLat())
+        // console.log(route)
+        if (route.distance <= 1000) {
+            console.log('perto')
+            next.removeAttribute('disabled')
+        } else {
+            console.log('longe')
+            next.setAttribute('disabled', 'true')
+        }
     }
 }, 5000)
 
