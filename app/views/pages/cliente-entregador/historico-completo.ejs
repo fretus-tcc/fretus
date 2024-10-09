@@ -114,11 +114,11 @@
                                         </button>
                                     </form>
                                     <% if (pedido.porcentagem_cupom != null) { %>
-                                        <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
+                                        <!-- <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
                                             <button class="accept-btn">
                                                 <img title="Retirar cupom" src="/imgs/client/icon-cupon-close.svg" alt="">
                                             </button>
-                                        </form>
+                                        </form> -->
                                     <% } %>
                                     <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
                                         <img src="/imgs/client/pay-icon.svg" alt="">
@@ -130,11 +130,11 @@
                                         </button>
                                     </form>
                                     <% if (pedido.porcentagem_cupom != null) { %>
-                                        <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
+                                        <!-- <form action="/cliente/desativar-cupom/<%= pedido.id_cupom %>/<%= pedido.id_pedido %>" method="POST">
                                             <button class="accept-btn">
                                                 <img title="Retirar cupom" src="/imgs/client/icon-cupon-close.svg" alt="">
                                             </button>
-                                        </form>
+                                        </form> -->
                                     <% } %>
                                     <% if (pedido.agendamento == 0) { %>
                                         <a href="/cliente/pagamento/<%= pedido.id_pedido %>">
