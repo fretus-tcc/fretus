@@ -24,20 +24,10 @@ setInterval(async () => {
     start.setLngLat(pos)
     
     const active = document.querySelector('.ships.active')
-    const next = document.querySelector('.status.active .next-step')
-    // console.log(active.dataset.idPedido);
     
     if (active != null) {
         socket.emit('nova localizacao', { start: start.getLngLat(), end: end.getLngLat(), id_entregador, id_pedido: active.dataset.idPedido })
-        getRoute(start.getLngLat(), end.getLngLat())
-        // console.log(route)
-        if (route.distance <= 1000) {
-            console.log('perto')
-            next.removeAttribute('disabled')
-        } else {
-            console.log('longe')
-            next.setAttribute('disabled', 'true')
-        }
+        await getRoute(start.getLngLat(), end.getLngLat())
     }
 }, 5000)
 
@@ -67,7 +57,7 @@ const statusContainer = document.querySelectorAll('.status')
 const backForm = document.querySelector('.return-form')
 
 ships.forEach((item, index) => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', async () => {
         document.querySelector('.ships.active')?.classList.remove('active')
         item.classList.add('active')
 
@@ -79,7 +69,7 @@ ships.forEach((item, index) => {
         backForm.classList.add('show')
         
         const shipCoords = [item.dataset.lng, item.dataset.lat]
-        setRoute(shipCoords)
+        await setRoute(shipCoords)
     })
 })
 
@@ -121,6 +111,16 @@ const getRoute = async (start, end) => {
     }
 
     setZoomRoute(route)
+
+    const next = document.querySelector('.status.active .next-step')
+    if (route.distance <= 1000) {
+        // console.log('perto')
+        next.removeAttribute('disabled')
+    } else {
+        // console.log('longe')
+        next.setAttribute('disabled', 'true')
+    }
+
 }
 
 const setZoomRoute = route => {
@@ -136,7 +136,7 @@ const setZoomRoute = route => {
     map.fitBounds(bounds, { padding: 300 })
 }
 
-const setRoute = (shipCoords) => {
+const setRoute = async (shipCoords) => {
     start.addTo(map)
     end.setLngLat(shipCoords).addTo(map)
 
@@ -144,12 +144,12 @@ const setRoute = (shipCoords) => {
         center: shipCoords
     })
 
-    getRoute(start.getLngLat(), end.getLngLat())
+    await getRoute(start.getLngLat(), end.getLngLat())
 }
 
 const currentActive = document.querySelector('.ships.active')
 if (currentActive != null) {
-    setRoute([currentActive.dataset.lng, currentActive.dataset.lat])
+    await setRoute([currentActive.dataset.lng, currentActive.dataset.lat])
 }
 
 window.addEventListener('resize', () => {

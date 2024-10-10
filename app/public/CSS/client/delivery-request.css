@@ -184,10 +184,13 @@ form > .cta + .msg-next {
     color: white;
     text-align: center;
     border-radius: 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 form > .cta[disabled]:hover + .msg-next {
-    height: 50%;
+    height: 80%;
     opacity: 1;
 }
 
