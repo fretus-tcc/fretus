@@ -114,7 +114,7 @@
                             <% if (entrega.status_entrega != 0) { %>
                                 <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>" method="post" style="position: relative;">
                                     <button class="cta next-step" disabled>Próxima Etapa</button>
-                                    <div class="msg-next" title="msg-next">Chegue mais perto do local para avançar</div>
+                                    <div class="msg-next">Chegue mais perto do local para avançar</div>
                                 </form>
                                 <button class="cta notify-call">Notificar Impeditivo</button>
                             <% } else { %>

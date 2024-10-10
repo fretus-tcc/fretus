@@ -301,6 +301,22 @@ CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.status_entrega (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS bzt6iht1cder66rlnctv.impeditivos (
+  id_impeditivo INT NOT NULL AUTO_INCREMENT,
+  id_pedido INT NOT NULL,
+  motivo_impeditivo VARCHAR(75) NOT NULL,
+  descricao_impeditivo VARCHAR(255) NOT NULL,
+  data_impeditivo DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_impeditivo),
+  UNIQUE INDEX IDSTATUS_UNIQUE (id_impeditivo ASC) VISIBLE,
+  INDEX fk_PEDIDOS_IMPEDITIVO1_idx (id_pedido ASC) VISIBLE,
+  CONSTRAINT fk_PEDIDOS_IMPEDITIVO1
+    FOREIGN KEY (id_pedido)
+    REFERENCES bzt6iht1cder66rlnctv.pedidos (id_pedido)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 /* CREATE TABLE IF NOT EXISTS `bzt6iht1cder66rlnctv`.`CUPONS` (
   `id_cupon` INT NOT NULL AUTO_INCREMENT,
   `prazo_cupon` DATETIME NOT NULL,
