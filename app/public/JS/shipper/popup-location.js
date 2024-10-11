@@ -7,6 +7,7 @@ const errorContainer = document.querySelector('.popup.location .error')
 const statusText = document.querySelector('.popup.location .status-text')
 const statusBar = document.querySelectorAll('.popup.location .bar_count')
 const loading = document.querySelector('.popup.location .loading')
+const impeditivosContainer = document.querySelector('.popup.location .impeditivos')
 
 mapboxgl.accessToken = accessToken
 const map = new mapboxgl.Map({
@@ -30,14 +31,16 @@ locationCall.forEach(async item => {
         const end = destino.split(',').map(Number)
         // await setMarkers(start, end)
 
-		const { status } = await fetchStatus(item.dataset.idPedido)
+		const { status } = await fetchStatus(`/cliente/status-entrega/${item.dataset.idPedido}`)
+		const { impeditivos } = await fetchStatus(`/cliente/impeditivos/${item.dataset.idPedido}`)
+        console.log(status)
 		loading.classList.remove('show')
-		showStatus(status, start, end)
+		showStatus(status, start, end, impeditivos)
 
 	})
 })
 
-function showStatus(status, start, end) {
+function showStatus(status, start, end, impeditivos) {
 	status.shift()
 	const statusItems = [...menuItems].reverse()
 
@@ -61,11 +64,28 @@ function showStatus(status, start, end) {
 	})
 	
 	statusItems[status.length - 1].classList.add('color')
+
+    if (impeditivos.length > 0) {
+        impeditivosContainer.classList.add('active')
+        impeditivosContainer.innerHTML = ''
+        impeditivos.forEach(impeditivo => {
+            const data_impeditivo = new Date(impeditivo.data_impeditivo)
+            impeditivosContainer.innerHTML += `
+                <div class="wrapper">
+                    <div class="content-i">
+                        <p>${impeditivo.motivo_impeditivo}</p>
+                        <p>${impeditivo.descricao_impeditivo}</p>
+                    </div>
+                    <p>${data_impeditivo.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p>
+                </div>
+            `
+        })
+    }
 }
 
-async function fetchStatus(id_pedido) {
+async function fetchStatus(url) {
 	try {
-        const res = await fetch(`/cliente/status-entrega/${id_pedido}`)
+        const res = await fetch(url)
         const data = await res.json()
 
         if (!res.ok) {
@@ -93,6 +113,7 @@ closelocation.addEventListener('click', () => {
 		loading.classList.add('show')
         locationPopup.setAttribute('data-id-entregador', '')
 		locationPopup.setAttribute('data-id-pedido', '')
+        impeditivosContainer.classList.remove('active')
 	})
 })
 

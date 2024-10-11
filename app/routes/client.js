@@ -91,6 +91,10 @@ router.get('/status-entrega/:id_pedido', verificarUsuAutorizado([1], 'pages/rest
     panelController.listStatus(req, res)
 });
 
+router.get('/impeditivos/:id_pedido', verificarUsuAutorizado([1], 'pages/restrito'), function (req, res) {
+    panelController.listImpeditivos(req, res)
+});
+
 router.put(
     '/perfil/:id',
     verificarUsuAutorizado([1], 'pages/restrito'),

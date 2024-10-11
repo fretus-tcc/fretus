@@ -189,6 +189,24 @@
     transform: rotate(180deg);
 }
 
+.container-impeditivos {
+    margin-top: 30px;
+}
+
+.impeditivos {
+    display: none;
+}
+
+.impeditivos.active {
+    display: block;
+}
+
+.impeditivos .wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
 /* =================descrição============== */
 /* =================mediaQ============== */
 @media (max-width: 490px) {
