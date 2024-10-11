@@ -193,12 +193,13 @@
     margin-top: 30px;
 }
 
-.impeditivos {
+.container-impeditivos:has(.impeditivos:not(.active)) {
     display: none;
 }
 
 .impeditivos.active {
     display: block;
+    margin-top: 7px;
 }
 
 .impeditivos .wrapper {
@@ -206,6 +207,16 @@
     justify-content: space-between;
     margin-bottom: 5px;
 }
+
+.impeditivos .data-impeditivo {
+    font-size: 10px;
+}
+
+.impeditivos .title-impeditivo {
+    font-weight: 700;
+    font-family: var(--font-1);
+}
+
 
 /* =================descrição============== */
 /* =================mediaQ============== */

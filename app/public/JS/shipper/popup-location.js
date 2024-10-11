@@ -73,10 +73,10 @@ function showStatus(status, start, end, impeditivos) {
             impeditivosContainer.innerHTML += `
                 <div class="wrapper">
                     <div class="content-i">
-                        <p>${impeditivo.motivo_impeditivo}</p>
-                        <p>${impeditivo.descricao_impeditivo}</p>
+                        <p><span class="title-impeditivo">Motivo do Problema:</span> ${impeditivo.motivo_impeditivo}</p>
+                        <p><span class="title-impeditivo">Descrição do Problema:</span> ${impeditivo.descricao_impeditivo}</p>
                     </div>
-                    <p>${data_impeditivo.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p>
+                    <p class="data-impeditivo">${data_impeditivo.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p>
                 </div>
             `
         })
