@@ -86,14 +86,14 @@ main {
     max-width: 30vw;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
-.favorito-item{
+.favorito-item, .avaliacao-item{
     border-radius: 3px;
     display: flex;
     padding: 10px;
     gap: 10px;
    /*  align-items: ce; */
 }
-.favorito-item img{
+.favorito-item img , .avaliacao-item img{
     width: 50px;
     /* border-radius: 50%; */
     height: 50px;
@@ -137,7 +137,7 @@ main {
         min-height: inherit;
        
     }
-    .favorito-item p {
+    .favorito-item p , .avaliacao-item p{
         font-size: .75rem;
     }
  
@@ -253,8 +253,9 @@ main {
         padding: 0 1.5rem;
     }
     .ContainerEntregafav {
-        top: 19.5rem;
+        top: 20.5rem;
         left: 1.5rem;
+       
     }
     .font-h2{
         font-size: 1.2rem;
@@ -270,4 +271,31 @@ main {
     .font-profile-span {
         font-size: .6rem;
     }
+    .font-desc {
+        font-size: .8rem !important;
+    }
+    .profile-container {
+        padding: 0 .9rem;
+    }
+    .ContainerEntregafav {
+        left: 1rem;
+    }
+    select {
+        margin: 8px 5px;
+    }
+
+}
+@media(max-width:340px){
+    .input-font-profile {
+        font-size: 1.2rem !important;
+    }
+    .Positionfav {
+        top: 11rem;
+      
+    }
+    .LabelBox {
+        font-size: 13px !important;
+
+    }
+
 }

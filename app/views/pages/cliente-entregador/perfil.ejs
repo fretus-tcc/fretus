@@ -58,7 +58,7 @@
                             </div>
                             <% if (!isClient) { %>
                                 <form class="form-perfil <%= !hasPermission ? 'disable-form' : '' %>" action="/entregador/veiculo/<%= result.usuario_id %>?_method=PUT" method="post">
-                                    <h1 style="margin: 10px 0; font-size: 1.8rem; text-decoration: underline;">Veículo</h1>
+                                    <h1 class="font-h1-desc" style="margin: 10px 0; text-decoration: underline">Veículo</h1>
                                     <input type="hidden" name="id_entregador" value="<%= result.id_entregador %>">
                
                                     <section class="row">
@@ -236,7 +236,7 @@
                 </section>
             <% } else { %>
                 <div class="Positionfav">
-                    <h2>Avaliações</h2>
+                    <h2 class="font-h2">Avaliações</h2>
                 <section class="Box-fav-item">
                         <% data.avaliacoes.forEach(avaliacao => { %>
                             <div class="avaliacao-item">
@@ -245,8 +245,10 @@
                                 <% } else { %>
                                     <img src="/imgs/client/user-icon.svg" alt="Usuário sem foto">
                                 <% } %>
-                                <p><%= avaliacao.nome_usuario %></p>
-                                <p><%= avaliacao.feedback_avaliacao %></p>
+                                <section>
+                                    <h4><%= avaliacao.nome_usuario %></h4> 
+                                    <p><%= avaliacao.feedback_avaliacao %></p>
+                                </section>
                             </div>
                         <% }) %>
                 </section>
