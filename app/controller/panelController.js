@@ -68,33 +68,25 @@ const panelController = {
         }
     },
 
-    // validation: [
-    //     param('id_denunciado')
-    //         .isInt()
-    //         .withMessage('Tente novamente')
-    //         .custom(async (value, { req }) => {
-    //             const result = await denunciasModel.findByIdDenunciado(value)
-    //             if (result.length != 0) {
-    //                 throw new Error('Tente novamente')
-    //             }
+    validation: [
+        param('id_pedido')
+            .isInt()
+            .withMessage('Tente novamente'),
 
-    //             return true
-    //         }),
+        body('motivo_impeditivo')
+            .notEmpty()
+            .withMessage('Motivo do impeditivo não preenchido')
+            .bail()
+            .isIn(['Problemas com Veículo', 'Acidente de Trânsito', 'Furto', 'Outros'])
+            .withMessage('Motivo do impeditivo inválido'),
 
-    //     body('motivo_denuncia')
-    //         .notEmpty()
-    //         .withMessage('Motivo da denúncia não preenchido')
-    //         .bail()
-    //         .isIn(['Assédio ou Comportamento inadequado', 'Problemas de Qualidade do Serviço', 'Violar Regras do Site', 'Suspeita de Fraude', 'Outros'])
-    //         .withMessage('Motivo da denúncia inválido'),
-
-    //     body('descricao_denuncia')
-    //         .notEmpty()
-    //         .withMessage('Descrição não preenchida')
-    //         .bail()
-    //         .isLength({ max: 400 })
-    //         .withMessage('Descrição deve conter até 400 caracteres'),
-    // ],
+        body('descricao_impeditivo')
+            .notEmpty()
+            .withMessage('Descrição não preenchida')
+            .bail()
+            .isLength({ max: 255 })
+            .withMessage('Descrição deve conter até 255 caracteres'),
+    ],
 
     createImpeditivo: async (req, res) => {
         const { id_pedido } = req.params

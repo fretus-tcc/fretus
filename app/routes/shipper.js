@@ -93,7 +93,7 @@ router.post('/panel/update-status/:id_pedido', verificarUsuAutorizado([2], 'page
     panelController.updateStatus(req, res)
 })
 
-router.post('/panel/impeditivo/:id_pedido', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, function (req, res) {
+router.post('/panel/impeditivo/:id_pedido', verificarUsuAutorizado([2], 'pages/restrito'), verificarCadastroCompleto, panelController.validation, function (req, res) {
     panelController.createImpeditivo(req, res)
 })
 

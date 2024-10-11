@@ -27,7 +27,7 @@ notifyForm.addEventListener('submit', async (e) => {
         data.erros.forEach(erro => {
             // console.log(erro)
             notify('Algo deu errado', erro.msg, 'error')
-            if (erro.path != 'id_denunciado') {
+            if (erro.path != 'id_pedido') {
                 const element = document.querySelector(`.error.${erro.path}`)
                 element.textContent = erro.msg
                 element.classList.add('show')
