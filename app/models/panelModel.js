@@ -64,6 +64,16 @@ const panelModel = {
         }
     },
 
+    findImpeditivoById: async (id_pedido) => {
+        try {
+            const [result] = await pool.query('SELECT * FROM impeditivos WHERE id_pedido = ?', [id_pedido])
+            return result
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
+
     insert: async (data) => {
         try {
             await pool.query('INSERT INTO status_entrega SET ?', [data])

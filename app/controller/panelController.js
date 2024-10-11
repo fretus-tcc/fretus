@@ -68,6 +68,19 @@ const panelController = {
         }
     },
 
+    listImpeditivos: async (req, res) => {
+        const { id_pedido } = req.params
+
+        try {
+            const impeditivos = await panelModel.findImpeditivoById(id_pedido)
+
+            res.json({ sucess: true, error: null, impeditivos })
+        } catch (error) {
+            console.log(error)
+            res.json({ sucess: false, error, impeditivos: null })
+        }
+    },
+
     validation: [
         param('id_pedido')
             .isInt()
