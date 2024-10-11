@@ -116,7 +116,7 @@
                                     <button class="cta next-step" disabled>Próxima Etapa</button>
                                     <div class="msg-next">Chegue mais perto do local para avançar</div>
                                 </form>
-                                <button class="cta notify-call">Notificar Impeditivo</button>
+                                <button class="cta notify-call" data-id-pedido="<%= entrega.id_pedido %>">Notificar Impeditivo</button>
                             <% } else { %>
                                 <form action="/entregador/panel/update-status/<%= entrega.id_pedido %>" method="post">
                                     <button class="cta">Começar entrega</button>
@@ -137,16 +137,18 @@
             <section class="close">
                 <img src="/imgs/client/close-icon.svg" alt="">
             </section>
-            <form class="popup-wrapper">
+            <form class="popup-wrapper notify-form" action="/entregador/panel/impeditivo/">
                 <h1>Notificar Impeditivo</h1>
-                <select required class="input-field field">
+                <select required class="input-field field" name="motivo_impeditivo">
                     <option value="">Motivo do Impeditivo</option>
-                    <option value="1">Problemas com Veículo</option>
-                    <option value="2">Acidente de Trânsito</option>
-                    <option value="4">Furto</option>
+                    <option value="Problemas com Veículo">Problemas com Veículo</option>
+                    <option value="Acidente de Trânsito">Acidente de Trânsito</option>
+                    <option value="Furto">Furto</option>
                     <option value="Outros">Outros</option>
                 </select>
-                <textarea required class="rate-field field" placeholder="Descrição do ocorrido"></textarea>
+                <span class="error motivo_impeditivo"></span>
+                <textarea required class="rate-field field" placeholder="Descrição do ocorrido" name="descricao_impeditivo"></textarea>
+                <span class="error descricao_impeditivo"></span>
                 <button class="cta">Enviar</button>
             </form>
         </section>
@@ -157,7 +159,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/JS/burguer.js"></script>
     <!-- <script src="/JS/client/geolocation.js"></script> -->
-    <script type="module" src="/JS/shipper/notify.js"></script>
+    <script src="/JS/shipper/notify.js"></script>
     <script>
         const id_entregador = '<%= autenticado.id %>'
     </script>

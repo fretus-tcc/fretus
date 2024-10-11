@@ -1,5 +1,6 @@
 const panelModel = require('../models/panelModel')
 const { notifyMessages } = require('../util/Funcao')
+const { param, body, validationResult } = require('express-validator')
 
 const panelController = {
     
@@ -65,6 +66,60 @@ const panelController = {
             console.log(error)
             res.json({ sucess: false, error, status: null })
         }
+    },
+
+    // validation: [
+    //     param('id_denunciado')
+    //         .isInt()
+    //         .withMessage('Tente novamente')
+    //         .custom(async (value, { req }) => {
+    //             const result = await denunciasModel.findByIdDenunciado(value)
+    //             if (result.length != 0) {
+    //                 throw new Error('Tente novamente')
+    //             }
+
+    //             return true
+    //         }),
+
+    //     body('motivo_denuncia')
+    //         .notEmpty()
+    //         .withMessage('Motivo da denúncia não preenchido')
+    //         .bail()
+    //         .isIn(['Assédio ou Comportamento inadequado', 'Problemas de Qualidade do Serviço', 'Violar Regras do Site', 'Suspeita de Fraude', 'Outros'])
+    //         .withMessage('Motivo da denúncia inválido'),
+
+    //     body('descricao_denuncia')
+    //         .notEmpty()
+    //         .withMessage('Descrição não preenchida')
+    //         .bail()
+    //         .isLength({ max: 400 })
+    //         .withMessage('Descrição deve conter até 400 caracteres'),
+    // ],
+
+    createImpeditivo: async (req, res) => {
+        const { id_pedido } = req.params
+        const { motivo_impeditivo, descricao_impeditivo } = req.body
+
+        const erros = validationResult(req)
+        if (!erros.isEmpty()) {
+            return res.json({ erros: erros.array(), success: false })
+        }
+
+        try {
+
+            const data = {
+                id_pedido,
+                motivo_impeditivo,
+                descricao_impeditivo
+            }
+            await panelModel.insertImpeditivo(data)
+            res.json({ erros: false, success: true })
+
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+        
     },
 
 }

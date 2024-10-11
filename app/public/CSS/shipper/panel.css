@@ -164,3 +164,12 @@ h2.name {
 .sn-notifications-container {
     z-index: 100000 !important;
 }
+
+.notify .error {
+    display: none;
+}
+
+.notify .error.show {
+    display: block;
+    color: red;
+}

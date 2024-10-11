@@ -81,7 +81,15 @@ const panelModel = {
             return error
         }
     },
-
+    
+    insertImpeditivo: async (data) => {
+        try {
+            await pool.query('INSERT INTO impeditivos SET ?', [data])
+        } catch (error) {
+            console.log(error)
+            return error
+        }
+    },
 }
 
 module.exports = panelModel
