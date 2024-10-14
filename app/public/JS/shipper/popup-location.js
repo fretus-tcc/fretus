@@ -33,7 +33,7 @@ locationCall.forEach(async item => {
 
 		const { status } = await fetchStatus(`/cliente/status-entrega/${item.dataset.idPedido}`)
 		const { impeditivos } = await fetchStatus(`/cliente/impeditivos/${item.dataset.idPedido}`)
-        console.log(status)
+        // console.log(status)
 		loading.classList.remove('show')
 		showStatus(status, start, end, impeditivos)
 
