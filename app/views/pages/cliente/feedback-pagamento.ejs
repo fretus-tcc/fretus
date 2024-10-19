@@ -16,9 +16,10 @@
         <% if (approved) { %>
             <img class="feedback-img" src="/imgs/client/check-round-icon.svg" alt="">
             <h1 class="feedback-title">Pagamento Aprovado</h1>
-            <p class="feedback-text">
+            <p class="feedback-text" style="margin-bottom: 5px;">
                 Parabéns, seu pagamento foi efetuado com sucesso. Agora você pode conversar com o entregador, visualizar o status da entrega em tempo real, e muito mais
             </p>
+            <a href="/cliente/historico" style="color: var(--orange); text-decoration: underline; font-weight: bold; font-size: 18px">Acompanhe sua entrega</a>
         <% } else { %>
             <img class="feedback-img" src="/imgs/client/error-round-icon.svg" alt="">
             <h1 class="feedback-title">Algo deu errado</h1>
