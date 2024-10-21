@@ -11,8 +11,10 @@ const panelController = {
         try {
             const entregas = await panelModel.findEntregas(id)
             const status = await panelModel.findStatus(id)
-
+            // console.log('ENTREGASSSS!!!!', entregas);
+            
             entregas.forEach((entrega, i) => {  
+                // console.log(entrega, status, i, id);
                 entrega.status_entrega = status[i].status_entrega
             })
 

@@ -11,7 +11,7 @@ const panelModel = {
                 'INNER JOIN usuario AS u ' +
                 'ON u.id_usuario = p.id_cliente ' +
                 'INNER JOIN conversas AS c ' +
-                'ON p.id_entregador = c.id_entregador ' +
+                'ON p.id_entregador = c.id_entregador AND p.id_cliente = c.id_cliente ' +
                 'WHERE pg.estado_pagamento = "aprovado" AND p.id_entregador = ?', [id_entregador])
             return result
         } catch (error) {
